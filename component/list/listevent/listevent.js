@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import data from './data.js'
 import { StackNavigator } from 'react-navigation';
-import HeaderTitle from 'react-navigation/src/views/Header/HeaderTitle';
 // import SearchBar from 'react-native-search-bar';
 
 
@@ -140,7 +139,7 @@ const styles = StyleSheet.create({
         backgroundColor : '#FC561F'
     }
 });
-export default StackNavigator({
+export default ListEvent({
     List: {
       screen: ListEvent,
     },

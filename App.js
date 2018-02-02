@@ -12,15 +12,21 @@ import {
   View
 } from 'react-native';
 import Span from './Span.js'
-import ListEvent from './component/listevent/listevent.js'
+import ListEvent from './component/list/listevent/listevent'
 import Login from './component/login/login.js'
 import RegisterDistance from './component/register/registerDistance.js'
 import UserRegister from './component/register/userRegister'
+import CouponForm from './component/form/couponForm'
+import ListShirt from './component/list/listShirt/listShirt'
+import ShirtPhotoPlus from './component/layout/shirtphotoplus'
+import CreditPayment from './component/layout/creditPayment'
+// import ChoiceSend from './component/items/choiceSend'
+
 
 export default class App extends Component<{}> {
   render() {
     return (
-      <UserRegister />
+      <CreditPayment />
     );
   }
 }

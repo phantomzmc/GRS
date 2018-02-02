@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
 import HeaderProfile from '../profile/header_profile.js'
-import ListDistance from '../event/listdistance.js'
+import ListDistance from '../list/event/listdistance'
 
 class RegisterDistance extends Component {
     static navigationOptions = {
