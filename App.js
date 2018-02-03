@@ -20,13 +20,15 @@ import CouponForm from './component/form/couponForm'
 import ListShirt from './component/list/listShirt/listShirt'
 import ShirtPhotoPlus from './component/layout/shirtphotoplus'
 import CreditPayment from './component/layout/creditPayment'
+import AddressLayout from './component/layout/addressLayout'
+import TotalLayout from './component/layout/totalLayout'
 // import ChoiceSend from './component/items/choiceSend'
 
 
 export default class App extends Component<{}> {
   render() {
     return (
-      <CreditPayment />
+      <TotalLayout />
     );
   }
 }
