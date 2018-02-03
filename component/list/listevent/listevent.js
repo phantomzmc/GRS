@@ -139,9 +139,5 @@ const styles = StyleSheet.create({
         backgroundColor : '#FC561F'
     }
 });
-export default ListEvent({
-    List: {
-      screen: ListEvent,
-    },
-  });
+export default ListEvent
 

@@ -1,20 +1,30 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, ImageBackground,KeyboardAvoidingView } from 'react-native';
 import LoginForm from '../form/loginForm'
 
-export default class Login extends Component {
+class Login extends Component {
+    static propTypes = {
+        navigation : PropTypes.object,
+    }
+    gotoListEvent = () => {
+        this.props.navigation.navigate ('ListEvent')
+    }
     render() {
         return (
             <ImageBackground source={{ uri: "http://register.shutterrunning2014.com/assets/img/theme/dongtanbg.jpg" }}
                 style={{ width: '100%', height: '100%', opacity: 1 }}>
                 <View style={styles.container}>
-                    <Text style={styles.textTitle}>
+                    <Text style={styles.textTitle}
+                            onPress={this.gotoListEvent}>
                         ShutterRuning Service
                     </Text>
 
                 </View>
                 <View style={styles.formcontainer}>
-                    <LoginForm />
+                    <LoginForm 
+                        
+                    />
                 </View>
 
             </ImageBackground>
@@ -43,3 +53,4 @@ const styles = StyleSheet.create({
         flex: 2,
     }
 })
+export default Login

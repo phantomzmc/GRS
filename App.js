@@ -22,13 +22,9 @@ import ShirtPhotoPlus from './component/layout/shirtphotoplus'
 import CreditPayment from './component/layout/creditPayment'
 import AddressLayout from './component/layout/addressLayout'
 import TotalLayout from './component/layout/totalLayout'
+
+import Navigation from './config/router'
 // import ChoiceSend from './component/items/choiceSend'
 
 
-export default class App extends Component<{}> {
-  render() {
-    return (
-      <TotalLayout />
-    );
-  }
-}
+export default () => <Navigation/>;
