@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import {
     AppRegistry,
     StyleSheet,
@@ -6,6 +8,8 @@ import {
     View,
     Image,
     ListView,
+    TouchableHighlight,
+    TouchableOpacity
 } from 'react-native';
 import data from './data.js'
 import { StackNavigator } from 'react-navigation';
@@ -13,15 +17,23 @@ import { StackNavigator } from 'react-navigation';
 
 
 class ListEvent extends Component {
+    static propTypes = {
+        navigation: PropTypes.object,
+    }
     static navigationOptions = {
         title: 'รายการวิ่ง',
-        headerStyle : {
-            backgroundColor : '#FC561F'
+        headerStyle: {
+            backgroundColor: '#FC561F'
         },
-        headerTitleStyle : {
-            color : '#fff'
+        headerTitleStyle: {
+            color: '#fff',
+            fontFamily: "Kanit",
+            fontWeight: '500',
         }
     };
+    gotoPayment = () => {
+        this.props.navigation.navigate('RegisterDistance')
+    }
 
     constructor(props) {
         super(props);
@@ -42,7 +54,8 @@ class ListEvent extends Component {
                 <ListView
                     dataSource={this.state.dataSource}
                     renderRow={this.renderEvent}
-                    style={styles.listView} />
+                    style={styles.listView}
+                />
             </View>
         );
     }
@@ -71,17 +84,19 @@ class ListEvent extends Component {
     renderEvent(data) {
         return (
             <View style={styles.background}>
-                <View style={styles.containerCard}>
-                    <Image source={{ uri: data.pic }}
-                        style={{ height: 200 }} />
-                    <View style={styles.containerEventDetail}>
-                        <View style={styles.containerEventDate}>
-                            <Text style={styles.dateText}>{data.date}</Text>
-                            <Text style={styles.monthText}>{data.month}</Text>
+                <TouchableOpacity onPress={this.gotoPayment}>
+                    <View style={styles.containerCard}>
+                        <Image source={{ uri: data.pic }}
+                            style={{ height: 200 }} />
+                        <View style={styles.containerEventDetail}>
+                            <View style={styles.containerEventDate}>
+                                <Text style={styles.dateText}>{data.date}</Text>
+                                <Text style={styles.monthText}>{data.month}</Text>
+                            </View>
+                            <Text style={styles.name}>{data.name}</Text>
                         </View>
-                        <Text style={styles.name}>{data.name}</Text>
                     </View>
-                </View>
+                </TouchableOpacity>
             </View>
         )
     }
@@ -114,12 +129,12 @@ const styles = StyleSheet.create({
     },
     dateText: {
         fontSize: 36,
-
+        fontFamily: "Kanit"
     },
     monthText: {
         color: '#FC561F',
         fontSize: 20,
-
+        fontFamily: "Kanit"
     },
     containerEventName: {
         flex: 1,
@@ -130,13 +145,14 @@ const styles = StyleSheet.create({
         paddingHorizontal: 25,
         paddingVertical: 15,
         fontSize: 18,
+        fontFamily: "Kanit"
     },
     listView: {
         paddingTop: 10,
         // backgroundColor: '#F5FCFF',
     },
-    navBackground : {
-        backgroundColor : '#FC561F'
+    navBackground: {
+        backgroundColor: '#FC561F'
     }
 });
 export default ListEvent

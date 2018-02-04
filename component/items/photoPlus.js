@@ -20,7 +20,7 @@ class PhotoPlus extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text> Photo + (ชำระเพิ่ม 100 บาท)</Text>
+                <Text style={{fontFamily: "Kanit",}}> Photo + (ชำระเพิ่ม 100 บาท)</Text>
                 <SwitchItem
                     toggleSwitch1={this.toggleSwitch1}
                     switch1Value={this.state.switch1Value}
@@ -31,7 +31,6 @@ class PhotoPlus extends Component {
 }
 const styles = StyleSheet.create({
     container : {
-
         flexDirection: 'row',
         margin: 20,
     }

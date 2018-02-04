@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
         marginBottom: 20,
         fontSize: 17,
+        fontFamily: 'kanit',
     }
 });
 

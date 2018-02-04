@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, StyleSheet,TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, StyleSheet,TouchableOpacity, Image } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
 
@@ -13,20 +13,27 @@ class ShirtPhotoPlus extends Component {
             backgroundColor: '#FC561F'
         },
         headerTitleStyle: {
-            color: '#fff'
+            color: '#fff',
+            fontFamily: 'kanit',
         }
     };
+    goNextState = () => {
+        this.props.navigation.navigate ('CreditPayment')
+    }
     render() {
         return (
             <ScrollView>
                 <View style={styles.container}>
+                    <Image source= {{uri : "http://register.shutterrunning2014.com/assets/img/theme/dongtanshirt.png"}} 
+                            style={{height:100,marginTop:10}}/>
                     <PhotoPlus />
                     <Text style={styles.textSize}>โปรดเลือกไซค์เสื้อ</Text>
                     <ListShirt />
                 </View>
                 <View style={styles.submitContainer}>
                     <TouchableOpacity style={styles.buttonContainer}>
-                        <Text style={styles.textButton}>ยืนยัน</Text>
+                        <Text style={styles.textButton}
+                            onPress={this.goNextState}>ถัดไป</Text>
                     </TouchableOpacity>
                 </View>
             </ScrollView>
@@ -35,6 +42,7 @@ class ShirtPhotoPlus extends Component {
 }
 const styles = StyleSheet.create({
     container: {
+        
         backgroundColor: '#fff',
     },
     textSize: {
@@ -42,29 +50,27 @@ const styles = StyleSheet.create({
         fontSize: 22,
         fontWeight: '300',
         padding: 20,
-
+        fontFamily: "Kanit",
     },
     submitContainer: {
         marginTop: 30,
         alignItems: 'center',
+        marginBottom : 30
     },
     buttonContainer: {
         height: 40,
-        width: '100%',
+        width: '80%',
         backgroundColor: '#FC561F',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 10,
+        borderRadius: 20,
+        paddingHorizontal: 30,
     },
     textButton: {
-        fontWeight: '700',
-        fontSize: 20,
+        fontWeight: '500',
+        fontSize: 14,
         color: '#fff',
-
+        fontFamily: "Kanit",
     }
 })
-export default StackNavigator ({
-    shirtPhotoPlus : {
-        screen : ShirtPhotoPlus
-    } 
-});
+export default ShirtPhotoPlus

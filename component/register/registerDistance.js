@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
@@ -6,6 +8,9 @@ import HeaderProfile from '../profile/header_profile.js'
 import ListDistance from '../list/event/listdistance'
 
 class RegisterDistance extends Component {
+    static propTypes = {
+        navigation: PropTypes.object,
+    }
     static navigationOptions = {
         title: 'ลงทะเบียนวิ่ง',
         headerStyle: {
@@ -38,8 +43,4 @@ const styles = StyleSheet.create({
         margin: 10,
     }
 })
-export default StackNavigator({
-    Register: {
-        screen: RegisterDistance,
-    },
-});
+export default RegisterDistance

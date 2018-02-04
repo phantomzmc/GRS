@@ -33,8 +33,8 @@ export default class ListShirt extends Component {
     renderShirt(datashirt) {
         return (
             <View style={styles.sizeshirt}>
-                <Text>{datashirt.size} </Text>
-                <Text> ({datashirt.width}")</Text>
+                <Text style={{fontFamily: "Kanit",}}>{datashirt.size} </Text>
+                <Text style={{fontFamily: "Kanit",}}> ({datashirt.width}")</Text>
             </View>
         )
     }

@@ -13,11 +13,11 @@ class TotalRegister extends Component {
                         </View>
                     </View>
                     <View>
-                        <Text style={{ fontSize: 10 }}>4th Brother Run & Share </Text>
-                        <Text style={{ fontSize: 7, color: '#8B8B8B' }}>(5 Km. - S) x 1 (Photo Plus)</Text>
+                        <Text style={{ fontSize: 10 , fontFamily:'kanit'}}>4th Brother Run & Share </Text>
+                        <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily:'kanit' }}>(5 Km. - S) x 1 (Photo Plus)</Text>
                     </View>
                     <View>
-                        <Text style={{ fontSize: 10 }}>600.00 ฿</Text>
+                        <Text style={{ fontSize: 10, fontFamily:'kanit' }}>600.00 ฿</Text>
                     </View>
                 </View>
                 <View style={styles.detailRow}>
@@ -28,12 +28,12 @@ class TotalRegister extends Component {
                         </View>
                     </View>
                     <View>
-                        <Text style={{ fontSize: 10 }}>รับเสื้อและเบอร์ที่ :  </Text>
-                        <Text style={{ fontSize: 10 }}>วันที่ 27 มกราคม 2561</Text>
-                        <Text style={{ fontSize: 7, color: '#8B8B8B' }}>ใต้สะพานพระราม 8 (ฝั่งถนนอรุณอัมรินทร์ )</Text>
+                        <Text style={{ fontSize: 10 , fontFamily:'kanit'}}>รับเสื้อและเบอร์ที่ :  </Text>
+                        <Text style={{ fontSize: 10 , fontFamily:'kanit'}}>วันที่ 27 มกราคม 2561</Text>
+                        <Text style={{ fontSize: 7, color: '#8B8B8B' , fontFamily:'kanit'}}>ใต้สะพานพระราม 8 (ฝั่งถนนอรุณอัมรินทร์ )</Text>
                     </View>
                     <View>
-                        <Text style={{ fontSize: 10 }}>65.00 ฿</Text>
+                        <Text style={{ fontSize: 10 , fontFamily:'kanit'}}>65.00 ฿</Text>
                     </View>
                 </View>
                 <View style={styles.detailRow}>
@@ -44,11 +44,11 @@ class TotalRegister extends Component {
                         </View>
                     </View>
                     <View>
-                        <Text style={{ fontSize: 10 }}>ค่าธรรมเนียมการใช้บัตรเครดิต/เดบิต</Text>
+                        <Text style={{ fontSize: 10 , fontFamily:'kanit'}}>ค่าธรรมเนียมการใช้บัตรเครดิต/เดบิต</Text>
                         {/* <Text style={{ fontSize: 7, color: '#8B8B8B' }}>(5 Km. - S) x 1 (Photo Plus)</Text> */}
                     </View>
                     <View>
-                        <Text style={{ fontSize: 10 }}>33.25 ฿</Text>
+                        <Text style={{ fontSize: 10 , fontFamily:'kanit'}}>33.25 ฿</Text>
                     </View>
                 </View>
                 <View style={styles.detailRow}>
@@ -59,11 +59,11 @@ class TotalRegister extends Component {
                         </View>
                     </View>
                     <View>
-                        <Text style={{ fontSize: 10 }}>ส่วนลดค่าโปรโมชั่น 100.00 บาท</Text>
+                        <Text style={{ fontSize: 10 , fontFamily:'kanit'}}>ส่วนลดค่าโปรโมชั่น 100.00 บาท</Text>
                         {/* <Text style={{ fontSize: 7, color: '#8B8B8B' }}>(5 Km. - S) x 1 (Photo Plus)</Text> */}
                     </View>
                     <View>
-                        <Text style={{ fontSize: 10 }}>-100.00 ฿</Text>
+                        <Text style={{ fontSize: 10 , fontFamily:'kanit'}}>-100.00 ฿</Text>
                     </View>
                 </View>
                 <View style={styles.detailRow}>
@@ -74,11 +74,11 @@ class TotalRegister extends Component {
                         </View>
                     </View>
                     <View>
-                        <Text style={{ fontSize: 10 }}>รวมทั้งสิ้น</Text>
+                        <Text style={{ fontSize: 10 , fontFamily:'kanit'}}>รวมทั้งสิ้น</Text>
                         {/* <Text style={{ fontSize: 7, color: '#8B8B8B' }}>(5 Km. - S) x 1 (Photo Plus)</Text> */}
                     </View>
                     <View>
-                        <Text style={{ fontSize: 10 }}>598.25 ฿</Text>
+                        <Text style={{ fontSize: 10 , fontFamily:'kanit'}}>598.25 ฿</Text>
                     </View>
                 </View>
 
