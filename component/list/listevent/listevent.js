@@ -14,6 +14,7 @@ import {
 import data from './data.js'
 import { StackNavigator } from 'react-navigation';
 // import SearchBar from 'react-native-search-bar';
+// import CellListEvent from './cellListEvent'
 
 
 class ListEvent extends Component {

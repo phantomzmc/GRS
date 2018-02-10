@@ -2,27 +2,26 @@ import React, { Component } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, } from 'react-native';
 
 export default class LoginForm extends Component {
+
   render() {
     return (
       <View style={styles.container}>
         <TextInput
           placeholder="เลขบัตรประชาชน"
-          returnKeyType = "next"
-          onSubmitEditing ={() => this.passwordInput}
+          returnKeyType="next"
+          onSubmitEditing={() => this.passwordInput}
+          onChangeText={(username) => this.setState({ username })}
           style={styles.input}
         />
         <TextInput
           placeholder="รหัสผ่าน"
-          returnKeyType = "go"
+          returnKeyType="go"
           secureTextEntry
           style={styles.input}
           ref={(input) => this.passwordInput = input}
+          onChangeText={(password) => this.setState({ password })}
         />
-        <View style={styles.loginContainer}>
-          <TouchableOpacity style={styles.buttonContainer}>
-            <Text style={styles.textButton}>Login</Text>
-          </TouchableOpacity>
-        </View>
+
       </View>
     );
   }
@@ -41,7 +40,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 10,
   },
-  loginContainer : {
+  loginContainer: {
     alignItems: 'center',
   },
   buttonContainer: {

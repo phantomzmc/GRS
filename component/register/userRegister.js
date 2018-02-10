@@ -36,8 +36,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default StackNavigator ({
-  Register: {
-    screen : UserRegister,
-  }
-})
+export default UserRegister 
