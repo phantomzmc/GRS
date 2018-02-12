@@ -3,8 +3,8 @@ import { View, Text, ScrollView, StyleSheet } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
 
-import HeaderUser from '../profile/header_profile'
-import FormRegister from '../form/formRegister'
+import HeaderUser from '../component/items/header_profile'
+import FormRegister from '../component/form/registerForm'
 
 class UserRegister extends Component {
   static navigationOptions = {

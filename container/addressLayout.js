@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, SegmentedControlIOS } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 
-import CreditView from '../items/creditView'
-import CreditForm from '../form/creditForm'
+import AddressForm from '../component/form/addressForm'
+import ChoiceSend from '../component/items/choiceSend'
 
-class CreditPayment extends Component {
+class AddressLayout extends Component {
     static navigationOptions = {
-        title: 'ชำระเงิน',
+        title: 'การจัดส่ง',
         headerStyle: {
             backgroundColor: '#FC561F'
         },
@@ -15,27 +15,23 @@ class CreditPayment extends Component {
             fontFamily: 'kanit',
         }
     };
-    goAddressSend = () => {
-        this.props.navigation.navigate ('AddressLayout')
+    goTotalPayment = () => {
+        this.props.navigation.navigate('TotalPayment')
     }
+
 
     render() {
         return (
             <ScrollView>
                 <View style={styles.container}>
-                    <SegmentedControlIOS
-                        values={['เครดิต เดบิตการ์ด', 'โอนเงิน']}
-                        tintColor="#FC561F"
-                        style={styles.segment} />
-                    <CreditView />
-                    <View style={styles.containerForm}>
-                        <Text style={styles.textForm}>กรอกข้อมูล</Text>
-                    </View>
-                    <CreditForm />
+                    <Text style={styles.text}>เลือกการจัดส่ง</Text>
+                    <ChoiceSend />
+                    <Text style={styles.text}>ข้อมูลในการจัดส่ง</Text>
+                    <AddressForm />
                 </View>
                 <View style={styles.submitContainer}>
                     <TouchableOpacity style={styles.buttonContainer}
-                                        onPress={this.goAddressSend}>
+                        onPress={this.goTotalPayment}>
                         <Text style={styles.textButton}>ชำระค่าสมัคร</Text>
                     </TouchableOpacity>
                 </View>
@@ -43,30 +39,21 @@ class CreditPayment extends Component {
         );
     }
 }
-
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#fff',
-        flexDirection: 'column',
+        backgroundColor: '#fff'
     },
-    containerForm: {
-        flex: 1,
-    },
-    segment: {
-        marginTop: 20,
-        marginHorizontal: 20,
-    },
-    textForm: {
+    text: {
         backgroundColor: '#EFF4F1',
         fontSize: 22,
         fontWeight: '300',
         padding: 20,
-        fontFamily: "Kanit"
+        fontFamily: 'Kanit',
     },
     submitContainer: {
         marginTop: 30,
         alignItems: 'center',
-        marginBottom: 30,
+        marginBottom : 30
     },
     buttonContainer: {
         height: 40,
@@ -80,9 +67,9 @@ const styles = StyleSheet.create({
         fontWeight: '500',
         fontSize: 15,
         color: '#fff',
-        fontFamily: "Kanit"
+        fontFamily: 'Kanit',
 
     }
 })
 
-export default CreditPayment;
+export default AddressLayout;

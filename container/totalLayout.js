@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 
-import TotalRegister from '../items/totalRegister'
+import TotalRegister from '../component/items/totalRegister'
 
 class TotalLayout extends Component {
     static navigationOptions = {

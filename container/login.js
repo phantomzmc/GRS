@@ -1,18 +1,19 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, ImageBackground, KeyboardAvoidingView, TouchableOpacity, Alert, TextInput } from 'react-native';
-import LoginForm from '../form/loginForm'
+import LoginForm from '../component/form/loginForm'
 
 class Login extends Component {
     static propTypes = {
         navigation: PropTypes.object,
     }
-    state : {
-        username : '',
-        password : ''
+    constructor (props){
+        super (props)
+        this.setState = {
+            name : "" ,
+            password : ""   
+        }
     }
-
-
     checkLogin() {
         if (this.state.username === "Admin" && this.state.password === "1234") {
             this.gotoListEvent()
@@ -22,7 +23,7 @@ class Login extends Component {
                 'การเข้าสู่ระบบผิดพลาด',
                 [
                     { text: 'Cancel' },
-                    { text: 'OK' },
+                    { text: 'สมัครสมาชิก'},
                 ],
                 { cancelable: false }
             )

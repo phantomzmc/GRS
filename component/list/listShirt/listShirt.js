@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, ListView, StyleSheet } from 'react-native';
+import { View, Text, ListView, StyleSheet, TouchableHighlight, AlertIOS } from 'react-native';
+
 
 import datashirt from './dataShirt'
 
-export default class ListShirt extends Component {
+class ListShirt extends Component {
 
     constructor(props) {
         super(props)
@@ -12,6 +13,7 @@ export default class ListShirt extends Component {
                 rowHasChanged: (r1, r2) => r1 != r2
             })
         }
+        this.pressDataShirt = this.pressDataShirt.bind(this)
     }
 
     componentDidMount() {
@@ -19,37 +21,49 @@ export default class ListShirt extends Component {
             dataSource: this.state.dataSource.cloneWithRows(datashirt)
         });
     }
+    
+    pressDataShirt(datashirt) {
+        AlertIOS.alert(datashirt.size)
+    }
     render() {
         return (
             <View style={styles.container}>
                 <ListView
                     dataSource={this.state.dataSource}
-                    renderRow={this.renderShirt}
+                    renderRow={this.renderShirt.bind(this)}
                     style={styles.ListView}
                 />
+
             </View>
         );
     }
     renderShirt(datashirt) {
         return (
-            <View style={styles.sizeshirt}>
-                <Text style={{fontFamily: "Kanit",}}>{datashirt.size} </Text>
-                <Text style={{fontFamily: "Kanit",}}> ({datashirt.width}")</Text>
-            </View>
+            <TouchableHighlight onPress={() => this.pressDataShirt(datashirt)}>
+                <View style={styles.sizeshirt}>
+                    <Text style={{ fontFamily: "Kanit", }}>{datashirt.size} </Text>
+                    <Text style={{ fontFamily: "Kanit", }}> ({datashirt.width}")</Text>
+                </View>
+            </TouchableHighlight>
         )
     }
 }
 
 const styles = StyleSheet.create({
-        container : {
-            margin: 20,
-        },
-        sizeshirt : {
-            margin: 10,
-            flexDirection: 'row',
-        },
-        ListView : {
+    container: {
 
-        }
+    },
+    sizeshirt: {
+        borderColor: '#f1f1f1',
+        padding: 15,
+        paddingHorizontal: 30,
+        borderWidth: 1,
+
+        flexDirection: 'row',
+    },
+    ListView: {
+
+    }
 
 })
+export default ListShirt

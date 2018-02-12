@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
-import HeaderProfile from '../profile/header_profile.js'
-import ListDistance from '../list/event/listdistance'
+import HeaderProfile from '../component/items/header_profile.js'
+import ListDistance from '../component/list/event/listdistance'
 
 class RegisterDistance extends Component {
     static propTypes = {

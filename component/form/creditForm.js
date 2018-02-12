@@ -2,18 +2,27 @@ import React, { Component } from 'react';
 import { View, Text, TextInput, StyleSheet, } from 'react-native';
 
 class CreditForm extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            cardnumber: "1234 5678 1234 5678"
+        }
+    }
     render() {
+        let { changeNumber } = this.props
         return (
-            <View style={styles.container}>
+            <View style={styles.container2}>
                 <TextInput
                     placeholder="ชื่อบนบัตร"
                     style={styles.input}
                 />
                 <TextInput
                     placeholder="หมายเลขบัตร"
+                    onChangeText={(cardnumber) => this.setState({ cardnumber })}
                     style={styles.input}
                 />
-                <View style={styles.container2}>
+                <Text>{'user input: ' + this.state.cardnumber}</Text>
+                <View style={styles.container3}>
                     <TextInput
                         placeholder="วันหมดอายุ"
                         style={styles.input}
@@ -29,7 +38,7 @@ class CreditForm extends Component {
     }
 }
 const styles = StyleSheet.create({
-    container: {
+    container2: {
         padding: 30,
     },
     input: {
@@ -41,7 +50,7 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         fontFamily: "Kanit"
     },
-    container2: {
+    container3: {
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
