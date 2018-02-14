@@ -7,6 +7,8 @@ import CreditPayment from '../container/creditPayment'
 import AddressLayout from '../container/addressLayout'
 import TotalPayment from '../container/totalLayout'
 import Register from '../container/userRegister'
+import TeamList from '../container/teamList'
+import TabRouter from '../config/tabrouter'
 // import ListShirt from '../component/list/listShirt/listShirt'
 
 export default StackNavigator ({
@@ -25,7 +27,12 @@ export default StackNavigator ({
     // ListEvent : {
     //     screen : ListEvent,
     // },
-
+    TabRouter : {
+        screen : TabRouter
+    },
+    TeamList : {
+        screen : TeamList
+    },
     ShirtPhotoPlus : {
         screen : ShirtPhotoPlus
     },

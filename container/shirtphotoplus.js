@@ -22,6 +22,7 @@ class ShirtPhotoPlus extends Component {
     };
 
     goNextState = () => {
+        this.props.setPriceCredit()
         this.props.navigation.navigate('CreditPayment')
     }
     render() {
@@ -31,7 +32,7 @@ class ShirtPhotoPlus extends Component {
                     <Image source={{ uri: "http://register.shutterrunning2014.com/assets/img/theme/dongtanshirt.png" }}
                         style={{ height: 100, marginTop: 10 }} />
                     <PhotoPlus titleName={this.props.photoplus.title}
-                                pricePhoto={this.props.photoplus.pricePhoto}/>
+                        pricePhoto={this.props.photoplus.pricePhoto} />
                     <Text style={styles.textSize}>โปรดเลือกไซค์เสื้อ</Text>
                     <ListShirt />
                 </View>
@@ -84,4 +85,14 @@ const mapStateToProps = (state) => {
         photoplus: state.photoplus,
     };
 };
+const mapDisPacthToProps = (dispacth) => {
+    return {
+        setPriceCredit: (priceCredit) => {
+            dispacth({
+                type: "setPriceCredit",
+                payload: priceCredit
+            })
+        }
+    }
+}
 export default connect(mapStateToProps)(ShirtPhotoPlus)
