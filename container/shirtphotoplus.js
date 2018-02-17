@@ -22,7 +22,6 @@ class ShirtPhotoPlus extends Component {
     };
 
     goNextState = () => {
-        this.props.setPriceCredit()
         this.props.navigation.navigate('CreditPayment')
     }
     render() {

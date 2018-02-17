@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
     nameProfile: {
         color: '#fff',
         fontSize: 20,
+        fontFamily: 'kanit',
         fontWeight: '900',
         marginBottom: 10,
         marginTop: 20,
@@ -60,6 +61,7 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 16,
         fontWeight: '900',
+        fontFamily :'kanit',
         marginBottom: 20
     }
 

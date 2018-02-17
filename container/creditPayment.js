@@ -1,50 +1,57 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, SegmentedControlIOS } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, } from 'react-native';
 
 import CreditView from '../component/items/creditView'
+import ButtonChangePayment from '../component/items/bottonChangePayment'
 import { connect } from 'react-redux';
 
 class CreditPayment extends Component {
-        static navigationOptions = {
-            title: 'ชำระเงิน',
-            headerStyle: {
-                backgroundColor: '#FC561F'
-            },
-            headerTitleStyle: {
-                color: '#fff',
-                fontFamily: 'kanit',
-            }
-        };
-        // getPrice (setPrice){
-        //     this.setState ({
-        //         price: this.state.setPrice
-        //     })
-        // }
-        goAddressSend = () => {
-            this.props.navigation.navigate('AddressLayout')
+    static navigationOptions = {
+        title: 'ชำระเงิน',
+        headerStyle: {
+            backgroundColor: '#FC561F'
+        },
+        headerTitleStyle: {
+            color: '#fff',
+            fontFamily: 'kanit',
         }
-
-        render() {
-
-            return (
-                <ScrollView>
-                    <View style={styles.container}>
-                        <SegmentedControlIOS
-                            values={['เครดิต เดบิตการ์ด', 'โอนเงิน']}
-                            tintColor="#FC561F"
-                            style={styles.segment} />
-                        <CreditView />
-                    </View>
-                    <View style={styles.submitContainer}>
-                        <TouchableOpacity style={styles.buttonContainer}
-                            onPress={this.goAddressSend}>
-                            <Text style={styles.textButton}>ชำระค่าสมัคร : {this.props.creditcard.priceCredit} บาท</Text>
-                        </TouchableOpacity>
-                    </View>
-                </ScrollView>
-            );
-        }
+    };
+    // getPrice (setPrice){
+    //     this.setState ({
+    //         price: this.state.setPrice
+    //     })
+    // }
+    gotoTransferPayment = () => {
+        this.props.navigation.navigate('TransferPayment')
     }
+    gotoCreditPayment = () => {
+        this.props.navigation.navigate('CreditPayment')
+    }
+    goAddressSend = () => {
+        this.props.navigation.navigate('AddressLayout')
+    }
+
+    render() {
+
+        return (
+            <ScrollView>
+                <View style={styles.container}>
+                    <ButtonChangePayment
+                        Tranfer={this.gotoTransferPayment.bind(this)}
+                        Credit={this.gotoCreditPayment.bind(this)}
+                    />
+                    <CreditView />
+                </View>
+                <View style={styles.submitContainer}>
+                    <TouchableOpacity style={styles.buttonContainer}
+                        onPress={this.goAddressSend}>
+                        <Text style={styles.textButton}>ชำระค่าสมัคร : {this.props.creditcard.priceCredit} บาท</Text>
+                    </TouchableOpacity>
+                </View>
+            </ScrollView>
+        );
+    }
+}
 
 const styles = StyleSheet.create({
     container: {

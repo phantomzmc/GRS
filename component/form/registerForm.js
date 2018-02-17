@@ -71,6 +71,7 @@ export default class FormRegister extends Component {
 const styles = StyleSheet.create({
     container: {
         padding: 20,
+        backgroundColor : '#fff'
     },
     textInput: {
         borderColor: '#FC561F',
@@ -100,6 +101,7 @@ const styles = StyleSheet.create({
     submitContainer: {
         marginTop: 30,
         alignItems: 'center',
+        marginBottom: 30,
     },
     buttonContainer: {
         height: 40,

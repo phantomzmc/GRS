@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 
-class EventListFriend extends Component {
+export default class EventListFriend extends Component {
     render() {
         return (
             <View style={styles.container}>
@@ -13,6 +13,34 @@ class EventListFriend extends Component {
                         style={styles.imgAvatar} />
                     <Image source={{ uri: "https://scontent.fbkk2-6.fna.fbcdn.net/v/t1.0-0/p370x247/21557776_1425545897494291_6496115009920700297_n.jpg?oh=2b747f30ce806f5e37ae1d3cd9427cf4&oe=5B1C181C" }}
                         style={styles.imgAvatar} />
+                        
+                </View>
+                <View style={styles.imgContainer}>
+                    <Image source={{ uri: "https://scontent.fbkk2-6.fna.fbcdn.net/v/t1.0-0/p370x247/21557776_1425545897494291_6496115009920700297_n.jpg?oh=2b747f30ce806f5e37ae1d3cd9427cf4&oe=5B1C181C" }}
+                        style={styles.imgAvatar} />
+                    <Image source={{ uri: "https://scontent.fbkk2-6.fna.fbcdn.net/v/t1.0-0/p370x247/21557776_1425545897494291_6496115009920700297_n.jpg?oh=2b747f30ce806f5e37ae1d3cd9427cf4&oe=5B1C181C" }}
+                        style={styles.imgAvatar} />
+                    <Image source={{ uri: "https://scontent.fbkk2-6.fna.fbcdn.net/v/t1.0-0/p370x247/21557776_1425545897494291_6496115009920700297_n.jpg?oh=2b747f30ce806f5e37ae1d3cd9427cf4&oe=5B1C181C" }}
+                        style={styles.imgAvatar} />
+                        
+                </View>
+                <View style={styles.imgContainer}>
+                    <Image source={{ uri: "https://scontent.fbkk2-6.fna.fbcdn.net/v/t1.0-0/p370x247/21557776_1425545897494291_6496115009920700297_n.jpg?oh=2b747f30ce806f5e37ae1d3cd9427cf4&oe=5B1C181C" }}
+                        style={styles.imgAvatar} />
+                    <Image source={{ uri: "https://scontent.fbkk2-6.fna.fbcdn.net/v/t1.0-0/p370x247/21557776_1425545897494291_6496115009920700297_n.jpg?oh=2b747f30ce806f5e37ae1d3cd9427cf4&oe=5B1C181C" }}
+                        style={styles.imgAvatar} />
+                    <Image source={{ uri: "https://scontent.fbkk2-6.fna.fbcdn.net/v/t1.0-0/p370x247/21557776_1425545897494291_6496115009920700297_n.jpg?oh=2b747f30ce806f5e37ae1d3cd9427cf4&oe=5B1C181C" }}
+                        style={styles.imgAvatar} />
+                        
+                </View>
+                <View style={styles.imgContainer}>
+                    <Image source={{ uri: "https://scontent.fbkk2-6.fna.fbcdn.net/v/t1.0-0/p370x247/21557776_1425545897494291_6496115009920700297_n.jpg?oh=2b747f30ce806f5e37ae1d3cd9427cf4&oe=5B1C181C" }}
+                        style={styles.imgAvatar} />
+                    <Image source={{ uri: "https://scontent.fbkk2-6.fna.fbcdn.net/v/t1.0-0/p370x247/21557776_1425545897494291_6496115009920700297_n.jpg?oh=2b747f30ce806f5e37ae1d3cd9427cf4&oe=5B1C181C" }}
+                        style={styles.imgAvatar} />
+                    <Image source={{ uri: "https://scontent.fbkk2-6.fna.fbcdn.net/v/t1.0-0/p370x247/21557776_1425545897494291_6496115009920700297_n.jpg?oh=2b747f30ce806f5e37ae1d3cd9427cf4&oe=5B1C181C" }}
+                        style={styles.imgAvatar} />
+                        
                 </View>
             </View>
         );
@@ -20,12 +48,17 @@ class EventListFriend extends Component {
 }
 const styles = StyleSheet.create({
     container: {
+        justifyContent: 'center',
         flex: 1,
-        padding: 20,
         backgroundColor: '#fff',
     },
     textTile: {
+        padding: 10,
         fontSize: 26,
+        fontWeight: '700',
+        fontFamily: 'kanit',
+        color: '#000',
+        
     },
     imgContainer: {
         marginVertical: 10,
@@ -38,4 +71,4 @@ const styles = StyleSheet.create({
         borderRadius: 40,
     }
 })
-export default EventListFriend;
+

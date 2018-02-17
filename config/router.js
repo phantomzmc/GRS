@@ -9,12 +9,21 @@ import TotalPayment from '../container/totalLayout'
 import Register from '../container/userRegister'
 import TeamList from '../container/teamList'
 import TabRouter from '../config/tabrouter'
+import AddEventFriend from '../container/AddEventDetailFrind'
+import TransferPayment from '../container/tranferPayment'
+
+import ListDistance from '../component/list/event/listdistance'
+import ListShith from '../component/list/listShirt/listShirt';
+
 // import ListShirt from '../component/list/listShirt/listShirt'
 
 export default StackNavigator ({
-    // RegisterDistance : {
-    //     screen : RegisterDistance,
-    // },
+    TransferPayment : {
+        screen : TransferPayment
+    },
+    RegisterDistance : {
+        screen : RegisterDistance,
+    },
     // Login : {
     //     screen : Login,
     //     navigationOptions : {
@@ -39,12 +48,16 @@ export default StackNavigator ({
     CreditPayment : {
         screen : CreditPayment
     },
+    
     AddressLayout : {
         screen : AddressLayout
     },
     TotalPayment : {
         screen : TotalPayment
     },
+    AddEventFriend : {
+        screen : AddEventFriend
+    }
 
 
 });

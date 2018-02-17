@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView,TouchableOpacity} from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
-import ButtonChage from '../component/items/bottonChage'
-import HeaderProfile from '../component/items/header_profile.js'
-import EventListFriend from '../component/list/listFriend/eventListFriend'
+import ListFriendDistance from '../component/list/event/listFriendDistance'
+import ListShirth from '../component/list/listShirt/listShirt'
 
 
-class TeamList extends Component {
+class AddEventFriend extends Component {
     static navigationOptions = {
-        title: 'ลงทะเบียนแบบกลุ่ม',
+        title: 'เลือกระยะทางเเละเสื้อ',
         headerStyle: {
             backgroundColor: '#FC561F'
         },
@@ -19,38 +18,37 @@ class TeamList extends Component {
             fontWeight: '500',
         }
     };
-    gotoTeamList = () => {
-        this.props.navigation.navigate('TabRouter')
-    }
-    gotoRegisterDistance = () => {
-        this.props.navigation.navigate('RegisterDistance')
-    }
 
     render() {
-        const { navigate } = this.props.navigation;
         return (
             <ScrollView>
                 <View style={styles.container}>
-                    <ButtonChage Team={this.gotoTeamList.bind(this)}
-                        Single={this.gotoRegisterDistance.bind(this)} />
-                    <HeaderProfile />
-                    <EventListFriend />
+                    <Text style={styles.textDistance}>เลือกระยะทาง</Text>
+                    <ListFriendDistance />
+                    <Text style={styles.textSizeshirth}>เลือกไซค์เสื้อ</Text>
+                    <ListShirth />
                     <View style={styles.submitContainer}>
                         <TouchableOpacity style={styles.buttonContainer}
-                            onPress={() => navigate('AddEventFriend')}>
+                            onPress={()=> navigate('AddEventFriend')}>
                             <Text style={styles.textButton}>ถัดไป</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
             </ScrollView>
-
         );
     }
 }
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+    },
+    textDistance : {
+        padding: 15,
+        fontSize: 20,
+    },
+    textSizeshirth :{
+        padding: 15,
+        fontSize: 20,
     },
     submitContainer: {
         marginTop: 30,
@@ -72,6 +70,5 @@ const styles = StyleSheet.create({
         fontFamily: 'Kanit',
 
     }
-
 })
-export default TeamList;
+export default AddEventFriend;

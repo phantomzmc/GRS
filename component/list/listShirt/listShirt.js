@@ -58,11 +58,10 @@ const styles = StyleSheet.create({
         padding: 15,
         paddingHorizontal: 30,
         borderWidth: 1,
-
         flexDirection: 'row',
     },
     ListView: {
-
+        backgroundColor: '#fff',
     }
 
 })
