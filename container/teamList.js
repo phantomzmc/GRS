@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     submitContainer: {
         marginTop: 30,
         alignItems: 'center',
-        marginBottom: 30,
+        marginBottom: 100,
     },
     buttonContainer: {
         height: 40,

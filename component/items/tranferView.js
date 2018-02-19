@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native';
-import { ImagePicker } from 'react-native-image-picker'
 
-
-
-
-class CreditView extends Component {
+class TranferView extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -40,37 +36,12 @@ class CreditView extends Component {
                     </View>
                 </View>
                 <View style={styles.submitContainer}>
-                    <TouchableOpacity style={styles.buttonContainer}
-                        onPress={this.show.bind(this)}>
+                    <TouchableOpacity style={styles.buttonContainer}>
                         <Text style={styles.textButton}>เพิ่มรูปภาพ</Text>
                     </TouchableOpacity>
                 </View>
             </View>
         );
-    }
-    show() {
-        ImagePicker.showImagePicker(options, (response) => {
-
-            if (response.didCancel) {
-                console.log('User cancelled image picker');
-            }
-            else if (response.error) {
-                console.log('ImagePicker Error: ', response.error);
-            }
-            else if (response.customButton) {
-                console.log('User tapped custom button: ', response.customButton);
-            }
-            else {
-                let source = { uri: response.uri };
-
-                // You can also display the image using data:
-                // let source = { uri: 'data:image/jpeg;base64,' + response.data };
-
-                this.setState({
-                    avatarSource: source
-                });
-            }
-        });
     }
 }
 
@@ -145,4 +116,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default CreditView;
+export default TranferView;

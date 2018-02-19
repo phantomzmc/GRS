@@ -18,12 +18,10 @@ import ListShith from '../component/list/listShirt/listShirt';
 // import ListShirt from '../component/list/listShirt/listShirt'
 
 export default StackNavigator ({
-    TransferPayment : {
-        screen : TransferPayment
-    },
-    RegisterDistance : {
-        screen : RegisterDistance,
-    },
+    
+    // RegisterDistance : {
+    //     screen : RegisterDistance,
+    // },
     // Login : {
     //     screen : Login,
     //     navigationOptions : {
@@ -33,9 +31,9 @@ export default StackNavigator ({
     // Register : {
     //     screen : Register,
     // },
-    // ListEvent : {
-    //     screen : ListEvent,
-    // },
+    ListEvent : {
+        screen : ListEvent,
+    },
     TabRouter : {
         screen : TabRouter
     },
@@ -48,7 +46,9 @@ export default StackNavigator ({
     CreditPayment : {
         screen : CreditPayment
     },
-    
+    TransferPayment : {
+        screen : TransferPayment
+    },
     AddressLayout : {
         screen : AddressLayout
     },

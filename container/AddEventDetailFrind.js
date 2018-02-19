@@ -18,8 +18,12 @@ class AddEventFriend extends Component {
             fontWeight: '500',
         }
     };
+    gotoCrediPayment = () => {
+        this.props.navigation.navigate('CrediPayment')
+    }
 
     render() {
+        const { navigate } = this.props.navigation;
         return (
             <ScrollView>
                 <View style={styles.container}>
@@ -29,7 +33,7 @@ class AddEventFriend extends Component {
                     <ListShirth />
                     <View style={styles.submitContainer}>
                         <TouchableOpacity style={styles.buttonContainer}
-                            onPress={()=> navigate('AddEventFriend')}>
+                            onPress={this.gotoCrediPayment}>
                             <Text style={styles.textButton}>ถัดไป</Text>
                         </TouchableOpacity>
                     </View>
@@ -45,10 +49,12 @@ const styles = StyleSheet.create({
     textDistance : {
         padding: 15,
         fontSize: 20,
+        fontFamily: 'kanit',
     },
     textSizeshirth :{
         padding: 15,
         fontSize: 20,
+        fontFamily: 'kanit',
     },
     submitContainer: {
         marginTop: 30,
