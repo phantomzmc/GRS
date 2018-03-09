@@ -15,6 +15,8 @@ import TransferPayment from '../container/tranferPayment'
 import ListDistance from '../component/list/event/listdistance'
 import ListShith from '../component/list/listShirt/listShirt';
 
+import Test from '../list'
+
 // import ListShirt from '../component/list/listShirt/listShirt'
 
 export default StackNavigator ({
@@ -30,6 +32,9 @@ export default StackNavigator ({
     // },
     // Register : {
     //     screen : Register,
+    // },
+    // Test : {
+    //     screen : Test
     // },
     ListEvent : {
         screen : ListEvent,
