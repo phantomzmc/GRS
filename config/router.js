@@ -20,10 +20,6 @@ import Test from '../list'
 // import ListShirt from '../component/list/listShirt/listShirt'
 
 export default StackNavigator ({
-    
-    // RegisterDistance : {
-    //     screen : RegisterDistance,
-    // },
     // Login : {
     //     screen : Login,
     //     navigationOptions : {
@@ -38,6 +34,9 @@ export default StackNavigator ({
     // },
     ListEvent : {
         screen : ListEvent,
+    },
+    RegisterDistance : {
+        screen : RegisterDistance,
     },
     TabRouter : {
         screen : TabRouter

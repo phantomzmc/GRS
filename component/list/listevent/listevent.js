@@ -8,16 +8,10 @@ import {
     Text,
     View,
     Image,
-    ListView,
     FlatList,
-    TouchableHighlight,
     TouchableOpacity
 } from 'react-native';
-import data from './data.js'
 import { StackNavigator } from 'react-navigation';
-// import SearchBar from 'react-native-search-bar';
-// import CellListEvent from './cellListEvent'
-
 
 class ListEvent extends Component {
     static propTypes = {
@@ -34,18 +28,12 @@ class ListEvent extends Component {
             fontWeight: '500',
         }
     };
-
-
     constructor(props) {
         super(props);
-        this.onChangeText = this.onChangeText.bind(this);
-        this.onCancelButtonPress = this.onCancelButtonPress.bind(this);
         this.state = {
-            isLoading: true
+            isLoading: true,
+            value : {}
         }
-        // this.state = {
-        //     dataSource: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }),
-        // }
     }
     componentDidMount() {
         return fetch("http://api.shutterrunning2014.com/api/v2/grsv2m/_table/Main.Events",
@@ -59,39 +47,23 @@ class ListEvent extends Component {
             })
             .then((response) => response.json())
             .then((responseJson) => {
-
                 this.setState({
                     isLoading: false,
                     dataSource: responseJson.resource,
-                }, function () {
-
                 });
-
             })
             .catch((error) => {
                 console.error(error);
             });
     }
-    gotoPayment = () => {
+    gotoPayment = (item) => {
         this.props.navigation.navigate('RegisterDistance')
-        console.log("test")
+        // this.setState.name("name2")
+        this.setState ({ value : item})
+        console.log(this.state.value)
     }
 
-    onChangeText(e) {
-        this.setState({
-            dataSource: this.state.dataSource.cloneWithRows(data.filter((item) =>
-                item.trackName.toLowerCase().includes(e.toLowerCase()))),
-        });
-    }
-
-
-    onCancelButtonPress() {
-        this.setState({
-            dataSource: this.state.dataSource.cloneWithRows(data),
-        });
-    }
     render() {
-
         if (this.state.isLoading) {
             return (
                 <View style={{ flex: 1, padding: 20 }}>
@@ -99,69 +71,31 @@ class ListEvent extends Component {
                 </View>
             )
         }
-
         return (
             <View style={{ flex: 1, paddingTop: 20 }} >
                 <FlatList
                     data={this.state.dataSource}
                     renderItem={({ item }) =>
-                        // <Text>{item.EventName}, {item.EventDate}</Text>}
                         <View style={styles.background}>
-                            <TouchableOpacity onPress={this.gotoPayment}>
-                                <View style={styles.containerCard}>
-                                    <Image source={{ uri: item.BackgroundImage}}
-                                        style={{ height: 200 }} />
-                                    <View style={styles.containerEventDetail}>
-                                        <View style={styles.containerEventDate}>
-                                            <Text style={styles.dateText}>{item.EventID}</Text>
-                                            <Text style={styles.monthText}>{item.EventDate}</Text>
-                                        </View>
-                                        <Text style={styles.name}>{item.EventName}</Text>
+                            <View style={styles.containerCard}>
+                                <Image source={{ uri: item.BackgroundImage }}
+                                    style={{ height: 200 }} />
+                                <View style={styles.containerEventDetail}>
+                                    <View style={styles.containerEventDate}>
+                                        <Text style={styles.dateText}>{item.EventID}</Text>
+                                        <Text style={styles.monthText}>{item.EventDate}</Text>
                                     </View>
+                                    <TouchableOpacity onPress={this.gotoPayment.bind(this,item)}>
+                                        <Text style={styles.name}>{item.EventName}</Text>
+                                    </TouchableOpacity>
                                 </View>
-                            </TouchableOpacity>
+                            </View>
                         </View>
                     }
                     keyExtractor={(item, index) => index}
                 />
             </View >
         );
-
-
-        // render() {
-        //     return (
-        //         <View>
-        //             {/* <SearchBar
-        //                 placeholder='Search'
-        //                 onChangeText={this.onChangeText}
-        //                 onCancelButtonPress={this.onCancelButtonPress} /> */}
-        //             <FlatList
-        //                 dataSource={this.state.dataSource}
-        //                 renderRow={this.renderEvent}
-        //                 style={styles.listView}
-        //             />
-        //         </View>
-        //     );
-        // }
-        // renderEvent(resource) {
-        //     return (
-        // <View style={styles.background}>
-        //     <TouchableOpacity onPress={this.gotoPayment}>
-        //         <View style={styles.containerCard}>
-        //             <Image source={{ uri: resource.BackgroundImage }}
-        //                 style={{ height: 200 }} />
-        //             <View style={styles.containerEventDetail}>
-        //                 <View style={styles.containerEventDate}>
-        //                     <Text style={styles.dateText}>{resource.EventDate}</Text>
-        //                     <Text style={styles.monthText}>{resource.EventID}</Text>
-        //                 </View>
-        //                 <Text style={styles.name}>{resource.EventName}</Text>
-        //             </View>
-        //         </View>
-        //     </TouchableOpacity>
-        // </View>
-        //     )
-        // }
     }
 }
 
