@@ -2,16 +2,25 @@ import { createStore, combineReducers } from 'redux';
 
 const eventState = {
     name: "1",
-    date: "date"
+    date: "date",
+    distanceEvent : {
+        distanceName:"",
+        distance :"",
+        price: ""
+    }
 }
-const event = (state = {}, action) => {
+const event = (state = eventState, action) => {
     switch (action.type) {
         case 'addEvent': {
             state.name = action.payload
             break;
         }
-        case 'addEventDate' : {
+        case 'addEventDate': {
             state.date = action.payload
+            break;
+        }
+        case 'addDistance' : {
+            state.distanceEvent = action.payload
             break;
         }
 
@@ -21,11 +30,11 @@ const event = (state = {}, action) => {
 
 const shirtphoto = (state = {}, action) => {
     switch (action.type) {
-        case 'setPrice':{
+        case 'setPrice': {
             state.price = action.payload
             break;
         }
-        case 'setSizeShirt' : {
+        case 'setSizeShirt': {
             state.size = action.payload
             break;
         }
@@ -48,18 +57,18 @@ const photoplus = (state = { title: "Photo Plus Service", pricePhoto: 100 }, act
 }
 const creditcard = (state = {}, action) => {
     switch (action.type) {
-        case 'setNameCredit':{
+        case 'setNameCredit': {
             state.nameCredit = action.payload
             break;
         }
-        case 'setNumberCredit' : {
+        case 'setNumberCredit': {
             state.numberCredit = action.payload
             break;
         }
-        case 'setExpCredit' :{
+        case 'setExpCredit': {
             state.expCredit = action.payload
         }
-        case 'setCVC' : {
+        case 'setCVC': {
             state.cvcCredit = action.payload
         }
         default:
@@ -67,38 +76,26 @@ const creditcard = (state = {}, action) => {
     }
     return state
 }
-const choiceSend = (state = {} ,action) => {
+const choiceSend = (state = {}, action) => {
     switch (action.type) {
-        case 'setSendChoice' : {
+        case 'setSendChoice': {
             state.choiceSend = action.payload
             break;
         }
     }
     return state
 }
-const address = (state = {} ,action) => {
+const address = (state = {}, action) => {
     switch (action.type) {
-        case 'setFullname' : {
-            state.fullname = action.payload
-            break;
-        }
-        case 'setEmail' : {
-            state.email = action.payload
-            break;
-        }
-        case 'setAddress' : {
-            state.address = action.payload
-            break;
-        }
-        case 'setTel' : {
-            state.tel = action.payload
+        case 'setUser': {
+            state.user = action.payload
             break;
         }
     }
     return state
 }
 
-const store = createStore(combineReducers({ event, shirtphoto, creditcard, photoplus,choiceSend,address }))
+const store = createStore(combineReducers({ event, shirtphoto, creditcard, photoplus, choiceSend, address }))
 store.subscribe(() => {
     console.log("Updata Store", store.getState())
 })

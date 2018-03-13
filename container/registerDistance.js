@@ -27,7 +27,15 @@ class RegisterDistance extends Component {
     constructor(props) {
         super(props)
         this.state = {
-
+            event : {
+                name: "name",
+                date: "date"
+            },
+            distanceEvent : {
+                distanceName: "",
+                distance: "",
+                price: ""
+            }
         }
         this.gotoShirtPhotoPlus = this.gotoShirtPhotoPlus.bind(this)
     }
@@ -38,8 +46,11 @@ class RegisterDistance extends Component {
     gotoRegisterDistance = () => {
         this.props.navigation.navigate('RegisterDistance')
     }
-    gotoShirtPhotoPlus = () => {
+    gotoShirtPhotoPlus = (dispatchEvent) => {
+        this.setState ({distanceEvent : dispatchEvent})
+        console.log(this.state.distanceEvent)
         this.props.navigation.navigate('ShirtPhotoPlus')
+        this.props.addDistance(this.state.distanceEvent)
     }
     render() {
         return (
@@ -47,16 +58,26 @@ class RegisterDistance extends Component {
                 <View style={styles.container}>
                     <ButtonChage Team={this.gotoTeamList.bind(this)}
                         Single={this.gotoRegisterDistance.bind(this)} />
-                    <HeaderProfile title={this.props.event.name}
-                                    detail={this.props.event.date} />
+                    <HeaderProfile title={this.state.event.name}
+                                    detail={this.state.event.date} />
                     <Text style={styles.text}>
                         โปรดเลือกระยะทาง
                      </Text>
-                    <ListDistance />
+                    <ListDistance onGotoshirt={this.gotoShirtPhotoPlus.bind(this)}/>
                     <ButtonSubmit PhotoPlus={this.gotoShirtPhotoPlus.bind(this)} />
                 </View>
             </ScrollView>
         );
+    }
+}
+const mapDisPatchToProps = (dispatch) => {
+    return {
+        addDistance : (distanceEvent) => {
+            dispatch({
+                type : "addDistance",
+                payload : distanceEvent
+            })
+        }
     }
 }
 const mapStatetoProps = (state) => {
@@ -78,4 +99,4 @@ const styles = StyleSheet.create({
     },
 
 })
-export default connect(mapStatetoProps)(RegisterDistance);
+export default connect(null,mapDisPatchToProps)(RegisterDistance);

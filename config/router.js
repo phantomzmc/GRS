@@ -20,12 +20,15 @@ import Test from '../list'
 // import ListShirt from '../component/list/listShirt/listShirt'
 
 export default StackNavigator ({
-    // Login : {
-    //     screen : Login,
-    //     navigationOptions : {
-    //         header : () => null
-    //     }
-    // },
+    RegisterDistance : {
+        screen : RegisterDistance,
+    },
+    Login : {
+        screen : Login,
+        navigationOptions : {
+            header : () => null
+        }
+    },
     // Register : {
     //     screen : Register,
     // },

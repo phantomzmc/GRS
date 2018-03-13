@@ -21,17 +21,16 @@ class AddressLayout extends Component {
         this.state = {
             choice: "",
             dataChoice: "",
-            fullname: "",
-            email:"",
-            adress:"",
-            tel: ""
+            user: {
+                fullname: "",
+                email:"",
+                adress:"",
+                tel: ""
+            }
         }
     }
     goTotalPayment = (fullname, email, adress, tel) => {
-        this.props.setFullname({fullname : fullname})
-        this.props.setEmail({email : email})
-        this.props.setAddress({adress : adress})
-        this.props.setTel({tel : tel})
+        this.props.setUser({ fullname : fullname,email,adress,tel})
         this.props.navigation.navigate('TotalPayment')
     }
     alertChoice = (dataChoice) => {
@@ -77,30 +76,12 @@ const mapDisPacthToProps = (dispacth) => {
                 payload: choice
             })
         },
-        setFullname : (fullname) => {
+        setUser : (fullname) => {
             dispacth({
-                type : "setFullname",
+                type : "setUser",
                 payload : fullname
             })
         },
-        setEmail : (email) => {
-            dispacth({
-                type : "setEmail",
-                payload : email
-            })
-        },
-        setAddress : (adress) => {
-            dispacth({
-                type : "setAddress",
-                payload : adress
-            })
-        },
-        setTel : (tel) => {
-            dispacth({
-                type : "setTel",
-                payload : tel
-            })
-        }
     }
 }
 

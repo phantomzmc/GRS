@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, ListView, ImageBackground, TouchableOpacity, } from 'react-native';
+import { View, Text, Image, StyleSheet, FlatList, ImageBackground, TouchableOpacity, } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
 
@@ -10,52 +10,55 @@ export default class ListDistance extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            dataSource: new ListView.DataSource({
-                rowHasChanged: (r1, r2) => r1 != r2
-            })
+            distanceEvent : {
+                name: "",
+                distance: "",
+                price: ""
+            }
         }
-        this.shirtPhotoPlus = this.shirtPhotoPlus.bind(this)
     }
 
     componentDidMount() {
         this.setState({
-            dataSource: this.state.dataSource.cloneWithRows(datadistance)
+            dataSource: datadistance
         });
     }
-    shirtPhotoPlus = (datadistance) => {
-        // this.props.onGoto()
-        AlertIOS.alert(datadistance.distance)
+    shirtPhotoPlus = (item) => {
+        this.setState({ distanceEvent: { name: item.name, distance: item.distance, price: item.price } })
+        this.props.onGotoshirt({ name: item.name, distance: item.distance, price: item.price })
+        console.log(this.state.distanceEvent)
     }
 
 
     render() {
+        if (this.state.isLoading) {
+            return (
+                <View style={{ flex: 1, padding: 20 }}>
+                    <ActivityIndicator />
+                </View>
+            )
+        }
         return (
-            <ListView
-                dataSource={this.state.dataSource}
-                renderRow={this.renderDistance}
-                style={styles.ListView}
-            />
-        );
-    }
-
-    renderDistance(datadistance) {
-        return (
-            <View style={styles.container}>
-                <TouchableOpacity>
-                    <ImageBackground source={{ uri: datadistance.pic }}
-                        style={styles.imgbackground}>
-
-                        <View style={styles.textContainer}>
-                            <Text style={styles.name}>{datadistance.name}</Text>
-                            <Text style={styles.distance}>{datadistance.distance}</Text>
-                            <Text style={styles.price}>{datadistance.price}</Text>
+            <View style={{ flex: 1, paddingTop: 20 }} >
+                <FlatList
+                    data={this.state.dataSource}
+                    renderItem={({ item }) =>
+                        <View style={styles.container}>
+                            <TouchableOpacity onPress={this.shirtPhotoPlus.bind(this, item)}>
+                                <ImageBackground source={{ uri: item.pic }}
+                                    style={styles.imgbackground}>
+                                    <View style={styles.textContainer}>
+                                        <Text style={styles.name}>{item.name}</Text>
+                                        <Text style={styles.distance}>{item.distance}</Text>
+                                        <Text style={styles.price}>{item.price}</Text>
+                                    </View>
+                                </ImageBackground>
+                            </TouchableOpacity>
                         </View>
-                    </ImageBackground>
-                </TouchableOpacity>
-
-
-            </View>
-
+                    }
+                    keyExtractor={(item, index) => index}
+                />
+            </View >
         );
     }
 }
