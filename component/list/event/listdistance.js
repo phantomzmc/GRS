@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, ListView, ImageBackground, TouchableHighlight, } from 'react-native';
+import { View, Text, Image, StyleSheet, ListView, ImageBackground, TouchableOpacity, } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
 
@@ -14,7 +14,7 @@ export default class ListDistance extends Component {
                 rowHasChanged: (r1, r2) => r1 != r2
             })
         }
-        this.gotoShirtPhotoPlus = this.gotoShirtPhotoPlus.bind(this)
+        this.shirtPhotoPlus = this.shirtPhotoPlus.bind(this)
     }
 
     componentDidMount() {
@@ -22,9 +22,11 @@ export default class ListDistance extends Component {
             dataSource: this.state.dataSource.cloneWithRows(datadistance)
         });
     }
-    gotoShirtPhotoPlus(datadistance) {
+    shirtPhotoPlus = (datadistance) => {
+        // this.props.onGoto()
         AlertIOS.alert(datadistance.distance)
     }
+
 
     render() {
         return (
@@ -39,16 +41,19 @@ export default class ListDistance extends Component {
     renderDistance(datadistance) {
         return (
             <View style={styles.container}>
-                <TouchableHighlight onPress={() => this.pressDataShirt(datadistance)}>
+                <TouchableOpacity>
                     <ImageBackground source={{ uri: datadistance.pic }}
                         style={styles.imgbackground}>
+
                         <View style={styles.textContainer}>
                             <Text style={styles.name}>{datadistance.name}</Text>
                             <Text style={styles.distance}>{datadistance.distance}</Text>
                             <Text style={styles.price}>{datadistance.price}</Text>
                         </View>
                     </ImageBackground>
-                </TouchableHighlight>
+                </TouchableOpacity>
+
+
             </View>
 
         );

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { View, Text, StyleSheet, ScrollView,TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
+import { connect } from 'react-redux'
 import ButtonChage from '../component/items/bottonChage'
 import HeaderProfile from '../component/items/header_profile.js'
 import ListDistance from '../component/list/event/listdistance'
@@ -23,6 +24,13 @@ class RegisterDistance extends Component {
             fontFamily: 'kanit',
         }
     };
+    constructor(props) {
+        super(props)
+        this.state = {
+
+        }
+        this.gotoShirtPhotoPlus = this.gotoShirtPhotoPlus.bind(this)
+    }
 
     gotoTeamList = () => {
         this.props.navigation.navigate('TabRouter')
@@ -31,27 +39,34 @@ class RegisterDistance extends Component {
         this.props.navigation.navigate('RegisterDistance')
     }
     gotoShirtPhotoPlus = () => {
-        this.props.navigation.navigate ('ShirtPhotoPlus')
+        this.props.navigation.navigate('ShirtPhotoPlus')
     }
     render() {
         return (
             <ScrollView>
                 <View style={styles.container}>
                     <ButtonChage Team={this.gotoTeamList.bind(this)}
-                                Single={this.gotoRegisterDistance.bind(this)}/>
-                    <HeaderProfile />
+                        Single={this.gotoRegisterDistance.bind(this)} />
+                    <HeaderProfile title={this.props.event.name}
+                                    detail={this.props.event.date} />
                     <Text style={styles.text}>
                         โปรดเลือกระยะทาง
                      </Text>
                     <ListDistance />
-                    <ButtonSubmit PhotoPlus={this.gotoShirtPhotoPlus.bind(this)}/>
+                    <ButtonSubmit PhotoPlus={this.gotoShirtPhotoPlus.bind(this)} />
                 </View>
             </ScrollView>
         );
     }
 }
+const mapStatetoProps = (state) => {
+    return {
+        event: state.event
+    }
+}
+
 const styles = StyleSheet.create({
-    container : {
+    container: {
 
     },
     text: {
@@ -63,4 +78,4 @@ const styles = StyleSheet.create({
     },
 
 })
-export default RegisterDistance
+export default connect(mapStatetoProps)(RegisterDistance);

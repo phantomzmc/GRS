@@ -1,14 +1,25 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, ListView } from 'react-native';
+import { StyleSheet, View, Text, ListView, TouchableOpacity } from 'react-native';
 
 
 class ChoiceSend extends Component {
-    constructor() {
-        super();
-        const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+    constructor(props) {
+        super(props);
         this.state = {
-            dataSource: ds.cloneWithRows(['รับด้วยตนเอง', 'ส่งไปรษณีย์']),
+            dataChoice: ["รับด้วยตนเอง", "ส่งไปรษณีย์"],
+            choice: "",
+            dataSource : new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
+
         };
+    }
+    componentDidMount() {
+        this.setState({
+            dataSource: this.state.dataSource.cloneWithRows(this.state.dataChoice) 
+        })
+    }
+    getChoice = (dataChoice) => {
+        this.props.showChoice(dataChoice)
+        this.setState({ choice: dataChoice })
     }
 
     render() {
@@ -16,10 +27,16 @@ class ChoiceSend extends Component {
             <ListView
                 style={styles.listview}
                 dataSource={this.state.dataSource}
-                renderRow={(rowData) => 
-                <Text style={styles.textlistview}>{rowData}</Text>}
+                renderRow={this.renderChoice.bind(this)}
             />
         );
+    }
+    renderChoice(dataChoice) {
+        return (
+            <TouchableOpacity onPress={()=> this.getChoice(dataChoice)}>
+                <Text style={styles.textlistview}>{dataChoice}</Text>
+            </TouchableOpacity>
+        )
     }
 }
 
@@ -28,10 +45,10 @@ const styles = StyleSheet.create({
         marginTop: 60,
         margin: 20
     },
-    listview : {
+    listview: {
         paddingHorizontal: 30,
     },
-    textlistview : {
+    textlistview: {
         marginTop: 20,
         marginBottom: 20,
         fontSize: 17,

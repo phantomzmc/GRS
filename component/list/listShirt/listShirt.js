@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, ListView, StyleSheet, TouchableHighlight, AlertIOS } from 'react-native';
 
-
+import { connect } from 'react-redux'
 import datashirt from './dataShirt'
 
 class ListShirt extends Component {
@@ -9,6 +9,7 @@ class ListShirt extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            size: "",
             dataSource: new ListView.DataSource({
                 rowHasChanged: (r1, r2) => r1 != r2
             })
@@ -21,9 +22,12 @@ class ListShirt extends Component {
             dataSource: this.state.dataSource.cloneWithRows(datashirt)
         });
     }
-    
+
     pressDataShirt(datashirt) {
-        AlertIOS.alert(datashirt.size)
+        console.log(this.state.size)
+        this.setState({ size: datashirt.size })
+        this.props.setSizeShirt(this.state.size)
+        AlertIOS.alert("ไซค์เสื้อ : " + datashirt.size)
     }
     render() {
         return (
@@ -48,6 +52,16 @@ class ListShirt extends Component {
         )
     }
 }
+const mapDispatchtoProps = (dispatch) => {
+    return {
+        setSizeShirt : (size) => {
+            dispatch({
+                type : 'setSizeShirt',
+                payload : size
+            })
+        }
+    }
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -65,4 +79,4 @@ const styles = StyleSheet.create({
     }
 
 })
-export default ListShirt
+export default connect(null,mapDispatchtoProps)(ListShirt)

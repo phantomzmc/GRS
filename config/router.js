@@ -35,6 +35,9 @@ export default StackNavigator ({
     ListEvent : {
         screen : ListEvent,
     },
+    ShirtPhotoPlus : {
+        screen : ShirtPhotoPlus
+    },
     RegisterDistance : {
         screen : RegisterDistance,
     },
@@ -44,9 +47,7 @@ export default StackNavigator ({
     TeamList : {
         screen : TeamList
     },
-    ShirtPhotoPlus : {
-        screen : ShirtPhotoPlus
-    },
+
     CreditPayment : {
         screen : CreditPayment
     },

@@ -86,9 +86,9 @@ const mapStateToProps = (state) => {
 };
 const mapDisPacthToProps = (dispacth) => {
     return {
-        setPriceCredit: (priceCredit) => {
+        setPrice: (priceCredit) => {
             dispacth({
-                type: "setPriceCredit",
+                type: "setPrice",
                 payload: priceCredit
             })
         }

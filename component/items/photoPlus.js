@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, Alert } from 'react-native';
 
+import { connect } from 'react-redux'
 import SwitchItem from '../items/switch'
 import Test from './test'
 
@@ -9,7 +10,7 @@ class PhotoPlus extends Component {
         super();
         this.state = {
             switch1Value: false,
-            pricePhotoPlus: 0,
+            pricePhotoPlus: 100,
             textSwitch: ""
 
         }
@@ -18,10 +19,15 @@ class PhotoPlus extends Component {
         this.setState({ switch1Value: value })
         console.log('Submit photo+' + value)
         if (this.state.switch1Value == true) {
+            this.props.setPrice(this.state.pricePhotoPlus)
             this.setState({ pricePhotoPlus: 0 })
+            console.log(this.state.pricePhotoPlus)
         }
         if (this.state.switch1Value == false) {
+            this.props.setPrice(this.state.pricePhotoPlus)
             this.setState({ pricePhotoPlus: this.props.pricePhoto })
+            console.log(this.state.pricePhotoPlus)
+            
         }
     }
 
@@ -39,6 +45,17 @@ class PhotoPlus extends Component {
         );
     }
 }
+const mapDispatchtoState = (dispatch) => {
+    return {
+        setPrice: (price) => {
+            dispatch({
+                type: 'setPrice',
+                payload: price
+            })
+        }
+    }
+}
+
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
@@ -46,4 +63,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default PhotoPlus;
+export default connect(null, mapDispatchtoState)(PhotoPlus);

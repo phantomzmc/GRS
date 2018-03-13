@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, AlertIOS } from 'react-native';
 
 import CreditView from '../component/items/creditView'
 import ButtonChangePayment from '../component/items/bottonChangePayment'
 import { connect } from 'react-redux';
+import { StackNavigator } from 'react-navigation';
+
 
 class CreditPayment extends Component {
     static navigationOptions = {
@@ -16,6 +18,12 @@ class CreditPayment extends Component {
             fontFamily: 'kanit',
         }
     };
+    constructor(props) {
+        super(props)
+        this.state = {
+        }
+        this.goAddressSend = this.goAddressSend.bind(this)
+    }
     // getPrice (setPrice){
     //     this.setState ({
     //         price: this.state.setPrice
@@ -29,6 +37,7 @@ class CreditPayment extends Component {
     }
     goAddressSend = () => {
         this.props.navigation.navigate('AddressLayout')
+        console.log("hello")
     }
 
     render() {
@@ -40,14 +49,9 @@ class CreditPayment extends Component {
                         Tranfer={this.gotoTransferPayment.bind(this)}
                         Credit={this.gotoCreditPayment.bind(this)}
                     />
-                    <CreditView />
+                    <CreditView goAddress = {this.goAddressSend.bind(this)}/>
                 </View>
-                <View style={styles.submitContainer}>
-                    <TouchableOpacity style={styles.buttonContainer}
-                        onPress={this.goAddressSend}>
-                        <Text style={styles.textButton}>ชำระค่าสมัคร : {this.props.creditcard.priceCredit} บาท</Text>
-                    </TouchableOpacity>
-                </View>
+
             </ScrollView>
         );
     }
@@ -62,26 +66,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
         marginHorizontal: 20,
     },
-    submitContainer: {
-        marginTop: 30,
-        alignItems: 'center',
-        marginBottom: 30,
-    },
-    buttonContainer: {
-        height: 40,
-        width: '80%',
-        backgroundColor: '#FC561F',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 20,
-    },
-    textButton: {
-        fontWeight: '500',
-        fontSize: 15,
-        color: '#fff',
-        fontFamily: "Kanit"
 
-    }
 })
 
 const mapStateToProps = (state) => {
@@ -89,5 +74,6 @@ const mapStateToProps = (state) => {
         creditcard: state.creditcard
     };
 };
+
 
 export default connect(mapStateToProps)(CreditPayment);

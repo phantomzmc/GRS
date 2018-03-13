@@ -12,6 +12,7 @@ import {
     TouchableOpacity
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
+import { connect } from 'react-redux'
 
 class ListEvent extends Component {
     static propTypes = {
@@ -32,7 +33,8 @@ class ListEvent extends Component {
         super(props);
         this.state = {
             isLoading: true,
-            value : {}
+            name: "",
+            date: ""
         }
     }
     componentDidMount() {
@@ -59,9 +61,13 @@ class ListEvent extends Component {
     gotoPayment = (item) => {
         this.props.navigation.navigate('RegisterDistance')
         // this.setState.name("name2")
-        this.setState ({ value : item})
-        console.log(this.state.value)
+        this.setState({ name: item.EventName, date: item.EventDate })
+        console.log(this.state.name)
+        console.log(this.state.date)
+        this.props.addEvent(this.state.name)
+        this.props.addEventDate(this.state.date)
     }
+
 
     render() {
         if (this.state.isLoading) {
@@ -85,7 +91,7 @@ class ListEvent extends Component {
                                         <Text style={styles.dateText}>{item.EventID}</Text>
                                         <Text style={styles.monthText}>{item.EventDate}</Text>
                                     </View>
-                                    <TouchableOpacity onPress={this.gotoPayment.bind(this,item)}>
+                                    <TouchableOpacity onPress={this.gotoPayment.bind(this, item)}>
                                         <Text style={styles.name}>{item.EventName}</Text>
                                     </TouchableOpacity>
                                 </View>
@@ -97,6 +103,22 @@ class ListEvent extends Component {
             </View >
         );
     }
+}
+const mapDispatchtoProps = (dispatch) => {
+    return {
+        addEvent: (name) => {
+            dispatch({
+                type: 'addEvent',
+                payload: name
+            })
+        },
+        addEventDate: (date) => {
+            dispatch({
+                type: 'addEventDate',
+                payload: date
+            })
+        }
+    };
 }
 
 const styles = StyleSheet.create({
@@ -152,5 +174,5 @@ const styles = StyleSheet.create({
         backgroundColor: '#FC561F'
     }
 });
-export default ListEvent
+export default connect(null, mapDispatchtoProps)(ListEvent);
 

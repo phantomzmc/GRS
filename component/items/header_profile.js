@@ -12,8 +12,8 @@ export default class HeaderProfile extends Component {
                             style={styles.imgAvatar} />
                     </View>
                     <View style={styles.detailProfile}>
-                        <Text style={styles.nameProfile}>Name</Text>
-                        <Text style={styles.ageProfile}>detail</Text>
+                        <Text style={styles.nameProfile}>{this.props.title}</Text>
+                        <Text style={styles.ageProfile}>{this.props.detail}</Text>
                     </View>
                 </View>
             </ImageBackground>
