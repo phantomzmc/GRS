@@ -31,7 +31,7 @@ class AddressLayout extends Component {
     }
     goTotalPayment = (fullname, email, adress, tel) => {
         this.props.setUser({ fullname : fullname,email,adress,tel})
-        this.props.navigation.navigate('TotalPayment')
+        this.props.navigation.navigate('CreditPayment')
     }
     alertChoice = (dataChoice) => {
         console.log(this.state.dataChoice)

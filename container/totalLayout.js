@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-nati
 import { connect } from 'react-redux'
 
 import TotalRegister from '../component/items/totalRegister'
+import DetailRegister from '../component/items/detailRegister'
 
 class TotalLayout extends Component {
     static navigationOptions = {
@@ -46,6 +47,7 @@ class TotalLayout extends Component {
         return (
             <ScrollView>
                 <View style={styles.container}>
+                    <DetailRegister />
                     <TotalRegister />
                     <View style={styles.submitContainer}>
                         <TouchableOpacity style={styles.buttonContainer}
@@ -83,16 +85,6 @@ const styles = StyleSheet.create({
     },
 
 })
-// const mapDisPacthToProps = (dispacth) => {
-//     return {
-//         addEvent: (name) => {
-//             dispacth({
-//                 type: "addEvent",
-//                 payload: name
-//             })
-//         }
-//     }
-// }
 
 const mapStateToProps = (state) => {
     return {

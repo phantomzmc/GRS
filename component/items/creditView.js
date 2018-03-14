@@ -16,13 +16,9 @@ class CreditView extends Component {
             cvcCredit: "XXX"
         }
     }
-    putDataCredit = (nameCredit,numberCredit,expCredit,cvcCredit) => {
-        this.props.setNameCredit(this.state.nameCredit )
-        this.props.setNumberCredit(this.state.numberCredit)
-        this.props.setExpCredit(this.state.expCredit)
-        this.props.setCVC(this.state.cvcCredit)
+    putDataCredit = (nameCredit, numberCredit, expCredit, cvcCredit) => {
         this.props.goAddress()
-        // this.props.navigation.navigate('AddressLayout')
+        this.props.setCredit({ nameCredit: nameCredit, numberCredit, expCredit, cvcCredit })
     }
     render() {
         let { nameCredit, numberCredit, expCredit, cvcCredit } = this.state
@@ -79,8 +75,8 @@ class CreditView extends Component {
                 </View>
                 <View style={styles.submitContainer}>
                     <TouchableOpacity style={styles.buttonContainer}
-                        onPress={()=>this.putDataCredit(nameCredit,numberCredit,expCredit,cvcCredit)}>
-                        <Text style={styles.textButton}>ชำระค่าสมัคร :  บาท</Text>
+                        onPress={() => this.putDataCredit(nameCredit, numberCredit, expCredit, cvcCredit)}>
+                        <Text style={styles.textButton}>ชำระค่าสมัคร : {this.props.TotalPrice}  บาท</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -89,31 +85,12 @@ class CreditView extends Component {
 }
 const mapDispatchtoProps = (dispatch) => {
     return {
-        setNameCredit: (nameCredit) => {
+        setCredit: (nameCredit) => {
             dispatch({
-                type: 'setNameCredit',
+                type: 'setCredit',
                 payload: nameCredit
             })
         },
-        setNumberCredit: (numberCredit) => {
-            dispatch({
-                type: 'setNumberCredit',
-                payload: numberCredit
-            })
-        },
-        setExpCredit: (expCredit) => {
-            dispatch({
-                type: 'setExpCredit',
-                payload: expCredit
-            })
-        },
-        setCVC: (cvcCredit) => {
-            dispatch({
-                type: 'setCVC',
-                payload: cvcCredit
-            })
-        },
-
     }
 }
 

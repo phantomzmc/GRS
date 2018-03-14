@@ -17,11 +17,11 @@ class TotalRegister extends Component {
                         </View>
                     </View>
                     <View>
-                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.props.event.name} </Text>
-                        <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit' }}>(5 Km. - S) x 1 (Photo Plus)</Text>
+                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.props.event.event.name} </Text>
+                        <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit' }}>({this.props.event.distanceEvent.distance} - {this.props.shirtphoto.size}) x 1 (Photo Plus)</Text>
                     </View>
                     <View>
-                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>600.00 ฿</Text>
+                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.props.totalPrice}.00 ฿</Text>
                     </View>
                 </View>
                 <View style={styles.detailRow}>
@@ -112,7 +112,9 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => {
     return {
         event: state.event,
+        distanceEvent : state.distanceEvent,
         shirtphoto: state.shirtphoto,
+        totalPrice : state.totalPrice,
         choiceSend: state.choiceSend,
         address: state.address
     }

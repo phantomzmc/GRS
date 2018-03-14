@@ -50,7 +50,7 @@ export default class ListDistance extends Component {
                                     <View style={styles.textContainer}>
                                         <Text style={styles.name}>{item.name}</Text>
                                         <Text style={styles.distance}>{item.distance}</Text>
-                                        <Text style={styles.price}>{item.price}</Text>
+                                        <Text style={styles.price}>{item.price}.00 บาท</Text>
                                     </View>
                                 </ImageBackground>
                             </TouchableOpacity>

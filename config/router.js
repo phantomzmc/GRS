@@ -1,4 +1,5 @@
 import { StackNavigator } from 'react-navigation';
+import SingleLogin from '../container/singleLogin'
 import Login from '../container/login'
 import ListEvent from '../component/list/listevent/listevent'
 import RegisterDistance from '../container/registerDistance'
@@ -15,13 +16,16 @@ import TransferPayment from '../container/tranferPayment'
 import ListDistance from '../component/list/event/listdistance'
 import ListShith from '../component/list/listShirt/listShirt';
 
-import Test from '../list'
+import DetailRegister from '../component/items/detailRegister'
 
 // import ListShirt from '../component/list/listShirt/listShirt'
 
 export default StackNavigator ({
-    RegisterDistance : {
-        screen : RegisterDistance,
+    SingleLogin : {
+        screen : SingleLogin,
+        navigationOptions : {
+            header : () => null
+        }
     },
     Login : {
         screen : Login,

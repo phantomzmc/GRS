@@ -9,26 +9,38 @@ class PhotoPlus extends Component {
     constructor() {
         super();
         this.state = {
-            switch1Value: false,
-            pricePhotoPlus: 100,
-            textSwitch: ""
+            switch1Value: true,
+            pricePhotoPlus: "100",
+            textSwitch: "",
+            priceEvent: "",
+            totalPrice: ""
 
         }
     }
+
     toggleSwitch1 = (value) => {
-        this.setState({ switch1Value: value })
-        console.log('Submit photo+' + value)
         if (this.state.switch1Value == true) {
-            this.props.setPrice(this.state.pricePhotoPlus)
-            this.setState({ pricePhotoPlus: 0 })
-            console.log(this.state.pricePhotoPlus)
-        }
-        if (this.state.switch1Value == false) {
-            this.props.setPrice(this.state.pricePhotoPlus)
             this.setState({ pricePhotoPlus: this.props.pricePhoto })
             console.log(this.state.pricePhotoPlus)
+            this.setState({ priceEvent: this.props.priceEvent })
+            console.log(this.state.priceEvent)
+            
             
         }
+        else if (this.state.switch1Value == false) {
+            this.setState({ pricePhotoPlus: 0 })
+            // this.props.setPrice(this.state.pricePhotoPlus)
+            console.log(this.state.pricePhotoPlus)
+
+        }
+        this.setState({ switch1Value: value })
+        console.log('Submit photo+' + value)
+        this.sumPrice()
+    }
+    sumPrice = () => {
+        this.setState({ totalPrice: this.state.pricePhotoPlus + this.state.priceEvent })
+        this.props.setTotal(this.state.totalPrice)
+        console.log(this.state.totalPrice)
     }
 
 
@@ -51,6 +63,12 @@ const mapDispatchtoState = (dispatch) => {
             dispatch({
                 type: 'setPrice',
                 payload: price
+            })
+        },
+        setTotal : (totalPrice) => {
+            dispatch({
+                type: "setTotal",
+                payload : totalPrice
             })
         }
     }

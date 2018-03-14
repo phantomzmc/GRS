@@ -22,7 +22,7 @@ class ShirtPhotoPlus extends Component {
     };
 
     goNextState = () => {
-        this.props.navigation.navigate('CreditPayment')
+        this.props.navigation.navigate('AddressLayout')
     }
     render() {
         return (
@@ -31,7 +31,8 @@ class ShirtPhotoPlus extends Component {
                     <Image source={{ uri: "http://register.shutterrunning2014.com/assets/img/theme/dongtanshirt.png" }}
                         style={{ height: 100, marginTop: 10 }} />
                     <PhotoPlus titleName={this.props.photoplus.title}
-                        pricePhoto={this.props.photoplus.pricePhoto} />
+                        pricePhoto={this.props.photoplus.pricePhoto}
+                        priceEvent={this.props.event.distanceEvent.price} />
                     <Text style={styles.textSize}>โปรดเลือกไซค์เสื้อ</Text>
                     <ListShirt />
                 </View>
@@ -79,6 +80,7 @@ const styles = StyleSheet.create({
 })
 const mapStateToProps = (state) => {
     return {
+        event :  state.event,
         creditcard: state.creditcard,
         shirtphoto: state.shirtphoto,
         photoplus: state.photoplus,

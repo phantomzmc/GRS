@@ -36,7 +36,7 @@ class CreditPayment extends Component {
         this.props.navigation.navigate('CreditPayment')
     }
     goAddressSend = () => {
-        this.props.navigation.navigate('AddressLayout')
+        this.props.navigation.navigate('TotalPayment')
         console.log("hello")
     }
 
@@ -49,7 +49,9 @@ class CreditPayment extends Component {
                         Tranfer={this.gotoTransferPayment.bind(this)}
                         Credit={this.gotoCreditPayment.bind(this)}
                     />
-                    <CreditView goAddress = {this.goAddressSend.bind(this)}/>
+                    <CreditView goAddress = {this.goAddressSend.bind(this)}
+                                TotalPrice = {this.props.total.totalPrice}
+                    />
                 </View>
 
             </ScrollView>
@@ -71,6 +73,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
     return {
+        total : state.total,
         creditcard: state.creditcard
     };
 };

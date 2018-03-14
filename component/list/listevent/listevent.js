@@ -33,8 +33,12 @@ class ListEvent extends Component {
         super(props);
         this.state = {
             isLoading: true,
-            name: "",
-            date: ""
+            event: {
+                name: "",
+                date: "",
+                tranferBank: ""
+            }
+
         }
     }
     componentDidMount() {
@@ -57,15 +61,17 @@ class ListEvent extends Component {
             .catch((error) => {
                 console.error(error);
             });
+
     }
     gotoPayment = (item) => {
         this.props.navigation.navigate('RegisterDistance')
         // this.setState.name("name2")
-        this.setState({ name: item.EventName, date: item.EventDate })
-        console.log(this.state.name)
-        console.log(this.state.date)
-        this.props.addEvent(this.state.name)
-        this.props.addEventDate(this.state.date)
+        this.setState({ event: { 
+                            name: item.EventName, 
+                            date: item.EventDate,
+                            tranferBank : item.EventBankDetailTH } 
+                    })
+        this.props.addEvent(this.state.event)
     }
 
 
@@ -106,18 +112,12 @@ class ListEvent extends Component {
 }
 const mapDispatchtoProps = (dispatch) => {
     return {
-        addEvent: (name) => {
+        addEvent: (event) => {
             dispatch({
                 type: 'addEvent',
-                payload: name
+                payload: event
             })
         },
-        addEventDate: (date) => {
-            dispatch({
-                type: 'addEventDate',
-                payload: date
-            })
-        }
     };
 }
 

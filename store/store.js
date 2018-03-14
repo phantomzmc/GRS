@@ -1,25 +1,34 @@
 import { createStore, combineReducers } from 'redux';
 
 const eventState = {
-    name: "1",
-    date: "date",
-    distanceEvent : {
-        distanceName:"",
-        distance :"",
-        price: ""
+    event: {
+        name: "1",
+        date: "date",
+        tranferBank: ""
+    },
+    distanceEvent: {
+        distanceName: "",
+        distance: "1 km",
+        price: 400
     }
+}
+const credit = {
+    nameCredit : {
+        nameCredit: "",
+        numberCredit: "1234 5678 1234 5678",
+        expCredit: "00/0000",
+        cvcCredit: "XXX"
+    },
+    vat : 33.25
 }
 const event = (state = eventState, action) => {
     switch (action.type) {
         case 'addEvent': {
-            state.name = action.payload
+            state.event = action.payload
             break;
         }
-        case 'addEventDate': {
-            state.date = action.payload
-            break;
-        }
-        case 'addDistance' : {
+
+        case 'addDistance': {
             state.distanceEvent = action.payload
             break;
         }
@@ -55,21 +64,11 @@ const photoplus = (state = { title: "Photo Plus Service", pricePhoto: 100 }, act
     }
     return state
 }
-const creditcard = (state = {}, action) => {
+const creditcard = (state = credit, action) => {
     switch (action.type) {
-        case 'setNameCredit': {
+        case 'setCredit': {
             state.nameCredit = action.payload
             break;
-        }
-        case 'setNumberCredit': {
-            state.numberCredit = action.payload
-            break;
-        }
-        case 'setExpCredit': {
-            state.expCredit = action.payload
-        }
-        case 'setCVC': {
-            state.cvcCredit = action.payload
         }
         default:
             break;
@@ -94,8 +93,17 @@ const address = (state = {}, action) => {
     }
     return state
 }
+const total = (state = {}, action) => {
+    switch (action.type) {
+        case 'setTotal': {
+            state.totalPrice = action.payload
+            break;
+        }
+    }
+    return state
+}
 
-const store = createStore(combineReducers({ event, shirtphoto, creditcard, photoplus, choiceSend, address }))
+const store = createStore(combineReducers({ event, shirtphoto, creditcard, photoplus, choiceSend, address, total }))
 store.subscribe(() => {
     console.log("Updata Store", store.getState())
 })
