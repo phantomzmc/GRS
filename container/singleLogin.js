@@ -6,11 +6,11 @@ class SingleLogin extends Component {
     static propTypes = {
         navigation: PropTypes.object,
     }
-    constructor (props){
-        super (props)
+    constructor(props) {
+        super(props)
         this.state = {
-            username : "" ,
-   
+            username: "",
+
         }
     }
     checkLogin() {
@@ -22,7 +22,10 @@ class SingleLogin extends Component {
                 'การเข้าสู่ระบบผิดพลาด',
                 [
                     { text: 'Cancel' },
-                    { text: 'สมัครสมาชิก'},
+                    {
+                        text: 'สมัครสมาชิก',
+                        onPress: () => this.gotoRegister.bind(this)
+                    },
                 ],
                 { cancelable: false }
             )
@@ -58,7 +61,7 @@ class SingleLogin extends Component {
                             <Text style={styles.textButton}>Login</Text>
                         </TouchableOpacity>
                     </View>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={this.gotoRegister.bind(this)}>
                         <Text style={styles.regisButton}>
                             สมัครสมาชิก
                         </Text>
@@ -88,7 +91,7 @@ const styles = StyleSheet.create({
     regisButton: {
         color: '#fff',
         alignSelf: 'center',
-        
+
     },
     input: {
         height: 40,
@@ -109,11 +112,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 10,
     },
-      textButton: {
+    textButton: {
         fontWeight: '700',
         fontSize: 20,
         color: '#fff',
-    
+
     }
 })
 export default SingleLogin

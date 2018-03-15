@@ -21,7 +21,7 @@ class DetailRegister extends Component {
                 </View>
                 <View style={styles.viewName}>
                     <Text style={styles.textName1}>ชื่อ - นามสกุล</Text>
-                    <Text style={styles.textName2}>{this.props.address.fullname}</Text>
+                    <Text style={styles.textName2}>{this.props.address.user.fullname}</Text>
                     <Text style={styles.textName1}>รายการวิ่ง</Text>
                     <Text style={styles.textName2}>{this.props.event.event.name}</Text>
                 </View>
@@ -31,14 +31,14 @@ class DetailRegister extends Component {
                         <Text style={styles.boxName}>{this.props.shirtphoto.size}</Text>
                     </View>
                     <View style={styles.box}>
-                        <Text style={styles.boxTitle}>{this.props.event.distanceEvent.distanceName}</Text>
+                        <Text style={styles.boxTitle}>{this.props.event.distanceEvent.name}</Text>
                         <Text style={styles.boxName}>{this.props.event.distanceEvent.distance}</Text>
                     </View>
                 </View>
                 <View style={styles.viewAddress}>
                     <View style={{ flex: 1, alignItems: 'center' }}>
                         <Text style={styles.textName1}>Address</Text>
-                        <Text style={{ fontFamily: 'kanit' }}>106/13 ม.7 ต.หนองหอย อ.เมือง จ.เชียงใหม่ 50000</Text>
+                        <Text style={{ fontFamily: 'kanit' }}>{this.props.address.user.adress}</Text>
                     </View>
                     <View style={{ flex: 1, alignItems: 'center' }}>
                         <Text style={styles.textName1}>วันที่</Text>

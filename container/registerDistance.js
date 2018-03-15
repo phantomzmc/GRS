@@ -48,9 +48,10 @@ class RegisterDistance extends Component {
     }
     gotoShirtPhotoPlus = (dispatchEvent) => {
         this.setState ({distanceEvent : dispatchEvent})
-        console.log(this.state.distanceEvent)
-        this.props.navigation.navigate('ShirtPhotoPlus')
         this.props.addDistance(this.state.distanceEvent)
+        this.props.setTotal(this.state.distanceEvent.price)
+        this.props.navigation.navigate('ShirtPhotoPlus')
+
     }
     render() {
         return (
@@ -76,6 +77,12 @@ const mapDisPatchToProps = (dispatch) => {
             dispatch({
                 type : "addDistance",
                 payload : distanceEvent
+            })
+        },
+        setTotal : (totalPrice) => {
+            dispatch({
+                type: "setTotal",
+                payload : totalPrice
             })
         }
     }

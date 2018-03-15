@@ -33,9 +33,9 @@ export default StackNavigator ({
             header : () => null
         }
     },
-    // Register : {
-    //     screen : Register,
-    // },
+    Register : {
+        screen : Register,
+    },
     // Test : {
     //     screen : Test
     // },

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ListView, StyleSheet, TouchableHighlight, AlertIOS } from 'react-native';
+import { View, Text, ListView, StyleSheet, TouchableHighlight, Alert } from 'react-native';
 
 import { connect } from 'react-redux'
 import datashirt from './dataShirt'
@@ -27,7 +27,7 @@ class ListShirt extends Component {
         console.log(this.state.size)
         this.setState({ size: datashirt.size })
         this.props.setSizeShirt(this.state.size)
-        AlertIOS.alert("ไซค์เสื้อ : " + datashirt.size)
+        Alert.alert("ไซค์เสื้อ : " + datashirt.size)
     }
     render() {
         return (

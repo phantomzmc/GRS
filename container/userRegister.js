@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
+import PropTypes from 'prop-types';
+import { View, Text, ScrollView, StyleSheet,TouchableOpacity } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
 
@@ -7,6 +8,9 @@ import HeaderUser from '../component/items/header_profile'
 import FormRegister from '../component/form/registerForm'
 
 class UserRegister extends Component {
+  static propTypes = {
+    navigation: PropTypes.object,
+  }
   static navigationOptions = {
     title: 'สมัครสมาชิก',
     headerStyle: {
@@ -17,13 +21,17 @@ class UserRegister extends Component {
     }
   };
 
+  gotoListEvent = () => {
+    this.props.navigation.navigate('ListEvent')
+  }
+
 
   render() {
     return (
       <ScrollView>
         <View style={styles.container}>
           <HeaderUser />
-          <FormRegister />
+          <FormRegister goEvent={this.gotoListEvent.bind(this)}/>
         </View>
       </ScrollView>
     );
@@ -32,7 +40,7 @@ class UserRegister extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom : 60
+    marginBottom: 60
   }
 })
 

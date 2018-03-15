@@ -21,7 +21,7 @@ class TotalRegister extends Component {
                         <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit' }}>({this.props.event.distanceEvent.distance} - {this.props.shirtphoto.size}) x 1 (Photo Plus)</Text>
                     </View>
                     <View>
-                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.props.totalPrice}.00 ฿</Text>
+                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.props.total.totalPrice}.00 ฿</Text>
                     </View>
                 </View>
                 <View style={styles.detailRow}>
@@ -114,7 +114,7 @@ const mapStateToProps = (state) => {
         event: state.event,
         distanceEvent : state.distanceEvent,
         shirtphoto: state.shirtphoto,
-        totalPrice : state.totalPrice,
+        total : state.total,
         choiceSend: state.choiceSend,
         address: state.address
     }
