@@ -13,8 +13,8 @@ class HeaderProfile extends Component {
                             style={styles.imgAvatar} />
                     </View>
                     <View style={styles.detailProfile}>
-                        <Text style={styles.nameProfile}>{this.props.event.event.name}</Text>
-                        <Text style={styles.ageProfile}>{this.props.event.event.date}</Text>
+                        <Text style={styles.nameProfile}>{this.props.Name}</Text>
+                        <Text style={styles.ageProfile}>{this.props.UserID}</Text>
                     </View>
                 </View>
             </ImageBackground>

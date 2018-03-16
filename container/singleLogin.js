@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, ImageBackground, KeyboardAvoidingView, TouchableOpacity, Alert, TextInput } from 'react-native';
+import { connect } from 'react-redux'
 
 class SingleLogin extends Component {
     static propTypes = {
@@ -14,7 +15,7 @@ class SingleLogin extends Component {
         }
     }
     checkLogin() {
-        if (this.state.username === "1234") {
+        if (this.state.username === this.props.profile.profile.userid) {
             this.gotoListEvent()
         } else {
             Alert.alert(
@@ -119,4 +120,11 @@ const styles = StyleSheet.create({
 
     }
 })
-export default SingleLogin
+
+const mapStateToProps = (state) => {
+    return {
+        profile : state.profile
+    }
+}
+
+export default connect(mapStateToProps)(SingleLogin)

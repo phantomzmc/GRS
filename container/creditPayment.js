@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, AlertIOS } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, AlertIOS ,Button} from 'react-native';
 
 import CreditView from '../component/items/creditView'
 import ButtonChangePayment from '../component/items/bottonChangePayment'
@@ -16,7 +16,14 @@ class CreditPayment extends Component {
         headerTitleStyle: {
             color: '#fff',
             fontFamily: 'kanit',
-        }
+        },
+        headerRight: (
+            <Button
+                onPress={() => this.showDetailPayment.bind(this)}
+                title="รายละเอียด"
+                color="#fff"
+            />
+        ),
     };
     constructor(props) {
         super(props)
@@ -24,11 +31,9 @@ class CreditPayment extends Component {
         }
         this.goAddressSend = this.goAddressSend.bind(this)
     }
-    // getPrice (setPrice){
-    //     this.setState ({
-    //         price: this.state.setPrice
-    //     })
-    // }
+    showDetailPayment = () => {
+        this.props.navigation.navigate('TotalPayment')
+    }
     gotoTransferPayment = () => {
         this.props.navigation.navigate('TransferPayment')
     }
@@ -49,8 +54,8 @@ class CreditPayment extends Component {
                         Tranfer={this.gotoTransferPayment.bind(this)}
                         Credit={this.gotoCreditPayment.bind(this)}
                     />
-                    <CreditView goAddress = {this.goAddressSend.bind(this)}
-                                TotalPrice = {this.props.total.totalPrice}
+                    <CreditView goAddress={this.goAddressSend.bind(this)}
+                        TotalPrice={this.props.total.totalPrice}
                     />
                 </View>
 
@@ -73,7 +78,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
     return {
-        total : state.total,
+        total: state.total,
         creditcard: state.creditcard
     };
 };

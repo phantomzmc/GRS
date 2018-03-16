@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, ScrollView, StyleSheet,TouchableOpacity } from 'react-native';
 import { StackNavigator } from 'react-navigation';
+import {connect} from 'react-redux'
 
 
 import HeaderUser from '../component/items/header_profile'
@@ -20,9 +21,16 @@ class UserRegister extends Component {
       color: '#fff'
     }
   };
+  constructor (props) {
+    super(props)
+    this.state ={
+      profile : {}
+    }
+  }
 
-  gotoListEvent = () => {
-    this.props.navigation.navigate('ListEvent')
+  gotoListEvent = (fullname,userid,age,number,t,a,city,country,postNumber,tel,email) => {
+    this.props.setProfile({ profile : fullname,userid,age,number,t,a,city,country,postNumber,tel,email})
+    this.props.navigation.navigate('SingleLogin')
   }
 
 
@@ -30,7 +38,8 @@ class UserRegister extends Component {
     return (
       <ScrollView>
         <View style={styles.container}>
-          <HeaderUser />
+          <HeaderUser Name={this.props.fullname}
+                      UserID={this.props.userid}/>
           <FormRegister goEvent={this.gotoListEvent.bind(this)}/>
         </View>
       </ScrollView>
@@ -44,4 +53,15 @@ const styles = StyleSheet.create({
   }
 })
 
-export default UserRegister 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setProfile: (profile) => {
+      dispatch({
+        type : "setProfile",
+        payload : profile
+      })
+    }
+  }
+}
+
+export default connect(null,mapDispatchToProps)(UserRegister) 

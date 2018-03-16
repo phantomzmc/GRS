@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import { connect } from 'react-redux'
 
 class AddressForm extends Component {
     constructor(props) {
@@ -11,8 +12,16 @@ class AddressForm extends Component {
             tel: ""
         }
     }
+    componentDidMount = () => {
+        this.setState({
+            fullname: this.props.profile.profile.profile,
+            email: this.props.profile.profile.email,
+            adress: this.props.profile.profile.number,
+            te: this.props.profile.profile.tel
+        })
+    }
     putDataUser = (fullname, email, adress, tel) => {
-        this.props.getAddress(fullname,email,adress,tel)
+        this.props.getAddress(fullname, email, adress, tel)
         console.log(this.state.fullname)
         console.log(this.state.email)
 
@@ -22,25 +31,25 @@ class AddressForm extends Component {
         return (
             <View style={styles.container}>
                 <TextInput
-                    placeholder="ชื่อ - นามสกุล"
-                    onChangeText={(fullname) => this.setState({ fullname })}
+                    placeholder={this.props.profile.profile.profile}
+                    onChangeText={(fullname) => this.setState(this.props.profile.profile.profile)}
                     style={styles.input}
                 />
                 <TextInput
-                    placeholder="Email"
+                    placeholder={this.props.profile.profile.email}
                     style={styles.input}
-                    onChangeText={(email) => this.setState({ email })}
+                    onChangeText={(email) => this.setState(this.props.profile.profile.email)}
                 />
                 <TextInput
-                    placeholder="ที่อยู่"
+                    placeholder={this.props.profile.profile.number}
                     style={styles.input}
-                    onChangeText={(adress) => this.setState({ adress })}
+                    onChangeText={(adress) => this.setState(this.props.profile.profile.number)}
 
                 />
                 <TextInput
-                    placeholder="เบอร์โทรศัพท์"
+                    placeholder={this.props.profile.profile.tel}
                     style={styles.input}
-                    onChangeText={(tel) => this.setState({ tel })}
+                    onChangeText={(tel) => this.setState(this.props.profile.profile.tel)}
                 />
                 <View style={styles.submitContainer}>
                     <TouchableOpacity style={styles.buttonContainer}
@@ -86,4 +95,10 @@ const styles = StyleSheet.create({
     }
 })
 
-export default AddressForm;
+const mapStateToProps = (state) => {
+    return {
+        profile: state.profile
+    }
+}
+
+export default connect(mapStateToProps)(AddressForm);

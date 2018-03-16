@@ -11,27 +11,29 @@ class FormRegister extends Component {
     }
     constructor(props) {
         super(props)
-        this.state = (
-            fullname = "",
-            userid = "",
-            gen = "",
-            age = "",
-            number = "",
-            t = "",
-            a = "",
-            city = "",
-            country = "",
-            postNumber = "",
-            tel = "",
-            email = ""
-
-        )
+        this.state = {
+            fullname : "",
+            userid : "",
+            gen : "",
+            age : "",
+            number : "",
+            t : "",
+            a : "",
+            city : "",
+            country : "",
+            postNumber : "",
+            tel : "",
+            email : ""
+        }   
     }
-    sendData = () => {
-        this.props.goEvent()
+    sendData = (fullname, userid, age, number, t, a, city, country, postNumber, tel, email) => {
+        this.props.goEvent(fullname, userid, age, number, t, a, city, country, postNumber, tel, email)
+        console.log(this.state.fullname)
+        console.log(this.state.userid)
     }
 
     render() {
+        let { fullname, userid, age, number, t, a, city, country, postNumber, tel, email } = this.state
         return (
             <View style={styles.container}>
                 <TextInput
@@ -111,7 +113,7 @@ class FormRegister extends Component {
                 />
                 <View style={styles.submitContainer}>
                     <TouchableOpacity style={styles.buttonContainer}
-                        onPress={this.sendData.bind(this)}>
+                        onPress={() => this.sendData(fullname, userid, age, number, t, a, city, country, postNumber, tel, email)}>
                         <Text style={styles.textButton}>ยืนยัน</Text>
                     </TouchableOpacity>
                 </View>

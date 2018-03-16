@@ -21,6 +21,29 @@ const credit = {
     },
     vat : 33.25
 }
+const user = {
+    fullname : "",
+    userid : "",
+    gen : "",
+    age : "",
+    number : "",
+    t : "",
+    a : "",
+    city : "",
+    country : "",
+    postNumber : "",
+    tel : "",
+    email : ""
+}
+const profile = (state = {} ,action) => {
+    switch (action.type){
+        case 'setProfile' : {
+            state.profile = action.payload
+        }
+    }
+    return state
+}
+
 const event = (state = eventState, action) => {
     switch (action.type) {
         case 'addEvent': {
@@ -103,7 +126,7 @@ const total = (state = {}, action) => {
     return state
 }
 
-const store = createStore(combineReducers({ event, shirtphoto, creditcard, photoplus, choiceSend, address, total }))
+const store = createStore(combineReducers({ profile,event, shirtphoto, creditcard, photoplus, choiceSend, address, total }))
 store.subscribe(() => {
     console.log("Updata Store", store.getState())
 })
