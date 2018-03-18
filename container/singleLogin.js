@@ -1,50 +1,67 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { View, Text, StyleSheet, ImageBackground, KeyboardAvoidingView, TouchableOpacity, Alert, TextInput } from 'react-native';
-import { connect } from 'react-redux'
+import React, {Component} from 'react';
+import {
+    View,
+    Text,
+    StyleSheet,
+    ImageBackground,
+    KeyboardAvoidingView,
+    TouchableOpacity,
+    Alert,
+    TextInput
+} from 'react-native';
+import {connect} from 'react-redux'
 
 class SingleLogin extends Component {
     static propTypes = {
-        navigation: PropTypes.object,
+        navigation: PropTypes.object
     }
     constructor(props) {
         super(props)
         this.state = {
-            username: "",
-
+            username: ""
         }
     }
     checkLogin() {
         if (this.state.username === this.props.profile.profile.userid) {
             this.gotoListEvent()
         } else {
-            Alert.alert(
-                'เกิดข้อผิดพลาด',
-                'การเข้าสู่ระบบผิดพลาด',
-                [
-                    { text: 'Cancel' },
-                    {
-                        text: 'สมัครสมาชิก',
-                        onPress: () => this.gotoRegister.bind(this)
-                    },
-                ],
-                { cancelable: false }
-            )
+            Alert.alert('เกิดข้อผิดพลาด', 'การเข้าสู่ระบบผิดพลาด', [
+                {
+                    text: 'Cancel'
+                }, {
+                    text: 'สมัครสมาชิก',
+                    onPress: () => this.gotoRegister()
+                }
+            ], {cancelable: false})
         }
     }
     gotoListEvent = () => {
-        this.props.navigation.navigate('ListEvent')
+        console.log(this.state.username)
+        this
+            .props
+            .navigation
+            .navigate('ListEvent')
     }
     gotoRegister = () => {
-        this.props.navigation.navigate('Register')
+        this
+            .props
+            .navigation
+            .navigate('Register')
     }
     render() {
         return (
-            <ImageBackground source={{ uri: "http://register.shutterrunning2014.com/assets/img/theme/dongtanbg.jpg" }}
-                style={{ width: '100%', height: '100%', opacity: 1 }}>
+            <ImageBackground
+                source={{
+                uri: "http://register.shutterrunning2014.com/assets/img/theme/dongtanbg.jpg"
+            }}
+                style={{
+                width: '100%',
+                height: '100%',
+                opacity: 1
+            }}>
                 <View style={styles.container}>
-                    <Text style={styles.textTitle}
-                        onPress={this.gotoListEvent}>
+                    <Text style={styles.textTitle} onPress={this.gotoListEvent}>
                         ShutterRuning Service
                     </Text>
                 </View>
@@ -53,16 +70,21 @@ class SingleLogin extends Component {
                         placeholder="เลขบัตรประชาชน"
                         returnKeyType="next"
                         onSubmitEditing={() => this.passwordInput}
-                        onChangeText={(username) => this.setState({ username })}
-                        style={styles.input}
-                    />
+                        onChangeText={(username) => this.setState({username})}
+                        style={styles.input}/>
                     <View style={styles.loginContainer}>
-                        <TouchableOpacity style={styles.buttonContainer}
-                            onPress={this.checkLogin.bind(this)}>
-                            <Text style={styles.textButton}>Login</Text>
+                        <TouchableOpacity
+                            style={styles.buttonContainer}
+                            onPress={this
+                            .checkLogin
+                            .bind(this)}>
+                            <Text style={styles.textButton}>เข้าร่วมกิจกรรม</Text>
                         </TouchableOpacity>
                     </View>
-                    <TouchableOpacity onPress={this.gotoRegister.bind(this)}>
+                    <TouchableOpacity
+                        onPress={this
+                        .gotoRegister
+                        .bind(this)}>
                         <Text style={styles.regisButton}>
                             สมัครสมาชิก
                         </Text>
@@ -78,32 +100,38 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-end',
         alignItems: 'center',
-
+        marginBottom : 20
     },
     textTitle: {
         fontSize: 34,
         color: '#fff',
         fontWeight: '700',
+        fontFamily: 'kanit'
     },
     formcontainer: {
         flex: 2,
         padding: 20,
+        borderRadius: 15
     },
     regisButton: {
+        padding: 20,
         color: '#fff',
         alignSelf: 'center',
+        fontFamily: 'kanit'
 
     },
     input: {
+        fontFamily: 'kanit',
         height: 40,
         backgroundColor: '#fff',
         opacity: 0.8,
         marginBottom: 20,
         paddingHorizontal: 20,
-        borderRadius: 10,
+        borderRadius: 20
     },
     loginContainer: {
-        alignItems: 'center',
+        margin : 20,
+        alignItems: 'center'
     },
     buttonContainer: {
         height: 40,
@@ -111,20 +139,19 @@ const styles = StyleSheet.create({
         backgroundColor: '#4CD946',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 10,
+        borderRadius: 20,
     },
     textButton: {
         fontWeight: '700',
-        fontSize: 20,
+        fontSize: 16,
         color: '#fff',
+        fontFamily: 'kanit'
 
     }
 })
 
 const mapStateToProps = (state) => {
-    return {
-        profile : state.profile
-    }
+    return {profile: state.profile}
 }
 
 export default connect(mapStateToProps)(SingleLogin)

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 import {
@@ -9,14 +9,15 @@ import {
     View,
     Image,
     FlatList,
-    TouchableOpacity
+    TouchableOpacity,
+    Alert
 } from 'react-native';
-import { StackNavigator } from 'react-navigation';
-import { connect } from 'react-redux'
+import {StackNavigator} from 'react-navigation';
+import {connect} from 'react-redux'
 
 class ListEvent extends Component {
     static propTypes = {
-        navigation: PropTypes.object,
+        navigation: PropTypes.object
     }
     static navigationOptions = {
         title: 'รายการวิ่ง',
@@ -26,7 +27,7 @@ class ListEvent extends Component {
         headerTitleStyle: {
             color: '#fff',
             fontFamily: "Kanit",
-            fontWeight: '500',
+            fontWeight: '500'
         }
     };
     constructor(props) {
@@ -37,75 +38,111 @@ class ListEvent extends Component {
                 name: "",
                 date: "",
                 tranferBank: ""
-            }
-
+            },
+            profile: ""
         }
     }
-    componentDidMount() {
-        return fetch("http://api.shutterrunning2014.com/api/v2/grsv2m/_table/Main.Events",
-            {
-                method: "GET",
-                headers: {
-                    "X-DreamFactory-API-Key": '36fda24fe5588fa4285ac6c6c2fdfbdb6b6bc9834699774c9bf777f706d05a88',
-                    "X-DreamFactory-Session-Token": 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQsInVzZXJfaWQiOjQsImVtYWlsIjoiYWRtaW5AZ3V1cnVuLmNvbSIsImZvcmV2ZXIiOmZhbHNlLCJpc3MiOiJodHRwOlwvXC9hcGkuc2h1dHRlcnJ1bm5pbmcyMDE0LmNvbVwvYXBpXC92MlwvdXNlclwvc2Vzc2lvbiIsImlhdCI6MTUyMDU0NDU5MSwiZXhwIjoxNTIwNTQ4MTkxLCJuYmYiOjE1MjA1NDQ1OTEsImp0aSI6IjA1Y2UzN2NjMmU2NjIyZGJlNmMzNTg5MzE1NTI0YmZjIn0._7jHjGhTPfa3rVioC2MrjJfLwrMMxYQYiWhe8DK5V7k',
-                    "Authorization": 'Basic YWRtaW5AZ3V1cnVuLmNvbTpXWGJyRDI4THRJUjNNWW0='
-                },
-            })
-            .then((response) => response.json())
-            .then((responseJson) => {
-                this.setState({
-                    isLoading: false,
-                    dataSource: responseJson.resource,
-                });
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+    componentDidMount(username) {
+        return fetch("http://api.shutterrunning2014.com/api/v2/grsv2m/_table/Main.Events", {
+            method: "GET",
+            headers: {
+                "X-DreamFactory-API-Key": '36fda24fe5588fa4285ac6c6c2fdfbdb6b6bc9834699774c9bf777f706d05a88',
+                "X-DreamFactory-Session-Token": 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQsInVzZXJfaWQiOjQsImVtYWlsIjoiYWR' +
+                        'taW5AZ3V1cnVuLmNvbSIsImZvcmV2ZXIiOmZhbHNlLCJpc3MiOiJodHRwOlwvXC9hcGkuc2h1dHRlcnJ' +
+                        '1bm5pbmcyMDE0LmNvbVwvYXBpXC92MlwvdXNlclwvc2Vzc2lvbiIsImlhdCI6MTUyMDU0NDU5MSwiZXh' +
+                        'wIjoxNTIwNTQ4MTkxLCJuYmYiOjE1MjA1NDQ1OTEsImp0aSI6IjA1Y2UzN2NjMmU2NjIyZGJlNmMzNTg' +
+                        '5MzE1NTI0YmZjIn0._7jHjGhTPfa3rVioC2MrjJfLwrMMxYQYiWhe8DK5V7k',
+                "Authorization": 'Basic YWRtaW5AZ3V1cnVuLmNvbTpXWGJyRDI4THRJUjNNWW0='
+            }
+        }).then((response) => response.json()).then((responseJson) => {
+            this.setState({isLoading: false, dataSource: responseJson.resource});
+            // console.log("hello" + this.state.profile)
+        }).catch((error) => {
+            console.error(error);
+        });
 
+    }
+    gotoRegister = () => {
+        console.log("gotoRegister")
+        this
+            .props
+            .navigation
+            .navigate('Register')
     }
     gotoPayment = (item) => {
-        this.props.navigation.navigate('RegisterDistance')
+        // if (this.state.profile == "") {     console.log("checkLogin")
+        // Alert.alert('เกิดข้อผิดพลาด', 'การเข้าสู่ระบบผิดพลาด', [         {
+        //  text: 'Cancel'         }, {             text: 'สมัครสมาชิก',
+        // onPress: () => this.gotoRegister(),         }     ], {cancelable: false}) }
+        // else if (this.state.profile != "") {     this         .props
+        // .navigation         .navigate('RegisterDistance')     //
+        // this.setState.name("name2")     this.setState({         event: {
+        // name: item.EventName,             date: item.EventDate,
+        // tranferBank: item.EventBankDetailTH         }     })     this         .props
+        //        .addEvent(item) }
+        this
+            .props
+            .navigation
+            .navigate('RegisterDistance')
         // this.setState.name("name2")
-        this.setState({ event: { 
-                            name: item.EventName, 
-                            date: item.EventDate,
-                            tranferBank : item.EventBankDetailTH } 
-                    })
-        this.props.addEvent(this.state.event)
+        this.setState({
+            event: {
+                name: item.EventName,
+                date: item.EventDate,
+                tranferBank: item.EventBankDetailTH
+            }
+        })
+        this
+            .props
+            .addEvent(item)
     }
-
 
     render() {
         if (this.state.isLoading) {
             return (
-                <View style={{ flex: 1, padding: 20 }}>
-                    <ActivityIndicator />
+                <View
+                    style={{
+                    flex: 1,
+                    padding: 20
+                }}>
+                    <ActivityIndicator/>
                 </View>
             )
         }
         return (
-            <View style={{ flex: 1, paddingTop: 20 }} >
+            <View
+                style={{
+                flex: 1,
+                paddingTop: 20
+            }}>
                 <FlatList
                     data={this.state.dataSource}
-                    renderItem={({ item }) =>
-                        <View style={styles.background}>
-                            <View style={styles.containerCard}>
-                                <Image source={{ uri: item.BackgroundImage }}
-                                    style={{ height: 200 }} />
-                                <View style={styles.containerEventDetail}>
-                                    <View style={styles.containerEventDate}>
-                                        <Text style={styles.dateText}>{item.EventID}</Text>
-                                        <Text style={styles.monthText}>{item.EventDate}</Text>
-                                    </View>
-                                    <TouchableOpacity onPress={this.gotoPayment.bind(this, item)}>
-                                        <Text style={styles.name}>{item.EventName}</Text>
-                                    </TouchableOpacity>
-                                </View>
+                    renderItem={({item}) => <View style={styles.background}>
+                    <View style={styles.containerCard}>
+                        <Image
+                            source={{
+                            uri: item.BackgroundImage
+                        }}
+                            style={{
+                            height: 200
+                        }}/>
+                        <View style={styles.containerEventDetail}>
+                            <View style={styles.containerEventDate}>
+                                <Text style={styles.dateText}>{item.EventID}</Text>
+                                <Text style={styles.monthText}>{item.EventDate}</Text>
                             </View>
+                            <TouchableOpacity
+                                onPress={this
+                                .gotoPayment
+                                .bind(this, item)}>
+                                <View style={styles.textName}>
+                                    <Text style={styles.name}>{item.EventName}</Text>
+                                </View>
+                            </TouchableOpacity>
                         </View>
-                    }
-                    keyExtractor={(item, index) => index}
-                />
+                    </View>
+                </View>}
+                    keyExtractor={(item, index) => index}/>
             </View >
         );
     }
@@ -113,38 +150,37 @@ class ListEvent extends Component {
 const mapDispatchtoProps = (dispatch) => {
     return {
         addEvent: (event) => {
-            dispatch({
-                type: 'addEvent',
-                payload: event
-            })
-        },
+            dispatch({type: 'addEvent', payload: event})
+        }
     };
 }
 
 const styles = StyleSheet.create({
     background: {
         backgroundColor: '#EFEFF4',
-        flex: 1,
+        flex: 1
     },
     containerCard: {
         justifyContent: 'center',
         backgroundColor: '#fff',
         shadowColor: '#000',
-        shadowOffset: { width: 0, height: 3 },
+        shadowOffset: {
+            width: 0,
+            height: 3
+        },
         shadowOpacity: 0.3,
         shadowRadius: 4,
         margin: 10,
-        borderRadius: 5,
-
+        borderRadius: 5
     },
     containerEventDetail: {
         padding: 15,
         flexDirection: 'row',
-        alignItems: 'center',
+        alignItems: 'center'
     },
     containerEventDate: {
-        paddingHorizontal: 10,
-        alignItems: 'center',
+        paddingHorizontal: 5,
+        alignItems: 'center'
     },
     dateText: {
         fontSize: 36,
@@ -156,11 +192,15 @@ const styles = StyleSheet.create({
         fontFamily: "Kanit"
     },
     containerEventName: {
-        flex: 1,
+        flex: 1
+    },
+    textName: {
+        marginRight: 30
     },
     name: {
         flex: 1,
         alignItems: 'center',
+        justifyContent: 'space-between',
         paddingHorizontal: 25,
         paddingVertical: 15,
         fontSize: 18,
@@ -175,4 +215,3 @@ const styles = StyleSheet.create({
     }
 });
 export default connect(null, mapDispatchtoProps)(ListEvent);
-

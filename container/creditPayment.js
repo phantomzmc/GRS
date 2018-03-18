@@ -1,48 +1,67 @@
-import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, AlertIOS ,Button} from 'react-native';
+import React, {Component} from 'react';
+import {
+    View,
+    Text,
+    StyleSheet,
+    ScrollView,
+    TouchableOpacity,
+    TouchableHighlight,
+    AlertIOS,
+    Button,
+    Modal
+} from 'react-native';
 
 import CreditView from '../component/items/creditView'
 import ButtonChangePayment from '../component/items/bottonChangePayment'
-import { connect } from 'react-redux';
-import { StackNavigator } from 'react-navigation';
-
+import {connect} from 'react-redux';
+import {StackNavigator} from 'react-navigation';
 
 class CreditPayment extends Component {
-    static navigationOptions = {
+
+    static navigationOptions = () => ({
         title: 'ชำระเงิน',
         headerStyle: {
             backgroundColor: '#FC561F'
         },
         headerTitleStyle: {
             color: '#fff',
-            fontFamily: 'kanit',
+            fontFamily: 'kanit'
         },
-        headerRight: (
-            <Button
-                onPress={() => this.showDetailPayment.bind(this)}
-                title="รายละเอียด"
-                color="#fff"
-            />
-        ),
-    };
+        // headerRight: <Button onPress={() => this.showDetailPayment()}
+        //     color="#fff"title="รายละเอียด"/>
+    });
     constructor(props) {
         super(props)
-        this.state = {
-        }
-        this.goAddressSend = this.goAddressSend.bind(this)
+        this.state = {}
+        this.goAddressSend = this
+            .goAddressSend
+            .bind(this)
     }
     showDetailPayment = () => {
-        this.props.navigation.navigate('TotalPayment')
+        console.log("showDetail")
+        this
+            .props
+            .navigation
+            .navigate('TotalRegister')
     }
     gotoTransferPayment = () => {
-        this.props.navigation.navigate('TransferPayment')
+        this
+            .props
+            .navigation
+            .navigate('TransferPayment')
     }
     gotoCreditPayment = () => {
-        this.props.navigation.navigate('CreditPayment')
+        this
+            .props
+            .navigation
+            .navigate('CreditPayment')
     }
     goAddressSend = () => {
-        this.props.navigation.navigate('TotalPayment')
-        console.log("hello")
+        this
+            .props
+            .navigation
+            .navigate('TotalPayment')
+
     }
 
     render() {
@@ -51,14 +70,19 @@ class CreditPayment extends Component {
             <ScrollView>
                 <View style={styles.container}>
                     <ButtonChangePayment
-                        Tranfer={this.gotoTransferPayment.bind(this)}
-                        Credit={this.gotoCreditPayment.bind(this)}
-                    />
-                    <CreditView goAddress={this.goAddressSend.bind(this)}
+                        Tranfer={this
+                        .gotoTransferPayment
+                        .bind(this)}
+                        Credit={this
+                        .gotoCreditPayment
+                        .bind(this)}/>
+                    <CreditView
+                        goAddress={this
+                        .goAddressSend
+                        .bind(this)}
                         TotalPrice={this.props.total.totalPrice}
-                    />
+                        ShowDetail={this.showDetailPayment.bind(this)}/>
                 </View>
-
             </ScrollView>
         );
     }
@@ -67,21 +91,16 @@ class CreditPayment extends Component {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#fff',
-        flexDirection: 'column',
+        flexDirection: 'column'
     },
     segment: {
         marginTop: 20,
-        marginHorizontal: 20,
-    },
-
+        marginHorizontal: 20
+    }
 })
 
 const mapStateToProps = (state) => {
-    return {
-        total: state.total,
-        creditcard: state.creditcard
-    };
+    return {total: state.total, creditcard: state.creditcard};
 };
-
 
 export default connect(mapStateToProps)(CreditPayment);

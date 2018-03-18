@@ -17,7 +17,7 @@ class TotalRegister extends Component {
                         </View>
                     </View>
                     <View>
-                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.props.event.event.name} </Text>
+                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.props.event.event.EventName} </Text>
                         <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit' }}>({this.props.event.distanceEvent.distance} - {this.props.shirtphoto.size}) x 1 (Photo Plus)</Text>
                     </View>
                     <View>

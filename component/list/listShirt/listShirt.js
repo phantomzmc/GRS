@@ -26,7 +26,7 @@ class ListShirt extends Component {
     pressDataShirt(datashirt) {
         console.log(this.state.size)
         this.setState({ size: datashirt.size })
-        this.props.setSizeShirt(this.state.size)
+        this.props.setSizeShirt(datashirt.size)
         Alert.alert("ไซค์เสื้อ : " + datashirt.size)
     }
     render() {

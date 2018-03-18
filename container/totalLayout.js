@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity,Alert } from 'react-native';
 import { connect } from 'react-redux'
 
 import TotalRegister from '../component/items/totalRegister'
@@ -40,7 +40,16 @@ class TotalLayout extends Component {
         console.log(this.state.event)
         console.log(this.props.event.name)
         console.log(this.props.event.date)
+        Alert.alert('เรียบร้อย', 'ทำการรายการเสร็จสิ้น', [
+            {
+                text: 'ไปยังรายการวิ่ง',
+                onPress: () => this.gotoListEvent()
+            }
+        ], {cancelable: false})
         // this.props.addEvent(this.state.name)
+    }
+    gotoListEvent = () => {
+        this.props.navigation.navigate('ListEvent')
     }
 
     render() {

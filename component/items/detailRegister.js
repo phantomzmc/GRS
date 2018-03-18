@@ -23,7 +23,7 @@ class DetailRegister extends Component {
                     <Text style={styles.textName1}>ชื่อ - นามสกุล</Text>
                     <Text style={styles.textName2}>{this.props.address.user.fullname}</Text>
                     <Text style={styles.textName1}>รายการวิ่ง</Text>
-                    <Text style={styles.textName2}>{this.props.event.event.name}</Text>
+                    <Text style={styles.textName2}>{this.props.event.event.EventName}</Text>
                 </View>
                 <View style={styles.viewSize}>
                     <View style={styles.box}>
@@ -42,7 +42,7 @@ class DetailRegister extends Component {
                     </View>
                     <View style={{ flex: 1, alignItems: 'center' }}>
                         <Text style={styles.textName1}>วันที่</Text>
-                        <Text style={{ fontFamily: 'kanit' }}>{this.props.event.event.date}</Text>
+                        <Text style={{ fontFamily: 'kanit' }}>{this.props.event.event.EventDate}</Text>
                     </View>
                 </View>
 

@@ -134,6 +134,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         height: 35,
         marginTop: 15,
+        fontFamily : 'kanit'
     },
     conlorsegment: {
         marginTop: 10,
@@ -151,6 +152,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         height: 35,
         marginTop: 15,
+        fontFamily : 'kanit'
     },
     submitContainer: {
         marginTop: 30,
@@ -163,12 +165,13 @@ const styles = StyleSheet.create({
         backgroundColor: '#FC561F',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 10,
+        borderRadius: 20,
     },
     textButton: {
         fontWeight: '700',
-        fontSize: 20,
+        fontSize: 16,
         color: '#fff',
+        fontFamily : 'kanit'
 
     }
 })

@@ -30,11 +30,13 @@ class ShirtPhotoPlus extends Component {
                 <View style={styles.container}>
                     <Image source={{ uri: "http://register.shutterrunning2014.com/assets/img/theme/dongtanshirt.png" }}
                         style={{ height: 100, marginTop: 10 }} />
-                    <PhotoPlus titleName={this.props.photoplus.title}
-                        pricePhoto={this.props.photoplus.pricePhoto}
-                        priceEvent={this.props.event.distanceEvent.price} />
+
                     <Text style={styles.textSize}>โปรดเลือกไซค์เสื้อ</Text>
                     <ListShirt />
+                    <Text style={styles.textSize}>Photo Plus + </Text>
+                    <PhotoPlus titleName={this.props.photoplus.title}
+                        dataPricePhoto={this.props.photoplus.pricePhoto}
+                        priceEvent={this.props.event.distanceEvent.price} />
                 </View>
                 <View style={styles.submitContainer}>
                     <TouchableOpacity style={styles.buttonContainer}>

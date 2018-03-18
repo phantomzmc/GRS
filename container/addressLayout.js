@@ -36,7 +36,7 @@ class AddressLayout extends Component {
     alertChoice = (dataChoice) => {
         console.log(this.state.dataChoice)
         this.setState({ dataChoice: dataChoice })
-        this.props.setSendChoice(this.state.dataChoice)
+        this.props.setSendChoice(dataChoice)
         AlertIOS.alert("การจัดส่ง : " + dataChoice)
     }
 

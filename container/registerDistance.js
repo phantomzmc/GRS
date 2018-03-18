@@ -27,11 +27,11 @@ class RegisterDistance extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            event : {
+            event: {
                 name: "name",
                 date: "date"
             },
-            distanceEvent : {
+            distanceEvent: {
                 distanceName: "",
                 distance: "",
                 price: ""
@@ -40,16 +40,19 @@ class RegisterDistance extends Component {
         this.gotoShirtPhotoPlus = this.gotoShirtPhotoPlus.bind(this)
     }
 
+    componentDidMount = ()=> {
+
+    }
     gotoTeamList = () => {
         this.props.navigation.navigate('TabRouter')
     }
     gotoRegisterDistance = () => {
         this.props.navigation.navigate('RegisterDistance')
     }
-    gotoShirtPhotoPlus = (dispatchEvent) => {
-        this.setState ({distanceEvent : dispatchEvent})
-        this.props.addDistance(this.state.distanceEvent)
-        this.props.setTotal(this.state.distanceEvent.price)
+    gotoShirtPhotoPlus = (distanceEvent) => {
+        this.props.addDistance(distanceEvent)
+        this.props.setTotal(distanceEvent.price)
+        this.setState({ distanceEvent: distanceEvent })
         this.props.navigation.navigate('ShirtPhotoPlus')
 
     }
@@ -59,13 +62,12 @@ class RegisterDistance extends Component {
                 <View style={styles.container}>
                     <ButtonChage Team={this.gotoTeamList.bind(this)}
                         Single={this.gotoRegisterDistance.bind(this)} />
-                    <HeaderProfile title={this.state.event.name}
-                                    detail={this.state.event.date} />
+                    <HeaderProfile />
                     <Text style={styles.text}>
                         โปรดเลือกระยะทาง
                      </Text>
-                    <ListDistance onGotoshirt={this.gotoShirtPhotoPlus.bind(this)}/>
-                    <ButtonSubmit PhotoPlus={this.gotoShirtPhotoPlus.bind(this)} />
+                    <ListDistance onGotoshirt={this.gotoShirtPhotoPlus.bind(this)} />
+                    {/* <ButtonSubmit PhotoPlus={this.gotoShirtPhotoPlus.bind(this)} /> */}
                 </View>
             </ScrollView>
         );
@@ -73,16 +75,16 @@ class RegisterDistance extends Component {
 }
 const mapDisPatchToProps = (dispatch) => {
     return {
-        addDistance : (distanceEvent) => {
+        addDistance: (distanceEvent) => {
             dispatch({
-                type : "addDistance",
-                payload : distanceEvent
+                type: "addDistance",
+                payload: distanceEvent
             })
         },
-        setTotal : (totalPrice) => {
+        setTotal: (totalPrice) => {
             dispatch({
                 type: "setTotal",
-                payload : totalPrice
+                payload: totalPrice
             })
         }
     }
@@ -106,4 +108,4 @@ const styles = StyleSheet.create({
     },
 
 })
-export default connect(null,mapDisPatchToProps)(RegisterDistance);
+export default connect(null, mapDisPatchToProps)(RegisterDistance);

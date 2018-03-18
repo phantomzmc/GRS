@@ -3,6 +3,22 @@ import { View, Text, ImageBackground, Image, StyleSheet, SegmentedControlIOS } f
 import { connect } from 'react-redux'
 
 class HeaderProfile extends Component {
+    constructor (props){
+        super(props)
+        this.state = {
+            name: "",
+            date : ""
+        }
+    }
+
+    componentDidMount = () => {
+        this.setState({
+            name : this.props.event.event.EventName,
+            date : this.props.event.event.EventDate,
+        })
+        console.log(this.state.name)
+        console.log(this.state.date)
+    }
     render() {
         return (
             <ImageBackground source={{ uri: "http://www.jcmagazine.com/wp-content/uploads/2016/07/deporte-carrera.jpg" }}
@@ -13,8 +29,8 @@ class HeaderProfile extends Component {
                             style={styles.imgAvatar} />
                     </View>
                     <View style={styles.detailProfile}>
-                        <Text style={styles.nameProfile}>{this.props.Name}</Text>
-                        <Text style={styles.ageProfile}>{this.props.UserID}</Text>
+                        <Text style={styles.nameProfile}>{this.state.name}</Text>
+                        <Text style={styles.ageProfile}>{this.state.date}</Text>
                     </View>
                 </View>
             </ImageBackground>

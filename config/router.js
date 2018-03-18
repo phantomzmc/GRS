@@ -12,6 +12,7 @@ import TeamList from '../container/teamList'
 import TabRouter from '../config/tabrouter'
 import AddEventFriend from '../container/AddEventDetailFrind'
 import TransferPayment from '../container/tranferPayment'
+import TotalRegister from '../component/items/totalRegister'
 
 import ListDistance from '../component/list/event/listdistance'
 import ListShith from '../component/list/listShirt/listShirt';
@@ -19,8 +20,12 @@ import ListShith from '../component/list/listShirt/listShirt';
 import DetailRegister from '../component/items/detailRegister'
 
 // import ListShirt from '../component/list/listShirt/listShirt'
+import Test from '../list'
 
 export default StackNavigator ({
+    // Test : {
+    //     screen : Test
+    // },
     SingleLogin : {
         screen : SingleLogin,
         navigationOptions : {
@@ -36,9 +41,6 @@ export default StackNavigator ({
     Register : {
         screen : Register,
     },
-    // Test : {
-    //     screen : Test
-    // },
     ListEvent : {
         screen : ListEvent,
     },
@@ -69,6 +71,9 @@ export default StackNavigator ({
     },
     AddEventFriend : {
         screen : AddEventFriend
+    },
+    TotalRegister : {
+        screen : TotalRegister
     }
 
 
