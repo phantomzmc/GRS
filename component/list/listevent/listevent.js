@@ -1,25 +1,23 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 import {
     AppRegistry,
+    ActivityIndicator,
     StyleSheet,
     Text,
     View,
     Image,
-    ListView,
-    TouchableHighlight,
-    TouchableOpacity
+    FlatList,
+    TouchableOpacity,
+    Alert
 } from 'react-native';
-import data from './data.js'
-import { StackNavigator } from 'react-navigation';
-// import SearchBar from 'react-native-search-bar';
-// import CellListEvent from './cellListEvent'
-
+import {StackNavigator} from 'react-navigation';
+import {connect} from 'react-redux'
 
 class ListEvent extends Component {
     static propTypes = {
-        navigation: PropTypes.object,
+        navigation: PropTypes.object
     }
     static navigationOptions = {
         title: 'รายการวิ่ง',
@@ -29,104 +27,160 @@ class ListEvent extends Component {
         headerTitleStyle: {
             color: '#fff',
             fontFamily: "Kanit",
-            fontWeight: '500',
+            fontWeight: '500'
         }
     };
-    gotoPayment = () => {
-        this.props.navigation.navigate('RegisterDistance')
-    }
-
     constructor(props) {
         super(props);
-        this.onChangeText = this.onChangeText.bind(this);
-        this.onCancelButtonPress = this.onCancelButtonPress.bind(this);
         this.state = {
-            dataSource: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }),
+            isLoading: true,
+            event: {
+                name: "",
+                date: "",
+                tranferBank: ""
+            },
+            profile: ""
         }
+    }
+    componentDidMount(username) {
+        return fetch("http://api.shutterrunning2014.com/api/v2/grsv2m/_table/Main.Events", {
+            method: "GET",
+            headers: {
+                "X-DreamFactory-API-Key": '36fda24fe5588fa4285ac6c6c2fdfbdb6b6bc9834699774c9bf777f706d05a88',
+                "X-DreamFactory-Session-Token": 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQsInVzZXJfaWQiOjQsImVtYWlsIjoiYWR' +
+                        'taW5AZ3V1cnVuLmNvbSIsImZvcmV2ZXIiOmZhbHNlLCJpc3MiOiJodHRwOlwvXC9hcGkuc2h1dHRlcnJ' +
+                        '1bm5pbmcyMDE0LmNvbVwvYXBpXC92MlwvdXNlclwvc2Vzc2lvbiIsImlhdCI6MTUyMDU0NDU5MSwiZXh' +
+                        'wIjoxNTIwNTQ4MTkxLCJuYmYiOjE1MjA1NDQ1OTEsImp0aSI6IjA1Y2UzN2NjMmU2NjIyZGJlNmMzNTg' +
+                        '5MzE1NTI0YmZjIn0._7jHjGhTPfa3rVioC2MrjJfLwrMMxYQYiWhe8DK5V7k',
+                "Authorization": 'Basic YWRtaW5AZ3V1cnVuLmNvbTpXWGJyRDI4THRJUjNNWW0='
+            }
+        }).then((response) => response.json()).then((responseJson) => {
+            this.setState({isLoading: false, dataSource: responseJson.resource});
+            // console.log("hello" + this.state.profile)
+        }).catch((error) => {
+            console.error(error);
+        });
+
+    }
+    gotoRegister = () => {
+        console.log("gotoRegister")
+        this
+            .props
+            .navigation
+            .navigate('Register')
+    }
+    gotoPayment = (item) => {
+        // if (this.state.profile == "") {     console.log("checkLogin")
+        // Alert.alert('เกิดข้อผิดพลาด', 'การเข้าสู่ระบบผิดพลาด', [         {
+        //  text: 'Cancel'         }, {             text: 'สมัครสมาชิก',
+        // onPress: () => this.gotoRegister(),         }     ], {cancelable: false}) }
+        // else if (this.state.profile != "") {     this         .props
+        // .navigation         .navigate('RegisterDistance')     //
+        // this.setState.name("name2")     this.setState({         event: {
+        // name: item.EventName,             date: item.EventDate,
+        // tranferBank: item.EventBankDetailTH         }     })     this         .props
+        //        .addEvent(item) }
+        this
+            .props
+            .navigation
+            .navigate('RegisterDistance')
+        // this.setState.name("name2")
+        this.setState({
+            event: {
+                name: item.EventName,
+                date: item.EventDate,
+                tranferBank: item.EventBankDetailTH
+            }
+        })
+        this
+            .props
+            .addEvent(item)
     }
 
     render() {
+        if (this.state.isLoading) {
+            return (
+                <View
+                    style={{
+                    flex: 1,
+                    padding: 20
+                }}>
+                    <ActivityIndicator/>
+                </View>
+            )
+        }
         return (
-            <View>
-                {/* <SearchBar
-                    placeholder='Search'
-                    onChangeText={this.onChangeText}
-                    onCancelButtonPress={this.onCancelButtonPress} /> */}
-                <ListView
-                    dataSource={this.state.dataSource}
-                    renderRow={this.renderEvent}
-                    style={styles.listView}
-                />
-            </View>
-        );
-    }
-
-    componentDidMount() {
-        this.setState({
-            dataSource: this.state.dataSource.cloneWithRows(data),
-
-        });
-    }
-
-    onChangeText(e) {
-        this.setState({
-            dataSource: this.state.dataSource.cloneWithRows(data.filter((item) =>
-                item.trackName.toLowerCase().includes(e.toLowerCase()))),
-        });
-    }
-
-
-    onCancelButtonPress() {
-        this.setState({
-            dataSource: this.state.dataSource.cloneWithRows(data),
-        });
-    }
-
-    renderEvent(data) {
-        return (
-            <View style={styles.background}>
-                <TouchableOpacity onPress={this.gotoPayment}>
+            <View
+                style={{
+                flex: 1,
+                paddingTop: 20
+            }}>
+                <FlatList
+                    data={this.state.dataSource}
+                    renderItem={({item}) => <View style={styles.background}>
                     <View style={styles.containerCard}>
-                        <Image source={{ uri: data.pic }}
-                            style={{ height: 200 }} />
+                        <Image
+                            source={{
+                            uri: item.BackgroundImage
+                        }}
+                            style={{
+                            height: 200
+                        }}/>
                         <View style={styles.containerEventDetail}>
                             <View style={styles.containerEventDate}>
-                                <Text style={styles.dateText}>{data.date}</Text>
-                                <Text style={styles.monthText}>{data.month}</Text>
+                                <Text style={styles.dateText}>{item.EventID}</Text>
+                                <Text style={styles.monthText}>{item.EventDate}</Text>
                             </View>
-                            <Text style={styles.name}>{data.name}</Text>
+                            <TouchableOpacity
+                                onPress={this
+                                .gotoPayment
+                                .bind(this, item)}>
+                                <View style={styles.textName}>
+                                    <Text style={styles.name}>{item.EventName}</Text>
+                                </View>
+                            </TouchableOpacity>
                         </View>
                     </View>
-                </TouchableOpacity>
-            </View>
-        )
+                </View>}
+                    keyExtractor={(item, index) => index}/>
+            </View >
+        );
     }
+}
+const mapDispatchtoProps = (dispatch) => {
+    return {
+        addEvent: (event) => {
+            dispatch({type: 'addEvent', payload: event})
+        }
+    };
 }
 
 const styles = StyleSheet.create({
     background: {
         backgroundColor: '#EFEFF4',
-        flex: 1,
+        flex: 1
     },
     containerCard: {
         justifyContent: 'center',
         backgroundColor: '#fff',
         shadowColor: '#000',
-        shadowOffset: { width: 0, height: 3 },
+        shadowOffset: {
+            width: 0,
+            height: 3
+        },
         shadowOpacity: 0.3,
         shadowRadius: 4,
         margin: 10,
-        borderRadius: 5,
-
+        borderRadius: 5
     },
     containerEventDetail: {
         padding: 15,
         flexDirection: 'row',
-        alignItems: 'center',
+        alignItems: 'center'
     },
     containerEventDate: {
-        paddingHorizontal: 10,
-        alignItems: 'center',
+        paddingHorizontal: 5,
+        alignItems: 'center'
     },
     dateText: {
         fontSize: 36,
@@ -138,11 +192,15 @@ const styles = StyleSheet.create({
         fontFamily: "Kanit"
     },
     containerEventName: {
-        flex: 1,
+        flex: 1
+    },
+    textName: {
+        marginRight: 30
     },
     name: {
         flex: 1,
         alignItems: 'center',
+        justifyContent: 'space-between',
         paddingHorizontal: 25,
         paddingVertical: 15,
         fontSize: 18,
@@ -156,5 +214,4 @@ const styles = StyleSheet.create({
         backgroundColor: '#FC561F'
     }
 });
-export default ListEvent
-
+export default connect(null, mapDispatchtoProps)(ListEvent);

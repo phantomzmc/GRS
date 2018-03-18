@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity,Button } from 'react-native';
+import PropTypes from 'prop-types';
+import { View, Text, StyleSheet, TouchableOpacity, Button } from 'react-native';
+import { StackNavigator } from 'react-navigation';
+
 
 import ButtonChangePayment from '../component/items/bottonChangePayment'
 import TranferView from '../component/items/tranferView'
 import TotalPayment from '../container/totalLayout'
 
 class TransferPayment extends Component {
+    static propTypes = {
+        navigation: PropTypes.object,
+    }
     static navigationOptions = {
         title: 'ชำระเงิน',
         headerStyle: {
@@ -17,19 +23,22 @@ class TransferPayment extends Component {
         },
         headerRight: (
             <Button
-              onPress={() => alert(<TotalPayment />)}
-              title="Info"
-              color="#fff"
+                onPress={() => this.showDetailPayment.bind(this)}
+                title="รายละเอียด"
+                color="#fff"
             />
-          ),
+        ),
     };
+    showDetailPayment = () => {
+        this.props.navigation.navigate('TotalPayment')
+    }
 
 
     render() {
         return (
             <View style={styles.container}>
                 <ButtonChangePayment />
-                <TranferView />
+                <TranferView showDetail={this.showDetailPayment.bind(this)} />
             </View>
         );
     }

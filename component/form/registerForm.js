@@ -1,18 +1,53 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, StyleSheet, SegmentedControlIOS,TouchableOpacity } from 'react-native';
+import PropTypes from 'prop-types';
 
-export default class FormRegister extends Component {
+import { View, Text, TextInput, StyleSheet, SegmentedControlIOS, TouchableOpacity } from 'react-native';
+import { StackNavigator } from 'react-navigation';
+
+
+class FormRegister extends Component {
+    static propTypes = {
+        navigation: PropTypes.object,
+    }
+    constructor(props) {
+        super(props)
+        this.state = {
+            fullname : "",
+            userid : "",
+            gen : "",
+            age : "",
+            number : "",
+            t : "",
+            a : "",
+            city : "",
+            country : "",
+            postNumber : "",
+            tel : "",
+            email : ""
+        }   
+    }
+    sendData = (fullname, userid, age, number, t, a, city, country, postNumber, tel, email) => {
+        this.props.goEvent(fullname, userid, age, number, t, a, city, country, postNumber, tel, email)
+        console.log(this.state.fullname)
+        console.log(this.state.userid)
+    }
+
     render() {
+        let { fullname, userid, age, number, t, a, city, country, postNumber, tel, email } = this.state
         return (
             <View style={styles.container}>
                 <TextInput
                     placeholder="ชื่อ - นามสกุล"
                     returnKeyType="next"
-                    style={styles.textInput} />
+                    style={styles.textInput}
+                    onChangeText={(fullname) => this.setState({ fullname })}
+                />
                 <TextInput
                     placeholder="รหัสบัตรประชาชน"
                     returnKeyType="next"
-                    style={styles.textInput} />
+                    style={styles.textInput}
+                    onChangeText={(userid) => this.setState({ userid })}
+                />
                 <View style={styles.conlorsegment}>
                     <SegmentedControlIOS
                         values={['ชาย', 'หญิง']}
@@ -21,45 +56,64 @@ export default class FormRegister extends Component {
                 <TextInput
                     placeholder="อายุ"
                     returnKeyType="next"
-                    style={styles.textInput} />
+                    style={styles.textInput}
+                    onChangeText={(age) => this.setState({ age })}
+                />
                 <TextInput
                     placeholder="บ้านเลขที่"
                     returnKeyType="next"
-                    style={styles.textInput} />
+                    style={styles.textInput}
+                    onChangeText={(number) => this.setState({ number })}
+                />
                 <View style={styles.addressContainer}>
                     <TextInput
                         placeholder="ตำบล"
                         returnKeyType="next"
-                        style={styles.textAddressInput} />
+                        style={styles.textAddressInput}
+                        onChangeText={(t) => this.setState({ t })}
+                    />
                     <TextInput
                         placeholder="อำเภอ"
                         returnKeyType="next"
-                        style={styles.textAddressInput} />
+                        style={styles.textAddressInput}
+                        onChangeText={(a) => this.setState({ a })}
+                    />
                 </View>
                 <View style={styles.addressContainer}>
                     <TextInput
                         placeholder="จังหวัด"
                         returnKeyType="next"
-                        style={styles.textAddressInput} />
+                        style={styles.textAddressInput}
+                        onChangeText={(city) => this.setState({ city })}
+                    />
                     <TextInput
                         placeholder="ประเทศ"
                         returnKeyType="next"
-                        style={styles.textAddressInput} />
+                        style={styles.textAddressInput}
+                        onChangeText={(country) => this.setState({ country })}
+                    />
                 </View>
                 <TextInput
                     placeholder="รหัสไปรษณีย์"
                     returnKeyType="next"
-                    style={styles.textInput} />
+                    style={styles.textInput}
+                    onChangeText={(postNumber) => this.setState({ postNumber })}
+                />
                 <TextInput
                     placeholder="เบอร์โทรศัพท์"
                     returnKeyType="next"
-                    style={styles.textInput} />
+                    style={styles.textInput}
+                    onChangeText={(tel) => this.setState({ tel })}
+                />
                 <TextInput
                     placeholder="Email"
                     returnKeyType="next"
-                    style={styles.textInput} />
+                    style={styles.textInput}
+                    onChangeText={(email) => this.setState({ email })}
+                />
                 <View style={styles.submitContainer}>
-                    <TouchableOpacity style={styles.buttonContainer}>
+                    <TouchableOpacity style={styles.buttonContainer}
+                        onPress={() => this.sendData(fullname, userid, age, number, t, a, city, country, postNumber, tel, email)}>
                         <Text style={styles.textButton}>ยืนยัน</Text>
                     </TouchableOpacity>
                 </View>
@@ -71,7 +125,7 @@ export default class FormRegister extends Component {
 const styles = StyleSheet.create({
     container: {
         padding: 20,
-        backgroundColor : '#fff'
+        backgroundColor: '#fff'
     },
     textInput: {
         borderColor: '#FC561F',
@@ -80,6 +134,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         height: 35,
         marginTop: 15,
+        fontFamily : 'kanit'
     },
     conlorsegment: {
         marginTop: 10,
@@ -97,6 +152,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         height: 35,
         marginTop: 15,
+        fontFamily : 'kanit'
     },
     submitContainer: {
         marginTop: 30,
@@ -109,12 +165,14 @@ const styles = StyleSheet.create({
         backgroundColor: '#FC561F',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 10,
+        borderRadius: 20,
     },
     textButton: {
         fontWeight: '700',
-        fontSize: 20,
+        fontSize: 16,
         color: '#fff',
+        fontFamily : 'kanit'
 
     }
 })
+export default FormRegister;

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity, AlertIOS } from 'react-native';
 
 import AddressForm from '../component/form/addressForm'
 import ChoiceSend from '../component/items/choiceSend'
+import { connect } from 'react-redux'
 
 class AddressLayout extends Component {
     static navigationOptions = {
@@ -15,8 +16,28 @@ class AddressLayout extends Component {
             fontFamily: 'kanit',
         }
     };
-    goTotalPayment = () => {
-        this.props.navigation.navigate('TotalPayment')
+    constructor(props) {
+        super(props)
+        this.state = {
+            choice: "",
+            dataChoice: "",
+            user: {
+                fullname: "",
+                email:"",
+                adress:"",
+                tel: ""
+            }
+        }
+    }
+    goTotalPayment = (fullname, email, adress, tel) => {
+        this.props.setUser({ fullname : fullname,email,adress,tel})
+        this.props.navigation.navigate('CreditPayment')
+    }
+    alertChoice = (dataChoice) => {
+        console.log(this.state.dataChoice)
+        this.setState({ dataChoice: dataChoice })
+        this.props.setSendChoice(dataChoice)
+        AlertIOS.alert("การจัดส่ง : " + dataChoice)
     }
 
 
@@ -25,20 +46,15 @@ class AddressLayout extends Component {
             <ScrollView>
                 <View style={styles.container}>
                     <Text style={styles.text}>เลือกการจัดส่ง</Text>
-                    <ChoiceSend />
+                    <ChoiceSend showChoice={this.alertChoice.bind(this)} />
                     <Text style={styles.text}>ข้อมูลในการจัดส่ง</Text>
-                    <AddressForm />
-                </View>
-                <View style={styles.submitContainer}>
-                    <TouchableOpacity style={styles.buttonContainer}
-                        onPress={this.goTotalPayment}>
-                        <Text style={styles.textButton}>ชำระค่าสมัคร</Text>
-                    </TouchableOpacity>
+                    <AddressForm getAddress={this.goTotalPayment.bind(this)}/>
                 </View>
             </ScrollView>
         );
     }
 }
+
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#fff'
@@ -50,26 +66,23 @@ const styles = StyleSheet.create({
         padding: 20,
         fontFamily: 'Kanit',
     },
-    submitContainer: {
-        marginTop: 30,
-        alignItems: 'center',
-        marginBottom : 30
-    },
-    buttonContainer: {
-        height: 40,
-        width: '80%',
-        backgroundColor: '#FC561F',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 20,
-    },
-    textButton: {
-        fontWeight: '500',
-        fontSize: 15,
-        color: '#fff',
-        fontFamily: 'Kanit',
-
-    }
 })
 
-export default AddressLayout;
+const mapDisPacthToProps = (dispacth) => {
+    return {
+        setSendChoice: (choice) => {
+            dispacth({
+                type: "setSendChoice",
+                payload: choice
+            })
+        },
+        setUser : (fullname) => {
+            dispacth({
+                type : "setUser",
+                payload : fullname
+            })
+        },
+    }
+}
+
+export default connect(null,mapDisPacthToProps)(AddressLayout);

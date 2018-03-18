@@ -22,7 +22,7 @@ class ShirtPhotoPlus extends Component {
     };
 
     goNextState = () => {
-        this.props.navigation.navigate('CreditPayment')
+        this.props.navigation.navigate('AddressLayout')
     }
     render() {
         return (
@@ -30,10 +30,13 @@ class ShirtPhotoPlus extends Component {
                 <View style={styles.container}>
                     <Image source={{ uri: "http://register.shutterrunning2014.com/assets/img/theme/dongtanshirt.png" }}
                         style={{ height: 100, marginTop: 10 }} />
-                    <PhotoPlus titleName={this.props.photoplus.title}
-                        pricePhoto={this.props.photoplus.pricePhoto} />
+
                     <Text style={styles.textSize}>โปรดเลือกไซค์เสื้อ</Text>
                     <ListShirt />
+                    <Text style={styles.textSize}>Photo Plus + </Text>
+                    <PhotoPlus titleName={this.props.photoplus.title}
+                        dataPricePhoto={this.props.photoplus.pricePhoto}
+                        priceEvent={this.props.event.distanceEvent.price} />
                 </View>
                 <View style={styles.submitContainer}>
                     <TouchableOpacity style={styles.buttonContainer}>
@@ -79,6 +82,7 @@ const styles = StyleSheet.create({
 })
 const mapStateToProps = (state) => {
     return {
+        event :  state.event,
         creditcard: state.creditcard,
         shirtphoto: state.shirtphoto,
         photoplus: state.photoplus,
@@ -86,9 +90,9 @@ const mapStateToProps = (state) => {
 };
 const mapDisPacthToProps = (dispacth) => {
     return {
-        setPriceCredit: (priceCredit) => {
+        setPrice: (priceCredit) => {
             dispacth({
-                type: "setPriceCredit",
+                type: "setPrice",
                 payload: priceCredit
             })
         }

@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, } from 'react-native';
+import { connect } from 'react-redux'
 
 class TotalRegister extends Component {
+    componentDidMount() {
+        console.log(this.props.EventData)
+    }
     render() {
         return (
             <View style={styles.container}>
@@ -13,11 +17,11 @@ class TotalRegister extends Component {
                         </View>
                     </View>
                     <View>
-                        <Text style={{ fontSize: 10 , fontFamily:'kanit'}}>4th Brother Run & Share </Text>
-                        <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily:'kanit' }}>(5 Km. - S) x 1 (Photo Plus)</Text>
+                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.props.event.event.EventName} </Text>
+                        <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit' }}>({this.props.event.distanceEvent.distance} - {this.props.shirtphoto.size}) x 1 (Photo Plus)</Text>
                     </View>
                     <View>
-                        <Text style={{ fontSize: 10, fontFamily:'kanit' }}>600.00 ฿</Text>
+                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.props.total.totalPrice}.00 ฿</Text>
                     </View>
                 </View>
                 <View style={styles.detailRow}>
@@ -28,12 +32,12 @@ class TotalRegister extends Component {
                         </View>
                     </View>
                     <View>
-                        <Text style={{ fontSize: 10 , fontFamily:'kanit'}}>รับเสื้อและเบอร์ที่ :  </Text>
-                        <Text style={{ fontSize: 10 , fontFamily:'kanit'}}>วันที่ 27 มกราคม 2561</Text>
-                        <Text style={{ fontSize: 7, color: '#8B8B8B' , fontFamily:'kanit'}}>ใต้สะพานพระราม 8 (ฝั่งถนนอรุณอัมรินทร์ )</Text>
+                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>รับเสื้อและเบอร์ที่ :  </Text>
+                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>วันที่ 27 มกราคม 2561</Text>
+                        <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit' }}>ใต้สะพานพระราม 8 (ฝั่งถนนอรุณอัมรินทร์ )</Text>
                     </View>
                     <View>
-                        <Text style={{ fontSize: 10 , fontFamily:'kanit'}}>65.00 ฿</Text>
+                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>65.00 ฿</Text>
                     </View>
                 </View>
                 <View style={styles.detailRow}>
@@ -44,11 +48,11 @@ class TotalRegister extends Component {
                         </View>
                     </View>
                     <View>
-                        <Text style={{ fontSize: 10 , fontFamily:'kanit'}}>ค่าธรรมเนียมการใช้บัตรเครดิต/เดบิต</Text>
+                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>ค่าธรรมเนียมการใช้บัตรเครดิต/เดบิต</Text>
                         {/* <Text style={{ fontSize: 7, color: '#8B8B8B' }}>(5 Km. - S) x 1 (Photo Plus)</Text> */}
                     </View>
                     <View>
-                        <Text style={{ fontSize: 10 , fontFamily:'kanit'}}>33.25 ฿</Text>
+                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>33.25 ฿</Text>
                     </View>
                 </View>
                 <View style={styles.detailRow}>
@@ -59,11 +63,11 @@ class TotalRegister extends Component {
                         </View>
                     </View>
                     <View>
-                        <Text style={{ fontSize: 10 , fontFamily:'kanit'}}>ส่วนลดค่าโปรโมชั่น 100.00 บาท</Text>
+                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>ส่วนลดค่าโปรโมชั่น 100.00 บาท</Text>
                         {/* <Text style={{ fontSize: 7, color: '#8B8B8B' }}>(5 Km. - S) x 1 (Photo Plus)</Text> */}
                     </View>
                     <View>
-                        <Text style={{ fontSize: 10 , fontFamily:'kanit'}}>-100.00 ฿</Text>
+                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>-100.00 ฿</Text>
                     </View>
                 </View>
                 <View style={styles.detailRow}>
@@ -74,11 +78,11 @@ class TotalRegister extends Component {
                         </View>
                     </View>
                     <View>
-                        <Text style={{ fontSize: 10 , fontFamily:'kanit'}}>รวมทั้งสิ้น</Text>
+                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>รวมทั้งสิ้น</Text>
                         {/* <Text style={{ fontSize: 7, color: '#8B8B8B' }}>(5 Km. - S) x 1 (Photo Plus)</Text> */}
                     </View>
                     <View>
-                        <Text style={{ fontSize: 10 , fontFamily:'kanit'}}>598.25 ฿</Text>
+                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>598.25 ฿</Text>
                     </View>
                 </View>
 
@@ -105,5 +109,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     }
 })
+const mapStateToProps = (state) => {
+    return {
+        event: state.event,
+        distanceEvent : state.distanceEvent,
+        shirtphoto: state.shirtphoto,
+        total : state.total,
+        choiceSend: state.choiceSend,
+        address: state.address
+    }
+}
 
-export default TotalRegister;
+export default connect(mapStateToProps)(TotalRegister);

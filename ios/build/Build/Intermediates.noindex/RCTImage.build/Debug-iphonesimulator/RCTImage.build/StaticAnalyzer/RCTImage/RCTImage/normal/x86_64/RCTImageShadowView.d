@@ -1,19 +1,19 @@
 dependencies: \
-  /Users/macintoshhd/GRS/node_modules/react-native/Libraries/Image/RCTImageShadowView.m \
-  /Users/macintoshhd/GRS/node_modules/react-native/Libraries/Image/RCTImageShadowView.h \
-  /Users/macintoshhd/GRS/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTShadowView.h \
-  /Users/macintoshhd/GRS/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTComponent.h \
-  /Users/macintoshhd/GRS/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTRootView.h \
-  /Users/macintoshhd/GRS/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridge.h \
-  /Users/macintoshhd/GRS/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeDelegate.h \
-  /Users/macintoshhd/GRS/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTJavaScriptLoader.h \
-  /Users/macintoshhd/GRS/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTDefines.h \
-  /Users/macintoshhd/GRS/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeModule.h \
-  /Users/macintoshhd/GRS/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTFrameUpdate.h \
-  /Users/macintoshhd/GRS/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTInvalidating.h \
-  /Users/macintoshhd/GRS/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/Yoga.h \
-  /Users/macintoshhd/GRS/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGEnums.h \
-  /Users/macintoshhd/GRS/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGMacros.h \
-  /Users/macintoshhd/GRS/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTLog.h \
-  /Users/macintoshhd/GRS/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTAssert.h \
-  /Users/macintoshhd/GRS/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTUtils.h
+  /Users/thunnathorn/GRS/node_modules/react-native/Libraries/Image/RCTImageShadowView.m \
+  /Users/thunnathorn/GRS/node_modules/react-native/Libraries/Image/RCTImageShadowView.h \
+  /Users/thunnathorn/GRS/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTShadowView.h \
+  /Users/thunnathorn/GRS/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTComponent.h \
+  /Users/thunnathorn/GRS/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTRootView.h \
+  /Users/thunnathorn/GRS/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridge.h \
+  /Users/thunnathorn/GRS/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeDelegate.h \
+  /Users/thunnathorn/GRS/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTJavaScriptLoader.h \
+  /Users/thunnathorn/GRS/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTDefines.h \
+  /Users/thunnathorn/GRS/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeModule.h \
+  /Users/thunnathorn/GRS/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTFrameUpdate.h \
+  /Users/thunnathorn/GRS/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTInvalidating.h \
+  /Users/thunnathorn/GRS/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/Yoga.h \
+  /Users/thunnathorn/GRS/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGEnums.h \
+  /Users/thunnathorn/GRS/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGMacros.h \
+  /Users/thunnathorn/GRS/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTLog.h \
+  /Users/thunnathorn/GRS/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTAssert.h \
+  /Users/thunnathorn/GRS/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTUtils.h

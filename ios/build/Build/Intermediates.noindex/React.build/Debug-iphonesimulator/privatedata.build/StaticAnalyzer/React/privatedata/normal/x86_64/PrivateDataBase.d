@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/macintoshhd/GRS/node_modules/react-native/ReactCommon/privatedata/PrivateDataBase.cpp \
-  /Users/macintoshhd/GRS/node_modules/react-native/ReactCommon/privatedata/PrivateDataBase.h
+  /Users/thunnathorn/GRS2/node_modules/react-native/ReactCommon/privatedata/PrivateDataBase.cpp \
+  /Users/thunnathorn/GRS2/node_modules/react-native/ReactCommon/privatedata/PrivateDataBase.h

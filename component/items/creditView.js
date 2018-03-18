@@ -1,37 +1,65 @@
-import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, TextInput } from 'react-native';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+
+import {
+    View,
+    Text,
+    StyleSheet,
+    Image,
+    TextInput,
+    TouchableOpacity,
+    AlertIOS
+} from 'react-native';
+import {connect} from 'react-redux'
+import {StackNavigator} from 'react-navigation';
 
 class CreditView extends Component {
+
     constructor(props) {
         super(props)
         this.state = {
-            cardnumber: "1234 5678 1234 5678",
-            datemonthYear: "Month / Year",
-            CVC : "XXX"
+            nameCredit: "",
+            numberCredit: "1234 5678 1234 5678",
+            expCredit: "00/0000",
+            cvcCredit: "XXX"
         }
     }
-
+    putDataCredit = (nameCredit, numberCredit, expCredit, cvcCredit) => {
+        this
+            .props
+            .goAddress()
+        this
+            .props
+            .setCredit({nameCredit: nameCredit, numberCredit, expCredit, cvcCredit})
+    }
     render() {
-        let { cardnumber, datemonthYear,CVC } = this.state
+        let {nameCredit, numberCredit, expCredit, cvcCredit} = this.state
         return (
             <View style={styles.container}>
                 <View style={styles.creditCard}>
                     <View style={styles.cardNumber}>
                         <Text style={styles.textCardNumber}>card number</Text>
-                        <Text style={styles.textNumber}>{cardnumber}</Text>
+                        <Text style={styles.textNumber}>{numberCredit}</Text>
                     </View>
                     <View style={styles.expcvcView}>
                         <View style={styles.EXPView}>
                             <Text style={styles.textExpiration}>Expiration</Text>
-                            <Text style={styles.monthyear}>{datemonthYear}</Text>
+                            <Text style={styles.monthyear}>{expCredit}</Text>
                         </View>
                         <View style={styles.CVCView}>
                             <Text style={styles.cvc}>CVC</Text>
-                            <Text style={styles.passcvc}>{CVC}</Text>
+                            <Text style={styles.passcvc}>{cvcCredit}</Text>
                         </View>
                         <View>
-                            <Image source={{ uri: "http://www.pngall.com/wp-content/uploads/2016/07/Mastercard-PNG-Clipart.png" }}
-                                style={{ width: 100, height: 50, paddingHorizontal: 30 }} />
+                            <Image
+                                source={{
+                                uri: "http://www.pngall.com/wp-content/uploads/2016/07/Mastercard-PNG-Clipart.png"
+                            }}
+                                style={{
+                                width: 100,
+                                height: 50,
+                                paddingHorizontal: 30
+                            }}/>
                         </View>
                     </View>
                 </View>
@@ -41,35 +69,55 @@ class CreditView extends Component {
                 <View style={styles.container2}>
                     <TextInput
                         placeholder="ชื่อบนบัตร"
-                        style={styles.input}
-                    />
+                        onChangeText={(nameCredit) => this.setState({nameCredit})}
+                        style={styles.input}/>
                     <TextInput
                         placeholder="หมายเลขบัตร"
-                        onChangeText={(cardnumber) => this.setState({ cardnumber })}
-                        style={styles.input}
-                    />
+                        onChangeText={(numberCredit) => this.setState({numberCredit})}
+                        style={styles.input}/>
                     <View style={styles.container3}>
                         <TextInput
                             placeholder="วันหมดอายุ"
-                            onChangeText={(datemonthYear) => this.setState({ datemonthYear })}
-                            style={styles.input}
-                        />
+                            onChangeText={(expCredit) => this.setState({expCredit})}
+                            style={styles.input}/>
                         <TextInput
                             placeholder="รหัสความปลอดภัย"
-                            onChangeText={(CVC) => this.setState({ CVC })}
-                            style={styles.input}
-                        />
+                            onChangeText={(cvcCredit) => this.setState({cvcCredit})}
+                            style={styles.input}/>
                     </View>
+                </View>
+                <View style={styles.showDetail}>
+                    <TouchableOpacity
+                        style={styles.buttonContainer2}
+                        onPress={()=> this.props.ShowDetail()}>
+                        <Text style={styles.textButton2}>เเสดงรายละเอียดค่าสมัคร</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.submitContainer}>
+
+                    <TouchableOpacity
+                        style={styles.buttonContainer}
+                        onPress={() => this.putDataCredit(nameCredit, numberCredit, expCredit, cvcCredit)}>
+                        <Text style={styles.textButton}>ชำระค่าสมัคร : {this.props.TotalPrice}
+                            บาท</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         );
+    }
+}
+const mapDispatchtoProps = (dispatch) => {
+    return {
+        setCredit: (nameCredit) => {
+            dispatch({type: 'setCredit', payload: nameCredit})
+        }
     }
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#fff'
     },
     creditCard: {
         backgroundColor: '#4E2A82',
@@ -80,32 +128,32 @@ const styles = StyleSheet.create({
     cardNumber: {
         flex: 1,
         justifyContent: 'center',
-        paddingLeft: 30,
+        paddingLeft: 30
     },
     textCardNumber: {
         color: '#fff',
-        fontSize: 7,
+        fontSize: 7
     },
     textNumber: {
         color: '#fff',
-        fontSize: 15,
+        fontSize: 15
     },
     expcvcView: {
         flex: 1,
         paddingLeft: 30,
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'space-between'
     },
     textExpiration: {
         color: '#fff',
-        fontSize: 7,
+        fontSize: 7
     },
     monthyear: {
         color: '#fff',
-        fontSize: 15,
+        fontSize: 15
     },
     CVCView: {
-        paddingLeft: 30,
+        paddingLeft: 30
     },
     cvc: {
         color: '#fff',
@@ -113,10 +161,10 @@ const styles = StyleSheet.create({
     },
     passcvc: {
         color: '#fff',
-        fontSize: 15,
+        fontSize: 15
     },
     container2: {
-        padding: 30,
+        padding: 30
     },
     input: {
         height: 40,
@@ -129,10 +177,10 @@ const styles = StyleSheet.create({
     },
     container3: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'space-between'
     },
     containerForm: {
-        flex: 1,
+        flex: 1
     },
     textForm: {
         backgroundColor: '#EFF4F1',
@@ -141,7 +189,44 @@ const styles = StyleSheet.create({
         padding: 20,
         fontFamily: "Kanit"
     },
-
+    submitContainer: {
+        marginTop: 30,
+        alignItems: 'center',
+        marginBottom: 30
+    },
+    buttonContainer: {
+        height: 40,
+        width: '80%',
+        backgroundColor: '#FC561F',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 20
+    },
+    textButton: {
+        fontWeight: '500',
+        fontSize: 15,
+        color: '#fff',
+        fontFamily: "Kanit"
+    },
+    showDetail :{
+        alignItems : 'center'
+    },
+    buttonContainer2: {
+        height: 40,
+        width: '80%',
+        borderColor : '#FC561F',
+        borderWidth : 1,
+        backgroundColor: '#fff',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 20
+    },
+    textButton2: {
+        fontWeight: '500',
+        fontSize: 15,
+        color: '#FC561F',
+        fontFamily: "Kanit"
+    },
 })
 
-export default CreditView;
+export default connect(null, mapDispatchtoProps)(CreditView);

@@ -1,7 +1,24 @@
 import React, { Component } from 'react';
 import { View, Text, ImageBackground, Image, StyleSheet, SegmentedControlIOS } from 'react-native';
+import { connect } from 'react-redux'
 
-export default class HeaderProfile extends Component {
+class HeaderProfile extends Component {
+    constructor (props){
+        super(props)
+        this.state = {
+            name: "",
+            date : ""
+        }
+    }
+
+    componentDidMount = () => {
+        this.setState({
+            name : this.props.event.event.EventName,
+            date : this.props.event.event.EventDate,
+        })
+        console.log(this.state.name)
+        console.log(this.state.date)
+    }
     render() {
         return (
             <ImageBackground source={{ uri: "http://www.jcmagazine.com/wp-content/uploads/2016/07/deporte-carrera.jpg" }}
@@ -12,8 +29,8 @@ export default class HeaderProfile extends Component {
                             style={styles.imgAvatar} />
                     </View>
                     <View style={styles.detailProfile}>
-                        <Text style={styles.nameProfile}>Name</Text>
-                        <Text style={styles.ageProfile}>detail</Text>
+                        <Text style={styles.nameProfile}>{this.state.name}</Text>
+                        <Text style={styles.ageProfile}>{this.state.date}</Text>
                     </View>
                 </View>
             </ImageBackground>
@@ -61,9 +78,14 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 16,
         fontWeight: '900',
-        fontFamily :'kanit',
+        fontFamily: 'kanit',
         marginBottom: 20
     }
-
-
 })
+const mapStateToProps = (state) => {
+    return {
+        event : state.event
+    }
+}
+
+export default connect(mapStateToProps)(HeaderProfile)

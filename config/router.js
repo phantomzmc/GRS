@@ -1,4 +1,5 @@
 import { StackNavigator } from 'react-navigation';
+import SingleLogin from '../container/singleLogin'
 import Login from '../container/login'
 import ListEvent from '../component/list/listevent/listevent'
 import RegisterDistance from '../container/registerDistance'
@@ -11,28 +12,43 @@ import TeamList from '../container/teamList'
 import TabRouter from '../config/tabrouter'
 import AddEventFriend from '../container/AddEventDetailFrind'
 import TransferPayment from '../container/tranferPayment'
+import TotalRegister from '../component/items/totalRegister'
 
 import ListDistance from '../component/list/event/listdistance'
 import ListShith from '../component/list/listShirt/listShirt';
 
+import DetailRegister from '../component/items/detailRegister'
+
 // import ListShirt from '../component/list/listShirt/listShirt'
+import Test from '../list'
 
 export default StackNavigator ({
-    
-    // RegisterDistance : {
-    //     screen : RegisterDistance,
+    // Test : {
+    //     screen : Test
     // },
-    // Login : {
-    //     screen : Login,
-    //     navigationOptions : {
-    //         header : () => null
-    //     }
-    // },
-    // Register : {
-    //     screen : Register,
-    // },
+    SingleLogin : {
+        screen : SingleLogin,
+        navigationOptions : {
+            header : () => null
+        }
+    },
+    Login : {
+        screen : Login,
+        navigationOptions : {
+            header : () => null
+        }
+    },
+    Register : {
+        screen : Register,
+    },
     ListEvent : {
         screen : ListEvent,
+    },
+    ShirtPhotoPlus : {
+        screen : ShirtPhotoPlus
+    },
+    RegisterDistance : {
+        screen : RegisterDistance,
     },
     TabRouter : {
         screen : TabRouter
@@ -40,9 +56,7 @@ export default StackNavigator ({
     TeamList : {
         screen : TeamList
     },
-    ShirtPhotoPlus : {
-        screen : ShirtPhotoPlus
-    },
+
     CreditPayment : {
         screen : CreditPayment
     },
@@ -57,6 +71,9 @@ export default StackNavigator ({
     },
     AddEventFriend : {
         screen : AddEventFriend
+    },
+    TotalRegister : {
+        screen : TotalRegister
     }
 
 

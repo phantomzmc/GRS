@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/macintoshhd/GRS/node_modules/react-native/ReactCommon/jsinspector/InspectorInterfaces.cpp \
-  /Users/macintoshhd/GRS/node_modules/react-native/ReactCommon/jsinspector/InspectorInterfaces.h
+  /Users/thunnathorn/GRS/node_modules/react-native/ReactCommon/jsinspector/InspectorInterfaces.cpp \
+  /Users/thunnathorn/GRS/node_modules/react-native/ReactCommon/jsinspector/InspectorInterfaces.h
