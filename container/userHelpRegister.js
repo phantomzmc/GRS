@@ -5,15 +5,16 @@ import {
   Text,
   ScrollView,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
+  Alert
 } from "react-native";
 import { StackNavigator } from "react-navigation";
 import { connect } from "react-redux";
 
 import HeaderUser from "../component/items/header_profile";
-import FormRegister from "../component/form/registerForm";
+import FormHelpRegister from "../component/form/registerHelpForm";
 
-class UserRegister extends Component {
+class UserHelpRegister extends Component {
   static propTypes = {
     navigation: PropTypes.object
   };
@@ -29,33 +30,34 @@ class UserRegister extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      profile: {}
+      help: {
+        firstname: "",
+        lastname: "",
+        relation: "",
+        tel: ""
+      }
     };
   }
 
-  gotoListEvent = (
-    fullname,
-    nickname,
-    password,
-    confirmpassword,
-    teamname,
-    bib,
-    userid,
-    tel,
-    email
-  ) => {
-    this.props.setProfile({
-      profile: fullname,
-      nickname,
-      password,
-      confirmpassword,
-      teamname,
-      bib,
-      userid,
-      tel,
-      email
-    });
-    this.props.navigation.navigate("UserAddressRegister");
+  gotoListEvent = (firstname, lastname, relation, tel) => {
+    Alert.alert(
+      "สำเร็จ",
+      "ทำการลงทะเบียนสมัครสมาชิกสำเร็จ",
+      [
+        {
+          text: "Cancel"
+        },
+        {
+          text: "เข้าสู่ระบบ",
+          onPress: () => this.gotoLogin()
+        }
+      ],
+      { cancelable: false }
+    );
+    this.props.setHelp({ help: firstname, lastname, relation, tel });
+  };
+  gotoLogin = () => {
+    this.props.navigation.navigate("SingleLogin");
   };
 
   render() {
@@ -63,7 +65,7 @@ class UserRegister extends Component {
       <ScrollView>
         <View style={styles.container}>
           <HeaderUser Name={this.props.fullname} UserID={this.props.userid} />
-          <FormRegister goEvent={this.gotoListEvent.bind(this)} />
+          <FormHelpRegister goEvent={this.gotoListEvent.bind(this)} />
         </View>
       </ScrollView>
     );
@@ -78,13 +80,13 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = dispatch => {
   return {
-    setProfile: profile => {
+    setHelp: help => {
       dispatch({
-        type: "setProfile",
-        payload: profile
+        type: "setHelp",
+        payload: help
       });
     }
   };
 };
 
-export default connect(null, mapDispatchToProps)(UserRegister);
+export default connect(null, mapDispatchToProps)(UserHelpRegister);

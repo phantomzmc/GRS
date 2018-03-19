@@ -23,7 +23,7 @@ class SingleLogin extends Component {
         }
     }
     checkLogin() {
-        if (this.state.username === this.props.profile.profile.userid) {
+        if (this.state.username == this.props.profile.profile.userid) {
             this.gotoListEvent()
         } else {
             Alert.alert('เกิดข้อผิดพลาด', 'การเข้าสู่ระบบผิดพลาด', [
@@ -41,7 +41,7 @@ class SingleLogin extends Component {
         this
             .props
             .navigation
-            .navigate('ListEvent')
+            .navigate('EventList')
     }
     gotoRegister = () => {
         this

@@ -13,19 +13,24 @@ import TabRouter from '../config/tabrouter'
 import AddEventFriend from '../container/AddEventDetailFrind'
 import TransferPayment from '../container/tranferPayment'
 import TotalRegister from '../component/items/totalRegister'
-
+import EventList from '../container/ListEvent'
 import ListDistance from '../component/list/event/listdistance'
 import ListShith from '../component/list/listShirt/listShirt';
 
 import DetailRegister from '../component/items/detailRegister'
+import UserHelpRegister from '../container/userHelpRegister'
+import UserAddressRegister from '../container/userAddressRegister'
 
 // import ListShirt from '../component/list/listShirt/listShirt'
 import Test from '../list'
 
 export default StackNavigator ({
-    // Test : {
-    //     screen : Test
-    // },
+    EventList : {
+        screen : EventList
+    },
+    Register : {
+        screen : Register
+    },
     SingleLogin : {
         screen : SingleLogin,
         navigationOptions : {
@@ -40,6 +45,12 @@ export default StackNavigator ({
     },
     Register : {
         screen : Register,
+    },
+    UserAddressRegister : {
+        screen : UserAddressRegister
+    },
+    UserHelpRegister : {
+        screen : UserHelpRegister
     },
     ListEvent : {
         screen : ListEvent,

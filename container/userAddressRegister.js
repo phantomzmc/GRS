@@ -11,9 +11,9 @@ import { StackNavigator } from "react-navigation";
 import { connect } from "react-redux";
 
 import HeaderUser from "../component/items/header_profile";
-import FormRegister from "../component/form/registerForm";
+import FormAddressRegister from "../component/form/registerAddressForm";
 
-class UserRegister extends Component {
+class UserAddressRegister extends Component {
   static propTypes = {
     navigation: PropTypes.object
   };
@@ -27,35 +27,22 @@ class UserRegister extends Component {
     }
   };
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      profile: {}
-    };
+      address: {
+        number : "",
+        t : "",
+        a : "",
+        city : "",
+        country : "",
+        postNumber : ""
+      }
   }
+}
 
-  gotoListEvent = (
-    fullname,
-    nickname,
-    password,
-    confirmpassword,
-    teamname,
-    bib,
-    userid,
-    tel,
-    email
-  ) => {
-    this.props.setProfile({
-      profile: fullname,
-      nickname,
-      password,
-      confirmpassword,
-      teamname,
-      bib,
-      userid,
-      tel,
-      email
-    });
-    this.props.navigation.navigate("UserAddressRegister");
+  gotoListEvent = (number, t, a, city, country, postNumber) => {
+    this.props.setAddress({address: number, t, a, city, country, postNumber});
+    this.props.navigation.navigate("UserHelpRegister");
   };
 
   render() {
@@ -63,7 +50,7 @@ class UserRegister extends Component {
       <ScrollView>
         <View style={styles.container}>
           <HeaderUser Name={this.props.fullname} UserID={this.props.userid} />
-          <FormRegister goEvent={this.gotoListEvent.bind(this)} />
+          <FormAddressRegister goEvent={this.gotoListEvent.bind(this)} />
         </View>
       </ScrollView>
     );
@@ -76,15 +63,15 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    setProfile: profile => {
+    setAddress: (address) => {
       dispatch({
-        type: "setProfile",
-        payload: profile
+        type: "setAddress",
+        payload: address
       });
     }
   };
 };
 
-export default connect(null, mapDispatchToProps)(UserRegister);
+export default connect(null, mapDispatchToProps)(UserAddressRegister);

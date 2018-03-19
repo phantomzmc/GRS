@@ -1,149 +1,141 @@
-import {createStore, combineReducers, applyMiddleware} from 'redux';
+import { createStore, combineReducers, applyMiddleware } from "redux";
 
 const eventState = {
-    event: {
-        name: "1",
-        date: "date",
-        tranferBank: ""
-    },
-    distanceEvent: {
-        distanceName: "",
-        distance: "1 km",
-        price: 400
-    }
-}
+  event: {
+    name: "1",
+    date: "date",
+    tranferBank: ""
+  },
+  distanceEvent: {
+    distanceName: "",
+    distance: "1 km",
+    price: 400
+  }
+};
 const credit = {
     nameCredit: {
-        nameCredit: "",
-        numberCredit: "1234 5678 1234 5678",
-        expCredit: "00/0000",
-        cvcCredit: "XXX"
-    },
-    vat: 33.25
-}
+    nameCredit: "",
+    numberCredit: "1234 5678 1234 5678",
+    expCredit: "00/0000",
+    cvcCredit: "XXX"
+  },
+  vat: 33.25
+};
 const user = {
-    fullname: "",
+  profile:{
     userid: "",
-    gen: "",
-    age: "",
-    number: "",
-    t: "",
-    a: "",
-    city: "",
-    country: "",
-    postNumber: "",
-    tel: "",
-    email: ""
-}
-const profile = (state = {}, action) => {
-    switch (action.type) {
-        case 'setProfile':
-            {
-                state.profile = action.payload
-            }
+  }
+
+};
+const profile = (state = user, action) => {
+  switch (action.type) {
+    case "setProfile": {
+      state.profile = action.payload;
     }
-    return state
-}
+    case "setAddress": {
+      state.address = action.payload;
+    }
+    case "setHelp": {
+      state.help = action.payload;
+    }
+  }
+  return state;
+};
 
 const event = (state = eventState, action) => {
-    switch (action.type) {
-        case 'addEvent':
-            {
-                state.event = action.payload
-                break;
-            }
-
-        case 'addDistance':
-            {
-                state.distanceEvent = action.payload
-                break;
-            }
-
+  switch (action.type) {
+    case "addEvent": {
+      state.event = action.payload;
+      break;
     }
-    return state
-}
+
+    case "addDistance": {
+      state.distanceEvent = action.payload;
+      break;
+    }
+  }
+  return state;
+};
 
 const shirtphoto = (state = {}, action) => {
-    switch (action.type) {
-        case 'setPrice':
-            {
-                state.price = action.payload
-                break;
-            }
-        case 'setSizeShirt':
-            {
-                state.size = action.payload
-                break;
-            }
-        default:
+  switch (action.type) {
+    case "setPrice": {
+      state.price = action.payload;
+      break;
     }
-    return state
-}
-const photoplus = (state = {
+    case "setSizeShirt": {
+      state.size = action.payload;
+      break;
+    }
+    default:
+  }
+  return state;
+};
+const photoplus = (
+  state = {
     title: "Photo Plus Service",
     pricePhoto: 100
-}, action) => {
-    switch (action.type) {
-        case 'onPhotoPlus':
-            state = {
-                ...state,
-                title: action.payload,
-                pricePhoto: action.payload
-            }
-            break;
-        default:
-    }
-    return state
-}
+  },
+  action
+) => {
+  switch (action.type) {
+    case "onPhotoPlus":
+      state = {
+        ...state,
+        title: action.payload,
+        pricePhoto: action.payload
+      };
+      break;
+    default:
+  }
+  return state;
+};
 const creditcard = (state = credit, action) => {
-    switch (action.type) {
-        case 'setCredit':
-            {
-                state.nameCredit = action.payload
-                break;
-            }
-        default:
-            break;
+  switch (action.type) {
+    case "setCredit": {
+      state.nameCredit = action.payload;
+      break;
     }
-    return state
-}
+    default:
+      break;
+  }
+  return state;
+};
 const choiceSend = (state = {}, action) => {
-    switch (action.type) {
-        case 'setSendChoice':
-            {
-                state.choiceSend = action.payload
-                break;
-            }
+  switch (action.type) {
+    case "setSendChoice": {
+      state.choiceSend = action.payload;
+      break;
     }
-    return state
-}
+  }
+  return state;
+};
 const address = (state = {}, action) => {
-    switch (action.type) {
-        case 'setUser':
-            {
-                state.user = action.payload
-                break;
-            }
+  switch (action.type) {
+    case "setUser": {
+      state.user = action.payload;
+      break;
     }
-    return state
-}
+  }
+  return state;
+};
 const total = (state = {}, action) => {
-    switch (action.type) {
-        case 'setTotal':
-            {
-                state.totalPrice = action.payload
-                break;
-            }
+  switch (action.type) {
+    case "setTotal": {
+      state.totalPrice = action.payload;
+      break;
     }
-    return state
-}
+  }
+  return state;
+};
 
-const myLogger = (store) => (next) => (action) => {
-    console.log("Log Action", action)
-    next(action)
-}
+const myLogger = store => next => action => {
+  console.log("Log Action", action);
+  next(action);
+};
 
-const store = createStore(combineReducers({
+const store = createStore(
+  combineReducers({
     profile,
     event,
     shirtphoto,
@@ -152,9 +144,12 @@ const store = createStore(combineReducers({
     choiceSend,
     address,
     total
-}), {}, applyMiddleware(myLogger))
+  }),
+  {},
+  applyMiddleware(myLogger)
+);
 store.subscribe(() => {
-    console.log("Updata Store", store.getState())
-})
+  console.log("Updata Store", store.getState());
+});
 
-export default store
+export default store;
