@@ -1,46 +1,69 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { View, Text, ScrollView, StyleSheet,TouchableOpacity } from 'react-native';
-import { StackNavigator } from 'react-navigation';
-import {connect} from 'react-redux'
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import {
+  View,
+  Text,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity
+} from "react-native";
+import { StackNavigator } from "react-navigation";
+import { connect } from "react-redux";
 
-
-import HeaderUser from '../component/items/header_profile'
-import FormRegister from '../component/form/registerForm'
+import HeaderUser from "../component/items/header_profile";
+import FormRegister from "../component/form/registerForm";
 
 class UserRegister extends Component {
   static propTypes = {
-    navigation: PropTypes.object,
-  }
+    navigation: PropTypes.object
+  };
   static navigationOptions = {
-    title: 'สมัครสมาชิก',
+    title: "สมัครสมาชิก",
     headerStyle: {
-      backgroundColor: '#FC561F'
+      backgroundColor: "#FC561F"
     },
     headerTitleStyle: {
-      color: '#fff'
+      color: "#fff"
     }
   };
-  constructor (props) {
-    super(props)
-    this.state ={
-      profile : {}
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      profile: {}
+    };
   }
 
-  gotoListEvent = (fullname,userid,age,number,t,a,city,country,postNumber,tel,email) => {
-    this.props.setProfile({ profile : fullname,userid,age,number,t,a,city,country,postNumber,tel,email})
-    this.props.navigation.navigate('SingleLogin')
-  }
-
+  gotoListEvent = (
+    fullname,
+    nickname,
+    password,
+    confirmpassword,
+    teamname,
+    bib,
+    userid,
+    tel,
+    email
+  ) => {
+    this.props.setProfile({
+      profile: fullname,
+      nickname,
+      password,
+      confirmpassword,
+      teamname,
+      bib,
+      userid,
+      tel,
+      email
+    });
+    this.props.navigation.navigate("UserAddressRegister");
+  };
 
   render() {
     return (
       <ScrollView>
         <View style={styles.container}>
-          <HeaderUser Name={this.props.fullname}
-                      UserID={this.props.userid}/>
-          <FormRegister goEvent={this.gotoListEvent.bind(this)}/>
+          <HeaderUser Name={this.props.fullname} UserID={this.props.userid} />
+          <FormRegister goEvent={this.gotoListEvent.bind(this)} />
         </View>
       </ScrollView>
     );
@@ -51,17 +74,17 @@ const styles = StyleSheet.create({
   container: {
     marginBottom: 60
   }
-})
+});
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    setProfile: (profile) => {
+    setProfile: profile => {
       dispatch({
-        type : "setProfile",
-        payload : profile
-      })
+        type: "setProfile",
+        payload: profile
+      });
     }
-  }
-}
+  };
+};
 
-export default connect(null,mapDispatchToProps)(UserRegister) 
+export default connect(null, mapDispatchToProps)(UserRegister);
