@@ -25,9 +25,15 @@ import UserAddressRegister from '../container/userAddressRegister'
 import Test from '../list'
 
 export default StackNavigator ({
-    EventList : {
-        screen : EventList
-    },
+    // RegisterDistance : {
+    //     screen : RegisterDistance,
+    // },
+    // Test : {
+    //     screen : Test
+    // },
+    // EventList : {
+    //     screen : EventList
+    // },
     Register : {
         screen : Register
     },

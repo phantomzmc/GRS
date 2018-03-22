@@ -49,22 +49,27 @@ class ListEvent extends Component {
         this.setState({ profile : this.props.profile.profile.userid})
         console.log("test" + this.state.profile)
     }
-
+    checkTeamRegis = () =>{
+        if(this.props.event.event == "1"){
+            console.log("TeamLogin")
+            this.props.navigation.navigate('Login')
+        }else if(this.props.event.event == "0"){
+            console.log("SingleLogin")
+            this.props.navigation.navigate('SingleLogin')
+        }
+    }
     gotoRegister = () => {
         console.log("gotoRegister")
-        this
-            .props
-            .navigation
-            .navigate('Register')
+        this.checkTeamRegis()
     }
     checkUser = () => {
         if (this.state.profile == "") {
             console.log("checkLogin")
-            Alert.alert('เกิดข้อผิดพลาด', 'การเข้าสู่ระบบผิดพลาด', [{
+            Alert.alert('กรุณาเข้าสู่ระบบ', 'ผู้ใช้งานจะต้องทำการเข้าสู่ระบบก่อน', [{
                 text: 'Cancel'
             }, {
-                text: 'สมัครสมาชิก',
-                onPress: () => this.gotoRegister(),
+                text: 'เข้าสู่ระบบ',
+                onPress: () => this.checkTeamRegis(),
             }], { cancelable: false })
         }
         else{
@@ -83,7 +88,8 @@ class ListEvent extends Component {
 }
 const mapStateToProps = (state) => {
     return {
-        profile: state.profile
+        profile: state.profile,
+        event : state.event
     }
 
 }

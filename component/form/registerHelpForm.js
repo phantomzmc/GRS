@@ -6,10 +6,9 @@ import {
   Text,
   TextInput,
   StyleSheet,
-  SegmentedControlIOS,
   TouchableOpacity,
-  DatePickerIOS,
-  Image
+  Image,
+  Picker
 } from "react-native";
 import { StackNavigator } from "react-navigation";
 
@@ -57,21 +56,30 @@ class FormAddressRegister extends Component {
           style={styles.textInput}
           onChangeText={lastname => this.setState({ lastname })}
         />
-        {/* </View> */}
-        {/* <View style={styles.addressContainer}> */}
-        <TextInput
-          placeholder="ความสัมพันธ์"
-          returnKeyType="next"
-          style={styles.textInput}
-          onChangeText={relation => this.setState({ relation })}
-        />
         <TextInput
           placeholder="หมายเลขโทรศัพท์"
           returnKeyType="next"
           style={styles.textInput}
           onChangeText={tel => this.setState({ tel })}
         />
-        {/* </View> */}
+        <TextInput
+          placeholder={this.state.relation}
+          returnKeyType="next"
+          style={styles.textInput}
+          onChangeText={relation => this.setState({ relation })}
+        />
+        <View style={styles.viewPicker}>
+          <Picker
+            style={styles.picker}
+            selectedValue={this.state.relation}
+            onValueChange={(itemValue, itemIndex) => this.setState({ relation: itemValue })} >
+            <Picker.Item label="ความสัมพันธ์" value="ความสัมพันธ์" />
+            <Picker.Item label="พ่อแม่" value="พ่อแม่" />
+            <Picker.Item label="ญาติ" value="ญาติ" />
+            <Picker.Item label="เพื่อน" value="เพื่อน" />
+          </Picker>
+        </View>
+
 
         <View style={styles.submitContainer}>
           <TouchableOpacity
@@ -123,23 +131,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
     fontFamily: "kanit"
   },
-  conlorsegment: {
-    marginTop: 10
-  },
-  addressContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between"
-  },
-  textAddressInput: {
-    width: "45%",
-    borderColor: "#FC561F",
-    borderRadius: 10,
-    borderWidth: 1.5,
-    paddingHorizontal: 10,
-    height: 35,
-    marginTop: 15,
-    fontFamily: "kanit"
-  },
+
   submitContainer: {
     marginTop: 30,
     alignItems: "center",
@@ -159,8 +151,15 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontFamily: "kanit"
   },
-  datepicker: {
-    padding: 50
+  viewPicker : {
+    alignItems : 'center',
+    justifyContent: 'center'
+  },
+  picker: {
+    alignContent: 'center',
+    justifyContent: 'center',
+    width: '80%',
+    height: '30%'
   }
 });
 export default FormAddressRegister;

@@ -42,7 +42,7 @@ class UserHelpRegister extends Component {
   gotoListEvent = (firstname, lastname, relation, tel) => {
     Alert.alert(
       "สำเร็จ",
-      "ทำการลงทะเบียนสมัครสมาชิกสำเร็จ",
+      "ขั้นตอนการลงทะเบียนเกือบเสร็จสมบูรณ์แล้ว กรุณาตรวจสอบอีเมล์เพื่อยืนยันตัวตน",
       [
         {
           text: "Cancel"

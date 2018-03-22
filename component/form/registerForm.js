@@ -12,6 +12,9 @@ import {
   Image
 } from "react-native";
 import { StackNavigator } from "react-navigation";
+import { DatePickerDialog } from 'react-native-datepicker-dialog'
+import moment from 'moment';
+
 
 class FormRegister extends Component {
   static propTypes = {
@@ -21,60 +24,52 @@ class FormRegister extends Component {
     super(props);
     this.state = {
       fullname: "",
+      lastname: "",
       nickname: "",
       userid: "",
       password: "",
       confirmpassword: "",
-      gen: "",
       teamname: "",
       bib: "",
       tel: "",
       email: "",
-      chosenDate: new Date()
+      journeyText: '',
+      journeyDate: null,
+      bloodtype: "",
+      nation: "",
+      selectedIndex : 0
     };
-    this.setDate = this.setDate(this);
   }
-  setDate(newDate) {
-    this.setState({ chosenDate: newDate });
-  }
-  sendData = (
-    fullname,
-    nickname,
-    password,
-    confirmpassword,
-    teamname,
-    bib,
-    userid,
-    tel,
-    email
-  ) => {
-    this.props.goEvent(
-      fullname,
-      nickname,
-      password,
-      confirmpassword,
-      teamname,
-      bib,
-      userid,
-      tel,
-      email
-    );
+  sendData = (fullname, lastname, nickname, password, confirmpassword, teamname, bib, userid, tel, email, journeyDate, bloodtype, nation) => {
+    this.props.goEvent(fullname, lastname, nickname, password, confirmpassword,  teamname, bib, userid, tel, email, journeyDate, bloodtype, nation);
     console.log(this.state.fullname);
     console.log(this.state.userid);
+    console.log(this.state.journeyDate)
   };
 
+  onJourneyDatePress = () => {
+    let journeyDate = this.state.journeyDate;
+    if (!journeyDate || journeyDate == null) {
+      journeyDate = new Date();
+      this.setState({
+        journeyDate: journeyDate
+      });
+    }
+    //To open the dialog
+    this.refs.journeyDialog.open({
+      date: journeyDate,
+      minDate: new Date() //To restirct past date
+    });
+  }
+  onJourneyDatePicked = (date) => {
+    this.setState({
+      journeyDate: date,
+      journeyText: moment(date).format('DD MMM, YYYY')
+    });
+  }
+
   render() {
-    let {
-      fullname,
-      nickname,
-      password,
-      confirmpassword,
-      teamname,
-      bib,
-      userid,
-      tel,
-      email
-    } = this.state;
+    let { fullname, lastname, nickname, password, confirmpassword, teamname, bib, userid, tel, email, journeyDate, bloodtype, nation } = this.state;
     return (
       <View style={styles.container}>
         <View style={styles.contectTitle}>
@@ -86,25 +81,56 @@ class FormRegister extends Component {
           </View>
           <Text style={styles.titleText}>ข้อมูลส่วนตัว</Text>
         </View>
-        {/* <Text>ชื่อ-นามสกุล</Text> */}
-        <TextInput
-          placeholder="ชื่อ - นามสกุล"
-          returnKeyType="next"
-          style={styles.textInput}
-          onChangeText={fullname => this.setState({ fullname })}
-        />
-        <TextInput
-          placeholder="ชื่อเล่น"
-          returnKeyType="next"
-          style={styles.textInput}
-          onChangeText={nickname => this.setState({ nickname })}
-        />
+        <View style={styles.addressContainer}>
+          <TextInput
+            placeholder="ชื่อ"
+            returnKeyType="next"
+            style={styles.textAddressInput}
+            onChangeText={fullname => this.setState({ fullname })}
+          />
+          <TextInput
+            placeholder="นามสกุล"
+            returnKeyType="next"
+            style={styles.textAddressInput}
+            onChangeText={lastname => this.setState({ lastname })}
+          />
+        </View>
+        <View style={styles.addressContainer}>
+          <TextInput
+            placeholder="ชื่อเล่น"
+            returnKeyType="next"
+            style={styles.textAddressInput}
+            onChangeText={nickname => this.setState({ nickname })}
+          />
+          <View style={styles.conlorsegment}>
+            <SegmentedControlIOS values={["ชาย", "หญิง"]}
+              selectedIndex={this.state.selectedIndex}
+              onChange={(event) => {
+                this.setState({ selectedIndex: event.nativeEvent.selectedSegmentIndex })
+              }}
+              tintColor="#FC561F" />
+          </View>
+        </View>
         <TextInput
           placeholder="รหัสบัตรประชาชน/หนังสือเดินทาง"
           returnKeyType="next"
           style={styles.textInput}
           onChangeText={userid => this.setState({ userid })}
         />
+        <View style={styles.addressContainer}>
+          <TextInput
+            placeholder="กร๊ปเลือด"
+            returnKeyType="next"
+            style={styles.textAddressInput}
+            onChangeText={bloodtype => this.setState({ bloodtype })}
+          />
+          <TextInput
+            placeholder="สัญชาติ"
+            returnKeyType="next"
+            style={styles.textAddressInput}
+            onChangeText={nation => this.setState({ nation })}
+          />
+        </View>
         <TextInput
           placeholder="รหัสผ่าน"
           returnKeyType="next"
@@ -119,45 +145,48 @@ class FormRegister extends Component {
           style={styles.textInput}
           onChangeText={confirmpassword => this.setState({ confirmpassword })}
         />
+        <TouchableOpacity onPress={this.onJourneyDatePress.bind(this)} >
+          <View style={styles.datePickerBox}>
+            <Text style={styles.datePickerText}>วัน/เดือน/ปีเกิด : {this.state.journeyText}</Text>
+          </View>
+        </TouchableOpacity>
 
-        <View style={styles.conlorsegment}>
-          <SegmentedControlIOS values={["ชาย", "หญิง"]} tintColor="#FC561F" />
+        <DatePickerDialog ref="journeyDialog" onDatePicked={this.onJourneyDatePicked.bind(this)} />
+        <View style={styles.addressContainer}>
+          <TextInput
+            placeholder="ชื่อทีม"
+            returnKeyType="next"
+            style={styles.textAddressInput}
+            onChangeText={teamname => this.setState({ teamname })}
+          />
+          <TextInput
+            placeholder="BIB"
+            returnKeyType="next"
+            style={styles.textAddressInput}
+            onChangeText={bib => this.setState({ bib })}
+          />
         </View>
-        {/* <DatePickerIOS
-                    style={styles.datepicker}
-                    date={this.state.chosenDate}
-                    onDateChange={this.setDate}
-                /> */}
-        <TextInput
-          placeholder="ชื่อทีม"
-          returnKeyType="next"
-          style={styles.textInput}
-          onChangeText={teamname => this.setState({ teamname })}
-        />
-        <TextInput
-          placeholder="BIB"
-          returnKeyType="next"
-          style={styles.textInput}
-          onChangeText={bib => this.setState({ bib })}
-        />
-        <TextInput
-          placeholder="เบอร์โทรศัพท์"
-          returnKeyType="next"
-          style={styles.textInput}
-          onChangeText={tel => this.setState({ tel })}
-        />
-        <TextInput
-          placeholder="Email"
-          returnKeyType="next"
-          style={styles.textInput}
-          onChangeText={email => this.setState({ email })}
-        />
+        <View style={styles.addressContainer}>
+          <TextInput
+            placeholder="เบอร์โทรศัพท์"
+            returnKeyType="next"
+            style={styles.textAddressInput}
+            onChangeText={tel => this.setState({ tel })}
+          />
+          <TextInput
+            placeholder="Email"
+            returnKeyType="next"
+            style={styles.textAddressInput}
+            onChangeText={email => this.setState({ email })}
+          />
+        </View>
         <View style={styles.submitContainer}>
           <TouchableOpacity
             style={styles.buttonContainer}
             onPress={() =>
               this.sendData(
                 fullname,
+                lastname,
                 nickname,
                 password,
                 confirmpassword,
@@ -165,7 +194,10 @@ class FormRegister extends Component {
                 bib,
                 userid,
                 tel,
-                email
+                email,
+                journeyDate,
+                bloodtype,
+                nation,
               )
             }
           >
@@ -215,14 +247,15 @@ const styles = StyleSheet.create({
     fontFamily: "kanit"
   },
   conlorsegment: {
-    marginTop: 10
+    width: "48%",
+    marginTop: 20
   },
   addressContainer: {
     flexDirection: "row",
     justifyContent: "space-between"
   },
   textAddressInput: {
-    width: "45%",
+    width: "48%",
     borderColor: "#FC561F",
     borderRadius: 10,
     borderWidth: 1.5,
@@ -250,8 +283,20 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontFamily: "kanit"
   },
-  datepicker: {
-    padding: 50
-  }
+  datePickerBox: {
+    marginTop: 9,
+    borderColor: '#fc561f',
+    borderWidth: 1.5,
+    padding: 0,
+    borderRadius: 10,
+    height: 35,
+    justifyContent: 'center'
+  },
+  datePickerText: {
+    fontSize: 14,
+    paddingLeft: 15,
+    color: '#d9d9d9',
+    fontFamily: 'kanit'
+  },
 });
 export default FormRegister;

@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     },
     coverImg: {
         width: '100%',
-        height: '30%'
+        height: 300
     },
     imgAvatar: {
         width: 100,

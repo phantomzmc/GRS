@@ -35,6 +35,7 @@ class UserRegister extends Component {
 
   gotoListEvent = (
     fullname,
+    lastname,
     nickname,
     password,
     confirmpassword,
@@ -42,10 +43,14 @@ class UserRegister extends Component {
     bib,
     userid,
     tel,
-    email
+    email,
+    journeyDate,
+    bloodtype,
+    nation
   ) => {
     this.props.setProfile({
       profile: fullname,
+      lastname,
       nickname,
       password,
       confirmpassword,
@@ -53,7 +58,10 @@ class UserRegister extends Component {
       bib,
       userid,
       tel,
-      email
+      email,
+      journeyDate,
+      bloodtype,
+      nation
     });
     this.props.navigation.navigate("UserAddressRegister");
   };

@@ -32,7 +32,7 @@ class ListEvent extends Component {
         }
     }
     componentDidMount() {
-        return fetch("http://api.shutterrunning2014.com/api/v2/grsv2m/_table/Main.Events", {
+        return fetch("http://api.shutterrunning2014.com/api/v2/grsv2m/_proc/Main.uspGetEventList", {
             method: "GET",
             headers: {
                 "X-DreamFactory-API-Key": '36fda24fe5588fa4285ac6c6c2fdfbdb6b6bc9834699774c9bf777f706d05a88',
@@ -44,8 +44,8 @@ class ListEvent extends Component {
                 "Authorization": 'Basic YWRtaW5AZ3V1cnVuLmNvbTpXWGJyRDI4THRJUjNNWW0='
             }
         }).then((response) => response.json()).then((responseJson) => {
-            this.setState({ isLoading: false, dataSource: responseJson.resource });
-            // console.log("hello" + this.state.profile)
+            this.setState({ isLoading: false, dataSource: responseJson });
+            console.log(this.state.dataSource)
         }).catch((error) => {
             console.error(error);
         });
@@ -53,6 +53,8 @@ class ListEvent extends Component {
     }
     gotoPayment = (item) => {
         if(this.props.Profile == ""){
+            this.props.addEvent(item.GroupRegister)
+            console.log(item.GroupRegister)
             this.props.CheckLogin()
         }else if(this.props.Profile != ""){
             this.setState({
@@ -90,7 +92,7 @@ class ListEvent extends Component {
                     renderItem={({ item }) => <View style={styles.background}>
                         <View style={styles.containerCard}>
                             <Image
-                                source={{
+                                require={{
                                     uri: item.BackgroundImage
                                 }}
                                 style={{

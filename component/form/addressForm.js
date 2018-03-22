@@ -43,7 +43,7 @@ class AddressForm extends Component {
                 <TextInput
                     placeholder={this.props.profile.profile.number}
                     style={styles.input}
-                    onChangeText={(adress) => this.setState(this.props.profile.profile.number)}
+                    onChangeText={(adress) => this.setState(this.props.profile.address.address)}
 
                 />
                 <TextInput

@@ -49,7 +49,7 @@ class TotalLayout extends Component {
         // this.props.addEvent(this.state.name)
     }
     gotoListEvent = () => {
-        this.props.navigation.navigate('ListEvent')
+        this.props.navigation.navigate('EventList')
     }
 
     render() {

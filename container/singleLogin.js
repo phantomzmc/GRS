@@ -26,7 +26,7 @@ class SingleLogin extends Component {
         if (this.state.username == this.props.profile.profile.userid) {
             this.gotoListEvent()
         } else {
-            Alert.alert('เกิดข้อผิดพลาด', 'การเข้าสู่ระบบผิดพลาด', [
+            Alert.alert('ยังไม่มีข้อมูลผู้ใช้งาน', 'กรุณาลงทะเบียนเพื่อเข้าใช้งาน', [
                 {
                     text: 'Cancel'
                 }, {
