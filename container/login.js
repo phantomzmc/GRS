@@ -68,7 +68,7 @@ class Login extends Component {
                             <Text style={styles.textButton}>Login</Text>
                         </TouchableOpacity>
                     </View>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={this.gotoRegister.bind(this)}>
                         <Text style={styles.regisButton}>
                             สมัครสมาชิก
                         </Text>

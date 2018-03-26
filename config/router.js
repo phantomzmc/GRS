@@ -16,6 +16,7 @@ import TotalRegister from '../component/items/totalRegister'
 import EventList from '../container/ListEvent'
 import ListDistance from '../component/list/event/listdistance'
 import ListShith from '../component/list/listShirt/listShirt';
+import DiscountCoupon from '../component/form/couponForm'
 
 import DetailRegister from '../component/items/detailRegister'
 import UserHelpRegister from '../container/userHelpRegister'
@@ -28,12 +29,9 @@ export default StackNavigator ({
     // RegisterDistance : {
     //     screen : RegisterDistance,
     // },
-    // Test : {
-    //     screen : Test
-    // },
-    // EventList : {
-    //     screen : EventList
-    // },
+    EventList : {
+        screen : EventList
+    },
     Register : {
         screen : Register
     },
@@ -63,6 +61,9 @@ export default StackNavigator ({
     },
     ShirtPhotoPlus : {
         screen : ShirtPhotoPlus
+    },
+    DiscountCoupon : {
+        screen : DiscountCoupon
     },
     RegisterDistance : {
         screen : RegisterDistance,

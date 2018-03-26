@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/thunnathorn/GRS2/node_modules/react-native/React/Modules/RCTUIManagerUtils.m \
-  /Users/thunnathorn/GRS2/node_modules/react-native/React/Modules/RCTUIManagerUtils.h
+  /Users/thunnathorn/GRS3/node_modules/react-native/React/Modules/RCTUIManagerUtils.m \
+  /Users/thunnathorn/GRS3/node_modules/react-native/React/Modules/RCTUIManagerUtils.h

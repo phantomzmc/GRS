@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image,Alert } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
 
@@ -20,10 +20,26 @@ class ShirtPhotoPlus extends Component {
             fontFamily: 'kanit',
         }
     };
-
     goNextState = () => {
-        this.props.navigation.navigate('AddressLayout')
+        console.log("checkPromo")
+        if(this.props.event.event.PromoCodeStatus == 1){
+            console.log("status 1")
+            Alert.alert("ส่วนลดค่าสมัคร","กรุณากรอกรหัสส่วนลดในการสมัคร",[
+                {
+                    text:"Cancel"
+                },
+                {
+                    text: "รหัสส่วนลด",
+                    onPress : () => this.props.navigation.navigate("DiscountCoupon")
+                },
+            ], { cancelable: false })
+        }
+        else if (this.props.event.event.PromoCodeStatus == 0){
+            console.log("status 0")
+            this.props.navigation.navigate('AddressLayout')
+        }
     }
+    
     render() {
         return (
             <ScrollView>

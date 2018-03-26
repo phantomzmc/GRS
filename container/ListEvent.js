@@ -50,10 +50,10 @@ class ListEvent extends Component {
         console.log("test" + this.state.profile)
     }
     checkTeamRegis = () =>{
-        if(this.props.event.event == "1"){
+        if(this.props.event.event.GroupRegister == "1"){
             console.log("TeamLogin")
             this.props.navigation.navigate('Login')
-        }else if(this.props.event.event == "0"){
+        }else if(this.props.event.event.GroupRegister == "0"){
             console.log("SingleLogin")
             this.props.navigation.navigate('SingleLogin')
         }

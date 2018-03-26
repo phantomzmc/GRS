@@ -3,16 +3,22 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity, } from 'react-nat
 
 import { StackNavigator } from 'react-navigation';
 
-import CouponForm from '../form/couponForm'
-
+import CouponForm from '../component/form/couponForm'
 class DiscountCoupon extends Component {
-
-
+    static navigationOptions = {
+        title: 'คูปองส่วนลด',
+        headerStyle: {
+            backgroundColor: '#FC561F'
+        },
+        headerTitleStyle: {
+            color: '#fff'
+        }
+    };
     render() {
         return (
             <ScrollView>
                 <View style={styles.continer}>
-                    <View style={styles.containerCoupon} >
+                    <View style={styles.containerCoupon}>
                         <CouponForm />
                     </View>
                     <View style={styles.containerButton}>
@@ -55,7 +61,7 @@ const styles = StyleSheet.create({
 })
 
 export default StackNavigator({
-    Coupon: {
+    DiscountCoupon: {
         screen: DiscountCoupon
     }
 })

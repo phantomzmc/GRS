@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-
 import {
   View,
   Text,
@@ -9,7 +8,8 @@ import {
   SegmentedControlIOS,
   TouchableOpacity,
   DatePickerIOS,
-  Image
+  Image,
+  Alert
 } from "react-native";
 import { StackNavigator } from "react-navigation";
 import { DatePickerDialog } from 'react-native-datepicker-dialog'
@@ -37,11 +37,11 @@ class FormRegister extends Component {
       journeyDate: null,
       bloodtype: "",
       nation: "",
-      selectedIndex : 0
+      selectedIndex: 0
     };
   }
   sendData = (fullname, lastname, nickname, password, confirmpassword, teamname, bib, userid, tel, email, journeyDate, bloodtype, nation) => {
-    this.props.goEvent(fullname, lastname, nickname, password, confirmpassword,  teamname, bib, userid, tel, email, journeyDate, bloodtype, nation);
+    this.props.goEvent(fullname, lastname, nickname, password, confirmpassword, teamname, bib, userid, tel, email, journeyDate, bloodtype, nation);
     console.log(this.state.fullname);
     console.log(this.state.userid);
     console.log(this.state.journeyDate)
@@ -67,6 +67,11 @@ class FormRegister extends Component {
       journeyText: moment(date).format('DD MMM, YYYY')
     });
   }
+  // checkinput = () => {
+  //   if(this.state.password.length < 8){
+  //     Alert.alert("Password ต้องมากกว่า 8 ตัว")
+  //   }
+  // }
 
   render() {
     let { fullname, lastname, nickname, password, confirmpassword, teamname, bib, userid, tel, email, journeyDate, bloodtype, nation } = this.state;
