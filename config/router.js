@@ -26,6 +26,9 @@ import UserAddressRegister from '../container/userAddressRegister'
 import Test from '../list'
 
 export default StackNavigator ({
+    TeamList : {
+        screen : TeamList
+    },
     // RegisterDistance : {
     //     screen : RegisterDistance,
     // },

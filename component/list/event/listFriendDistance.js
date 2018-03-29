@@ -1,67 +1,95 @@
 import React, { Component } from 'react';
-import { View, Text, ListView,StyleSheet } from 'react-native';
+import { View, Text, FlatList, StyleSheet, Alert, TouchableOpacity } from 'react-native';
+import { connect } from 'react-redux'
 
 import datadistance from './datadistance'
+import { map } from 'mobx';
 
 class ListFriendDistance extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            dataSource: new ListView.DataSource({
-                rowHasChanged: (r1, r2) => r1 != r2
-            })
         }
     }
 
     componentDidMount() {
         this.setState({
-            dataSource: this.state.dataSource.cloneWithRows(datadistance)
+            dataSource: datadistance
         });
     }
+    alertShow(item) {
+        this.props.addDistance(item)
+        Alert.alert(item.name, "ระยะทาง : " + item.distance + " ราคา : " + item.price)
+    }
     render() {
+        if (this.state.isLoading) {
+            return (
+                <View
+                    style={{
+                        flex: 1,
+                        padding: 20
+                    }}>
+                    <ActivityIndicator />
+                </View>
+            )
+        }
         return (
-            <ListView
-                dataSource={this.state.dataSource}
-                renderRow={this.renderDistance.bind(this)}
-                style={styles.listview}
-
-            />
+            <View
+                style={{
+                    flex: 1,
+                    paddingTop: 20
+                }}>
+                <FlatList
+                    data={this.state.dataSource}
+                    renderItem={({ item }) => <View style={styles.listview}>
+                        <View style={styles.container}>
+                            <TouchableOpacity onPress={() => this.alertShow(item)}>
+                                <View style={styles.cellDistance}>
+                                    <Text style={styles.title}>{item.name} - {item.distance}</Text>
+                                    <Text style={styles.detail}>{item.price}</Text>
+                                </View>
+                            </TouchableOpacity>
+                        </View>
+                    </View>}
+                    keyExtractor={(item, index) => index} />
+            </View >
         );
     }
 
-    renderDistance(datadistance) {
-        return (
-            <View style={styles.container}>
-                <View style={styles.cellDistance}>
-                    <Text style={styles.title}>{datadistance.name} - {datadistance.distance}</Text>
-                    <Text style={styles.detail}>{datadistance.price}</Text>
-                </View>
-            </View>
-        )
+
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addDistance: (detailRegis) => {
+            dispatch({
+                type: 'addDistance',
+                payload: detailRegis
+            })
+        }
     }
 }
 
-const styles = StyleSheet.create ({
-    container : {
+const styles = StyleSheet.create({
+    container: {
         flex: 1,
     },
-    listview : {
+    listview: {
         backgroundColor: '#fff',
     },
-    cellDistance : {
+    cellDistance: {
         padding: 15,
         borderColor: '#f1f1f1',
         paddingHorizontal: 30,
         borderWidth: 1,
     },
-    title : {
+    title: {
         fontSize: 17
-       
+
     },
-    detail : {
+    detail: {
         fontSize: 10,
         color: '#666666'
     }
 })
 
-export default ListFriendDistance;
+export default connect(null, mapDispatchToProps)(ListFriendDistance);

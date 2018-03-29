@@ -34,7 +34,14 @@ class TeamList extends Component {
                     <ButtonChage Team={this.gotoTeamList.bind(this)}
                         Single={this.gotoRegisterDistance.bind(this)} />
                     <HeaderProfile />
+                    <Text style={styles.textTile}>รายชื่อเพื่อน</Text>
                     <EventListFriend />
+                    <View style={styles.addFriend}>
+                        <TouchableOpacity style={styles.buttonContainer}
+                            onPress={() => navigate('FriendList')}>
+                            <Text style={styles.textButton}>เพิ่มรายชื่อเพื่อน</Text>
+                        </TouchableOpacity>
+                    </View>
                     <View style={styles.submitContainer}>
                         <TouchableOpacity style={styles.buttonContainer}
                             onPress={() => navigate('AddEventFriend')}>
@@ -51,6 +58,10 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
+    },
+    addFriend : {
+        marginTop: 30,
+        alignItems: 'center',
     },
     submitContainer: {
         marginTop: 30,
@@ -70,8 +81,14 @@ const styles = StyleSheet.create({
         fontSize: 15,
         color: '#fff',
         fontFamily: 'Kanit',
-
-    }
+    },
+    textTile: {
+        padding: 10,
+        fontSize: 26,
+        fontWeight: '700',
+        fontFamily: 'kanit',
+        color: '#000',
+    },
 
 })
 export default TeamList;

@@ -1,74 +1,92 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, FlatList } from 'react-native';
 
-export default class EventListFriend extends Component {
+import { connect } from 'react-redux'
+
+class EventListFriend extends Component {
+    constructor(state) {
+        super(state)
+        this.state = {
+
+        }
+    }
+    componentDidMount() {
+        this.setState({
+            dataSource: this.props.friendlist.profile
+        });
+        console.log(this.state.dataSource)
+    }
     render() {
+        if (this.state.isLoading) {
+            return (
+                <View
+                    style={{
+                        flex: 1,
+                        padding: 20
+                    }}>
+                    <ActivityIndicator />
+                </View>
+            )
+        }
         return (
-            <View style={styles.container}>
-                <Text style={styles.textTile}>รายชื่อเพื่อน</Text>
-                <View style={styles.imgContainer}>
-                    <Image source={{ uri: "https://scontent.fbkk2-6.fna.fbcdn.net/v/t1.0-0/p370x247/21557776_1425545897494291_6496115009920700297_n.jpg?oh=2b747f30ce806f5e37ae1d3cd9427cf4&oe=5B1C181C" }}
-                        style={styles.imgAvatar} />
-                    <Image source={{ uri: "https://scontent.fbkk2-6.fna.fbcdn.net/v/t1.0-0/p370x247/21557776_1425545897494291_6496115009920700297_n.jpg?oh=2b747f30ce806f5e37ae1d3cd9427cf4&oe=5B1C181C" }}
-                        style={styles.imgAvatar} />
-                    <Image source={{ uri: "https://scontent.fbkk2-6.fna.fbcdn.net/v/t1.0-0/p370x247/21557776_1425545897494291_6496115009920700297_n.jpg?oh=2b747f30ce806f5e37ae1d3cd9427cf4&oe=5B1C181C" }}
-                        style={styles.imgAvatar} />
-                        
-                </View>
-                <View style={styles.imgContainer}>
-                    <Image source={{ uri: "https://scontent.fbkk2-6.fna.fbcdn.net/v/t1.0-0/p370x247/21557776_1425545897494291_6496115009920700297_n.jpg?oh=2b747f30ce806f5e37ae1d3cd9427cf4&oe=5B1C181C" }}
-                        style={styles.imgAvatar} />
-                    <Image source={{ uri: "https://scontent.fbkk2-6.fna.fbcdn.net/v/t1.0-0/p370x247/21557776_1425545897494291_6496115009920700297_n.jpg?oh=2b747f30ce806f5e37ae1d3cd9427cf4&oe=5B1C181C" }}
-                        style={styles.imgAvatar} />
-                    <Image source={{ uri: "https://scontent.fbkk2-6.fna.fbcdn.net/v/t1.0-0/p370x247/21557776_1425545897494291_6496115009920700297_n.jpg?oh=2b747f30ce806f5e37ae1d3cd9427cf4&oe=5B1C181C" }}
-                        style={styles.imgAvatar} />
-                        
-                </View>
-                <View style={styles.imgContainer}>
-                    <Image source={{ uri: "https://scontent.fbkk2-6.fna.fbcdn.net/v/t1.0-0/p370x247/21557776_1425545897494291_6496115009920700297_n.jpg?oh=2b747f30ce806f5e37ae1d3cd9427cf4&oe=5B1C181C" }}
-                        style={styles.imgAvatar} />
-                    <Image source={{ uri: "https://scontent.fbkk2-6.fna.fbcdn.net/v/t1.0-0/p370x247/21557776_1425545897494291_6496115009920700297_n.jpg?oh=2b747f30ce806f5e37ae1d3cd9427cf4&oe=5B1C181C" }}
-                        style={styles.imgAvatar} />
-                    <Image source={{ uri: "https://scontent.fbkk2-6.fna.fbcdn.net/v/t1.0-0/p370x247/21557776_1425545897494291_6496115009920700297_n.jpg?oh=2b747f30ce806f5e37ae1d3cd9427cf4&oe=5B1C181C" }}
-                        style={styles.imgAvatar} />
-                        
-                </View>
-                <View style={styles.imgContainer}>
-                    <Image source={{ uri: "https://scontent.fbkk2-6.fna.fbcdn.net/v/t1.0-0/p370x247/21557776_1425545897494291_6496115009920700297_n.jpg?oh=2b747f30ce806f5e37ae1d3cd9427cf4&oe=5B1C181C" }}
-                        style={styles.imgAvatar} />
-                    <Image source={{ uri: "https://scontent.fbkk2-6.fna.fbcdn.net/v/t1.0-0/p370x247/21557776_1425545897494291_6496115009920700297_n.jpg?oh=2b747f30ce806f5e37ae1d3cd9427cf4&oe=5B1C181C" }}
-                        style={styles.imgAvatar} />
-                    <Image source={{ uri: "https://scontent.fbkk2-6.fna.fbcdn.net/v/t1.0-0/p370x247/21557776_1425545897494291_6496115009920700297_n.jpg?oh=2b747f30ce806f5e37ae1d3cd9427cf4&oe=5B1C181C" }}
-                        style={styles.imgAvatar} />
-                        
-                </View>
-            </View>
+            <View
+                style={{
+                    flex: 1,
+                    paddingTop: 20
+                }}>
+                <FlatList
+                    data={this.state.dataSource}
+                    renderItem={({ item }) =>
+                        <View style={styles.container}>
+                            <View style={styles.imgContainer}>
+                                <View style={styles.listfriend}>
+                                    <Image source={{ uri: item.imgAvatar }}
+                                        style={styles.imgAvatar} />
+                                    <Text style={styles.textName}>{item.name}</Text>
+                                </View>
+                            </View>
+
+                        </View>}
+                    keyExtractor={(item, index) => index} />
+            </View >
         );
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        friendlist: state.friendlist
+    }
+}
+
 const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
         flex: 1,
         backgroundColor: '#fff',
     },
-    textTile: {
-        padding: 10,
-        fontSize: 26,
-        fontWeight: '700',
-        fontFamily: 'kanit',
-        color: '#000',
-        
-    },
+
     imgContainer: {
         marginVertical: 10,
         flexDirection: 'row',
         justifyContent: 'space-around',
+        alignContent: 'center'
     },
     imgAvatar: {
         width: 80,
         height: 80,
         borderRadius: 40,
+    },
+    listfriend: {
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    textName: {
+        padding: 10,
+        fontFamily: 'kanit',
+        fontSize: 15
     }
 })
+
+export default connect(mapStateToProps)(EventListFriend)
 

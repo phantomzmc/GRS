@@ -13,7 +13,7 @@ const eventState = {
   }
 };
 const credit = {
-    nameCredit: {
+  nameCredit: {
     nameCredit: "",
     numberCredit: "1234 5678 1234 5678",
     expCredit: "00/0000",
@@ -22,9 +22,9 @@ const credit = {
   vat: 33.25
 };
 const user = {
-  profile:{
+  profile: {
     userid: "",
-    password : ""
+    password: ""
   }
 
 };
@@ -129,6 +129,46 @@ const total = (state = {}, action) => {
   }
   return state;
 };
+const friend = {
+  profile:
+    [
+      {
+        name: "kiiky",
+        gen: "man",
+        age: "21",
+        imgAvatar: "https://scontent.fbkk2-6.fna.fbcdn.net/v/t1.0-0/p370x247/21557776_1425545897494291_6496115009920700297_n.jpg?oh=2b747f30ce806f5e37ae1d3cd9427cf4&oe=5B1C181C",
+
+      },
+    ],
+  detailRegis: [{
+    size: "",
+    distance: {}
+  }]
+
+}
+const friendlist = (state = friend, action) => {
+  switch (action.type) {
+    case "addFriend":
+      return {
+        ...state,
+        profile: [...state.profile, action.payload]
+      }
+      break;
+    case "addDistance":
+      return {
+        ...state,
+        detailRegis: [...state.detailRegis.distance, action.payload]
+      }
+      break;
+    case "addSize":
+      return {
+        ...state,
+        detail: [...state.detailRegis.size, action.payload]
+      }
+      break;
+  }
+  return state;
+}
 
 const myLogger = store => next => action => {
   console.log("Log Action", action);
@@ -144,7 +184,7 @@ const store = createStore(
     photoplus,
     choiceSend,
     address,
-    total
+    total, friendlist
   }),
   {},
   applyMiddleware(myLogger)

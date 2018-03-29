@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 import FriendListView from '../component/list/listFriend/friendList'
+import { Item } from 'native-base';
 
 class FriendList extends Component {
     static navigationOptions = {
@@ -15,11 +16,18 @@ class FriendList extends Component {
             fontWeight: '500',
         }
     };
+    gotoAddFriendDetail() {
+        this.props.navigation.navigate('AddEventFriend')
+    }
+    gotoTeamList(){
+        this.props.navigation.navigate('TeamList')
+    }
     render() {
         return (
             <View style={styles.container}>
                 <Text style={styles.text}> รายชื่อเพื่อน </Text>
-                <FriendListView />
+                <FriendListView AddFriendDetail={() => this.gotoAddFriendDetail()} 
+                                TeamList={() => this.gotoTeamList()}/>
             </View>
         );
     }

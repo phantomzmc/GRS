@@ -1,48 +1,86 @@
 import React, { Component } from 'react';
-import { View, Text, ListView, StyleSheet, Image } from 'react-native';
+import { View, Text, ListView, StyleSheet, Image, FlatList, Alert, TouchableOpacity } from 'react-native';
 
 import datafriend from './dataFriend'
+import { connect } from 'react-redux'
 
 class FriendListView extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            dataSource: new ListView.DataSource({
-                rowHasChanged: (r1, r2) => r1 != r2
-            })
+
         }
+        // this.alertShow = this.alertShow.bind(this)
     }
 
     componentDidMount() {
         this.setState({
-            dataSource: this.state.dataSource.cloneWithRows(datafriend)
+            dataSource: datafriend
         });
     }
+    alertShow(item) {
+        console.log(item)
+        Alert.alert(item.name, " เพศ : " + item.gen + " อายุ : " + item.age,
+            [
+                { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+                { text: 'OK', onPress: () => this.props.AddFriendDetail() },
+                { text: 'หน้าหลัก' , onPress: () => this.props.TeamList()}
+            ],
+            { cancelable: false }
+        )
+        this.props.addFriend(item)
+    }
     render() {
+        if (this.state.isLoading) {
+            return (
+                <View
+                    style={{
+                        flex: 1,
+                        padding: 20
+                    }}>
+                    <ActivityIndicator />
+                </View>
+            )
+        }
         return (
-            <View style={styles.container}>
-                <ListView
-                    dataSource={this.state.dataSource}
-                    renderRow={this.renderFriend.bind(this)}
-                    style={styles.listview}
-                />
-            </View>
+            <View
+                style={{
+                    flex: 1,
+                    paddingTop: 20
+                }}>
+                <FlatList
+                    data={this.state.dataSource}
+                    renderItem={({ item }) => <View style={styles.container}>
+                        <View style={styles.cellFriend}>
+                            <View>
+                                <Image source={{ uri: item.imgAvatar }}
+                                    style={styles.avatar} />
+                            </View>
+                            <TouchableOpacity onPress={() => this.alertShow(item)}>
+                                <View style={styles.textListFriend}>
+                                    <Text style={styles.textName}>{item.name}</Text>
+                                    <Text style={styles.textAge}>อายุ : {item.age} - {item.gen}</Text>
+                                </View>
+                            </TouchableOpacity>
+                        </View>
+                    </View>}
+                    keyExtractor={(item, index) => index} />
+            </View >
+
         );
     }
-    renderFriend(datafriend) {
-        return (
-            <View style={styles.cellFriend}>
-                <View>
-                    <Image source={{ uri: datafriend.imgAvatar }}
-                        style={styles.avatar} />
-                </View>
-                <View style={styles.textListFriend}>
-                    <Text style={styles.textName}>{datafriend.name}</Text>
-                    <Text style={styles.textAge}>อายุ : {datafriend.age} - {datafriend.gen}</Text>
-                </View>
-            </View>
-        )
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addFriend : (profile) => {
+            dispatch({
+                type: 'addFriend',
+                payload :profile
+            })
+        }
     }
+
 }
 
 const styles = StyleSheet.create({
@@ -65,7 +103,7 @@ const styles = StyleSheet.create({
         borderColor: '#fff',
         borderWidth: 2,
     },
-    textListFriend : {
+    textListFriend: {
         flexDirection: 'column',
         justifyContent: 'center',
         paddingHorizontal: 30,
@@ -79,4 +117,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default FriendListView;
+export default connect(null,mapDispatchToProps)(FriendListView);
