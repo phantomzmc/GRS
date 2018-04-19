@@ -10,11 +10,11 @@ class EventListFriend extends Component {
 
         }
     }
-    componentDidMount() {
+    componentDidMount= () => {
         this.setState({
             dataSource: this.props.friendlist.profile
         });
-        console.log(this.state.dataSource)
+        console.log(this.props.friendlist.profile[2])
     }
     render() {
         if (this.state.isLoading) {
@@ -32,9 +32,10 @@ class EventListFriend extends Component {
             <View
                 style={{
                     flex: 1,
-                    paddingTop: 20
+                    padding: 20
                 }}>
                 <FlatList
+                    horizontal
                     data={this.state.dataSource}
                     renderItem={({ item }) =>
                         <View style={styles.container}>

@@ -1,2 +1,2 @@
-dependencies: /Users/thunnathorn/GRS/ios/GRS/main.m \
-  /Users/thunnathorn/GRS/ios/GRS/AppDelegate.h
+dependencies: /Users/thunnathorn/GRS3/ios/GRS/main.m \
+  /Users/thunnathorn/GRS3/ios/GRS/AppDelegate.h

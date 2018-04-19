@@ -60,9 +60,9 @@ class ListFriendDistance extends Component {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        addDistance: (detailRegis) => {
+        addDistanceFriend: (detailRegis) => {
             dispatch({
-                type: 'addDistance',
+                type: 'addDistanceFriend',
                 payload: detailRegis
             })
         }

@@ -154,7 +154,7 @@ const friendlist = (state = friend, action) => {
         profile: [...state.profile, action.payload]
       }
       break;
-    case "addDistance":
+    case "addDistanceFriend":
       return {
         ...state,
         detailRegis: [...state.detailRegis.distance, action.payload]

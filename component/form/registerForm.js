@@ -13,6 +13,7 @@ import {
 } from "react-native";
 import { StackNavigator } from "react-navigation";
 import { DatePickerDialog } from 'react-native-datepicker-dialog'
+import { Form, Item, Input, Label } from 'native-base'
 import moment from 'moment';
 
 
@@ -86,105 +87,117 @@ class FormRegister extends Component {
           </View>
           <Text style={styles.titleText}>ข้อมูลส่วนตัว</Text>
         </View>
-        <View style={styles.addressContainer}>
-          <TextInput
-            placeholder="ชื่อ"
-            returnKeyType="next"
-            style={styles.textAddressInput}
-            onChangeText={fullname => this.setState({ fullname })}
-          />
-          <TextInput
-            placeholder="นามสกุล"
-            returnKeyType="next"
-            style={styles.textAddressInput}
-            onChangeText={lastname => this.setState({ lastname })}
-          />
+        <Text style={styles.headForm}>ชื่อ - นามสกุล</Text>
+        <Form>
+          <Item floatingLabel>
+            <Label style={styles.textLabel}>ชื่อ</Label>
+            <Input
+              onChangeText={fullname => this.setState({ fullname })}
+            />
+          </Item>
+          <Item floatingLabel last>
+            <Label style={styles.textLabel}>นามสกุล</Label>
+            <Input
+              onChangeText={lastname => this.setState({ lastname })}
+            />
+          </Item>
+        </Form>
+        <Text style={styles.headForm}>ชื่อเล่น</Text>
+        <Form>
+          <Item floatingLabel last>
+            <Label style={styles.textLabel}>ชื่อเล่น</Label>
+            <Input
+              onChangeText={nickname => this.setState({ nickname })}
+            />
+          </Item>
+        </Form>
+        <Text style={styles.headForm}>เพศ</Text>
+        <View style={styles.conlorsegment}>
+          <SegmentedControlIOS values={["ชาย", "หญิง"]}
+            selectedIndex={this.state.selectedIndex}
+            onChange={(event) => {
+              this.setState({ selectedIndex: event.nativeEvent.selectedSegmentIndex })
+            }}
+            tintColor="#FC561F" />
         </View>
-        <View style={styles.addressContainer}>
-          <TextInput
-            placeholder="ชื่อเล่น"
-            returnKeyType="next"
-            style={styles.textAddressInput}
-            onChangeText={nickname => this.setState({ nickname })}
-          />
-          <View style={styles.conlorsegment}>
-            <SegmentedControlIOS values={["ชาย", "หญิง"]}
-              selectedIndex={this.state.selectedIndex}
-              onChange={(event) => {
-                this.setState({ selectedIndex: event.nativeEvent.selectedSegmentIndex })
-              }}
-              tintColor="#FC561F" />
-          </View>
-        </View>
-        <TextInput
-          placeholder="รหัสบัตรประชาชน/หนังสือเดินทาง"
-          returnKeyType="next"
-          style={styles.textInput}
-          onChangeText={userid => this.setState({ userid })}
-        />
-        <View style={styles.addressContainer}>
-          <TextInput
-            placeholder="กร๊ปเลือด"
-            returnKeyType="next"
-            style={styles.textAddressInput}
-            onChangeText={bloodtype => this.setState({ bloodtype })}
-          />
-          <TextInput
-            placeholder="สัญชาติ"
-            returnKeyType="next"
-            style={styles.textAddressInput}
-            onChangeText={nation => this.setState({ nation })}
-          />
-        </View>
-        <TextInput
-          placeholder="รหัสผ่าน"
-          returnKeyType="next"
-          secureTextEntry
-          style={styles.textInput}
-          onChangeText={password => this.setState({ password })}
-        />
-        <TextInput
-          placeholder="ยืนยันรหัสผ่าน"
-          returnKeyType="next"
-          secureTextEntry
-          style={styles.textInput}
-          onChangeText={confirmpassword => this.setState({ confirmpassword })}
-        />
+        <Text style={styles.headForm}>รหัสบัตรประชาชน/หนังสือเดินทาง</Text>
+
+        <Form>
+          <Item floatingLabel last>
+            <Label style={styles.textLabel}>Ex.15099999xxxxx</Label>
+            <Input
+              onChangeText={userid => this.setState({ userid })} />
+          </Item>
+        </Form>
+        <Text style={styles.headForm}>กรุ๊ปเลือด</Text>
+        <Form>
+          <Item floatingLabel last>
+            <Label style={styles.textLabel}>Ex. A,B,O,AB</Label>
+            <Input
+              onChangeText={bloodtype => this.setState({ bloodtype })}
+            />
+          </Item>
+        </Form>
+        <Text style={styles.headForm}>สัญชาติ</Text>
+        <Form>
+          <Item floatingLabel last>
+            <Label style={styles.textLabel}>Ex.พทุธ,คริสต์</Label>
+            <Input
+              onChangeText={nation => this.setState({ nation })} />
+          </Item>
+        </Form>
+        <Text style={styles.headForm}>รหัสผ่าน</Text>
+        <Form>
+          <Item floatingLabel last>
+            <Label style={styles.textLabel}>Ex.xxxxxxxxxxxx</Label>
+            <Input
+              onChangeText={password => this.setState({ password })}
+            />
+          </Item>
+        </Form>
+
+        <Text style={styles.headForm}>ยืนยันรหัสผ่าน</Text>
+        <Form>
+          <Item floatingLabel last>
+            <Label style={styles.textLabel}>Ex.xxxxxxxxxxxx</Label>
+            <Input
+              onChangeText={confirmpassword => this.setState({ confirmpassword })} />
+          </Item>
+        </Form>
+        <Text style={styles.headForm}>วันเกิด</Text>
         <TouchableOpacity onPress={this.onJourneyDatePress.bind(this)} >
-          <View style={styles.datePickerBox}>
             <Text style={styles.datePickerText}>วัน/เดือน/ปีเกิด : {this.state.journeyText}</Text>
-          </View>
         </TouchableOpacity>
 
         <DatePickerDialog ref="journeyDialog" onDatePicked={this.onJourneyDatePicked.bind(this)} />
-        <View style={styles.addressContainer}>
-          <TextInput
-            placeholder="ชื่อทีม"
-            returnKeyType="next"
-            style={styles.textAddressInput}
-            onChangeText={teamname => this.setState({ teamname })}
-          />
-          <TextInput
-            placeholder="BIB"
-            returnKeyType="next"
-            style={styles.textAddressInput}
-            onChangeText={bib => this.setState({ bib })}
-          />
-        </View>
-        <View style={styles.addressContainer}>
-          <TextInput
-            placeholder="เบอร์โทรศัพท์"
-            returnKeyType="next"
-            style={styles.textAddressInput}
-            onChangeText={tel => this.setState({ tel })}
-          />
-          <TextInput
-            placeholder="Email"
-            returnKeyType="next"
-            style={styles.textAddressInput}
-            onChangeText={email => this.setState({ email })}
-          />
-        </View>
+
+                <Text style={styles.headForm}>ชื่อทีม</Text>
+        <Form>
+          <Item floatingLabel last>
+            <Label style={styles.textLabel}>Ex.Team...</Label>
+            <Input
+              onChangeText={teamname => this.setState({ teamname })} />
+          </Item>
+        </Form>
+
+        <Text style={styles.headForm}>เบอร์โทรศัพท์</Text>
+        <Form>
+          <Item floatingLabel last>
+            <Label style={styles.textLabel}>Ex.090-xxxxxx</Label>
+            <Input
+              onChangeText={tel => this.setState({ tel })} />
+          </Item>
+        </Form>
+
+        <Text style={styles.headForm}>Email</Text>
+        <Form>
+          <Item floatingLabel last>
+            <Label style={styles.textLabel}>Ex.abc@gmail.com</Label>
+            <Input
+              onChangeText={email => this.setState({ email })} />
+          </Item>
+        </Form>
+
         <View style={styles.submitContainer}>
           <TouchableOpacity
             style={styles.buttonContainer}
@@ -252,7 +265,8 @@ const styles = StyleSheet.create({
     fontFamily: "kanit"
   },
   conlorsegment: {
-    width: "48%",
+    width: "50%",
+    left : '25%',
     marginTop: 20
   },
   addressContainer: {
@@ -299,9 +313,19 @@ const styles = StyleSheet.create({
   },
   datePickerText: {
     fontSize: 14,
+    paddingTop :10,
     paddingLeft: 15,
-    color: '#d9d9d9',
+    // color: '#d9d9d9',
     fontFamily: 'kanit'
   },
+  headForm : {
+    fontFamily :'kanit',
+    fontSize : 16,
+    paddingTop : 20
+  },
+  textLabel :{
+    fontSize :14,
+    fontFamily : 'kanit'
+  }
 });
 export default FormRegister;

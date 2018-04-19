@@ -11,6 +11,8 @@ import {
   Picker
 } from "react-native";
 import { StackNavigator } from "react-navigation";
+import { Form, Item, Input, Label } from 'native-base'
+
 
 class FormAddressRegister extends Component {
   static propTypes = {
@@ -44,30 +46,41 @@ class FormAddressRegister extends Component {
           <Text style={styles.titleText}>กรณีฉุกเฉิน</Text>
         </View>
         {/* <View style={styles.addressContainer}> */}
-        <TextInput
-          placeholder="ชื่อ"
-          returnKeyType="next"
-          style={styles.textInput}
-          onChangeText={firstname => this.setState({ firstname })}
-        />
-        <TextInput
-          placeholder="นามสกุล"
-          returnKeyType="next"
-          style={styles.textInput}
-          onChangeText={lastname => this.setState({ lastname })}
-        />
-        <TextInput
-          placeholder="หมายเลขโทรศัพท์"
-          returnKeyType="next"
-          style={styles.textInput}
-          onChangeText={tel => this.setState({ tel })}
-        />
-        <TextInput
-          placeholder={this.state.relation}
-          returnKeyType="next"
-          style={styles.textInput}
-          onChangeText={relation => this.setState({ relation })}
-        />
+        <Text style={styles.headForm}>ชื่อ-นามสกุล</Text>
+        <Form>
+          <Item floatingLabel last>
+            <Label style={styles.textLabel}>Ex.ชื่อ</Label>
+            <Input
+              onChangeText={firstname => this.setState({ firstname })}
+            />
+          </Item>
+        </Form>
+        <Form>
+          <Item floatingLabel last>
+            <Label style={styles.textLabel}>Ex.นามสกุล</Label>
+            <Input
+              onChangeText={lastname => this.setState({ lastname })}
+            />
+          </Item>
+        </Form>
+        <Text style={styles.headForm}>หมายเลขโทรศัพท์</Text>
+        <Form>
+          <Item floatingLabel last>
+            <Label style={styles.textLabel}>Ex.090-xxxxxx</Label>
+            <Input
+              onChangeText={tel => this.setState({ tel })}
+            />
+          </Item>
+        </Form>
+        <Text style={styles.headForm}>ความสัมพันธ์</Text>
+        <Form>
+          <Item floatingLabel last>
+            <Label style={styles.textLabel}>{this.state.relation}</Label>
+            <Input
+              onChangeText={relation => this.setState({ relation })}
+            />
+          </Item>
+        </Form>
         <View style={styles.viewPicker}>
           <Picker
             style={styles.picker}
@@ -151,8 +164,8 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontFamily: "kanit"
   },
-  viewPicker : {
-    alignItems : 'center',
+  viewPicker: {
+    alignItems: 'center',
     justifyContent: 'center'
   },
   picker: {
@@ -160,6 +173,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '80%',
     height: '30%'
+  },
+  headForm: {
+    fontFamily: 'kanit',
+    fontSize: 16,
+    paddingTop: 20
+  },
+  textLabel: {
+    fontSize: 14,
+    fontFamily: 'kanit'
   }
 });
 export default FormAddressRegister;
