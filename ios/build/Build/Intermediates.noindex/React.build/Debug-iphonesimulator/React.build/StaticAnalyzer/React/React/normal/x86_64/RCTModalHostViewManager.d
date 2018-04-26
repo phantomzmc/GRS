@@ -29,4 +29,5 @@ dependencies: \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Views/RCTModalManager.h \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Modules/RCTEventEmitter.h \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Views/RCTShadowView.h \
+  /Users/thunnathorn/GRS3/node_modules/react-native/React/Views/RCTLayout.h \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Base/RCTRootView.h

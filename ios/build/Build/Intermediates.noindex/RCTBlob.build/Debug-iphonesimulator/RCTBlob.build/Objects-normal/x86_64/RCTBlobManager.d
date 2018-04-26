@@ -1,5 +1,5 @@
 dependencies: \
-  /Users/thunnathorn/GRS3/node_modules/react-native/Libraries/Blob/RCTBlobManager.m \
+  /Users/thunnathorn/GRS3/node_modules/react-native/Libraries/Blob/RCTBlobManager.mm \
   /Users/thunnathorn/GRS3/node_modules/react-native/Libraries/Blob/RCTBlobManager.h \
   /Users/thunnathorn/GRS3/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridge.h \
   /Users/thunnathorn/GRS3/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeDelegate.h \
@@ -21,5 +21,7 @@ dependencies: \
   /Users/thunnathorn/GRS3/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/Yoga.h \
   /Users/thunnathorn/GRS3/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGEnums.h \
   /Users/thunnathorn/GRS3/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGMacros.h \
-  /Users/thunnathorn/GRS3/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTWebSocketModule.h \
-  /Users/thunnathorn/GRS3/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTEventEmitter.h
+  /Users/thunnathorn/GRS3/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTNetworking.h \
+  /Users/thunnathorn/GRS3/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTEventEmitter.h \
+  /Users/thunnathorn/GRS3/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTNetworkTask.h \
+  /Users/thunnathorn/GRS3/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTWebSocketModule.h

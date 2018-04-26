@@ -32,9 +32,9 @@ export default StackNavigator({
     // Verify : {
     //     screen : Verify
     // },
-    // Register: {
-    //     screen: Register,
-    // },
+    Register: {
+        screen: Register,
+    },
     EventList: {
         screen: EventList,
     },

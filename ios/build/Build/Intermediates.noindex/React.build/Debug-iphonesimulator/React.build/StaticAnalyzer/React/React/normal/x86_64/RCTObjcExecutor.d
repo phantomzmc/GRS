@@ -396,4 +396,6 @@ dependencies: \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Base/RCTUtils.h \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Profiler/RCTProfile.h \
   /Users/thunnathorn/GRS3/ios/build/Build/Products/Debug-iphonesimulator/include/cxxreact/JSBigString.h \
-  /Users/thunnathorn/GRS3/ios/build/Build/Products/Debug-iphonesimulator/include/cxxreact/MessageQueueThread.h
+  /Users/thunnathorn/GRS3/ios/build/Build/Products/Debug-iphonesimulator/include/cxxreact/MessageQueueThread.h \
+  /Users/thunnathorn/GRS3/ios/build/Build/Products/Debug-iphonesimulator/include/cxxreact/RAMBundleRegistry.h \
+  /Users/thunnathorn/GRS3/ios/build/Build/Products/Debug-iphonesimulator/include/cxxreact/JSModulesUnbundle.h

@@ -25,6 +25,7 @@ dependencies: \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Views/RCTComponent.h \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Views/SafeAreaView/RCTSafeAreaShadowView.h \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Views/RCTShadowView.h \
+  /Users/thunnathorn/GRS3/node_modules/react-native/React/Views/RCTLayout.h \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Base/RCTRootView.h \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Views/SafeAreaView/RCTSafeAreaView.h \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Views/RCTView.h \

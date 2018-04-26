@@ -27,5 +27,4 @@ dependencies: \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Views/ScrollView/RCTScrollableProtocol.h \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Views/RCTView.h \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Views/RCTWrapperViewController.h \
-  /Users/thunnathorn/GRS3/node_modules/react-native/React/Views/RCTViewControllerProtocol.h \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Views/UIView+React.h

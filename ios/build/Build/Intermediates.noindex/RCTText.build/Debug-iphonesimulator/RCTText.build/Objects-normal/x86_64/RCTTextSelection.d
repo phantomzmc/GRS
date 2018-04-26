@@ -1,6 +1,6 @@
 dependencies: \
-  /Users/thunnathorn/GRS3/node_modules/react-native/Libraries/Text/RCTTextSelection.m \
-  /Users/thunnathorn/GRS3/node_modules/react-native/Libraries/Text/RCTTextSelection.h \
+  /Users/thunnathorn/GRS3/node_modules/react-native/Libraries/Text/TextInput/RCTTextSelection.m \
+  /Users/thunnathorn/GRS3/node_modules/react-native/Libraries/Text/TextInput/RCTTextSelection.h \
   /Users/thunnathorn/GRS3/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTConvert.h \
   /Users/thunnathorn/GRS3/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTAnimationType.h \
   /Users/thunnathorn/GRS3/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBorderStyle.h \

@@ -19,4 +19,5 @@ dependencies: \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/DevSupport/RCTPackagerClient.h \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Profiler/RCTProfile.h \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/DevSupport/RCTPackagerConnection.h \
-  /Users/thunnathorn/GRS3/node_modules/react-native/React/DevSupport/RCTInspectorDevServerHelper.h
+  /Users/thunnathorn/GRS3/node_modules/react-native/React/DevSupport/RCTInspectorDevServerHelper.h \
+  /Users/thunnathorn/GRS3/node_modules/react-native/React/Inspector/RCTInspectorPackagerConnection.h

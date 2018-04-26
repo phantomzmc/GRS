@@ -28,5 +28,7 @@ dependencies: \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Base/RCTRootView.h \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Views/RCTViewManager.h \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Views/UIView+React.h \
+  /Users/thunnathorn/GRS3/node_modules/react-native/React/Modules/RCTUIManagerObserverCoordinator.h \
+  /Users/thunnathorn/GRS3/node_modules/react-native/React/Modules/RCTUIManagerUtils.h \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Views/UIView+Private.h \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Views/RCTRefreshControl.h

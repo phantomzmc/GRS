@@ -1,7 +1,6 @@
 dependencies: \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Views/RCTWrapperViewController.m \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Views/RCTWrapperViewController.h \
-  /Users/thunnathorn/GRS3/node_modules/react-native/React/Views/RCTViewControllerProtocol.h \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Base/RCTEventDispatcher.h \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Base/RCTBridge.h \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Base/RCTBridgeDelegate.h \

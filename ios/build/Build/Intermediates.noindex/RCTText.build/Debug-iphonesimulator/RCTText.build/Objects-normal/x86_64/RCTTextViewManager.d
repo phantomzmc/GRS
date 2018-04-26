@@ -1,6 +1,6 @@
 dependencies: \
-  /Users/thunnathorn/GRS3/node_modules/react-native/Libraries/Text/RCTTextViewManager.m \
-  /Users/thunnathorn/GRS3/node_modules/react-native/Libraries/Text/RCTTextViewManager.h \
+  /Users/thunnathorn/GRS3/node_modules/react-native/Libraries/Text/Text/RCTTextViewManager.m \
+  /Users/thunnathorn/GRS3/node_modules/react-native/Libraries/Text/Text/RCTTextViewManager.h \
   /Users/thunnathorn/GRS3/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTViewManager.h \
   /Users/thunnathorn/GRS3/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeModule.h \
   /Users/thunnathorn/GRS3/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTDefines.h \
@@ -23,15 +23,16 @@ dependencies: \
   /Users/thunnathorn/GRS3/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTInvalidating.h \
   /Users/thunnathorn/GRS3/ios/build/Build/Products/Debug-iphonesimulator/include/React/UIView+React.h \
   /Users/thunnathorn/GRS3/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTComponent.h \
-  /Users/thunnathorn/GRS3/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTFont.h \
+  /Users/thunnathorn/GRS3/node_modules/react-native/Libraries/Text/BaseText/RCTBaseTextViewManager.h \
+  /Users/thunnathorn/GRS3/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTAccessibilityManager.h \
   /Users/thunnathorn/GRS3/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTShadowView+Layout.h \
   /Users/thunnathorn/GRS3/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTShadowView.h \
+  /Users/thunnathorn/GRS3/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTLayout.h \
   /Users/thunnathorn/GRS3/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTRootView.h \
-  /Users/thunnathorn/GRS3/node_modules/react-native/Libraries/Text/RCTConvert+Text.h \
-  /Users/thunnathorn/GRS3/node_modules/react-native/Libraries/Text/RCTShadowTextView.h \
-  /Users/thunnathorn/GRS3/node_modules/react-native/Libraries/Text/RCTTextView.h \
-  /Users/thunnathorn/GRS3/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTView.h \
-  /Users/thunnathorn/GRS3/node_modules/react-native/Libraries/Text/RCTTextInput.h \
-  /Users/thunnathorn/GRS3/node_modules/react-native/Libraries/Text/RCTBackedTextInputViewProtocol.h \
-  /Users/thunnathorn/GRS3/node_modules/react-native/Libraries/Text/RCTFontAttributes.h \
-  /Users/thunnathorn/GRS3/node_modules/react-native/Libraries/Text/RCTFontAttributesDelegate.h
+  /Users/thunnathorn/GRS3/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTUIManager.h \
+  /Users/thunnathorn/GRS3/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTUIManagerUtils.h \
+  /Users/thunnathorn/GRS3/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTUIManagerObserverCoordinator.h \
+  /Users/thunnathorn/GRS3/node_modules/react-native/Libraries/Text/Text/RCTTextShadowView.h \
+  /Users/thunnathorn/GRS3/node_modules/react-native/Libraries/Text/BaseText/RCTBaseTextShadowView.h \
+  /Users/thunnathorn/GRS3/node_modules/react-native/Libraries/Text/RCTTextAttributes.h \
+  /Users/thunnathorn/GRS3/node_modules/react-native/Libraries/Text/Text/RCTTextView.h

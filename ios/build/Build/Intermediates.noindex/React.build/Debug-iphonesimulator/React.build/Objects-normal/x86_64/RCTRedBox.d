@@ -21,4 +21,6 @@ dependencies: \
   /Users/thunnathorn/GRS3/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGEnums.h \
   /Users/thunnathorn/GRS3/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGMacros.h \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Base/RCTErrorInfo.h \
-  /Users/thunnathorn/GRS3/node_modules/react-native/React/Base/RCTJSStackFrame.h
+  /Users/thunnathorn/GRS3/node_modules/react-native/React/Base/RCTEventDispatcher.h \
+  /Users/thunnathorn/GRS3/node_modules/react-native/React/Base/RCTJSStackFrame.h \
+  /Users/thunnathorn/GRS3/node_modules/react-native/React/Modules/RCTRedBoxExtraDataViewController.h

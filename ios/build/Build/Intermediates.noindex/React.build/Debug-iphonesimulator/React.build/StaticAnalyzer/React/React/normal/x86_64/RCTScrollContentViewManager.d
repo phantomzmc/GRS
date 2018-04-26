@@ -25,6 +25,7 @@ dependencies: \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Views/RCTComponent.h \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Views/ScrollView/RCTScrollContentShadowView.h \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Views/RCTShadowView.h \
+  /Users/thunnathorn/GRS3/node_modules/react-native/React/Views/RCTLayout.h \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Base/RCTRootView.h \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Views/ScrollView/RCTScrollContentView.h \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Views/RCTView.h

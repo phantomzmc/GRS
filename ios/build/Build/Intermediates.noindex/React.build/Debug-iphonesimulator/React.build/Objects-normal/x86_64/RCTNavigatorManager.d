@@ -25,4 +25,5 @@ dependencies: \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Views/RCTComponent.h \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Views/RCTNavigator.h \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Modules/RCTUIManager.h \
-  /Users/thunnathorn/GRS3/node_modules/react-native/React/Base/RCTRootView.h
+  /Users/thunnathorn/GRS3/node_modules/react-native/React/Base/RCTRootView.h \
+  /Users/thunnathorn/GRS3/node_modules/react-native/React/Modules/RCTUIManagerObserverCoordinator.h

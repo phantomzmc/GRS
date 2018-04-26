@@ -8,10 +8,11 @@ import {
   StyleSheet,
   TouchableOpacity,
   Image,
-  Picker
+
 } from "react-native";
+import randomstringPromise from 'randomstring-promise';
 import { StackNavigator } from "react-navigation";
-import { Form, Item, Input, Label } from 'native-base'
+import { Form, Item, Input, Label, Picker, Icon } from 'native-base'
 
 
 class FormAddressRegister extends Component {
@@ -23,13 +24,27 @@ class FormAddressRegister extends Component {
     this.state = {
       firstname: "",
       lastname: "",
-      relation: "",
-      tel: ""
+      relation: "ความสัมพันธ์",
+      tel: "",
+      verifycode: "",
+      statusVerify: 0
     };
   }
+  componentWillMount() {
+    let { verifycode } = this.state
+    console.log("verfity")
+    randomstringPromise(10)
+      .then((verifycode) => {
+        this.setState({ verifycode })
+        // console.log(code);  // u8KNs7aAw0DCOKO1MdEgVIcF2asajrdd
+        console.log(verifycode)
+      });
+  }
+
 
   sendData = (firstname, lastname, relation, tel) => {
-    this.props.goEvent(firstname, lastname, relation, tel);
+    let { verifycode, statusVerify } = this.state
+    this.props.goEvent(firstname, lastname, relation, tel, verifycode, statusVerify);
   };
 
   render() {
@@ -72,28 +87,24 @@ class FormAddressRegister extends Component {
             />
           </Item>
         </Form>
-        <Text style={styles.headForm}>ความสัมพันธ์</Text>
-        <Form>
-          <Item floatingLabel last>
-            <Label style={styles.textLabel}>{this.state.relation}</Label>
-            <Input
-              onChangeText={relation => this.setState({ relation })}
-            />
-          </Item>
-        </Form>
         <View style={styles.viewPicker}>
-          <Picker
-            style={styles.picker}
-            selectedValue={this.state.relation}
-            onValueChange={(itemValue, itemIndex) => this.setState({ relation: itemValue })} >
-            <Picker.Item label="ความสัมพันธ์" value="ความสัมพันธ์" />
-            <Picker.Item label="พ่อแม่" value="พ่อแม่" />
-            <Picker.Item label="ญาติ" value="ญาติ" />
-            <Picker.Item label="เพื่อน" value="เพื่อน" />
-          </Picker>
+          <Text style={styles.headForm}>ความสัมพันธ์</Text>
+          <Form>
+            <Picker
+              mode="dropdown"
+              iosHeader="เลือกความสัมพันธ์"
+              iosIcon={<Icon name="ios-arrow-down-outline" />}
+              style={styles.picker}
+              selectedValue={this.state.relation}
+              onValueChange={(itemValue, itemIndex) => this.setState({ relation: itemValue })}
+            >
+              <Picker.Item label="ความสัมพันธ์" value="ความสัมพันธ์" />
+              <Picker.Item label="พ่อแม่" value="พ่อแม่" />
+              <Picker.Item label="ญาติ" value="ญาติ" />
+              <Picker.Item label="เพื่อน" value="เพื่อน" />
+            </Picker>
+          </Form>
         </View>
-
-
         <View style={styles.submitContainer}>
           <TouchableOpacity
             style={styles.buttonContainer}
@@ -165,15 +176,13 @@ const styles = StyleSheet.create({
     fontFamily: "kanit"
   },
   viewPicker: {
-    alignItems: 'center',
-    justifyContent: 'center'
+    flexDirection: 'row'
   },
   picker: {
-    alignContent: 'center',
-    justifyContent: 'center',
-    width: '80%',
-    height: '30%'
+    paddingTop: 30,
+    padding: 30
   },
+
   headForm: {
     fontFamily: 'kanit',
     fontSize: 16,

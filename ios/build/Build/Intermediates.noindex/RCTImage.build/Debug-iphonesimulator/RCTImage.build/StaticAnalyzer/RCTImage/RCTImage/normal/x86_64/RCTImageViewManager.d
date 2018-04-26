@@ -29,5 +29,6 @@ dependencies: \
   /Users/thunnathorn/GRS3/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTURLRequestDelegate.h \
   /Users/thunnathorn/GRS3/node_modules/react-native/Libraries/Image/RCTImageShadowView.h \
   /Users/thunnathorn/GRS3/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTShadowView.h \
+  /Users/thunnathorn/GRS3/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTLayout.h \
   /Users/thunnathorn/GRS3/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTRootView.h \
   /Users/thunnathorn/GRS3/node_modules/react-native/Libraries/Image/RCTImageView.h

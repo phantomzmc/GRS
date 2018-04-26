@@ -23,4 +23,7 @@ dependencies: \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Base/RCTInvalidating.h \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Views/UIView+React.h \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Views/RCTComponent.h \
-  /Users/thunnathorn/GRS3/node_modules/react-native/React/Views/RCTTabBar.h
+  /Users/thunnathorn/GRS3/node_modules/react-native/React/Views/RCTTabBar.h \
+  /Users/thunnathorn/GRS3/node_modules/react-native/React/Modules/RCTUIManager.h \
+  /Users/thunnathorn/GRS3/node_modules/react-native/React/Base/RCTRootView.h \
+  /Users/thunnathorn/GRS3/node_modules/react-native/React/Modules/RCTUIManagerObserverCoordinator.h

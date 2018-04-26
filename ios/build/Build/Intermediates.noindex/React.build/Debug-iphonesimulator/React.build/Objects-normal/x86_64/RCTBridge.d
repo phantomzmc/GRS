@@ -21,6 +21,7 @@ dependencies: \
   /Users/thunnathorn/GRS3/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGMacros.h \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Base/RCTEventDispatcher.h \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/DevSupport/RCTInspectorDevServerHelper.h \
+  /Users/thunnathorn/GRS3/node_modules/react-native/React/Inspector/RCTInspectorPackagerConnection.h \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Base/RCTModuleData.h \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Base/RCTPerformanceLogger.h \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Profiler/RCTProfile.h \

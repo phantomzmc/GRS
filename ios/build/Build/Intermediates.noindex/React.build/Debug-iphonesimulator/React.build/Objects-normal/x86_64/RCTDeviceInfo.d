@@ -11,4 +11,5 @@ dependencies: \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Modules/RCTAccessibilityManager.h \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Base/RCTAssert.h \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Base/RCTEventDispatcher.h \
+  /Users/thunnathorn/GRS3/node_modules/react-native/React/UIUtils/RCTUIUtils.h \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Base/RCTUtils.h

@@ -25,4 +25,5 @@ dependencies: \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Views/UIView+React.h \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Base/RCTParserUtils.h \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Views/RCTShadowView.h \
+  /Users/thunnathorn/GRS3/node_modules/react-native/React/Views/RCTLayout.h \
   /Users/thunnathorn/GRS3/node_modules/react-native/React/Base/RCTRootView.h

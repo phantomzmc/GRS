@@ -36,7 +36,6 @@ class UserHelpRegister extends Component {
         lastname: "",
         relation: "",
         tel: "",
-        code : "",
         verifycode: "",
         statusVerify: 0
       }
@@ -44,7 +43,7 @@ class UserHelpRegister extends Component {
   }
 
 
-  gotoListEvent = (firstname, lastname, relation, tel,verifycode, statusVerify) => {
+  gotoListEvent = (firstname, lastname, relation, tel, verfitycode, statusVerify) => {
     Alert.alert(
       "สำเร็จ",
       "ขั้นตอนการลงทะเบียนเกือบเสร็จสมบูรณ์แล้ว กรุณาตรวจสอบอีเมล์เพื่อยืนยันตัวตน",
@@ -59,7 +58,7 @@ class UserHelpRegister extends Component {
       ],
       { cancelable: false }
     );
-    this.props.setHelp({ help: firstname, lastname, relation, tel, verifycode, statusVerify });
+    this.props.setHelp({ help: firstname, lastname, relation, tel, verfitycode, statusVerify });
   };
   gotoLogin = () => {
     this.props.navigation.navigate("SingleLogin");
