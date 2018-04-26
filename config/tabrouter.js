@@ -14,9 +14,6 @@ var myTabs = TabNavigator({
     TeamList: {
         screen: TeamList
     },
-    // AddEventFriend : {
-    //     screen : AddEventFriend
-    // },
     FriendList: {
         screen: FriendList 
     },

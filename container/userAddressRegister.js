@@ -59,7 +59,6 @@ class UserAddressRegister extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 60
   }
 });
 

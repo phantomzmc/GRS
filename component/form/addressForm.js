@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import { Form, Item, Input, Label } from 'native-base'
 import { connect } from 'react-redux'
 
 class AddressForm extends Component {
@@ -30,31 +31,46 @@ class AddressForm extends Component {
         let { fullname, email, adress, tel } = this.state
         return (
             <View style={styles.container}>
-                <TextInput
-                    placeholder={this.props.profile.profile.profile}
-                    onChangeText={(fullname) => this.setState(this.props.profile.profile.profile)}
-                    style={styles.input}
-                />
-                <TextInput
-                    placeholder={this.props.profile.profile.email}
-                    style={styles.input}
-                    onChangeText={(email) => this.setState(this.props.profile.profile.email)}
-                />
-                <TextInput
-                    placeholder={this.props.profile.profile.number}
-                    style={styles.input}
-                    onChangeText={(adress) => this.setState(this.props.profile.address.address)}
-
-                />
-                <TextInput
-                    placeholder={this.props.profile.profile.tel}
-                    style={styles.input}
-                    onChangeText={(tel) => this.setState(this.props.profile.profile.tel)}
-                />
+                <Text style={styles.headForm}>ชื่อ - นามสกุล</Text>
+                <Form>
+                    <Item floatingLabel last>
+                        <Label style={styles.textLabel}>{this.props.profile.profile.profile}</Label>
+                        <Input
+                            onChangeText={(fullname) => this.setState(this.props.profile.profile.profile)}
+                        />
+                    </Item>
+                </Form>
+                <Text style={styles.headForm}>Email</Text>
+                <Form>
+                    <Item floatingLabel last>
+                        <Label style={styles.textLabel}>{this.props.profile.profile.email}</Label>
+                        <Input
+                            onChangeText={(email) => this.setState(this.props.profile.profile.email)}
+                        />
+                    </Item>
+                </Form>
+                <Text style={styles.headForm}>ที่อยู่</Text>
+                <Form>
+                    <Item floatingLabel last>
+                        <Label style={styles.textLabel}>{this.props.profile.profile.address}</Label>
+                        <Input
+                            onChangeText={(adress) => this.setState(this.props.profile.address.address)}
+                        />
+                    </Item>
+                </Form>
+                <Text style={styles.headForm}>โทรศัพท์</Text>
+                <Form>
+                    <Item floatingLabel last>
+                        <Label style={styles.textLabel}>{this.props.profile.profile.tel}</Label>
+                        <Input
+                            onChangeText={(tel) => this.setState(this.props.profile.profile.tel)}
+                        />
+                    </Item>
+                </Form>
                 <View style={styles.submitContainer}>
                     <TouchableOpacity style={styles.buttonContainer}
                         onPress={() => this.putDataUser(fullname, email, adress, tel)}>
-                        <Text style={styles.textButton}>ชำระค่าสมัคร</Text>
+                        <Text style={styles.textButton}>ถัดไป</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -77,7 +93,6 @@ const styles = StyleSheet.create({
     submitContainer: {
         marginTop: 30,
         alignItems: 'center',
-        marginBottom: 30
     },
     buttonContainer: {
         height: 40,
@@ -92,6 +107,15 @@ const styles = StyleSheet.create({
         fontSize: 15,
         color: '#fff',
         fontFamily: 'Kanit',
+    },
+    headForm: {
+        fontFamily: 'kanit',
+        fontSize: 16,
+        paddingTop: 20
+    },
+    textLabel: {
+        fontSize: 14,
+        fontFamily: 'kanit'
     }
 })
 

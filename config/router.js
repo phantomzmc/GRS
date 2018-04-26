@@ -17,84 +17,94 @@ import EventList from '../container/ListEvent'
 import ListDistance from '../component/list/event/listdistance'
 import ListShith from '../component/list/listShirt/listShirt';
 import DiscountCoupon from '../component/form/couponForm'
-
+import GetPleace from '../component/items/getPlece'
 import DetailRegister from '../component/items/detailRegister'
 import UserHelpRegister from '../container/userHelpRegister'
 import UserAddressRegister from '../container/userAddressRegister'
 
-// import ListShirt from '../component/list/listShirt/listShirt'
-import Test from '../list'
+import ControlDistance from '../container/controlDistance'
+import ButtonChangePayment from '../component/items/bottonChangePayment' 
+import SummaryTotal from '../component/items/summary'
+import Verify from '../container/verify'
 
-export default StackNavigator ({
-    Register : {
-        screen : Register
-    },
-    // RegisterDistance : {
-    //     screen : RegisterDistance,
+
+export default StackNavigator({
+    // Verify : {
+    //     screen : Verify
     // },
-    EventList : {
-        screen : EventList
+    // Register: {
+    //     screen: Register,
+    // },
+    EventList: {
+        screen: EventList,
     },
-    Register : {
-        screen : Register
+    Register: {
+        screen: Register,
     },
-    SingleLogin : {
-        screen : SingleLogin,
-        navigationOptions : {
-            header : () => null
+    SingleLogin: {
+        screen: SingleLogin,
+        navigationOptions: {
+            header: () => null
         }
     },
-    Login : {
-        screen : Login,
-        navigationOptions : {
-            header : () => null
+    Login: {
+        screen: Login,
+        navigationOptions: {
+            header: () => null
         }
     },
-    Register : {
-        screen : Register,
+    UserAddressRegister: {
+        screen: UserAddressRegister,
     },
-    UserAddressRegister : {
-        screen : UserAddressRegister
+    UserHelpRegister: {
+        screen: UserHelpRegister,
+
     },
-    UserHelpRegister : {
-        screen : UserHelpRegister
+    // ListEvent: {
+    //     screen: ListEvent,
+    // },
+    ShirtPhotoPlus: {
+        screen: ShirtPhotoPlus
     },
-    ListEvent : {
-        screen : ListEvent,
+    DiscountCoupon: {
+        screen: DiscountCoupon
     },
-    ShirtPhotoPlus : {
-        screen : ShirtPhotoPlus
+    ControlDistance : {
+        screen : ControlDistance
     },
-    DiscountCoupon : {
-        screen : DiscountCoupon
+    RegisterDistance: {
+        screen: RegisterDistance,
     },
-    RegisterDistance : {
-        screen : RegisterDistance,
+    ButtonChangePayment : {
+        screen : ButtonChangePayment
     },
-    TabRouter : {
-        screen : TabRouter
+    TabRouter: {
+        screen: TabRouter
     },
-    TeamList : {
-        screen : TeamList
+    TeamList: {
+        screen: TeamList
     },
 
-    CreditPayment : {
-        screen : CreditPayment
+    CreditPayment: {
+        screen: CreditPayment
     },
-    TransferPayment : {
-        screen : TransferPayment
+    TransferPayment: {
+        screen: TransferPayment
     },
-    AddressLayout : {
-        screen : AddressLayout
+    AddressLayout: {
+        screen: AddressLayout
     },
-    TotalPayment : {
-        screen : TotalPayment
+    TotalPayment: {
+        screen: TotalPayment
     },
-    AddEventFriend : {
-        screen : AddEventFriend
+    AddEventFriend: {
+        screen: AddEventFriend
     },
-    TotalRegister : {
-        screen : TotalRegister
+    TotalRegister: {
+        screen: TotalRegister
+    },
+    GetPleace : {
+        screen : GetPleace
     }
 
 

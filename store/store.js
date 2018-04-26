@@ -9,7 +9,7 @@ const eventState = {
   distanceEvent: {
     distanceName: "",
     distance: "1 km",
-    price: 400
+    price: 0.
   }
 };
 const credit = {
@@ -25,9 +25,9 @@ const user = {
   profile: {
     userid: "",
     password: ""
-  }
-
+  },
 };
+
 const profile = (state = user, action) => {
   switch (action.type) {
     case "setProfile": {

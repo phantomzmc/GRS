@@ -1,29 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Button } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
 import { connect } from 'react-redux'
-import ButtonChage from '../component/items/bottonChage'
 import HeaderProfile from '../component/items/header_profile.js'
 import ListDistance from '../component/list/event/listdistance'
 import ButtonSubmit from '../component/items/buttonSubmit';
+
 
 class RegisterDistance extends Component {
     static propTypes = {
         navigation: PropTypes.object,
     }
-    static navigationOptions = {
-        title: 'ลงทะเบียนวิ่ง',
-        headerStyle: {
-            backgroundColor: '#FC561F'
-        },
-        headerTitleStyle: {
-            color: '#fff',
-            fontFamily: 'kanit',
-        }
-    };
     constructor(props) {
         super(props)
         this.state = {
@@ -37,37 +27,24 @@ class RegisterDistance extends Component {
                 price: ""
             }
         }
-        this.gotoShirtPhotoPlus = this.gotoShirtPhotoPlus.bind(this)
+        // this.gotoShirtPhotoPlus = this.gotoShirtPhotoPlus.bind(this)
     }
-
-    componentDidMount = ()=> {
-
-    }
-    gotoTeamList = () => {
-        this.props.navigation.navigate('TabRouter')
-    }
-    gotoRegisterDistance = () => {
-        this.props.navigation.navigate('RegisterDistance')
-    }
-    gotoShirtPhotoPlus = (distanceEvent) => {
-        this.props.addDistance(distanceEvent)
-        this.props.setTotal(distanceEvent.price)
+  
+    gotoShirtPhotoPlus(distanceEvent) {
         this.setState({ distanceEvent: distanceEvent })
-        this.props.navigation.navigate('ShirtPhotoPlus')
-
+        this.props.setTotal(distanceEvent.price)
+        this.props.addDistance(distanceEvent)
+        this.props.nextState()
     }
     render() {
         return (
             <ScrollView>
                 <View style={styles.container}>
-                    <ButtonChage Team={this.gotoTeamList.bind(this)}
-                        Single={this.gotoRegisterDistance.bind(this)} />
                     <HeaderProfile />
                     <Text style={styles.text}>
                         โปรดเลือกระยะทาง
                      </Text>
                     <ListDistance onGotoshirt={this.gotoShirtPhotoPlus.bind(this)} />
-                    {/* <ButtonSubmit PhotoPlus={this.gotoShirtPhotoPlus.bind(this)} /> */}
                 </View>
             </ScrollView>
         );
@@ -89,11 +66,7 @@ const mapDisPatchToProps = (dispatch) => {
         }
     }
 }
-const mapStatetoProps = (state) => {
-    return {
-        event: state.event
-    }
-}
+
 
 const styles = StyleSheet.create({
     container: {

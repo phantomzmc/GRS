@@ -52,25 +52,16 @@ class ListDistance extends Component {
             }).catch((error) => {
                 console.error(error);
             });
-
-        this.setState({
-            distanceName: this.props.event.distanceEvent.distanceName,
-            distance: this.props.event.distanceEvent.distance,
-            price: this.props.event.distanceEvent.price,
-            dataSource: datadistance,
-        });
     }
-    shirtPhotoPlus = (item) => {
+    shirtPhotoPlus(item){
         this.setState({
             distanceEvent: {
-                name: item.name,
-                distance: item.distance,
-                price: item.price
+                name: item.CourseName,
+                distance: item.Distance,
+                price: item.Fee
             }
         })
-        this
-            .props
-            .onGotoshirt({ name: item.name, distance: item.distance, price: item.price })
+        this.props.onGotoshirt({ name: item.CourseName, distance: item.Distance, price: item.Fee })
         console.log(this.state.distanceEvent)
     }
 

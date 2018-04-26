@@ -10,7 +10,8 @@ import {
     Image,
     FlatList,
     TouchableOpacity,
-    Alert
+    Alert,
+    StatusBar
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { connect } from 'react-redux'
@@ -44,16 +45,16 @@ class ListEvent extends Component {
             profile: ""
         }
     }
-    componentDidMount(){
+    componentDidMount() {
         console.log(this.props.profile.profile.userid)
-        this.setState({ profile : this.props.profile.profile.userid})
+        this.setState({ profile: this.props.profile.profile.userid })
         console.log("test" + this.state.profile)
     }
-    checkTeamRegis(){
-        if(this.props.event.event == "1"){
+    checkTeamRegis() {
+        if (this.props.event.event == "1") {
             console.log("TeamLogin")
             this.props.navigation.navigate('Login')
-        }else if(this.props.event.event == "0"){
+        } else if (this.props.event.event == "0") {
             console.log("SingleLogin")
             this.props.navigation.navigate('SingleLogin')
         }
@@ -73,16 +74,21 @@ class ListEvent extends Component {
             //     onPress: () => this.checkTeamRegis(),
             // }], { cancelable: false })
         }
-        else{
-            this.props.navigation.navigate('RegisterDistance')        
+        else {
+            this.props.navigation.navigate('ControlDistance')
         }
     }
 
     render() {
         return (
             <View style={styles.container}>
+                <StatusBar
+                    barStyle="light-content"
+                    hidden={false}
+                    translucent={true}
+                />
                 <List CheckLogin={this.checkUser.bind(this)}
-                        Profile={this.state.profile}/>
+                    Profile={this.state.profile} />
             </View>
         )
     }
@@ -90,7 +96,7 @@ class ListEvent extends Component {
 const mapStateToProps = (state) => {
     return {
         profile: state.profile,
-        event : state.event
+        event: state.event
     }
 
 }

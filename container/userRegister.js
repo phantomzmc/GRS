@@ -80,7 +80,6 @@ class UserRegister extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 60
   }
 });
 

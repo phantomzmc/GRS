@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity,Button} from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
 import ButtonChage from '../component/items/bottonChage'
@@ -17,7 +17,14 @@ class TeamList extends Component {
             color: '#fff',
             fontFamily: "Kanit",
             fontWeight: '500',
-        }
+        },
+        headerRight: (
+            <Button
+                onPress={() => alert('This is a button!')}
+                title="Info"
+                color="#fff"
+            />
+        ),
     };
     gotoTeamList = () => {
         this.props.navigation.navigate('TabRouter')
@@ -31,8 +38,6 @@ class TeamList extends Component {
         return (
             <ScrollView>
                 <View style={styles.container}>
-                    <ButtonChage Team={this.gotoTeamList.bind(this)}
-                        Single={this.gotoRegisterDistance.bind(this)} />
                     <HeaderProfile />
                     <Text style={styles.textTile}>รายชื่อเพื่อน</Text>
                     <EventListFriend />
@@ -59,7 +64,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
     },
-    addFriend : {
+    addFriend: {
         marginTop: 30,
         alignItems: 'center',
     },

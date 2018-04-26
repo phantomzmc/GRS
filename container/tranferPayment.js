@@ -12,23 +12,23 @@ class TransferPayment extends Component {
     static propTypes = {
         navigation: PropTypes.object,
     }
-    static navigationOptions = {
-        title: 'ชำระเงิน',
-        headerStyle: {
-            backgroundColor: '#FC561F'
-        },
-        headerTitleStyle: {
-            color: '#fff',
-            fontFamily: 'kanit',
-        },
-        headerRight: (
-            <Button
-                onPress={() => this.showDetailPayment.bind(this)}
-                title="รายละเอียด"
-                color="#fff"
-            />
-        ),
-    };
+    // static navigationOptions = {
+    //     title: 'ชำระเงิน',
+    //     headerStyle: {
+    //         backgroundColor: '#FC561F'
+    //     },
+    //     headerTitleStyle: {
+    //         color: '#fff',
+    //         fontFamily: 'kanit',
+    //     },
+    //     headerRight: (
+    //         <Button
+    //             onPress={() => this.showDetailPayment.bind(this)}
+    //             title="รายละเอียด"
+    //             color="#fff"
+    //         />
+    //     ),
+    // };
     showDetailPayment = () => {
         this.props.navigation.navigate('TotalPayment')
     }
@@ -37,7 +37,6 @@ class TransferPayment extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <ButtonChangePayment />
                 <TranferView showDetail={this.showDetailPayment.bind(this)} />
             </View>
         );

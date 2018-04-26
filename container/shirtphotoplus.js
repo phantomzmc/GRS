@@ -6,6 +6,7 @@ import { StackNavigator } from 'react-navigation';
 import { connect } from 'react-redux'
 import ListShirt from '../component/list/listShirt/listShirt'
 import PhotoPlus from '../component/items/photoPlus'
+import SummaryTotal from '../component/items/summary'
 
 
 
@@ -52,7 +53,7 @@ class ShirtPhotoPlus extends Component {
                     <Text style={styles.textSize}>Photo Plus + </Text>
                     <PhotoPlus titleName={this.props.photoplus.title}
                         dataPricePhoto={this.props.photoplus.pricePhoto}
-                        priceEvent={this.props.event.distanceEvent.price} />
+                        priceEvent={this.props.total.totalPrice} />
                 </View>
                 <View style={styles.submitContainer}>
                     <TouchableOpacity style={styles.buttonContainer}>
@@ -60,6 +61,7 @@ class ShirtPhotoPlus extends Component {
                             onPress={this.goNextState}>ถัดไป</Text>
                     </TouchableOpacity>
                 </View>
+                <SummaryTotal />
             </ScrollView>
         );
     }
@@ -102,6 +104,7 @@ const mapStateToProps = (state) => {
         creditcard: state.creditcard,
         shirtphoto: state.shirtphoto,
         photoplus: state.photoplus,
+        total : state.total
     };
 };
 const mapDisPacthToProps = (dispacth) => {

@@ -10,15 +10,14 @@ class PhotoPlus extends Component {
         super();
         this.state = {
             switch1Value: true,
-            pricePhotoPlus: "100",
+            pricePhotoPlus: 100.0,
             textSwitch: "",
             priceEvent: "",
-            totalPrice: ""
+            totalPrice : ""
         }
     }
-    componentDidMount = () => {
+    componentWillMount = () => {
         this.setState({
-            priceEvent : this.props.priceEvent,
             pricePhotoPlus : this.props.dataPricePhoto,
         })
         this.sumPrice()
@@ -45,9 +44,7 @@ class PhotoPlus extends Component {
         this.setState({
             totalPrice: this.state.pricePhotoPlus + this.state.priceEvent
         })
-        this
-            .props
-            .setTotal(this.state.totalPrice)
+        this.props.setTotal(this.state.totalPrice)
         console.log(this.state.totalPrice)
     }
 

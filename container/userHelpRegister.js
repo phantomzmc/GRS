@@ -6,7 +6,8 @@ import {
   ScrollView,
   StyleSheet,
   TouchableOpacity,
-  Alert
+  Alert,
+  StatusBar
 } from "react-native";
 import { StackNavigator } from "react-navigation";
 import { connect } from "react-redux";
@@ -34,27 +35,31 @@ class UserHelpRegister extends Component {
         firstname: "",
         lastname: "",
         relation: "",
-        tel: ""
+        tel: "",
+        code : "",
+        verifycode: "",
+        statusVerify: 0
       }
     };
   }
 
-  gotoListEvent = (firstname, lastname, relation, tel) => {
+
+  gotoListEvent = (firstname, lastname, relation, tel,verifycode, statusVerify) => {
     Alert.alert(
       "สำเร็จ",
       "ขั้นตอนการลงทะเบียนเกือบเสร็จสมบูรณ์แล้ว กรุณาตรวจสอบอีเมล์เพื่อยืนยันตัวตน",
       [
         {
-          text: "Cancel"
+          text: "ยกเลิก"
         },
         {
-          text: "เข้าสู่ระบบ",
+          text: "ตกลง",
           onPress: () => this.gotoLogin()
         }
       ],
       { cancelable: false }
     );
-    this.props.setHelp({ help: firstname, lastname, relation, tel });
+    this.props.setHelp({ help: firstname, lastname, relation, tel, verifycode, statusVerify });
   };
   gotoLogin = () => {
     this.props.navigation.navigate("SingleLogin");
@@ -63,6 +68,11 @@ class UserHelpRegister extends Component {
   render() {
     return (
       <ScrollView>
+        <StatusBar
+          barStyle="light-content"
+          hidden={false}
+          translucent={true}
+        />
         <View style={styles.container}>
           <HeaderUser Name={this.props.fullname} UserID={this.props.userid} />
           <FormHelpRegister goEvent={this.gotoListEvent.bind(this)} />
