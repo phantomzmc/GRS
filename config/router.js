@@ -29,9 +29,12 @@ import Verify from '../container/verify'
 
 
 export default StackNavigator({
-    // Verify : {
-    //     screen : Verify
-    // },
+    Register: {
+        screen: Register,
+    },
+    Verify : {
+        screen : Verify
+    },
     Register: {
         screen: Register,
     },

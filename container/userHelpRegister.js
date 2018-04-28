@@ -14,6 +14,7 @@ import { connect } from "react-redux";
 
 import HeaderUser from "../component/items/header_profile";
 import FormHelpRegister from "../component/form/registerHelpForm";
+import verify from "./verify";
 
 class UserHelpRegister extends Component {
   static propTypes = {
@@ -53,15 +54,16 @@ class UserHelpRegister extends Component {
         },
         {
           text: "ตกลง",
-          onPress: () => this.gotoLogin()
+          onPress: () => this.gotoVerify()
         }
       ],
       { cancelable: false }
     );
-    this.props.setHelp({ help: firstname, lastname, relation, tel, verfitycode, statusVerify });
+    this.props.setHelp({ help: firstname, lastname, relation, tel });
+    this.props.setVerify({ verfitycode, statusVerify })
   };
-  gotoLogin = () => {
-    this.props.navigation.navigate("SingleLogin");
+  gotoVerify = () => {
+    this.props.navigation.navigate("Verify");
   };
 
   render() {
@@ -83,7 +85,7 @@ class UserHelpRegister extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 60
+    // marginBottom: 60
   }
 });
 
@@ -93,6 +95,12 @@ const mapDispatchToProps = dispatch => {
       dispatch({
         type: "setHelp",
         payload: help
+      });
+    },
+    setVerify: verify => {
+      dispatch({
+        type: "setVerify",
+        payload: verify
       });
     }
   };

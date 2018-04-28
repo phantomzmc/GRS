@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   picker: {
-    paddingTop: 30,
+    paddingTop : 15,
     padding: 30
   },
 

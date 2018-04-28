@@ -39,6 +39,9 @@ const profile = (state = user, action) => {
     case "setHelp": {
       state.help = action.payload;
     }
+    case "setVerify" : {
+      state.verify = action.payload
+    }
   }
   return state;
 };
