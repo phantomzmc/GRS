@@ -24,8 +24,11 @@ const credit = {
 const user = {
   profile: {
     userid: "",
-    password: ""
+    password: "",
   },
+  verify:{
+    statusVerify : 0
+  }
 };
 
 const profile = (state = user, action) => {

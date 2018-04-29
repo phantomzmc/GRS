@@ -16,10 +16,24 @@ class Login extends Component {
             password: ""
         }
     }
+    componentWillMount() {
+        console.log("statusVerify : " + this.props.profile.verify.statusVerify)
+    }
     checkLogin() {
-        if (this.state.username === this.props.profile.profile.userid && this.state.password === this.props.profile.profile.password) {
+        if (this.state.username === this.props.profile.profile.userid && this.state.password === this.props.profile.profile.password && this.props.profile.verify.statusVerify === 1) {
             this.gotoListEvent()
-        } else {
+        }
+        else if (this.props.profile.verify.statusVerify === 0) {
+            Alert.alert('ยังไม่มีข้อมูลผู้ใช้งาน', 'ผู้ใช้งานยังไม่ได้ทำการยืนยันตัวตน กรุณายืนยันตัวตนด้วย', [
+                {
+                    text: 'Cancel'
+                }, {
+                    text: 'ยืนยันตัวตน',
+                    onPress: () => this.gotoVerify()
+                }
+            ], { cancelable: false })
+        }
+        else {
             Alert.alert('ยังไม่มีข้อมูลผู้ใช้งาน', 'กรุณาลงทะเบียนเพื่อเข้าใช้งาน', [
                 {
                     text: 'Cancel'
@@ -29,6 +43,9 @@ class Login extends Component {
                 }
             ], { cancelable: false })
         }
+    }
+    gotoVerify = () => {
+        this.props.navigation.navigate('Verify')
     }
     gotoListEvent = () => {
         console.log(this.state.username)

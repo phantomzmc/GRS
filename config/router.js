@@ -30,8 +30,8 @@ import ResetVerify from '../container/resetVerify'
 
 
 export default StackNavigator({
-    Register : {
-        screen : Register
+    Login : {
+        screen : Login
     },
     ResetVerify : {
         screen : ResetVerify
