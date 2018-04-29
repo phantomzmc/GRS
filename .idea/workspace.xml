@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e6dbda81-0cf0-4353-b9d0-7c7ee3da8428" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/GRS.build/Debug-iphonesimulator/GRS.build/dgph" afterPath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/GRS.build/Debug-iphonesimulator/GRS.build/dgph" />
+      <change beforePath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/RCTActionSheet.build/Debug-iphonesimulator/RCTActionSheet.build/dgph" afterPath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/RCTActionSheet.build/Debug-iphonesimulator/RCTActionSheet.build/dgph" />
+      <change beforePath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/RCTAnimation.build/Debug-iphonesimulator/RCTAnimation.build/dgph" afterPath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/RCTAnimation.build/Debug-iphonesimulator/RCTAnimation.build/dgph" />
+      <change beforePath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/RCTBlob.build/Debug-iphonesimulator/RCTBlob.build/dgph" afterPath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/RCTBlob.build/Debug-iphonesimulator/RCTBlob.build/dgph" />
+      <change beforePath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/RCTGeolocation.build/Debug-iphonesimulator/RCTGeolocation.build/dgph" afterPath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/RCTGeolocation.build/Debug-iphonesimulator/RCTGeolocation.build/dgph" />
+      <change beforePath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/RCTImage.build/Debug-iphonesimulator/RCTImage.build/dgph" afterPath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/RCTImage.build/Debug-iphonesimulator/RCTImage.build/dgph" />
+      <change beforePath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/RCTLinking.build/Debug-iphonesimulator/RCTLinking.build/dgph" afterPath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/RCTLinking.build/Debug-iphonesimulator/RCTLinking.build/dgph" />
+      <change beforePath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/RCTNetwork.build/Debug-iphonesimulator/RCTNetwork.build/dgph" afterPath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/RCTNetwork.build/Debug-iphonesimulator/RCTNetwork.build/dgph" />
+      <change beforePath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/RCTSettings.build/Debug-iphonesimulator/RCTSettings.build/dgph" afterPath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/RCTSettings.build/Debug-iphonesimulator/RCTSettings.build/dgph" />
+      <change beforePath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/RCTText.build/Debug-iphonesimulator/RCTText.build/dgph" afterPath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/RCTText.build/Debug-iphonesimulator/RCTText.build/dgph" />
+      <change beforePath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/RCTVibration.build/Debug-iphonesimulator/RCTVibration.build/dgph" afterPath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/RCTVibration.build/Debug-iphonesimulator/RCTVibration.build/dgph" />
+      <change beforePath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/RCTWebSocket.build/Debug-iphonesimulator/RCTWebSocket.build/dgph" afterPath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/RCTWebSocket.build/Debug-iphonesimulator/RCTWebSocket.build/dgph" />
+      <change beforePath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/RCTWebSocket.build/Debug-iphonesimulator/fishhook.build/dgph" afterPath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/RCTWebSocket.build/Debug-iphonesimulator/fishhook.build/dgph" />
+      <change beforePath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/RNImagePicker.build/Debug-iphonesimulator/RNImagePicker.build/dgph" afterPath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/RNImagePicker.build/Debug-iphonesimulator/RNImagePicker.build/dgph" />
+      <change beforePath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/RNVectorIcons.build/Debug-iphonesimulator/RNVectorIcons.build/dgph" afterPath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/RNVectorIcons.build/Debug-iphonesimulator/RNVectorIcons.build/dgph" />
+      <change beforePath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/React.build/Debug-iphonesimulator/React.build/dgph" afterPath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/React.build/Debug-iphonesimulator/React.build/dgph" />
+      <change beforePath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/React.build/Debug-iphonesimulator/cxxreact.build/dgph" afterPath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/React.build/Debug-iphonesimulator/cxxreact.build/dgph" />
+      <change beforePath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/React.build/Debug-iphonesimulator/double-conversion.build/dgph" afterPath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/React.build/Debug-iphonesimulator/double-conversion.build/dgph" />
+      <change beforePath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/React.build/Debug-iphonesimulator/jschelpers.build/dgph" afterPath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/React.build/Debug-iphonesimulator/jschelpers.build/dgph" />
+      <change beforePath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/React.build/Debug-iphonesimulator/jsinspector.build/dgph" afterPath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/React.build/Debug-iphonesimulator/jsinspector.build/dgph" />
+      <change beforePath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/React.build/Debug-iphonesimulator/privatedata.build/dgph" afterPath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/React.build/Debug-iphonesimulator/privatedata.build/dgph" />
+      <change beforePath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/React.build/Debug-iphonesimulator/third-party.build/dgph" afterPath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/React.build/Debug-iphonesimulator/third-party.build/dgph" />
+      <change beforePath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/React.build/Debug-iphonesimulator/yoga.build/dgph" afterPath="$PROJECT_DIR$/ios/build/Build/Intermediates.noindex/React.build/Debug-iphonesimulator/yoga.build/dgph" />
+      <change beforePath="$PROJECT_DIR$/ios/build/Logs/Build/Cache.db" afterPath="$PROJECT_DIR$/ios/build/Logs/Build/Cache.db" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/26K6A22R0VJ3L/CFNetwork-3188M7OK0JW08.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/26K6A22R0VJ3L/CoreFoundation-J9ZOXGK4ZTRR.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/26K6A22R0VJ3L/CoreGraphics-54UV9QOCX3ZY.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/26K6A22R0VJ3L/CoreImage-2L8M44C0CYIPM.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/26K6A22R0VJ3L/CoreText-3W9A51BO0R6G.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/26K6A22R0VJ3L/CoreVideo-1MLDN391V99P4.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/26K6A22R0VJ3L/Darwin-38I6DLZ5IH61J.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/26K6A22R0VJ3L/Dispatch-2LX9MWM6UEPQW.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/26K6A22R0VJ3L/FileProvider-1OMUUHYDP2DYB.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/26K6A22R0VJ3L/Foundation-3DFYNEBRQSXST.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/26K6A22R0VJ3L/ImageIO-YVI44K06S0WO.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/26K6A22R0VJ3L/Metal-UMHL2WVYX9T4.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/26K6A22R0VJ3L/ObjectiveC-1R06XOY9T4FIM.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/26K6A22R0VJ3L/OpenGLES-MDRMEQ3COFKY.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/26K6A22R0VJ3L/QuartzCore-23I9VTX2KZMTH.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/26K6A22R0VJ3L/Security-27ZMYP8CODFT0.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/26K6A22R0VJ3L/UIKit-1V5UHAPTOD24G.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/26K6A22R0VJ3L/XCTest-1FJM61D2FSIU5.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/26K6A22R0VJ3L/os_object-38I6DLZ5IH61J.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2A6C8N4HIHEKW/Darwin-38I6DLZ5IH61J.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2A6C8N4HIHEKW/MachO-1BMJAO5Q3NM3O.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2TEPZ6QH2TM2J/CFNetwork-3188M7OK0JW08.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2TEPZ6QH2TM2J/CoreFoundation-J9ZOXGK4ZTRR.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2TEPZ6QH2TM2J/CoreGraphics-54UV9QOCX3ZY.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2TEPZ6QH2TM2J/CoreImage-2L8M44C0CYIPM.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2TEPZ6QH2TM2J/CoreText-3W9A51BO0R6G.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2TEPZ6QH2TM2J/CoreVideo-1MLDN391V99P4.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2TEPZ6QH2TM2J/Darwin-38I6DLZ5IH61J.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2TEPZ6QH2TM2J/Dispatch-2LX9MWM6UEPQW.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2TEPZ6QH2TM2J/FileProvider-1OMUUHYDP2DYB.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2TEPZ6QH2TM2J/Foundation-3DFYNEBRQSXST.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2TEPZ6QH2TM2J/ImageIO-YVI44K06S0WO.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2TEPZ6QH2TM2J/Metal-UMHL2WVYX9T4.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2TEPZ6QH2TM2J/ObjectiveC-1R06XOY9T4FIM.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2TEPZ6QH2TM2J/OpenGLES-MDRMEQ3COFKY.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2TEPZ6QH2TM2J/QuartzCore-23I9VTX2KZMTH.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2TEPZ6QH2TM2J/Security-27ZMYP8CODFT0.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2TEPZ6QH2TM2J/UIKit-1V5UHAPTOD24G.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2TEPZ6QH2TM2J/os_object-38I6DLZ5IH61J.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2UXKQ3ZRFOM51/Accelerate-1IKW7DALYIORV.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2UXKQ3ZRFOM51/AudioToolbox-29TRZLCW5QLKV.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2UXKQ3ZRFOM51/CFNetwork-3188M7OK0JW08.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2UXKQ3ZRFOM51/CoreAudio-DU322UQPMITA.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2UXKQ3ZRFOM51/CoreFoundation-J9ZOXGK4ZTRR.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2UXKQ3ZRFOM51/CoreGraphics-54UV9QOCX3ZY.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2UXKQ3ZRFOM51/CoreImage-2L8M44C0CYIPM.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2UXKQ3ZRFOM51/CoreLocation-2RB9TGORWT0YQ.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2UXKQ3ZRFOM51/CoreMIDI-2OV5TK5CIMZXQ.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2UXKQ3ZRFOM51/CoreTelephony-E0K26IE3JFHL.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2UXKQ3ZRFOM51/CoreText-3W9A51BO0R6G.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2UXKQ3ZRFOM51/CoreVideo-1MLDN391V99P4.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2UXKQ3ZRFOM51/Darwin-38I6DLZ5IH61J.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2UXKQ3ZRFOM51/Dispatch-2LX9MWM6UEPQW.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2UXKQ3ZRFOM51/FileProvider-1OMUUHYDP2DYB.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2UXKQ3ZRFOM51/Foundation-3DFYNEBRQSXST.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2UXKQ3ZRFOM51/ImageIO-YVI44K06S0WO.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2UXKQ3ZRFOM51/Metal-UMHL2WVYX9T4.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2UXKQ3ZRFOM51/MobileCoreServices-N94D31PLFESQ.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2UXKQ3ZRFOM51/ObjectiveC-1R06XOY9T4FIM.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2UXKQ3ZRFOM51/OpenGLES-MDRMEQ3COFKY.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2UXKQ3ZRFOM51/QuartzCore-23I9VTX2KZMTH.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2UXKQ3ZRFOM51/Security-27ZMYP8CODFT0.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2UXKQ3ZRFOM51/SystemConfiguration-354UAJE49HRJF.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2UXKQ3ZRFOM51/UIKit-1V5UHAPTOD24G.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2UXKQ3ZRFOM51/_Builtin_intrinsics-14H22GRGLA1OM.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/2UXKQ3ZRFOM51/os_object-38I6DLZ5IH61J.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3JXD969CZ38M9/AVFoundation-2W8OQOO5E005V.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3JXD969CZ38M9/AudioToolbox-29TRZLCW5QLKV.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3JXD969CZ38M9/CFNetwork-3188M7OK0JW08.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3JXD969CZ38M9/CoreAudio-DU322UQPMITA.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3JXD969CZ38M9/CoreFoundation-J9ZOXGK4ZTRR.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3JXD969CZ38M9/CoreGraphics-54UV9QOCX3ZY.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3JXD969CZ38M9/CoreImage-2L8M44C0CYIPM.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3JXD969CZ38M9/CoreLocation-2RB9TGORWT0YQ.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3JXD969CZ38M9/CoreMIDI-2OV5TK5CIMZXQ.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3JXD969CZ38M9/CoreMedia-3JTCZ41S8BKUD.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3JXD969CZ38M9/CoreText-3W9A51BO0R6G.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3JXD969CZ38M9/CoreVideo-1MLDN391V99P4.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3JXD969CZ38M9/Darwin-38I6DLZ5IH61J.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3JXD969CZ38M9/Dispatch-2LX9MWM6UEPQW.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3JXD969CZ38M9/FileProvider-1OMUUHYDP2DYB.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3JXD969CZ38M9/Foundation-3DFYNEBRQSXST.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3JXD969CZ38M9/ImageIO-YVI44K06S0WO.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3JXD969CZ38M9/JavaScriptCore-N94D31PLFESQ.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3JXD969CZ38M9/MediaToolbox-3N6MLXYI7H98P.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3JXD969CZ38M9/Metal-UMHL2WVYX9T4.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3JXD969CZ38M9/ObjectiveC-1R06XOY9T4FIM.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3JXD969CZ38M9/OpenGLES-MDRMEQ3COFKY.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3JXD969CZ38M9/QuartzCore-23I9VTX2KZMTH.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3JXD969CZ38M9/Security-27ZMYP8CODFT0.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3JXD969CZ38M9/UIKit-1V5UHAPTOD24G.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3JXD969CZ38M9/_Builtin_intrinsics-14H22GRGLA1OM.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3JXD969CZ38M9/os_object-38I6DLZ5IH61J.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3JXD969CZ38M9/simd-3V2MLXFFX3BH.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3JXD969CZ38M9/zlib-38I6DLZ5IH61J.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3OX5XR1DN684Z/AVFoundation-2W8OQOO5E005V.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3OX5XR1DN684Z/AudioToolbox-29TRZLCW5QLKV.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3OX5XR1DN684Z/CFNetwork-3188M7OK0JW08.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3OX5XR1DN684Z/CoreAudio-DU322UQPMITA.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3OX5XR1DN684Z/CoreFoundation-J9ZOXGK4ZTRR.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3OX5XR1DN684Z/CoreGraphics-54UV9QOCX3ZY.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3OX5XR1DN684Z/CoreImage-2L8M44C0CYIPM.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3OX5XR1DN684Z/CoreLocation-2RB9TGORWT0YQ.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3OX5XR1DN684Z/CoreMIDI-2OV5TK5CIMZXQ.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3OX5XR1DN684Z/CoreMedia-3JTCZ41S8BKUD.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3OX5XR1DN684Z/CoreText-3W9A51BO0R6G.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3OX5XR1DN684Z/CoreVideo-1MLDN391V99P4.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3OX5XR1DN684Z/Darwin-38I6DLZ5IH61J.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3OX5XR1DN684Z/Dispatch-2LX9MWM6UEPQW.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3OX5XR1DN684Z/FileProvider-1OMUUHYDP2DYB.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3OX5XR1DN684Z/Foundation-3DFYNEBRQSXST.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3OX5XR1DN684Z/ImageIO-YVI44K06S0WO.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3OX5XR1DN684Z/JavaScriptCore-N94D31PLFESQ.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3OX5XR1DN684Z/MediaToolbox-3N6MLXYI7H98P.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3OX5XR1DN684Z/Metal-UMHL2WVYX9T4.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3OX5XR1DN684Z/ObjectiveC-1R06XOY9T4FIM.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3OX5XR1DN684Z/OpenGLES-MDRMEQ3COFKY.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3OX5XR1DN684Z/QuartzCore-23I9VTX2KZMTH.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3OX5XR1DN684Z/Security-27ZMYP8CODFT0.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3OX5XR1DN684Z/UIKit-1V5UHAPTOD24G.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3OX5XR1DN684Z/_Builtin_intrinsics-14H22GRGLA1OM.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3OX5XR1DN684Z/os_object-38I6DLZ5IH61J.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3OX5XR1DN684Z/simd-3V2MLXFFX3BH.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/3OX5XR1DN684Z/zlib-38I6DLZ5IH61J.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/PJA4P0EX1UJ2/CFNetwork-3188M7OK0JW08.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/PJA4P0EX1UJ2/CoreFoundation-J9ZOXGK4ZTRR.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/PJA4P0EX1UJ2/CoreGraphics-54UV9QOCX3ZY.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/PJA4P0EX1UJ2/CoreImage-2L8M44C0CYIPM.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/PJA4P0EX1UJ2/CoreText-3W9A51BO0R6G.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/PJA4P0EX1UJ2/CoreVideo-1MLDN391V99P4.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/PJA4P0EX1UJ2/Darwin-38I6DLZ5IH61J.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/PJA4P0EX1UJ2/Dispatch-2LX9MWM6UEPQW.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/PJA4P0EX1UJ2/FileProvider-1OMUUHYDP2DYB.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/PJA4P0EX1UJ2/Foundation-3DFYNEBRQSXST.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/PJA4P0EX1UJ2/ImageIO-YVI44K06S0WO.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/PJA4P0EX1UJ2/Metal-UMHL2WVYX9T4.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/PJA4P0EX1UJ2/ObjectiveC-1R06XOY9T4FIM.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/PJA4P0EX1UJ2/OpenGLES-MDRMEQ3COFKY.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/PJA4P0EX1UJ2/QuartzCore-23I9VTX2KZMTH.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/PJA4P0EX1UJ2/Security-27ZMYP8CODFT0.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/PJA4P0EX1UJ2/UIKit-1V5UHAPTOD24G.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/PJA4P0EX1UJ2/os_object-38I6DLZ5IH61J.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/S24K3J27GGBJ/AVFoundation-2W8OQOO5E005V.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/S24K3J27GGBJ/Accelerate-1IKW7DALYIORV.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/S24K3J27GGBJ/AssetsLibrary-15E86WRBMI1ZI.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/S24K3J27GGBJ/AudioToolbox-29TRZLCW5QLKV.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/S24K3J27GGBJ/CFNetwork-3188M7OK0JW08.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/S24K3J27GGBJ/CoreAudio-DU322UQPMITA.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/S24K3J27GGBJ/CoreFoundation-J9ZOXGK4ZTRR.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/S24K3J27GGBJ/CoreGraphics-54UV9QOCX3ZY.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/S24K3J27GGBJ/CoreImage-2L8M44C0CYIPM.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/S24K3J27GGBJ/CoreLocation-2RB9TGORWT0YQ.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/S24K3J27GGBJ/CoreMIDI-2OV5TK5CIMZXQ.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/S24K3J27GGBJ/CoreMedia-3JTCZ41S8BKUD.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/S24K3J27GGBJ/CoreTelephony-E0K26IE3JFHL.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/S24K3J27GGBJ/CoreText-3W9A51BO0R6G.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/S24K3J27GGBJ/CoreVideo-1MLDN391V99P4.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/S24K3J27GGBJ/Darwin-38I6DLZ5IH61J.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/S24K3J27GGBJ/Dispatch-2LX9MWM6UEPQW.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/S24K3J27GGBJ/FileProvider-1OMUUHYDP2DYB.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/S24K3J27GGBJ/Foundation-3DFYNEBRQSXST.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/S24K3J27GGBJ/ImageIO-YVI44K06S0WO.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/S24K3J27GGBJ/JavaScriptCore-N94D31PLFESQ.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/S24K3J27GGBJ/MachO-1BMJAO5Q3NM3O.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/S24K3J27GGBJ/MediaToolbox-3N6MLXYI7H98P.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/S24K3J27GGBJ/Metal-UMHL2WVYX9T4.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/S24K3J27GGBJ/MobileCoreServices-N94D31PLFESQ.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/S24K3J27GGBJ/ObjectiveC-1R06XOY9T4FIM.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/S24K3J27GGBJ/OpenGLES-MDRMEQ3COFKY.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/S24K3J27GGBJ/Photos-3A71D5TFDRRPT.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/S24K3J27GGBJ/QuartzCore-23I9VTX2KZMTH.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/S24K3J27GGBJ/Security-27ZMYP8CODFT0.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/S24K3J27GGBJ/SystemConfiguration-354UAJE49HRJF.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/S24K3J27GGBJ/UIKit-1V5UHAPTOD24G.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/S24K3J27GGBJ/_Builtin_intrinsics-14H22GRGLA1OM.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/S24K3J27GGBJ/os-38I6DLZ5IH61J.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/S24K3J27GGBJ/os_object-38I6DLZ5IH61J.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/ModuleCache/S24K3J27GGBJ/simd-3V2MLXFFX3BH.pcm.timestamp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/build/info.plist" afterPath="$PROJECT_DIR$/ios/build/info.plist" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GradleLocalSettings">
+    <option name="externalProjectsViewState">
+      <projects_view />
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="20" />
+    <option name="y" value="43" />
+    <option name="width" value="1400" />
+    <option name="height" value="757" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="AndroidView" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
+      <pane id="Scope" />
+      <pane id="AndroidView">
+        <subPane>
+          <expand>
+            <path>
+              <item name="GRS3" type="1abcf292:AndroidViewProjectNode" />
+              <item name="GRS3" type="e9137016:NonAndroidModuleNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+    </configuration>
+    <configuration name="&lt;template&gt;" type="Applet" default="true" selected="false">
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+    </configuration>
+    <configuration name="&lt;template&gt;" type="JUnit" default="true" selected="false">
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+    </configuration>
+    <configuration name="&lt;template&gt;" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" default="true" selected="false">
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e6dbda81-0cf0-4353-b9d0-7c7ee3da8428" name="Default" comment="" />
+      <created>1522237957455</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1522237957455</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TodoView" selected-index="1">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="20" y="43" width="1400" height="757" extended-state="0" />
+    <layout>
+      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32930514" sideWeight="0.47643593" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32930514" sideWeight="0.52356404" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32930514" sideWeight="0.49410897" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932332" sideWeight="0.4970545" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932332" sideWeight="0.4970545" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2533137" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+</project>

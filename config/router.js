@@ -26,17 +26,15 @@ import ControlDistance from '../container/controlDistance'
 import ButtonChangePayment from '../component/items/bottonChangePayment' 
 import SummaryTotal from '../component/items/summary'
 import Verify from '../container/verify'
+import ResetVerify from '../container/resetVerify'
 
 
 export default StackNavigator({
-    Register: {
-        screen: Register,
+    Register : {
+        screen : Register
     },
-    Verify : {
-        screen : Verify
-    },
-    Register: {
-        screen: Register,
+    ResetVerify : {
+        screen : ResetVerify
     },
     EventList: {
         screen: EventList,
@@ -63,9 +61,9 @@ export default StackNavigator({
         screen: UserHelpRegister,
 
     },
-    // ListEvent: {
-    //     screen: ListEvent,
-    // },
+    Verify : {
+        screen : Verify
+    },
     ShirtPhotoPlus: {
         screen: ShirtPhotoPlus
     },

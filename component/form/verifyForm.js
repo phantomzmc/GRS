@@ -33,6 +33,9 @@ class FormVerifyCode extends Component {
             { text: 'ลองอีกครั้ง', onPress: () => console.log('ลองอีกครั้ง') },
         ])
     }
+    goResetVerify(){
+        this.props.resetVerify()
+    }
 
     render() {
         let { code, statusVerify } = this.state
@@ -58,7 +61,7 @@ class FormVerifyCode extends Component {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.containerNewCode}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => this.goResetVerify()}>
                         <Text style={styles.textNewCode}>- ขอ VerifyCode ใหม่</Text>
                     </TouchableOpacity>
                 </View>
@@ -84,7 +87,7 @@ const styles = StyleSheet.create({
         padding: 20,
         fontFamily: 'kanit',
         fontSize: 16,
-
+        textAlign: 'center'
     },
     containerForm: {
         padding: 20,

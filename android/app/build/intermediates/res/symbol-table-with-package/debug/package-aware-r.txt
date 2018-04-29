@@ -984,6 +984,7 @@ int style Widget_AppCompat_Spinner_Underlined 0x7f0c013f
 int style Widget_AppCompat_TextView_SpinnerItem 0x7f0c0140
 int style Widget_AppCompat_Toolbar 0x7f0c0141
 int style Widget_AppCompat_Toolbar_Button_Navigation 0x7f0c0142
+int style redboxButton 0x7f0c0143
 int[] styleable ActionBar { 0x7f02002c, 0x7f02002e, 0x7f02002f, 0x7f02004e, 0x7f02004f, 0x7f020050, 0x7f020051, 0x7f020053, 0x7f020057, 0x7f020058, 0x7f020063, 0x7f02006a, 0x7f02006b, 0x7f02006c, 0x7f02006d, 0x7f02006e, 0x7f020070, 0x7f020073, 0x7f02007f, 0x7f020086, 0x7f020091, 0x7f020098, 0x7f020099, 0x7f0200b9, 0x7f0200bc, 0x7f0200ce, 0x7f0200d6 }
 int styleable ActionBar_background 0
 int styleable ActionBar_backgroundSplit 1

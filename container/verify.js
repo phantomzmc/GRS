@@ -31,12 +31,16 @@ class VerifyCode extends Component {
         console.log({verifycode, statusVerify})
         this.props.setVerify({ verifycode, statusVerify })
     }
+    gotoResetVerify = () => {
+        this.props.navigation.navigate("ResetVerify")
+    }
 
     render() {
         return (
             <Container style={styles.container}>
                 <FormVerifyCode goLogin={this.gotoLogin.bind(this)} 
-                                sendData={this.sendDataVerify.bind(this)}/>
+                                sendData={this.sendDataVerify.bind(this)}
+                                resetVerify={this.gotoResetVerify.bind(this)}/>
             </Container>
         )
     }
