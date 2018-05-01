@@ -1,4 +1,4 @@
-#Sun Apr 29 05:39:46 ICT 2018
-base.0=/Users/thunnathorn/GRS3/android/app/build/intermediates/transforms/dexMerger/debug/18
+#Wed May 02 01:29:17 ICT 2018
+base.0=/Users/thunnathorn/GRS3/android/app/build/intermediates/transforms/dexMerger/debug/35
 path.0=classes.dex
 renamed.0=classes.dex

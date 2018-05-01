@@ -28,14 +28,10 @@ import SummaryTotal from '../component/items/summary'
 import Verify from '../container/verify'
 import ResetVerify from '../container/resetVerify'
 
-
 export default StackNavigator({
-    Login : {
-        screen : Login
-    },
-    ResetVerify : {
-        screen : ResetVerify
-    },
+    // RNCommunications : {
+    //     screen : RNCommunications
+    // },
     EventList: {
         screen: EventList,
     },
@@ -63,6 +59,9 @@ export default StackNavigator({
     },
     Verify : {
         screen : Verify
+    },
+    ResetVerify : {
+        screen : ResetVerify
     },
     ShirtPhotoPlus: {
         screen: ShirtPhotoPlus

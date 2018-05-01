@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-
 import {
   View,
   Text,
@@ -11,13 +10,17 @@ import {
 
 } from "react-native";
 import randomstringPromise from 'randomstring-promise';
+import Communications from 'react-native-communications';
 import { StackNavigator } from "react-navigation";
 import { Form, Item, Input, Label, Picker, Icon } from 'native-base'
+import { connect } from 'react-redux'
 
 
 class FormAddressRegister extends Component {
   static propTypes = {
-    navigation: PropTypes.object
+    navigation: PropTypes.object,
+    email: PropTypes.string
+
   };
   constructor(props) {
     super(props);
@@ -27,23 +30,25 @@ class FormAddressRegister extends Component {
       relation: "ความสัมพันธ์",
       tel: "",
       verifycode: "",
-      statusVerify: 0
+      statusVerify: 0,
+      email : ""
     };
   }
   componentWillMount() {
-    let { verifycode } = this.state
-    console.log("verfity")
+    let { verifycode,email } = this.state
     randomstringPromise(10)
       .then((verifycode) => {
         this.setState({ verifycode })
         // console.log(code);  // u8KNs7aAw0DCOKO1MdEgVIcF2asajrdd
         console.log(verifycode)
       });
+    this.setState({ email : this.props.profile.profile.email})
   }
 
 
   sendData = (firstname, lastname, relation, tel) => {
     let { verifycode, statusVerify } = this.state
+    Communications.email([this.state.email], null, null, 'GuuRun Code Verify', 'VerifyCode is : ' + this.state.verifycode)
     this.props.goEvent(firstname, lastname, relation, tel, verifycode, statusVerify);
   };
 
@@ -179,7 +184,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   picker: {
-    paddingTop : 15,
+    paddingTop: 15,
     padding: 30
   },
 
@@ -193,4 +198,10 @@ const styles = StyleSheet.create({
     fontFamily: 'kanit'
   }
 });
-export default FormAddressRegister;
+
+const mapStateToProps = (state) => {
+  return {
+    profile: state.profile
+  }
+}
+export default connect(mapStateToProps)(FormAddressRegister);

@@ -52,7 +52,7 @@ class AddressForm extends Component {
                 <Text style={styles.headForm}>ที่อยู่</Text>
                 <Form>
                     <Item floatingLabel last>
-                        <Label style={styles.textLabel}>{this.props.profile.profile.address}</Label>
+                        <Label style={styles.textLabel}>{this.props.profile.address.address} {this.props.profile.address.t} {this.props.profile.address.a} {this.props.profile.address.city} {this.props.profile.address.country} {this.props.profile.address.postNumber}</Label>
                         <Input
                             onChangeText={(adress) => this.setState(this.props.profile.address.address)}
                         />

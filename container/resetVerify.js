@@ -38,7 +38,7 @@ class ResetVerify extends Component {
             });
     }
     gotoLogin = () => {
-        this.props.navigation.navigate("Login")
+        this.props.navigation.navigate("Verify")
     }
     sendResetVerify() {
         let { verifycode, statusVerify } = this.state
