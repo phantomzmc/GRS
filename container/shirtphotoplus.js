@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image,Alert } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image, Alert } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
 
@@ -23,24 +23,24 @@ class ShirtPhotoPlus extends Component {
     };
     goNextState = () => {
         console.log("checkPromo")
-        if(this.props.event.event.PromoCodeStatus == 1){
+        if (this.props.event.event.PromoCodeStatus == 1  || this.props.event.event.PromoCodeRequired == 1) {
             console.log("status 1")
-            Alert.alert("ส่วนลดค่าสมัคร","กรุณากรอกรหัสส่วนลดในการสมัคร",[
+            Alert.alert("ส่วนลดค่าสมัคร", "กรุณากรอกรหัสส่วนลดในการสมัคร", [
                 {
-                    text:"Cancel"
+                    text: "Cancel"
                 },
                 {
                     text: "รหัสส่วนลด",
-                    onPress : () => this.props.navigation.navigate("DiscountCoupon")
+                    onPress: () => this.props.navigation.navigate("DiscountCoupon")
                 },
             ], { cancelable: false })
         }
-        else if (this.props.event.event.PromoCodeStatus == 0){
-            console.log("status 0")
+        else if (this.props.event.event.PromoCodeStatus == 0 && this.props.event.event.PromoCodeRequired == 0){
+            console.log("status 0 ผ่าน")
             this.props.navigation.navigate('AddressLayout')
         }
     }
-    
+
     render() {
         return (
             <ScrollView>
@@ -100,11 +100,11 @@ const styles = StyleSheet.create({
 })
 const mapStateToProps = (state) => {
     return {
-        event :  state.event,
+        event: state.event,
         creditcard: state.creditcard,
         shirtphoto: state.shirtphoto,
         photoplus: state.photoplus,
-        total : state.total
+        total: state.total
     };
 };
 const mapDisPacthToProps = (dispacth) => {

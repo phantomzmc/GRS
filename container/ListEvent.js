@@ -63,15 +63,18 @@ class ListEvent extends Component {
         console.log("gotoRegister")
         this.checkTeamRegis()
     }
+    gotoLogin = () =>{
+        this.props.navigation.navigate("SingleLogin")
+    }
     checkUser = () => {
         if (this.state.profile == "") {
             console.log("checkLogin")
-            this.checkTeamRegis()
+            this.gotoLogin()
             // Alert.alert('กรุณาเข้าสู่ระบบ', 'ผู้ใช้งานจะต้องทำการเข้าสู่ระบบก่อน', [{
             //     text: 'Cancel'
             // }, {
             //     text: 'เข้าสู่ระบบ',
-            //     onPress: () => this.checkTeamRegis(),
+            //     onPress: () => this.gotoLogin(),
             // }], { cancelable: false })
         }
         else {

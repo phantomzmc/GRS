@@ -42,7 +42,7 @@ class SingleLogin extends Component {
         this
             .props
             .navigation
-            .navigate('EventList')
+            .navigate('RegisterDistance')
     }
     gotoRegister = () => {
         this

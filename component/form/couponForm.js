@@ -26,11 +26,25 @@ class CouponForm extends Component {
     gotoAddress() {
         this.props.navigation.navigate('AddressLayout')
     }
+
     checkInput() {
-        if (this.state.coupon == "") {
-            Alert.alert("กรุณากรอกรหัสคูปองให้ถูกต้อง")
-        } else if (this.state.coupon == "1234") {
-            this.gotoAddress()
+        if (this.props.event.event.PromoCodeRequired == 1 && this.props.event.event.PromoCodeStatus == 1) {
+            console.log("ต้อง input code")
+             if (this.state.coupon == "") {
+                 Alert.alert("กรุณากรอกรหัสคูปองให้ถูกต้อง")
+             } else if (this.state.coupon == "1234") {
+                 this.gotoAddress()
+             }
+        }
+        else if (this.props.event.event.PromoCodeRequired == 0 && this.props.event.event.PromoCodeStatus == 1) {
+            console.log("ใส่หรือไม่ใส่ได้")
+             if (this.state.coupon == "1234") {
+                 this.gotoAddress()
+             }
+             this.gotoAddress()
+        }
+        else if (this.props.event.event.PromoCodeRequired == 1 && this.props.event.event.PromoCodeStatus == 0){
+            console.log("ใส่หรือไม่ใส่ได้2")
         }
     }
     render() {

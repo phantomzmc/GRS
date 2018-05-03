@@ -61,9 +61,9 @@ class ListEvent extends Component {
     }
     gotoPayment = (item) => {
         if (this.props.Profile == "") {
-            this.props.addEvent(item.GroupRegister)
-            console.log(item.GroupRegister)
+            this.props.addEvent(item)
             this.props.CheckLogin()
+            console.log(item)
         } else if (this.props.Profile != "") {
             this.setState({
                 event: {
@@ -72,8 +72,8 @@ class ListEvent extends Component {
                     tranferBank: item.EventBankDetailTH
                 }
             })
-            this.props.addEvent(item)
             this.props.CheckLogin()
+            this.props.addEvent(item)
         }
     }
 
@@ -130,7 +130,10 @@ class ListEvent extends Component {
 const mapDispatchtoProps = (dispatch) => {
     return {
         addEvent: (event) => {
-            dispatch({ type: 'addEvent', payload: event })
+            dispatch({ 
+                type: 'addEvent', 
+                payload: event 
+            })
         }
     };
 }

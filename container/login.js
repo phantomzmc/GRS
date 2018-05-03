@@ -49,10 +49,13 @@ class Login extends Component {
     }
     gotoListEvent = () => {
         console.log(this.state.username)
-        this.props.navigation.navigate('EventList')
+        this.props.navigation.navigate('RegisterDistance')
     }
     gotoRegister = () => {
         this.props.navigation.navigate('Register')
+    }
+    gotoResetPassword = () => {
+        this.props.navigation.navigate('ResetPassword')
     }
     render() {
         return (
@@ -85,9 +88,15 @@ class Login extends Component {
                             <Text style={styles.textButton}>Login</Text>
                         </TouchableOpacity>
                     </View>
+                    
                     <TouchableOpacity onPress={this.gotoRegister.bind(this)}>
                         <Text style={styles.regisButton}>
                             สมัครสมาชิก
+                        </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={this.gotoResetPassword.bind(this)}>
+                        <Text style={styles.regisButton}>
+                            ขอรหัสผ่านใหม่
                         </Text>
                     </TouchableOpacity>
                 </View>

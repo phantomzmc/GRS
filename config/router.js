@@ -27,10 +27,12 @@ import ButtonChangePayment from '../component/items/bottonChangePayment'
 import SummaryTotal from '../component/items/summary'
 import Verify from '../container/verify'
 import ResetVerify from '../container/resetVerify'
+import ResetPassword from '../container/resetPassword'
+import Test from '../container/test'
 
 export default StackNavigator({
-    // RNCommunications : {
-    //     screen : RNCommunications
+    // Test : {
+    //     screen : Test
     // },
     EventList: {
         screen: EventList,
@@ -62,6 +64,9 @@ export default StackNavigator({
     },
     ResetVerify : {
         screen : ResetVerify
+    },
+    ResetPassword : {
+        screen : ResetPassword
     },
     ShirtPhotoPlus: {
         screen: ShirtPhotoPlus

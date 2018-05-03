@@ -2620,6 +2620,10 @@ function-bind@^1.0.2, function-bind@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/function-bind/-/function-bind-1.1.1.tgz#a56899d3ea3c9bab874bb9773b7c5ede92f4895d"
 
+fuse.js@^3.0.5:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/fuse.js/-/fuse.js-3.2.0.tgz#f0448e8069855bf2a3e683cdc1d320e7e2a07ef4"
+
 gauge@~1.2.5:
   version "1.2.7"
   resolved "https://registry.yarnpkg.com/gauge/-/gauge-1.2.7.tgz#e9cec5483d3d4ee0ef44b60a7d99e4935e136d93"
@@ -5081,6 +5085,24 @@ react-native-animatable@^1.2.4:
   dependencies:
     prop-types "^15.5.10"
 
+react-native-autocomplete-input@^3.5.0:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/react-native-autocomplete-input/-/react-native-autocomplete-input-3.5.0.tgz#2e52e3865abf1ad3e8d04f7e39f5314c03a89e4d"
+  dependencies:
+    prop-types "^15.5.10"
+
+react-native-autocomplete-select@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-autocomplete-select/-/react-native-autocomplete-select-1.0.0.tgz#2e5537f49b7038e98fc845236fa5aa5650cf7272"
+  dependencies:
+    react ">=15.4.1"
+    react-native ">=0.38.0"
+    string_score "git+https://github.com/ThiagoNP/string_score.git"
+
+react-native-autocomplete@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/react-native-autocomplete/-/react-native-autocomplete-0.4.0.tgz#df786ca3e5efbd161e2bd87c39d4984f00dfc047"
+
 react-native-communications@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/react-native-communications/-/react-native-communications-2.2.1.tgz#7883b56b20a002eeb790c113f8616ea8692ca795"
@@ -5148,6 +5170,10 @@ react-native-keyboard-aware-scroll-view@0.5.0:
     prop-types "^15.6.0"
     react-native-iphone-x-helper "^1.0.1"
 
+react-native-modal-filter-picker@^1.3.4:
+  version "1.3.4"
+  resolved "https://registry.yarnpkg.com/react-native-modal-filter-picker/-/react-native-modal-filter-picker-1.3.4.tgz#c33ae2ca7b0b5adae8671a6b417a6f5d263d9813"
+
 react-native-modal-overlay@^1.2.3:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/react-native-modal-overlay/-/react-native-modal-overlay-1.2.3.tgz#e28ef249544c46e5ab1f292287efe9fca3cee4f1"
@@ -5190,6 +5216,13 @@ react-native-safe-area-view@^0.7.0:
   dependencies:
     hoist-non-react-statics "^2.3.1"
 
+react-native-search-filter@^0.1.1, react-native-search-filter@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/react-native-search-filter/-/react-native-search-filter-0.1.3.tgz#fe710c1e075ab30d08fe568b590c5a3d47b5fd49"
+  dependencies:
+    fuse.js "^3.0.5"
+    react-native-search-filter "^0.1.1"
+
 react-native-select-list@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/react-native-select-list/-/react-native-select-list-1.0.5.tgz#e69048ac6fdbce4d8ec195b97131f19ef4f00e42"
@@ -5226,7 +5259,7 @@ react-native-vector-icons@~4.5.0:
     prop-types "^15.5.10"
     yargs "^8.0.2"
 
-react-native@^0.55.3:
+react-native@>=0.38.0, react-native@^0.55.3:
   version "0.55.3"
   resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.55.3.tgz#6ff1691bd0645d0480fba16377edb9dce5bd28c4"
   dependencies:
@@ -5362,6 +5395,15 @@ react-tween-state@^0.1.5:
 react@16.2.0:
   version "16.2.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.2.0.tgz#a31bd2dab89bff65d42134fa187f24d054c273ba"
+  dependencies:
+    fbjs "^0.8.16"
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.0"
+
+react@>=15.4.1:
+  version "16.3.2"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.3.2.tgz#fdc8420398533a1e58872f59091b272ce2f91ea9"
   dependencies:
     fbjs "^0.8.16"
     loose-envify "^1.1.0"
@@ -6133,6 +6175,10 @@ string_decoder@~1.0.3:
   resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-1.0.3.tgz#0fc67d7c141825de94282dd536bec6b9bce860ab"
   dependencies:
     safe-buffer "~5.1.0"
+
+"string_score@git+https://github.com/ThiagoNP/string_score.git":
+  version "0.1.20"
+  resolved "git+https://github.com/ThiagoNP/string_score.git#62588b6c43fe957f631f6bfd76300cad678a7941"
 
 stringstream@~0.0.4, stringstream@~0.0.5:
   version "0.0.5"

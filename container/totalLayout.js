@@ -42,7 +42,7 @@ class TotalLayout extends Component {
         console.log(this.props.event.date)
         Alert.alert('เรียบร้อย', 'ทำการรายการเสร็จสิ้น', [
             {
-                text: 'ไปยังรายการวิ่ง',
+                text: 'ตกลง',
                 onPress: () => this.gotoListEvent()
             }
         ], {cancelable: false})
