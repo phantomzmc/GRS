@@ -22,17 +22,6 @@ class ListEvent extends Component {
     static propTypes = {
         navigation: PropTypes.object
     }
-    static navigationOptions = {
-        title: 'รายการวิ่ง',
-        headerStyle: {
-            backgroundColor: '#FC561F'
-        },
-        headerTitleStyle: {
-            color: '#fff',
-            fontFamily: "Kanit",
-            fontWeight: '500'
-        }
-    };
     constructor(props) {
         super(props);
         this.state = {
@@ -46,6 +35,12 @@ class ListEvent extends Component {
         }
     }
     componentDidMount() {
+        this.setUserID()
+    }
+    componentWillUnmount(){
+        
+    }
+    setUserID = () => {
         console.log(this.props.profile.profile.userid)
         this.setState({ profile: this.props.profile.profile.userid })
         console.log("test" + this.state.profile)
@@ -70,12 +65,6 @@ class ListEvent extends Component {
         if (this.state.profile == "") {
             console.log("checkLogin")
             this.gotoLogin()
-            // Alert.alert('กรุณาเข้าสู่ระบบ', 'ผู้ใช้งานจะต้องทำการเข้าสู่ระบบก่อน', [{
-            //     text: 'Cancel'
-            // }, {
-            //     text: 'เข้าสู่ระบบ',
-            //     onPress: () => this.gotoLogin(),
-            // }], { cancelable: false })
         }
         else {
             this.props.navigation.navigate('ControlDistance')

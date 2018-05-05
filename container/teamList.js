@@ -8,24 +8,7 @@ import EventListFriend from '../component/list/listFriend/eventListFriend'
 
 
 class TeamList extends Component {
-    static navigationOptions = {
-        title: 'ลงทะเบียนแบบกลุ่ม',
-        headerStyle: {
-            backgroundColor: '#FC561F'
-        },
-        headerTitleStyle: {
-            color: '#fff',
-            fontFamily: "Kanit",
-            fontWeight: '500',
-        },
-        headerRight: (
-            <Button
-                onPress={() => alert('This is a button!')}
-                title="Info"
-                color="#fff"
-            />
-        ),
-    };
+
     gotoTeamList = () => {
         this.props.navigation.navigate('TabRouter')
     }

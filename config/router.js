@@ -1,8 +1,6 @@
 import { StackNavigator } from 'react-navigation';
 import SingleLogin from '../container/singleLogin'
 import Login from '../container/login'
-import ListEvent from '../component/list/listevent/listevent'
-import RegisterDistance from '../container/registerDistance'
 import ShirtPhotoPlus from '../container/shirtphotoplus'
 import CreditPayment from '../container/creditPayment'
 import AddressLayout from '../container/addressLayout'
@@ -14,8 +12,7 @@ import AddEventFriend from '../container/AddEventDetailFrind'
 import TransferPayment from '../container/tranferPayment'
 import TotalRegister from '../component/items/totalRegister'
 import EventList from '../container/ListEvent'
-import ListDistance from '../component/list/event/listdistance'
-import ListShith from '../component/list/listShirt/listShirt';
+
 import DiscountCoupon from '../component/form/couponForm'
 import GetPleace from '../component/items/getPlece'
 import DetailRegister from '../component/items/detailRegister'
@@ -23,22 +20,46 @@ import UserHelpRegister from '../container/userHelpRegister'
 import UserAddressRegister from '../container/userAddressRegister'
 
 import ControlDistance from '../container/controlDistance'
-import ButtonChangePayment from '../component/items/bottonChangePayment' 
+import ButtonChangePayment from '../component/items/bottonChangePayment'
 import SummaryTotal from '../component/items/summary'
 import Verify from '../container/verify'
 import ResetVerify from '../container/resetVerify'
 import ResetPassword from '../container/resetPassword'
 import Test from '../container/test'
+import MultiSelectExample from '../mockdata'
 
 export default StackNavigator({
-    // Test : {
-    //     screen : Test
+    // MultiSelectExample : {
+    //     screen : MultiSelectExample
     // },
+    Test : {
+        screen : Test
+    },
     EventList: {
         screen: EventList,
+        navigationOptions: {
+            title: 'รายการวิ่ง',
+            headerStyle: {
+                backgroundColor: '#FC561F'
+            },
+            headerTitleStyle: {
+                color: '#fff',
+                fontFamily: "Kanit",
+                fontWeight: '500'
+            }
+        }
     },
     Register: {
         screen: Register,
+        navigationOptions: {
+            title: "สมัครสมาชิก",
+            headerStyle: {
+                backgroundColor: "#FC561F"
+            },
+            headerTitleStyle: {
+                color: "#fff"
+            }
+        }
     },
     SingleLogin: {
         screen: SingleLogin,
@@ -54,40 +75,132 @@ export default StackNavigator({
     },
     UserAddressRegister: {
         screen: UserAddressRegister,
+        navigationOptions: {
+            title: "สมัครสมาชิก",
+            headerStyle: {
+                backgroundColor: "#FC561F"
+            },
+            headerTitleStyle: {
+                color: "#fff"
+            }
+        }
     },
     UserHelpRegister: {
         screen: UserHelpRegister,
+        navigationOptions: {
+            title: "สมัครสมาชิก",
+            headerStyle: {
+                backgroundColor: "#FC561F"
+            },
+            headerTitleStyle: {
+                color: "#fff"
+            }
+        }
 
     },
-    Verify : {
-        screen : Verify
+    Verify: {
+        screen: Verify,
+        navigationOptions: {
+            title: "ยืนยันตัวตน",
+            headerStyle: {
+                backgroundColor: "#FC561F"
+            },
+            headerTitleStyle: {
+                color: "#fff"
+            }
+        }
     },
-    ResetVerify : {
-        screen : ResetVerify
+    ResetVerify: {
+        screen: ResetVerify,
+        navigationOptions: {
+            title: "ขอรหัสผ่านใหม่",
+            headerStyle: {
+                backgroundColor: "#FC561F"
+            },
+            headerTitleStyle: {
+                color: "#fff"
+            }
+        }
     },
-    ResetPassword : {
-        screen : ResetPassword
+    ResetPassword: {
+        screen: ResetPassword,
+        navigationOptions: {
+            title: "ขอรหัสผ่านใหม่",
+            headerStyle: {
+                backgroundColor: "#FC561F"
+            },
+            headerTitleStyle: {
+                color: "#fff"
+            }
+        }
     },
     ShirtPhotoPlus: {
-        screen: ShirtPhotoPlus
+        screen: ShirtPhotoPlus,
+        navigationOptions: {
+            title: 'เลือกไซค์เสื้อ',
+            headerStyle: {
+                backgroundColor: '#FC561F'
+            },
+            headerTitleStyle: {
+                color: '#fff',
+                fontFamily: 'kanit',
+            }
+        }
     },
     DiscountCoupon: {
-        screen: DiscountCoupon
+        screen: DiscountCoupon,
+        navigationOptions: {
+            title: 'คูปองส่วนลด',
+            headerStyle: {
+                backgroundColor: '#FC561F'
+            },
+            headerTitleStyle: {
+                color: '#fff'
+            }
+        }
     },
-    ControlDistance : {
-        screen : ControlDistance
+    ControlDistance: {
+        screen: ControlDistance,
+        navigationOptions: {
+            title: 'ลงทะเบียนวิ่ง',
+            headerStyle: {
+                backgroundColor: '#FC561F'
+            },
+            headerTitleStyle: {
+                color: '#fff',
+                fontFamily: 'kanit',
+            },
+        }
     },
-    RegisterDistance: {
-        screen: RegisterDistance,
-    },
-    ButtonChangePayment : {
-        screen : ButtonChangePayment
+    ButtonChangePayment: {
+        screen: ButtonChangePayment,
+        navigationOptions: {
+            title: 'ชำระเงิน',
+            headerStyle: {
+                backgroundColor: '#FC561F'
+            },
+            headerTitleStyle: {
+                color: '#fff',
+                fontFamily: 'kanit',
+            },
+        }
     },
     TabRouter: {
         screen: TabRouter
     },
     TeamList: {
-        screen: TeamList
+        screen: TeamList,
+        navigationOptions: {
+            title: 'ลงทะเบียนแบบกลุ่ม',
+            headerStyle: {
+                backgroundColor: '#FC561F'
+            },
+            headerTitleStyle: {
+                color: '#fff',
+                fontFamily: "Kanit",
+                fontWeight: '500',
+            },
+        }
     },
 
     CreditPayment: {
@@ -97,19 +210,50 @@ export default StackNavigator({
         screen: TransferPayment
     },
     AddressLayout: {
-        screen: AddressLayout
+        screen: AddressLayout,
+        navigationOptions: {
+            title: 'การจัดส่ง',
+            headerStyle: {
+                backgroundColor: '#FC561F'
+            },
+            headerTitleStyle: {
+                color: '#fff',
+                fontFamily: 'kanit',
+            },
+        }
     },
     TotalPayment: {
-        screen: TotalPayment
+        screen: TotalPayment,
+        navigationOptions: {
+            title: 'สรุปการสมัครทั้งหมด',
+            headerStyle: {
+                backgroundColor: '#FC561F'
+            },
+            headerTitleStyle: {
+                color: '#fff',
+                fontFamily: 'kanit',
+            }
+        }
     },
     AddEventFriend: {
-        screen: AddEventFriend
+        screen: AddEventFriend,
+        navigationOptions: {
+            title: 'เลือกระยะทางเเละเสื้อ',
+            headerStyle: {
+                backgroundColor: '#FC561F'
+            },
+            headerTitleStyle: {
+                color: '#fff',
+                fontFamily: "Kanit",
+                fontWeight: '500',
+            }
+        }
     },
     TotalRegister: {
         screen: TotalRegister
     },
-    GetPleace : {
-        screen : GetPleace
+    GetPleace: {
+        screen: GetPleace
     }
 
 

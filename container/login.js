@@ -49,7 +49,7 @@ class Login extends Component {
     }
     gotoListEvent = () => {
         console.log(this.state.username)
-        this.props.navigation.navigate('RegisterDistance')
+        this.props.navigation.navigate('ControlDistance')
     }
     gotoRegister = () => {
         this.props.navigation.navigate('Register')

@@ -11,31 +11,39 @@ import SummaryTotal from '../component/items/summary'
 
 
 class ShirtPhotoPlus extends Component {
-    static navigationOptions = {
-        title: 'เลือกไซค์เสื้อ',
-        headerStyle: {
-            backgroundColor: '#FC561F'
-        },
-        headerTitleStyle: {
-            color: '#fff',
-            fontFamily: 'kanit',
-        }
-    };
+
     goNextState = () => {
         console.log("checkPromo")
-        if (this.props.event.event.PromoCodeStatus == 1  || this.props.event.event.PromoCodeRequired == 1) {
-            console.log("status 1")
+        if (this.props.event.event.PromoCodeStatus == 1 && this.props.event.event.PromoCodeRequired == 1) {
+            console.log("status 1 ต้องกรอก")
             Alert.alert("ส่วนลดค่าสมัคร", "กรุณากรอกรหัสส่วนลดในการสมัคร", [
                 {
                     text: "Cancel"
                 },
                 {
-                    text: "รหัสส่วนลด",
+                    text: "ยืนยัน",
                     onPress: () => this.props.navigation.navigate("DiscountCoupon")
                 },
             ], { cancelable: false })
         }
-        else if (this.props.event.event.PromoCodeStatus == 0 && this.props.event.event.PromoCodeRequired == 0){
+        else if ((this.props.event.event.PromoCodeStatus == 1 && this.props.event.event.PromoCodeRequired == 0) || (this.props.event.event.PromoCodeStatus == 0 && this.props.event.event.PromoCodeRequired == 1)) {
+            console.log("status 2 กรอกหรือไม่กรอกก็ได้")
+            Alert.alert("ส่วนลดค่าสมัคร", "รายการนี้มีส่วนลดค่าสมัคร ท่านสามารถกรอกรหัสเพื่อรับส่วนลดได้", [
+                {
+                    text: "Cancel"
+                },
+                {
+                    text: "กรอกรหัสส่วนลด",
+                    onPress: () => this.props.navigation.navigate("DiscountCoupon")
+                },
+                {
+                    text: "ข้ามการกรอกรหัส",
+                    onPress: () => this.props.navigation.navigate('AddressLayout')
+
+                },
+            ], { cancelable: false })
+        }
+        else if (this.props.event.event.PromoCodeStatus == 0 && this.props.event.event.PromoCodeRequired == 0) {
             console.log("status 0 ผ่าน")
             this.props.navigation.navigate('AddressLayout')
         }

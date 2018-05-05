@@ -17,15 +17,7 @@ class UserRegister extends Component {
   static propTypes = {
     navigation: PropTypes.object
   };
-  static navigationOptions = {
-    title: "สมัครสมาชิก",
-    headerStyle: {
-      backgroundColor: "#FC561F"
-    },
-    headerTitleStyle: {
-      color: "#fff"
-    }
-  };
+
   constructor(props) {
     super(props);
     this.state = {

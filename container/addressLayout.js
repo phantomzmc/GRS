@@ -14,16 +14,6 @@ class AddressLayout extends Component {
     static propTypes = {
         navigation: PropTypes.object,
     }
-    static navigationOptions = {
-        title: 'การจัดส่ง',
-        headerStyle: {
-            backgroundColor: '#FC561F'
-        },
-        headerTitleStyle: {
-            color: '#fff',
-            fontFamily: 'kanit',
-        },
-    };
     constructor(props) {
         super(props)
         this.state = {

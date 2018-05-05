@@ -6,15 +6,6 @@ import { map } from 'mobx';
 
 
 class CouponForm extends Component {
-    static navigationOptions = {
-        title: 'คูปองส่วนลด',
-        headerStyle: {
-            backgroundColor: '#FC561F'
-        },
-        headerTitleStyle: {
-            color: '#fff'
-        }
-    };
     constructor(state) {
         super(state)
         this.state = {

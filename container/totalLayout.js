@@ -6,16 +6,7 @@ import TotalRegister from '../component/items/totalRegister'
 import DetailRegister from '../component/items/detailRegister'
 
 class TotalLayout extends Component {
-    static navigationOptions = {
-        title: 'สรุปการสมัครทั้งหมด',
-        headerStyle: {
-            backgroundColor: '#FC561F'
-        },
-        headerTitleStyle: {
-            color: '#fff',
-            fontFamily: 'kanit',
-        }
-    };
+
     constructor(props) {
         super(props)
         this.state = {

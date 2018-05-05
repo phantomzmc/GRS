@@ -11,19 +11,7 @@ import ButtonSubmit from '../component/items/buttonSubmit';
 
 
 class RegisterDistance extends Component {
-    static propTypes = {
-        navigation: PropTypes.object,
-        
-    }
-    static navigationOptions = {
-        title: "ขอรหัสผ่านใหม่",
-        headerStyle: {
-          backgroundColor: "#FC561F"
-        },
-        headerTitleStyle: {
-          color: "#fff"
-        }
-      };
+
     constructor(props) {
         super(props)
         this.state = {
@@ -39,14 +27,14 @@ class RegisterDistance extends Component {
         }
         // this.gotoShirtPhotoPlus = this.gotoShirtPhotoPlus.bind(this)
     }
-    nextState= () => {
+    nextState = () => {
         this.props.navigation.navigate("ShirtPhotoPlus")
     }
     gotoShirtPhotoPlus(distanceEvent) {
         this.setState({ distanceEvent: distanceEvent })
         this.props.setTotal(distanceEvent.price)
         this.props.addDistance(distanceEvent)
-        this.props.navigation.navigate("ShirtPhotoPlus")
+        this.props.nextState()
     }
     render() {
         return (

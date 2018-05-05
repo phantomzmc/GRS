@@ -12,23 +12,6 @@ class ButtonChangePayment extends Component {
     static propTypes = {
         navigation: PropTypes.object,
     }
-    static navigationOptions = {
-        title: 'ชำระเงิน',
-        headerStyle: {
-            backgroundColor: '#FC561F'
-        },
-        headerTitleStyle: {
-            color: '#fff',
-            fontFamily: 'kanit',
-        },
-        headerRight: (
-            <Button
-                onPress={() => alert('This is a button!')}
-                title="Info"
-                color="#fff"
-            />
-        ),
-    };
     constructor(props) {
         super(props)
         this.state = {

@@ -4363,9 +4363,9 @@ mock-fs@^3.9.0:
     rewire "2.5.2"
     semver "5.3.0"
 
-moment@2.x.x:
-  version "2.21.0"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.21.0.tgz#2a114b51d2a6ec9e6d83cf803f838a878d8a023a"
+moment@^2.22.0:
+  version "2.22.1"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.22.1.tgz#529a2e9bf973f259c9643d237fda84de3a26e8ad"
 
 morgan@^1.9.0:
   version "1.9.0"
@@ -5111,11 +5111,11 @@ react-native-datepicker-dialog@0.0.9:
   version "0.0.9"
   resolved "https://registry.yarnpkg.com/react-native-datepicker-dialog/-/react-native-datepicker-dialog-0.0.9.tgz#6e1f890a9b40937cea9e0c762fd542afb9fc3f37"
 
-react-native-datepicker@^1.6.0:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/react-native-datepicker/-/react-native-datepicker-1.6.0.tgz#3a40dc9b112023c49d60ba2a0789d440b7e3d97c"
+react-native-datepicker@^1.7.2:
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/react-native-datepicker/-/react-native-datepicker-1.7.2.tgz#58d0822591a0ac9b32aba082650222a0ee29669d"
   dependencies:
-    moment "2.x.x"
+    moment "^2.22.0"
 
 react-native-dismiss-keyboard@1.0.0:
   version "1.0.0"
@@ -5190,6 +5190,10 @@ react-native-modalbox@^1.4.2:
 react-native-multiple-choice@0.0.8:
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/react-native-multiple-choice/-/react-native-multiple-choice-0.0.8.tgz#ef7d99ac1044941cdf8b94109cc5a3307aa19e87"
+
+react-native-multiple-select@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/react-native-multiple-select/-/react-native-multiple-select-0.4.1.tgz#a79ad2a2668df3cb35b8f9ba4cbd04561e1f41ec"
 
 react-native-popup-dialog@^0.11.46:
   version "0.11.46"

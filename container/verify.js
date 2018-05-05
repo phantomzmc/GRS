@@ -11,19 +11,7 @@ class VerifyCode extends Component {
     static propTypes = {
         navigation: PropTypes.object
     };
-    static navigationOptions = {
-        title: "ยืนยันตัวตน",
-        headerStyle: {
-            backgroundColor: "#FC561F"
-        },
-        headerTitleStyle: {
-            color: "#fff"
-        }
-    };
 
-    componentWillMount() {
-
-    }
     gotoLogin = () => {
         this.props.navigation.navigate("Login")
     }

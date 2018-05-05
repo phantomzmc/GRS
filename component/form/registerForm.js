@@ -12,6 +12,8 @@ import {
   Alert
 } from "react-native";
 import { StackNavigator } from "react-navigation";
+import DatePicker from 'react-native-datepicker'
+
 import { DatePickerDialog } from 'react-native-datepicker-dialog'
 import { Form, Item, Input, Label, Tabs, Tab, TabHeading, Icon } from 'native-base'
 import moment from 'moment';
@@ -34,45 +36,22 @@ class FormRegister extends Component {
       bib: "",
       tel: "",
       email: "",
-      journeyText: '',
-      journeyDate: null,
+      date: new Date,
       bloodtype: "",
       nation: "",
       selectedIndex: 0
     };
   }
-  sendData = (fullname, lastname, nickname, password, confirmpassword, teamname, bib, userid, tel, email, journeyDate, bloodtype, nation) => {
-    this.props.goEvent(fullname, lastname, nickname, password, confirmpassword, teamname, bib, userid, tel, email, journeyDate, bloodtype, nation);
+  sendData = (fullname, lastname, nickname, password, confirmpassword, teamname, bib, userid, tel, email, date, bloodtype, nation) => {
+    this.props.goEvent(fullname, lastname, nickname, password, confirmpassword, teamname, bib, userid, tel, email, date, bloodtype, nation);
     console.log(this.state.fullname);
     console.log(this.state.userid);
-    console.log(this.state.journeyDate);
+    console.log(this.state.date);
     console.log(this.state.selectedIndex);
   };
 
-  onJourneyDatePress = () => {
-    let journeyDate = this.state.journeyDate;
-    if (!journeyDate || journeyDate == null) {
-      journeyDate = new Date();
-      this.setState({
-        journeyDate: journeyDate
-      });
-    }
-    //To open the dialog
-    this.refs.journeyDialog.open({
-      date: journeyDate,
-      minDate: new Date() //To restirct past date
-    });
-  }
-  onJourneyDatePicked = (date) => {
-    this.setState({
-      journeyDate: date,
-      journeyText: moment(date).format('DD MMM, YYYY')
-    });
-  }
-
-
   render() {
-    let { fullname, lastname, nickname, password, confirmpassword, teamname, bib, userid, tel, email, journeyDate, bloodtype, nation } = this.state;
+    let { fullname, lastname, nickname, password, confirmpassword, teamname, bib, userid, tel, email, date, bloodtype, nation } = this.state;
     return (
       <View style={styles.container}>
         <View style={styles.contectTitle}>
@@ -116,12 +95,6 @@ class FormRegister extends Component {
             <Tab heading={<TabHeading><Icon name="ios-woman" onPress={() => this.setState({ selectedIndex: 1 })} /></TabHeading>}>
             </Tab>
           </Tabs>
-          {/* <SegmentedControlIOS values={["ชาย", "หญิง"]}
-            selectedIndex={this.state.selectedIndex}
-            onChange={(event) => {
-              this.setState({ selectedIndex: event.nativeEvent.selectedSegmentIndex })
-            }}
-            tintColor="#FC561F" /> */}
         </View>
         <Text style={styles.headForm}>รหัสบัตรประชาชน/หนังสือเดินทาง</Text>
 
@@ -170,11 +143,31 @@ class FormRegister extends Component {
           </Item>
         </Form>
         <Text style={styles.headForm}>วันเกิด</Text>
-        <TouchableOpacity onPress={this.onJourneyDatePress.bind(this)} >
-          <Text style={styles.datePickerText}>วัน/เดือน/ปีเกิด : {this.state.journeyText}</Text>
-        </TouchableOpacity>
-
-        <DatePickerDialog ref="journeyDialog" onDatePicked={this.onJourneyDatePicked.bind(this)} />
+        <View style={styles.containerDatePicker}>
+          <DatePicker
+            style={styles.datePickerText}
+            date={this.state.date}
+            mode="date"
+            placeholder="select date"
+            format="YYYY-MM-DD"
+            minDate="1920-01-01"
+            maxDate={this.state.date}
+            confirmBtnText="Confirm"
+            cancelBtnText="Cancel"
+            customStyles={{
+              dateIcon: {
+                position: 'absolute',
+                left: 0,
+                top: 4,
+                marginLeft: 0
+              },
+              dateInput: {
+                marginLeft: 36
+              }
+            }}
+            onDateChange={(date) => { this.setState({ date: date }) }}
+          />
+        </View>
 
         <Text style={styles.headForm}>ชื่อทีม</Text>
         <Form>
@@ -218,7 +211,7 @@ class FormRegister extends Component {
                 userid,
                 tel,
                 email,
-                journeyDate,
+                date,
                 bloodtype,
                 nation,
               )
@@ -260,33 +253,10 @@ const styles = StyleSheet.create({
     width: 25,
     height: 25
   },
-  textInput: {
-    borderColor: "#FC561F",
-    borderRadius: 10,
-    borderWidth: 1.5,
-    paddingHorizontal: 20,
-    height: 35,
-    marginTop: 15,
-    fontFamily: "kanit"
-  },
   conlorsegment: {
     backgroundColor: '#fff',
     alignContent: 'center',
     marginTop: 20
-  },
-  addressContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between"
-  },
-  textAddressInput: {
-    width: "48%",
-    borderColor: "#FC561F",
-    borderRadius: 10,
-    borderWidth: 1.5,
-    paddingHorizontal: 20,
-    height: 35,
-    marginTop: 15,
-    fontFamily: "kanit"
   },
   submitContainer: {
     marginTop: 30,
@@ -307,33 +277,29 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontFamily: "kanit"
   },
-  datePickerBox: {
-    marginTop: 9,
-    borderColor: '#fc561f',
-    borderWidth: 1.5,
-    padding: 0,
-    borderRadius: 10,
-    height: 35,
-    justifyContent: 'center'
-  },
+
   datePickerText: {
-    fontSize: 14,
     paddingTop: 10,
-    paddingLeft: 15,
-    // color: '#d9d9d9',
-    fontFamily: 'kanit'
+    paddingLeft: 30,
+    width: "80%",
+    justifyContent: "center",
+    fontFamily: "kanit"
+  },
+  containerDatePicker: {
+    flexDirection: 'row'
   },
   headForm: {
-    fontFamily: 'kanit',
+    fontFamily: "kanit",
     fontSize: 16,
     paddingTop: 20
   },
   textLabel: {
     fontSize: 14,
-    fontFamily: 'kanit'
+    fontFamily: "kanit"
   },
   tabStyle: {
     backgroundColor: '#fff'
-  }
+  },
+
 });
 export default FormRegister;

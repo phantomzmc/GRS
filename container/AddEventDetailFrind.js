@@ -7,17 +7,7 @@ import ListShirth from '../component/list/listShirt/listShirt'
 
 
 class AddEventFriend extends Component {
-    static navigationOptions = {
-        title: 'เลือกระยะทางเเละเสื้อ',
-        headerStyle: {
-            backgroundColor: '#FC561F'
-        },
-        headerTitleStyle: {
-            color: '#fff',
-            fontFamily: "Kanit",
-            fontWeight: '500',
-        }
-    };
+
     gotoCrediPayment = () => {
         this.props.navigation.navigate('CrediPayment')
     }

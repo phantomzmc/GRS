@@ -3,21 +3,26 @@ import { View, Text, ImageBackground, Image, StyleSheet, SegmentedControlIOS } f
 import { connect } from 'react-redux'
 
 class HeaderProfile extends Component {
-    constructor (props){
+    constructor(props) {
         super(props)
         this.state = {
-            name: "",
-            date : ""
+            fullname: "",
+            lastname: "",
+            gen: "M",
+            age: 21,
+            eventname : "",
         }
     }
 
     componentDidMount = () => {
         this.setState({
-            name : this.props.event.event.EventName,
-            date : this.props.event.event.EventDate,
+            fullname : this.props.profile.profile.profile,
+            lastname : this.props.profile.profile.lastname,
+            // gen : this.props.profile.profile.gen,
+            eventname : this.props.event.event.EventName,
         })
-        console.log(this.state.name)
-        console.log(this.state.date)
+        console.log(this.state.fullname)
+        console.log(this.state.gen)
     }
     render() {
         return (
@@ -29,8 +34,9 @@ class HeaderProfile extends Component {
                             style={styles.imgAvatar} />
                     </View>
                     <View style={styles.detailProfile}>
-                        <Text style={styles.nameProfile}>{this.state.name}</Text>
-                        <Text style={styles.ageProfile}>{this.state.date}</Text>
+                        <Text style={styles.nameProfile}>{this.state.fullname} - {this.state.lastname} </Text>
+                        <Text style={styles.ageProfile}>{this.state.gen} - {this.state.age}</Text>
+                        <Text style={styles.eventTitle}>{this.state.eventname}</Text>
                     </View>
                 </View>
             </ImageBackground>
@@ -76,7 +82,14 @@ const styles = StyleSheet.create({
     },
     ageProfile: {
         color: '#fff',
-        fontSize: 16,
+        fontSize: 14,
+        fontWeight: '900',
+        fontFamily: 'kanit',
+        marginBottom: 10
+    },
+    eventTitle : {
+        color: '#fff',
+        fontSize: 18,
         fontWeight: '900',
         fontFamily: 'kanit',
         marginBottom: 20
@@ -84,7 +97,8 @@ const styles = StyleSheet.create({
 })
 const mapStateToProps = (state) => {
     return {
-        event : state.event
+        event: state.event,
+        profile : state.profile
     }
 }
 

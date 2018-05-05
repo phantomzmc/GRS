@@ -11,15 +11,6 @@ class ResetVerify extends Component {
     static propTypes = {
         navigation: PropTypes.object
       };
-      static navigationOptions = {
-        title: "ขอรหัสผ่านใหม่",
-        headerStyle: {
-          backgroundColor: "#FC561F"
-        },
-        headerTitleStyle: {
-          color: "#fff"
-        }
-      };
     constructor(props) {
         super(props)
         this.state = {
