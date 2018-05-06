@@ -42,6 +42,9 @@ class FormRegister extends Component {
       selectedIndex: 0
     };
   }
+  componentWillUnmount() {
+    console.log("componentWillUnmount")
+  }
   sendData = (fullname, lastname, nickname, password, confirmpassword, teamname, bib, userid, tel, email, date, bloodtype, nation) => {
     this.props.goEvent(fullname, lastname, nickname, password, confirmpassword, teamname, bib, userid, tel, email, date, bloodtype, nation);
     console.log(this.state.fullname);

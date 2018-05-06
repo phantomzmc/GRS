@@ -1,18 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-
-import {
-  View,
-  Text,
-  TextInput,
-  StyleSheet,
-  SegmentedControlIOS,
-  TouchableOpacity,
-  DatePickerIOS,
-  Image
-} from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Alert, Image } from "react-native";
 import { StackNavigator } from "react-navigation";
 import { Form, Item, Input, Label } from 'native-base'
+import ProvinceForm from './addressForm-province'
+import AmphoeForm from './addressForm-amphoe'
+import TambonForm from './addressForm-tunporn'
 
 
 class FormAddressRegister extends Component {
@@ -23,21 +16,33 @@ class FormAddressRegister extends Component {
     super(props);
     this.state = {
       number: "",
-      t: "",
-      a: "",
-      city: "",
+      tambon: "",
+      amphoe: "",
       country: "",
-      postNumber: ""
+      postNumber: "",
+      province: ""
     };
   }
+  passProvince(city) {
+    let { province } = this.state
+    this.setState({ province: city })
+  }
+  passTampon(tunporn) {
+    let { tambon } = this.state
+    this.setState({ tambon: tunporn })
+  }
+  passAmphoe(amphoes) {
+    let { amphoe } = this.state
+    this.setState({ amphoe: amphoes })
+  }
 
-  sendData = (number, t, a, city, country, postNumber) => {
-    this.props.goEvent(number, t, a, city, country, postNumber);
+  sendData = (number, tambon, amphoe, province, country, postNumber) => {
+    this.props.goEvent(number, tambon, amphoe, province, country, postNumber);
 
   };
 
   render() {
-    let { number, t, a, city, country, postNumber } = this.state;
+    let { number, tambon, amphoe, province, country, postNumber} = this.state;
     return (
       <View style={styles.container}>
         <View style={styles.contectTitle}>
@@ -57,33 +62,15 @@ class FormAddressRegister extends Component {
             />
           </Item>
         </Form>
-        <Text style={styles.headForm}>ตำบล</Text>
-        <Form>
-          <Item floatingLabel last>
-            <Label style={styles.textLabel}>Ex.ตำบล</Label>
-            <Input
-              onChangeText={t => this.setState({ t })}
-            />
-          </Item>
-        </Form>
-        <Text style={styles.headForm}>อำเภอ</Text>
-        <Form>
-          <Item floatingLabel last>
-            <Label style={styles.textLabel}>Ex.อำเภอ เมือง</Label>
-            <Input
-              onChangeText={a => this.setState({ a })}
-            />
-          </Item>
-        </Form>
-        <Text style={styles.headForm}>จังหวัด</Text>
-        <Form>
-          <Item floatingLabel last>
-            <Label style={styles.textLabel}>Ex.กรุงเทพฯ</Label>
-            <Input
-              onChangeText={city => this.setState({ city })}
-            />
-          </Item>
-        </Form>
+        <Text style={styles.headForm}>ตำบล : {this.state.tambon}</Text>
+        <TambonForm gettumporn={this.passTampon.bind(this)} />
+
+        <Text style={styles.headForm}>อำเภอ : {this.state.amphoe}</Text>
+        <AmphoeForm getamphoe={this.passAmphoe.bind(this)} />
+
+        <Text style={styles.headForm}>จังหวัด : {this.state.province}</Text>
+        <ProvinceForm getProvince={this.passProvince.bind(this)} />
+
         <Text style={styles.headForm}>ประเทศ</Text>
         <Form>
           <Item floatingLabel last>
@@ -107,7 +94,7 @@ class FormAddressRegister extends Component {
           <TouchableOpacity
             style={styles.buttonContainer}
             onPress={() =>
-              this.sendData(number, t, a, city, country, postNumber)
+              this.sendData(number, tambon, amphoe, province, country, postNumber)
             }
           >
             <Text style={styles.textButton}>ถัดไป</Text>

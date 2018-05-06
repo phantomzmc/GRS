@@ -6,7 +6,7 @@ import SearchInput, { createFilter } from 'react-native-search-filter';
 import axios from 'axios'
 const KEYS_TO_FILTERS = ['Value'];
 
-var uri = "http://api.shutterrunning2014.com/api/v2/grsv2m/_proc/Main.uspGetProvinceSuggestion"
+var uri = "http://api.shutterrunning2014.com/api/v2/grsv2m/_proc/Main.uspGetTambonSuggestion"
 var api_key = '36fda24fe5588fa4285ac6c6c2fdfbdb6b6bc9834699774c9bf777f706d05a88'
 var sessionToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQsInVzZXJfaWQiOjQsImVtYWlsIjoiYWR' +
     'taW5AZ3V1cnVuLmNvbSIsImZvcmV2ZXIiOmZhbHNlLCJpc3MiOiJodHRwOlwvXC9hcGkuc2h1dHRlcnJ' +
@@ -15,7 +15,7 @@ var sessionToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQsInVzZXJfaWQ
     '5MzE1NTI0YmZjIn0._7jHjGhTPfa3rVioC2MrjJfLwrMMxYQYiWhe8DK5V7k'
 var auth = 'Basic YWRtaW5AZ3V1cnVuLmNvbTpXWGJyRDI4THRJUjNNWW0='
 
-class ProvinceForm extends Component {
+class TambonForm extends Component {
     static propTypes = {
         searchTerm: PropTypes.string
     }
@@ -25,12 +25,12 @@ class ProvinceForm extends Component {
             searchTerm: "",
             emails: [],
             data: "",
-            province: "",
+            tumporn: "",
             isItems: true
         }
     }
     componentDidUpdate(prevProps, prevState) {
-        if (this.state.province && prevState.province) {
+        if (this.state.tumporn && prevState.tumporn) {
             this.loadData = false
 
         }
@@ -42,7 +42,7 @@ class ProvinceForm extends Component {
     }
 
     loadData = () => {
-        let { emails, searchTerm, province } = this.state
+        let { emails, searchTerm, tumporn } = this.state
         let data = ({
             params: {
                 value: this.state.searchTerm,
@@ -67,13 +67,13 @@ class ProvinceForm extends Component {
         this.setState({ searchTerm: term, isItems: true })
     }
     hideItem() {
-        if (this.state.province !== "")
+        if (this.state.tumporn !== "")
             this.setState({ isItems: false })
     }
-    onGetProvince = () => {
-        let { province, emails } = this.state
-        console.log(this.state.province)
-        this.props.getProvince(this.state.province)
+    onGettumporn = () => {
+        let { tumporn, emails } = this.state
+        console.log(this.state.tumporn)
+        this.props.gettumporn(this.state.tumporn)
         this.hideItem()
     }
 
@@ -84,7 +84,7 @@ class ProvinceForm extends Component {
             <View style={styles.container}>
                 <Form>
                     <Item floatingLabel>
-                        <Label style={styles.text}>Ex.กรุงเทพมหานคร</Label>
+                        <Label style={styles.text}>Ex.ตำบล</Label>
                         <Input
                             onChangeText={(term) => { this.searchUpdated(term) }}
                         />
@@ -94,8 +94,8 @@ class ProvinceForm extends Component {
                     <ScrollView style={styles.list}>
                         {filteredEmails.map(email => {
                             return (
-                                <TouchableOpacity onPress={() => this.setState({ province: email.Value })}
-                                    onPressIn={this.onGetProvince.bind(this)}
+                                <TouchableOpacity onPress={() => this.setState({ tumporn: email.Value })}
+                                    onPressIn={this.onGettumporn.bind(this)}
                                     key={email.Value} >
                                     <View style={styles.items}>
                                         <Text style={styles.textValue}>{email.Value}</Text>
@@ -135,4 +135,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default ProvinceForm
+export default TambonForm

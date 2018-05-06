@@ -32,23 +32,23 @@ export default StackNavigator({
     // MultiSelectExample : {
     //     screen : MultiSelectExample
     // },
-    Test : {
-        screen : Test
-    },
-    EventList: {
-        screen: EventList,
-        navigationOptions: {
-            title: 'รายการวิ่ง',
-            headerStyle: {
-                backgroundColor: '#FC561F'
-            },
-            headerTitleStyle: {
-                color: '#fff',
-                fontFamily: "Kanit",
-                fontWeight: '500'
-            }
-        }
-    },
+    // Test : {
+    //     screen : Test
+    // },
+    // EventList: {
+    //     screen: EventList,
+    //     navigationOptions: {
+    //         title: 'รายการวิ่ง',
+    //         headerStyle: {
+    //             backgroundColor: '#FC561F'
+    //         },
+    //         headerTitleStyle: {
+    //             color: '#fff',
+    //             fontFamily: "Kanit",
+    //             fontWeight: '500'
+    //         }
+    //     }
+    // },
     Register: {
         screen: Register,
         navigationOptions: {
