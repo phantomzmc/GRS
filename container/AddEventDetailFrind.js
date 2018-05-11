@@ -17,7 +17,7 @@ class AddEventFriend extends Component {
         return (
             <ScrollView>
                 <View style={styles.container}>
-                    <Text style={styles.textDistance}>เลือกระยะทาง</Text>
+                    {/* <Text style={styles.textDistance}>เลือกระยะทาง</Text> */}
                     <ListFriendDistance />
                     <Text style={styles.textSizeshirth}>เลือกไซค์เสื้อ</Text>
                     <ListShirth />

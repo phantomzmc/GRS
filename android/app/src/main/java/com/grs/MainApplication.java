@@ -3,6 +3,11 @@ package com.grs;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.smixx.reactnativeicons.ReactNativeIcons;
+import fr.greweb.reactnativeviewshot.RNViewShotPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
+import ui.shine.RNShineButtonPackage;
+import com.imagepicker.ImagePickerPackage;
 
 
 import com.facebook.react.ReactNativeHost;
@@ -24,7 +29,12 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
-          new MainReactPackage()
+          new MainReactPackage(),
+            new ReactNativeIcons(),
+            new RNViewShotPackage(),
+            new VectorIconsPackage(),
+            new RNShineButtonPackage(),
+            new ImagePickerPackage()
 
       );
     }

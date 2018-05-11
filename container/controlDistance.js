@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { View, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { Container, Header, Tab, Tabs, TabHeading, Icon, Text, Button } from 'native-base';
 import { StackNavigator } from 'react-navigation';
+import { connect } from 'react-redux'
 import Login from '../container/login'
 import RegisterDistance from '../container/registerDistance'
 import SummaryTotal from '../component/items/summary'
-import { map } from 'mobx';
 
 class ControlDistance extends Component {
     static propTypes = {
@@ -16,8 +16,14 @@ class ControlDistance extends Component {
         super(props)
         this.state = {
             pageNumber: 0,
+            login: 1
         }
         this.goAddTeam = this.goAddTeam.bind(this)
+    }
+    goLogin = () => {
+        console.log(this.state.login)
+        this.props.setLogin(this.state.login)
+        this.props.navigation.navigate("Login")
     }
     goNextState = () => {
         this.props.navigation.navigate('ShirtPhotoPlus')
@@ -30,9 +36,10 @@ class ControlDistance extends Component {
             },
             {
                 text: "เข้าสู่ระบบ",
-                onPress: () => this.props.navigation.navigate("Login")
+                onPress: () => this.goLogin()
             },
         ], { cancelable: false })
+
     }
 
     render() {
@@ -48,6 +55,17 @@ class ControlDistance extends Component {
                 <SummaryTotal />
             </Container>
         );
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setLogin: (login) => {
+            dispatch({
+                type: "setLogin",
+                payload: login
+            })
+        }
     }
 }
 
@@ -72,4 +90,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default ControlDistance;
+export default connect(null, mapDispatchToProps)(ControlDistance);

@@ -1,13 +1,4 @@
-#Wed May 02 01:29:18 ICT 2018
-path.3=classes.dex
-path.2=classes.dex
-path.1=classes.dex
-path.0=classes.dex
-renamed.3=classes4.dex
-renamed.2=classes3.dex
-renamed.1=classes2.dex
+#Tue May 08 00:50:39 ICT 2018
+base.0=/Users/thunnathorn/GRS3/android/app/build/intermediates/transforms/dexMerger/debug/50
 renamed.0=classes.dex
-base.3=/Users/thunnathorn/GRS3/android/app/build/intermediates/transforms/dexMerger/debug/47
-base.2=/Users/thunnathorn/GRS3/android/app/build/intermediates/transforms/dexMerger/debug/46
-base.1=/Users/thunnathorn/GRS3/android/app/build/intermediates/transforms/dexMerger/debug/48
-base.0=/Users/thunnathorn/GRS3/android/app/build/intermediates/transforms/dexMerger/debug/45
+path.0=classes.dex

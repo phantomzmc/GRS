@@ -50,7 +50,7 @@ class FriendListView extends Component {
                 }}>
                 <FlatList
                     data={this.state.dataSource}
-                    renderItem={({ item }) => <View style={styles.container}>
+                    renderItem={({ item }) => <View style={styles.container}>{item.name}
                         <View style={styles.cellFriend}>
                             <View>
                                 <Image source={{ uri: item.imgAvatar }}

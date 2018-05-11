@@ -26,8 +26,8 @@ const user = {
     userid: "",
     password: "",
   },
-  verify:{
-    statusVerify : 0
+  verify: {
+    statusVerify: 0
   }
 };
 
@@ -42,7 +42,7 @@ const profile = (state = user, action) => {
     case "setHelp": {
       state.help = action.payload;
     }
-    case "setVerify" : {
+    case "setVerify": {
       state.verify = action.payload
     }
   }
@@ -135,6 +135,16 @@ const total = (state = {}, action) => {
   }
   return state;
 };
+
+const login = (state = login = 0, action) => {
+  switch (action.type) {
+    case "setLogin": {
+      state.login = action.payload
+      break;
+    }
+  }
+  return state;
+}
 const friend = {
   profile:
     [
@@ -190,7 +200,9 @@ const store = createStore(
     photoplus,
     choiceSend,
     address,
-    total, friendlist
+    total,
+    friendlist,
+    login
   }),
   {},
   applyMiddleware(myLogger)

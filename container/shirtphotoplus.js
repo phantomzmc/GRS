@@ -1,37 +1,30 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image, Alert } from 'react-native';
 import { StackNavigator } from 'react-navigation';
-
-
 import { connect } from 'react-redux'
 import ListShirt from '../component/list/listShirt/listShirt'
 import PhotoPlus from '../component/items/photoPlus'
 import SummaryTotal from '../component/items/summary'
 
-
-
 class ShirtPhotoPlus extends Component {
-
+    state = {
+        isItems: false,
+        isItems2: false
+    }
     goNextState = () => {
         console.log("checkPromo")
         if (this.props.event.event.PromoCodeStatus == 1 && this.props.event.event.PromoCodeRequired == 1) {
             console.log("status 1 ต้องกรอก")
             Alert.alert("ส่วนลดค่าสมัคร", "กรุณากรอกรหัสส่วนลดในการสมัคร", [
                 {
-                    text: "Cancel"
-                },
-                {
                     text: "ยืนยัน",
                     onPress: () => this.props.navigation.navigate("DiscountCoupon")
                 },
-            ], { cancelable: false })
+            ])
         }
         else if ((this.props.event.event.PromoCodeStatus == 1 && this.props.event.event.PromoCodeRequired == 0) || (this.props.event.event.PromoCodeStatus == 0 && this.props.event.event.PromoCodeRequired == 1)) {
             console.log("status 2 กรอกหรือไม่กรอกก็ได้")
             Alert.alert("ส่วนลดค่าสมัคร", "รายการนี้มีส่วนลดค่าสมัคร ท่านสามารถกรอกรหัสเพื่อรับส่วนลดได้", [
-                {
-                    text: "Cancel"
-                },
                 {
                     text: "กรอกรหัสส่วนลด",
                     onPress: () => this.props.navigation.navigate("DiscountCoupon")
@@ -41,7 +34,7 @@ class ShirtPhotoPlus extends Component {
                     onPress: () => this.props.navigation.navigate('AddressLayout')
 
                 },
-            ], { cancelable: false })
+            ])
         }
         else if (this.props.event.event.PromoCodeStatus == 0 && this.props.event.event.PromoCodeRequired == 0) {
             console.log("status 0 ผ่าน")
@@ -58,10 +51,14 @@ class ShirtPhotoPlus extends Component {
 
                     <Text style={styles.textSize}>โปรดเลือกไซค์เสื้อ</Text>
                     <ListShirt />
-                    <Text style={styles.textSize}>Photo Plus + </Text>
-                    <PhotoPlus titleName={this.props.photoplus.title}
-                        dataPricePhoto={this.props.photoplus.pricePhoto}
-                        priceEvent={this.props.total.totalPrice} />
+                    {this.state.isItems && <Text style={styles.textSize}>Photo Plus + </Text>}
+                    {this.state.isItems2 &&
+                        <PhotoPlus titleName={this.props.photoplus.title}
+                            dataPricePhoto={this.props.photoplus.pricePhoto}
+                            priceEvent={this.props.total.totalPrice} />
+                    }
+
+
                 </View>
                 <View style={styles.submitContainer}>
                     <TouchableOpacity style={styles.buttonContainer}>

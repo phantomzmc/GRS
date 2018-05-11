@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <instant-run
     abi="x86"
-    api-level="26"
+    api-level="27"
     build-mode="FULL"
-    density="420dpi"
+    density="560dpi"
     format="10"
     plugin-version="3.1.2"
-    timestamp="1525203743819"
+    timestamp="1525715279326"
     token="2569851526322340929"
     verifier="FULL_BUILD_REQUESTED" >
 
@@ -18,11 +18,17 @@
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="0" />
+        duration="541" />
     <task
         name="verifier"
         duration="0" />
 
+    <artifact
+        location="/Users/thunnathorn/GRS3/android/app/build/intermediates/resources/instant-run/debug/resources-debug.apk"
+        type="SPLIT" />
+    <artifact
+        location="/Users/thunnathorn/GRS3/android/app/build/intermediates/split-apk/debug/slices/slice_3.apk"
+        type="SPLIT" />
     <artifact
         location="/Users/thunnathorn/GRS3/android/app/build/intermediates/split-apk/debug/slices/slice_7.apk"
         type="SPLIT" />
@@ -45,9 +51,6 @@
         location="/Users/thunnathorn/GRS3/android/app/build/intermediates/split-apk/debug/slices/slice_0.apk"
         type="SPLIT" />
     <artifact
-        location="/Users/thunnathorn/GRS3/android/app/build/intermediates/split-apk/debug/slices/slice_3.apk"
-        type="SPLIT" />
-    <artifact
         location="/Users/thunnathorn/GRS3/android/app/build/intermediates/split-apk/debug/slices/slice_6.apk"
         type="SPLIT" />
     <artifact
@@ -57,16 +60,19 @@
         location="/Users/thunnathorn/GRS3/android/app/build/intermediates/split-apk/debug/slices/slice_4.apk"
         type="SPLIT" />
     <artifact
-        location="/Users/thunnathorn/GRS3/android/app/build/intermediates/resources/instant-run/debug/resources-debug.apk"
-        type="SPLIT" />
-    <artifact
         location="/Users/thunnathorn/GRS3/android/app/build/intermediates/instant-run-apk/debug/app-debug.apk"
         type="SPLIT_MAIN" />
 
     <build
         build-mode="FULL"
-        timestamp="1525203743819"
+        timestamp="1525715279326"
         verifier="FULL_BUILD_REQUESTED" >
+        <artifact
+            location="/Users/thunnathorn/GRS3/android/app/build/intermediates/resources/instant-run/debug/resources-debug.apk"
+            type="SPLIT" />
+        <artifact
+            location="/Users/thunnathorn/GRS3/android/app/build/intermediates/split-apk/debug/slices/slice_3.apk"
+            type="SPLIT" />
         <artifact
             location="/Users/thunnathorn/GRS3/android/app/build/intermediates/split-apk/debug/slices/slice_7.apk"
             type="SPLIT" />
@@ -89,9 +95,6 @@
             location="/Users/thunnathorn/GRS3/android/app/build/intermediates/split-apk/debug/slices/slice_0.apk"
             type="SPLIT" />
         <artifact
-            location="/Users/thunnathorn/GRS3/android/app/build/intermediates/split-apk/debug/slices/slice_3.apk"
-            type="SPLIT" />
-        <artifact
             location="/Users/thunnathorn/GRS3/android/app/build/intermediates/split-apk/debug/slices/slice_6.apk"
             type="SPLIT" />
         <artifact
@@ -99,9 +102,6 @@
             type="SPLIT" />
         <artifact
             location="/Users/thunnathorn/GRS3/android/app/build/intermediates/split-apk/debug/slices/slice_4.apk"
-            type="SPLIT" />
-        <artifact
-            location="/Users/thunnathorn/GRS3/android/app/build/intermediates/resources/instant-run/debug/resources-debug.apk"
             type="SPLIT" />
         <artifact
             location="/Users/thunnathorn/GRS3/android/app/build/intermediates/instant-run-apk/debug/app-debug.apk"

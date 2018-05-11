@@ -1,33 +1,29 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { Header, Item, Icon, Input } from 'native-base'
 
 import FriendListView from '../component/list/listFriend/friendList'
-import { Item } from 'native-base';
 
 class FriendList extends Component {
-    static navigationOptions = {
-        title: 'รายชื่อเพื่อน',
-        headerStyle: {
-            backgroundColor: '#FC561F'
-        },
-        headerTitleStyle: {
-            color: '#fff',
-            fontFamily: "Kanit",
-            fontWeight: '500',
-        }
-    };
     gotoAddFriendDetail() {
         this.props.navigation.navigate('AddEventFriend')
     }
-    gotoTeamList(){
-        this.props.navigation.navigate('TeamList')
+    gotoTeamList() {
+        this.props.navigation.navigate('FriendInEvent')
     }
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.text}> รายชื่อเพื่อน </Text>
-                <FriendListView AddFriendDetail={() => this.gotoAddFriendDetail()} 
-                                TeamList={() => this.gotoTeamList()}/>
+                <Header searchBar rounded>
+                    <Item>
+                        <Icon name="ios-search" />
+                        <Input placeholder="ค้นหาเพื่อน" />
+                        <Icon name="ios-people" />
+                    </Item>
+                </Header>
+                {/* <Text style={styles.text}> รายชื่อเพื่อน </Text> */}
+                <FriendListView AddFriendDetail={() => this.gotoAddFriendDetail()}
+                    TeamList={() => this.gotoTeamList()} />
             </View>
         );
     }

@@ -137,6 +137,11 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-icons')
+    compile project(':react-native-view-shot')
+    compile project(':react-native-vector-icons')
+    compile project(':react-native-shine-button')
+    compile project(':react-native-image-picker')
     implementation project(':react-native-image-picker')
     implementation project(':react-native-vector-icons')
     implementation fileTree(dir: "libs", include: ["*.jar"])

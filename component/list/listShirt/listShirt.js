@@ -45,7 +45,7 @@ class ListShirt extends Component {
         return (
             <TouchableHighlight onPress={() => this.pressDataShirt(datashirt)}>
                 <View style={styles.sizeshirt}>
-                    <Text style={{ fontFamily: "Kanit", }}>{datashirt.size} </Text>
+                    <Text style={{ fontFamily: "Kanit", }}>{datashirt.label} </Text>
                     <Text style={{ fontFamily: "Kanit", }}> ({datashirt.width}")</Text>
                 </View>
             </TouchableHighlight>

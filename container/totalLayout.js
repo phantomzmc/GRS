@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity,Alert } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import { connect } from 'react-redux'
+import { captureScreen } from "react-native-view-shot";
 
 import TotalRegister from '../component/items/totalRegister'
 import DetailRegister from '../component/items/detailRegister'
@@ -20,11 +21,12 @@ class TotalLayout extends Component {
     }
     componentDidMount() {
         console.log(this.state.name)
-        this.setState({ event: {
-                            name : this.props.event.name,
-                            date : this.props.event.date
-                        }
-                    })
+        this.setState({
+            event: {
+                name: this.props.event.name,
+                date: this.props.event.date
+            }
+        })
 
     }
     onClick = () => {
@@ -36,11 +38,22 @@ class TotalLayout extends Component {
                 text: 'ตกลง',
                 onPress: () => this.gotoListEvent()
             }
-        ], {cancelable: false})
+        ], { cancelable: false })
         // this.props.addEvent(this.state.name)
     }
     gotoListEvent = () => {
         this.props.navigation.navigate('EventList')
+    }
+
+    captureScreenFunction = () => {
+        captureScreen({
+            format: "jpg",
+            quality: 0.8
+        })
+            .then(
+                error => console.error("Oops, Something Went Wrong", error)
+            );
+
     }
 
     render() {
@@ -51,8 +64,12 @@ class TotalLayout extends Component {
                     <TotalRegister />
                     <View style={styles.submitContainer}>
                         <TouchableOpacity style={styles.buttonContainer}
+                            onPress={this.captureScreenFunction}>
+                            <Text style={styles.textButton}>บันทึก</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.buttonContainer}
                             onPress={this.onClick.bind(this)}>
-                            <Text style={styles.textButton}>ชำระค่าสมัคร</Text>
+                            <Text style={styles.textButton}>ปิด</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -71,6 +88,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 20,
+        marginBottom: 30
+
     },
     textButton: {
         fontWeight: '500',
@@ -81,7 +100,6 @@ const styles = StyleSheet.create({
     submitContainer: {
         marginTop: 30,
         alignItems: 'center',
-        marginBottom: 30
     },
 
 })

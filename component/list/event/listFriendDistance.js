@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, StyleSheet, Alert, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, StyleSheet, Alert, TouchableOpacity, Image } from 'react-native';
+import CheckBox from 'react-native-check-box'
 import { connect } from 'react-redux'
 
 import datadistance from './datadistance'
@@ -9,6 +10,7 @@ class ListFriendDistance extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            selected: false
         }
     }
 
@@ -17,6 +19,12 @@ class ListFriendDistance extends Component {
             dataSource: datadistance
         });
     }
+    selectCheckbox = () => {
+        this.setState({
+            selected: true,
+        });
+        console.log("click")
+    };
     alertShow(item) {
         this.props.addDistance(item)
         Alert.alert(item.name, "ระยะทาง : " + item.distance + " ราคา : " + item.price)
@@ -24,28 +32,30 @@ class ListFriendDistance extends Component {
     render() {
         if (this.state.isLoading) {
             return (
-                <View
-                    style={{
-                        flex: 1,
-                        padding: 20
-                    }}>
+                <View>
                     <ActivityIndicator />
                 </View>
             )
         }
         return (
-            <View
-                style={{
-                    flex: 1,
-                    paddingTop: 20
-                }}>
+            <View>
                 <FlatList
+                    horizontal
                     data={this.state.dataSource}
                     renderItem={({ item }) => <View style={styles.listview}>
                         <View style={styles.container}>
+
                             <TouchableOpacity onPress={() => this.alertShow(item)}>
                                 <View style={styles.cellDistance}>
-                                    <Text style={styles.title}>{item.name} - {item.distance}</Text>
+                                    <View style={styles.checkBox}>
+                                        <CheckBox
+                                            style={{ flex: 1 }}
+                                            onClick={() => this.selectCheckbox(item.name)}
+                                            isChecked={item.name.checked}
+                                        />
+                                    </View>
+                                    <Text style={styles.title}>{item.name}</Text>
+                                    <Text style={styles.detail}>{item.distance}</Text>
                                     <Text style={styles.detail}>{item.price}</Text>
                                 </View>
                             </TouchableOpacity>
@@ -71,20 +81,22 @@ const mapDispatchToProps = (dispatch) => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flexDirection: 'row'
     },
     listview: {
         backgroundColor: '#fff',
     },
+    checkBox: {
+        flexDirection: 'row',
+        justifyContent: 'center'
+    },
     cellDistance: {
+        justifyContent: 'center',
         padding: 15,
-        borderColor: '#f1f1f1',
         paddingHorizontal: 30,
-        borderWidth: 1,
     },
     title: {
-        fontSize: 17
-
+        fontSize: 10
     },
     detail: {
         fontSize: 10,

@@ -1,26 +1,36 @@
 export default [
-    {
-        "size" : "XS",
+    {   
+        "value" : 0,
+        "label" : "เลือกขนาดไซค์เสื้อ",
+    },
+    {   
+        "value" : 1,
+        "label" : "XS",
         "width" : "36"
     },
     {
-        "size" : "S",
+        "value" : 2,
+        "label" : "S",
         "width" : "38"
     },
     {
-        "size" : "M",
+        "value" : 3,
+        "label" : "M",
         "width" : "40"
     },
     {
-        "size" : "L",
+        "value" : 4,
+        "label" : "L",
         "width" : "42"
     },
     {
-        "size" : "XL",
+        "value" : 5,
+        "label" : "XL",
         "width" : "44"
     },
     {
-        "size" : "XXL",
+        "value" : 6,
+        "label" : "XXL",
         "width" : "46"
     }
 

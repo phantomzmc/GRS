@@ -25,30 +25,33 @@ import SummaryTotal from '../component/items/summary'
 import Verify from '../container/verify'
 import ResetVerify from '../container/resetVerify'
 import ResetPassword from '../container/resetPassword'
-import Test from '../container/test'
 import MultiSelectExample from '../mockdata'
 
+import FriendDistance from '../container/friendDistance'
+import HistoryList from '../component/list/history/historylist'
+
+
 export default StackNavigator({
-    // MultiSelectExample : {
-    //     screen : MultiSelectExample
+    // HistoryList : {
+    //     screen : HistoryList
     // },
-    // Test : {
-    //     screen : Test
+    // TabRouter: {
+    //     screen: TabRouter
     // },
-    // EventList: {
-    //     screen: EventList,
-    //     navigationOptions: {
-    //         title: 'รายการวิ่ง',
-    //         headerStyle: {
-    //             backgroundColor: '#FC561F'
-    //         },
-    //         headerTitleStyle: {
-    //             color: '#fff',
-    //             fontFamily: "Kanit",
-    //             fontWeight: '500'
-    //         }
-    //     }
-    // },
+    EventList: {
+        screen: EventList,
+        navigationOptions: {
+            title: 'รายการวิ่ง',
+            headerStyle: {
+                backgroundColor: '#FC561F'
+            },
+            headerTitleStyle: {
+                color: '#fff',
+                fontFamily: "Kanit",
+                fontWeight: '500'
+            }
+        }
+    },
     Register: {
         screen: Register,
         navigationOptions: {
@@ -246,6 +249,20 @@ export default StackNavigator({
                 color: '#fff',
                 fontFamily: "Kanit",
                 fontWeight: '500',
+            }
+        }
+    },
+    FriendDistance : {
+        screen : FriendDistance,
+        navigationOptions: {
+            title: 'รายชื่อเพื่อน',
+            headerStyle: {
+                backgroundColor: '#FC561F'
+            },
+            headerTitleStyle: {
+                color: '#fff',
+                fontFamily: "Kanit",
+                fontWeight: '500'
             }
         }
     },

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity,Button} from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { Container, Header, Item, Input, Button, Tab, Tabs, TabHeading,Icon } from 'native-base';
 import { StackNavigator } from 'react-navigation';
 
 import ButtonChage from '../component/items/bottonChage'
@@ -13,7 +14,7 @@ class TeamList extends Component {
         this.props.navigation.navigate('TabRouter')
     }
     gotoRegisterDistance = () => {
-        this.props.navigation.navigate('RegisterDistance')
+        this.props.navigation.navigate('FriendInEvent')
     }
 
     render() {
@@ -22,17 +23,26 @@ class TeamList extends Component {
             <ScrollView>
                 <View style={styles.container}>
                     <HeaderProfile />
-                    <Text style={styles.textTile}>รายชื่อเพื่อน</Text>
-                    <EventListFriend />
-                    <View style={styles.addFriend}>
-                        <TouchableOpacity style={styles.buttonContainer}
-                            onPress={() => navigate('FriendList')}>
-                            <Text style={styles.textButton}>เพิ่มรายชื่อเพื่อน</Text>
-                        </TouchableOpacity>
-                    </View>
+                    {/* <Text style={styles.textTile}>รายชื่อเพื่อน</Text> */}
+                    <Header searchBar rounded>
+                        <Item>
+                            <Icon name="ios-search" />
+                            <Input placeholder="ค้นหาเพื่อน" />
+                            <Icon name="ios-people" />
+                        </Item>
+                    </Header>
+                    <Tabs>
+                        <Tab heading={<TabHeading><Icon name="ios-people" /></TabHeading>}>
+                            <EventListFriend />
+                        </Tab>
+                        <Tab heading={<TabHeading><Icon name="ios-heart"/></TabHeading>}>
+                            <Text>No Icon</Text>
+                            <EventListFriend />
+                        </Tab>
+                    </Tabs>
                     <View style={styles.submitContainer}>
                         <TouchableOpacity style={styles.buttonContainer}
-                            onPress={() => navigate('AddEventFriend')}>
+                            onPress={() => navigate('FriendDistance')}>
                             <Text style={styles.textButton}>ถัดไป</Text>
                         </TouchableOpacity>
                     </View>

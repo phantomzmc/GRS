@@ -2,7 +2,7 @@ Arguments:
   /usr/local/bin/node /usr/local/bin/yarn add
 
 PATH: 
-  /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+  /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/thunnathorn/Library/Android/sdk/tools:/Users/thunnathorn/Library/Android/sdk/platform-tools
 
 Yarn version: 
   1.5.1
@@ -34,18 +34,30 @@ npm manifest:
       "react": "16.2.0",
       "react-native": "^0.55.3",
       "react-native-action-button": "^2.8.4",
+      "react-native-autocomplete": "^0.4.0",
+      "react-native-autocomplete-input": "^3.5.0",
+      "react-native-autocomplete-select": "^1.0.0",
+      "react-native-check-box": "^2.1.0",
+      "react-native-checkbox-field": "^2.0.2",
       "react-native-communications": "^2.2.1",
-      "react-native-datepicker": "^1.6.0",
+      "react-native-datepicker": "^1.7.2",
       "react-native-datepicker-dialog": "0.0.9",
       "react-native-elements": "^0.19.1",
+      "react-native-icons": "^0.7.1",
       "react-native-image-picker": "^0.26.7",
+      "react-native-modal-filter-picker": "^1.3.4",
       "react-native-modal-overlay": "^1.2.3",
       "react-native-modalbox": "^1.4.2",
       "react-native-multiple-choice": "0.0.8",
+      "react-native-multiple-select": "^0.4.1",
       "react-native-popup-dialog": "^0.11.46",
       "react-native-router-flux": "^4.0.0-beta.28",
+      "react-native-search-filter": "^0.1.3",
+      "react-native-select-input-ios": "^1.2.0",
+      "react-native-shine-button": "^0.0.8",
       "react-native-simple-modal": "^8.0.0",
       "react-native-vector-icons": "^4.6.0",
+      "react-native-view-shot": "^2.3.0",
       "react-navigation": "^1.0.0-beta.27",
       "react-redux": "^5.0.6",
       "redux": "^3.7.2",
@@ -2696,6 +2708,10 @@ Lockfile:
     version "1.1.1"
     resolved "https://registry.yarnpkg.com/function-bind/-/function-bind-1.1.1.tgz#a56899d3ea3c9bab874bb9773b7c5ede92f4895d"
   
+  fuse.js@^3.0.5:
+    version "3.2.0"
+    resolved "https://registry.yarnpkg.com/fuse.js/-/fuse.js-3.2.0.tgz#f0448e8069855bf2a3e683cdc1d320e7e2a07ef4"
+  
   gauge@~1.2.5:
     version "1.2.7"
     resolved "https://registry.yarnpkg.com/gauge/-/gauge-1.2.7.tgz#e9cec5483d3d4ee0ef44b60a7d99e4935e136d93"
@@ -4435,9 +4451,9 @@ Lockfile:
       rewire "2.5.2"
       semver "5.3.0"
   
-  moment@2.x.x:
-    version "2.21.0"
-    resolved "https://registry.yarnpkg.com/moment/-/moment-2.21.0.tgz#2a114b51d2a6ec9e6d83cf803f838a878d8a023a"
+  moment@^2.22.0:
+    version "2.22.1"
+    resolved "https://registry.yarnpkg.com/moment/-/moment-2.22.1.tgz#529a2e9bf973f259c9643d237fda84de3a26e8ad"
   
   morgan@^1.9.0:
     version "1.9.0"
@@ -5050,7 +5066,7 @@ Lockfile:
     dependencies:
       asap "~2.0.3"
   
-  prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.6.0:
+  prop-types@^15.5.10, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.6.0:
     version "15.6.1"
     resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.1.tgz#36644453564255ddda391191fb3a125cbdf654ca"
     dependencies:
@@ -5157,6 +5173,34 @@ Lockfile:
     dependencies:
       prop-types "^15.5.10"
   
+  react-native-autocomplete-input@^3.5.0:
+    version "3.5.0"
+    resolved "https://registry.yarnpkg.com/react-native-autocomplete-input/-/react-native-autocomplete-input-3.5.0.tgz#2e52e3865abf1ad3e8d04f7e39f5314c03a89e4d"
+    dependencies:
+      prop-types "^15.5.10"
+  
+  react-native-autocomplete-select@^1.0.0:
+    version "1.0.0"
+    resolved "https://registry.yarnpkg.com/react-native-autocomplete-select/-/react-native-autocomplete-select-1.0.0.tgz#2e5537f49b7038e98fc845236fa5aa5650cf7272"
+    dependencies:
+      react ">=15.4.1"
+      react-native ">=0.38.0"
+      string_score "git+https://github.com/ThiagoNP/string_score.git"
+  
+  react-native-autocomplete@^0.4.0:
+    version "0.4.0"
+    resolved "https://registry.yarnpkg.com/react-native-autocomplete/-/react-native-autocomplete-0.4.0.tgz#df786ca3e5efbd161e2bd87c39d4984f00dfc047"
+  
+  react-native-check-box@^2.1.0:
+    version "2.1.0"
+    resolved "https://registry.yarnpkg.com/react-native-check-box/-/react-native-check-box-2.1.0.tgz#a4e5fa2c1860cfc3f5758ae3493b6ec2ec7c2878"
+    dependencies:
+      prop-types "^15.5.7"
+  
+  react-native-checkbox-field@^2.0.2:
+    version "2.0.2"
+    resolved "https://registry.yarnpkg.com/react-native-checkbox-field/-/react-native-checkbox-field-2.0.2.tgz#5a61cb52ab327f24b5ba1c4ad086bd7ffcb9257a"
+  
   react-native-communications@^2.2.1:
     version "2.2.1"
     resolved "https://registry.yarnpkg.com/react-native-communications/-/react-native-communications-2.2.1.tgz#7883b56b20a002eeb790c113f8616ea8692ca795"
@@ -5165,11 +5209,11 @@ Lockfile:
     version "0.0.9"
     resolved "https://registry.yarnpkg.com/react-native-datepicker-dialog/-/react-native-datepicker-dialog-0.0.9.tgz#6e1f890a9b40937cea9e0c762fd542afb9fc3f37"
   
-  react-native-datepicker@^1.6.0:
-    version "1.6.0"
-    resolved "https://registry.yarnpkg.com/react-native-datepicker/-/react-native-datepicker-1.6.0.tgz#3a40dc9b112023c49d60ba2a0789d440b7e3d97c"
+  react-native-datepicker@^1.7.2:
+    version "1.7.2"
+    resolved "https://registry.yarnpkg.com/react-native-datepicker/-/react-native-datepicker-1.7.2.tgz#58d0822591a0ac9b32aba082650222a0ee29669d"
     dependencies:
-      moment "2.x.x"
+      moment "^2.22.0"
   
   react-native-dismiss-keyboard@1.0.0:
     version "1.0.0"
@@ -5209,6 +5253,10 @@ Lockfile:
       opencollective "^1.0.3"
       prop-types "^15.5.8"
   
+  react-native-icons@^0.7.1:
+    version "0.7.1"
+    resolved "https://registry.yarnpkg.com/react-native-icons/-/react-native-icons-0.7.1.tgz#a05c6c87bff7bfd883903bb9b7156f5ba568f977"
+  
   react-native-image-picker@^0.26.7:
     version "0.26.7"
     resolved "https://registry.yarnpkg.com/react-native-image-picker/-/react-native-image-picker-0.26.7.tgz#ad2ee957f7f6cc01396893ea03d84cb2adb2e376"
@@ -5223,6 +5271,10 @@ Lockfile:
     dependencies:
       prop-types "^15.6.0"
       react-native-iphone-x-helper "^1.0.1"
+  
+  react-native-modal-filter-picker@^1.3.4:
+    version "1.3.4"
+    resolved "https://registry.yarnpkg.com/react-native-modal-filter-picker/-/react-native-modal-filter-picker-1.3.4.tgz#c33ae2ca7b0b5adae8671a6b417a6f5d263d9813"
   
   react-native-modal-overlay@^1.2.3:
     version "1.2.3"
@@ -5240,6 +5292,10 @@ Lockfile:
   react-native-multiple-choice@0.0.8:
     version "0.0.8"
     resolved "https://registry.yarnpkg.com/react-native-multiple-choice/-/react-native-multiple-choice-0.0.8.tgz#ef7d99ac1044941cdf8b94109cc5a3307aa19e87"
+  
+  react-native-multiple-select@^0.4.1:
+    version "0.4.1"
+    resolved "https://registry.yarnpkg.com/react-native-multiple-select/-/react-native-multiple-select-0.4.1.tgz#a79ad2a2668df3cb35b8f9ba4cbd04561e1f41ec"
   
   react-native-popup-dialog@^0.11.46:
     version "0.11.46"
@@ -5266,9 +5322,26 @@ Lockfile:
     dependencies:
       hoist-non-react-statics "^2.3.1"
   
+  react-native-search-filter@^0.1.1, react-native-search-filter@^0.1.3:
+    version "0.1.3"
+    resolved "https://registry.yarnpkg.com/react-native-search-filter/-/react-native-search-filter-0.1.3.tgz#fe710c1e075ab30d08fe568b590c5a3d47b5fd49"
+    dependencies:
+      fuse.js "^3.0.5"
+      react-native-search-filter "^0.1.1"
+  
+  react-native-select-input-ios@^1.2.0:
+    version "1.2.0"
+    resolved "https://registry.yarnpkg.com/react-native-select-input-ios/-/react-native-select-input-ios-1.2.0.tgz#663d1893c68e518e21f462c9e265ffc4d4a07549"
+  
   react-native-select-list@^1.0.5:
     version "1.0.5"
     resolved "https://registry.yarnpkg.com/react-native-select-list/-/react-native-select-list-1.0.5.tgz#e69048ac6fdbce4d8ec195b97131f19ef4f00e42"
+  
+  react-native-shine-button@^0.0.8:
+    version "0.0.8"
+    resolved "https://registry.yarnpkg.com/react-native-shine-button/-/react-native-shine-button-0.0.8.tgz#c2e64080cc7b2a992de28e2f37c8ee79545ce37d"
+    dependencies:
+      react-native-vector-icons "4.5.0"
   
   react-native-simple-modal@^8.0.0:
     version "8.0.0"
@@ -5286,6 +5359,14 @@ Lockfile:
     dependencies:
       prop-types "^15.6.0"
   
+  react-native-vector-icons@4.5.0, react-native-vector-icons@~4.5.0:
+    version "4.5.0"
+    resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-4.5.0.tgz#6b95619e64f62f05f579f74a01fe5640df95158b"
+    dependencies:
+      lodash "^4.0.0"
+      prop-types "^15.5.10"
+      yargs "^8.0.2"
+  
   react-native-vector-icons@^4.6.0:
     version "4.6.0"
     resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-4.6.0.tgz#e4014311ffa6de397d914ffc31b7097a874cc8d5"
@@ -5294,15 +5375,11 @@ Lockfile:
       prop-types "^15.5.10"
       yargs "^8.0.2"
   
-  react-native-vector-icons@~4.5.0:
-    version "4.5.0"
-    resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-4.5.0.tgz#6b95619e64f62f05f579f74a01fe5640df95158b"
-    dependencies:
-      lodash "^4.0.0"
-      prop-types "^15.5.10"
-      yargs "^8.0.2"
+  react-native-view-shot@^2.3.0:
+    version "2.3.0"
+    resolved "https://registry.yarnpkg.com/react-native-view-shot/-/react-native-view-shot-2.3.0.tgz#ac01880d3c560f0dc918cd7cdf8854c6ff85ca31"
   
-  react-native@^0.55.3:
+  react-native@>=0.38.0, react-native@^0.55.3:
     version "0.55.3"
     resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.55.3.tgz#6ff1691bd0645d0480fba16377edb9dce5bd28c4"
     dependencies:
@@ -5438,6 +5515,15 @@ Lockfile:
   react@16.2.0:
     version "16.2.0"
     resolved "https://registry.yarnpkg.com/react/-/react-16.2.0.tgz#a31bd2dab89bff65d42134fa187f24d054c273ba"
+    dependencies:
+      fbjs "^0.8.16"
+      loose-envify "^1.1.0"
+      object-assign "^4.1.1"
+      prop-types "^15.6.0"
+  
+  react@>=15.4.1:
+    version "16.3.2"
+    resolved "https://registry.yarnpkg.com/react/-/react-16.3.2.tgz#fdc8420398533a1e58872f59091b272ce2f91ea9"
     dependencies:
       fbjs "^0.8.16"
       loose-envify "^1.1.0"
@@ -6209,6 +6295,10 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-1.0.3.tgz#0fc67d7c141825de94282dd536bec6b9bce860ab"
     dependencies:
       safe-buffer "~5.1.0"
+  
+  "string_score@git+https://github.com/ThiagoNP/string_score.git":
+    version "0.1.20"
+    resolved "git+https://github.com/ThiagoNP/string_score.git#62588b6c43fe957f631f6bfd76300cad678a7941"
   
   stringstream@~0.0.4, stringstream@~0.0.5:
     version "0.0.5"
