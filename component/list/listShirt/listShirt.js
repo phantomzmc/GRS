@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
         borderColor: '#f1f1f1',
         padding: 15,
         paddingHorizontal: 30,
-        borderWidth: 1,
+        borderBottomWidth: 1,
         flexDirection: 'row',
     },
     ListView: {

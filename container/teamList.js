@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
-import { Container, Header, Item, Input, Button, Tab, Tabs, TabHeading,Icon } from 'native-base';
+import { Container, Header, Item, Input, Button, Tab, Tabs, TabHeading, Icon } from 'native-base';
 import { StackNavigator } from 'react-navigation';
 
 import ButtonChage from '../component/items/bottonChage'
@@ -35,7 +35,7 @@ class TeamList extends Component {
                         <Tab heading={<TabHeading><Icon name="ios-people" /></TabHeading>}>
                             <EventListFriend />
                         </Tab>
-                        <Tab heading={<TabHeading><Icon name="ios-heart"/></TabHeading>}>
+                        <Tab heading={<TabHeading><Icon name="ios-heart" /></TabHeading>}>
                             <Text>No Icon</Text>
                             <EventListFriend />
                         </Tab>
@@ -43,12 +43,11 @@ class TeamList extends Component {
                     <View style={styles.submitContainer}>
                         <TouchableOpacity style={styles.buttonContainer}
                             onPress={() => navigate('FriendDistance')}>
-                            <Text style={styles.textButton}>ถัดไป</Text>
+                            <Text style={styles.textButton}>+ เพิ่มในการสมัคร</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
             </ScrollView>
-
         );
     }
 }

@@ -7,6 +7,7 @@ import datafriend from './dataFriend'
 import ListFriendDistance from '../event/listFriendDistance'
 import ListShirth from '../listShirt/listShirt'
 import DropDownShirth from '../listShirt/dropdownShirt'
+import CardFriendDistance from '../../items/cardFriendDistance'
 
 
 class FriendInEvent extends Component {
@@ -47,42 +48,7 @@ class FriendInEvent extends Component {
                     data={this.state.dataSource}
                     renderItem={({ item }) =>
                         <View style={styles.container}>
-                            <Card style={{ flex: 0 }}>
-                                <CardItem>
-                                    <Left>
-                                        <Thumbnail source={{ uri: item.imgAvatar }} />
-                                        <Body>
-                                            <Text>{item.name}</Text>
-                                            <Text note>{item.gen} -  {item.age}</Text>
-                                        </Body>
-                                    </Left>
-                                    <Right>
-                                        <TouchableOpacity onPress={this.hideShow}>
-                                            <Icon name="arrow-forward" />
-                                        </TouchableOpacity>
-                                    </Right>
-                                </CardItem>
-                                <CardItem>
-                                    <Body>
-                                        {this.state.container &&
-                                            <View style={styles.listDistance}>
-                                                <ListFriendDistance />
-                                                <View style={styles.dropdownstyle}>
-                                                    <DropDownShirth />
-                                                </View>
-                                            </View>
-                                        }
-                                    </Body>
-                                </CardItem>
-                                <CardItem>
-                                    <Left>
-                                        <Button transparent warning>
-                                            <Icon name="ios-checkmark-circle" />
-                                            <Text>Photo + Service</Text>
-                                        </Button>
-                                    </Left>
-                                </CardItem>
-                            </Card>
+                            <CardFriendDistance distance={item}/>
                         </View>}
                     keyExtractor={(item, index) => index} />
             </View >
@@ -99,8 +65,9 @@ const styles = StyleSheet.create({
         fontFamily: 'Kanit'
     },
     dropdownstyle: {
-        flexDirection: 'row',
-        justifyContent: 'center'
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
 
 })

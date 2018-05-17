@@ -29,9 +29,18 @@ import MultiSelectExample from '../mockdata'
 
 import FriendDistance from '../container/friendDistance'
 import HistoryList from '../component/list/history/historylist'
-
+import FriendInEvent from '../component/list/listFriend/frienInEvent'
 
 export default StackNavigator({
+    FriendInEvent : {
+        screen : FriendInEvent
+    },
+    Login: {
+        screen: Login,
+        navigationOptions: {
+            header: () => null
+        }
+    },
     // HistoryList : {
     //     screen : HistoryList
     // },

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, StyleSheet, Alert, TouchableOpacity, Image } from 'react-native';
-import CheckBox from 'react-native-check-box'
+import { View, Text, FlatList, StyleSheet, Alert, TouchableHighlight, Image } from 'react-native';
+import { Left, Right } from "native-base";
 import { connect } from 'react-redux'
 
 import datadistance from './datadistance'
@@ -10,7 +10,7 @@ class ListFriendDistance extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            selected: false
+            pressStatus: true
         }
     }
 
@@ -19,14 +19,15 @@ class ListFriendDistance extends Component {
             dataSource: datadistance
         });
     }
-    selectCheckbox = () => {
-        this.setState({
-            selected: true,
-        });
-        console.log("click")
-    };
+    _onHideUnderlay() {
+        this.setState({ pressStatus: false });
+    }
+    _onShowUnderlay() {
+        this.setState({ pressStatus: true });
+    }
     alertShow(item) {
         this.props.addDistance(item)
+        this.props.getDistance(item)
         Alert.alert(item.name, "ระยะทาง : " + item.distance + " ราคา : " + item.price)
     }
     render() {
@@ -40,26 +41,25 @@ class ListFriendDistance extends Component {
         return (
             <View>
                 <FlatList
-                    horizontal
                     data={this.state.dataSource}
                     renderItem={({ item }) => <View style={styles.listview}>
-                        <View style={styles.container}>
-
-                            <TouchableOpacity onPress={() => this.alertShow(item)}>
-                                <View style={styles.cellDistance}>
-                                    <View style={styles.checkBox}>
-                                        <CheckBox
-                                            style={{ flex: 1 }}
-                                            onClick={() => this.selectCheckbox(item.name)}
-                                            isChecked={item.name.checked}
-                                        />
-                                    </View>
-                                    <Text style={styles.title}>{item.name}</Text>
-                                    <Text style={styles.detail}>{item.distance}</Text>
-                                    <Text style={styles.detail}>{item.price}</Text>
+                        <TouchableHighlight onPress={() => this.alertShow(item)}
+                            activeOpacity={0.5}
+                            underlayColor="#f1f1f1" >
+                            <View style={this.state.pressStatus ? styles.cellDistance : styles.cellDistanceOnPress}>
+                                <View style={styles.content}>
+                                    <Left>
+                                        <Text style={styles.title}>
+                                            {item.name} {item.distance}
+                                        </Text>
+                                    </Left>
+                                    <Right>
+                                        <Text style={styles.detail}>{item.price} บาท</Text>
+                                    </Right>
                                 </View>
-                            </TouchableOpacity>
-                        </View>
+
+                            </View>
+                        </TouchableHighlight>
                     </View>}
                     keyExtractor={(item, index) => index} />
             </View >
@@ -70,36 +70,42 @@ class ListFriendDistance extends Component {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        addDistanceFriend: (detailRegis) => {
+        addDistance: (item) => {
             dispatch({
-                type: 'addDistanceFriend',
-                payload: detailRegis
+                type: 'addDistance',
+                payload: item
             })
         }
     }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'row'
-    },
     listview: {
         backgroundColor: '#fff',
-    },
-    checkBox: {
-        flexDirection: 'row',
-        justifyContent: 'center'
+        paddingBottom: 20
     },
     cellDistance: {
         justifyContent: 'center',
-        padding: 15,
-        paddingHorizontal: 30,
+        // borderColor: '#f1f1f1',
+        // borderBottomWidth: 1,
+        paddingHorizontal: 20,
+        flexDirection: 'row',
+    },
+    cellDistanceOnPress: {
+        justifyContent: 'center',
+        backgroundColor: '#f1f1f1',
+        borderColor: '#f1f1f1',
+        borderBottomWidth: 1,
+        paddingHorizontal: 20,
+        flexDirection: 'row',
+    },
+    content: {
     },
     title: {
-        fontSize: 10
+        fontFamily: 'kanit'
     },
     detail: {
-        fontSize: 10,
+        fontFamily: 'kanit',
         color: '#666666'
     }
 })

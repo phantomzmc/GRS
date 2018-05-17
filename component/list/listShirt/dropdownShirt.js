@@ -26,7 +26,7 @@ class DropDownShirth extends Component {
     render() {
         let state = this.state;
         return (
-            <View>
+            <View style={styles.container}>
                 <SelectInput
                     value={state.valueSmall0}
                     options={this.state.dataOpition}
@@ -43,6 +43,9 @@ const MARGIN_SMALL = 8;
 const MARGIN_LARGE = 16;
 
 const styles = StyleSheet.create({
+    container:{
+        padding : 5
+    },
     selectInput: {
         flexDirection: 'row',
         height: 36,
