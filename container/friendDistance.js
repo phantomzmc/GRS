@@ -1,24 +1,35 @@
 import React, { Component } from 'react'
 import FriendInEvent from '../component/list/listFriend/frienInEvent'
 import { View, StyleSheet, TouchableOpacity, Text, ScrollView } from 'react-native';
+import HeaderTeam from '../component/items/headerTeam'
 
 class FriendDistance extends Component {
-    onButtonChangePayment = () =>{
+    state = {
+        title: "เลือกระยะทาง"
+    }
+    onButtonChangePayment = () => {
         this.props.navigation.navigate("ButtonChangePayment")
+    }
+    onPressGoBack = () => {
+        this.props.navigation.navigate("TabRouter")
     }
     render() {
         return (
-            <ScrollView>
-                <View style={styles.container}>
-                    <FriendInEvent />
-                    <View style={styles.submitContainer}>
-                        <TouchableOpacity style={styles.buttonContainer}
-                            onPress={this.onButtonChangePayment.bind(this)}>
-                            <Text style={styles.textButton}>ถัดไป</Text>
-                        </TouchableOpacity>
+            <View>
+                <HeaderTeam title={this.state.title}
+                    goback={this.onPressGoBack.bind(this)} />
+                <ScrollView>
+                    <View style={styles.container}>
+                        <FriendInEvent />
+                        <View style={styles.submitContainer}>
+                            <TouchableOpacity style={styles.buttonContainer}
+                                onPress={this.onButtonChangePayment.bind(this)}>
+                                <Text style={styles.textButton}>ถัดไป</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
-                </View>
-            </ScrollView>
+                </ScrollView>
+            </View>
         )
     }
 }

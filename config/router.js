@@ -29,12 +29,13 @@ import MultiSelectExample from '../mockdata'
 
 import FriendDistance from '../container/friendDistance'
 import HistoryList from '../component/list/history/historylist'
-import FriendInEvent from '../component/list/listFriend/frienInEvent'
+import FriendListLayout from '../container/friendListLayout'
+import HistoryContainer from '../container/historyContainer'
 
 export default StackNavigator({
-    FriendInEvent : {
-        screen : FriendInEvent
-    },
+    // FriendListLayout : {
+    //     screen : FriendListLayout
+    // },
     Login: {
         screen: Login,
         navigationOptions: {
@@ -198,7 +199,10 @@ export default StackNavigator({
         }
     },
     TabRouter: {
-        screen: TabRouter
+        screen: TabRouter,
+        navigationOptions: {
+            header: () => null
+        }
     },
     TeamList: {
         screen: TeamList,
@@ -264,15 +268,7 @@ export default StackNavigator({
     FriendDistance : {
         screen : FriendDistance,
         navigationOptions: {
-            title: 'รายชื่อเพื่อน',
-            headerStyle: {
-                backgroundColor: '#FC561F'
-            },
-            headerTitleStyle: {
-                color: '#fff',
-                fontFamily: "Kanit",
-                fontWeight: '500'
-            }
+            header: () => null
         }
     },
     TotalRegister: {

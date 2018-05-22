@@ -8,15 +8,23 @@ class FriendListView extends Component {
     constructor(props) {
         super(props)
         this.state = {
-
+            isRefesh  : false,
+            
         }
         // this.alertShow = this.alertShow.bind(this)
     }
 
     componentDidMount() {
         this.setState({
-            dataSource: datafriend
+            dataSource: this.props.friend
         });
+    }
+    onRefesh = () =>{
+        // this.setState({ isRefesh : true})
+        console.log(datafriend)
+        console.log(this.props.friend)
+        // datafriend.push(this.state.newitem)
+
     }
     alertShow(item) {
         console.log(item)
@@ -46,10 +54,12 @@ class FriendListView extends Component {
             <View
                 style={{
                     flex: 1,
-                    paddingTop: 20
+                    // paddingTop: 20
                 }}>
                 <FlatList
                     data={this.state.dataSource}
+                    refreshing={this.state.isRefesh}
+                    onRefresh={this.onRefesh}
                     renderItem={({ item }) => <View style={styles.container}>{item.name}
                         <View style={styles.cellFriend}>
                             <View>

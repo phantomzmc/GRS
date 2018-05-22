@@ -28,7 +28,7 @@ class ListFriendDistance extends Component {
     alertShow(item) {
         this.props.addDistance(item)
         this.props.getDistance(item)
-        Alert.alert(item.name, "ระยะทาง : " + item.distance + " ราคา : " + item.price)
+        // Alert.alert(item.name, "ระยะทาง : " + item.distance + " ราคา : " + item.price)
     }
     render() {
         if (this.state.isLoading) {
@@ -45,7 +45,7 @@ class ListFriendDistance extends Component {
                     renderItem={({ item }) => <View style={styles.listview}>
                         <TouchableHighlight onPress={() => this.alertShow(item)}
                             activeOpacity={0.5}
-                            underlayColor="#f1f1f1" >
+                            underlayColor="#FC561F" >
                             <View style={this.state.pressStatus ? styles.cellDistance : styles.cellDistanceOnPress}>
                                 <View style={styles.content}>
                                     <Left>

@@ -24,10 +24,11 @@ class ListShirt extends Component {
     }
 
     pressDataShirt(datashirt) {
-        console.log(this.state.size)
-        this.setState({ size: datashirt.size })
-        this.props.setSizeShirt(datashirt.size)
-        Alert.alert("ไซค์เสื้อ : " + datashirt.size)
+        console.log(this.state.label)
+        this.setState({ size: datashirt.label })
+        this.props.setSizeShirt(datashirt.label)
+        this.props.getShirt(datashirt)
+        // Alert.alert("ไซค์เสื้อ : " + datashirt.label)
     }
     render() {
         return (
@@ -43,7 +44,10 @@ class ListShirt extends Component {
     }
     renderShirt(datashirt) {
         return (
-            <TouchableHighlight onPress={() => this.pressDataShirt(datashirt)}>
+            <TouchableHighlight
+                onPress={() => this.pressDataShirt(datashirt)}
+                activeOpacity={0.5}
+                underlayColor="#FC561F">
                 <View style={styles.sizeshirt}>
                     <Text style={{ fontFamily: "Kanit", }}>{datashirt.label} </Text>
                     <Text style={{ fontFamily: "Kanit", }}> ({datashirt.width}")</Text>
@@ -54,10 +58,10 @@ class ListShirt extends Component {
 }
 const mapDispatchtoProps = (dispatch) => {
     return {
-        setSizeShirt : (size) => {
+        setSizeShirt: (size) => {
             dispatch({
-                type : 'setSizeShirt',
-                payload : size
+                type: 'setSizeShirt',
+                payload: size
             })
         }
     }
@@ -79,4 +83,4 @@ const styles = StyleSheet.create({
     }
 
 })
-export default connect(null,mapDispatchtoProps)(ListShirt)
+export default connect(null, mapDispatchtoProps)(ListShirt)

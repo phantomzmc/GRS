@@ -18,7 +18,7 @@ import Navigation from './config/router'
 // import ChoiceSend from './component/items/choiceSend'
 import { Provider } from 'react-redux'
 import store from './store/store'
-
+import Login from './container/login'
 
 export default () =>
 

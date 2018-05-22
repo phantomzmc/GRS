@@ -14,9 +14,9 @@ class FriendInEvent extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            container: true
+            index: [],
+            deleteCellKey: null
         }
-        this.hideShow = this.hideShow.bind(this)
     }
     componentDidMount() {
         this.setState({
@@ -29,28 +29,46 @@ class FriendInEvent extends Component {
             console.log("nextProps")
         }
     }
-    hideShow() {
-        if (this.state.container === false) {
-            this.setState({ container: true })
-            console.log(this.state.container)
-
-        }
-        else if (this.state.container === true) {
-            this.setState({ container: false })
-            console.log(this.state.container)
-        }
-
+    keyExtractor = (item, index) => {
+        return index
+    }
+    deleteItem() {
+        let { index, dataSource } = this.state
+        Alert.alert(
+            'ลบรายชื่อเพื่อน',
+            'คุณต้องการลบ ' + dataSource.gen + '' , 
+            [
+                {text : 'ยกเลิก'},
+                {text : 'ตกลง' , onPress : () => {
+                    dataSource.splice(index,1)
+                    console.log("delete")
+                    console.log(dataSource)
+                    this.refreshFlatlist()
+                }}
+            ],{cancelable : true}
+        )
+    }
+    refreshFlatlist = (deleteKey) => {
+        let { deleteCellKey } = this.state
+        this.setState((prevState) => {
+            return {
+                deleteCellKey : deleteKey
+            }
+        })
     }
     render() {
         return (
             <View>
                 <FlatList
                     data={this.state.dataSource}
-                    renderItem={({ item }) =>
+                    refreshing={true}
+                    renderItem={({ item, index }) =>
                         <View style={styles.container}>
-                            <CardFriendDistance distance={item}/>
+                            <CardFriendDistance distance={item}
+                                                delete={this.deleteItem.bind(this)}
+                                                 />
                         </View>}
-                    keyExtractor={(item, index) => index} />
+                    keyExtractor={this.keyExtractor} />
             </View >
         )
     }

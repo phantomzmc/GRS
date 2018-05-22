@@ -1,23 +1,32 @@
 import React, { Component } from 'react';
-import { View ,StyleSheet} from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import HistoryList from '../component/list/history/historylist'
+import HeaderTeam from '../component/items/headerTeam'
 
 class HistoryContainer extends Component {
+    state = {
+        title: "ประวัติการวิ่ง"
+    }
 
     render() {
         return (
             <View style={styles.container}>
-                <HistoryList/>
+                <HeaderTeam title={this.state.title} />
+                <View style={styles.list}>
+                    <HistoryList />
+                </View>
             </View>
-            
+
         );
     }
 }
 
 const styles = StyleSheet.create({
-    container : {
-        flex : 1,
-        padding : 10
+    container: {
+
+    },
+    list: {
+        padding: 10
     }
 })
 
