@@ -42,12 +42,6 @@ export default StackNavigator({
             header: () => null
         }
     },
-    // HistoryList : {
-    //     screen : HistoryList
-    // },
-    // TabRouter: {
-    //     screen: TabRouter
-    // },
     EventList: {
         screen: EventList,
         navigationOptions: {
@@ -58,20 +52,14 @@ export default StackNavigator({
             headerTitleStyle: {
                 color: '#fff',
                 fontFamily: "Kanit",
-                fontWeight: '500'
             }
         }
     },
     Register: {
         screen: Register,
         navigationOptions: {
-            title: "สมัครสมาชิก",
-            headerStyle: {
-                backgroundColor: "#FC561F"
-            },
-            headerTitleStyle: {
-                color: "#fff"
-            }
+            header : () => null
+
         }
     },
     SingleLogin: {
@@ -89,50 +77,27 @@ export default StackNavigator({
     UserAddressRegister: {
         screen: UserAddressRegister,
         navigationOptions: {
-            title: "สมัครสมาชิก",
-            headerStyle: {
-                backgroundColor: "#FC561F"
-            },
-            headerTitleStyle: {
-                color: "#fff"
-            }
+            header : () => null
+
         }
     },
     UserHelpRegister: {
         screen: UserHelpRegister,
         navigationOptions: {
-            title: "สมัครสมาชิก",
-            headerStyle: {
-                backgroundColor: "#FC561F"
-            },
-            headerTitleStyle: {
-                color: "#fff"
-            }
+            header : () => null
         }
-
     },
     Verify: {
         screen: Verify,
         navigationOptions: {
-            title: "ยืนยันตัวตน",
-            headerStyle: {
-                backgroundColor: "#FC561F"
-            },
-            headerTitleStyle: {
-                color: "#fff"
-            }
+            header : () => null
+
         }
     },
     ResetVerify: {
         screen: ResetVerify,
         navigationOptions: {
-            title: "ขอรหัสผ่านใหม่",
-            headerStyle: {
-                backgroundColor: "#FC561F"
-            },
-            headerTitleStyle: {
-                color: "#fff"
-            }
+            header : () => null
         }
     },
     ResetPassword: {
@@ -150,52 +115,25 @@ export default StackNavigator({
     ShirtPhotoPlus: {
         screen: ShirtPhotoPlus,
         navigationOptions: {
-            title: 'เลือกไซค์เสื้อ',
-            headerStyle: {
-                backgroundColor: '#FC561F'
-            },
-            headerTitleStyle: {
-                color: '#fff',
-                fontFamily: 'kanit',
-            }
+            header : () => null
         }
     },
     DiscountCoupon: {
         screen: DiscountCoupon,
         navigationOptions: {
-            title: 'คูปองส่วนลด',
-            headerStyle: {
-                backgroundColor: '#FC561F'
-            },
-            headerTitleStyle: {
-                color: '#fff'
-            }
+            header : () => null
         }
     },
     ControlDistance: {
         screen: ControlDistance,
         navigationOptions: {
-            title: 'ลงทะเบียนวิ่ง',
-            headerStyle: {
-                backgroundColor: '#FC561F'
-            },
-            headerTitleStyle: {
-                color: '#fff',
-                fontFamily: 'kanit',
-            },
+            header: () => null
         }
     },
     ButtonChangePayment: {
         screen: ButtonChangePayment,
         navigationOptions: {
-            title: 'ชำระเงิน',
-            headerStyle: {
-                backgroundColor: '#FC561F'
-            },
-            headerTitleStyle: {
-                color: '#fff',
-                fontFamily: 'kanit',
-            },
+            header : () => null
         }
     },
     TabRouter: {
@@ -207,15 +145,7 @@ export default StackNavigator({
     TeamList: {
         screen: TeamList,
         navigationOptions: {
-            title: 'ลงทะเบียนแบบกลุ่ม',
-            headerStyle: {
-                backgroundColor: '#FC561F'
-            },
-            headerTitleStyle: {
-                color: '#fff',
-                fontFamily: "Kanit",
-                fontWeight: '500',
-            },
+            header : () => null
         }
     },
 
@@ -228,27 +158,13 @@ export default StackNavigator({
     AddressLayout: {
         screen: AddressLayout,
         navigationOptions: {
-            title: 'การจัดส่ง',
-            headerStyle: {
-                backgroundColor: '#FC561F'
-            },
-            headerTitleStyle: {
-                color: '#fff',
-                fontFamily: 'kanit',
-            },
+            header : () => null
         }
     },
     TotalPayment: {
         screen: TotalPayment,
         navigationOptions: {
-            title: 'สรุปการสมัครทั้งหมด',
-            headerStyle: {
-                backgroundColor: '#FC561F'
-            },
-            headerTitleStyle: {
-                color: '#fff',
-                fontFamily: 'kanit',
-            }
+            header : () => null
         }
     },
     AddEventFriend: {
@@ -265,8 +181,8 @@ export default StackNavigator({
             }
         }
     },
-    FriendDistance : {
-        screen : FriendDistance,
+    FriendDistance: {
+        screen: FriendDistance,
         navigationOptions: {
             header: () => null
         }

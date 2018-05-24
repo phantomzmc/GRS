@@ -7,6 +7,7 @@ import CreditPayment from '../../container/creditPayment'
 import TranferPayment from '../../container/tranferPayment'
 import TotalRegister from '../../component/items/totalRegister'
 import SummaryTotal from '../items/summary'
+import HeaderTeam from '../items/headerTeam'
 
 class ButtonChangePayment extends Component {
     static propTypes = {
@@ -15,6 +16,7 @@ class ButtonChangePayment extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            title: "ชำระเงิน",
             pageNumber: 0
         }
 
@@ -25,6 +27,9 @@ class ButtonChangePayment extends Component {
     gotoTotalPayment = () => {
         this.props.navigation.navigate('TotalPayment')
     }
+    gotoBack = () => {
+        this.props.navigation.navigate('AddressLayout')
+    }
     render() {
         return (
             <Container style={styles.container}>
@@ -33,6 +38,9 @@ class ButtonChangePayment extends Component {
                     hidden={false}
                     translucent={true}
                 />
+                <HeaderTeam
+                    title={this.state.title}
+                    goback={this.gotoBack.bind(this)} />
                 <Tabs initialPage={this.state.pageNumber} renderTabBar={() => <ScrollableTab />}>
                     <Tab heading={<TabHeading><Icon name="card" /><Text style={styles.textLabel}> ชำระผ่านบัตรเครดิต/เดบิต</Text></TabHeading>}>
                         <CreditPayment showDetail={this.gotoShowDetail.bind(this)}

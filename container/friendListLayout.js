@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, TouchableOpacity,StatusBar } from 'react-native';
 import { Header, Item, Icon, Input, Thumbnail, Button, Text } from 'native-base'
 import Modal from "react-native-modal";
 import datafriend from '../component/list/listFriend/dataFriend'
@@ -42,6 +42,11 @@ class FriendList extends Component {
         return (
             <View style={styles.container}>
                 <HeaderTeam title={this.state.title} />
+                <StatusBar
+                    barStyle="light-content"
+                    hidden={false}
+                    translucent={true}
+                />
                 <Header searchBar rounded>
                     <Item>
                         <Icon name="ios-search" />
@@ -56,8 +61,8 @@ class FriendList extends Component {
 
                 <Modal isVisible={this.state.isModalVisible}>
                     <ModalAddFriend toggleModal={this._toggleModal}
-                                    friend={datafriend}
-                                    getAddFriend={this.addFriend.bind(this)} />
+                        friend={datafriend}
+                        getAddFriend={this.addFriend.bind(this)} />
                 </Modal>
                 <Modal isVisible={this.state.isModalVisibleError}>
                     <ErrorModalAddFriend toggleModal={this._toggleModal} />

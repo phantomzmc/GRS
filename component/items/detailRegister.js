@@ -3,6 +3,9 @@ import { View, Text, StyleSheet, Image } from 'react-native';
 import { connect } from 'react-redux'
 
 class DetailRegister extends Component {
+    state = {
+        address : "106/13 หนองหอย เมืองเชียงใหม่ เชียงใหม่"
+    }
     render() {
         return (
             <View style={styles.container}>
@@ -38,7 +41,8 @@ class DetailRegister extends Component {
                 <View style={styles.viewAddress}>
                     <View style={{ flex: 1, alignItems: 'center' }}>
                         <Text style={styles.textName1}>Address</Text>
-                        <Text style={{ fontFamily: 'kanit' }}>{this.props.address.user.adress}</Text>
+                        {/* <Text style={{ fontFamily: 'kanit' }}>{this.props.address.user.adress}</Text> */}
+                        <Text style={{ fontFamily: 'kanit' }}>{this.state.address}</Text>
                     </View>
                     <View style={{ flex: 1, alignItems: 'center' }}>
                         <Text style={styles.textName1}>วันที่</Text>

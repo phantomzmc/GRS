@@ -26,7 +26,7 @@ class ListFriendDistance extends Component {
         this.setState({ pressStatus: true });
     }
     alertShow(item) {
-        this.props.addDistance(item)
+        // this.props.addDistance(item)
         this.props.getDistance(item)
         // Alert.alert(item.name, "ระยะทาง : " + item.distance + " ราคา : " + item.price)
     }
@@ -68,16 +68,16 @@ class ListFriendDistance extends Component {
 
 
 }
-const mapDispatchToProps = (dispatch) => {
-    return {
-        addDistance: (item) => {
-            dispatch({
-                type: 'addDistance',
-                payload: item
-            })
-        }
-    }
-}
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         addDistance: (item) => {
+//             dispatch({
+//                 type: 'addDistance',
+//                 payload: item
+//             })
+//         }
+//     }
+// }
 
 const styles = StyleSheet.create({
     listview: {
@@ -110,4 +110,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default connect(null, mapDispatchToProps)(ListFriendDistance);
+export default ListFriendDistance;

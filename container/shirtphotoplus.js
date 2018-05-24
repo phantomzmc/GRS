@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image, Alert } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image, Alert,StatusBar } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { connect } from 'react-redux'
 import ListShirt from '../component/list/listShirt/listShirt'
 import PhotoPlus from '../component/items/photoPlus'
 import SummaryTotal from '../component/items/summary'
+import HeaderTeam from '../component/items/headerTeam'
 
 class ShirtPhotoPlus extends Component {
     state = {
+        title: "เลือกไซค์เสื้อ",
         isItems: false,
         isItems2: false
     }
@@ -41,33 +43,44 @@ class ShirtPhotoPlus extends Component {
             this.props.navigation.navigate('AddressLayout')
         }
     }
+    goPreveState = () => {
+        this.props.navigation.navigate('ControlDistance')
+    }
 
     render() {
         return (
-            <ScrollView>
-                <View style={styles.container}>
-                    <Image source={{ uri: "http://register.shutterrunning2014.com/assets/img/theme/dongtanshirt.png" }}
-                        style={{ height: 100, marginTop: 10 }} />
+            <View>
+                <HeaderTeam
+                    title={this.state.title}
+                    goback={this.goPreveState.bind(this)} />
+                <StatusBar
+                    barStyle="light-content"
+                    hidden={false}
+                    translucent={true}
+                />
+                <ScrollView>
+                    <View style={styles.container}>
+                        <Image source={{ uri: "http://register.shutterrunning2014.com/assets/img/theme/dongtanshirt.png" }}
+                            style={{ height: 100, marginTop: 10 }} />
 
-                    <Text style={styles.textSize}>โปรดเลือกไซค์เสื้อ</Text>
-                    <ListShirt />
-                    {this.state.isItems && <Text style={styles.textSize}>Photo Plus + </Text>}
-                    {this.state.isItems2 &&
-                        <PhotoPlus titleName={this.props.photoplus.title}
-                            dataPricePhoto={this.props.photoplus.pricePhoto}
-                            priceEvent={this.props.total.totalPrice} />
-                    }
-
-
-                </View>
-                <View style={styles.submitContainer}>
-                    <TouchableOpacity style={styles.buttonContainer}>
-                        <Text style={styles.textButton}
-                            onPress={this.goNextState}>ถัดไป</Text>
-                    </TouchableOpacity>
-                </View>
-                <SummaryTotal />
-            </ScrollView>
+                        <Text style={styles.textSize}>โปรดเลือกไซค์เสื้อ</Text>
+                        <ListShirt />
+                        {this.state.isItems && <Text style={styles.textSize}>Photo Plus + </Text>}
+                        {this.state.isItems2 &&
+                            <PhotoPlus titleName={this.props.photoplus.title}
+                                dataPricePhoto={this.props.photoplus.pricePhoto}
+                                priceEvent={this.props.total.totalPrice} />
+                        }
+                    </View>
+                    <View style={styles.submitContainer}>
+                        <TouchableOpacity style={styles.buttonContainer}>
+                            <Text style={styles.textButton}
+                                onPress={this.goNextState}>ถัดไป</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <SummaryTotal />
+                </ScrollView>
+            </View>
         );
     }
 }

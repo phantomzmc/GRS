@@ -5266,6 +5266,12 @@ react-native-simple-modal@^8.0.0:
   version "8.0.0"
   resolved "https://registry.yarnpkg.com/react-native-simple-modal/-/react-native-simple-modal-8.0.0.tgz#08ee6b114cd5180e27430c4f8685b05d2aa9199e"
 
+react-native-switch-pro@^0.4.11:
+  version "0.4.11"
+  resolved "https://registry.yarnpkg.com/react-native-switch-pro/-/react-native-switch-pro-0.4.11.tgz#ec8f5c7d6217fab926839e9e58b44dba309becd9"
+  dependencies:
+    prop-types "^15.5.10"
+
 react-native-tab-view@^0.0.70:
   version "0.0.70"
   resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-0.0.70.tgz#1dd2ded32acd0cb6bfef38d26e53675db733b37b"

@@ -24,7 +24,6 @@ class ListShirt extends Component {
     }
 
     pressDataShirt(datashirt) {
-        console.log(this.state.label)
         this.setState({ size: datashirt.label })
         this.props.setSizeShirt(datashirt.label)
         this.props.getShirt(datashirt)
@@ -83,4 +82,4 @@ const styles = StyleSheet.create({
     }
 
 })
-export default connect(null, mapDispatchtoProps)(ListShirt)
+export default connect(null,mapDispatchtoProps)(ListShirt)

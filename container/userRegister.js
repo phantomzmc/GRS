@@ -5,13 +5,15 @@ import {
   Text,
   ScrollView,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
+  StatusBar
 } from "react-native";
 import { StackNavigator } from "react-navigation";
 import { connect } from "react-redux";
 
 import HeaderUser from "../component/items/header_profile";
 import FormRegister from "../component/form/registerForm";
+import HeaderTeam from '../component/items/headerTeam'
 
 class UserRegister extends Component {
   static propTypes = {
@@ -21,6 +23,7 @@ class UserRegister extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      title: "สมัครสมาชิก",
       profile: {}
     };
   }
@@ -57,15 +60,28 @@ class UserRegister extends Component {
     });
     this.props.navigation.navigate("UserAddressRegister");
   };
+  gotoBack = () => {
+    this.props.navigation.navigate('SingleLogin')
+  }
 
   render() {
     return (
-      <ScrollView>
-        <View style={styles.container}>
-          <HeaderUser Name={this.props.fullname} UserID={this.props.userid} />
-          <FormRegister goEvent={this.gotoListEvent.bind(this)} />
-        </View>
-      </ScrollView>
+      <View>
+        <HeaderTeam
+          title={this.state.title}
+          goback={this.gotoBack.bind(this)} />
+        <StatusBar
+          barStyle="light-content"
+          hidden={false}
+          translucent={true}
+        />
+        <ScrollView>
+          <View style={styles.container}>
+            <HeaderUser Name={this.props.fullname} UserID={this.props.userid} />
+            <FormRegister goEvent={this.gotoListEvent.bind(this)} />
+          </View>
+        </ScrollView>
+      </View>
     );
   }
 }

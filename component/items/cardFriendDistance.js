@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { View, FlatList, StyleSheet, Alert, TouchableOpacity, Image, ScrollView } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
+import Switch from 'react-native-switch-pro'
 
 import ListFriendDistance from '../list/event/listFriendDistance'
 import ListShirth from '../list/listShirt/listShirt'
 import DropDownShirth from '../list/listShirt/dropdownShirt'
 import dataFriend from '../list/listFriend/dataFriend';
+import data from '../list/listevent/data';
 
 class CradFriendDistance extends Component {
     constructor(props) {
@@ -15,24 +17,48 @@ class CradFriendDistance extends Component {
             distance: false,
             sizeShirth: false,
             items: [],
-            iconName: "arrow-forward",
+            totals : 500,
+            // name: [],
             dataDis: [],
-            dataShirt: []
+            dataShirt: [],
+            iconName: "arrow-forward",
+            value: false
         }
+        this.getDataRegisFriend = this.getDataRegisFriend.bind(this)
     }
     componentDidMount() {
         this.setState({ items: this.props.distance })
     }
-    onPressDeleteItem(){
+    onPressDeleteItem() {
         this.props.delete()
     }
-    passDistance(item) {
+
+    passName(item) {
+        this.setState({ name: this.state.items })
+        console.log(this.state.name)
+    }
+    passDistance = (item) => {
         let { dataDis } = this.state
-        this.setState({ dataDis: item })
+        this.passName()
+        this.setState({ dataDis: item , total : item.price})
+        console.log(this.state.dataDis)
+        this.props.getPriceTotal(this.state.total)
     }
     passShirt(shirt) {
-        let { dataShirt } = this.state
         this.setState({ dataShirt: shirt })
+        console.log(this.state.dataShirt)
+    }
+    getDataRegisFriend = (dataFriendRegis) => {
+        let { name, dataDis, dataShirt } = this.state
+        this.setState({ dataFriendRegis: { nameRegis: name, dataDisRegis: dataDis, dataShirtRegis: dataShirt } })
+        this.props.getFriendRegis(dataFriendRegis)
+    }
+    photoPlusSwitch = () => {
+        let { dataFriendRegis } = this.state
+        this.setState({ photoplusValue: 100 })
+        console.log(this.state.photoplusValue)
+        this.getDataRegisFriend(dataFriendRegis)
+
     }
     chageIcon = () => {
         const { iconName } = this.state
@@ -50,19 +76,15 @@ class CradFriendDistance extends Component {
                 <CardItem>
                     <Left>
                         <Thumbnail source={{ uri: items.imgAvatar }} />
-                        <Body>
-                            <Text>{items.name}</Text>
-                            <Text note>{items.gen} -  {items.age}</Text>
+                        <Body style={{ paddingHorizontal: 5 }}>
+                            <Text style={{ fontFamily: "kanit" }}>{items.name}</Text>
+                            <Text note style={{ fontFamily: "kanit" }}>{items.gen} -  {items.age}</Text>
                         </Body>
                     </Left>
                     <Right>
                         <View style={{ flexDirection: 'row' }}>
-                            {/* <TouchableOpacity onPress={() => this.setState({ container: !this.state.container })}
-                                onPressIn={() => this.chageIcon()}>
-                                <Icon name="ios-heart" />
-                            </TouchableOpacity> */}
                             <TouchableOpacity onPress={this.onPressDeleteItem.bind(this)}>
-                                <Icon name="ios-trash-outline" style={{ color: 'red'}}/>
+                                <Icon name="ios-trash-outline" style={{ color: 'red' }} />
                             </TouchableOpacity>
                         </View>
                     </Right>
@@ -96,18 +118,23 @@ class CradFriendDistance extends Component {
                                     </Right>
                                 </View>
                                 {this.state.sizeShirth && <ListShirth getShirt={this.passShirt.bind(this)} />}
-
                             </View>
                         </View>
                     </Body>
                 </CardItem>
                 <CardItem>
                     <Left>
-                        <Button transparent warning>
-                            <Icon name="ios-checkmark-circle" />
-                            <Text>Photo + Service</Text>
-                        </Button>
+                        <Icon name="ios-camera-outline" style={{ fontSize: 20 }} />
+                        <Text style={{ fontFamily: "kanit", fontSize: 16 }}>Photo + Service</Text>
                     </Left>
+                    <Right>
+                        <Switch
+                            width={60}
+                            height={30}
+                            value={this.state.value}
+                            onSyncPress={() => this.photoPlusSwitch()}
+                        />
+                    </Right>
                 </CardItem>
             </Card>
 

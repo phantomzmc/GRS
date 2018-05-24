@@ -28,7 +28,7 @@ class SummaryTotal extends Component {
                 <View style={styles.container}>
                     <View style={styles.box}>
                         <Text style={styles.textSummary}>สรุปค่าสมัครทั้งหมด : </Text>
-                        <Text style={styles.textSummary}>{this.state.totalprice}0 บาท</Text>
+                        <Text style={styles.textSummary}>{}{this.state.totalprice}0 บาท</Text>
                     </View>
                 </View>
             </ImageBackground>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity,StatusBar } from 'react-native';
 import { Container, Header, Item, Input, Button, Tab, Tabs, TabHeading, Icon } from 'native-base';
 import { StackNavigator } from 'react-navigation';
 import Modal from "react-native-modal";
@@ -50,6 +50,11 @@ class TeamList extends Component {
         return (
             <View>
                 <HeaderTeam title={this.state.title} />
+                <StatusBar
+                    barStyle="light-content"
+                    hidden={false}
+                    translucent={true}
+                />
                 <ScrollView>
                     <View style={styles.container}>
                         <HeaderProfile />
@@ -68,11 +73,11 @@ class TeamList extends Component {
                         </Header>
                         <Tabs>
                             <Tab heading={<TabHeading><Icon name="ios-people" /></TabHeading>}>
-                                <EventListFriend friend={datafriend}/>
+                                <EventListFriend friend={datafriend} />
                             </Tab>
                             <Tab heading={<TabHeading><Icon name="ios-heart" /></TabHeading>}>
                                 <Text>No Icon</Text>
-                                <EventListFriend friend={datafriend}/>
+                                <EventListFriend friend={datafriend} />
                             </Tab>
                         </Tabs>
                         <Modal isVisible={this.state.isModalVisible}>

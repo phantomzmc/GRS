@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert,StatusBar } from 'react-native';
 import { connect } from 'react-redux'
 import { captureScreen } from "react-native-view-shot";
 
 import TotalRegister from '../component/items/totalRegister'
 import DetailRegister from '../component/items/detailRegister'
+import HeaderTeam from '../component/items/headerTeam'
 
 class TotalLayout extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
+            title: "สรุปการสมัครทั้งหมด",
             name: "hello test",
             event: {
                 name: "",
@@ -44,6 +46,9 @@ class TotalLayout extends Component {
     gotoListEvent = () => {
         this.props.navigation.navigate('EventList')
     }
+    gotoBack = () => {
+        this.props.navigation.navigate('ButtonChangePayment')
+    }
 
     captureScreenFunction = () => {
         captureScreen({
@@ -53,27 +58,36 @@ class TotalLayout extends Component {
             .then(
                 error => console.error("Oops, Something Went Wrong", error)
             );
-
     }
 
     render() {
         return (
-            <ScrollView>
-                <View style={styles.container}>
-                    <DetailRegister />
-                    <TotalRegister />
-                    <View style={styles.submitContainer}>
-                        <TouchableOpacity style={styles.buttonContainer}
-                            onPress={this.captureScreenFunction}>
-                            <Text style={styles.textButton}>บันทึก</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.buttonContainer}
-                            onPress={this.onClick.bind(this)}>
-                            <Text style={styles.textButton}>ปิด</Text>
-                        </TouchableOpacity>
+            <View>
+                <HeaderTeam
+                    title={this.state.title}
+                    goback={this.gotoBack.bind(this)} />
+                <StatusBar
+                    barStyle="light-content"
+                    hidden={false}
+                    translucent={true}
+                />
+                <ScrollView>
+                    <View style={styles.container}>
+                        <DetailRegister />
+                        <TotalRegister />
+                        <View style={styles.submitContainer}>
+                            <TouchableOpacity style={styles.buttonContainer}
+                                onPress={this.captureScreenFunction}>
+                                <Text style={styles.textButton}>บันทึก</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.buttonContainer}
+                                onPress={this.onClick.bind(this)}>
+                                <Text style={styles.textButton}>ปิด</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
-                </View>
-            </ScrollView>
+                </ScrollView>
+            </View>
         );
     }
 }

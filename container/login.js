@@ -30,6 +30,9 @@ class Login extends Component {
         else if ((this.state.username === "Admin2" && this.state.password === "1234") && (this.props.login === 0)){
             this.gotoTabTeam()
         }
+        else if ((this.state.username === "1509901688799" && this.state.password === "mcc12azy") && (this.props.login === 0)){
+            this.gotoTabTeam()
+        }
         else if (this.props.profile.verify.statusVerify === 0) {
             Alert.alert('ยังไม่มีข้อมูลผู้ใช้งาน', 'ผู้ใช้งานยังไม่ได้ทำการยืนยันตัวตน กรุณายืนยันตัวตนด้วย', [
                 {

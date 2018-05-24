@@ -4,10 +4,13 @@ import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Ic
 
 import datafriend from './dataFriend'
 
+import { connect } from "react-redux";
+
 import ListFriendDistance from '../event/listFriendDistance'
 import ListShirth from '../listShirt/listShirt'
 import DropDownShirth from '../listShirt/dropdownShirt'
 import CardFriendDistance from '../../items/cardFriendDistance'
+import Summary from '../../items/summary'
 
 
 class FriendInEvent extends Component {
@@ -15,7 +18,8 @@ class FriendInEvent extends Component {
         super(props)
         this.state = {
             index: [],
-            deleteCellKey: null
+            deleteCellKey: null,
+            friendRegis: []
         }
     }
     componentDidMount() {
@@ -36,25 +40,40 @@ class FriendInEvent extends Component {
         let { index, dataSource } = this.state
         Alert.alert(
             'ลบรายชื่อเพื่อน',
-            'คุณต้องการลบ ' + dataSource.gen + '' , 
+            'คุณต้องการลบ ' + dataSource.gen + '',
             [
-                {text : 'ยกเลิก'},
-                {text : 'ตกลง' , onPress : () => {
-                    dataSource.splice(index,1)
-                    console.log("delete")
-                    console.log(dataSource)
-                    this.refreshFlatlist()
-                }}
-            ],{cancelable : true}
+                { text: 'ยกเลิก' },
+                {
+                    text: 'ตกลง', onPress: () => {
+                        dataSource.splice(index, 1)
+                        console.log("delete")
+                        console.log(dataSource)
+                        this.refreshFlatlist()
+                    }
+                }
+            ], { cancelable: true }
         )
     }
     refreshFlatlist = (deleteKey) => {
         let { deleteCellKey } = this.state
         this.setState((prevState) => {
             return {
-                deleteCellKey : deleteKey
+                deleteCellKey: deleteKey
             }
         })
+    }
+    passTotal = (price) => {
+        this.props.getSummaryPrice(price)
+    }
+    passFriendRegis = (regisFriend) => {
+        let { friendRegis } = this.state
+        friendRegis.push(regisFriend)
+        if(regisFriend == ""){
+            console.log(this.state.friendRegis)
+        }
+        else if (regisFriend != ""){
+            this.props.addFriendInEvent(regisFriend)
+        }
     }
     render() {
         return (
@@ -65,12 +84,24 @@ class FriendInEvent extends Component {
                     renderItem={({ item, index }) =>
                         <View style={styles.container}>
                             <CardFriendDistance distance={item}
-                                                delete={this.deleteItem.bind(this)}
-                                                 />
+                                delete={this.deleteItem.bind(this)}
+                                getFriendRegis={this.passFriendRegis.bind(this)}
+                                getPriceTotal={this.passTotal.bind(this)}
+                            />
                         </View>}
                     keyExtractor={this.keyExtractor} />
             </View >
         )
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addFriendInEvent: (regisFriend) => {
+            dispatch({
+                type: 'addFriendInEvent',
+                payload: regisFriend
+            })
+        }
     }
 }
 
@@ -90,4 +121,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default FriendInEvent
+export default connect(null, mapDispatchToProps)(FriendInEvent)

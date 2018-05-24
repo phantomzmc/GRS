@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, Alert,StatusBar } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { connect } from 'react-redux'
 import { map } from 'mobx';
 
+import HeaderTeam from "../items/headerTeam";
 
 class CouponForm extends Component {
     constructor(state) {
         super(state)
         this.state = {
+            title: "คูปองส่วนลด",
             coupon: ""
         }
         this.checkInput = this.checkInput.bind(this)
@@ -17,48 +19,62 @@ class CouponForm extends Component {
     gotoAddress() {
         this.props.navigation.navigate('AddressLayout')
     }
+    gotoBack = () => {
+        this.props.navigation.navigate('ShirtPhotoPlus')
+    }
 
     checkInput() {
         if (this.props.event.event.PromoCodeRequired == 1 && this.props.event.event.PromoCodeStatus == 1) {
             console.log("ต้อง input code")
-             if (this.state.coupon == "") {
-                 Alert.alert("กรุณากรอกรหัสคูปองให้ถูกต้อง")
-             } else if (this.state.coupon == "1234") {
-                 this.gotoAddress()
-             }
+            if (this.state.coupon == "") {
+                Alert.alert("กรุณากรอกรหัสคูปองให้ถูกต้อง")
+            } else if (this.state.coupon == "1234") {
+                this.gotoAddress()
+            }
         }
         else if (this.props.event.event.PromoCodeRequired == 0 && this.props.event.event.PromoCodeStatus == 1) {
             console.log("ใส่หรือไม่ใส่ได้")
-             if (this.state.coupon == "1234") {
-                 this.gotoAddress()
-             }
-             this.gotoAddress()
+            if (this.state.coupon == "1234") {
+                this.gotoAddress()
+            }
+            this.gotoAddress()
         }
-        else if (this.props.event.event.PromoCodeRequired == 1 && this.props.event.event.PromoCodeStatus == 0){
+        else if (this.props.event.event.PromoCodeRequired == 1 && this.props.event.event.PromoCodeStatus == 0) {
             console.log("ใส่หรือไม่ใส่ได้2")
         }
     }
     render() {
         let { coupon } = this.state
         return (
-            <View style={styles.container}>
-                <Image source={{ uri: "http://shutterrunning2014.com/wp-content/uploads/2018/01/For-web-2014.png" }}
-                    style={styles.imgEvent} />
-                <Text style={styles.textNameEvent}>
-                    {this.props.event.event.EventName}
-                </Text>
-                <Text style={styles.detailDiscountCoupon}>
-                    ส่วนลดค่าสมัครรายการวิ่ง 100 บาท
-                    </Text>
-                <TextInput
-                    placeholder="รหัสคูปอง"
-                    onChangeText={(coupon) => this.setState({ coupon })}
-                    style={styles.inputCoupon}
+            <View>
+                <HeaderTeam
+                    title={this.state.title}
+                    goback={this.gotoBack.bind(this)}
                 />
-                <TouchableOpacity style={styles.submitButton}
-                    onPress={() => this.checkInput()}>
-                    <Text style={styles.textButton}>ถัดไป</Text>
-                </TouchableOpacity>
+                <StatusBar
+                    barStyle="light-content"
+                    hidden={false}
+                    translucent={true}
+                />
+                <View style={styles.container}>
+                    <Image source={{ uri: "http://shutterrunning2014.com/wp-content/uploads/2018/01/For-web-2014.png" }}
+                        style={styles.imgEvent} />
+                    <Text style={styles.textNameEvent}>
+                        {this.props.event.event.EventName}
+                    </Text>
+                    <Text style={styles.detailDiscountCoupon}>
+                        ส่วนลดค่าสมัครรายการวิ่ง 100 บาท
+                    </Text>
+                    <TextInput
+                        placeholder="รหัสคูปอง"
+                        onChangeText={(coupon) => this.setState({ coupon })}
+                        style={styles.inputCoupon}
+                    />
+                    <TouchableOpacity style={styles.submitButton}
+                        onPress={() => this.checkInput()}>
+                        <Text style={styles.textButton}>ถัดไป</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         );
     }

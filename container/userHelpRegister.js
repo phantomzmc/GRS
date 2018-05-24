@@ -14,6 +14,7 @@ import { connect } from "react-redux";
 
 import HeaderUser from "../component/items/header_profile";
 import FormHelpRegister from "../component/form/registerHelpForm";
+import HeaderTeam from '../component/items/headerTeam'
 import verify from "./verify";
 
 class UserHelpRegister extends Component {
@@ -24,6 +25,7 @@ class UserHelpRegister extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      title: "สมัครสมาชิก",
       help: {
         firstname: "",
         lastname: "",
@@ -57,20 +59,29 @@ class UserHelpRegister extends Component {
   gotoVerify = () => {
     this.props.navigation.navigate("Verify");
   };
+  gotoBack = () => {
+    this.props.navigation.navigate('UserAddressRegister')
+  }
 
   render() {
     return (
-      <ScrollView>
+      <View>
+        <HeaderTeam
+          title={this.state.title}
+          goback={this.gotoBack.bind(this)}
+        />
         <StatusBar
           barStyle="light-content"
           hidden={false}
           translucent={true}
         />
-        <View style={styles.container}>
-          <HeaderUser Name={this.props.fullname} UserID={this.props.userid} />
-          <FormHelpRegister goEvent={this.gotoListEvent.bind(this)} />
-        </View>
-      </ScrollView>
+        <ScrollView>
+          <View style={styles.container}>
+            <HeaderUser Name={this.props.fullname} UserID={this.props.userid} />
+            <FormHelpRegister goEvent={this.gotoListEvent.bind(this)} />
+          </View>
+        </ScrollView>
+      </View>
     );
   }
 }

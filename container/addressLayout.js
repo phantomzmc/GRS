@@ -7,6 +7,7 @@ import AddressForm from '../component/form/addressForm'
 // import ChoiceSend from '../component/items/choiceSend'
 import GetPleace from '../component/items/getPlece'
 import SummaryTotal from '../component/items/summary'
+import HeaderTeam from "../component/items/headerTeam";
 import { connect } from 'react-redux'
 
 
@@ -17,6 +18,7 @@ class AddressLayout extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            title: "การจัดส่ง",
             choice: 0,
             dataChoice: "รับเอง",
             user: {
@@ -34,7 +36,9 @@ class AddressLayout extends Component {
         this.getChoice()
         this.props.setSendChoice(this.state.dataChoice)
         this.props.navigation.navigate('ButtonChangePayment')
-
+    }
+    gotoBack = () => {
+        this.props.navigation.navigate('ShirtPhotoPlus')
     }
     goTotalPayment = (fullname, email, adress, tel) => {
         this.nextToPayment()
@@ -58,6 +62,10 @@ class AddressLayout extends Component {
                     hidden={false}
                     translucent={true}
                 />
+                <HeaderTeam
+                    title={this.state.title}
+                    goback={this.gotoBack.bind(this)}
+                />
                 <Tabs initialPage={this.state.pageNumber}>
                     <Tab heading={<TabHeading><Icon name="md-flag" /><Text style={styles.textLabel} onPress={() => this.setState({ choice: 0 })}> รับเอง</Text></TabHeading>} >
                         <GetPleace goPayment={this.nextToPayment.bind(this)} />
@@ -69,13 +77,7 @@ class AddressLayout extends Component {
                     </Tab>
                 </Tabs>
                 <SummaryTotal />
-                {/* <Text style={styles.text}>เลือกการจัดส่ง</Text>
-                        <ChoiceSend showChoice={this.alertChoice.bind(this)} />
-                        <Text style={styles.text}>ข้อมูลในการจัดส่ง</Text>
-                        <AddressForm getAddress={this.goTotalPayment.bind(this)} /> */}
             </Container>
-
-
         );
     }
 }

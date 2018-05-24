@@ -146,20 +146,11 @@ const login = (state = login = 0, action) => {
   return state;
 }
 const friend = {
-  profile:
-    [
-      {
-        name: "kiiky",
-        gen: "man",
-        age: "21",
-        imgAvatar: "https://scontent.fbkk2-6.fna.fbcdn.net/v/t1.0-0/p370x247/21557776_1425545897494291_6496115009920700297_n.jpg?oh=2b747f30ce806f5e37ae1d3cd9427cf4&oe=5B1C181C",
-
-      },
-    ],
-  detailRegis: [{
-    size: "",
-    distance: {}
-  }]
+    friendEvent : {
+      name : [],
+      dataDis : [],
+      dataShirth : []
+    }
 
 }
 const friendlist = (state = friend, action) => {
@@ -182,6 +173,11 @@ const friendlist = (state = friend, action) => {
         detail: [...state.detailRegis.size, action.payload]
       }
       break;
+    case "addFriendInEvent" : 
+      return {
+        ...state,
+      friendEvent : [...state.friendEvent ,action.payload]
+      }
   }
   return state;
 }

@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, StyleSheet, TouchableOpacity, Text } from 'react-native'
+import { View, StyleSheet, TouchableOpacity, Text,StatusBar } from 'react-native'
 import { Conatainer } from 'native-base'
 import { connect } from 'react-redux'
 import randomstringPromise from 'randomstring-promise';
 
 import ResetVerifyForm from "../component/form/resetVerifyForm"
+import HeaderTeam from '../component/items/headerTeam'
 
 class ResetVerify extends Component {
     static propTypes = {
         navigation: PropTypes.object
-      };
+    };
     constructor(props) {
         super(props)
         this.state = {
+            title: "ขอรหัสยืนยันตัวตนใหม่",
             verifycode: "",
             statusVerify: 0
         }
@@ -35,15 +37,29 @@ class ResetVerify extends Component {
         let { verifycode, statusVerify } = this.state
         this.props.setVerify({ verifycode, statusVerify })
     }
+    gotoBack = () => {
+        this.props.navigation.navigate('Verify')
+    }
 
     render() {
         return (
-            <View style={styles.container}>
-                <ResetVerifyForm sendNewCode={this.sendResetVerify.bind(this)}
-                    goLogin={this.gotoLogin.bind(this)} />
-                {/* <TouchableOpacity onPress={this.sendResetVerify.bind(this)}>
+            <View>
+                <HeaderTeam
+                    title={this.state.title}
+                    goback={this.gotoBack.bind(this)}
+                />
+                <StatusBar
+                    barStyle="light-content"
+                    hidden={false}
+                    translucent={true}
+                />
+                <View style={styles.container}>
+                    <ResetVerifyForm sendNewCode={this.sendResetVerify.bind(this)}
+                        goLogin={this.gotoLogin.bind(this)} />
+                    {/* <TouchableOpacity onPress={this.sendResetVerify.bind(this)}>
                     <Text>test</Text>
                 </TouchableOpacity> */}
+                </View>
             </View>
         );
     }
