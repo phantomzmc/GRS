@@ -136,10 +136,20 @@ const total = (state = {}, action) => {
   return state;
 };
 
-const login = (state = login = 0, action) => {
+
+const username = (state = {}, action) => {
   switch (action.type) {
-    case "setLogin": {
-      state.login = action.payload
+    case "setUsername": {
+      state.username = action.payload
+      break;
+    }
+  }
+  return state;
+}
+const userprofile = (state = {}, action) => {
+  switch (action.type) {
+    case "setUserProfile": {
+      state.userprofile = action.payload
       break;
     }
   }
@@ -198,7 +208,8 @@ const store = createStore(
     address,
     total,
     friendlist,
-    login
+    username,
+    userprofile
   }),
   {},
   applyMiddleware(myLogger)

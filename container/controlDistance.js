@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, StyleSheet, TouchableOpacity, Alert ,StatusBar} from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Alert, StatusBar } from 'react-native';
 import { Container, Header, Tab, Tabs, TabHeading, Icon, Text, Button } from 'native-base';
 import { StackNavigator } from 'react-navigation';
 import { connect } from 'react-redux'
@@ -58,11 +58,20 @@ class ControlDistance extends Component {
                     hidden={false}
                     translucent={true}
                 />
-                <Tabs initialPage={this.state.pageNumber}>
-                    <Tab heading={<TabHeading><Text style={styles.textLabel}>ลงทะเบียนแบบเดียว</Text></TabHeading>}>
+                <Tabs
+                    initialPage={this.state.pageNumber}
+                    tabBarUnderlineStyle={{ backgroundColor: "#FC561F",height : 2 }}>
+                    <Tab
+                        heading={<TabHeading><Text style={styles.textLabel}>ลงทะเบียนแบบเดียว</Text></TabHeading>}>
                         <RegisterDistance nextState={this.goNextState.bind(this)} />
                     </Tab>
-                    <Tab heading={<TabHeading><Text style={styles.textLabel} onPress={() => this.goAddTeam()}>ลงทะเบียนแบบกลุ่ม</Text></TabHeading>}>
+                    <Tab
+                        heading={<TabHeading><Text style={styles.textLabel} onPress={() => this.goAddTeam()}>ลงทะเบียนแบบกลุ่ม</Text></TabHeading>}
+                        // textStyle={styles.textLabel}
+                        // tabStyle={{ backgroundColor: '#FC561F' }}
+                        // activeTabStyle={{ backgroundColor: '#FC561F' }}
+                        // activeTextStyle={styles.textLabel}
+                        >
                     </Tab>
                 </Tabs>
                 <SummaryTotal />
@@ -88,6 +97,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff'
     },
     textLabel: {
+        color : '#FC561F',
         fontSize: 12,
         fontFamily: 'kanit',
     },

@@ -36,12 +36,12 @@ export default StackNavigator({
     // FriendListLayout : {
     //     screen : FriendListLayout
     // },
-    Login: {
-        screen: Login,
-        navigationOptions: {
-            header: () => null
-        }
-    },
+    // Login: {
+    //     screen: Login,
+    //     navigationOptions: {
+    //         header: () => null
+    //     }
+    // },
     EventList: {
         screen: EventList,
         navigationOptions: {

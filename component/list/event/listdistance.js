@@ -15,7 +15,6 @@ import data from '../listevent/data.js';
 import { connect } from 'react-redux'
 import axios from 'axios'
 
-var uri = "http://api.shutterrunning2014.com/api/v2/grsv2m/_proc/Main.uspGetCourseLists(2,1509901688799)"
 var api_key = '36fda24fe5588fa4285ac6c6c2fdfbdb6b6bc9834699774c9bf777f706d05a88'
 var sessionToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQsInVzZXJfaWQiOjQsImVtYWlsIjoiYWR' +
     'taW5AZ3V1cnVuLmNvbSIsImZvcmV2ZXIiOmZhbHNlLCJpc3MiOiJodHRwOlwvXC9hcGkuc2h1dHRlcnJ' +
@@ -33,10 +32,14 @@ class ListDistance extends Component {
                 distance: "",
                 price: ""
             },
+            id: this.props.event.event.EventID,
+            userid: this.props.username.username
         }
     }
 
     componentDidMount() {
+        const { id, userid } = this.state
+        const uri = 'http://api.shutterrunning2014.com/api/v2/grsv2m/_proc/Main.uspGetCourseLists(' + id + ',' + userid + ')'
         axios.get(uri, {
             headers: {
                 "X-DreamFactory-API-Key": api_key,
@@ -53,7 +56,7 @@ class ListDistance extends Component {
                 console.error(error);
             });
     }
-    shirtPhotoPlus(item){
+    shirtPhotoPlus(item) {
         this.setState({
             distanceEvent: {
                 name: item.CourseName,
@@ -145,7 +148,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
     return {
-        event: state.event
+        event: state.event,
+        username : state.username
     }
 }
 
