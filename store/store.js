@@ -60,6 +60,10 @@ const event = (state = eventState, action) => {
       state.distanceEvent = action.payload;
       break;
     }
+    case "setTotal": {
+      state.totalPrice = action.payload;
+      break;
+    }
   }
   return state;
 };
@@ -121,15 +125,6 @@ const address = (state = {}, action) => {
   switch (action.type) {
     case "setUser": {
       state.user = action.payload;
-      break;
-    }
-  }
-  return state;
-};
-const total = (state = {}, action) => {
-  switch (action.type) {
-    case "setTotal": {
-      state.totalPrice = action.payload;
       break;
     }
   }
@@ -206,7 +201,6 @@ const store = createStore(
     photoplus,
     choiceSend,
     address,
-    total,
     friendlist,
     username,
     userprofile

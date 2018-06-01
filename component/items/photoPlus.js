@@ -1,75 +1,85 @@
-import React, {Component} from 'react';
-import {View, Text, StyleSheet, Image, Alert} from 'react-native';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { View, Text, StyleSheet, Image, Alert } from 'react-native';
 
-import {connect} from 'react-redux'
-import SwitchItem from '../items/switch'
+import { connect } from 'react-redux'
+import Switch from 'react-native-switch-pro'
 import Test from './test'
 
 class PhotoPlus extends Component {
+    static propTypes = {
+        priceEvent : PropTypes.number,
+        pricePhotoPlus : PropTypes.number
+    }
     constructor() {
         super();
         this.state = {
-            switch1Value: true,
-            pricePhotoPlus: 100.0,
+            value: true,
+            pricePhotoPlus: null,
             textSwitch: "",
-            priceEvent: "",
-            totalPrice : ""
+            // priceEvent: this.props.event.distanceEvent.price,
+            totalPrice: ""
         }
     }
-    componentWillMount = () => {
+    componentWillMount(){
         this.setState({
-            pricePhotoPlus : this.props.dataPricePhoto,
+            priceEvent: parseFloat(this.props.event.distanceEvent.price),
+            pricePhotoPlus: parseFloat(this.props.event.distanceEvent.pricePhotoPlus)
         })
-        this.sumPrice()
     }
 
-    toggleSwitch1 = (value) => {
-        if (this.state.switch1Value == true) {
-            this.setState({pricePhotoPlus: this.props.pricePhoto})
-            console.log(this.state.pricePhotoPlus)
-            this.setState({priceEvent: this.props.priceEvent})
-            console.log(this.state.priceEvent)
+    photoPlusSwitch = () => {
+        let { dataFriendRegis } = this.state
+        this.setState({ value: !this.state.value })
+        // console.log(this.state.pricePhotoPlus)
+        this.sumPrice()
+        this.props.setTotal(this.state.totalPrice.toString())
+    }
 
-        } else if (this.state.switch1Value == false) {
-            this.setState({pricePhotoPlus: 0})
-            // this.props.setPrice(this.state.pricePhotoPlus)
-            console.log(this.state.pricePhotoPlus)
-
+    sumPrice = () => {
+        let { value,priceEvent,pricePhotoPlus } = this.state
+        if (value == true) {
+            const sum =  pricePhotoPlus +  priceEvent
+            console.log(sum)
+            this.setState({ totalPrice : sum})
+            console.log(this.state.totalPrice)
         }
-        this.setState({switch1Value: value})
-        console.log('Submit photo+' + value)
-        this.sumPrice()
-    }
-    sumPrice = (totalPrice) => {
-        this.setState({
-            totalPrice: this.state.pricePhotoPlus + this.state.priceEvent
-        })
-        this.props.setTotal(this.state.totalPrice)
-        console.log(this.state.totalPrice)
+        else if (value == false) {
+            this.setState({ totalPrice: this.state.priceEvent })
+        }
     }
 
     render() {
-        let {price, title} = this.state
+        let { price, title } = this.state
         return (
             <View style={styles.container}>
                 <Text style={{
                     fontFamily: "Kanit"
                 }}>{this.props.titleName}
-                    </Text>
-                <SwitchItem
-                    toggleSwitch1={this.toggleSwitch1}
-                    switch1Value={this.state.switch1Value}/>
+                </Text>
+                <Switch
+                    width={60}
+                    height={30}
+                    value={this.state.value}
+                    onSyncPress={() => this.photoPlusSwitch()}
+                />
             </View>
         );
     }
 }
-const mapDispatchtoState = (dispatch) => {
+const mapStateToProps = (state) => {
     return {
-        setPrice: (price) => {
-            dispatch({type: 'setPrice', payload: price})
-        },
+        event: state.event
+    }
+}
+
+const mapDispatchToState = (dispatch) => {
+    return {
         setTotal: (totalPrice) => {
-            dispatch({type: "setTotal", payload: totalPrice})
+            dispatch({ 
+                type: "setTotal", 
+                payload: totalPrice 
+            })
         }
     }
 }
@@ -77,8 +87,9 @@ const mapDispatchtoState = (dispatch) => {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        margin: 20
+        margin: 20,
+        justifyContent: 'space-around'
     }
 })
 
-export default connect(null, mapDispatchtoState)(PhotoPlus);
+export default connect(mapStateToProps, mapDispatchToState)(PhotoPlus);

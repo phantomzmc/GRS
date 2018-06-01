@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image, Alert,StatusBar } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image, Alert, StatusBar } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { connect } from 'react-redux'
 import ListShirt from '../component/list/listShirt/listShirt'
@@ -12,6 +12,20 @@ class ShirtPhotoPlus extends Component {
         title: "เลือกไซค์เสื้อ",
         isItems: false,
         isItems2: false
+    }
+    componentDidMount = () => {
+        if (this.props.event.distanceEvent.statusPhotoPlus == 1) {
+            this.setState({
+                isItems: !this.state.isItems,
+                isItems2: !this.state.isItems2
+            })
+        }
+        else if (this.props.event.distanceEvent.statusPhotoPlus == 0) {
+            this.setState({
+                isItems: this.state.isItems,
+                isItems2: this.state.isItems2
+            })
+        }
     }
     goNextState = () => {
         console.log("checkPromo")
@@ -69,7 +83,7 @@ class ShirtPhotoPlus extends Component {
                         {this.state.isItems2 &&
                             <PhotoPlus titleName={this.props.photoplus.title}
                                 dataPricePhoto={this.props.photoplus.pricePhoto}
-                                priceEvent={this.props.total.totalPrice} />
+                             />
                         }
                     </View>
                     <View style={styles.submitContainer}>

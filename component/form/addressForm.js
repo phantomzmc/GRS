@@ -15,10 +15,10 @@ class AddressForm extends Component {
     }
     componentDidMount = () => {
         this.setState({
-            fullname: this.props.profile.profile.profile,
-            email: this.props.profile.profile.email,
-            adress: this.props.profile.profile.number,
-            te: this.props.profile.profile.tel
+            fullname: this.props.userprofile.userprofile.FirstName + this.props.userprofile.userprofile.LastName,
+            email: this.props.userprofile.userprofile.Email,
+            adress: this.props.userprofile.userprofile.Address + " " +this.props.userprofile.userprofile.SubDistric,
+            tel: this.props.userprofile.userprofile.Phone
         })
     }
     putDataUser = (fullname, email, adress, tel) => {
@@ -34,36 +34,36 @@ class AddressForm extends Component {
                 <Text style={styles.headForm}>ชื่อ - นามสกุล</Text>
                 <Form>
                     <Item floatingLabel last>
-                        <Label style={styles.textLabel}>{this.props.profile.profile.profile}</Label>
+                        <Label style={styles.textLabel}>{fullname}</Label>
                         <Input
-                            onChangeText={(fullname) => this.setState(this.props.profile.profile.profile)}
+                            onChangeText={(fullname) => this.setState(fullname)}
                         />
                     </Item>
                 </Form>
                 <Text style={styles.headForm}>Email</Text>
                 <Form>
                     <Item floatingLabel last>
-                        <Label style={styles.textLabel}>{this.props.profile.profile.email}</Label>
+                        <Label style={styles.textLabel}>{email}</Label>
                         <Input
-                            onChangeText={(email) => this.setState(this.props.profile.profile.email)}
+                            onChangeText={(email) => this.setState(email)}
                         />
                     </Item>
                 </Form>
                 <Text style={styles.headForm}>ที่อยู่</Text>
                 <Form>
                     <Item floatingLabel last>
-                        <Label style={styles.textLabel}>{this.props.profile.address.address} {this.props.profile.address.t} {this.props.profile.address.a} {this.props.profile.address.city} {this.props.profile.address.country} {this.props.profile.address.postNumber}</Label>
+                        <Label style={styles.textLabel}>{adress}</Label>
                         <Input
-                            onChangeText={(adress) => this.setState(this.props.profile.address.address)}
+                            onChangeText={(adress) => this.setState(adress)}
                         />
                     </Item>
                 </Form>
                 <Text style={styles.headForm}>โทรศัพท์</Text>
                 <Form>
                     <Item floatingLabel last>
-                        <Label style={styles.textLabel}>{this.props.profile.profile.tel}</Label>
+                        <Label style={styles.textLabel}>{tel}</Label>
                         <Input
-                            onChangeText={(tel) => this.setState(this.props.profile.profile.tel)}
+                            onChangeText={(tel) => this.setState(tel)}
                         />
                     </Item>
                 </Form>
@@ -121,7 +121,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
     return {
-        profile: state.profile
+        profile: state.profile,
+        userprofile : state.userprofile
     }
 }
 

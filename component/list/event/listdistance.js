@@ -11,7 +11,6 @@ import {
 import { StackNavigator } from 'react-navigation';
 
 import datadistance from './datadistance.js'
-import data from '../listevent/data.js';
 import { connect } from 'react-redux'
 import axios from 'axios'
 
@@ -22,18 +21,21 @@ var sessionToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQsInVzZXJfaWQ
     'wIjoxNTIwNTQ4MTkxLCJuYmYiOjE1MjA1NDQ1OTEsImp0aSI6IjA1Y2UzN2NjMmU2NjIyZGJlNmMzNTg' +
     '5MzE1NTI0YmZjIn0._7jHjGhTPfa3rVioC2MrjJfLwrMMxYQYiWhe8DK5V7k'
 var auth = 'Basic YWRtaW5AZ3V1cnVuLmNvbTpXWGJyRDI4THRJUjNNWW0='
+var img = 'https://www.beautifullearth.com/wp-content/uploads/2017/10/123-6.jpg'
 
 class ListDistance extends Component {
     constructor(props) {
         super(props)
         this.state = {
             distanceEvent: {
+                id: "",
                 name: "",
                 distance: "",
                 price: ""
             },
             id: this.props.event.event.EventID,
-            userid: this.props.username.username
+            userid: this.props.username.username,
+            pic: img,
         }
     }
 
@@ -50,7 +52,7 @@ class ListDistance extends Component {
         })
             // .then((response) => response.json())
             .then((responseJson) => {
-                this.setState({ isLoading: false, dataSource: responseJson.data, });
+                this.setState({ isLoading: false, dataSource: responseJson.data });
                 console.log(this.state.dataSource)
             }).catch((error) => {
                 console.error(error);
@@ -59,13 +61,13 @@ class ListDistance extends Component {
     shirtPhotoPlus(item) {
         this.setState({
             distanceEvent: {
+                id: item.CourseID,
                 name: item.CourseName,
                 distance: item.Distance,
                 price: item.Fee
             }
         })
-        this.props.onGotoshirt({ name: item.CourseName, distance: item.Distance, price: item.Fee })
-        console.log(this.state.distanceEvent)
+        this.props.onGotoshirt({ id: item.CourseID, name: item.CourseName, distance: item.Distance, price: item.Fee, pricePhotoPlus: item.PhotoPlusCost, statusPhotoPlus: item.PhotoPlusService })
     }
 
     render() {
@@ -88,13 +90,13 @@ class ListDistance extends Component {
                 }}>
                 <FlatList
                     data={this.state.dataSource}
-                    renderItem={({ item }) => <View style={styles.container}>
+                    renderItem={({ item, datadistance }) => <View style={styles.container}>
                         <TouchableOpacity
                             onPress={this
                                 .shirtPhotoPlus
                                 .bind(this, item)}>
                             <ImageBackground
-                                source={{ uri: item.pic }}
+                                source={{ uri: this.state.pic }}
                                 style={styles.imgbackground}>
                                 <View style={styles.textContainer}>
                                     <Text style={styles.name}>{item.CourseName}</Text>
@@ -149,7 +151,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => {
     return {
         event: state.event,
-        username : state.username
+        username: state.username
     }
 }
 

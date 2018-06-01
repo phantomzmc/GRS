@@ -100,8 +100,8 @@ class ListEvent extends Component {
                     renderItem={({ item }) => <View style={styles.background}>
                         <View style={styles.containerCard}>
                             <Image
-                                require={{
-                                    uri: item.BackgroundImage
+                                source={{
+                                    require: '${item.BackgroundImage}'
                                 }}
                                 style={{
                                     height: 200

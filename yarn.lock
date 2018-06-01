@@ -5169,10 +5169,6 @@ react-native-icons@^0.7.1:
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/react-native-icons/-/react-native-icons-0.7.1.tgz#a05c6c87bff7bfd883903bb9b7156f5ba568f977"
 
-react-native-image-picker@^0.26.7:
-  version "0.26.7"
-  resolved "https://registry.yarnpkg.com/react-native-image-picker/-/react-native-image-picker-0.26.7.tgz#ad2ee957f7f6cc01396893ea03d84cb2adb2e376"
-
 react-native-iphone-x-helper@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.0.2.tgz#7dbca530930f7c1ce8633cc8fd13ba94102992e1"
@@ -5256,12 +5252,6 @@ react-native-select-list@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/react-native-select-list/-/react-native-select-list-1.0.5.tgz#e69048ac6fdbce4d8ec195b97131f19ef4f00e42"
 
-react-native-shine-button@^0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/react-native-shine-button/-/react-native-shine-button-0.0.8.tgz#c2e64080cc7b2a992de28e2f37c8ee79545ce37d"
-  dependencies:
-    react-native-vector-icons "4.5.0"
-
 react-native-simple-modal@^8.0.0:
   version "8.0.0"
   resolved "https://registry.yarnpkg.com/react-native-simple-modal/-/react-native-simple-modal-8.0.0.tgz#08ee6b114cd5180e27430c4f8685b05d2aa9199e"
@@ -5284,17 +5274,17 @@ react-native-tab-view@^0.0.70:
   dependencies:
     prop-types "^15.6.0"
 
-react-native-vector-icons@4.5.0, react-native-vector-icons@~4.5.0:
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-4.5.0.tgz#6b95619e64f62f05f579f74a01fe5640df95158b"
+react-native-vector-icons@^4.6.0:
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-4.6.0.tgz#e4014311ffa6de397d914ffc31b7097a874cc8d5"
   dependencies:
     lodash "^4.0.0"
     prop-types "^15.5.10"
     yargs "^8.0.2"
 
-react-native-vector-icons@^4.6.0:
-  version "4.6.0"
-  resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-4.6.0.tgz#e4014311ffa6de397d914ffc31b7097a874cc8d5"
+react-native-vector-icons@~4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-4.5.0.tgz#6b95619e64f62f05f579f74a01fe5640df95158b"
   dependencies:
     lodash "^4.0.0"
     prop-types "^15.5.10"

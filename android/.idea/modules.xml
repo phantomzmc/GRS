@@ -5,11 +5,18 @@
       <module fileurl="file://$PROJECT_DIR$/GRS.iml" filepath="$PROJECT_DIR$/GRS.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/../node_modules/react-native-camera/android/react-native-camera.iml" filepath="$PROJECT_DIR$/../node_modules/react-native-camera/android/react-native-camera.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../node_modules/react-native-camera/android/react-native-camera.iml" filepath="$PROJECT_DIR$/../node_modules/react-native-camera/android/react-native-camera.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../node_modules/react-native-icons/android/react-native-icons.iml" filepath="$PROJECT_DIR$/../node_modules/react-native-icons/android/react-native-icons.iml" />
       <module fileurl="file://$PROJECT_DIR$/../node_modules/react-native-image-picker/android/react-native-image-picker.iml" filepath="$PROJECT_DIR$/../node_modules/react-native-image-picker/android/react-native-image-picker.iml" />
       <module fileurl="file://$PROJECT_DIR$/../node_modules/react-native-mail/android/react-native-mail.iml" filepath="$PROJECT_DIR$/../node_modules/react-native-mail/android/react-native-mail.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../node_modules/react-native-mail/android/react-native-mail.iml" filepath="$PROJECT_DIR$/../node_modules/react-native-mail/android/react-native-mail.iml" />
       <module fileurl="file://$PROJECT_DIR$/../node_modules/react-native-mail-compose/android/react-native-mail-compose.iml" filepath="$PROJECT_DIR$/../node_modules/react-native-mail-compose/android/react-native-mail-compose.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../node_modules/react-native-mail-compose/android/react-native-mail-compose.iml" filepath="$PROJECT_DIR$/../node_modules/react-native-mail-compose/android/react-native-mail-compose.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../node_modules/react-native-shine-button/android/react-native-shine-button.iml" filepath="$PROJECT_DIR$/../node_modules/react-native-shine-button/android/react-native-shine-button.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../node_modules/react-native-sms-x/android/app/react-native-sms-x.iml" filepath="$PROJECT_DIR$/../node_modules/react-native-sms-x/android/app/react-native-sms-x.iml" />
       <module fileurl="file://$PROJECT_DIR$/../node_modules/react-native-sms-x/android/app/react-native-sms-x.iml" filepath="$PROJECT_DIR$/../node_modules/react-native-sms-x/android/app/react-native-sms-x.iml" />
       <module fileurl="file://$PROJECT_DIR$/../node_modules/react-native-vector-icons/android/react-native-vector-icons.iml" filepath="$PROJECT_DIR$/../node_modules/react-native-vector-icons/android/react-native-vector-icons.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../node_modules/react-native-view-shot/android/react-native-view-shot.iml" filepath="$PROJECT_DIR$/../node_modules/react-native-view-shot/android/react-native-view-shot.iml" />
     </modules>
   </component>
 </project>

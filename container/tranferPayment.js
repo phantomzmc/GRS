@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, StyleSheet, TouchableOpacity, Button } from 'react-native';
 import { StackNavigator } from 'react-navigation';
+import { connect } from 'react-redux'
 
 
 import ButtonChangePayment from '../component/items/bottonChangePayment'
@@ -20,9 +21,17 @@ class TransferPayment extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <TranferView showDetail={this.showDetailPayment.bind(this)} />
+                <TranferView 
+                    showDetail={this.showDetailPayment.bind(this)}
+                    detailPayment={this.props.event.event.EventBankDetailTH} />
             </View>
         );
+    }
+}
+
+const mapStateToProps = (state) => {
+    return {
+        event: state.event
     }
 }
 
@@ -33,4 +42,4 @@ const styles = StyleSheet.create({
     },
 
 })
-export default TransferPayment;
+export default connect(mapStateToProps)(TransferPayment);

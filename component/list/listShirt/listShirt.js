@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
-import { View, Text, ListView, StyleSheet, TouchableHighlight, Alert } from 'react-native';
-
+import { View, Text, FlatList, StyleSheet, TouchableHighlight, Alert } from 'react-native';
+import axios from 'axios'
 import { connect } from 'react-redux'
 import datashirt from './dataShirt'
+
+var api_key = '36fda24fe5588fa4285ac6c6c2fdfbdb6b6bc9834699774c9bf777f706d05a88'
+var sessionToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQsInVzZXJfaWQiOjQsImVtYWlsIjoiYWR' +
+    'taW5AZ3V1cnVuLmNvbSIsImZvcmV2ZXIiOmZhbHNlLCJpc3MiOiJodHRwOlwvXC9hcGkuc2h1dHRlcnJ' +
+    '1bm5pbmcyMDE0LmNvbVwvYXBpXC92MlwvdXNlclwvc2Vzc2lvbiIsImlhdCI6MTUyMDU0NDU5MSwiZXh' +
+    'wIjoxNTIwNTQ4MTkxLCJuYmYiOjE1MjA1NDQ1OTEsImp0aSI6IjA1Y2UzN2NjMmU2NjIyZGJlNmMzNTg' +
+    '5MzE1NTI0YmZjIn0._7jHjGhTPfa3rVioC2MrjJfLwrMMxYQYiWhe8DK5V7k'
+var auth = 'Basic YWRtaW5AZ3V1cnVuLmNvbTpXWGJyRDI4THRJUjNNWW0='
 
 class ListShirt extends Component {
 
@@ -10,49 +18,80 @@ class ListShirt extends Component {
         super(props)
         this.state = {
             size: "",
-            dataSource: new ListView.DataSource({
-                rowHasChanged: (r1, r2) => r1 != r2
-            })
+            CourseID: this.props.event.distanceEvent.id,
+            Gender: this.props.userprofile.userprofile.Gender
         }
         this.pressDataShirt = this.pressDataShirt.bind(this)
     }
-
     componentDidMount() {
-        this.setState({
-            dataSource: this.state.dataSource.cloneWithRows(datashirt)
-        });
+        const { CourseID, Gender } = this.state
+        const uri = 'http://api.shutterrunning2014.com/api/v2/grsv2m/_proc/Main.uspGetJerseyLists(' + CourseID + ' , ' + Gender + ' )'
+        axios.get(uri, {
+            headers: {
+                "X-DreamFactory-API-Key": api_key,
+                "X-DreamFactory-Session-Token": sessionToken,
+                "Authorization": auth
+            },
+            responseType: 'json'
+        })
+            // .then((response) => response.json())
+            .then((responseJson) => {
+                this.setState({ isLoading: false, dataSource: responseJson.data, });
+                console.log(this.state.dataSource)
+            }).catch((error) => {
+                console.error(error);
+            });
+
     }
 
-    pressDataShirt(datashirt) {
-        this.setState({ size: datashirt.label })
-        this.props.setSizeShirt(datashirt.label)
-        this.props.getShirt(datashirt)
+    pressDataShirt(item) {
+        this.setState({ size: item.JerseySizeValue })
+        this.props.setSizeShirt(item.JerseySizeValue)
+        this.props.getShirt(item)
         // Alert.alert("ไซค์เสื้อ : " + datashirt.label)
     }
-    render() {
-        return (
-            <View style={styles.container}>
-                <ListView
-                    dataSource={this.state.dataSource}
-                    renderRow={this.renderShirt.bind(this)}
-                    style={styles.ListView}
-                />
 
-            </View>
+    render() {
+        if (this.state.isLoading) {
+            return (
+                <View
+                    style={{
+                        flex: 1,
+                        padding: 20
+                    }}>
+                    <ActivityIndicator />
+                </View>
+            )
+        }
+        return (
+            <View
+                style={{
+                    flex: 1,
+                    paddingTop: 20
+                }}>
+                <FlatList
+                    data={this.state.dataSource}
+                    renderItem={({ item }) => <View style={styles.container}>
+                        <TouchableHighlight
+                            onPress={() => this.pressDataShirt(item)}
+                            activeOpacity={0.5}
+                            underlayColor="#FC561F">
+                            <View style={styles.sizeshirt}>
+                                <Text style={{ fontFamily: "Kanit", }}>{item.JerseySizeValue} </Text>
+                                <Text style={{ fontFamily: "Kanit", }}> ({item.JerseySizeDesc})</Text>
+                            </View>
+                        </TouchableHighlight>
+                    </View>}
+                    keyExtractor={(item, index) => index} />
+            </View >
         );
     }
-    renderShirt(datashirt) {
-        return (
-            <TouchableHighlight
-                onPress={() => this.pressDataShirt(datashirt)}
-                activeOpacity={0.5}
-                underlayColor="#FC561F">
-                <View style={styles.sizeshirt}>
-                    <Text style={{ fontFamily: "Kanit", }}>{datashirt.label} </Text>
-                    <Text style={{ fontFamily: "Kanit", }}> ({datashirt.width}")</Text>
-                </View>
-            </TouchableHighlight>
-        )
+}
+
+const mapStateToProps = (state) => {
+    return {
+        event: state.event,
+        userprofile: state.userprofile
     }
 }
 const mapDispatchtoProps = (dispatch) => {
@@ -82,4 +121,4 @@ const styles = StyleSheet.create({
     }
 
 })
-export default connect(null,mapDispatchtoProps)(ListShirt)
+export default connect(mapStateToProps, mapDispatchtoProps)(ListShirt)

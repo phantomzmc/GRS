@@ -50,7 +50,7 @@ class CreditPayment extends Component {
             <ScrollView>
                 <View style={styles.container}>
                     <CreditView goAddress={this.goAddressSend.bind(this)}
-                        TotalPrice={this.props.total.totalPrice}
+                        TotalPrice={this.props.event.totalPrice}
                         ShowDetail={this.showDetailPayment.bind(this)} />
                 </View>
             </ScrollView>
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = (state) => {
-    return { total: state.total, creditcard: state.creditcard };
+    return { event: state.event, creditcard: state.creditcard };
 };
 
 export default connect(mapStateToProps)(CreditPayment);

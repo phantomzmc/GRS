@@ -11,14 +11,13 @@ class SummaryTotal extends Component {
         }
     }
     componentWillMount() {
-        this.setState({ totalprice: this.props.event.distanceEvent.price })
+        this.setState({ totalprice: this.props.event.totalPrice })
         console.log(this.state.totalprice)
     }
     componentWillReceiveProps(nextProps) {
-        if (nextProps.totalprice != this.props.this.props.event.distanceEvent.price) {
+        if (nextProps.totalprice != this.props.event.totalPrice) {
             console.log("update")
-            console.log(this.props.total.totalPrice)
-            this.setState({ totalprice: this.props.event.distanceEvent.price })
+            this.setState({ totalprice: this.props.event.totalPrice })
         }
     }
 
@@ -28,7 +27,7 @@ class SummaryTotal extends Component {
                 <View style={styles.container}>
                     <View style={styles.box}>
                         <Text style={styles.textSummary}>สรุปค่าสมัครทั้งหมด : </Text>
-                        <Text style={styles.textSummary}>{}{this.state.totalprice}0 บาท</Text>
+                        <Text style={styles.textSummary}>{}{this.state.totalprice}.0 บาท</Text>
                     </View>
                 </View>
             </ImageBackground>
