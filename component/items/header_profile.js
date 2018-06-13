@@ -46,7 +46,12 @@ class HeaderProfile extends Component {
                 this.props.setUserProfile(this.state.user[0])
                 this.setData()
             }).catch((error) => {
-                console.error(error);
+                this.setState({
+                    fullname: "",
+                    lastname: "",
+                    gen: "M",
+                    age: 21,
+                })
             });
     }
     setData(){

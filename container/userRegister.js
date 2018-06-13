@@ -41,10 +41,11 @@ class UserRegister extends Component {
     email,
     journeyDate,
     bloodtype,
-    nation
+    nation,
+    gen
   ) => {
     this.props.setProfile({
-      profile: fullname,
+      fullname,
       lastname,
       nickname,
       password,
@@ -56,7 +57,8 @@ class UserRegister extends Component {
       email,
       journeyDate,
       bloodtype,
-      nation
+      nation,
+      gen
     });
     this.props.navigation.navigate("UserAddressRegister");
   };

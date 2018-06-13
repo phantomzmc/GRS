@@ -39,22 +39,19 @@ class FormRegister extends Component {
       date: new Date,
       bloodtype: "",
       nation: "",
+      gen: "M",
       selectedIndex: 0
     };
   }
   componentWillUnmount() {
     console.log("componentWillUnmount")
   }
-  sendData = (fullname, lastname, nickname, password, confirmpassword, teamname, bib, userid, tel, email, date, bloodtype, nation) => {
-    this.props.goEvent(fullname, lastname, nickname, password, confirmpassword, teamname, bib, userid, tel, email, date, bloodtype, nation);
-    console.log(this.state.fullname);
-    console.log(this.state.userid);
-    console.log(this.state.date);
-    console.log(this.state.selectedIndex);
+  sendData = (fullname, lastname, nickname, password, confirmpassword, teamname, bib, userid, tel, email, date, bloodtype, nation,gen) => {
+    this.props.goEvent(fullname, lastname, nickname, password, confirmpassword, teamname, bib, userid, tel, email, date, bloodtype, nation,gen);
   };
 
   render() {
-    let { fullname, lastname, nickname, password, confirmpassword, teamname, bib, userid, tel, email, date, bloodtype, nation } = this.state;
+    let { fullname, lastname, nickname, password, confirmpassword, teamname, bib, userid, tel, email, date, bloodtype, nation,gen } = this.state;
     return (
       <View style={styles.container}>
         <View style={styles.contectTitle}>
@@ -93,9 +90,9 @@ class FormRegister extends Component {
         <Text style={styles.headForm}>เพศ</Text>
         <View style={styles.conlorsegment}>
           <Tabs initialPage={this.state.selectedIndex}>
-            <Tab heading={<TabHeading ><Icon name="ios-man" onPress={() => this.setState({ selectedIndex: 0 })} /></TabHeading>}>
+            <Tab heading={<TabHeading ><Icon name="ios-man" onPress={() => this.setState({ selectedIndex: 0, gen: "M" })} /></TabHeading>}>
             </Tab>
-            <Tab heading={<TabHeading><Icon name="ios-woman" onPress={() => this.setState({ selectedIndex: 1 })} /></TabHeading>}>
+            <Tab heading={<TabHeading><Icon name="ios-woman" onPress={() => this.setState({ selectedIndex: 1, gen: "F" })} /></TabHeading>}>
             </Tab>
           </Tabs>
         </View>
@@ -217,6 +214,7 @@ class FormRegister extends Component {
                 date,
                 bloodtype,
                 nation,
+                gen
               )
             }
           >

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image, Alert, StatusBar } from 'react-native';
-import { StackNavigator } from 'react-navigation';
 import { connect } from 'react-redux'
 import ListShirt from '../component/list/listShirt/listShirt'
 import PhotoPlus from '../component/items/photoPlus'
@@ -62,6 +61,7 @@ class ShirtPhotoPlus extends Component {
     }
 
     render() {
+        let url = 'https://register.shutterrunning2014.com/assets/img/theme/'
         return (
             <View>
                 <HeaderTeam
@@ -73,17 +73,18 @@ class ShirtPhotoPlus extends Component {
                     translucent={true}
                 />
                 <ScrollView>
-                    <View style={styles.container}>
-                        <Image source={{ uri: "http://register.shutterrunning2014.com/assets/img/theme/dongtanshirt.png" }}
-                            style={{ height: 100, marginTop: 10 }} />
 
+                    <View style={styles.container}>
+                        <Image
+                            source={{ uri: url + this.props.shirtphoto.shirt }}
+                            style={{ height: 100, marginTop: 10 }} />
                         <Text style={styles.textSize}>โปรดเลือกไซค์เสื้อ</Text>
                         <ListShirt />
                         {this.state.isItems && <Text style={styles.textSize}>Photo Plus + </Text>}
                         {this.state.isItems2 &&
                             <PhotoPlus titleName={this.props.photoplus.title}
                                 dataPricePhoto={this.props.photoplus.pricePhoto}
-                             />
+                            />
                         }
                     </View>
                     <View style={styles.submitContainer}>

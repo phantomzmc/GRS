@@ -5113,6 +5113,13 @@ react-native-checkbox-field@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/react-native-checkbox-field/-/react-native-checkbox-field-2.0.2.tgz#5a61cb52ab327f24b5ba1c4ad086bd7ffcb9257a"
 
+react-native-checkbox-heaven@^0.1.5:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/react-native-checkbox-heaven/-/react-native-checkbox-heaven-0.1.5.tgz#fd54cec78b948d4c6316801ff8cbc2c82b824055"
+  dependencies:
+    prop-types "^15.6.0"
+    react-native-vector-icons "^4.0.0"
+
 react-native-communications@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/react-native-communications/-/react-native-communications-2.2.1.tgz#7883b56b20a002eeb790c113f8616ea8692ca795"
@@ -5274,7 +5281,7 @@ react-native-tab-view@^0.0.70:
   dependencies:
     prop-types "^15.6.0"
 
-react-native-vector-icons@^4.6.0:
+react-native-vector-icons@^4.0.0, react-native-vector-icons@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-4.6.0.tgz#e4014311ffa6de397d914ffc31b7097a874cc8d5"
   dependencies:

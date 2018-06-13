@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import {
-    AppRegistry,
     ActivityIndicator,
     StyleSheet,
     Text,
@@ -10,13 +8,12 @@ import {
     Image,
     FlatList,
     TouchableOpacity,
-    Alert
 } from 'react-native';
-import { StackNavigator } from 'react-navigation';
 import { connect } from 'react-redux'
 import axios from 'axios'
 
-var uri = "http://api.shutterrunning2014.com/api/v2/grsv2m/_proc/Main.uspGetEventList"
+
+var uri = "http://api.shutterrunning2014.com/api/v2/grsv2m/_proc/Main.uspGetEventList()"
 var api_key = '36fda24fe5588fa4285ac6c6c2fdfbdb6b6bc9834699774c9bf777f706d05a88'
 var sessionToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQsInVzZXJfaWQiOjQsImVtYWlsIjoiYWR' +
     'taW5AZ3V1cnVuLmNvbSIsImZvcmV2ZXIiOmZhbHNlLCJpc3MiOiJodHRwOlwvXC9hcGkuc2h1dHRlcnJ' +
@@ -41,7 +38,7 @@ class ListEvent extends Component {
             profile: ""
         }
     }
-    componentDidMount() {
+    componentWillMount() {
         axios.get(uri, {
             headers: {
                 "X-DreamFactory-API-Key": api_key,
@@ -78,6 +75,7 @@ class ListEvent extends Component {
     }
 
     render() {
+        let url = 'https://register.shutterrunning2014.com/assets/img/theme/'
         if (this.state.isLoading) {
             return (
                 <View
@@ -101,7 +99,7 @@ class ListEvent extends Component {
                         <View style={styles.containerCard}>
                             <Image
                                 source={{
-                                    require: '${item.BackgroundImage}'
+                                    uri:  url + item.BackgroundImage
                                 }}
                                 style={{
                                     height: 200

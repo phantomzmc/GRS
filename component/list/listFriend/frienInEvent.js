@@ -24,7 +24,7 @@ class FriendInEvent extends Component {
     }
     componentDidMount() {
         this.setState({
-            dataSource: datafriend
+            dataSource: this.props.friendlist.friendRegis
         });
     }
     componentWillReceiveProps(nextProps) {
@@ -94,6 +94,11 @@ class FriendInEvent extends Component {
         )
     }
 }
+const mapStateToProps = state => {
+    return {
+        friendlist : state.friendlist
+    }
+}
 const mapDispatchToProps = (dispatch) => {
     return {
         addFriendInEvent: (regisFriend) => {
@@ -121,4 +126,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default connect(null, mapDispatchToProps)(FriendInEvent)
+export default connect(mapStateToProps, mapDispatchToProps)(FriendInEvent)

@@ -20,7 +20,7 @@ class AddressLayout extends Component {
         this.state = {
             title: "การจัดส่ง",
             choice: 0,
-            dataChoice: "รับเอง",
+            dataChoice: "",
             user: {
                 fullname: "",
                 email: "",
@@ -32,9 +32,14 @@ class AddressLayout extends Component {
             pageNumber: 0
         }
     }
+    componentWillMount = () => {
+        this.setState({
+            priceEvent: parseFloat(this.props.event.totalPrice),
+            priceCDO: parseFloat(60.0)
+        })
+    }
     nextToPayment = () => {
         this.getChoice()
-        this.props.setSendChoice(this.state.dataChoice)
         this.props.navigation.navigate('ButtonChangePayment')
     }
     gotoBack = () => {
@@ -46,13 +51,18 @@ class AddressLayout extends Component {
     }
     getChoice = () => {
         if (this.state.choice === 0) {
-            console.log("รับเอง")
-            this.setState({ dataChoice: "รับเอง" })
+            // console.log("รับเอง")
+            this.props.setSendChoice({ dataChoice: "รับเอง", priceCDO: parseFloat(0.0) })
         }
         else if (this.state.choice === 1) {
-            console.log("ส่งไปรษณีย์")
-            this.setState({ dataChoice: "ส่งไปรษณีย์" })
+            this.props.setSendChoice({ dataChoice: "ส่งไปรษณีย์", priceCDO: parseFloat(60.0) })
+            this.totalPriceRegis()
         }
+    }
+    totalPriceRegis = () => {
+        let { priceEvent, priceCDO } = this.state
+        const sum = priceCDO + priceEvent
+        this.props.setTotal(sum)
     }
     render() {
         return (
@@ -70,7 +80,7 @@ class AddressLayout extends Component {
                     <Tab heading={<TabHeading><Icon name="md-flag" /><Text style={styles.textLabel} onPress={() => this.setState({ choice: 0 })}> รับเอง</Text></TabHeading>} >
                         <GetPleace goPayment={this.nextToPayment.bind(this)} />
                     </Tab>
-                    <Tab heading={<TabHeading><Icon name="md-map" /><Text style={styles.textLabel} onPress={() => this.setState({ choice: 1 })}> ส่งไปรษณีย์</Text></TabHeading>} >
+                    <Tab heading={<TabHeading><Icon name="md-map" /><Text style={styles.textLabel} onPress={() => this.setState({ choice: 1 })} > ส่งไปรษณีย์</Text></TabHeading>} >
                         <ScrollView >
                             <AddressForm getAddress={this.goTotalPayment.bind(this)} />
                         </ScrollView>
@@ -92,6 +102,12 @@ const styles = StyleSheet.create({
     },
 })
 
+const mapStateToProps = (state) => {
+    return {
+        event: state.event
+    }
+}
+
 const mapDisPacthToProps = (dispacth) => {
     return {
         setSendChoice: (choice) => {
@@ -106,7 +122,13 @@ const mapDisPacthToProps = (dispacth) => {
                 payload: fullname
             })
         },
+        setTotal: (totalPrice) => {
+            dispacth({
+                type: "setTotal",
+                payload: totalPrice
+            })
+        }
     }
 }
 
-export default connect(null, mapDisPacthToProps)(AddressLayout);
+export default connect(mapStateToProps, mapDisPacthToProps)(AddressLayout);

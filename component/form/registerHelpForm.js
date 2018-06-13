@@ -31,18 +31,19 @@ class FormAddressRegister extends Component {
       tel: "",
       verifycode: "",
       statusVerify: 0,
-      email : ""
+      email: ""
     };
   }
   componentWillMount() {
-    let { verifycode,email } = this.state
+    let { verifycode, email } = this.state
     randomstringPromise(10)
       .then((verifycode) => {
         this.setState({ verifycode })
         // console.log(code);  // u8KNs7aAw0DCOKO1MdEgVIcF2asajrdd
         console.log(verifycode)
+        this.props.setVerify(verifycode)
       });
-    this.setState({ email : this.props.profile.profile.email})
+    this.setState({ email: this.props.profile.profile.email })
   }
 
 
@@ -50,6 +51,8 @@ class FormAddressRegister extends Component {
     let { verifycode, statusVerify } = this.state
     Communications.email([this.state.email], null, null, 'GuuRun Code Verify', 'VerifyCode is : ' + this.state.verifycode)
     this.props.goEvent(firstname, lastname, relation, tel, verifycode, statusVerify);
+    this.props.setHelp({ firstname, lastname, relation, tel });
+    
   };
 
   render() {
@@ -204,4 +207,20 @@ const mapStateToProps = (state) => {
     profile: state.profile
   }
 }
-export default connect(mapStateToProps)(FormAddressRegister);
+const mapDispatchToProps = dispatch => {
+  return {
+    setHelp: help => {
+      dispatch({
+        type: "setHelp",
+        payload: help
+      });
+    },
+    setVerify: verify => {
+      dispatch({
+        type: "setVerify",
+        payload: verify
+      });
+    }
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(FormAddressRegister);

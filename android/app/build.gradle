@@ -137,6 +137,11 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-web-image')
+    compile project(':react-native-fast-image')
+    compile project(':react-native-view-shot')
+    compile project(':react-native-vector-icons')
+    compile project(':react-native-icons')
     implementation project(':react-native-icons')
     implementation project(':react-native-view-shot')
     implementation project(':react-native-vector-icons')

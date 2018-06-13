@@ -2,8 +2,17 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, ImageBackground, KeyboardAvoidingView, TouchableOpacity, Alert, TextInput } from 'react-native';
 import LoginForm from '../component/form/loginForm'
-
 import { connect } from 'react-redux'
+import axios from 'axios'
+
+var uri = "http://api.shutterrunning2014.com/api/v2/grsv2m/_proc/Main.uspSignIn"
+var api_key = '36fda24fe5588fa4285ac6c6c2fdfbdb6b6bc9834699774c9bf777f706d05a88'
+var sessionToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQsInVzZXJfaWQiOjQsImVtYWlsIjoiYWR' +
+    'taW5AZ3V1cnVuLmNvbSIsImZvcmV2ZXIiOmZhbHNlLCJpc3MiOiJodHRwOlwvXC9hcGkuc2h1dHRlcnJ' +
+    '1bm5pbmcyMDE0LmNvbVwvYXBpXC92MlwvdXNlclwvc2Vzc2lvbiIsImlhdCI6MTUyMDU0NDU5MSwiZXh' +
+    'wIjoxNTIwNTQ4MTkxLCJuYmYiOjE1MjA1NDQ1OTEsImp0aSI6IjA1Y2UzN2NjMmU2NjIyZGJlNmMzNTg' +
+    '5MzE1NTI0YmZjIn0._7jHjGhTPfa3rVioC2MrjJfLwrMMxYQYiWhe8DK5V7k'
+var auth = 'Basic YWRtaW5AZ3V1cnVuLmNvbTpXWGJyRDI4THRJUjNNWW0='
 
 class Login extends Component {
     static propTypes = {
@@ -13,33 +22,57 @@ class Login extends Component {
         super(props)
         this.state = {
             username: "",
-            password: ""
+            password: "",
+            status: [],
         }
     }
-    componentWillMount() {
-        console.log("statusVerify : " + this.props.profile.verify.statusVerify)
-        console.log("login status : " + this.props.login)
+    checkLoginSever() {
+        let { status, username, password } = this.state
+        let data = ({
+            params: [
+                { name: "Username", value: username },
+                { name: "Password", value: password }
+            ]
+        })
+        axios.post(uri, data, {
+            headers: {
+                "X-DreamFactory-API-Key": api_key,
+                "X-DreamFactory-Session-Token": sessionToken,
+                "Authorization": auth
+            },
+            responseType: 'json'
+        })
+            .then((response) => {
+                this.setState({ isLoading: false, status: response.data });
+                console.log(this.state.status)
+                console.log(this.state.status[0].SignInStatus)
+                this.checkLogin()
+            }).catch((error) => {
+                console.error(error);
+            });
     }
     checkLogin() {
-        if (this.state.username === this.props.profile.profile.userid && this.state.password === this.props.profile.profile.password && this.props.profile.verify.statusVerify === 1) {
-            this.gotoDistance()
-        }
-        else if ((this.state.username === "Admin" && this.state.password === "1234")){
-            this.gotoDistance()
-        }
-        else if ((this.state.username === "Admin2" && this.state.password === "1234") && (this.props.login === 0)){
+        if (this.state.status[0].SignInStatus === "1") {
+            this.props.setUsername(this.state.username)
             this.gotoTabTeam()
         }
-        else if ((this.state.username === "1509901688799" && this.state.password === "mcc12azy") && (this.props.login === 0)){
-            this.gotoTabTeam()
-        }
-        else if (this.props.profile.verify.statusVerify === 0) {
-            Alert.alert('ยังไม่มีข้อมูลผู้ใช้งาน', 'ผู้ใช้งานยังไม่ได้ทำการยืนยันตัวตน กรุณายืนยันตัวตนด้วย', [
+        // else if (this.state.status[0].ActivateStatus === 0) {
+        //     Alert.alert('ยังไม่มีข้อมูลผู้ใช้งาน', 'ผู้ใช้งานยังไม่ได้ทำการยืนยันตัวตน กรุณายืนยันตัวตนด้วย', [
+        //         {
+        //             text: 'Cancel'
+        //         }, {
+        //             text: 'ยืนยันตัวตน',
+        //             onPress: () => this.gotoVerify()
+        //         }
+        //     ], { cancelable: false })
+        // }
+        else if (this.state.status[0].SignInStatus === "0") {
+            Alert.alert('ยังไม่มีข้อมูลผู้ใช้งาน', 'กรุณาลงทะเบียนเพื่อเข้าใช้งาน', [
                 {
                     text: 'Cancel'
                 }, {
-                    text: 'ยืนยันตัวตน',
-                    onPress: () => this.gotoVerify()
+                    text: 'สมัครสมาชิก',
+                    onPress: () => this.gotoRegister()
                 }
             ], { cancelable: false })
         }
@@ -97,11 +130,11 @@ class Login extends Component {
                     />
                     <View style={styles.loginContainer}>
                         <TouchableOpacity style={styles.buttonContainer}
-                            onPress={this.checkLogin.bind(this)}>
+                            onPress={this.checkLoginSever.bind(this)}>
                             <Text style={styles.textButton}>Login</Text>
                         </TouchableOpacity>
                     </View>
-                    
+
                     <TouchableOpacity onPress={this.gotoRegister.bind(this)}>
                         <Text style={styles.regisButton}>
                             สมัครสมาชิก
@@ -121,9 +154,19 @@ class Login extends Component {
 const mapStateToProps = (state) => {
     return {
         profile: state.profile,
-        login : state.login
+        login: state.login
     }
 
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setUsername: (username) => {
+            dispatch({
+                type: "setUsername",
+                payload: username
+            })
+        }
+    }
 }
 
 const styles = StyleSheet.create({
@@ -176,4 +219,4 @@ const styles = StyleSheet.create({
         fontFamily: 'kanit'
     }
 })
-export default connect(mapStateToProps)(Login)
+export default connect(mapStateToProps, mapDispatchToProps)(Login)

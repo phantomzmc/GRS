@@ -3,8 +3,14 @@ import { View, Text, StyleSheet, Image, } from 'react-native';
 import { connect } from 'react-redux'
 
 class TotalRegister extends Component {
+    state = {
+        total : "'"
+    }
     componentDidMount() {
-        console.log(this.props.EventData)
+        this.setState({
+            total : this.props.event.totalPrice,
+            priceCDO : this.props.choiceSend.choiceSend.priceCDO 
+        })
     }
     render() {
         return (
@@ -21,7 +27,7 @@ class TotalRegister extends Component {
                         <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit' }}>({this.props.event.distanceEvent.distance} - {this.props.shirtphoto.size}) x 1 (Photo Plus)</Text>
                     </View>
                     <View>
-                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.props.total.totalPrice}.00 ฿</Text>
+                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.state.total}.00 ฿</Text>
                     </View>
                 </View>
                 <View style={styles.detailRow}>
@@ -37,7 +43,7 @@ class TotalRegister extends Component {
                         <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit' }}>ใต้สะพานพระราม 8 (ฝั่งถนนอรุณอัมรินทร์ )</Text>
                     </View>
                     <View>
-                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>65.00 ฿</Text>
+                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.state.priceCDO}.00 ฿</Text>
                     </View>
                 </View>
                 <View style={styles.detailRow}>
@@ -82,7 +88,7 @@ class TotalRegister extends Component {
                         {/* <Text style={{ fontSize: 7, color: '#8B8B8B' }}>(5 Km. - S) x 1 (Photo Plus)</Text> */}
                     </View>
                     <View>
-                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>598.25 ฿</Text>
+                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.state.total} ฿</Text>
                     </View>
                 </View>
 
@@ -114,7 +120,6 @@ const mapStateToProps = (state) => {
         event: state.event,
         distanceEvent : state.distanceEvent,
         shirtphoto: state.shirtphoto,
-        total : state.total,
         choiceSend: state.choiceSend,
         address: state.address
     }

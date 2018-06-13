@@ -64,10 +64,10 @@ class ListDistance extends Component {
                 id: item.CourseID,
                 name: item.CourseName,
                 distance: item.Distance,
-                price: item.Fee
+                price: parseFloat(item.Fee)
             }
         })
-        this.props.onGotoshirt({ id: item.CourseID, name: item.CourseName, distance: item.Distance, price: item.Fee, pricePhotoPlus: item.PhotoPlusCost, statusPhotoPlus: item.PhotoPlusService })
+        this.props.onGotoshirt({ id: item.CourseID, name: item.CourseName, distance: item.Distance, price: parseFloat(item.Fee), pricePhotoPlus: item.PhotoPlusCost, statusPhotoPlus: item.PhotoPlusService })
     }
 
     render() {

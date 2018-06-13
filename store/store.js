@@ -78,6 +78,10 @@ const shirtphoto = (state = {}, action) => {
       state.size = action.payload;
       break;
     }
+    case "setImageShirt": {
+      state.shirt = action.payload;
+      break;
+    }
     default:
   }
   return state;
@@ -151,11 +155,12 @@ const userprofile = (state = {}, action) => {
   return state;
 }
 const friend = {
-    friendEvent : {
-      name : [],
-      dataDis : [],
-      dataShirth : []
-    }
+  friendRegis: {},
+  friendEvent: {
+    name: [],
+    dataDis: [],
+    dataShirth: []
+  }
 
 }
 const friendlist = (state = friend, action) => {
@@ -178,11 +183,15 @@ const friendlist = (state = friend, action) => {
         detail: [...state.detailRegis.size, action.payload]
       }
       break;
-    case "addFriendInEvent" : 
+    case "addFriendInEvent":
       return {
         ...state,
-      friendEvent : [...state.friendEvent ,action.payload]
+        friendEvent: [...state.friendEvent, action.payload]
       }
+    case "setFriendRegister": {
+      state.friendRegis = action.payload
+      break;
+    }
   }
   return state;
 }

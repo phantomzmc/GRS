@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, StyleSheet, TouchableHighlight, Alert } from 'react-native';
+import { View, Text, FlatList, StyleSheet, TouchableHighlight, ActivityIndicator } from 'react-native';
 import axios from 'axios'
 import { connect } from 'react-redux'
-import datashirt from './dataShirt'
 
 var api_key = '36fda24fe5588fa4285ac6c6c2fdfbdb6b6bc9834699774c9bf777f706d05a88'
 var sessionToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQsInVzZXJfaWQiOjQsImVtYWlsIjoiYWR' +
@@ -17,13 +16,14 @@ class ListShirt extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            isLoading : true,
             size: "",
             CourseID: this.props.event.distanceEvent.id,
-            Gender: this.props.userprofile.userprofile.Gender
+            Gender: this.props.userprofile.userprofile.Gender,
         }
         this.pressDataShirt = this.pressDataShirt.bind(this)
     }
-    componentDidMount() {
+    componentWillMount() {
         const { CourseID, Gender } = this.state
         const uri = 'http://api.shutterrunning2014.com/api/v2/grsv2m/_proc/Main.uspGetJerseyLists(' + CourseID + ' , ' + Gender + ' )'
         axios.get(uri, {
@@ -38,6 +38,8 @@ class ListShirt extends Component {
             .then((responseJson) => {
                 this.setState({ isLoading: false, dataSource: responseJson.data, });
                 console.log(this.state.dataSource)
+                this.props.setImageShirt(this.state.dataSource[0].JersePic)
+
             }).catch((error) => {
                 console.error(error);
             });
@@ -47,8 +49,11 @@ class ListShirt extends Component {
     pressDataShirt(item) {
         this.setState({ size: item.JerseySizeValue })
         this.props.setSizeShirt(item.JerseySizeValue)
-        this.props.getShirt(item)
         // Alert.alert("ไซค์เสื้อ : " + datashirt.label)
+    }
+    teamGetShirt() {
+        this.props.getShirt(item)
+
     }
 
     render() {
@@ -100,6 +105,12 @@ const mapDispatchtoProps = (dispatch) => {
             dispatch({
                 type: 'setSizeShirt',
                 payload: size
+            })
+        },
+        setImageShirt : shirt => {
+            dispatch({
+                type: 'setImageShirt',
+                payload : shirt
             })
         }
     }

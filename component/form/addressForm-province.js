@@ -59,8 +59,9 @@ class ProvinceForm extends Component {
             .then((responseJson) => {
                 this.setState({ isLoading: false, emails: responseJson.data });
                 console.log(this.state.emails)
-            }).catch((error) => {
-                console.error(error);
+            })
+            .catch((error) => {
+                // console.error(error);
             });
     }
     searchUpdated(term) {

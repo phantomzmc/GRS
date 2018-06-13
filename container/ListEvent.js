@@ -37,13 +37,9 @@ class ListEvent extends Component {
     componentDidMount() {
         this.setUserID()
     }
-    componentWillUnmount(){
-        
-    }
     setUserID = () => {
         console.log(this.props.profile.profile.userid)
         this.setState({ profile: this.props.profile.profile.userid })
-        console.log("test" + this.state.profile)
     }
     checkTeamRegis() {
         if (this.props.event.event == "1") {

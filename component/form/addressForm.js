@@ -17,7 +17,11 @@ class AddressForm extends Component {
         this.setState({
             fullname: this.props.userprofile.userprofile.FirstName + this.props.userprofile.userprofile.LastName,
             email: this.props.userprofile.userprofile.Email,
-            adress: this.props.userprofile.userprofile.Address + " " +this.props.userprofile.userprofile.SubDistric,
+            adress: this.props.userprofile.userprofile.Address + " " + 
+                    this.props.userprofile.userprofile.SubDistric + " " +
+                    this.props.userprofile.userprofile.Distric + " " +
+                    this.props.userprofile.userprofile.Province + " " +
+                    this.props.userprofile.userprofile.PostCode ,
             tel: this.props.userprofile.userprofile.Phone
         })
     }
@@ -122,7 +126,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => {
     return {
         profile: state.profile,
-        userprofile : state.userprofile
+        userprofile: state.userprofile
     }
 }
 

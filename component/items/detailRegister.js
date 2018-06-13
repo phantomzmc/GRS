@@ -4,7 +4,16 @@ import { connect } from 'react-redux'
 
 class DetailRegister extends Component {
     state = {
-        address : "106/13 หนองหอย เมืองเชียงใหม่ เชียงใหม่"
+        address: "106/13 หนองหอย เมืองเชียงใหม่ เชียงใหม่"
+    }
+    componentDidMount() {
+        this.setState({
+            address: this.props.userprofile.userprofile.Address + " " +
+                this.props.userprofile.userprofile.SubDistric + " " +
+                this.props.userprofile.userprofile.Distric + " " +
+                this.props.userprofile.userprofile.Province + " " +
+                this.props.userprofile.userprofile.PostCode
+        })
     }
     render() {
         return (
@@ -24,7 +33,7 @@ class DetailRegister extends Component {
                 </View>
                 <View style={styles.viewName}>
                     <Text style={styles.textName1}>ชื่อ - นามสกุล</Text>
-                    <Text style={styles.textName2}>{this.props.profile.profile.profile} {this.props.profile.profile.lastname}</Text>
+                    <Text style={styles.textName2}>{this.props.userprofile.userprofile.FirstName} {this.props.userprofile.userprofile.LastName}</Text>
                     <Text style={styles.textName1}>รายการวิ่ง</Text>
                     <Text style={styles.textName2}>{this.props.event.event.EventName}</Text>
                 </View>
@@ -124,10 +133,10 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => {
     return {
         event: state.event,
-        profile : state.profile,
-        distanceEvent : state.distanceEvent,
+        profile: state.profile,
+        distanceEvent: state.distanceEvent,
         shirtphoto: state.shirtphoto,
-        totalPrice : state.totalPrice,
+        userprofile: state.userprofile,
         choiceSend: state.choiceSend,
         address: state.address
     }

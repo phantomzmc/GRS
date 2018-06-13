@@ -77,7 +77,7 @@ class TotalLayout extends Component {
                         <TotalRegister />
                         <View style={styles.submitContainer}>
                             <TouchableOpacity style={styles.buttonContainer}
-                                onPress={this.captureScreenFunction}>
+                                onPress={this.captureScreenFunction.bind(this)}>
                                 <Text style={styles.textButton}>บันทึก</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.buttonContainer}

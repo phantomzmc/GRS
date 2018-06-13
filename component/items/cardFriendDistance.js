@@ -75,9 +75,9 @@ class CradFriendDistance extends Component {
             <Card>
                 <CardItem>
                     <Left>
-                        <Thumbnail source={{ uri: items.imgAvatar }} />
+                        <Thumbnail source={{ uri: items.PicProfile }} />
                         <Body style={{ paddingHorizontal: 5 }}>
-                            <Text style={{ fontFamily: "kanit" }}>{items.name}</Text>
+                            <Text style={{ fontFamily: "kanit" }}>{items.FirstName} - {items.LastName}</Text>
                             <Text note style={{ fontFamily: "kanit" }}>{items.gen} -  {items.age}</Text>
                         </Body>
                     </Left>

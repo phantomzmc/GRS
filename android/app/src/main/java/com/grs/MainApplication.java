@@ -3,6 +3,11 @@ package com.grs;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import org.vovkasm.WebImage.WebImagePackage;
+import com.dylanvann.fastimage.FastImageViewPackage;
+import fr.greweb.reactnativeviewshot.RNViewShotPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
+import com.smixx.reactnativeicons.ReactNativeIcons;
 import com.smixx.reactnativeicons.ReactNativeIcons;
 import fr.greweb.reactnativeviewshot.RNViewShotPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -30,6 +35,11 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new WebImagePackage(),
+            new FastImageViewPackage(),
+            new RNViewShotPackage(),
+            new VectorIconsPackage(),
+            new ReactNativeIcons(),
             new ReactNativeIcons(),
             new RNViewShotPackage(),
             new VectorIconsPackage(),
