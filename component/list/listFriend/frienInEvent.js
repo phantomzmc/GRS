@@ -1,16 +1,7 @@
 import React, { Component } from 'react'
 import { View, FlatList, StyleSheet, Alert, TouchableOpacity, Image, ScrollView } from 'react-native';
-import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
-
-import datafriend from './dataFriend'
-
 import { connect } from "react-redux";
-
-import ListFriendDistance from '../event/listFriendDistance'
-import ListShirth from '../listShirt/listShirt'
-import DropDownShirth from '../listShirt/dropdownShirt'
 import CardFriendDistance from '../../items/cardFriendDistance'
-import Summary from '../../items/summary'
 
 
 class FriendInEvent extends Component {

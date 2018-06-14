@@ -21,10 +21,10 @@ class EventListFriend extends Component {
             isRefesh: false,
         }
     }
-    componentDidMount() {
+    componentWillMount() {
         let data = ({
             params: [
-                { name: "RunnerID", value: "15" },
+                { name: "RunnerID", value: this.props.userprofile.userprofile.RunnerID },
                 { name: "PageNo", value: "1" },
                 { name: "RowPerPage", value: "12" }
             ]
@@ -52,11 +52,7 @@ class EventListFriend extends Component {
         this.props.setFriendRegister(datafriend)
     }
     onRefesh = () => {
-        // this.setState({ isRefesh : true})
-        console.log(datafriend)
-        console.log(this.props.friend)
-        // datafriend.push(this.state.newitem)
-
+        this.componentDidMount()
     }
     render() {
         let { selected, favorite } = this.state

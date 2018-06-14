@@ -25,7 +25,7 @@ class HeaderProfile extends Component {
             user: []
         }
     }
-    componentDidMount = () => {
+    componentWillMount = () => {
         let { user } = this.state
         let data = ({
             params: {

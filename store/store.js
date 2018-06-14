@@ -156,12 +156,14 @@ const userprofile = (state = {}, action) => {
 }
 const friend = {
   friendRegis: {},
+  dataDis: {},
   friendEvent: {
     name: [],
     dataDis: [],
+    dataFee: [],
     dataShirth: []
-  }
-
+  },
+  
 }
 const friendlist = (state = friend, action) => {
   switch (action.type) {
@@ -172,10 +174,7 @@ const friendlist = (state = friend, action) => {
       }
       break;
     case "addDistanceFriend":
-      return {
-        ...state,
-        detailRegis: [...state.detailRegis.distance, action.payload]
-      }
+      state.dataDis = action.payload
       break;
     case "addSize":
       return {
@@ -183,14 +182,18 @@ const friendlist = (state = friend, action) => {
         detail: [...state.detailRegis.size, action.payload]
       }
       break;
-    case "addFriendInEvent":
-      return {
-        ...state,
-        friendEvent: [...state.friendEvent, action.payload]
-      }
+    case "addFriendInEvent": {
+      state.friendEvent = action.payload
+      break;
+    }
     case "setFriendRegister": {
       state.friendRegis = action.payload
       break;
+    }
+    case "setTotalPrice": {
+      state.friendTotalPrice = action.payload
+      break;
+
     }
   }
   return state;

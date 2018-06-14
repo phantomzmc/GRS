@@ -10,7 +10,7 @@ import SummaryTotal from '../component/items/summary'
 class FriendDistance extends Component {
     state = {
         title: "เลือกระยะทาง",
-        price: [100, 200],
+        price: [],
         totals: 0
     }
 
@@ -32,6 +32,7 @@ class FriendDistance extends Component {
             a + b
         const sum = price.reduce(add)
         console.log(sum)
+        this.props.setTotalPrice(sum)
         this.setState({ totals: sum })
     }
 
@@ -63,7 +64,16 @@ const mapStateToProps = (state) => {
         friendlist: state.friendlist
     }
 }
-
+const mapDispatchToProps = dispatch => {
+    return {
+        setTotalPrice: (totals) => {
+            dispatch({
+                type: 'setTotalPrice',
+                payload: totals
+            })
+        }
+    }
+}
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -91,4 +101,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default connect(mapStateToProps)(FriendDistance)
+export default connect(mapStateToProps,mapDispatchToProps)(FriendDistance)

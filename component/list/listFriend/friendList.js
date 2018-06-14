@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ListView, StyleSheet, Image, FlatList, Alert, TouchableOpacity } from 'react-native';
-
-import datafriend from './dataFriend'
+import { View, Text, StyleSheet, Image, FlatList, Alert, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux'
 import axios from 'axios'
 

@@ -58,7 +58,6 @@ class TeamList extends Component {
                 <ScrollView>
                     <View style={styles.container}>
                         <HeaderProfile />
-                        {/* <Text style={styles.textTile}>รายชื่อเพื่อน</Text> */}
                         <Header searchBar rounded>
                             <Item>
                                 <Icon name="ios-search" />

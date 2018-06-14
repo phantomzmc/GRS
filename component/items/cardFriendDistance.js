@@ -4,10 +4,10 @@ import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Ic
 import Switch from 'react-native-switch-pro'
 
 import ListFriendDistance from '../list/event/listFriendDistance'
-import ListShirth from '../list/listShirt/listShirt'
+import ListFriendShirth from '../list/listShirt/listFriendShrit'
 import DropDownShirth from '../list/listShirt/dropdownShirt'
 import dataFriend from '../list/listFriend/dataFriend';
-import data from '../list/listevent/data';
+import { connect } from 'react-redux';
 
 class CradFriendDistance extends Component {
     constructor(props) {
@@ -17,8 +17,7 @@ class CradFriendDistance extends Component {
             distance: false,
             sizeShirth: false,
             items: [],
-            totals : 500,
-            // name: [],
+            total: parseFloat("0"),
             dataDis: [],
             dataShirt: [],
             iconName: "arrow-forward",
@@ -33,25 +32,27 @@ class CradFriendDistance extends Component {
         this.props.delete()
     }
 
-    passName(item) {
-        this.setState({ name: this.state.items })
+    passName = (runnerid) => {
+        console.log(runnerid)
+        this.setState({ name: runnerid })
         console.log(this.state.name)
     }
     passDistance = (item) => {
-        let { dataDis } = this.state
         this.passName()
-        this.setState({ dataDis: item , total : item.price})
-        console.log(this.state.dataDis)
+        this.setState({ dataDis: item, total: parseFloat(item.Fee) })
+        // this.props.addDistanceFriend(this.state.dataDis)
         this.props.getPriceTotal(this.state.total)
     }
     passShirt(shirt) {
         this.setState({ dataShirt: shirt })
         console.log(this.state.dataShirt)
     }
-    getDataRegisFriend = (dataFriendRegis) => {
-        let { name, dataDis, dataShirt } = this.state
-        this.setState({ dataFriendRegis: { nameRegis: name, dataDisRegis: dataDis, dataShirtRegis: dataShirt } })
-        this.props.getFriendRegis(dataFriendRegis)
+    getDataRegisFriend = (item) => {
+        let { name, dataShirt,dataFriendRegis } = this.state
+        this.setState({ dataFriendRegis: { runnerid: name, couseid: item.CourseID, nameRegis: item.CourseName, dataDisRegis: item.Distance, dataFee: item.Fee, dataShirtRegis: dataShirt } })
+        dataFriend.push(dataFriendRegis)
+        console.log(dataFriend)
+        this.props.getFriendRegis(dataFriend)
     }
     photoPlusSwitch = () => {
         let { dataFriendRegis } = this.state
@@ -95,7 +96,7 @@ class CradFriendDistance extends Component {
                             <View style={styles.dropdownstyle}>
                                 <View style={{ flexDirection: 'row', paddingVertical: 20 }}>
                                     <Left>
-                                        <Text style={styles.labelTitle}>ระยะทาง : {this.state.dataDis.name} {this.state.dataDis.distance}</Text>
+                                        <Text style={styles.labelTitle}>ระยะทาง : {this.state.dataDis.CourseName} {this.state.dataDis.Distance}</Text>
                                     </Left>
                                     <Right>
                                         <TouchableOpacity onPress={() => this.setState({ distance: !this.state.distance })}
@@ -104,7 +105,12 @@ class CradFriendDistance extends Component {
                                         </TouchableOpacity>
                                     </Right>
                                 </View>
-                                {this.state.distance && <ListFriendDistance getDistance={this.passDistance.bind(this)} />}
+                                {this.state.distance &&
+                                    <ListFriendDistance
+                                        getRunnerID={this.passName.bind(this)}
+                                        getDistance={this.passDistance.bind(this)}
+                                        getFriend={this.getDataRegisFriend.bind(this)}
+                                    />}
 
                                 <View style={{ flexDirection: 'row' }}>
                                     <Left>
@@ -117,7 +123,7 @@ class CradFriendDistance extends Component {
                                         </TouchableOpacity>
                                     </Right>
                                 </View>
-                                {this.state.sizeShirth && <ListShirth getShirt={this.passShirt.bind(this)} />}
+                                {this.state.sizeShirth && <ListFriendShirth getShirt={this.passShirt.bind(this)} />}
                             </View>
                         </View>
                     </Body>
@@ -141,6 +147,21 @@ class CradFriendDistance extends Component {
         );
     }
 }
+const mapStateToProps = state => {
+    return {
+
+    }
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        addDistanceFriend: (dataDis) => {
+            dispatch({
+                type: 'addDistanceFriend',
+                payload: dataDis
+            })
+        }
+    }
+}
 
 const styles = StyleSheet.create({
     listDistance: {
@@ -161,4 +182,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default CradFriendDistance
+export default connect(mapStateToProps, mapDispatchToProps)(CradFriendDistance)

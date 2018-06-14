@@ -19,6 +19,10 @@ class SummaryTotal extends Component {
             console.log("update")
             this.setState({ totalprice: this.props.event.totalPrice })
         }
+        else if (nextProps.totalprice != this.props.friendlist.friendTotalPrice){
+            console.log("friend update ")
+            this.setState({totalprice : this.props.friendlist.friendTotalPrice})
+        }
     }
 
     render() {
@@ -37,7 +41,8 @@ class SummaryTotal extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        event: state.event
+        event: state.event,
+        friendlist: state.friendlist
     }
 }
 

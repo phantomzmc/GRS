@@ -1,23 +1,46 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, StyleSheet, Alert, TouchableHighlight, Image } from 'react-native';
+import { View, Text, FlatList, StyleSheet, TouchableHighlight } from 'react-native';
 import { Left, Right } from "native-base";
 import { connect } from 'react-redux'
+import axios from 'axios'
 
-import datadistance from './datadistance'
-import { map } from 'mobx';
+var api_key = '36fda24fe5588fa4285ac6c6c2fdfbdb6b6bc9834699774c9bf777f706d05a88'
+var sessionToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQsInVzZXJfaWQiOjQsImVtYWlsIjoiYWR' +
+    'taW5AZ3V1cnVuLmNvbSIsImZvcmV2ZXIiOmZhbHNlLCJpc3MiOiJodHRwOlwvXC9hcGkuc2h1dHRlcnJ' +
+    '1bm5pbmcyMDE0LmNvbVwvYXBpXC92MlwvdXNlclwvc2Vzc2lvbiIsImlhdCI6MTUyMDU0NDU5MSwiZXh' +
+    'wIjoxNTIwNTQ4MTkxLCJuYmYiOjE1MjA1NDQ1OTEsImp0aSI6IjA1Y2UzN2NjMmU2NjIyZGJlNmMzNTg' +
+    '5MzE1NTI0YmZjIn0._7jHjGhTPfa3rVioC2MrjJfLwrMMxYQYiWhe8DK5V7k'
+var auth = 'Basic YWRtaW5AZ3V1cnVuLmNvbTpXWGJyRDI4THRJUjNNWW0='
 
 class ListFriendDistance extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            pressStatus: true
+            pressStatus: true,
+            id: this.props.event.event.EventID,
+            userid: this.props.username.username,
+            runnerid: this.props.userprofile.userprofile.RunnerID
         }
     }
 
     componentDidMount() {
-        this.setState({
-            dataSource: datadistance
-        });
+        const { id, userid } = this.state
+        const uri = 'http://api.shutterrunning2014.com/api/v2/grsv2m/_proc/Main.uspGetCourseLists(' + id + ',' + userid + ')'
+        axios.get(uri, {
+            headers: {
+                "X-DreamFactory-API-Key": api_key,
+                "X-DreamFactory-Session-Token": sessionToken,
+                "Authorization": auth
+            },
+            responseType: 'json'
+        })
+            // .then((response) => response.json())
+            .then((responseJson) => {
+                this.setState({ isLoading: false, dataSource: responseJson.data });
+                console.log(this.state.dataSource)
+            }).catch((error) => {
+                console.error(error);
+            });
     }
     _onHideUnderlay() {
         this.setState({ pressStatus: false });
@@ -26,9 +49,11 @@ class ListFriendDistance extends Component {
         this.setState({ pressStatus: true });
     }
     alertShow(item) {
-        // this.props.addDistance(item)
+        let {runnerid} = this.state
+        this.props.getRunnerID(runnerid)
+        console.log(runnerid)
         this.props.getDistance(item)
-        // Alert.alert(item.name, "ระยะทาง : " + item.distance + " ราคา : " + item.price)
+        this.props.getFriend(item)
     }
     render() {
         if (this.state.isLoading) {
@@ -50,11 +75,11 @@ class ListFriendDistance extends Component {
                                 <View style={styles.content}>
                                     <Left>
                                         <Text style={styles.title}>
-                                            {item.name} {item.distance}
+                                            {item.CourseName} {item.Distance}
                                         </Text>
                                     </Left>
                                     <Right>
-                                        <Text style={styles.detail}>{item.price} บาท</Text>
+                                        <Text style={styles.detail}>{item.Fee} บาท</Text>
                                     </Right>
                                 </View>
 
@@ -65,19 +90,15 @@ class ListFriendDistance extends Component {
             </View >
         );
     }
-
-
 }
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         addDistance: (item) => {
-//             dispatch({
-//                 type: 'addDistance',
-//                 payload: item
-//             })
-//         }
-//     }
-// }
+const mapStateToProps = state => {
+    return {
+        event: state.event,
+        username: state.username,
+        userprofile : state.userprofile
+    }
+}
+
 
 const styles = StyleSheet.create({
     listview: {
@@ -110,4 +131,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default ListFriendDistance;
+export default connect(mapStateToProps)(ListFriendDistance);
