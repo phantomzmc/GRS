@@ -3,6 +3,15 @@ package com.grs;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import fr.greweb.reactnativeviewshot.RNViewShotPackage;
+import com.brentvatne.react.ReactVideoPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
+import com.imagepicker.ImagePickerPackage;
+import com.reactnative.ivpusic.imagepicker.PickerPackage;
+import com.smixx.reactnativeicons.ReactNativeIcons;
+import com.wix.RNCameraKit.RNCameraKitPackage;
+import com.imagepicker.ImagePickerPackage;
+import com.reactnative.ivpusic.imagepicker.PickerPackage;
 import org.vovkasm.WebImage.WebImagePackage;
 import com.dylanvann.fastimage.FastImageViewPackage;
 import fr.greweb.reactnativeviewshot.RNViewShotPackage;
@@ -13,6 +22,7 @@ import fr.greweb.reactnativeviewshot.RNViewShotPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import ui.shine.RNShineButtonPackage;
 import com.imagepicker.ImagePickerPackage;
+import com.wix.RNCameraKit.RNCameraKitPackage;
 
 
 import com.facebook.react.ReactNativeHost;
@@ -35,6 +45,15 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNViewShotPackage(),
+            new ReactVideoPackage(),
+            new VectorIconsPackage(),
+            new ImagePickerPackage(),
+            new PickerPackage(),
+            new ReactNativeIcons(),
+            new RNCameraKitPackage(),
+            new ImagePickerPackage(),
+            new PickerPackage(),
             new WebImagePackage(),
             new FastImageViewPackage(),
             new RNViewShotPackage(),
@@ -44,7 +63,8 @@ public class MainApplication extends Application implements ReactApplication {
             new RNViewShotPackage(),
             new VectorIconsPackage(),
             new RNShineButtonPackage(),
-            new ImagePickerPackage()
+            new ImagePickerPackage(),
+              new RNCameraKitPackage()
 
       );
     }

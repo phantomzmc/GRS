@@ -37,12 +37,16 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>GRS would like access to your photo gallery</string>
 	<key>NSCameraUsageDescription</key>
-	<string>เปิดเพื่อทำการเข้าใช้งานกล้องถ่ายรูป</string>
+	<string>GRS would like to use your camera</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>GRS would like to save photos to your photo gallery</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>GRS would like to your microphone (for videos)</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string/>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>เปิดเพื่อทำการเข้าถึงคลังรูปภาพ</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>
