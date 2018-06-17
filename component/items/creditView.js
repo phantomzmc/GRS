@@ -111,8 +111,7 @@ class CreditView extends Component {
                     <TouchableOpacity
                         style={styles.buttonContainer}
                         onPress={() => this.putDataCredit(nameCredit, numberCredit, expCredit, cvcCredit)}>
-                        <Text style={styles.textButton}>ชำระค่าสมัคร : {this.props.TotalPrice}
-                            บาท</Text>
+                        <Text style={styles.textButton}>ชำระค่าสมัคร : {this.props.TotalPrice} บาท</Text>
                     </TouchableOpacity>
                 </View>
             </View>

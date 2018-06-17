@@ -3792,6 +3792,10 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.10.0"
 
+keymirror@0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/keymirror/-/keymirror-0.1.1.tgz#918889ea13f8d0a42e7c557250eee713adc95c35"
+
 kind-of@^3.0.2, kind-of@^3.0.3, kind-of@^3.2.0:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-3.2.2.tgz#31ea21a734bab9bbb0f32466d893aea51e4a3c64"
@@ -4012,7 +4016,7 @@ lodash@^4.0.0, lodash@^4.10.1, lodash@^4.11.1, lodash@^4.13.1, lodash@^4.14.0, l
   version "4.17.5"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.5.tgz#99a92d65c0272debe8c96b6057bc8fbfa3bed511"
 
-lodash@^4.2.0:
+lodash@^4.14.2, lodash@^4.2.0:
   version "4.17.10"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.10.tgz#1b7793cf7259ea38fb3661d4d38b3260af8ae4e7"
 
@@ -5103,6 +5107,12 @@ react-native-autocomplete@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/react-native-autocomplete/-/react-native-autocomplete-0.4.0.tgz#df786ca3e5efbd161e2bd87c39d4984f00dfc047"
 
+react-native-camera-kit@^6.2.4:
+  version "6.2.4"
+  resolved "https://registry.yarnpkg.com/react-native-camera-kit/-/react-native-camera-kit-6.2.4.tgz#bc2b8aa271bdfe3351ce2fcaff03ee9895379282"
+  dependencies:
+    lodash "^4.14.2"
+
 react-native-check-box@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/react-native-check-box/-/react-native-check-box-2.1.0.tgz#a4e5fa2c1860cfc3f5758ae3493b6ec2ec7c2878"
@@ -5175,6 +5185,14 @@ react-native-elements@^0.19.1:
 react-native-icons@^0.7.1:
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/react-native-icons/-/react-native-icons-0.7.1.tgz#a05c6c87bff7bfd883903bb9b7156f5ba568f977"
+
+react-native-image-crop-picker@^0.20.3:
+  version "0.20.3"
+  resolved "https://registry.yarnpkg.com/react-native-image-crop-picker/-/react-native-image-crop-picker-0.20.3.tgz#565d69c1764e96abef23871fe4d6d58b1ee35e18"
+
+react-native-image-picker@^0.26.10:
+  version "0.26.10"
+  resolved "https://registry.yarnpkg.com/react-native-image-picker/-/react-native-image-picker-0.26.10.tgz#0bb9ab928984948c67aee0b9e64216bee007a9fc"
 
 react-native-iphone-x-helper@^1.0.1:
   version "1.0.2"
@@ -5296,6 +5314,13 @@ react-native-vector-icons@~4.5.0:
     lodash "^4.0.0"
     prop-types "^15.5.10"
     yargs "^8.0.2"
+
+react-native-video@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-video/-/react-native-video-2.2.0.tgz#13535a6fd7e2fde5a498a771db5b8c2a2d16cb0f"
+  dependencies:
+    keymirror "0.1.1"
+    prop-types "^15.5.10"
 
 react-native-view-shot@^2.3.0:
   version "2.3.0"

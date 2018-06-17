@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert,StatusBar } from 'react-native';
+import { Container } from 'native-base'
 import { connect } from 'react-redux'
 import { captureScreen } from "react-native-view-shot";
 
@@ -62,7 +63,7 @@ class TotalLayout extends Component {
 
     render() {
         return (
-            <View>
+            <Container>
                 <HeaderTeam
                     title={this.state.title}
                     goback={this.gotoBack.bind(this)} />
@@ -87,7 +88,7 @@ class TotalLayout extends Component {
                         </View>
                     </View>
                 </ScrollView>
-            </View>
+            </Container>
         );
     }
 }

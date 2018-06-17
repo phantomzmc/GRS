@@ -157,12 +157,8 @@ const userprofile = (state = {}, action) => {
 const friend = {
   friendRegis: {},
   dataDis: {},
-  friendEvent: {
-    name: [],
-    dataDis: [],
-    dataFee: [],
-    dataShirth: []
-  },
+  friendEvent: {},
+  shirtSize : {}
   
 }
 const friendlist = (state = friend, action) => {
@@ -177,10 +173,7 @@ const friendlist = (state = friend, action) => {
       state.dataDis = action.payload
       break;
     case "addSize":
-      return {
-        ...state,
-        detail: [...state.detailRegis.size, action.payload]
-      }
+      state.shirtSize = action.payload
       break;
     case "addFriendInEvent": {
       state.friendEvent = action.payload

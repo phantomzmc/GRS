@@ -1,8 +1,8 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/bin/yarn add
+  /usr/local/bin/node /usr/local/bin/yarn add react-native-image-crop-picke
 
 PATH: 
-  /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/thunnathorn/Library/Android/sdk/tools:/Users/thunnathorn/Library/Android/sdk/platform-tools
+  /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 
 Yarn version: 
   1.5.1
@@ -37,14 +37,17 @@ npm manifest:
       "react-native-autocomplete": "^0.4.0",
       "react-native-autocomplete-input": "^3.5.0",
       "react-native-autocomplete-select": "^1.0.0",
+      "react-native-camera-kit": "^6.2.4",
       "react-native-check-box": "^2.1.0",
       "react-native-checkbox-field": "^2.0.2",
+      "react-native-checkbox-heaven": "^0.1.5",
       "react-native-communications": "^2.2.1",
       "react-native-datepicker": "^1.7.2",
       "react-native-datepicker-dialog": "0.0.9",
       "react-native-elements": "^0.19.1",
       "react-native-icons": "^0.7.1",
-      "react-native-image-picker": "^0.26.7",
+      "react-native-image-picker": "^0.26.10",
+      "react-native-modal": "^6.0.0",
       "react-native-modal-filter-picker": "^1.3.4",
       "react-native-modal-overlay": "^1.2.3",
       "react-native-modalbox": "^1.4.2",
@@ -54,8 +57,8 @@ npm manifest:
       "react-native-router-flux": "^4.0.0-beta.28",
       "react-native-search-filter": "^0.1.3",
       "react-native-select-input-ios": "^1.2.0",
-      "react-native-shine-button": "^0.0.8",
       "react-native-simple-modal": "^8.0.0",
+      "react-native-switch-pro": "^0.4.11",
       "react-native-vector-icons": "^4.6.0",
       "react-native-view-shot": "^2.3.0",
       "react-navigation": "^1.0.0-beta.27",
@@ -4100,7 +4103,7 @@ Lockfile:
     version "4.17.5"
     resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.5.tgz#99a92d65c0272debe8c96b6057bc8fbfa3bed511"
   
-  lodash@^4.2.0:
+  lodash@^4.14.2, lodash@^4.2.0:
     version "4.17.10"
     resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.10.tgz#1b7793cf7259ea38fb3661d4d38b3260af8ae4e7"
   
@@ -5066,7 +5069,7 @@ Lockfile:
     dependencies:
       asap "~2.0.3"
   
-  prop-types@^15.5.10, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.6.0:
+  prop-types@^15.5.10, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1:
     version "15.6.1"
     resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.1.tgz#36644453564255ddda391191fb3a125cbdf654ca"
     dependencies:
@@ -5191,6 +5194,12 @@ Lockfile:
     version "0.4.0"
     resolved "https://registry.yarnpkg.com/react-native-autocomplete/-/react-native-autocomplete-0.4.0.tgz#df786ca3e5efbd161e2bd87c39d4984f00dfc047"
   
+  react-native-camera-kit@^6.2.4:
+    version "6.2.4"
+    resolved "https://registry.yarnpkg.com/react-native-camera-kit/-/react-native-camera-kit-6.2.4.tgz#bc2b8aa271bdfe3351ce2fcaff03ee9895379282"
+    dependencies:
+      lodash "^4.14.2"
+  
   react-native-check-box@^2.1.0:
     version "2.1.0"
     resolved "https://registry.yarnpkg.com/react-native-check-box/-/react-native-check-box-2.1.0.tgz#a4e5fa2c1860cfc3f5758ae3493b6ec2ec7c2878"
@@ -5200,6 +5209,13 @@ Lockfile:
   react-native-checkbox-field@^2.0.2:
     version "2.0.2"
     resolved "https://registry.yarnpkg.com/react-native-checkbox-field/-/react-native-checkbox-field-2.0.2.tgz#5a61cb52ab327f24b5ba1c4ad086bd7ffcb9257a"
+  
+  react-native-checkbox-heaven@^0.1.5:
+    version "0.1.5"
+    resolved "https://registry.yarnpkg.com/react-native-checkbox-heaven/-/react-native-checkbox-heaven-0.1.5.tgz#fd54cec78b948d4c6316801ff8cbc2c82b824055"
+    dependencies:
+      prop-types "^15.6.0"
+      react-native-vector-icons "^4.0.0"
   
   react-native-communications@^2.2.1:
     version "2.2.1"
@@ -5257,9 +5273,9 @@ Lockfile:
     version "0.7.1"
     resolved "https://registry.yarnpkg.com/react-native-icons/-/react-native-icons-0.7.1.tgz#a05c6c87bff7bfd883903bb9b7156f5ba568f977"
   
-  react-native-image-picker@^0.26.7:
-    version "0.26.7"
-    resolved "https://registry.yarnpkg.com/react-native-image-picker/-/react-native-image-picker-0.26.7.tgz#ad2ee957f7f6cc01396893ea03d84cb2adb2e376"
+  react-native-image-picker@^0.26.10:
+    version "0.26.10"
+    resolved "https://registry.yarnpkg.com/react-native-image-picker/-/react-native-image-picker-0.26.10.tgz#0bb9ab928984948c67aee0b9e64216bee007a9fc"
   
   react-native-iphone-x-helper@^1.0.1:
     version "1.0.2"
@@ -5280,6 +5296,13 @@ Lockfile:
     version "1.2.3"
     resolved "https://registry.yarnpkg.com/react-native-modal-overlay/-/react-native-modal-overlay-1.2.3.tgz#e28ef249544c46e5ab1f292287efe9fca3cee4f1"
     dependencies:
+      react-native-animatable "^1.2.4"
+  
+  react-native-modal@^6.0.0:
+    version "6.0.0"
+    resolved "https://registry.yarnpkg.com/react-native-modal/-/react-native-modal-6.0.0.tgz#72b829454cde207848e4323a96a440c152f7508e"
+    dependencies:
+      prop-types "^15.6.1"
       react-native-animatable "^1.2.4"
   
   react-native-modalbox@^1.4.2:
@@ -5337,15 +5360,15 @@ Lockfile:
     version "1.0.5"
     resolved "https://registry.yarnpkg.com/react-native-select-list/-/react-native-select-list-1.0.5.tgz#e69048ac6fdbce4d8ec195b97131f19ef4f00e42"
   
-  react-native-shine-button@^0.0.8:
-    version "0.0.8"
-    resolved "https://registry.yarnpkg.com/react-native-shine-button/-/react-native-shine-button-0.0.8.tgz#c2e64080cc7b2a992de28e2f37c8ee79545ce37d"
-    dependencies:
-      react-native-vector-icons "4.5.0"
-  
   react-native-simple-modal@^8.0.0:
     version "8.0.0"
     resolved "https://registry.yarnpkg.com/react-native-simple-modal/-/react-native-simple-modal-8.0.0.tgz#08ee6b114cd5180e27430c4f8685b05d2aa9199e"
+  
+  react-native-switch-pro@^0.4.11:
+    version "0.4.11"
+    resolved "https://registry.yarnpkg.com/react-native-switch-pro/-/react-native-switch-pro-0.4.11.tgz#ec8f5c7d6217fab926839e9e58b44dba309becd9"
+    dependencies:
+      prop-types "^15.5.10"
   
   react-native-tab-view@^0.0.70:
     version "0.0.70"
@@ -5359,17 +5382,17 @@ Lockfile:
     dependencies:
       prop-types "^15.6.0"
   
-  react-native-vector-icons@4.5.0, react-native-vector-icons@~4.5.0:
-    version "4.5.0"
-    resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-4.5.0.tgz#6b95619e64f62f05f579f74a01fe5640df95158b"
+  react-native-vector-icons@^4.0.0, react-native-vector-icons@^4.6.0:
+    version "4.6.0"
+    resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-4.6.0.tgz#e4014311ffa6de397d914ffc31b7097a874cc8d5"
     dependencies:
       lodash "^4.0.0"
       prop-types "^15.5.10"
       yargs "^8.0.2"
   
-  react-native-vector-icons@^4.6.0:
-    version "4.6.0"
-    resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-4.6.0.tgz#e4014311ffa6de397d914ffc31b7097a874cc8d5"
+  react-native-vector-icons@~4.5.0:
+    version "4.5.0"
+    resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-4.5.0.tgz#6b95619e64f62f05f579f74a01fe5640df95158b"
     dependencies:
       lodash "^4.0.0"
       prop-types "^15.5.10"
@@ -7018,14 +7041,14 @@ Lockfile:
       fd-slicer "~1.0.1"
 
 Trace: 
-  Error: Missing list of packages to add to your project.
-      at new MessageError (/usr/local/lib/node_modules/yarn/lib/cli.js:186:110)
-      at Object.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:40587:13)
-      at Generator.next (<anonymous>)
-      at step (/usr/local/lib/node_modules/yarn/lib/cli.js:98:30)
-      at /usr/local/lib/node_modules/yarn/lib/cli.js:116:14
-      at new Promise (<anonymous>)
-      at new F (/usr/local/lib/node_modules/yarn/lib/cli.js:23451:28)
-      at Object.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:95:12)
-      at Object.run (/usr/local/lib/node_modules/yarn/lib/cli.js:40599:19)
-      at run (/usr/local/lib/node_modules/yarn/lib/cli.js:89113:20)
+  Error: https://registry.yarnpkg.com/react-native-image-crop-picke: Not found
+      at Request.params.callback [as _callback] (/usr/local/lib/node_modules/yarn/lib/cli.js:65019:18)
+      at Request.self.callback (/usr/local/lib/node_modules/yarn/lib/cli.js:132430:22)
+      at emitTwo (events.js:126:13)
+      at Request.emit (events.js:214:7)
+      at Request.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:133413:10)
+      at emitOne (events.js:116:13)
+      at Request.emit (events.js:211:7)
+      at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:133333:12)
+      at Object.onceWrapper (events.js:313:30)
+      at emitNone (events.js:111:20)

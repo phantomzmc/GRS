@@ -21,7 +21,7 @@ class ListShirt extends Component {
             size: "",
 
         }
-        this.pressDataShirt = this.pressDataShirt.bind(this)
+        this.teamGetShirt = this.teamGetShirt.bind(this)
     }
     componentDidMount() {
         let data = ({
@@ -50,16 +50,9 @@ class ListShirt extends Component {
 
     }
 
-    pressDataShirt(item) {
-        this.setState({ size: item.JerseySizeValue })
-        this.props.setSizeShirt(item.JerseySizeValue)
-        // Alert.alert("ไซค์เสื้อ : " + datashirt.label)
-    }
     teamGetShirt(item) {
         this.props.getShirt(item)
-
     }
-
     render() {
         if (this.state.isLoading) {
             return (

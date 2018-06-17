@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Alert, StatusBar } from "react-native";
-import { StackNavigator } from "react-navigation";
 import { connect } from "react-redux";
+import { Container } from 'native-base'
 
 import HeaderUser from "../component/items/header_profile";
 import FormHelpRegister from "../component/form/registerHelpForm";
 import HeaderTeam from '../component/items/headerTeam'
-import verify from "./verify"
 import axios from 'axios'
 
 var uri = "http://api.shutterrunning2014.com/api/v2/grsv2m/_proc/Main.uspCreateAccount"
@@ -39,8 +38,8 @@ class UserHelpRegister extends Component {
       }
     };
   }
-  createAccount = () => {
-    let activecode = this.props.profile.help.verfitycode
+  createAccount = (ecfirstname, eclastname, ecrelation, ectel, activecode) => {
+    // let activecode = activecode
     let firstname = this.props.profile.profile.fullname
     let lastname = this.props.profile.profile.lastname
     let nickname = this.props.profile.profile.nickname
@@ -58,10 +57,10 @@ class UserHelpRegister extends Component {
     let city = this.props.profile.address.city
     let country = this.props.profile.address.country
     let postnumber = this.props.profile.address.postNumber
-    let ecfirstname = this.props.profile.help.firstname
-    let eclastname = this.props.profile.help.lastname
-    let ecrelation = this.props.profile.help.relation
-    let ectel = this.props.profile.help.tel
+    // let ecfirstname = ecfirstname
+    // let eclastname = eclastname
+    // let ecrelation = ecrelation
+    // let ectel = ectel
 
     let data = ({
       params: {
@@ -79,12 +78,13 @@ class UserHelpRegister extends Component {
       .then((response) => {
         this.setState({ isLoading: false, status: response.data });
         console.log("success")
+        this.gotoListEvent()
       }).catch((error) => {
         console.error(error);
       });
   }
 
-  gotoListEvent = (firstname, lastname, relation, tel, verfitycode, statusVerify) => {
+  gotoListEvent = () => {
     Alert.alert(
       "สำเร็จ",
       "ขั้นตอนการลงทะเบียนเกือบเสร็จสมบูรณ์แล้ว กรุณาตรวจสอบอีเมล์เพื่อยืนยันตัวตน",
@@ -99,7 +99,6 @@ class UserHelpRegister extends Component {
       ],
       { cancelable: false }
     );
-    // this.createAccount()
   };
   gotoVerify = () => {
     this.props.navigation.navigate("Verify");
@@ -110,7 +109,7 @@ class UserHelpRegister extends Component {
 
   render() {
     return (
-      <View>
+      <Container>
         <HeaderTeam
           title={this.state.title}
           goback={this.gotoBack.bind(this)}
@@ -123,10 +122,10 @@ class UserHelpRegister extends Component {
         <ScrollView>
           <View style={styles.container}>
             <HeaderUser Name={this.props.fullname} UserID={this.props.userid} />
-            <FormHelpRegister goEvent={this.gotoListEvent.bind(this)} />
+            <FormHelpRegister goEvent={this.createAccount.bind(this)} />
           </View>
         </ScrollView>
-      </View>
+      </Container>
     );
   }
 }

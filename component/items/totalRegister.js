@@ -4,13 +4,28 @@ import { connect } from 'react-redux'
 
 class TotalRegister extends Component {
     state = {
-        total : "'"
+        total: "",
+        promotionStatus: false
     }
     componentDidMount() {
         this.setState({
-            total : this.props.event.totalPrice,
-            priceCDO : this.props.choiceSend.choiceSend.priceCDO 
+            total: this.props.event.totalPrice,
+            priceCDO: this.props.choiceSend.choiceSend.priceCDO
         })
+        this.checkPromoStatus()
+    }
+    checkPromoStatus = () => {
+        console.log("checkPromoStatus")
+        if (this.props.event.event.PromoCodeRequired == "0") {
+            this.setState({
+                promotionStatus: false
+            })
+        }
+        else if (this.props.event.event.PromoCodeRequired == "1" || this.props.event.event.PromoCodeStatus == "1") {
+            this.setState({
+                promotionStatus: true
+            })
+        }
     }
     render() {
         return (
@@ -61,21 +76,24 @@ class TotalRegister extends Component {
                         <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>33.25 ฿</Text>
                     </View>
                 </View>
-                <View style={styles.detailRow}>
-                    <View>
-                        <View style={{ backgroundColor: '#4CD964', width: 50, height: 50, borderRadius: 25, }}>
-                            <Image source={require('../icon/price.png')}
-                                style={{ width: 30, height: 30, justifyContent: 'center', alignSelf: 'center', marginTop: 10 }} />
+
+                {this.state.promotionStatus &&
+                    <View style={styles.detailRow}>
+                        <View>
+                            <View style={{ backgroundColor: '#4CD964', width: 50, height: 50, borderRadius: 25, }}>
+                                <Image source={require('../icon/price.png')}
+                                    style={{ width: 30, height: 30, justifyContent: 'center', alignSelf: 'center', marginTop: 10 }} />
+                            </View>
+                        </View>
+                        <View>
+                            <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>ส่วนลดค่าโปรโมชั่น 100.00 บาท</Text>
+                            {/* <Text style={{ fontSize: 7, color: '#8B8B8B' }}>(5 Km. - S) x 1 (Photo Plus)</Text> */}
+                        </View>
+                        <View>
+                            <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>-100.00 ฿</Text>
                         </View>
                     </View>
-                    <View>
-                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>ส่วนลดค่าโปรโมชั่น 100.00 บาท</Text>
-                        {/* <Text style={{ fontSize: 7, color: '#8B8B8B' }}>(5 Km. - S) x 1 (Photo Plus)</Text> */}
-                    </View>
-                    <View>
-                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>-100.00 ฿</Text>
-                    </View>
-                </View>
+                }
                 <View style={styles.detailRow}>
                     <View>
                         <View style={{ backgroundColor: '#FDD463', width: 50, height: 50, borderRadius: 25, }}>
@@ -118,7 +136,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => {
     return {
         event: state.event,
-        distanceEvent : state.distanceEvent,
+        distanceEvent: state.distanceEvent,
         shirtphoto: state.shirtphoto,
         choiceSend: state.choiceSend,
         address: state.address

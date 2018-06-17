@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image, Alert, StatusBar } from 'react-native';
+import { Container} from 'native-base'
 import { connect } from 'react-redux'
 import ListShirt from '../component/list/listShirt/listShirt'
 import PhotoPlus from '../component/items/photoPlus'
@@ -10,7 +11,8 @@ class ShirtPhotoPlus extends Component {
     state = {
         title: "เลือกไซค์เสื้อ",
         isItems: false,
-        isItems2: false
+        isItems2: false,
+        imageShirt : ""
     }
     componentDidMount = () => {
         if (this.props.event.distanceEvent.statusPhotoPlus == 1) {
@@ -59,11 +61,16 @@ class ShirtPhotoPlus extends Component {
     goPreveState = () => {
         this.props.navigation.navigate('ControlDistance')
     }
+    setImageShrirt(item){
+        this.setState({
+            imageShirt : item
+        })
+    }
 
     render() {
         let url = 'https://register.shutterrunning2014.com/assets/img/theme/'
         return (
-            <View>
+            <Container>
                 <HeaderTeam
                     title={this.state.title}
                     goback={this.goPreveState.bind(this)} />
@@ -73,13 +80,14 @@ class ShirtPhotoPlus extends Component {
                     translucent={true}
                 />
                 <ScrollView>
-
                     <View style={styles.container}>
                         <Image
-                            source={{ uri: url + this.props.shirtphoto.shirt }}
+                            source={{ uri: url + this.state.imageShirt }}
                             style={{ height: 100, marginTop: 10 }} />
                         <Text style={styles.textSize}>โปรดเลือกไซค์เสื้อ</Text>
-                        <ListShirt />
+                        <ListShirt 
+                            getImageShirt={this.setImageShrirt.bind(this)}
+                        />
                         {this.state.isItems && <Text style={styles.textSize}>Photo Plus + </Text>}
                         {this.state.isItems2 &&
                             <PhotoPlus titleName={this.props.photoplus.title}
@@ -93,9 +101,9 @@ class ShirtPhotoPlus extends Component {
                                 onPress={this.goNextState}>ถัดไป</Text>
                         </TouchableOpacity>
                     </View>
-                    <SummaryTotal />
                 </ScrollView>
-            </View>
+                <SummaryTotal />
+            </Container>
         );
     }
 }

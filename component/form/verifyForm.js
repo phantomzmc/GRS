@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Alert } from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
 import { Container, Button, Form, Input, Item, Label } from 'native-base'
 import { connect } from 'react-redux'
+import axios from 'axios'
+
+
 
 class FormVerifyCode extends Component {
     constructor(props) {
@@ -10,29 +13,11 @@ class FormVerifyCode extends Component {
             code: "",
             statusVerify: 1
         }
-        this.onChange = this.onChange.bind(this)
     }
-    onChange = (code, statusVerify) => {
-        this.setState({
-            statusVerify: 1,
-            code: this.props.profile.verify.verfitycode
-        })
+    checkCodeVerify(code) {
+        this.props.getVerify(code)
     }
-    checkCodeVerify(code, statusVerify) {
-        if (this.state.code === this.props.profile.verify.verfitycode) {
-            this.onChange(code, statusVerify)
-            this.props.sendData(code, statusVerify)
-            this.props.goLogin()
-        }
-        else if (this.state.code !== this.props.profile.verify.verfitycode) {
-            this.alertError()
-        }
-    }
-    alertError() {
-        Alert.alert('รหัสไม่ตรงกัน', 'กรุณากรอกรหัสที่ได้รับทาง Email อย่างถูกต้อง', [
-            { text: 'ลองอีกครั้ง', onPress: () => console.log('ลองอีกครั้ง') },
-        ])
-    }
+    
     goResetVerify(){
         this.props.resetVerify()
     }
@@ -55,7 +40,7 @@ class FormVerifyCode extends Component {
                 <View style={styles.submitContainer}>
                     <TouchableOpacity
                         style={styles.buttonContainer}
-                        onPress={() => this.checkCodeVerify(code , statusVerify)}
+                        onPress={() => this.checkCodeVerify(code)}
                     >
                         <Text style={styles.textButton}>ยืนยัน</Text>
                     </TouchableOpacity>

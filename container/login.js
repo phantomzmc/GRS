@@ -52,27 +52,25 @@ class Login extends Component {
             });
     }
     checkLogin() {
-        if (this.state.status[0].SignInStatus === "1") {
+        let { status } = this.state
+        if (status[0].SignInStatus === "1" && status[0].ActivateStatus === "1") {
             this.props.setUsername(this.state.username)
             this.gotoTabTeam()
         }
-        // else if (this.state.status[0].ActivateStatus === 0) {
-        //     Alert.alert('ยังไม่มีข้อมูลผู้ใช้งาน', 'ผู้ใช้งานยังไม่ได้ทำการยืนยันตัวตน กรุณายืนยันตัวตนด้วย', [
-        //         {
-        //             text: 'Cancel'
-        //         }, {
-        //             text: 'ยืนยันตัวตน',
-        //             onPress: () => this.gotoVerify()
-        //         }
-        //     ], { cancelable: false })
-        // }
-        else if (this.state.status[0].SignInStatus === "0") {
-            Alert.alert('ยังไม่มีข้อมูลผู้ใช้งาน', 'กรุณาลงทะเบียนเพื่อเข้าใช้งาน', [
+        else if (status[0].SignInStatus === "1" && status[0].ActivateStatus === "0") {
+            Alert.alert('กรุณายืนยันตัวตน', 'ผู้ใช้งานยังไม่ได้ทำการยืนยันตัวตน กรุณายืนยันตัวตนด้วย', [
                 {
                     text: 'Cancel'
                 }, {
-                    text: 'สมัครสมาชิก',
-                    onPress: () => this.gotoRegister()
+                    text: 'ยืนยันตัวตน',
+                    onPress: () => this.gotoVerify()
+                }
+            ], { cancelable: false })
+        }
+        else if (this.state.status[0].SignInStatus === "0") {
+            Alert.alert('ชื่อผู้ใช้หรือรหัสผ่านผิด!', 'กรุณากรอกชื่อผู้ใช้เเละรหัสผ่านให้ถูกต้อง', [
+                {
+                    text: 'ตกลง'
                 }
             ], { cancelable: false })
         }

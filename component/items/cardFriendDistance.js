@@ -7,6 +7,7 @@ import ListFriendDistance from '../list/event/listFriendDistance'
 import ListFriendShirth from '../list/listShirt/listFriendShrit'
 import DropDownShirth from '../list/listShirt/dropdownShirt'
 import dataFriend from '../list/listFriend/dataFriend';
+import dataShirts from '../list/listShirt/dataShirt'
 import { connect } from 'react-redux';
 
 class CradFriendDistance extends Component {
@@ -40,15 +41,14 @@ class CradFriendDistance extends Component {
     passDistance = (item) => {
         this.passName()
         this.setState({ dataDis: item, total: parseFloat(item.Fee) })
-        // this.props.addDistanceFriend(this.state.dataDis)
         this.props.getPriceTotal(this.state.total)
     }
-    passShirt(shirt) {
-        this.setState({ dataShirt: shirt })
-        console.log(this.state.dataShirt)
+    passShirt(item) {
+        dataShirts.push(item.JerseySizeValue)
+        this.props.addSize(dataShirts)
     }
     getDataRegisFriend = (item) => {
-        let { name, dataShirt,dataFriendRegis } = this.state
+        let { name, dataShirt, dataFriendRegis } = this.state
         this.setState({ dataFriendRegis: { runnerid: name, couseid: item.CourseID, nameRegis: item.CourseName, dataDisRegis: item.Distance, dataFee: item.Fee, dataShirtRegis: dataShirt } })
         dataFriend.push(dataFriendRegis)
         console.log(dataFriend)
@@ -158,6 +158,12 @@ const mapDispatchToProps = dispatch => {
             dispatch({
                 type: 'addDistanceFriend',
                 payload: dataDis
+            })
+        },
+        addSize: (dataShirt) => {
+            dispatch({
+                type: 'addSize',
+                payload: dataShirt
             })
         }
     }

@@ -38,7 +38,7 @@ class FormAddressRegister extends Component {
     let { verifycode, email } = this.state
     randomstringPromise(10)
       .then((verifycode) => {
-        this.setState({ verifycode })
+        this.setState({ verifycode : verifycode })
         // console.log(code);  // u8KNs7aAw0DCOKO1MdEgVIcF2asajrdd
         console.log(verifycode)
         this.props.setVerify(verifycode)
@@ -51,7 +51,7 @@ class FormAddressRegister extends Component {
     let { verifycode, statusVerify } = this.state
     Communications.email([this.state.email], null, null, 'GuuRun Code Verify', 'VerifyCode is : ' + this.state.verifycode)
     this.props.goEvent(firstname, lastname, relation, tel, verifycode, statusVerify);
-    this.props.setHelp({ firstname, lastname, relation, tel });
+    this.props.setHelp({ firstname, lastname, relation, tel,verifycode });
     
   };
 

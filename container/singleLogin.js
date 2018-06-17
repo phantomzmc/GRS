@@ -65,6 +65,16 @@ class SingleLogin extends Component {
         else if (this.state.username == "Admin") {
             this.gotoListEvent()
         }
+        // else if(this.state.status[0].UsernameStatus == "0"){
+        //     Alert.alert('ผู้ใช้งานยังไม่ได้ยืนยันตัวตน', 'กรุณาทำการกรอกรหัสเพื่อทำการยืนยันตัวตน', [
+        //         {
+        //             text: 'Cancel'
+        //         }, {
+        //             text: 'กรอกรหัสยืนยันตัวตน',
+        //             onPress: () => this.gotoVerify()
+        //         }
+        //     ], { cancelable: false })
+        // }
         else {
             Alert.alert('ยังไม่มีข้อมูลผู้ใช้งาน', 'กรุณาลงทะเบียนเพื่อเข้าใช้งาน', [
                 {
@@ -82,6 +92,9 @@ class SingleLogin extends Component {
     }
     gotoRegister = () => {
         this.props.navigation.navigate('Register')
+    }
+    gotoVerify = () => {
+        this.props.navigation.navigate('Vefify')
     }
     render() {
         return (

@@ -15,24 +15,29 @@ import EventList from '../container/ListEvent'
 
 import DiscountCoupon from '../component/form/couponForm'
 import GetPleace from '../component/items/getPlece'
-import DetailRegister from '../component/items/detailRegister'
 import UserHelpRegister from '../container/userHelpRegister'
 import UserAddressRegister from '../container/userAddressRegister'
 
 import ControlDistance from '../container/controlDistance'
 import ButtonChangePayment from '../component/items/bottonChangePayment'
-import SummaryTotal from '../component/items/summary'
 import Verify from '../container/verify'
 import ResetVerify from '../container/resetVerify'
 import ResetPassword from '../container/resetPassword'
-import MultiSelectExample from '../mockdata'
+import GalleryScreen from '../mockdata'
 
 import FriendDistance from '../container/friendDistance'
-import HistoryList from '../component/list/history/historylist'
-import FriendListLayout from '../container/friendListLayout'
-import HistoryContainer from '../container/historyContainer'
+
 
 export default StackNavigator({
+    // GalleryScreen : {
+    //     screen : GalleryScreen
+    // },
+    // ButtonChangePayment: {
+    //     screen: ButtonChangePayment,
+    //     navigationOptions: {
+    //         header : () => null
+    //     }
+    // },
     // FriendListLayout : {
     //     screen : FriendListLayout
     // },

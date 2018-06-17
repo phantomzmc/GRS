@@ -39,7 +39,7 @@ class ListShirt extends Component {
                 this.setState({ isLoading: false, dataSource: responseJson.data, });
                 console.log(this.state.dataSource)
                 this.props.setImageShirt(this.state.dataSource[0].JersePic)
-
+                this.props.getImageShirt(this.state.dataSource[0].JersePic)
             }).catch((error) => {
                 console.error(error);
             });
@@ -51,10 +51,7 @@ class ListShirt extends Component {
         this.props.setSizeShirt(item.JerseySizeValue)
         // Alert.alert("ไซค์เสื้อ : " + datashirt.label)
     }
-    teamGetShirt() {
-        this.props.getShirt(item)
 
-    }
 
     render() {
         if (this.state.isLoading) {

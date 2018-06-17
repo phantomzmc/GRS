@@ -3,21 +3,23 @@ import PropTypes from "prop-types";
 import {
   View,
   Text,
-  TextInput,
   StyleSheet,
-  SegmentedControlIOS,
   TouchableOpacity,
-  DatePickerIOS,
   Image,
   Alert
 } from "react-native";
-import { StackNavigator } from "react-navigation";
 import DatePicker from 'react-native-datepicker'
+import axios from 'axios'
+import { Form, Item, Input, Label, Tabs, Tab, TabHeading, Icon,Toast } from 'native-base'
 
-import { DatePickerDialog } from 'react-native-datepicker-dialog'
-import { Form, Item, Input, Label, Tabs, Tab, TabHeading, Icon } from 'native-base'
-import moment from 'moment';
-
+var uri = "http://api.shutterrunning2014.com/api/v2/grsv2m/_proc/Main.uspCheckUsername"
+var api_key = '36fda24fe5588fa4285ac6c6c2fdfbdb6b6bc9834699774c9bf777f706d05a88'
+var sessionToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQsInVzZXJfaWQiOjQsImVtYWlsIjoiYWR' +
+  'taW5AZ3V1cnVuLmNvbSIsImZvcmV2ZXIiOmZhbHNlLCJpc3MiOiJodHRwOlwvXC9hcGkuc2h1dHRlcnJ' +
+  '1bm5pbmcyMDE0LmNvbVwvYXBpXC92MlwvdXNlclwvc2Vzc2lvbiIsImlhdCI6MTUyMDU0NDU5MSwiZXh' +
+  'wIjoxNTIwNTQ4MTkxLCJuYmYiOjE1MjA1NDQ1OTEsImp0aSI6IjA1Y2UzN2NjMmU2NjIyZGJlNmMzNTg' +
+  '5MzE1NTI0YmZjIn0._7jHjGhTPfa3rVioC2MrjJfLwrMMxYQYiWhe8DK5V7k'
+var auth = 'Basic YWRtaW5AZ3V1cnVuLmNvbTpXWGJyRDI4THRJUjNNWW0='
 
 class FormRegister extends Component {
   static propTypes = {
@@ -40,18 +42,61 @@ class FormRegister extends Component {
       bloodtype: "",
       nation: "",
       gen: "M",
-      selectedIndex: 0
+      selectedIndex: 0,
+      status : "",
+      showToast: false
     };
   }
-  componentWillUnmount() {
-    console.log("componentWillUnmount")
-  }
-  sendData = (fullname, lastname, nickname, password, confirmpassword, teamname, bib, userid, tel, email, date, bloodtype, nation,gen) => {
-    this.props.goEvent(fullname, lastname, nickname, password, confirmpassword, teamname, bib, userid, tel, email, date, bloodtype, nation,gen);
+
+  sendData = (fullname, lastname, nickname, password, confirmpassword, teamname, bib, userid, tel, email, date, bloodtype, nation, gen) => {
+    this.props.goEvent(fullname, lastname, nickname, password, confirmpassword, teamname, bib, userid, tel, email, date, bloodtype, nation, gen);
   };
 
+  checkUsernmae() {
+    let data = ({
+      params: {
+        value: this.state.userid,
+      }
+    })
+    axios.post(uri, data, {
+      headers: {
+        "X-DreamFactory-API-Key": api_key,
+        "X-DreamFactory-Session-Token": sessionToken,
+        "Authorization": auth
+      },
+      responseType: 'json'
+    })
+      .then((response) => {
+        this.setState({ isLoading: false, status: response.data });
+        console.log(this.state.status[0].UsernameStatus)
+        this.alertCheckUsername()
+      }).catch((error) => {
+        console.error(error);
+      });
+  }
+  alertCheckUsername = () => {
+    let { status } = this.state
+    if (status[0].UsernameStatus == "1") {
+      Alert.alert('นำเข้าผู้ใช้งานจากระบบเก่า (GRS ฟรี)', 'ควรยืนยัน Username และตั้งรหัสผ่าน', [
+        {
+          text: 'ตกลง'
+        }
+      ], { cancelable: false })
+    }
+    else if (status[0].UsernameStatus == "2") {
+      Alert.alert('มีผู้ใช้งานนี้ในระบบเเล้ว', 'กรุณาเปลี่ยนใหม่ให้ถูกต้อง', [
+        {
+          text: 'ตกลง'
+        }
+      ], { cancelable: false })
+    }
+    else if (status[0].UsernameStatus == "0") {
+
+    }
+  }
+
   render() {
-    let { fullname, lastname, nickname, password, confirmpassword, teamname, bib, userid, tel, email, date, bloodtype, nation,gen } = this.state;
+    let { fullname, lastname, nickname, password, confirmpassword, teamname, bib, userid, tel, email, date, bloodtype, nation, gen } = this.state;
     return (
       <View style={styles.container}>
         <View style={styles.contectTitle}>
@@ -102,7 +147,8 @@ class FormRegister extends Component {
           <Item floatingLabel last>
             <Label style={styles.textLabel}>Ex.15099999xxxxx</Label>
             <Input
-              onChangeText={userid => this.setState({ userid })} />
+              onChangeText={userid => this.setState({ userid })}
+              onEndEditing={this.checkUsernmae.bind(this)} />
           </Item>
         </Form>
         <Text style={styles.headForm}>กรุ๊ปเลือด</Text>

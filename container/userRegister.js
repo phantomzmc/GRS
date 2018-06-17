@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   StatusBar
 } from "react-native";
+import { Container } from 'native-base'
 import { StackNavigator } from "react-navigation";
 import { connect } from "react-redux";
 
@@ -68,7 +69,7 @@ class UserRegister extends Component {
 
   render() {
     return (
-      <View>
+      <Container>
         <HeaderTeam
           title={this.state.title}
           goback={this.gotoBack.bind(this)} />
@@ -83,7 +84,7 @@ class UserRegister extends Component {
             <FormRegister goEvent={this.gotoListEvent.bind(this)} />
           </View>
         </ScrollView>
-      </View>
+      </Container>
     );
   }
 }
