@@ -5,12 +5,16 @@ import { connect } from 'react-redux'
 class TotalRegister extends Component {
     state = {
         total: "",
-        promotionStatus: false
+        totalRegister : "",
+        promotionStatus: false,
+        creditPrice : ""
     }
     componentDidMount() {
         this.setState({
             total: this.props.event.totalPrice,
-            priceCDO: this.props.choiceSend.choiceSend.priceCDO
+            totalRegister : this.props.event.totalRegister,
+            priceCDO: this.props.choiceSend.choiceSend.priceCDO,
+            creditPrice : this.props.creditcard.vat
         })
         this.checkPromoStatus()
     }
@@ -42,7 +46,7 @@ class TotalRegister extends Component {
                         <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit' }}>({this.props.event.distanceEvent.distance} - {this.props.shirtphoto.size}) x 1 (Photo Plus)</Text>
                     </View>
                     <View>
-                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.state.total}.00 ฿</Text>
+                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.state.total}.0 ฿</Text>
                     </View>
                 </View>
                 <View style={styles.detailRow}>
@@ -58,7 +62,7 @@ class TotalRegister extends Component {
                         <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit' }}>ใต้สะพานพระราม 8 (ฝั่งถนนอรุณอัมรินทร์ )</Text>
                     </View>
                     <View>
-                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.state.priceCDO}.00 ฿</Text>
+                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.state.priceCDO}.0 ฿</Text>
                     </View>
                 </View>
                 <View style={styles.detailRow}>
@@ -73,7 +77,7 @@ class TotalRegister extends Component {
                         {/* <Text style={{ fontSize: 7, color: '#8B8B8B' }}>(5 Km. - S) x 1 (Photo Plus)</Text> */}
                     </View>
                     <View>
-                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>33.25 ฿</Text>
+                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.state.creditPrice}.0 ฿</Text>
                     </View>
                 </View>
 
@@ -106,7 +110,7 @@ class TotalRegister extends Component {
                         {/* <Text style={{ fontSize: 7, color: '#8B8B8B' }}>(5 Km. - S) x 1 (Photo Plus)</Text> */}
                     </View>
                     <View>
-                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.state.total} ฿</Text>
+                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.state.totalRegister}.0 ฿</Text>
                     </View>
                 </View>
 
@@ -139,7 +143,8 @@ const mapStateToProps = (state) => {
         distanceEvent: state.distanceEvent,
         shirtphoto: state.shirtphoto,
         choiceSend: state.choiceSend,
-        address: state.address
+        address: state.address,
+        creditcard : state.creditcard
     }
 }
 

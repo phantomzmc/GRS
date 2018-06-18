@@ -1,9 +1,19 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { StyleSheet, View } from "react-native";
 import { Button, Icon, Text, Thumbnail, H1 } from "native-base";
 
 
 class ErrorModalAddFriend extends Component {
+    static propTypes = {
+        navigation: PropTypes.object,
+    }
+    constructor(props) {
+        super(props)
+        this.state = {
+
+        }
+    }
 
     render() {
         return (
@@ -18,7 +28,7 @@ class ErrorModalAddFriend extends Component {
                         <Icon name="ios-close-outline" />
                         <Text style={{ fontFamily: "kanit" }}>ปิด</Text>
                     </Button>
-                    <Button iconLeft rounded success style={{ marginHorizontal: 10, justifyContent: "center" }}>
+                    <Button iconLeft rounded success style={{ marginHorizontal: 10, justifyContent: "center" }} onPress={this.props.goRegister}>
                         <Icon name="ios-add-outline" style={{ color: "#fff" }} />
                         <Text style={styles.textButton}>สมัครสมาชิก</Text>
                     </Button>

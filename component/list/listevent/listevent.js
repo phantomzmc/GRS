@@ -120,7 +120,7 @@ class ListEvent extends Component {
                             </View>
                         </View>
                     </View>}
-                    keyExtractor={(item, index) => index} />
+                    keyExtractor={(item, index) => index.toString()} />
             </View >
         );
     }

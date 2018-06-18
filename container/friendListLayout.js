@@ -27,9 +27,9 @@ class FriendList extends Component {
         isModalVisible: false,
         isModalVisibleError: false,
         searchText: "",
-        friendOutput : [],
-        addStatus : [],
-        datafriendlist : [] 
+        friendOutput: [],
+        addStatus: [],
+        datafriendlist: []
     }
 
     showModal = () => {
@@ -50,8 +50,9 @@ class FriendList extends Component {
             responseType: 'json'
         })
             .then((response) => {
-                this.setState({ isLoading: false, friendOutput: response.data, isModalVisible: !this.state.isModalVisible });
+                this.setState({ isLoading: false, friendOutput: response.data});
                 console.log(this.state.friendOutput[0])
+                this.checkRegisStatus()
             }).catch((error) => {
                 this.setState({ isModalVisibleError: !this.state.isModalVisibleError })
                 // console.error(error);
@@ -74,22 +75,37 @@ class FriendList extends Component {
             responseType: 'json'
         })
             .then((response) => {
-                this.setState({ isLoading: false, addStatus: response.data});
+                this.setState({ isLoading: false, addStatus: response.data });
                 console.log(this.state.addStatus[0])
             }).catch((error) => {
                 // this.setState({ isModalVisibleError: !this.state.isModalVisibleError })
                 console.error(error);
             });
-    
+
     }
-    _toggleModal = () => {
-        this.setState({ isModalVisible: !this.state.isModalVisible }) || this.setState({ isModalVisibleError: !this.state.isModalVisibleError })
+    checkRegisStatus = () => {
+        if (this.state.friendOutput[0] == undefined || this.state.friendOutput[0] == null) {
+            this.hideModalError()
+        }
+        else {
+            this.hideModal()
+        }
+    }
+    hideModal = () => {
+        this.setState({ isModalVisible: !this.state.isModalVisible })
+    }
+    hideModalError = () => {
+        this.setState({ isModalVisibleError: !this.state.isModalVisibleError })
     }
     gotoAddFriendDetail() {
         this.props.navigation.navigate('AddEventFriend')
     }
     gotoTeamList() {
         this.props.navigation.navigate('FriendInEvent')
+    }
+    gotoRegister = () => {
+        this.props.navigation.navigate('Register')
+        this.hideModalError()
     }
 
     render() {
@@ -115,14 +131,17 @@ class FriendList extends Component {
                 </Header>
 
                 <Modal isVisible={this.state.isModalVisible}>
-                    <ModalAddFriend 
-                        toggleModal={this._toggleModal}
+                    <ModalAddFriend
+                        toggleModal={this.hideModal}
                         outputfriend={this.state.friendOutput[0]}
                         friend={datafriend}
                         getAddFriend={this.addFriend.bind(this)} />
                 </Modal>
                 <Modal isVisible={this.state.isModalVisibleError}>
-                    <ErrorModalAddFriend toggleModal={this._toggleModal} />
+                    <ErrorModalAddFriend
+                        toggleModal={this.hideModalError}
+                        goRegister={this.gotoRegister.bind(this)}
+                    />
                 </Modal>
 
                 <FriendListView AddFriendDetail={() => this.gotoAddFriendDetail()}
@@ -134,7 +153,7 @@ class FriendList extends Component {
 }
 const mapStateToProps = state => {
     return {
-        userprofile : state.userprofile
+        userprofile: state.userprofile
     }
 }
 const styles = StyleSheet.create({

@@ -106,7 +106,7 @@ class ListDistance extends Component {
                             </ImageBackground>
                         </TouchableOpacity>
                     </View>}
-                    keyExtractor={(item, index) => index} />
+                    keyExtractor={(item, index) => index.toString()} />
             </View >
         );
     }

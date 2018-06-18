@@ -84,7 +84,7 @@ class ListShirt extends Component {
                             </View>
                         </TouchableHighlight>
                     </View>}
-                    keyExtractor={(item, index) => index} />
+                    keyExtractor={(item, index) => index.toString()} />
             </View >
         );
     }

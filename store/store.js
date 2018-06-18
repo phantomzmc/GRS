@@ -19,7 +19,6 @@ const credit = {
     expCredit: "00/0000",
     cvcCredit: "XXX"
   },
-  vat: 33.25
 };
 const user = {
   profile: {
@@ -62,6 +61,10 @@ const event = (state = eventState, action) => {
     }
     case "setTotal": {
       state.totalPrice = action.payload;
+      break;
+    }
+    case "setTotalRegister" : {
+      state.totalRegister = action.payload;
       break;
     }
   }
@@ -109,6 +112,10 @@ const creditcard = (state = credit, action) => {
   switch (action.type) {
     case "setCredit": {
       state.nameCredit = action.payload;
+      break;
+    }
+    case "setCreditPrice" : {
+      state.vat = action.payload;
       break;
     }
     default:
@@ -191,6 +198,7 @@ const friendlist = (state = friend, action) => {
   }
   return state;
 }
+
 
 const myLogger = store => next => action => {
   console.log("Log Action", action);

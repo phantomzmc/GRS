@@ -2,7 +2,8 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, StatusBar } from 'react-native';
 import { Container, Header, Tab, Tabs, TabHeading, Icon, Button, ScrollableTab } from 'native-base';
-import { StackNavigator } from 'react-navigation';
+import { connect} from 'react-redux'
+
 import CreditPayment from '../../container/creditPayment'
 import TranferPayment from '../../container/tranferPayment'
 import TotalRegister from '../../component/items/totalRegister'
@@ -19,7 +20,21 @@ class ButtonChangePayment extends Component {
             title: "ชำระเงิน",
             pageNumber: 0
         }
-
+    }
+    componentWillMount(){
+        console.log(this.props.event.totalPrice)
+        this.setState({
+            total : parseFloat(this.props.event.totalPrice)
+        })
+        this.sumCredit()
+    }
+    sumCredit(){
+        sum = (this.props.event.totalPrice * 105)/100
+        console.log(sum)
+        credit = (sum - this.props.event.totalPrice)
+        console.log(credit)
+        this.props.setTotalRegister(sum)
+        this.props.setCreditPrice(credit)
     }
     gotoShowDetail = () => {
         this.props.navigation.navigate('TotalRegister')
@@ -58,6 +73,27 @@ class ButtonChangePayment extends Component {
         );
     }
 }
+const mapStateToProps = state => {
+    return{
+        event : state.event
+    }
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        setTotalRegister : (total) => {
+            dispatch({
+                type : "setTotalRegister",
+                payload : total
+            })
+        },
+        setCreditPrice : (credit) => {
+            dispatch({
+                type : "setCreditPrice",
+                payload : credit
+            })
+        }
+    }
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -82,4 +118,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default ButtonChangePayment;
+export default connect(mapStateToProps,mapDispatchToProps)(ButtonChangePayment);
