@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import { Form, Item, Input, Label } from 'native-base'
 import { connect } from 'react-redux'
 
 class AddressForm extends Component {
@@ -9,52 +10,131 @@ class AddressForm extends Component {
             fullname: "",
             email: "",
             adress: "",
-            tel: ""
+            subdistric: "",
+            distric: "",
+            province: "",
+            postcode: "",
+            tel: "",
+            note: ""
         }
     }
     componentDidMount = () => {
         this.setState({
-            fullname: this.props.profile.profile.profile,
-            email: this.props.profile.profile.email,
-            adress: this.props.profile.profile.number,
-            te: this.props.profile.profile.tel
+            fullname: this.props.userprofile.userprofile.FirstName,
+            lastname: this.props.userprofile.userprofile.LastName,
+            email: this.props.userprofile.userprofile.Email,
+            adress: this.props.userprofile.userprofile.Address,
+            subdistric: this.props.userprofile.userprofile.SubDistric,
+            distric: this.props.userprofile.userprofile.Distric,
+            province: this.props.userprofile.userprofile.Province,
+            postcode: this.props.userprofile.userprofile.PostCode,
+            tel: this.props.userprofile.userprofile.Phone,
         })
     }
-    putDataUser = (fullname, email, adress, tel) => {
-        this.props.getAddress(fullname, email, adress, tel)
+    putDataUser = (fullname, lastname, email, adress, subdistric, distric, province, postcode, tel, note) => {
+        this.props.getAddress(fullname, lastname, email, adress, subdistric, distric, province, postcode, tel, note)
         console.log(this.state.fullname)
         console.log(this.state.email)
 
     }
     render() {
-        let { fullname, email, adress, tel } = this.state
+        let { fullname, lastname, email, adress, subdistric, distric, province, postcode, tel, note } = this.state
         return (
             <View style={styles.container}>
-                <TextInput
-                    placeholder={this.props.profile.profile.profile}
-                    onChangeText={(fullname) => this.setState(this.props.profile.profile.profile)}
-                    style={styles.input}
-                />
-                <TextInput
-                    placeholder={this.props.profile.profile.email}
-                    style={styles.input}
-                    onChangeText={(email) => this.setState(this.props.profile.profile.email)}
-                />
-                <TextInput
-                    placeholder={this.props.profile.profile.number}
-                    style={styles.input}
-                    onChangeText={(adress) => this.setState(this.props.profile.profile.number)}
-
-                />
-                <TextInput
-                    placeholder={this.props.profile.profile.tel}
-                    style={styles.input}
-                    onChangeText={(tel) => this.setState(this.props.profile.profile.tel)}
-                />
+                <Text style={styles.headForm}>ชื่อ :</Text>
+                <Form>
+                    <Item floatingLabel last>
+                        <Label style={styles.textLabel}>{fullname}</Label>
+                        <Input
+                            onChangeText={(fullname) => this.setState(fullname)}
+                        />
+                    </Item>
+                </Form>
+                <Text style={styles.headForm}>นามสกุล :</Text>
+                <Form>
+                    <Item floatingLabel last>
+                        <Label style={styles.textLabel}>{lastname}</Label>
+                        <Input
+                            onChangeText={(lastname) => this.setState(lastname)}
+                        />
+                    </Item>
+                </Form>
+                <Text style={styles.headForm}>Email</Text>
+                <Form>
+                    <Item floatingLabel last>
+                        <Label style={styles.textLabel}>{email}</Label>
+                        <Input
+                            onChangeText={(email) => this.setState(email)}
+                        />
+                    </Item>
+                </Form>
+                <Text style={styles.headForm}>ที่อยู่</Text>
+                <Form>
+                    <Item floatingLabel last>
+                        <Label style={styles.textLabel}>{adress}</Label>
+                        <Input
+                            onChangeText={(adress) => this.setState(adress)}
+                        />
+                    </Item>
+                </Form>
+                <Text style={styles.headForm}>ตำบล : </Text>
+                <Form>
+                    <Item floatingLabel last>
+                        <Label style={styles.textLabel}>{subdistric}</Label>
+                        <Input
+                            onChangeText={(subdistric) => this.setState(subdistric)}
+                        />
+                    </Item>
+                </Form>
+                <Text style={styles.headForm}>อำเภอ : </Text>
+                <Form>
+                    <Item floatingLabel last>
+                        <Label style={styles.textLabel}>{distric}</Label>
+                        <Input
+                            onChangeText={(distric) => this.setState(distric)}
+                        />
+                    </Item>
+                </Form>
+                <Text style={styles.headForm}>จังหวัด : </Text>
+                <Form>
+                    <Item floatingLabel last>
+                        <Label style={styles.textLabel}>{province}</Label>
+                        <Input
+                            onChangeText={(province) => this.setState(province)}
+                        />
+                    </Item>
+                </Form>
+                <Text style={styles.headForm}>รหัสไปรษณีย์</Text>
+                <Form>
+                    <Item floatingLabel last>
+                        <Label style={styles.textLabel}>{postcode}</Label>
+                        <Input
+                            onChangeText={(postcode) => this.setState(postcode)}
+                        />
+                    </Item>
+                </Form>
+                <Text style={styles.headForm}>โทรศัพท์</Text>
+                <Form>
+                    <Item floatingLabel last>
+                        <Label style={styles.textLabel}>{tel}</Label>
+                        <Input
+                            onChangeText={(tel) => this.setState(tel)}
+                        />
+                    </Item>
+                </Form>
+                <Text style={styles.headForm}>*** หมายเหตุ</Text>
+                <Form>
+                    <Item floatingLabel last>
+                        <Label style={styles.textLabel}>{note}</Label>
+                        <Input
+                            onChangeText={(note) => this.setState(note)}
+                        />
+                    </Item>
+                </Form>
                 <View style={styles.submitContainer}>
                     <TouchableOpacity style={styles.buttonContainer}
-                        onPress={() => this.putDataUser(fullname, email, adress, tel)}>
-                        <Text style={styles.textButton}>ชำระค่าสมัคร</Text>
+                        onPress={() => this.putDataUser(fullname, lastname, email, adress, subdistric, distric, province, postcode, tel, note)}>
+                        <Text style={styles.textButton}>ถัดไป</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -63,7 +143,7 @@ class AddressForm extends Component {
 }
 const styles = StyleSheet.create({
     container: {
-        padding: 30,
+        padding: 20,
     },
     input: {
         height: 40,
@@ -77,7 +157,6 @@ const styles = StyleSheet.create({
     submitContainer: {
         marginTop: 30,
         alignItems: 'center',
-        marginBottom: 30
     },
     buttonContainer: {
         height: 40,
@@ -92,12 +171,22 @@ const styles = StyleSheet.create({
         fontSize: 15,
         color: '#fff',
         fontFamily: 'Kanit',
+    },
+    headForm: {
+        fontFamily: 'kanit',
+        fontSize: 16,
+        paddingTop: 20
+    },
+    textLabel: {
+        fontSize: 14,
+        fontFamily: 'kanit'
     }
 })
 
 const mapStateToProps = (state) => {
     return {
-        profile: state.profile
+        profile: state.profile,
+        userprofile: state.userprofile
     }
 }
 

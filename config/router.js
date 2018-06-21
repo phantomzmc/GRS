@@ -1,8 +1,6 @@
 import { StackNavigator } from 'react-navigation';
 import SingleLogin from '../container/singleLogin'
 import Login from '../container/login'
-import ListEvent from '../component/list/listevent/listevent'
-import RegisterDistance from '../container/registerDistance'
 import ShirtPhotoPlus from '../container/shirtphotoplus'
 import CreditPayment from '../container/creditPayment'
 import AddressLayout from '../container/addressLayout'
@@ -14,77 +12,191 @@ import AddEventFriend from '../container/AddEventDetailFrind'
 import TransferPayment from '../container/tranferPayment'
 import TotalRegister from '../component/items/totalRegister'
 import EventList from '../container/ListEvent'
-import ListDistance from '../component/list/event/listdistance'
-import ListShith from '../component/list/listShirt/listShirt';
 
-import DetailRegister from '../component/items/detailRegister'
+import DiscountCoupon from '../component/form/couponForm'
+import GetPleace from '../component/items/getPlece'
 import UserHelpRegister from '../container/userHelpRegister'
 import UserAddressRegister from '../container/userAddressRegister'
 
-// import ListShirt from '../component/list/listShirt/listShirt'
-import Test from '../list'
+import ControlDistance from '../container/controlDistance'
+import ButtonChangePayment from '../component/items/bottonChangePayment'
+import Verify from '../container/verify'
+import ResetVerify from '../container/resetVerify'
+import ResetPassword from '../container/resetPassword'
+import GalleryScreen from '../mockdata'
 
-export default StackNavigator ({
-    EventList : {
-        screen : EventList
+import FriendDistance from '../container/friendDistance'
+
+
+export default StackNavigator({
+    // GalleryScreen : {
+    //     screen : GalleryScreen
+    // },
+    // ButtonChangePayment: {
+    //     screen: ButtonChangePayment,
+    //     navigationOptions: {
+    //         header : () => null
+    //     }
+    // },
+    // FriendListLayout : {
+    //     screen : FriendListLayout
+    // },
+    // Login: {
+    //     screen: Login,
+    //     navigationOptions: {
+    //         header: () => null
+    //     }
+    // },
+    EventList: {
+        screen: EventList,
+        navigationOptions: {
+            title: 'รายการวิ่ง',
+            headerStyle: {
+                backgroundColor: '#FC561F'
+            },
+            headerTitleStyle: {
+                color: '#fff',
+                fontFamily: "Kanit",
+            }
+        }
     },
-    Register : {
-        screen : Register
+    Register: {
+        screen: Register,
+        navigationOptions: {
+            header : () => null
+
+        }
     },
-    SingleLogin : {
-        screen : SingleLogin,
-        navigationOptions : {
+    SingleLogin: {
+        screen: SingleLogin,
+        navigationOptions: {
+            header: () => null
+        }
+    },
+    Login: {
+        screen: Login,
+        navigationOptions: {
+            header: () => null
+        }
+    },
+    UserAddressRegister: {
+        screen: UserAddressRegister,
+        navigationOptions: {
+            header : () => null
+
+        }
+    },
+    UserHelpRegister: {
+        screen: UserHelpRegister,
+        navigationOptions: {
             header : () => null
         }
     },
-    Login : {
-        screen : Login,
-        navigationOptions : {
+    Verify: {
+        screen: Verify,
+        navigationOptions: {
+            header : () => null
+
+        }
+    },
+    ResetVerify: {
+        screen: ResetVerify,
+        navigationOptions: {
             header : () => null
         }
     },
-    Register : {
-        screen : Register,
+    ResetPassword: {
+        screen: ResetPassword,
+        navigationOptions: {
+            title: "ขอรหัสผ่านใหม่",
+            headerStyle: {
+                backgroundColor: "#FC561F"
+            },
+            headerTitleStyle: {
+                color: "#fff"
+            }
+        }
     },
-    UserAddressRegister : {
-        screen : UserAddressRegister
+    ShirtPhotoPlus: {
+        screen: ShirtPhotoPlus,
+        navigationOptions: {
+            header : () => null
+        }
     },
-    UserHelpRegister : {
-        screen : UserHelpRegister
+    DiscountCoupon: {
+        screen: DiscountCoupon,
+        navigationOptions: {
+            header : () => null
+        }
     },
-    ListEvent : {
-        screen : ListEvent,
+    ControlDistance: {
+        screen: ControlDistance,
+        navigationOptions: {
+            header: () => null
+        }
     },
-    ShirtPhotoPlus : {
-        screen : ShirtPhotoPlus
+    ButtonChangePayment: {
+        screen: ButtonChangePayment,
+        navigationOptions: {
+            header : () => null
+        }
     },
-    RegisterDistance : {
-        screen : RegisterDistance,
+    TabRouter: {
+        screen: TabRouter,
+        navigationOptions: {
+            header: () => null
+        }
     },
-    TabRouter : {
-        screen : TabRouter
-    },
-    TeamList : {
-        screen : TeamList
+    TeamList: {
+        screen: TeamList,
+        navigationOptions: {
+            header : () => null
+        }
     },
 
-    CreditPayment : {
-        screen : CreditPayment
+    CreditPayment: {
+        screen: CreditPayment
     },
-    TransferPayment : {
-        screen : TransferPayment
+    TransferPayment: {
+        screen: TransferPayment
     },
-    AddressLayout : {
-        screen : AddressLayout
+    AddressLayout: {
+        screen: AddressLayout,
+        navigationOptions: {
+            header : () => null
+        }
     },
-    TotalPayment : {
-        screen : TotalPayment
+    TotalPayment: {
+        screen: TotalPayment,
+        navigationOptions: {
+            header : () => null
+        }
     },
-    AddEventFriend : {
-        screen : AddEventFriend
+    AddEventFriend: {
+        screen: AddEventFriend,
+        navigationOptions: {
+            title: 'เลือกระยะทางเเละเสื้อ',
+            headerStyle: {
+                backgroundColor: '#FC561F'
+            },
+            headerTitleStyle: {
+                color: '#fff',
+                fontFamily: "Kanit",
+                fontWeight: '500',
+            }
+        }
     },
-    TotalRegister : {
-        screen : TotalRegister
+    FriendDistance: {
+        screen: FriendDistance,
+        navigationOptions: {
+            header: () => null
+        }
+    },
+    TotalRegister: {
+        screen: TotalRegister
+    },
+    GetPleace: {
+        screen: GetPleace
     }
 
 

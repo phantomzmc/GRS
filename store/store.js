@@ -9,24 +9,27 @@ const eventState = {
   distanceEvent: {
     distanceName: "",
     distance: "1 km",
-    price: 400
+    price: 0.
   }
 };
 const credit = {
-    nameCredit: {
+  nameCredit: {
     nameCredit: "",
     numberCredit: "1234 5678 1234 5678",
     expCredit: "00/0000",
     cvcCredit: "XXX"
   },
-  vat: 33.25
 };
 const user = {
-  profile:{
+  profile: {
     userid: "",
+    password: "",
+  },
+  verify: {
+    statusVerify: 0
   }
-
 };
+
 const profile = (state = user, action) => {
   switch (action.type) {
     case "setProfile": {
@@ -37,6 +40,9 @@ const profile = (state = user, action) => {
     }
     case "setHelp": {
       state.help = action.payload;
+    }
+    case "setVerify": {
+      state.verify = action.payload
     }
   }
   return state;
@@ -53,6 +59,14 @@ const event = (state = eventState, action) => {
       state.distanceEvent = action.payload;
       break;
     }
+    case "setTotal": {
+      state.totalPrice = action.payload;
+      break;
+    }
+    case "setTotalRegister" : {
+      state.totalRegister = action.payload;
+      break;
+    }
   }
   return state;
 };
@@ -65,6 +79,10 @@ const shirtphoto = (state = {}, action) => {
     }
     case "setSizeShirt": {
       state.size = action.payload;
+      break;
+    }
+    case "setImageShirt": {
+      state.shirt = action.payload;
       break;
     }
     default:
@@ -96,6 +114,10 @@ const creditcard = (state = credit, action) => {
       state.nameCredit = action.payload;
       break;
     }
+    case "setCreditPrice" : {
+      state.vat = action.payload;
+      break;
+    }
     default:
       break;
   }
@@ -119,15 +141,64 @@ const address = (state = {}, action) => {
   }
   return state;
 };
-const total = (state = {}, action) => {
+
+
+const username = (state = {}, action) => {
   switch (action.type) {
-    case "setTotal": {
-      state.totalPrice = action.payload;
+    case "setUsername": {
+      state.username = action.payload
       break;
     }
   }
   return state;
-};
+}
+const userprofile = (state = {}, action) => {
+  switch (action.type) {
+    case "setUserProfile": {
+      state.userprofile = action.payload
+      break;
+    }
+  }
+  return state;
+}
+const friend = {
+  friendRegis: {},
+  dataDis: {},
+  friendEvent: {},
+  shirtSize : {}
+  
+}
+const friendlist = (state = friend, action) => {
+  switch (action.type) {
+    case "addFriend":
+      return {
+        ...state,
+        profile: [...state.profile, action.payload]
+      }
+      break;
+    case "addDistanceFriend":
+      state.dataDis = action.payload
+      break;
+    case "addSize":
+      state.shirtSize = action.payload
+      break;
+    case "addFriendInEvent": {
+      state.friendEvent = action.payload
+      break;
+    }
+    case "setFriendRegister": {
+      state.friendRegis = action.payload
+      break;
+    }
+    case "setTotalPrice": {
+      state.friendTotalPrice = action.payload
+      break;
+
+    }
+  }
+  return state;
+}
+
 
 const myLogger = store => next => action => {
   console.log("Log Action", action);
@@ -143,7 +214,9 @@ const store = createStore(
     photoplus,
     choiceSend,
     address,
-    total
+    friendlist,
+    username,
+    userprofile
   }),
   {},
   applyMiddleware(myLogger)

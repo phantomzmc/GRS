@@ -1,6 +1,5 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import {
     View,
     Text,
@@ -10,8 +9,9 @@ import {
     TouchableOpacity,
     AlertIOS
 } from 'react-native';
-import {connect} from 'react-redux'
-import {StackNavigator} from 'react-navigation';
+import { Form, Item, Input, Label , Icon} from 'native-base'
+import { connect } from 'react-redux'
+import { StackNavigator } from 'react-navigation';
 
 class CreditView extends Component {
 
@@ -25,15 +25,11 @@ class CreditView extends Component {
         }
     }
     putDataCredit = (nameCredit, numberCredit, expCredit, cvcCredit) => {
-        this
-            .props
-            .goAddress()
-        this
-            .props
-            .setCredit({nameCredit: nameCredit, numberCredit, expCredit, cvcCredit})
+        this.props.goAddress()
+        this.props.setCredit({ nameCredit: nameCredit, numberCredit, expCredit, cvcCredit })
     }
     render() {
-        let {nameCredit, numberCredit, expCredit, cvcCredit} = this.state
+        let { nameCredit, numberCredit, expCredit, cvcCredit } = this.state
         return (
             <View style={styles.container}>
                 <View style={styles.creditCard}>
@@ -53,13 +49,13 @@ class CreditView extends Component {
                         <View>
                             <Image
                                 source={{
-                                uri: "http://www.pngall.com/wp-content/uploads/2016/07/Mastercard-PNG-Clipart.png"
-                            }}
+                                    uri: "http://www.pngall.com/wp-content/uploads/2016/07/Mastercard-PNG-Clipart.png"
+                                }}
                                 style={{
-                                width: 100,
-                                height: 50,
-                                paddingHorizontal: 30
-                            }}/>
+                                    width: 100,
+                                    height: 50,
+                                    paddingHorizontal: 30
+                                }} />
                         </View>
                     </View>
                 </View>
@@ -67,39 +63,55 @@ class CreditView extends Component {
                     <Text style={styles.textForm}>กรอกข้อมูล</Text>
                 </View>
                 <View style={styles.container2}>
-                    <TextInput
-                        placeholder="ชื่อบนบัตร"
-                        onChangeText={(nameCredit) => this.setState({nameCredit})}
-                        style={styles.input}/>
-                    <TextInput
-                        placeholder="หมายเลขบัตร"
-                        onChangeText={(numberCredit) => this.setState({numberCredit})}
-                        style={styles.input}/>
-                    <View style={styles.container3}>
-                        <TextInput
-                            placeholder="วันหมดอายุ"
-                            onChangeText={(expCredit) => this.setState({expCredit})}
-                            style={styles.input}/>
-                        <TextInput
-                            placeholder="รหัสความปลอดภัย"
-                            onChangeText={(cvcCredit) => this.setState({cvcCredit})}
-                            style={styles.input}/>
-                    </View>
+                    <Text style={styles.headForm}>ชื่อบนบัตร</Text>
+                    <Form>
+                        <Item floatingLabel last>
+                            <Label style={styles.textLabel}>Ex.xxxxxxxxxxxx</Label>
+                            <Input
+                                onChangeText={(nameCredit) => this.setState({ nameCredit })}
+                            />
+                        </Item>
+                    </Form>
+                    <Text style={styles.headForm}>หมายเลขบัตร</Text>
+                    <Form>
+                        <Item floatingLabel last>
+                            <Label style={styles.textLabel}>Ex.1234 4567 8901 8764</Label>
+                            <Input
+                                onChangeText={(numberCredit) => this.setState({ numberCredit })}
+                            />
+                        </Item>
+                    </Form>
+                    <Text style={styles.headForm}>วันหมดอายุ</Text>
+                    <Form>
+                        <Item floatingLabel last>
+                            <Label style={styles.textLabel}>Ex.02/61</Label>
+                            <Input
+                                onChangeText={(expCredit) => this.setState({ expCredit })}
+                            />
+                        </Item>
+                    </Form>
+                    <Text style={styles.headForm}>รหัสความปลอดภัย</Text>
+                    <Form>
+                        <Item floatingLabel last>
+                            <Label style={styles.textLabel}>Ex.123</Label>
+                            <Input
+                                onChangeText={(cvcCredit) => this.setState({ cvcCredit })}
+                            />
+                        </Item>
+                    </Form>
                 </View>
-                <View style={styles.showDetail}>
+                {/* <View style={styles.showDetail}>
                     <TouchableOpacity
                         style={styles.buttonContainer2}
-                        onPress={()=> this.props.ShowDetail()}>
+                        onPress={() => this.props.ShowDetail()}>
                         <Text style={styles.textButton2}>เเสดงรายละเอียดค่าสมัคร</Text>
                     </TouchableOpacity>
-                </View>
+                </View> */}
                 <View style={styles.submitContainer}>
-
                     <TouchableOpacity
                         style={styles.buttonContainer}
                         onPress={() => this.putDataCredit(nameCredit, numberCredit, expCredit, cvcCredit)}>
-                        <Text style={styles.textButton}>ชำระค่าสมัคร : {this.props.TotalPrice}
-                            บาท</Text>
+                        <Text style={styles.textButton}>ชำระค่าสมัคร : {this.props.TotalRegister} บาท</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -109,7 +121,7 @@ class CreditView extends Component {
 const mapDispatchtoProps = (dispatch) => {
     return {
         setCredit: (nameCredit) => {
-            dispatch({type: 'setCredit', payload: nameCredit})
+            dispatch({ type: 'setCredit', payload: nameCredit })
         }
     }
 }
@@ -208,14 +220,14 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontFamily: "Kanit"
     },
-    showDetail :{
-        alignItems : 'center'
+    showDetail: {
+        alignItems: 'center'
     },
     buttonContainer2: {
         height: 40,
         width: '80%',
-        borderColor : '#FC561F',
-        borderWidth : 1,
+        borderColor: '#FC561F',
+        borderWidth: 1,
         backgroundColor: '#fff',
         justifyContent: 'center',
         alignItems: 'center',
@@ -227,6 +239,15 @@ const styles = StyleSheet.create({
         color: '#FC561F',
         fontFamily: "Kanit"
     },
+    headForm: {
+        fontFamily: 'kanit',
+        fontSize: 16,
+        paddingTop: 20
+    },
+    textLabel: {
+        fontSize: 14,
+        fontFamily: 'kanit'
+    }
 })
 
 export default connect(null, mapDispatchtoProps)(CreditView);

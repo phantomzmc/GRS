@@ -7,17 +7,7 @@ import ListShirth from '../component/list/listShirt/listShirt'
 
 
 class AddEventFriend extends Component {
-    static navigationOptions = {
-        title: 'เลือกระยะทางเเละเสื้อ',
-        headerStyle: {
-            backgroundColor: '#FC561F'
-        },
-        headerTitleStyle: {
-            color: '#fff',
-            fontFamily: "Kanit",
-            fontWeight: '500',
-        }
-    };
+
     gotoCrediPayment = () => {
         this.props.navigation.navigate('CrediPayment')
     }
@@ -27,7 +17,7 @@ class AddEventFriend extends Component {
         return (
             <ScrollView>
                 <View style={styles.container}>
-                    <Text style={styles.textDistance}>เลือกระยะทาง</Text>
+                    {/* <Text style={styles.textDistance}>เลือกระยะทาง</Text> */}
                     <ListFriendDistance />
                     <Text style={styles.textSizeshirth}>เลือกไซค์เสื้อ</Text>
                     <ListShirth />

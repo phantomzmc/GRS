@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
     View,
     Text,
@@ -10,7 +10,17 @@ import {
     Alert,
     TextInput
 } from 'react-native';
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
+import axios from 'axios'
+
+var uri = "http://api.shutterrunning2014.com/api/v2/grsv2m/_proc/Main.uspCheckUsername"
+var api_key = '36fda24fe5588fa4285ac6c6c2fdfbdb6b6bc9834699774c9bf777f706d05a88'
+var sessionToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQsInVzZXJfaWQiOjQsImVtYWlsIjoiYWR' +
+    'taW5AZ3V1cnVuLmNvbSIsImZvcmV2ZXIiOmZhbHNlLCJpc3MiOiJodHRwOlwvXC9hcGkuc2h1dHRlcnJ' +
+    '1bm5pbmcyMDE0LmNvbVwvYXBpXC92MlwvdXNlclwvc2Vzc2lvbiIsImlhdCI6MTUyMDU0NDU5MSwiZXh' +
+    'wIjoxNTIwNTQ4MTkxLCJuYmYiOjE1MjA1NDQ1OTEsImp0aSI6IjA1Y2UzN2NjMmU2NjIyZGJlNmMzNTg' +
+    '5MzE1NTI0YmZjIn0._7jHjGhTPfa3rVioC2MrjJfLwrMMxYQYiWhe8DK5V7k'
+var auth = 'Basic YWRtaW5AZ3V1cnVuLmNvbTpXWGJyRDI4THRJUjNNWW0='
 
 class SingleLogin extends Component {
     static propTypes = {
@@ -19,47 +29,84 @@ class SingleLogin extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            username: ""
+            username: "",
+            status: [],
         }
     }
+    checkLoginSever () {
+        let { status,username } = this.state
+        let data = ({
+            params: {
+                value: username,
+            }
+        })
+        axios.post(uri,data, {
+            headers: {
+                "X-DreamFactory-API-Key": api_key,
+                "X-DreamFactory-Session-Token": sessionToken,
+                "Authorization": auth
+            },
+            responseType: 'json'
+        })
+            .then((response) => {
+                this.setState({ isLoading: false, status: response.data });
+                console.log(this.state.status)
+                console.log(this.state.status[0].UsernameStatus)
+                this.checkLogin()
+            }).catch((error) => {
+                console.error(error);
+            });
+    }
     checkLogin() {
-        if (this.state.username == this.props.profile.profile.userid) {
+        if (this.state.status[0].UsernameStatus == "2") {
+            this.props.setUsername(this.state.username)
             this.gotoListEvent()
-        } else {
-            Alert.alert('เกิดข้อผิดพลาด', 'การเข้าสู่ระบบผิดพลาด', [
+        }
+        else if (this.state.username == "Admin") {
+            this.gotoListEvent()
+        }
+        // else if(this.state.status[0].UsernameStatus == "0"){
+        //     Alert.alert('ผู้ใช้งานยังไม่ได้ยืนยันตัวตน', 'กรุณาทำการกรอกรหัสเพื่อทำการยืนยันตัวตน', [
+        //         {
+        //             text: 'Cancel'
+        //         }, {
+        //             text: 'กรอกรหัสยืนยันตัวตน',
+        //             onPress: () => this.gotoVerify()
+        //         }
+        //     ], { cancelable: false })
+        // }
+        else {
+            Alert.alert('ยังไม่มีข้อมูลผู้ใช้งาน', 'กรุณาลงทะเบียนเพื่อเข้าใช้งาน', [
                 {
                     text: 'Cancel'
                 }, {
                     text: 'สมัครสมาชิก',
                     onPress: () => this.gotoRegister()
                 }
-            ], {cancelable: false})
+            ], { cancelable: false })
         }
+
     }
     gotoListEvent = () => {
-        console.log(this.state.username)
-        this
-            .props
-            .navigation
-            .navigate('EventList')
+        this.props.navigation.navigate('ControlDistance')
     }
     gotoRegister = () => {
-        this
-            .props
-            .navigation
-            .navigate('Register')
+        this.props.navigation.navigate('Register')
+    }
+    gotoVerify = () => {
+        this.props.navigation.navigate('Vefify')
     }
     render() {
         return (
             <ImageBackground
                 source={{
-                uri: "http://register.shutterrunning2014.com/assets/img/theme/dongtanbg.jpg"
-            }}
+                    uri: "http://register.shutterrunning2014.com/assets/img/theme/dongtanbg.jpg"
+                }}
                 style={{
-                width: '100%',
-                height: '100%',
-                opacity: 1
-            }}>
+                    width: '100%',
+                    height: '100%',
+                    opacity: 1
+                }}>
                 <View style={styles.container}>
                     <Text style={styles.textTitle} onPress={this.gotoListEvent}>
                         ShutterRuning Service
@@ -70,21 +117,21 @@ class SingleLogin extends Component {
                         placeholder="เลขบัตรประชาชน"
                         returnKeyType="next"
                         onSubmitEditing={() => this.passwordInput}
-                        onChangeText={(username) => this.setState({username})}
-                        style={styles.input}/>
+                        onChangeText={(username) => this.setState({ username })}
+                        style={styles.input} />
                     <View style={styles.loginContainer}>
                         <TouchableOpacity
                             style={styles.buttonContainer}
                             onPress={this
-                            .checkLogin
-                            .bind(this)}>
+                                .checkLoginSever
+                                .bind(this)}>
                             <Text style={styles.textButton}>เข้าร่วมกิจกรรม</Text>
                         </TouchableOpacity>
                     </View>
                     <TouchableOpacity
                         onPress={this
-                        .gotoRegister
-                        .bind(this)}>
+                            .gotoRegister
+                            .bind(this)}>
                         <Text style={styles.regisButton}>
                             สมัครสมาชิก
                         </Text>
@@ -100,7 +147,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-end',
         alignItems: 'center',
-        marginBottom : 20
+        marginBottom: 20
     },
     textTitle: {
         fontSize: 34,
@@ -130,7 +177,7 @@ const styles = StyleSheet.create({
         borderRadius: 20
     },
     loginContainer: {
-        margin : 20,
+        margin: 20,
         alignItems: 'center'
     },
     buttonContainer: {
@@ -151,7 +198,18 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = (state) => {
-    return {profile: state.profile}
+    return { profile: state.profile }
 }
 
-export default connect(mapStateToProps)(SingleLogin)
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setUsername: (username) => {
+            dispatch({
+                type: "setUsername",
+                payload: username
+            })
+        }
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(SingleLogin)

@@ -5,36 +5,33 @@ import {
   Text,
   ScrollView,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
+  StatusBar
 } from "react-native";
+import { Container } from 'native-base'
 import { StackNavigator } from "react-navigation";
 import { connect } from "react-redux";
 
 import HeaderUser from "../component/items/header_profile";
 import FormRegister from "../component/form/registerForm";
+import HeaderTeam from '../component/items/headerTeam'
 
 class UserRegister extends Component {
   static propTypes = {
     navigation: PropTypes.object
   };
-  static navigationOptions = {
-    title: "สมัครสมาชิก",
-    headerStyle: {
-      backgroundColor: "#FC561F"
-    },
-    headerTitleStyle: {
-      color: "#fff"
-    }
-  };
+
   constructor(props) {
     super(props);
     this.state = {
+      title: "สมัครสมาชิก",
       profile: {}
     };
   }
 
   gotoListEvent = (
     fullname,
+    lastname,
     nickname,
     password,
     confirmpassword,
@@ -42,10 +39,15 @@ class UserRegister extends Component {
     bib,
     userid,
     tel,
-    email
+    email,
+    journeyDate,
+    bloodtype,
+    nation,
+    gen
   ) => {
     this.props.setProfile({
-      profile: fullname,
+      fullname,
+      lastname,
       nickname,
       password,
       confirmpassword,
@@ -53,26 +55,42 @@ class UserRegister extends Component {
       bib,
       userid,
       tel,
-      email
+      email,
+      journeyDate,
+      bloodtype,
+      nation,
+      gen
     });
     this.props.navigation.navigate("UserAddressRegister");
   };
+  gotoBack = () => {
+    this.props.navigation.navigate('SingleLogin')
+  }
 
   render() {
     return (
-      <ScrollView>
-        <View style={styles.container}>
-          <HeaderUser Name={this.props.fullname} UserID={this.props.userid} />
-          <FormRegister goEvent={this.gotoListEvent.bind(this)} />
-        </View>
-      </ScrollView>
+      <Container>
+        <HeaderTeam
+          title={this.state.title}
+          goback={this.gotoBack.bind(this)} />
+        <StatusBar
+          barStyle="light-content"
+          hidden={false}
+          translucent={true}
+        />
+        <ScrollView>
+          <View style={styles.container}>
+            <HeaderUser Name={this.props.fullname} UserID={this.props.userid} />
+            <FormRegister goEvent={this.gotoListEvent.bind(this)} />
+          </View>
+        </ScrollView>
+      </Container>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 60
   }
 });
 

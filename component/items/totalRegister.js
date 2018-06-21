@@ -3,8 +3,33 @@ import { View, Text, StyleSheet, Image, } from 'react-native';
 import { connect } from 'react-redux'
 
 class TotalRegister extends Component {
+    state = {
+        total: "",
+        totalRegister : "",
+        promotionStatus: false,
+        creditPrice : ""
+    }
     componentDidMount() {
-        console.log(this.props.EventData)
+        this.setState({
+            total: this.props.event.totalPrice,
+            totalRegister : this.props.event.totalRegister,
+            priceCDO: this.props.choiceSend.choiceSend.priceCDO,
+            creditPrice : this.props.creditcard.vat
+        })
+        this.checkPromoStatus()
+    }
+    checkPromoStatus = () => {
+        console.log("checkPromoStatus")
+        if (this.props.event.event.PromoCodeRequired == "0") {
+            this.setState({
+                promotionStatus: false
+            })
+        }
+        else if (this.props.event.event.PromoCodeRequired == "1" || this.props.event.event.PromoCodeStatus == "1") {
+            this.setState({
+                promotionStatus: true
+            })
+        }
     }
     render() {
         return (
@@ -21,7 +46,7 @@ class TotalRegister extends Component {
                         <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit' }}>({this.props.event.distanceEvent.distance} - {this.props.shirtphoto.size}) x 1 (Photo Plus)</Text>
                     </View>
                     <View>
-                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.props.total.totalPrice}.00 ฿</Text>
+                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.state.total}.0 ฿</Text>
                     </View>
                 </View>
                 <View style={styles.detailRow}>
@@ -37,7 +62,7 @@ class TotalRegister extends Component {
                         <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit' }}>ใต้สะพานพระราม 8 (ฝั่งถนนอรุณอัมรินทร์ )</Text>
                     </View>
                     <View>
-                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>65.00 ฿</Text>
+                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.state.priceCDO}.0 ฿</Text>
                     </View>
                 </View>
                 <View style={styles.detailRow}>
@@ -52,24 +77,27 @@ class TotalRegister extends Component {
                         {/* <Text style={{ fontSize: 7, color: '#8B8B8B' }}>(5 Km. - S) x 1 (Photo Plus)</Text> */}
                     </View>
                     <View>
-                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>33.25 ฿</Text>
+                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.state.creditPrice}.0 ฿</Text>
                     </View>
                 </View>
-                <View style={styles.detailRow}>
-                    <View>
-                        <View style={{ backgroundColor: '#4CD964', width: 50, height: 50, borderRadius: 25, }}>
-                            <Image source={require('../icon/price.png')}
-                                style={{ width: 30, height: 30, justifyContent: 'center', alignSelf: 'center', marginTop: 10 }} />
+
+                {this.state.promotionStatus &&
+                    <View style={styles.detailRow}>
+                        <View>
+                            <View style={{ backgroundColor: '#4CD964', width: 50, height: 50, borderRadius: 25, }}>
+                                <Image source={require('../icon/price.png')}
+                                    style={{ width: 30, height: 30, justifyContent: 'center', alignSelf: 'center', marginTop: 10 }} />
+                            </View>
+                        </View>
+                        <View>
+                            <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>ส่วนลดค่าโปรโมชั่น 100.00 บาท</Text>
+                            {/* <Text style={{ fontSize: 7, color: '#8B8B8B' }}>(5 Km. - S) x 1 (Photo Plus)</Text> */}
+                        </View>
+                        <View>
+                            <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>-100.00 ฿</Text>
                         </View>
                     </View>
-                    <View>
-                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>ส่วนลดค่าโปรโมชั่น 100.00 บาท</Text>
-                        {/* <Text style={{ fontSize: 7, color: '#8B8B8B' }}>(5 Km. - S) x 1 (Photo Plus)</Text> */}
-                    </View>
-                    <View>
-                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>-100.00 ฿</Text>
-                    </View>
-                </View>
+                }
                 <View style={styles.detailRow}>
                     <View>
                         <View style={{ backgroundColor: '#FDD463', width: 50, height: 50, borderRadius: 25, }}>
@@ -82,7 +110,7 @@ class TotalRegister extends Component {
                         {/* <Text style={{ fontSize: 7, color: '#8B8B8B' }}>(5 Km. - S) x 1 (Photo Plus)</Text> */}
                     </View>
                     <View>
-                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>598.25 ฿</Text>
+                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.state.totalRegister}.0 ฿</Text>
                     </View>
                 </View>
 
@@ -112,11 +140,11 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => {
     return {
         event: state.event,
-        distanceEvent : state.distanceEvent,
+        distanceEvent: state.distanceEvent,
         shirtphoto: state.shirtphoto,
-        total : state.total,
         choiceSend: state.choiceSend,
-        address: state.address
+        address: state.address,
+        creditcard : state.creditcard
     }
 }
 

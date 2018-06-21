@@ -1,17 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-
-import {
-  View,
-  Text,
-  TextInput,
-  StyleSheet,
-  SegmentedControlIOS,
-  TouchableOpacity,
-  DatePickerIOS,
-  Image
-} from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Alert, Image } from "react-native";
 import { StackNavigator } from "react-navigation";
+import { Form, Item, Input, Label } from 'native-base'
+import ProvinceForm from './addressForm-province'
+import AmphoeForm from './addressForm-amphoe'
+import TambonForm from './addressForm-tunporn'
+
 
 class FormAddressRegister extends Component {
   static propTypes = {
@@ -21,76 +16,85 @@ class FormAddressRegister extends Component {
     super(props);
     this.state = {
       number: "",
-      t: "",
-      a: "",
-      city: "",
+      tambon: "",
+      amphoe: "",
       country: "",
-      postNumber: ""
+      postNumber: "",
+      province: ""
     };
   }
+  passProvince(city) {
+    let { province } = this.state
+    this.setState({ province: city })
+  }
+  passTampon(tunporn) {
+    let { tambon } = this.state
+    this.setState({ tambon: tunporn })
+  }
+  passAmphoe(amphoes) {
+    let { amphoe } = this.state
+    this.setState({ amphoe: amphoes })
+  }
 
-  sendData = (number, t, a, city, country, postNumber) => {
-    this.props.goEvent(number, t, a, city, country, postNumber);
+  sendData = (number, tambon, amphoe, province, country, postNumber) => {
+    this.props.goEvent(number, tambon, amphoe, province, country, postNumber);
 
   };
 
   render() {
-    let { number, t, a, city, country, postNumber } = this.state;
+    let { number, tambon, amphoe, province, country, postNumber} = this.state;
     return (
       <View style={styles.container}>
         <View style={styles.contectTitle}>
           <View style={styles.textTitle}>
             <Image source={require('../icon/location-pointer.png')}
-                    style={styles.icon}/>
+              style={styles.icon} />
 
           </View>
           <Text style={styles.titleText}>ที่อยู่</Text>
         </View>
-        <TextInput
-          placeholder="บ้านเลขที่"
-          returnKeyType="next"
-          style={styles.textInput}
-          onChangeText={number => this.setState({ number })}
-        />
-        {/* <View style={styles.addressContainer}> */}
-          <TextInput
-            placeholder="ตำบล"
-            returnKeyType="next"
-            style={styles.textInput}
-            onChangeText={t => this.setState({ t })}
-          />
-          <TextInput
-            placeholder="อำเภอ"
-            returnKeyType="next"
-            style={styles.textInput}
-            onChangeText={a => this.setState({ a })}
-          />
-        {/* </View> */}
-        {/* <View style={styles.addressContainer}> */}
-          <TextInput
-            placeholder="จังหวัด"
-            returnKeyType="next"
-            style={styles.textInput}
-            onChangeText={city => this.setState({ city })}
-          />
-          <TextInput
-            placeholder="ประเทศ"
-            returnKeyType="next"
-            style={styles.textInput}
-            onChangeText={country => this.setState({ country })}
-          />
-        {/* </View> */}
-        <TextInput
-          placeholder="รหัสไปรษณีย์"
-          returnKeyType="next"
-          style={styles.textInput}
-          onChangeText={postNumber => this.setState({ postNumber })}
-        />
+        <Text style={styles.headForm}>บ้านเลขที่</Text>
+        <Form>
+          <Item floatingLabel last>
+            <Label style={styles.textLabel}>Ex.123/45</Label>
+            <Input
+              onChangeText={number => this.setState({ number })}
+            />
+          </Item>
+        </Form>
+        <Text style={styles.headForm}>ตำบล : {this.state.tambon}</Text>
+        <TambonForm gettumporn={this.passTampon.bind(this)} />
+
+        <Text style={styles.headForm}>อำเภอ : {this.state.amphoe}</Text>
+        <AmphoeForm getamphoe={this.passAmphoe.bind(this)} />
+
+        <Text style={styles.headForm}>จังหวัด : {this.state.province}</Text>
+        <ProvinceForm getProvince={this.passProvince.bind(this)} />
+
+        <Text style={styles.headForm}>ประเทศ</Text>
+        <Form>
+          <Item floatingLabel last>
+            <Label style={styles.textLabel}>Ex.ไทย</Label>
+            <Input
+              onChangeText={country => this.setState({ country })}
+            />
+          </Item>
+        </Form>
+        <Text style={styles.headForm}>รหัสไปรษณีย์</Text>
+        <Form>
+          <Item floatingLabel last>
+            <Label style={styles.textLabel}>Ex.10160</Label>
+            <Input
+              onChangeText={postNumber => this.setState({ postNumber })}
+            />
+          </Item>
+        </Form>
+
         <View style={styles.submitContainer}>
           <TouchableOpacity
             style={styles.buttonContainer}
             onPress={() =>
-              this.sendData(number, t, a, city, country, postNumber)
+              this.sendData(number, tambon, amphoe, province, country, postNumber)
             }
           >
             <Text style={styles.textButton}>ถัดไป</Text>
@@ -107,7 +111,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff"
   },
   textTitle: {
-    backgroundColor : '#fc561f',
+    backgroundColor: '#fc561f',
     padding: 10,
     width: 40,
     height: 40,
@@ -120,14 +124,14 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: 15,
     fontFamily: "kanit",
-    color : '#fc561f'
+    color: '#fc561f'
   },
-  contectTitle : {
-    alignItems : 'center'
+  contectTitle: {
+    alignItems: 'center'
   },
   icon: {
-      width :32,
-      height:32
+    width: 32,
+    height: 32
   },
   textInput: {
     borderColor: "#FC561F",
@@ -176,6 +180,15 @@ const styles = StyleSheet.create({
   },
   datepicker: {
     padding: 50
+  },
+  headForm: {
+    fontFamily: 'kanit',
+    fontSize: 16,
+    paddingTop: 20
+  },
+  textLabel: {
+    fontSize: 14,
+    fontFamily: 'kanit'
   }
 });
 export default FormAddressRegister;

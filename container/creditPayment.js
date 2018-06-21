@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
     View,
     Text,
@@ -10,26 +11,15 @@ import {
     Button,
     Modal
 } from 'react-native';
-
 import CreditView from '../component/items/creditView'
 import ButtonChangePayment from '../component/items/bottonChangePayment'
-import {connect} from 'react-redux';
-import {StackNavigator} from 'react-navigation';
+import { connect } from 'react-redux';
+import { StackNavigator } from 'react-navigation';
 
 class CreditPayment extends Component {
-
-    static navigationOptions = () => ({
-        title: 'ชำระเงิน',
-        headerStyle: {
-            backgroundColor: '#FC561F'
-        },
-        headerTitleStyle: {
-            color: '#fff',
-            fontFamily: 'kanit'
-        },
-        // headerRight: <Button onPress={() => this.showDetailPayment()}
-        //     color="#fff"title="รายละเอียด"/>
-    });
+    static propTypes = {
+        navigation: PropTypes.object,
+    }
     constructor(props) {
         super(props)
         this.state = {}
@@ -39,10 +29,7 @@ class CreditPayment extends Component {
     }
     showDetailPayment = () => {
         console.log("showDetail")
-        this
-            .props
-            .navigation
-            .navigate('TotalRegister')
+        this.props.showDetail()
     }
     gotoTransferPayment = () => {
         this
@@ -51,17 +38,10 @@ class CreditPayment extends Component {
             .navigate('TransferPayment')
     }
     gotoCreditPayment = () => {
-        this
-            .props
-            .navigation
-            .navigate('CreditPayment')
+        this.props.navigation.navigate('CreditPayment')
     }
     goAddressSend = () => {
-        this
-            .props
-            .navigation
-            .navigate('TotalPayment')
-
+        this.props.totalPayment()
     }
 
     render() {
@@ -69,19 +49,10 @@ class CreditPayment extends Component {
         return (
             <ScrollView>
                 <View style={styles.container}>
-                    <ButtonChangePayment
-                        Tranfer={this
-                        .gotoTransferPayment
-                        .bind(this)}
-                        Credit={this
-                        .gotoCreditPayment
-                        .bind(this)}/>
-                    <CreditView
-                        goAddress={this
-                        .goAddressSend
-                        .bind(this)}
-                        TotalPrice={this.props.total.totalPrice}
-                        ShowDetail={this.showDetailPayment.bind(this)}/>
+                    <CreditView 
+                        goAddress={this.goAddressSend.bind(this)}
+                        TotalPrice={this.props.event.totalPrice}
+                        ShowDetail={this.showDetailPayment.bind(this)} />
                 </View>
             </ScrollView>
         );
@@ -100,7 +71,7 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = (state) => {
-    return {total: state.total, creditcard: state.creditcard};
+    return { event: state.event, creditcard: state.creditcard };
 };
 
 export default connect(mapStateToProps)(CreditPayment);

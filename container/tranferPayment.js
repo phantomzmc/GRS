@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, StyleSheet, TouchableOpacity, Button } from 'react-native';
 import { StackNavigator } from 'react-navigation';
+import { connect } from 'react-redux'
 
 
 import ButtonChangePayment from '../component/items/bottonChangePayment'
@@ -12,23 +13,6 @@ class TransferPayment extends Component {
     static propTypes = {
         navigation: PropTypes.object,
     }
-    static navigationOptions = {
-        title: 'ชำระเงิน',
-        headerStyle: {
-            backgroundColor: '#FC561F'
-        },
-        headerTitleStyle: {
-            color: '#fff',
-            fontFamily: 'kanit',
-        },
-        headerRight: (
-            <Button
-                onPress={() => this.showDetailPayment.bind(this)}
-                title="รายละเอียด"
-                color="#fff"
-            />
-        ),
-    };
     showDetailPayment = () => {
         this.props.navigation.navigate('TotalPayment')
     }
@@ -37,10 +21,17 @@ class TransferPayment extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <ButtonChangePayment />
-                <TranferView showDetail={this.showDetailPayment.bind(this)} />
+                <TranferView 
+                    showDetail={this.showDetailPayment.bind(this)}
+                    detailPayment={this.props.event.event.EventBankDetailTH} />
             </View>
         );
+    }
+}
+
+const mapStateToProps = (state) => {
+    return {
+        event: state.event
     }
 }
 
@@ -51,4 +42,4 @@ const styles = StyleSheet.create({
     },
 
 })
-export default TransferPayment;
+export default connect(mapStateToProps)(TransferPayment);

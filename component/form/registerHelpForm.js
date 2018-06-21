@@ -1,34 +1,58 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-
 import {
   View,
   Text,
   TextInput,
   StyleSheet,
-  SegmentedControlIOS,
   TouchableOpacity,
-  DatePickerIOS,
-  Image
+  Image,
+
 } from "react-native";
+import randomstringPromise from 'randomstring-promise';
+import Communications from 'react-native-communications';
 import { StackNavigator } from "react-navigation";
+import { Form, Item, Input, Label, Picker, Icon } from 'native-base'
+import { connect } from 'react-redux'
+
 
 class FormAddressRegister extends Component {
   static propTypes = {
-    navigation: PropTypes.object
+    navigation: PropTypes.object,
+    email: PropTypes.string
+
   };
   constructor(props) {
     super(props);
     this.state = {
       firstname: "",
       lastname: "",
-      relation: "",
-      tel: ""
+      relation: "ความสัมพันธ์",
+      tel: "",
+      verifycode: "",
+      statusVerify: 0,
+      email: ""
     };
   }
+  componentWillMount() {
+    let { verifycode, email } = this.state
+    randomstringPromise(10)
+      .then((verifycode) => {
+        this.setState({ verifycode : verifycode })
+        // console.log(code);  // u8KNs7aAw0DCOKO1MdEgVIcF2asajrdd
+        console.log(verifycode)
+        this.props.setVerify(verifycode)
+      });
+    this.setState({ email: this.props.profile.profile.email })
+  }
+
 
   sendData = (firstname, lastname, relation, tel) => {
-    this.props.goEvent(firstname, lastname, relation, tel);
+    let { verifycode, statusVerify } = this.state
+    Communications.email([this.state.email], null, null, 'GuuRun Code Verify', 'VerifyCode is : ' + this.state.verifycode)
+    this.props.goEvent(firstname, lastname, relation, tel, verifycode, statusVerify);
+    this.props.setHelp({ firstname, lastname, relation, tel,verifycode });
+    
   };
 
   render() {
@@ -45,34 +69,50 @@ class FormAddressRegister extends Component {
           <Text style={styles.titleText}>กรณีฉุกเฉิน</Text>
         </View>
         {/* <View style={styles.addressContainer}> */}
-        <TextInput
-          placeholder="ชื่อ"
-          returnKeyType="next"
-          style={styles.textInput}
-          onChangeText={firstname => this.setState({ firstname })}
-        />
-        <TextInput
-          placeholder="นามสกุล"
-          returnKeyType="next"
-          style={styles.textInput}
-          onChangeText={lastname => this.setState({ lastname })}
-        />
-        {/* </View> */}
-        {/* <View style={styles.addressContainer}> */}
-        <TextInput
-          placeholder="ความสัมพันธ์"
-          returnKeyType="next"
-          style={styles.textInput}
-          onChangeText={relation => this.setState({ relation })}
-        />
-        <TextInput
-          placeholder="หมายเลขโทรศัพท์"
-          returnKeyType="next"
-          style={styles.textInput}
-          onChangeText={tel => this.setState({ tel })}
-        />
-        {/* </View> */}
-
+        <Text style={styles.headForm}>ชื่อ-นามสกุล</Text>
+        <Form>
+          <Item floatingLabel last>
+            <Label style={styles.textLabel}>Ex.ชื่อ</Label>
+            <Input
+              onChangeText={firstname => this.setState({ firstname })}
+            />
+          </Item>
+        </Form>
+        <Form>
+          <Item floatingLabel last>
+            <Label style={styles.textLabel}>Ex.นามสกุล</Label>
+            <Input
+              onChangeText={lastname => this.setState({ lastname })}
+            />
+          </Item>
+        </Form>
+        <Text style={styles.headForm}>หมายเลขโทรศัพท์</Text>
+        <Form>
+          <Item floatingLabel last>
+            <Label style={styles.textLabel}>Ex.090-xxxxxx</Label>
+            <Input
+              onChangeText={tel => this.setState({ tel })}
+            />
+          </Item>
+        </Form>
+        <View style={styles.viewPicker}>
+          <Text style={styles.headForm}>ความสัมพันธ์</Text>
+          <Form>
+            <Picker
+              mode="dropdown"
+              iosHeader="เลือกความสัมพันธ์"
+              iosIcon={<Icon name="ios-arrow-down-outline" />}
+              style={styles.picker}
+              selectedValue={this.state.relation}
+              onValueChange={(itemValue, itemIndex) => this.setState({ relation: itemValue })}
+            >
+              <Picker.Item label="ความสัมพันธ์" value="ความสัมพันธ์" />
+              <Picker.Item label="พ่อแม่" value="พ่อแม่" />
+              <Picker.Item label="ญาติ" value="ญาติ" />
+              <Picker.Item label="เพื่อน" value="เพื่อน" />
+            </Picker>
+          </Form>
+        </View>
         <View style={styles.submitContainer}>
           <TouchableOpacity
             style={styles.buttonContainer}
@@ -123,23 +163,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
     fontFamily: "kanit"
   },
-  conlorsegment: {
-    marginTop: 10
-  },
-  addressContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between"
-  },
-  textAddressInput: {
-    width: "45%",
-    borderColor: "#FC561F",
-    borderRadius: 10,
-    borderWidth: 1.5,
-    paddingHorizontal: 10,
-    height: 35,
-    marginTop: 15,
-    fontFamily: "kanit"
-  },
+
   submitContainer: {
     marginTop: 30,
     alignItems: "center",
@@ -159,8 +183,44 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontFamily: "kanit"
   },
-  datepicker: {
-    padding: 50
+  viewPicker: {
+    flexDirection: 'row'
+  },
+  picker: {
+    paddingTop: 15,
+    padding: 30
+  },
+
+  headForm: {
+    fontFamily: 'kanit',
+    fontSize: 16,
+    paddingTop: 20
+  },
+  textLabel: {
+    fontSize: 14,
+    fontFamily: 'kanit'
   }
 });
-export default FormAddressRegister;
+
+const mapStateToProps = (state) => {
+  return {
+    profile: state.profile
+  }
+}
+const mapDispatchToProps = dispatch => {
+  return {
+    setHelp: help => {
+      dispatch({
+        type: "setHelp",
+        payload: help
+      });
+    },
+    setVerify: verify => {
+      dispatch({
+        type: "setVerify",
+        payload: verify
+      });
+    }
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(FormAddressRegister);

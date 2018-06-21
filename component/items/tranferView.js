@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
     View,
     Text,
@@ -8,82 +8,45 @@ import {
     TouchableOpacity
 } from 'react-native';
 
-import ImagePicker from 'react-native-image-picker';
-
-
 class TranferView extends Component {
-    constructor(props) {
+    constructor(props){
         super(props)
         this.state = {
-            bank: "ธนาคารกสิกรไทย",
-            branch: "สาขาโลตัส บางกะปิ",
-            ACNumber: "025-3-14945-0",
-            username: "นาย มารุต บูรณศิล",
-            avatarSource: null,
-
+            bank : "",
+            branch : "",
+            ACNumber : "",
+            username : ""
         }
     }
-    selectPhotoTapped() {
-        const options = {
-          quality: 1.0,
-          maxWidth: 500,
-          maxHeight: 500,
-          storageOptions: {
-            skipBackup: true
-          }
-        };
-    
-        ImagePicker.showImagePicker(options, (response) => {
-          console.log('Response = ', response);
-    
-          if (response.didCancel) {
-            console.log('User cancelled photo picker');
-          }
-          else if (response.error) {
-            console.log('ImagePicker Error: ', response.error);
-          }
-          else if (response.customButton) {
-            console.log('User tapped custom button: ', response.customButton);
-          }
-          else {
-            let source = { uri: response.uri };
-    
-            // You can also display the image using data:
-            // let source = { uri: 'data:image/jpeg;base64,' + response.data };
-    
-            this.setState({
-              avatarSource: source
-            });
-          }
-        });
-      }
+
 
     render() {
-        let {bank, branch, ACNumber, username} = this.state
+        let { bank, branch, ACNumber, username } = this.state
         return (
             <View style={styles.container}>
                 <View style={styles.creditCard}>
                     <View style={styles.cardNumber}>
                         <View
                             style={{
-                            flexDirection: 'column'
-                        }}>
-                            <Text style={styles.textCardNumber}>{bank}</Text>
-                            <Text style={styles.textNumber}>{branch}</Text>
+                                flexDirection: 'column'
+                            }}>
+                            <Text style={styles.textCardNumber}>{this.props.detailPayment}</Text>
+                            {/* <Text style={styles.textNumber}>{branch}</Text> */}
                         </View>
-                        <Image
-                            source={{
-                            uri: "http://www.satapornbooks.co.th/SPBecommerce/images/logo-bank03.png"
-                        }}
-                            style={{
-                            width: 50,
-                            height: 50
-                        }}/>
+
                     </View>
                     <View style={styles.expcvcView}>
                         <View style={styles.EXPView}>
-                            <Text style={styles.textExpiration}>บัญชีออมทรัพย์เลขที่ {ACNumber}</Text>
-                            <Text style={styles.monthyear}>{username}</Text>
+                            {/* <Text style={styles.textExpiration}>บัญชีออมทรัพย์เลขที่ {this.props.detailPayment}</Text>
+                            <Text style={styles.monthyear}>{username}</Text> */}
+                            <Image
+                                source={{
+                                    uri: "http://www.satapornbooks.co.th/SPBecommerce/images/logo-bank03.png"
+                                }}
+                                style={{
+                                    width: 50,
+                                    height: 50
+                                }} />
                         </View>
                         <View></View>
                     </View>
@@ -91,14 +54,14 @@ class TranferView extends Component {
                 <View style={styles.submitContainer}>
                     <TouchableOpacity
                         onPress={this
-                        .selectPhotoTapped
-                        .bind(this)}
+                            .selectPhotoTapped
+                            .bind(this)}
                         style={styles.buttonContainer}>
                         <View>
                             {this.state.avatarSource === null
                                 ? <Text style={styles.textButton}>เพิ่มรูปภาพ</Text>
-                                : <Image style={styles.avatar} source={this.state.avatarSource}/>
-}
+                                : <Image style={styles.avatar} source={this.state.avatarSource} />
+                            }
                         </View>
                     </TouchableOpacity>
                 </View>
