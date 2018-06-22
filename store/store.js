@@ -1,5 +1,15 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 
+const token = (state = {} ,action) => {
+  switch (action.type){
+    case "setCreateToken" : {
+      state.token = action.payload
+      break
+    }
+  }
+  return state;
+}
+
 const eventState = {
   event: {
     name: "1",
@@ -108,6 +118,7 @@ const photoplus = (
   }
   return state;
 };
+
 const creditcard = (state = credit, action) => {
   switch (action.type) {
     case "setCredit": {
@@ -207,6 +218,7 @@ const myLogger = store => next => action => {
 
 const store = createStore(
   combineReducers({
+    token,
     profile,
     event,
     shirtphoto,

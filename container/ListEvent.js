@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-    StyleSheet,
-    View,
-    StatusBar
-} from 'react-native';
+import { StyleSheet,View,StatusBar } from 'react-native';
+import List from '../component/list/listevent/listevent'
 import { YellowBox } from 'react-native';
 import { connect } from 'react-redux'
-
-import List from '../component/list/listevent/listevent'
 
 class ListEvent extends Component {
     static propTypes = {
@@ -24,12 +19,10 @@ class ListEvent extends Component {
                 date: "",
                 tranferBank: ""
             },
-            profile: ""
+            profile: "",
+            token : ""
         }
 
-    }
-    componentDidMount() {
-        this.setUserID()
     }
     setUserID = () => {
         console.log(this.props.profile.profile.userid)
@@ -69,8 +62,10 @@ class ListEvent extends Component {
                     hidden={false}
                     translucent={true}
                 />
-                <List CheckLogin={this.checkUser.bind(this)}
-                    Profile={this.state.profile} />
+                <List 
+                    CheckLogin={this.checkUser.bind(this)}
+                    Profile={this.state.profile}
+                />
             </View>
         )
     }
@@ -80,12 +75,21 @@ const mapStateToProps = (state) => {
         profile: state.profile,
         event: state.event
     }
-
 }
+const mapDispatchToProps = dispatch => {
+        return{
+            setCreateToken : (token) => {
+                dispatch({
+                    type : "setCreateToken",
+                    payload : token
+                })
+            }
+        }
+    }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1
     }
 });
-export default connect(mapStateToProps)(ListEvent);
+export default connect(mapStateToProps,mapDispatchToProps)(ListEvent);

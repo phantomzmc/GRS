@@ -12,19 +12,15 @@ import AddEventFriend from '../container/AddEventDetailFrind'
 import TransferPayment from '../container/tranferPayment'
 import TotalRegister from '../component/items/totalRegister'
 import EventList from '../container/ListEvent'
-
 import DiscountCoupon from '../component/form/couponForm'
 import GetPleace from '../component/items/getPlece'
 import UserHelpRegister from '../container/userHelpRegister'
 import UserAddressRegister from '../container/userAddressRegister'
-
 import ControlDistance from '../container/controlDistance'
 import ButtonChangePayment from '../component/items/bottonChangePayment'
 import Verify from '../container/verify'
 import ResetVerify from '../container/resetVerify'
 import ResetPassword from '../container/resetPassword'
-import GalleryScreen from '../mockdata'
-
 import FriendDistance from '../container/friendDistance'
 
 

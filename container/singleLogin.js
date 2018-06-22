@@ -12,15 +12,8 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux'
 import axios from 'axios'
-
-var uri = "http://api.shutterrunning2014.com/api/v2/grsv2m/_proc/Main.uspCheckUsername"
-var api_key = '36fda24fe5588fa4285ac6c6c2fdfbdb6b6bc9834699774c9bf777f706d05a88'
-var sessionToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQsInVzZXJfaWQiOjQsImVtYWlsIjoiYWR' +
-    'taW5AZ3V1cnVuLmNvbSIsImZvcmV2ZXIiOmZhbHNlLCJpc3MiOiJodHRwOlwvXC9hcGkuc2h1dHRlcnJ' +
-    '1bm5pbmcyMDE0LmNvbVwvYXBpXC92MlwvdXNlclwvc2Vzc2lvbiIsImlhdCI6MTUyMDU0NDU5MSwiZXh' +
-    'wIjoxNTIwNTQ4MTkxLCJuYmYiOjE1MjA1NDQ1OTEsImp0aSI6IjA1Y2UzN2NjMmU2NjIyZGJlNmMzNTg' +
-    '5MzE1NTI0YmZjIn0._7jHjGhTPfa3rVioC2MrjJfLwrMMxYQYiWhe8DK5V7k'
-var auth = 'Basic YWRtaW5AZ3V1cnVuLmNvbTpXWGJyRDI4THRJUjNNWW0='
+import api from '../config/api_key'
+import req from '../config/uri_req'
 
 class SingleLogin extends Component {
     static propTypes = {
@@ -35,6 +28,7 @@ class SingleLogin extends Component {
     }
     checkLoginSever () {
         let { status,username } = this.state
+        let uri = req[2].uspCheckUsername
         let data = ({
             params: {
                 value: username,
@@ -42,9 +36,8 @@ class SingleLogin extends Component {
         })
         axios.post(uri,data, {
             headers: {
-                "X-DreamFactory-API-Key": api_key,
-                "X-DreamFactory-Session-Token": sessionToken,
-                "Authorization": auth
+                "X-DreamFactory-API-Key": api[0].api_key,
+                "X-DreamFactory-Session-Token": this.props.token.token,
             },
             responseType: 'json'
         })
@@ -198,7 +191,10 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = (state) => {
-    return { profile: state.profile }
+    return { 
+        profile: state.profile,
+        token : state.token
+    }
 }
 
 const mapDispatchToProps = (dispatch) => {

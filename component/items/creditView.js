@@ -9,9 +9,11 @@ import {
     TouchableOpacity,
     AlertIOS
 } from 'react-native';
-import { Form, Item, Input, Label , Icon} from 'native-base'
+import { Form, Item, Input, Label, Icon } from 'native-base'
 import { connect } from 'react-redux'
-import { StackNavigator } from 'react-navigation';
+
+import Omise from 'omise-react-native';
+Omise.config('pkey_test_5ccy7tzubo9t8d0i71o', 'skey_test_5ccy7tzukutfwjoi8p3', '2015-11-17');
 
 class CreditView extends Component {
 
@@ -20,11 +22,49 @@ class CreditView extends Component {
         this.state = {
             nameCredit: "",
             numberCredit: "1234 5678 1234 5678",
-            expCredit: "00/0000",
+            expCredit: "00",
             cvcCredit: "XXX"
         }
+        this.genTokenCredit = this.genTokenCredit.bind(this)
     }
+
+    async genTokenCredit(nameCredit, numberCredit, expCredit, cvcCredit) {
+        const data = await Omise.createToken({
+            'card': {
+                'name': nameCredit,
+                'city': 'Bangkok',
+                'postal_code': 10320,
+                'number': numberCredit,
+                'expiration_month': parseInt(expCredit),
+                'expiration_year': 2018,
+                'security_code': parseInt(cvcCredit)
+            }
+        });
+        console.log(data.id);
+    }
+    // getCharges(tokenId){
+    //     console.log(tokenId)
+    //     Omise.charges.create({
+    //         'amount': '100000', // 1,000 Baht
+    //         'currency': 'thb',
+    //         'capture': false,
+    //         'card': tokenId
+    //       }, function(err, resp) {
+    //         console.log(resp)
+    //         console.log(err)
+    //         if (charge) {
+    //           //Success
+    //           console.log("success")
+    //         } else {
+    //           //Handle failure
+    //           console.log(err)
+    //         //   throw resp.failure_code;
+    //         }
+    //       });
+    // }
+
     putDataCredit = (nameCredit, numberCredit, expCredit, cvcCredit) => {
+        this.genTokenCredit(nameCredit, numberCredit, expCredit, cvcCredit)
         this.props.goAddress()
         this.props.setCredit({ nameCredit: nameCredit, numberCredit, expCredit, cvcCredit })
     }
@@ -90,6 +130,7 @@ class CreditView extends Component {
                             />
                         </Item>
                     </Form>
+
                     <Text style={styles.headForm}>รหัสความปลอดภัย</Text>
                     <Form>
                         <Item floatingLabel last>
@@ -110,7 +151,7 @@ class CreditView extends Component {
                 <View style={styles.submitContainer}>
                     <TouchableOpacity
                         style={styles.buttonContainer}
-                        onPress={() => this.putDataCredit(nameCredit, numberCredit, expCredit, cvcCredit)}>
+                        onPress={() => this.genTokenCredit(nameCredit, numberCredit, expCredit, cvcCredit)}>
                         <Text style={styles.textButton}>ชำระค่าสมัคร : {this.props.TotalRegister} บาท</Text>
                     </TouchableOpacity>
                 </View>

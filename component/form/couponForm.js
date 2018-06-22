@@ -1,19 +1,33 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, Alert,StatusBar } from 'react-native';
-import { StackNavigator } from 'react-navigation';
+import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, Alert, StatusBar } from 'react-native';
+import { Container, Form, Item, Label, Input } from "native-base";
 import { connect } from 'react-redux'
-import { map } from 'mobx';
-
+import axios from 'axios'
 import HeaderTeam from "../items/headerTeam";
+
+var uri = "http://api.shutterrunning2014.com/api/v2/grsv2m/_proc/Main.uspApplyPromoCode"
+var api_key = '36fda24fe5588fa4285ac6c6c2fdfbdb6b6bc9834699774c9bf777f706d05a88'
+var sessionToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQsInVzZXJfaWQiOjQsImVtYWlsIjoiYWR' +
+    'taW5AZ3V1cnVuLmNvbSIsImZvcmV2ZXIiOmZhbHNlLCJpc3MiOiJodHRwOlwvXC9hcGkuc2h1dHRlcnJ' +
+    '1bm5pbmcyMDE0LmNvbVwvYXBpXC92MlwvdXNlclwvc2Vzc2lvbiIsImlhdCI6MTUyMDU0NDU5MSwiZXh' +
+    'wIjoxNTIwNTQ4MTkxLCJuYmYiOjE1MjA1NDQ1OTEsImp0aSI6IjA1Y2UzN2NjMmU2NjIyZGJlNmMzNTg' +
+    '5MzE1NTI0YmZjIn0._7jHjGhTPfa3rVioC2MrjJfLwrMMxYQYiWhe8DK5V7k'
+var auth = 'Basic YWRtaW5AZ3V1cnVuLmNvbTpXWGJyRDI4THRJUjNNWW0='
 
 class CouponForm extends Component {
     constructor(state) {
         super(state)
         this.state = {
             title: "คูปองส่วนลด",
-            coupon: ""
+            coupon: "",
+            status: [],
+            discountType: "",
+            price: "",
+            button: true,
+            button2: false
         }
-        this.checkInput = this.checkInput.bind(this)
+        this.checkPromoCode = this.checkPromoCode.bind(this)
+        this.checkOutput = this.checkOutput.bind(this)
         this.gotoAddress = this.gotoAddress.bind(this)
     }
     gotoAddress() {
@@ -22,31 +36,76 @@ class CouponForm extends Component {
     gotoBack = () => {
         this.props.navigation.navigate('ShirtPhotoPlus')
     }
-
-    checkInput() {
-        if (this.props.event.event.PromoCodeRequired == 1 && this.props.event.event.PromoCodeStatus == 1) {
-            console.log("ต้อง input code")
-            if (this.state.coupon == "") {
-                Alert.alert("กรุณากรอกรหัสคูปองให้ถูกต้อง")
-            } else if (this.state.coupon == "1234") {
-                this.gotoAddress()
-            }
+    checkPromoCode() {
+        let data = ({
+            params: [
+                { name: "EventID", value: this.props.event.event.EventID },
+                { name: "PromoCode", value: this.state.coupon },
+                { name: "RunnerID", value: this.props.userprofile.userprofile.RunnerID }
+            ]
+        })
+        axios.post(uri, data, {
+            headers: {
+                "X-DreamFactory-API-Key": api_key,
+                "X-DreamFactory-Session-Token": sessionToken,
+                "Authorization": auth
+            },
+            responseType: 'json'
+        })
+            .then((response) => {
+                this.setState({ isLoading: false, status: response.data });
+                console.log(this.state.status)
+                this.checkOutput()
+            }).catch((error) => {
+                console.error(error);
+            });
+    }
+    changeStatus = () => {
+        if (this.state.coupon != "")
+            this.setState({ button2: true, button: false })
+        else if (this.state.coupon == "") {
+            this.setState({ button: true, button2: false })
         }
-        else if (this.props.event.event.PromoCodeRequired == 0 && this.props.event.event.PromoCodeStatus == 1) {
-            console.log("ใส่หรือไม่ใส่ได้")
-            if (this.state.coupon == "1234") {
-                this.gotoAddress()
-            }
+    }
+    checkType() {
+        let { status } = this.state
+        if (status[0].PromoDiscountType == "1") {
+            this.setState({
+                discountType: "บาท"
+            })
+        }
+        else if (status[0].PromoDiscountType == "2") {
+            this.setState({
+                discountType: "เปอร์เซ็น",
+
+            })
+        }
+        this.setState({ price: status[0].PromoDiscount })
+    }
+    checkOutput() {
+        let { status } = this.state
+        if (status[0].PromoStatus == "1") {
+            this.checkType()
             this.gotoAddress()
         }
-        else if (this.props.event.event.PromoCodeRequired == 1 && this.props.event.event.PromoCodeStatus == 0) {
-            console.log("ใส่หรือไม่ใส่ได้2")
+        else if (status[0].PromoStatus == "0") {
+            Alert.alert("รหัสส่วนลดนี้ถูกใช้งานเเล้ว")
+        }
+        else if (status[0].PromoStatus == "0" && this.props.event.event.PromoCodeRequired == "0") {
+            Alert.alert("ส่วนลดค่าสมัคร", "รหัสนี้ไม่ถูกต้องหรือถูกใช้ไปแล้ว", [
+                {
+                    text: "ลองอีกครั้ง",
+                },
+                {
+                    text: "ข้ามการกรอกรหัส",
+                    onPress: () => this.props.navigation.navigate('AddressLayout')
+                },
+            ])
         }
     }
     render() {
-        let { coupon } = this.state
         return (
-            <View>
+            <Container>
                 <HeaderTeam
                     title={this.state.title}
                     goback={this.gotoBack.bind(this)}
@@ -63,26 +122,39 @@ class CouponForm extends Component {
                         {this.props.event.event.EventName}
                     </Text>
                     <Text style={styles.detailDiscountCoupon}>
-                        ส่วนลดค่าสมัครรายการวิ่ง 100 บาท
+                        ส่วนลดค่าสมัครรายการวิ่ง {this.state.price} {this.state.discountType}
                     </Text>
-                    <TextInput
-                        placeholder="รหัสคูปอง"
-                        onChangeText={(coupon) => this.setState({ coupon })}
-                        style={styles.inputCoupon}
-                    />
-                    <TouchableOpacity style={styles.submitButton}
-                        onPress={() => this.checkInput()}>
-                        <Text style={styles.textButton}>ถัดไป</Text>
-                    </TouchableOpacity>
+                    <View style={{ width: '70%' }}>
+                        <Form>
+                            <Item floatingLabel last>
+                                <Label style={styles.textLabel}>รหัสคูปอง</Label>
+                                <Input
+                                    onChangeText={(coupon) => this.setState({ coupon })}
+                                    onEndEditing={() => this.changeStatus()} />
+                            </Item>
+                        </Form>
+                    </View>
+                    {this.state.button &&
+                        <TouchableOpacity style={styles.submitButtonDefalt}>
+                            <Text style={styles.textButton}>ถัดไป</Text>
+                        </TouchableOpacity>}
+                    {this.state.button2 &&
+                        <TouchableOpacity style={styles.submitButton}
+                            onPress={() => this.checkPromoCode()}>
+                            <Text style={styles.textButton}>ถัดไป</Text>
+                        </TouchableOpacity>
+                    }
+
                 </View>
-            </View>
+            </Container>
         );
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        event: state.event
+        event: state.event,
+        userprofile: state.userprofile
     }
 }
 
@@ -119,6 +191,17 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         fontFamily: 'kanit'
     },
+    submitButtonDefalt: {
+        margin: 30,
+        height: 50,
+        width: '75%',
+        alignContent: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#FC561F',
+        alignItems: 'center',
+        borderRadius: 20,
+        opacity: 0.5
+    },
     submitButton: {
         margin: 30,
         height: 50,
@@ -129,8 +212,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 20,
     },
+
     textButton: {
         color: '#fff',
+        fontSize: 18,
+        fontFamily: 'kanit'
+    },
+    textLabel: {
         fontSize: 18,
         fontFamily: 'kanit'
     }
