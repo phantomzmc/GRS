@@ -17,24 +17,9 @@ class ButtonChangePayment extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            title: "ชำระเงิน",
+            title: "ชำระด้วยบัตรเครดิต/เดบิต",
             pageNumber: 0
         }
-    }
-    componentWillMount(){
-        console.log(this.props.event.totalPrice)
-        this.setState({
-            total : parseFloat(this.props.event.totalPrice)
-        })
-        this.sumCredit()
-    }
-    sumCredit(){
-        sum = (this.props.event.totalPrice * 105)/100
-        console.log(sum)
-        credit = (sum - this.props.event.totalPrice)
-        console.log(credit)
-        this.props.setTotalRegister(sum)
-        this.props.setCreditPrice(credit)
     }
     gotoShowDetail = () => {
         this.props.navigation.navigate('TotalRegister')
@@ -43,7 +28,7 @@ class ButtonChangePayment extends Component {
         this.props.navigation.navigate('TotalPayment')
     }
     gotoBack = () => {
-        this.props.navigation.navigate('AddressLayout')
+        this.props.navigation.navigate('ControlPayment')
     }
     render() {
         return (
@@ -56,14 +41,11 @@ class ButtonChangePayment extends Component {
                 <HeaderTeam
                     title={this.state.title}
                     goback={this.gotoBack.bind(this)} />
-                <Tabs initialPage={this.state.pageNumber} renderTabBar={() => <ScrollableTab />}>
+                <Tabs initialPage={this.state.pageNumber}>
                     <Tab heading={<TabHeading><Icon name="card" /><Text style={styles.textLabel}> ชำระผ่านบัตรเครดิต/เดบิต</Text></TabHeading>}>
                         <CreditPayment 
                             showDetail={this.gotoShowDetail.bind(this)}
                             totalPayment={this.gotoTotalPayment.bind(this)} />
-                    </Tab>
-                    <Tab heading={<TabHeading><Icon name="card" /><Text style={styles.textLabel}> โอนเงิน</Text></TabHeading>}>
-                        <TranferPayment />
                     </Tab>
                     <Tab heading={<TabHeading><Icon name="list" /><Text style={styles.textLabel}> เเสดงค่าสมัครทั้งหมด</Text></TabHeading>}>
                         <TotalRegister />

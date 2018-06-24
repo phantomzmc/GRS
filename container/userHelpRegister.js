@@ -3,20 +3,15 @@ import PropTypes from "prop-types";
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Alert, StatusBar } from "react-native";
 import { connect } from "react-redux";
 import { Container } from 'native-base'
+import axios from 'axios'
 
 import HeaderUser from "../component/items/header_profile";
 import FormHelpRegister from "../component/form/registerHelpForm";
 import HeaderTeam from '../component/items/headerTeam'
-import axios from 'axios'
+import req from '../config/uri_req'
+import api_key from '../config/api_key'
 
-var uri = "http://api.shutterrunning2014.com/api/v2/grsv2m/_proc/Main.uspCreateAccount"
-var api_key = '36fda24fe5588fa4285ac6c6c2fdfbdb6b6bc9834699774c9bf777f706d05a88'
-var sessionToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQsInVzZXJfaWQiOjQsImVtYWlsIjoiYWR' +
-  'taW5AZ3V1cnVuLmNvbSIsImZvcmV2ZXIiOmZhbHNlLCJpc3MiOiJodHRwOlwvXC9hcGkuc2h1dHRlcnJ' +
-  '1bm5pbmcyMDE0LmNvbVwvYXBpXC92MlwvdXNlclwvc2Vzc2lvbiIsImlhdCI6MTUyMDU0NDU5MSwiZXh' +
-  'wIjoxNTIwNTQ4MTkxLCJuYmYiOjE1MjA1NDQ1OTEsImp0aSI6IjA1Y2UzN2NjMmU2NjIyZGJlNmMzNTg' +
-  '5MzE1NTI0YmZjIn0._7jHjGhTPfa3rVioC2MrjJfLwrMMxYQYiWhe8DK5V7k'
-var auth = 'Basic YWRtaW5AZ3V1cnVuLmNvbTpXWGJyRDI4THRJUjNNWW0='
+
 
 class UserHelpRegister extends Component {
   static propTypes = {
@@ -39,7 +34,6 @@ class UserHelpRegister extends Component {
     };
   }
   createAccount = (ecfirstname, eclastname, ecrelation, ectel, activecode) => {
-    // let activecode = activecode
     let firstname = this.props.profile.profile.fullname
     let lastname = this.props.profile.profile.lastname
     let nickname = this.props.profile.profile.nickname
@@ -57,11 +51,9 @@ class UserHelpRegister extends Component {
     let city = this.props.profile.address.city
     let country = this.props.profile.address.country
     let postnumber = this.props.profile.address.postNumber
-    // let ecfirstname = ecfirstname
-    // let eclastname = eclastname
-    // let ecrelation = ecrelation
-    // let ectel = ectel
 
+    let uri = req[0].uspCreateAccount
+    let apikey = api_key[0].api_key
     let data = ({
       params: {
         value: "{\"ActivateCode\":\"" + activecode + "\",\"FirstName\":\"" + firstname + "\",\"LastName\":\"" + lastname + "\",\"NickName\":\"" + nickname + "\",\"IdentityType\":\"1\",\"CitizenshipID\":\"" + userid + "\",\"PassportID\":\"123\",\"Password\":\"" + password + "\",\"Gender\":\"F\",\"DateOfBirth\":\"" + journeyDate + "\",\"Nationality\":\"" + nation + "\",\"TeamName\":\"" + teamname + "\",\"BIBName\":\"" + bib + "\",\"Email\":\"" + email + "\",\"Phone\":\"" + tel + "\",\"Address\":\"" + address + "\",\"SubDistric\":\"" + t + "\",\"Distric\":\"" + a + "\",\"Province\":\"" + city + "\",\"Country\":\"" + country + "\",\"PostCode\":\"" + postnumber + "\",\"PicProfile\":\"1\",\"BackgroundProfile\":\"1\",\"PicGroup\":\"1\",\"ECFirstName\":\"" + ecfirstname + "\",\"ECLastName\":\"" + eclastname + "\",\"ECRelation\":\"" + ecrelation + "\",\"ECPhone\":\"" + ectel + "\"}"
@@ -69,9 +61,8 @@ class UserHelpRegister extends Component {
     })
     axios.post(uri, data, {
       headers: {
-        "X-DreamFactory-API-Key": api_key,
-        "X-DreamFactory-Session-Token": sessionToken,
-        "Authorization": auth
+        "X-DreamFactory-API-Key": apikey,
+        "X-DreamFactory-Session-Token": this.props.token.token,
       },
       responseType: 'json'
     })
@@ -137,7 +128,8 @@ const styles = StyleSheet.create({
 });
 const mapStateToProps = state => {
   return {
-    profile: state.profile
+    profile: state.profile,
+    token : state.token
   }
 }
 

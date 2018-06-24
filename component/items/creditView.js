@@ -9,7 +9,7 @@ import {
     TouchableOpacity,
     AlertIOS
 } from 'react-native';
-import { Form, Item, Input, Label, Icon } from 'native-base'
+import { Form, Item, Input, Label, Icon, Card } from 'native-base'
 import { connect } from 'react-redux'
 
 import Omise from 'omise-react-native';
@@ -141,18 +141,35 @@ class CreditView extends Component {
                         </Item>
                     </Form>
                 </View>
-                {/* <View style={styles.showDetail}>
-                    <TouchableOpacity
-                        style={styles.buttonContainer2}
-                        onPress={() => this.props.ShowDetail()}>
-                        <Text style={styles.textButton2}>เเสดงรายละเอียดค่าสมัคร</Text>
-                    </TouchableOpacity>
-                </View> */}
+                <View style={styles.containerForm}>
+                    <Text style={styles.textForm}>คำรับรองของผู้สมัคร</Text>
+                </View>
+                <View style={{ padding :10}}>
+                    <Card>
+                        <Text style={styles.textDetail}>   ข้าพเจ้าขอรับรองว่าข้อความข้างต้นเป็นความจริงและได้ทำการฝึกซ้อม ทั้งมีสุขภาพสมบูรณ์พร้อมที่จะมีการแข่งขันในประเภทที่สมัครข้างต้นด้วยความเต็มใจ และจะไม่เรียกร้องค่าเสียหายใดๆหากเกิดอันตรายหรือบาดเจ็บทั้งก่อนและหลังการแข่งขันอีกทั้งก่อนและหลังการแข่งขัน อีกทั้งยินดีที่จะแสดงหลักฐานพิสุจน์ตัวเองต่อคณะผู้จัดการแข่งขัน
+                                และถือว่าการบันทึกภาพยนต์ดังกล่าวเป็นลิขสิทธิ์ของคณะกรรมการจัดการแข่งขันครั้งนี้
+                        </Text>
+                        <Text style={styles.textDetail}>
+                                 การยืนยันการสมัครผ่านระบบออนไลน์นี้ถือว่าท่านได้ให้การยอมรับข้อความข้างต้นแทนการเซ็นชื่อ
+                        </Text>
+                    </Card>
+                </View>
+                <View style={styles.containerForm}>
+                    <Text style={styles.textForm}>สงวนสิทธิ์การเปลี่ยนแปลง</Text>
+                </View>
+                <View style={{ padding :10}}>
+                    <Card>
+                        <Text style={styles.textDetail}>*** หลังจากยืนยันการชำระค่าสมัครแล้ว ไม่สามารถยกเลิกหรือเปลี่ยนแปลงข้อมูลการสมัครใดๆในทุกกรณี ***
+                        </Text>
+
+                    </Card>
+                </View>
+
                 <View style={styles.submitContainer}>
                     <TouchableOpacity
                         style={styles.buttonContainer}
                         onPress={() => this.genTokenCredit(nameCredit, numberCredit, expCredit, cvcCredit)}>
-                        <Text style={styles.textButton}>ชำระค่าสมัคร : {this.props.TotalRegister} บาท</Text>
+                        <Text style={styles.textButton}> ยืนยันและชำระค่าบริการ </Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -288,6 +305,11 @@ const styles = StyleSheet.create({
     textLabel: {
         fontSize: 14,
         fontFamily: 'kanit'
+    },
+    textDetail : {
+        fontFamily : 'kanit',
+        padding : 15
+
     }
 })
 

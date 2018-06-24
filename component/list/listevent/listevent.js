@@ -56,7 +56,7 @@ class ListEvent extends Component {
 
     feedEvent(token) {
         console.log(this.props.sendToken)
-        let uri = req[1].uspGetEventList
+        let uri = req[0].uspGetEventList
         axios.get(uri, {
             headers: {
                 "X-DreamFactory-API-Key": api[0].api_key,

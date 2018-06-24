@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 import { Form, Item, Input, Label } from 'native-base'
+import CheckBox from 'react-native-checkbox-heaven';
 import { connect } from 'react-redux'
 
 class AddressForm extends Component {
@@ -15,7 +16,10 @@ class AddressForm extends Component {
             province: "",
             postcode: "",
             tel: "",
-            note: ""
+            note: "",
+            checked: false,
+            statusButton: true,
+            statusButton2: false
         }
     }
     componentDidMount = () => {
@@ -30,12 +34,21 @@ class AddressForm extends Component {
             postcode: this.props.userprofile.userprofile.PostCode,
             tel: this.props.userprofile.userprofile.Phone,
         })
+
     }
     putDataUser = (fullname, lastname, email, adress, subdistric, distric, province, postcode, tel, note) => {
         this.props.getAddress(fullname, lastname, email, adress, subdistric, distric, province, postcode, tel, note)
         console.log(this.state.fullname)
         console.log(this.state.email)
+        this.props.funSumPostman()
 
+    }
+    handleOnChange() {
+        this.setState({
+            checked: !this.state.checked,
+            statusButton: !this.state.statusButton,
+            statusButton2: !this.state.statusButton2
+        })
     }
     render() {
         let { fullname, lastname, email, adress, subdistric, distric, province, postcode, tel, note } = this.state
@@ -131,11 +144,31 @@ class AddressForm extends Component {
                         />
                     </Item>
                 </Form>
+                <View style={styles.checkSubmit}>
+                    <CheckBox
+                        label='กดเพื่อยืนยันการรับเอง'
+                        labelStyle={styles.labelStyle}
+                        iconSize={30}
+                        iconName='iosCircleFill'
+                        checked={this.state.checked}
+                        checkedColor='#008080'
+                        uncheckedColor='#1f1f1f'
+                        onChange={this.handleOnChange.bind(this)}
+                    />
+                </View>
                 <View style={styles.submitContainer}>
-                    <TouchableOpacity style={styles.buttonContainer}
-                        onPress={() => this.putDataUser(fullname, lastname, email, adress, subdistric, distric, province, postcode, tel, note)}>
-                        <Text style={styles.textButton}>ถัดไป</Text>
-                    </TouchableOpacity>
+                    {this.state.statusButton &&
+                        <TouchableOpacity style={styles.buttonContainer}>
+                            <Text style={styles.textButton}>ถัดไป</Text>
+                        </TouchableOpacity>
+                    }
+                    {this.state.statusButton2 &&
+                        <TouchableOpacity style={styles.buttonContainerOnPress}
+                            onPress={() => this.putDataUser(fullname, lastname, email, adress, subdistric, distric, province, postcode, tel, note)}>
+                            <Text style={styles.textButton}>ถัดไป</Text>
+                        </TouchableOpacity>
+                    }
+
                 </View>
             </View>
         );
@@ -155,10 +188,19 @@ const styles = StyleSheet.create({
         fontFamily: 'kanit',
     },
     submitContainer: {
-        marginTop: 30,
+        marginTop: 10,
         alignItems: 'center',
     },
     buttonContainer: {
+        height: 40,
+        width: '80%',
+        backgroundColor: '#FC561F',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 20,
+        opacity: 0.5
+    },
+    buttonContainerOnPress: {
         height: 40,
         width: '80%',
         backgroundColor: '#FC561F',
@@ -180,6 +222,16 @@ const styles = StyleSheet.create({
     textLabel: {
         fontSize: 14,
         fontFamily: 'kanit'
+    },
+    labelStyle: {
+        padding: 20,
+        fontFamily: "kanit",
+        fontSize: 16
+    },
+    checkSubmit: {
+        paddingVertical: 40,
+        justifyContent: "center",
+        alignItems: "center"
     }
 })
 

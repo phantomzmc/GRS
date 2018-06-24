@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, Alert, TextInput } from 'react-native';
 import { connect } from 'react-redux'
 import axios from 'axios'
+import req from '../config/uri_req'
+import api_key from '../config/api_key'
 
 class Login extends Component {
     static propTypes = {
@@ -18,7 +20,9 @@ class Login extends Component {
     }
 
     checkLoginSever() {
-        let { status, username, password } = this.state
+        let { username, password } = this.state
+        let uri = req[0].uspSignIn
+        let apikey = api_key[0].api_key
         let data = ({
             params: [
                 { name: "Username", value: username },
@@ -27,9 +31,8 @@ class Login extends Component {
         })
         axios.post(uri, data, {
             headers: {
-                "X-DreamFactory-API-Key": api_key,
-                "X-DreamFactory-Session-Token": sessionToken,
-                "Authorization": auth
+                "X-DreamFactory-API-Key": apikey,
+                "X-DreamFactory-Session-Token": this.props.token.token,
             },
             responseType: 'json'
         })
@@ -144,9 +147,9 @@ class Login extends Component {
 const mapStateToProps = (state) => {
     return {
         profile: state.profile,
-        login: state.login
+        login: state.login,
+        token : state.token
     }
-
 }
 const mapDispatchToProps = (dispatch) => {
     return {

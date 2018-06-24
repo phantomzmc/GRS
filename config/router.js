@@ -18,10 +18,13 @@ import UserHelpRegister from '../container/userHelpRegister'
 import UserAddressRegister from '../container/userAddressRegister'
 import ControlDistance from '../container/controlDistance'
 import ButtonChangePayment from '../component/items/bottonChangePayment'
+import ButtonChangeTranfer from '../component/items/bottonChangeTranfer'
 import Verify from '../container/verify'
 import ResetVerify from '../container/resetVerify'
 import ResetPassword from '../container/resetPassword'
 import FriendDistance from '../container/friendDistance'
+
+import ControlPayment from '../container/controlPayment'
 
 
 export default StackNavigator({
@@ -37,8 +40,8 @@ export default StackNavigator({
     // FriendListLayout : {
     //     screen : FriendListLayout
     // },
-    // Login: {
-    //     screen: Login,
+    // ControlPayment: {
+    //     screen: ControlPayment,
     //     navigationOptions: {
     //         header: () => null
     //     }
@@ -131,10 +134,22 @@ export default StackNavigator({
             header: () => null
         }
     },
+    ControlPayment: {
+        screen: ControlPayment,
+        navigationOptions: {
+            header : () => null
+        }
+    },
     ButtonChangePayment: {
         screen: ButtonChangePayment,
         navigationOptions: {
             header : () => null
+        }
+    },
+    ButtonChangeTranfer:{
+        screen : ButtonChangeTranfer,
+        navigationOptions : {
+            header: () => null
         }
     },
     TabRouter: {

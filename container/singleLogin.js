@@ -28,7 +28,7 @@ class SingleLogin extends Component {
     }
     checkLoginSever () {
         let { status,username } = this.state
-        let uri = req[2].uspCheckUsername
+        let uri = req[0].uspCheckUsername
         let data = ({
             params: {
                 value: username,

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { View, ScrollView, StyleSheet, TouchableOpacity, AlertIOS, StatusBar } from 'react-native';
-import { Container, Icon, Text, Tab, Tabs, TabHeading, Card, CardItem, Body } from 'native-base';
+import { Container, Icon, Text, Tab, Tabs, TabHeading, Card, CardItem, Body, Content } from 'native-base';
 
 import AddressForm from '../component/form/addressForm'
 // import ChoiceSend from '../component/items/choiceSend'
@@ -40,7 +40,7 @@ class AddressLayout extends Component {
     }
     nextToPayment = () => {
         // this.getChoice()
-        this.props.navigation.navigate('ButtonChangePayment')
+        this.props.navigation.navigate('ControlPayment')
     }
     gotoBack = () => {
         this.props.navigation.navigate('ShirtPhotoPlus')
@@ -78,23 +78,27 @@ class AddressLayout extends Component {
                     goback={this.gotoBack.bind(this)}
                 />
                 <Tabs initialPage={this.state.pageNumber}>
-                    <Tab heading={<TabHeading><Icon name="md-flag" /><Text style={styles.textLabel} onPress={this.getSumPleace.bind(this)}> เลือกรับเอง</Text></TabHeading>} >
-                        <GetPleace goPayment={this.nextToPayment.bind(this)} />
+                    <Tab heading={<TabHeading><Icon name="md-flag" /><Text style={styles.textLabel} > เลือกรับเอง</Text></TabHeading>} onPress={this.getSumPleace.bind(this)}>
+                        <GetPleace
+                            goPayment={this.nextToPayment.bind(this)}
+                            funSumPleace={this.getSumPleace.bind(this)}
+                        />
                     </Tab>
-                    <Tab heading={<TabHeading><Icon name="md-map" /><Text style={styles.textLabel} onPress={this.getSumPostman.bind(this)} > เลือกส่งไปรษณีย์</Text></TabHeading>} >
+                    <Tab heading={<TabHeading><Icon name="md-map" /><Text style={styles.textLabel} > เลือกส่งไปรษณีย์</Text></TabHeading>} onPress={this.getSumPostman.bind(this)}>
                         <ScrollView >
-                            <View style={{ padding: 20 }}>
+                            <View style={{ paddingTop: 20, paddingHorizontal: 20 }}>
                                 <Card>
-                                    <CardItem>
-                                        <Body>
-                                            <View>
-                                                <Text>ค่าใช้จ่ายในการจัดส่งแบบไปรษณีย์</Text>
-                                            </View>
-                                        </Body>
-                                    </CardItem>
+                                    <View style={{ justifyContent: "center", alignItems: "center", padding: 20 }}>
+                                        <Text style={[styles.textTitle, { fontSize: 18, paddingBottom: 5 }]}>ค่าใช้จ่ายในการจัดส่งแบบไปรษณีย์</Text>
+                                        <Text style={styles.textTitle}>ไปรษณีย์ ค่าส่งคนแรก 65 บาท</Text>
+                                        <Text style={styles.textTitle}>คนที่ 2 หรือคนถัดไป คนล่ะ 35 บาท</Text>
+                                    </View>
                                 </Card>
                             </View>
-                            <AddressForm getAddress={this.goTotalPayment.bind(this)} />
+                            <AddressForm
+                                getAddress={this.goTotalPayment.bind(this)}
+                                funSumPostman={this.getSumPostman.bind(this)}
+                            />
                         </ScrollView>
                     </Tab>
                 </Tabs>
@@ -112,6 +116,17 @@ const styles = StyleSheet.create({
         fontSize: 12,
         fontFamily: 'Kanit',
     },
+    cradPost: {
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column"
+    },
+    textTitle: {
+        fontFamily: "kanit",
+        fontSize: 14,
+        justifyContent: "center",
+        alignContent: "center",
+    }
 })
 
 const mapStateToProps = (state) => {
@@ -140,10 +155,10 @@ const mapDisPacthToProps = (dispatch) => {
                 payload: totalPrice
             })
         },
-        setTotalRegister : (total) => {
+        setTotalRegister: (total) => {
             dispatch({
-                type : "setTotalRegister",
-                payload : total
+                type: "setTotalRegister",
+                payload: total
             })
         },
     }

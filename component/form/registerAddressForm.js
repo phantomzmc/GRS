@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { View, Text, StyleSheet, TouchableOpacity, Alert, Image } from "react-native";
-import { StackNavigator } from "react-navigation";
 import { Form, Item, Input, Label } from 'native-base'
 import ProvinceForm from './addressForm-province'
 import AmphoeForm from './addressForm-amphoe'

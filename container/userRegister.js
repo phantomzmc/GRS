@@ -81,7 +81,9 @@ class UserRegister extends Component {
         <ScrollView>
           <View style={styles.container}>
             <HeaderUser Name={this.props.fullname} UserID={this.props.userid} />
-            <FormRegister goEvent={this.gotoListEvent.bind(this)} />
+            <FormRegister
+              goEvent={this.gotoListEvent.bind(this)}
+              getToken={this.props.token.token} />
           </View>
         </ScrollView>
       </Container>
@@ -93,7 +95,11 @@ const styles = StyleSheet.create({
   container: {
   }
 });
-
+const mapStateToProps = state => {
+  return {
+    token: state.token
+  }
+}
 const mapDispatchToProps = dispatch => {
   return {
     setProfile: profile => {
@@ -105,4 +111,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(UserRegister);
+export default connect(mapStateToProps, mapDispatchToProps)(UserRegister);
