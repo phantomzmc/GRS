@@ -129,6 +129,9 @@ const creditcard = (state = credit, action) => {
       state.vat = action.payload;
       break;
     }
+    case "setStatusPayment" : {
+      state.statusPayment = action.payload
+    }
     default:
       break;
   }

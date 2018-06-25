@@ -23,7 +23,8 @@ class CreditView extends Component {
             nameCredit: "",
             numberCredit: "1234 5678 1234 5678",
             expCredit: "00",
-            cvcCredit: "XXX"
+            cvcCredit: "XXX",
+            statusPayment : false
         }
         this.genTokenCredit = this.genTokenCredit.bind(this)
     }
@@ -40,33 +41,37 @@ class CreditView extends Component {
                 'security_code': parseInt(cvcCredit)
             }
         });
-        console.log(data.id);
+        console.log(data)
+        this.getCharges(data.id)
     }
-    // getCharges(tokenId){
-    //     console.log(tokenId)
-    //     Omise.charges.create({
-    //         'amount': '100000', // 1,000 Baht
-    //         'currency': 'thb',
-    //         'capture': false,
-    //         'card': tokenId
-    //       }, function(err, resp) {
-    //         console.log(resp)
-    //         console.log(err)
-    //         if (charge) {
-    //           //Success
-    //           console.log("success")
-    //         } else {
-    //           //Handle failure
-    //           console.log(err)
-    //         //   throw resp.failure_code;
-    //         }
-    //       });
-    // }
+    getCharges(tokenId){
+        console.log(tokenId)
+        Omise.charges.create({
+            'amount': '100000', // 1,000 Baht
+            'currency': 'thb',
+            'capture': false,
+            'card': tokenId
+          }, function(err, resp) {
+            console.log(resp)
+            console.log(err)
+            if (charge) {
+              //Success
+              console.log("success")
+              this.setState({ statusPayment : true})
+            } else {
+              //Handle failure
+              console.log(err)
+              this.setState({ statusPayment : false})
+            //   throw resp.failure_code;
+            }
+          });
+    }
 
     putDataCredit = (nameCredit, numberCredit, expCredit, cvcCredit) => {
         this.genTokenCredit(nameCredit, numberCredit, expCredit, cvcCredit)
         this.props.goAddress()
         this.props.setCredit({ nameCredit: nameCredit, numberCredit, expCredit, cvcCredit })
+        this.props.setStatusPayment(this.state.statusPayment)
     }
     render() {
         let { nameCredit, numberCredit, expCredit, cvcCredit } = this.state
@@ -168,7 +173,7 @@ class CreditView extends Component {
                 <View style={styles.submitContainer}>
                     <TouchableOpacity
                         style={styles.buttonContainer}
-                        onPress={() => this.genTokenCredit(nameCredit, numberCredit, expCredit, cvcCredit)}>
+                        onPress={() => this.putDataCredit(nameCredit, numberCredit, expCredit, cvcCredit)}>
                         <Text style={styles.textButton}> ยืนยันและชำระค่าบริการ </Text>
                     </TouchableOpacity>
                 </View>
@@ -179,7 +184,16 @@ class CreditView extends Component {
 const mapDispatchtoProps = (dispatch) => {
     return {
         setCredit: (nameCredit) => {
-            dispatch({ type: 'setCredit', payload: nameCredit })
+            dispatch({ 
+                type: 'setCredit', 
+                payload: nameCredit 
+            })
+        },
+        setStatusPayment: (statusPayment) => {
+            dispatch({
+                type : 'setStatusPayment',
+                payload : statusPayment
+            })
         }
     }
 }

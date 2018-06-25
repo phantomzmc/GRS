@@ -48,7 +48,7 @@ class ButtonChangeTranfer extends Component {
                             totalPayment={this.gotoTotalPayment.bind(this)} />
                     </Tab> */}
                     <Tab heading={<TabHeading><Icon name="card" /><Text style={styles.textLabel}> โอนเงิน</Text></TabHeading>}>
-                        {/* <TranferPayment /> */}
+                        <TranferPayment />
                     </Tab>
                     <Tab heading={<TabHeading><Icon name="list" /><Text style={styles.textLabel}> เเสดงค่าสมัครทั้งหมด</Text></TabHeading>}>
                         <TotalRegister />

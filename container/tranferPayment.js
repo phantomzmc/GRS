@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, StyleSheet, TouchableOpacity, Button } from 'react-native';
-import { StackNavigator } from 'react-navigation';
 import { connect } from 'react-redux'
 
 
-import ButtonChangePayment from '../component/items/bottonChangePayment'
 import TranferView from '../component/items/tranferView'
 import TotalPayment from '../container/totalLayout'
 

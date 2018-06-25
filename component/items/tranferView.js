@@ -7,16 +7,56 @@ import {
     TextInput,
     TouchableOpacity
 } from 'react-native';
+import ImagePicker from 'react-native-image-picker';
+
 
 class TranferView extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         this.state = {
-            bank : "",
-            branch : "",
-            ACNumber : "",
-            username : ""
+            bank: "",
+            branch: "",
+            ACNumber: "",
+            username: "",
+            ImageSource: null,
+
         }
+    }
+    selectPhotoTapped() {
+        const options = {
+            quality: 1.0,
+            maxWidth: 500,
+            maxHeight: 500,
+            storageOptions: {
+                skipBackup: true
+            }
+        };
+
+         ImagePicker.showImagePicker(options, (response) => {
+            console.log('Response = ', response);
+
+            if (response.didCancel) {
+                console.log('User cancelled photo picker');
+            }
+            else if (response.error) {
+                console.log('ImagePicker Error: ', response.error);
+            }
+            else if (response.customButton) {
+                console.log('User tapped custom button: ', response.customButton);
+            }
+            else {
+                let source = { uri: response.uri };
+
+                // You can also display the image using data:
+                // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+                this.setState({
+
+                    ImageSource: source
+
+                });
+            }
+        });
     }
 
 
@@ -52,16 +92,12 @@ class TranferView extends Component {
                     </View>
                 </View>
                 <View style={styles.submitContainer}>
-                    <TouchableOpacity
-                        onPress={this
-                            .selectPhotoTapped
-                            .bind(this)}
-                        style={styles.buttonContainer}>
-                        <View>
-                            {this.state.avatarSource === null
-                                ? <Text style={styles.textButton}>เพิ่มรูปภาพ</Text>
-                                : <Image style={styles.avatar} source={this.state.avatarSource} />
+                    <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
+                        <View style={styles.ImageContainer}>
+                            {this.state.ImageSource === null ? <Text>Select a Photo</Text> :
+                                <Image style={styles.ImageContainer} source={this.state.ImageSource} />
                             }
+
                         </View>
                     </TouchableOpacity>
                 </View>
@@ -137,7 +173,19 @@ const styles = StyleSheet.create({
         fontSize: 15,
         color: '#fff',
         fontFamily: 'Kanit'
-    }
+    },
+    ImageContainer: {
+        borderRadius: 10,
+        width: 250,
+        height: 250,
+        borderColor: '#9B9B9B',
+        borderWidth: 1 ,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#CDDC39',
+        
+      },
+  
 
 })
 

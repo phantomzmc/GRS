@@ -4,7 +4,9 @@ import { connect } from 'react-redux'
 
 class DetailRegister extends Component {
     state = {
-        address: "106/13 หนองหอย เมืองเชียงใหม่ เชียงใหม่"
+        address: "106/13 หนองหอย เมืองเชียงใหม่ เชียงใหม่",
+        statusPayment1: false,
+        statusPayment2: true
     }
     componentDidMount() {
         this.setState({
@@ -14,13 +16,21 @@ class DetailRegister extends Component {
                 this.props.userprofile.userprofile.Province + " " +
                 this.props.userprofile.userprofile.PostCode
         })
+        if (this.props.creditcard.statusPayment == true) {
+            this.setState({ statusPayment1: true, statusPayment2: false })
+        }
+        else if (this.props.creditcard.statusPayment == false) {
+            this.setState({ statusPayment1: false, statusPayment2: true })
+
+        }
     }
     render() {
         return (
             <View style={styles.container}>
                 <View style={styles.view1}>
                     <View>
-                        <Text style={styles.typePayment}> จ่ายเเล้ว </Text>
+                        {this.state.statusPayment1 && <Text style={styles.typePaymentSuccess}> จ่ายเเล้ว </Text>}
+                        {this.state.statusPayment2 && <Text style={styles.typePaymentFalse}> ยังไม่ได้จ่าย </Text>}
                     </View>
                     <View>
                         <Image source={{ uri: "https://www.qrstuff.com/images/sample.png" }}
@@ -105,8 +115,12 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
 
     },
-    typePayment: {
+    typePaymentSuccess: {
         color: '#90EE90',
+        fontFamily: 'kanit',
+    },
+    typePaymentFalse: {
+        color: "red",
         fontFamily: 'kanit',
     },
     textName1: {
@@ -138,7 +152,8 @@ const mapStateToProps = (state) => {
         shirtphoto: state.shirtphoto,
         userprofile: state.userprofile,
         choiceSend: state.choiceSend,
-        address: state.address
+        address: state.address,
+        creditcard: state.creditcard
     }
 }
 export default connect(mapStateToProps)(DetailRegister);
