@@ -67,10 +67,6 @@ class ControlDistance extends Component {
                     </Tab>
                     <Tab
                         heading={<TabHeading><Text style={styles.textLabel} onPress={() => this.goAddTeam()}>ลงทะเบียนแบบกลุ่ม</Text></TabHeading>}
-                        // textStyle={styles.textLabel}
-                        // tabStyle={{ backgroundColor: '#FC561F' }}
-                        // activeTabStyle={{ backgroundColor: '#FC561F' }}
-                        // activeTextStyle={styles.textLabel}
                         >
                     </Tab>
                 </Tabs>

@@ -12,15 +12,18 @@ class TransferPayment extends Component {
         navigation: PropTypes.object,
     }
     showDetailPayment = () => {
-        this.props.navigation.navigate('TotalPayment')
+        this.props.showDetail()
     }
-
+    goAddressSend = () => {
+        this.props.totalPayment()
+    }
 
     render() {
         return (
             <View style={styles.container}>
-                <TranferView 
-                    showDetail={this.showDetailPayment.bind(this)}
+                <TranferView
+                    ShowDetail={this.showDetailPayment.bind(this)} 
+                    goAddress={this.goAddressSend.bind(this)}
                     detailPayment={this.props.event.event.EventBankDetailTH} />
             </View>
         );

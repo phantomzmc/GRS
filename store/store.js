@@ -212,6 +212,22 @@ const friendlist = (state = friend, action) => {
   }
   return state;
 }
+const network = (state = {},action) => {
+  switch (action.type){
+    case "setIP" : {
+      state.ip = action.payload
+      break;
+    }
+    case "setLatitude" : {
+      state.lat = action.payload
+      break;
+    }
+    case "setLongitude" : {
+      state.long = action.payload
+    }
+  }
+  return state;
+}
 
 
 const myLogger = store => next => action => {
@@ -231,7 +247,8 @@ const store = createStore(
     address,
     friendlist,
     username,
-    userprofile
+    userprofile,
+    network
   }),
   {},
   applyMiddleware(myLogger)

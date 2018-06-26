@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import DatePicker from 'react-native-datepicker'
 import axios from 'axios'
-import { Form, Item, Input, Label, Tabs, Tab, TabHeading, Icon,Toast } from 'native-base'
+import { Form, Item, Input, Label, Tabs, Tab, TabHeading, Icon, Toast } from 'native-base'
 import req from '../../config/uri_req'
 import api_key from '../../config/api_key'
 
@@ -36,7 +36,7 @@ class FormRegister extends Component {
       nation: "",
       gen: "M",
       selectedIndex: 0,
-      status : "",
+      status: "",
       showToast: false
     };
   }
@@ -128,10 +128,12 @@ class FormRegister extends Component {
         </Form>
         <Text style={styles.headForm}>เพศ</Text>
         <View style={styles.conlorsegment}>
-          <Tabs initialPage={this.state.selectedIndex}>
-            <Tab heading={<TabHeading ><Icon name="ios-man" onPress={() => this.setState({ selectedIndex: 0, gen: "M" })} /></TabHeading>}>
+          <Tabs
+            initialPage={this.state.selectedIndex}
+            tabBarUnderlineStyle={{ backgroundColor: "#FC561F", height: 2 }}>
+            <Tab heading={<TabHeading ><Icon name="ios-man" style={{ color: "#FC561F" }} /><Text style={styles.tabGender}>ชาย</Text></TabHeading>} onPress={() => this.setState({ selectedIndex: 0, gen: "M" })}>
             </Tab>
-            <Tab heading={<TabHeading><Icon name="ios-woman" onPress={() => this.setState({ selectedIndex: 1, gen: "F" })} /></TabHeading>}>
+            <Tab heading={<TabHeading><Icon name="ios-woman" style={{ color: "#FC561F" }} /><Text style={styles.tabGender}>หญิง</Text></TabHeading>} onPress={() => this.setState({ selectedIndex: 1, gen: "F" })}>
             </Tab>
           </Tabs>
         </View>
@@ -341,6 +343,11 @@ const styles = StyleSheet.create({
   tabStyle: {
     backgroundColor: '#fff'
   },
+  tabGender: {
+    fontFamily: "kanit",
+    paddingHorizontal: 10,
+    color: "#FC561F"
+  }
 
 });
 export default FormRegister;

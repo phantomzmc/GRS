@@ -28,7 +28,6 @@ class CreditPayment extends Component {
             .bind(this)
     }
     showDetailPayment = () => {
-        console.log("showDetail")
         this.props.showDetail()
     }
     gotoTransferPayment = () => {

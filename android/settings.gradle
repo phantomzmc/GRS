@@ -1,4 +1,8 @@
 rootProject.name = 'GRS'
+include ':react-native-network-info'
+project(':react-native-network-info').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-network-info/android')
+include ':react-native-image-picker'
+project(':react-native-image-picker').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-image-picker/android')
 include ':react-native-view-shot'
 project(':react-native-view-shot').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-view-shot/android')
 include ':react-native-video'

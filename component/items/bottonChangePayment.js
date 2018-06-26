@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, StatusBar } from 'react-native';
 import { Container, Header, Tab, Tabs, TabHeading, Icon, Button, ScrollableTab } from 'native-base';
-import { connect} from 'react-redux'
+import { connect } from 'react-redux'
 
 import CreditPayment from '../../container/creditPayment'
 import TranferPayment from '../../container/tranferPayment'
@@ -43,12 +43,12 @@ class ButtonChangePayment extends Component {
                     goback={this.gotoBack.bind(this)} />
                 <Tabs initialPage={this.state.pageNumber}>
                     <Tab heading={<TabHeading><Icon name="card" /><Text style={styles.textLabel}> ชำระผ่านบัตรเครดิต/เดบิต</Text></TabHeading>}>
-                        <CreditPayment 
+                        <CreditPayment
                             showDetail={this.gotoShowDetail.bind(this)}
                             totalPayment={this.gotoTotalPayment.bind(this)} />
                     </Tab>
                     <Tab heading={<TabHeading><Icon name="list" /><Text style={styles.textLabel}> เเสดงค่าสมัครทั้งหมด</Text></TabHeading>}>
-                        <TotalRegister />
+                        <TotalRegister/>
                     </Tab>
                 </Tabs>
                 <SummaryTotal />
@@ -57,22 +57,22 @@ class ButtonChangePayment extends Component {
     }
 }
 const mapStateToProps = state => {
-    return{
-        event : state.event
+    return {
+        event: state.event
     }
 }
 const mapDispatchToProps = dispatch => {
     return {
-        setTotalRegister : (total) => {
+        setTotalRegister: (total) => {
             dispatch({
-                type : "setTotalRegister",
-                payload : total
+                type: "setTotalRegister",
+                payload: total
             })
         },
-        setCreditPrice : (credit) => {
+        setCreditPrice: (credit) => {
             dispatch({
-                type : "setCreditPrice",
-                payload : credit
+                type: "setCreditPrice",
+                payload: credit
             })
         }
     }
@@ -101,4 +101,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default connect(mapStateToProps,mapDispatchToProps)(ButtonChangePayment);
+export default connect(mapStateToProps, mapDispatchToProps)(ButtonChangePayment);

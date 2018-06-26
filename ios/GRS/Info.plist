@@ -2,6 +2,16 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string/>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string/>
+	<key>NSMicrophoneUsageDescription</key>
+	<string/>
+	<key>NSCameraUsageDescription</key>
+	<string/>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -37,12 +47,6 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>NSCameraUsageDescription</key>
-	<string>เปิดเพื่อทำการเข้าใช้งานกล้องถ่ายรูป</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>เปิดเพื่อทำการเข้าถึงคลังรูปภาพ</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>

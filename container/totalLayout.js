@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert,StatusBar } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert, StatusBar } from 'react-native';
 import { Container } from 'native-base'
 import { connect } from 'react-redux'
 import { captureScreen } from "react-native-view-shot";
@@ -19,7 +19,7 @@ class TotalLayout extends Component {
                 name: "",
                 date: ""
             },
-
+            imageURI : ""
         }
     }
     componentDidMount() {
@@ -57,8 +57,16 @@ class TotalLayout extends Component {
             quality: 0.8
         })
             .then(
+                uri => this.setState({ imageURI: uri }),
+                Alert.alert('บันทึกสำเร็จ', 'ทำการบันทึกรายการเสร็จสิ้น', [
+                    {
+                        text: 'ตกลง',
+                        onPress: () => this.gotoListEvent()
+                    }
+                ], { cancelable: false }),
                 error => console.error("Oops, Something Went Wrong", error)
             );
+
     }
 
     render() {

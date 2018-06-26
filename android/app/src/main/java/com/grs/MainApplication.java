@@ -3,6 +3,8 @@ package com.grs;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.pusherman.networkinfo.RNNetworkInfoPackage;
+import com.imagepicker.ImagePickerPackage;
 import fr.greweb.reactnativeviewshot.RNViewShotPackage;
 import com.brentvatne.react.ReactVideoPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -31,6 +33,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNNetworkInfoPackage(),
+            new ImagePickerPackage(),
             new RNViewShotPackage(),
             new ReactVideoPackage(),
             new VectorIconsPackage(),

@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
     View,
     Text,
     StyleSheet,
     Image,
-    TextInput,
+    ScrollView,
     TouchableOpacity
 } from 'react-native';
+import { Card, Icon } from "native-base";
 import ImagePicker from 'react-native-image-picker';
 
-
 class TranferView extends Component {
+    static propTypes = {
+        navigation: PropTypes.object,
+    }
     constructor(props) {
         super(props)
         this.state = {
@@ -19,7 +23,7 @@ class TranferView extends Component {
             ACNumber: "",
             username: "",
             ImageSource: null,
-
+            statusButton: false
         }
     }
     selectPhotoTapped() {
@@ -32,7 +36,7 @@ class TranferView extends Component {
             }
         };
 
-         ImagePicker.showImagePicker(options, (response) => {
+        ImagePicker.showImagePicker(options, (response) => {
             console.log('Response = ', response);
 
             if (response.didCancel) {
@@ -46,15 +50,13 @@ class TranferView extends Component {
             }
             else {
                 let source = { uri: response.uri };
-
                 // You can also display the image using data:
                 // let source = { uri: 'data:image/jpeg;base64,' + response.data };
-
                 this.setState({
-
-                    ImageSource: source
-
+                    ImageSource: source,
+                    statusButton: true
                 });
+                console.log(this.state.ImageSource)
             }
         });
     }
@@ -63,45 +65,86 @@ class TranferView extends Component {
     render() {
         let { bank, branch, ACNumber, username } = this.state
         return (
-            <View style={styles.container}>
-                <View style={styles.creditCard}>
-                    <View style={styles.cardNumber}>
-                        <View
-                            style={{
-                                flexDirection: 'column'
-                            }}>
-                            <Text style={styles.textCardNumber}>{this.props.detailPayment}</Text>
-                            {/* <Text style={styles.textNumber}>{branch}</Text> */}
-                        </View>
-
-                    </View>
-                    <View style={styles.expcvcView}>
-                        <View style={styles.EXPView}>
-                            {/* <Text style={styles.textExpiration}>บัญชีออมทรัพย์เลขที่ {this.props.detailPayment}</Text>
-                            <Text style={styles.monthyear}>{username}</Text> */}
-                            <Image
-                                source={{
-                                    uri: "http://www.satapornbooks.co.th/SPBecommerce/images/logo-bank03.png"
-                                }}
+            <ScrollView>
+                <View style={styles.container}>
+                    <View style={styles.creditCard}>
+                        <View style={styles.cardNumber}>
+                            <View
                                 style={{
-                                    width: 50,
-                                    height: 50
-                                }} />
-                        </View>
-                        <View></View>
-                    </View>
-                </View>
-                <View style={styles.submitContainer}>
-                    <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
-                        <View style={styles.ImageContainer}>
-                            {this.state.ImageSource === null ? <Text>Select a Photo</Text> :
-                                <Image style={styles.ImageContainer} source={this.state.ImageSource} />
-                            }
+                                    flexDirection: 'column'
+                                }}>
+                                <Text style={styles.textCardNumber}>{this.props.detailPayment}</Text>
+                                {/* <Text style={styles.textNumber}>{branch}</Text> */}
+                            </View>
 
+                        </View>
+                        <View style={styles.expcvcView}>
+                            <View style={styles.EXPView}>
+                                {/* <Text style={styles.textExpiration}>บัญชีออมทรัพย์เลขที่ {this.props.detailPayment}</Text>
+                            <Text style={styles.monthyear}>{username}</Text> */}
+                                <Image
+                                    source={{
+                                        uri: "http://www.satapornbooks.co.th/SPBecommerce/images/logo-bank03.png"
+                                    }}
+                                    style={{
+                                        width: 50,
+                                        height: 50
+                                    }} />
+                            </View>
+                            <View></View>
+                        </View>
+                    </View>
+                    <View style={styles.containerForm}>
+                        <Text style={styles.textForm}>หลักฐานการชำระเงิน</Text>
+                    </View>
+                    <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
+                        <View style={{ justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+                            <Card style={styles.ImageContainer}>
+                                {this.state.ImageSource === null ?
+                                    <View style={{ flexDirection: "row" }}>
+                                        <Icon name="camera" type="Entypo" style={{ fontSize: 20, color: "#FC561F", marginRight: 10 }} />
+                                        <Text style={{ fontFamily: "kanit", color: "#FC561F" }}>เลือกรูปภาพ</Text>
+                                    </View> :
+                                    <Image style={styles.ImageContainer} source={this.state.ImageSource} />
+                                }
+                            </Card>
                         </View>
                     </TouchableOpacity>
+                    <View style={styles.containerForm}>
+                        <Text style={styles.textForm}>คำรับรองของผู้สมัคร</Text>
+                    </View>
+                    <View style={{ padding: 10 }}>
+                        <Card>
+                            <Text style={styles.textDetail}>   ข้าพเจ้าขอรับรองว่าข้อความข้างต้นเป็นความจริงและได้ทำการฝึกซ้อม ทั้งมีสุขภาพสมบูรณ์พร้อมที่จะมีการแข่งขันในประเภทที่สมัครข้างต้นด้วยความเต็มใจ และจะไม่เรียกร้องค่าเสียหายใดๆหากเกิดอันตรายหรือบาดเจ็บทั้งก่อนและหลังการแข่งขันอีกทั้งก่อนและหลังการแข่งขัน อีกทั้งยินดีที่จะแสดงหลักฐานพิสุจน์ตัวเองต่อคณะผู้จัดการแข่งขัน
+                                    และถือว่าการบันทึกภาพยนต์ดังกล่าวเป็นลิขสิทธิ์ของคณะกรรมการจัดการแข่งขันครั้งนี้
+                        </Text>
+                            <Text style={styles.textDetail}>
+                                การยืนยันการสมัครผ่านระบบออนไลน์นี้ถือว่าท่านได้ให้การยอมรับข้อความข้างต้นแทนการเซ็นชื่อ
+                        </Text>
+                        </Card>
+                    </View>
+                    <View style={styles.containerForm}>
+                        <Text style={styles.textForm}>สงวนสิทธิ์การเปลี่ยนแปลง</Text>
+                    </View>
+                    <View style={{ padding: 10 }}>
+                        <Card>
+                            <Text style={styles.textDetail}>*** หลังจากยืนยันการชำระค่าสมัครแล้ว ไม่สามารถยกเลิกหรือเปลี่ยนแปลงข้อมูลการสมัครใดๆในทุกกรณี ***
+                        </Text>
+
+                        </Card>
+                    </View>
+                    <View style={styles.submitContainer}>
+                        {this.state.statusButton &&
+
+                            <TouchableOpacity style={[styles.buttonContainer]}
+                                onPress={() => this.props.goAddress()}>
+                                <Text style={styles.textButton}>ถัดไป</Text>
+                            </TouchableOpacity>
+
+                        }
+                    </View>
                 </View>
-            </View>
+            </ScrollView>
         );
     }
 }
@@ -158,7 +201,8 @@ const styles = StyleSheet.create({
     },
     submitContainer: {
         alignItems: 'center',
-        marginBottom: 100
+        marginBottom: 80,
+        marginTop: 20
     },
     buttonContainer: {
         height: 40,
@@ -175,17 +219,27 @@ const styles = StyleSheet.create({
         fontFamily: 'Kanit'
     },
     ImageContainer: {
-        borderRadius: 10,
         width: 250,
-        height: 250,
-        borderColor: '#9B9B9B',
-        borderWidth: 1 ,
+        height: 150,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#CDDC39',
-        
-      },
-  
+        backgroundColor: '#fff',
+    },
+    containerForm: {
+        flex: 1
+    },
+    textForm: {
+        backgroundColor: '#EFF4F1',
+        fontSize: 22,
+        fontWeight: '300',
+        padding: 20,
+        fontFamily: "Kanit"
+    },
+    textDetail: {
+        fontFamily: 'kanit',
+        padding: 15
+    }
+
 
 })
 

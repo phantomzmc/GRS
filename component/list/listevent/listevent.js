@@ -206,15 +206,16 @@ const styles = StyleSheet.create({
         flex: 1
     },
     textName: {
-        marginRight: 30
+        paddingRight: 30
     },
     name: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'space-between',
-        paddingHorizontal: 25,
+        paddingLeft: 20,
+        paddingRight: 60,
         paddingVertical: 15,
-        fontSize: 18,
+        fontSize: 16,
         fontFamily: "Kanit"
     },
     listView: {

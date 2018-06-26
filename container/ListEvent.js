@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet,View,StatusBar } from 'react-native';
+import { StyleSheet, View, StatusBar } from 'react-native';
 import List from '../component/list/listevent/listevent'
 import { YellowBox } from 'react-native';
 import { connect } from 'react-redux'
+import { NetworkInfo } from 'react-native-network-info';
 
 class ListEvent extends Component {
     static propTypes = {
@@ -20,9 +21,25 @@ class ListEvent extends Component {
                 tranferBank: ""
             },
             profile: "",
-            token : ""
+            token: "",
+            ip: "",
+            lat: "",
+            long: ""
         }
 
+    }
+    componentDidMount() {
+        this.getNetwork()
+    }
+    getNetwork() {
+        NetworkInfo.getIPAddress(ip => {
+            this.props.setIP(ip)
+        });
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+            this.props.setLatitude(position.coords.latitude)
+            this.props.setLongitude(position.coords.longitude)
+        })
     }
     setUserID = () => {
         console.log(this.props.profile.profile.userid)
@@ -62,7 +79,7 @@ class ListEvent extends Component {
                     hidden={false}
                     translucent={true}
                 />
-                <List 
+                <List
                     CheckLogin={this.checkUser.bind(this)}
                     Profile={this.state.profile}
                 />
@@ -77,19 +94,37 @@ const mapStateToProps = (state) => {
     }
 }
 const mapDispatchToProps = dispatch => {
-        return{
-            setCreateToken : (token) => {
-                dispatch({
-                    type : "setCreateToken",
-                    payload : token
-                })
-            }
+    return {
+        setCreateToken: (token) => {
+            dispatch({
+                type: "setCreateToken",
+                payload: token
+            })
+        },
+        setIP: (ip) => {
+            dispatch({
+                type: "setIP",
+                payload: ip
+            })
+        },
+        setLatitude: (lat) => {
+            dispatch({
+                type: "setLatitude",
+                payload: lat
+            })
+        },
+        setLongitude: (long) => {
+            dispatch({
+                type: "setLongitude",
+                payload: long
+            })
         }
     }
+}
 
 const styles = StyleSheet.create({
     container: {
         flex: 1
     }
 });
-export default connect(mapStateToProps,mapDispatchToProps)(ListEvent);
+export default connect(mapStateToProps, mapDispatchToProps)(ListEvent);
