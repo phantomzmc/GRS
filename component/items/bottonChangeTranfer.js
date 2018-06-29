@@ -3,8 +3,6 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, StatusBar } from 'react-native';
 import { Container, Header, Tab, Tabs, TabHeading, Icon, Button, ScrollableTab } from 'native-base';
 import { connect } from 'react-redux'
-
-import CreditPayment from '../../container/creditPayment'
 import TranferPayment from '../../container/tranferPayment'
 import TotalRegister from '../../component/items/totalRegister'
 import SummaryTotal from '../items/summary'

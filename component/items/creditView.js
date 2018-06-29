@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import {
-    View,
-    Text,
-    StyleSheet,
-    Image,
-    TextInput,
-    TouchableOpacity,
-    AlertIOS
-} from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Form, Item, Input, Label, Icon, Card } from 'native-base'
 import { connect } from 'react-redux'
-
+import Modal from "react-native-modal";
 import Omise from 'omise-react-native';
-Omise.config('pkey_test_5ccy7tzubo9t8d0i71o', 'skey_test_5ccy7tzukutfwjoi8p3', '2015-11-17');
+import ChargePaymentLoad from '../modal/chargePayment_load'
+import ChargePayment from '../modal/chargePayment'
+import ChargePaymentError from '../modal/chargePayment_error'
+const ibit_pkey = 'pkey_test_5b7nut5dlzyudruopsl'
+const ibit_skey = 'skey_test_5b7nwwrac7mvps7l3mp'
+const test_pkey = 'pkey_test_5ccy7tzubo9t8d0i71o'
+const test_skey = 'skey_test_5ccy7tzukutfwjoi8p3'
+Omise.config(test_pkey, test_skey, '2015-11-17');
 
 class CreditView extends Component {
 
@@ -22,59 +20,82 @@ class CreditView extends Component {
         this.state = {
             nameCredit: "",
             numberCredit: "1234 5678 1234 5678",
-            expCredit: "00",
+            expCredit: "02",
+            yearCredit: "20",
             cvcCredit: "XXX",
-            statusPayment : false
+            statusPayment: false,
+            modalLoad: false,
+            modalSuccess: false,
+            modalFaild: false
         }
         this.genTokenCredit = this.genTokenCredit.bind(this)
     }
 
-    async genTokenCredit(nameCredit, numberCredit, expCredit, cvcCredit) {
+    async genTokenCredit(nameCredit, numberCredit, expCredit,yearCredit, cvcCredit) {
         const data = await Omise.createToken({
             'card': {
                 'name': nameCredit,
-                'city': 'Bangkok',
-                'postal_code': 10320,
                 'number': numberCredit,
                 'expiration_month': parseInt(expCredit),
-                'expiration_year': 2018,
+                'expiration_year': parseInt(yearCredit),
                 'security_code': parseInt(cvcCredit)
             }
         });
         console.log(data)
+        // this.openModal()
         this.getCharges(data.id)
     }
-    getCharges(tokenId){
-        console.log(tokenId)
-        Omise.charges.create({
-            'amount': '100000', // 1,000 Baht
+    async getCharges(tokenId) {
+        const totalRegis = Number(this.props.event.totalRegister * 100)
+        this.setState({
+            amount: String(totalRegis)
+        })
+        const data = await Omise.createSource({
+            'type': 'internet_banking_bbl',
+            'amount': this.state.amount,
             'currency': 'thb',
-            'capture': false,
+            'capture': true,
             'card': tokenId
-          }, function(err, resp) {
-            console.log(resp)
-            console.log(err)
-            if (charge) {
-              //Success
-              console.log("success")
-              this.setState({ statusPayment : true})
-            } else {
-              //Handle failure
-              console.log(err)
-              this.setState({ statusPayment : false})
-            //   throw resp.failure_code;
-            }
-          });
-    }
 
-    putDataCredit = (nameCredit, numberCredit, expCredit, cvcCredit) => {
-        this.genTokenCredit(nameCredit, numberCredit, expCredit, cvcCredit)
-        this.props.goAddress()
-        this.props.setCredit({ nameCredit: nameCredit, numberCredit, expCredit, cvcCredit })
+        });
+        console.log(data)
+        // const charges = await Omise.createCharge({
+        //     amount: this.state.amount, // 1,000 Baht
+        //     currency: 'thb',
+        //     capture: true,
+        //     card: tokenId
+        // })
+        // this.openModal()
+        this.checkPaymentModal(data)
+        this.props.setCharge(data)
+    }
+    openModal = () => {
+        this.setState({ modalLoad: !this.state.modalLoad })
+    }
+    checkPaymentModal = (charges) => {
+        if (charges.status == "successful") {
+            this.setState({ modalSuccess: !this.state.modalSuccess })
+            setTimeout(() => {
+                this.props.goAddress()
+                this.setState({ modalSuccess: !this.state.modalSuccess })
+            }, 3000);
+            console.log("successful")
+        }
+        else if (charges.status == "failed") {
+            this.setState({ modalFaild: !this.state.modalFaild })
+            setTimeout(() => {
+                this.setState({ modalFaild: !this.state.modalFaild })
+            }, 3000);
+            console.log("failed")
+        }
+    }
+    putDataCredit = (nameCredit, numberCredit, expCredit,yearCredit, cvcCredit) => {
+        this.genTokenCredit(nameCredit, numberCredit, expCredit,yearCredit, cvcCredit)
+        this.props.setCredit({ nameCredit: nameCredit, numberCredit, expCredit,yearCredit, cvcCredit })
         this.props.setStatusPayment(this.state.statusPayment)
     }
     render() {
-        let { nameCredit, numberCredit, expCredit, cvcCredit } = this.state
+        let { nameCredit, numberCredit, expCredit,yearCredit, cvcCredit } = this.state
         return (
             <View style={styles.container}>
                 <View style={styles.creditCard}>
@@ -85,7 +106,7 @@ class CreditView extends Component {
                     <View style={styles.expcvcView}>
                         <View style={styles.EXPView}>
                             <Text style={styles.textExpiration}>Expiration</Text>
-                            <Text style={styles.monthyear}>{expCredit}</Text>
+                            <Text style={styles.monthyear}>{expCredit}/{yearCredit}</Text>
                         </View>
                         <View style={styles.CVCView}>
                             <Text style={styles.cvc}>CVC</Text>
@@ -129,9 +150,15 @@ class CreditView extends Component {
                     <Text style={styles.headForm}>วันหมดอายุ</Text>
                     <Form>
                         <Item floatingLabel last>
-                            <Label style={styles.textLabel}>Ex.02/61</Label>
+                            <Label style={styles.textLabel}>เดือน</Label>
                             <Input
                                 onChangeText={(expCredit) => this.setState({ expCredit })}
+                            />
+                        </Item>
+                        <Item floatingLabel last>
+                            <Label style={styles.textLabel}>ปี</Label>
+                            <Input
+                                onChangeText={(yearCredit) => this.setState({ yearCredit })}
                             />
                         </Item>
                     </Form>
@@ -149,31 +176,41 @@ class CreditView extends Component {
                 <View style={styles.containerForm}>
                     <Text style={styles.textForm}>คำรับรองของผู้สมัคร</Text>
                 </View>
-                <View style={{ padding :10}}>
+                <View style={{ padding: 10 }}>
                     <Card>
                         <Text style={styles.textDetail}>   ข้าพเจ้าขอรับรองว่าข้อความข้างต้นเป็นความจริงและได้ทำการฝึกซ้อม ทั้งมีสุขภาพสมบูรณ์พร้อมที่จะมีการแข่งขันในประเภทที่สมัครข้างต้นด้วยความเต็มใจ และจะไม่เรียกร้องค่าเสียหายใดๆหากเกิดอันตรายหรือบาดเจ็บทั้งก่อนและหลังการแข่งขันอีกทั้งก่อนและหลังการแข่งขัน อีกทั้งยินดีที่จะแสดงหลักฐานพิสุจน์ตัวเองต่อคณะผู้จัดการแข่งขัน
                                 และถือว่าการบันทึกภาพยนต์ดังกล่าวเป็นลิขสิทธิ์ของคณะกรรมการจัดการแข่งขันครั้งนี้
                         </Text>
                         <Text style={styles.textDetail}>
-                                 การยืนยันการสมัครผ่านระบบออนไลน์นี้ถือว่าท่านได้ให้การยอมรับข้อความข้างต้นแทนการเซ็นชื่อ
+                            การยืนยันการสมัครผ่านระบบออนไลน์นี้ถือว่าท่านได้ให้การยอมรับข้อความข้างต้นแทนการเซ็นชื่อ
                         </Text>
                     </Card>
                 </View>
                 <View style={styles.containerForm}>
                     <Text style={styles.textForm}>สงวนสิทธิ์การเปลี่ยนแปลง</Text>
                 </View>
-                <View style={{ padding :10}}>
+                <View style={{ padding: 10 }}>
                     <Card>
                         <Text style={styles.textDetail}>*** หลังจากยืนยันการชำระค่าสมัครแล้ว ไม่สามารถยกเลิกหรือเปลี่ยนแปลงข้อมูลการสมัครใดๆในทุกกรณี ***
                         </Text>
 
                     </Card>
                 </View>
+                <Modal isVisible={this.state.modalSuccess}>
+                    <ChargePayment />
+                </Modal>
+                <Modal isVisible={this.state.modalLoad}>
+                    <ChargePaymentLoad />
+                </Modal>
+
+                <Modal isVisible={this.state.modalFaild}>
+                    <ChargePaymentError />
+                </Modal>
 
                 <View style={styles.submitContainer}>
                     <TouchableOpacity
                         style={styles.buttonContainer}
-                        onPress={() => this.putDataCredit(nameCredit, numberCredit, expCredit, cvcCredit)}>
+                        onPress={() => this.putDataCredit(nameCredit, numberCredit, expCredit,yearCredit, cvcCredit)}>
                         <Text style={styles.textButton}> ยืนยันและชำระค่าบริการ </Text>
                     </TouchableOpacity>
                 </View>
@@ -181,18 +218,29 @@ class CreditView extends Component {
         );
     }
 }
+const mapStateToProps = state => {
+    return {
+        event: state.event
+    }
+}
 const mapDispatchtoProps = (dispatch) => {
     return {
         setCredit: (nameCredit) => {
-            dispatch({ 
-                type: 'setCredit', 
-                payload: nameCredit 
+            dispatch({
+                type: 'setCredit',
+                payload: nameCredit
             })
         },
         setStatusPayment: (statusPayment) => {
             dispatch({
-                type : 'setStatusPayment',
-                payload : statusPayment
+                type: 'setStatusPayment',
+                payload: statusPayment
+            })
+        },
+        setCharge: (charges) => {
+            dispatch({
+                type: 'setCharge',
+                payload: charges
             })
         }
     }
@@ -320,11 +368,11 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontFamily: 'kanit'
     },
-    textDetail : {
-        fontFamily : 'kanit',
-        padding : 15
+    textDetail: {
+        fontFamily: 'kanit',
+        padding: 15
 
     }
 })
 
-export default connect(null, mapDispatchtoProps)(CreditView);
+export default connect(mapStateToProps, mapDispatchtoProps)(CreditView);

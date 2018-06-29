@@ -1,22 +1,27 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, } from 'react-native';
+import { View, StyleSheet, Image, } from 'react-native';
+import { Text } from 'native-base'
 import { connect } from 'react-redux'
 
 class TotalRegister extends Component {
     state = {
         total: "",
-        totalRegister : "",
+        totalRegister: "",
         promotionStatus: false,
-        creditPrice : ""
+        creditPrice: "",
+        detailPleace1: false,
+        detailPleace2: false,
     }
     componentDidMount() {
         this.setState({
             total: this.props.event.totalPrice,
-            totalRegister : this.props.event.totalRegister,
+            totalRegister: this.props.event.totalRegister,
             priceCDO: this.props.choiceSend.choiceSend.priceCDO,
-            creditPrice : this.props.creditcard.vat
+            creditPrice: this.props.creditcard.vat,
+            pleace: this.props.choiceSend.choiceSend.detail
         })
         this.checkPromoStatus()
+        this.checkPleaceItem()
     }
     checkPromoStatus = () => {
         console.log("checkPromoStatus")
@@ -29,6 +34,14 @@ class TotalRegister extends Component {
             this.setState({
                 promotionStatus: true
             })
+        }
+    }
+    checkPleaceItem = () => {
+        if (this.props.choiceSend.choiceSend.placeItemID == "1") {
+            this.setState({ detailPleace1: !this.state.detailPleace1 })
+        }
+        else if (this.props.choiceSend.choiceSend.placeItemID == "0") {
+            this.setState({ detailPleace2: !this.state.detailPleace2 })
         }
     }
     render() {
@@ -56,11 +69,22 @@ class TotalRegister extends Component {
                                 style={{ width: 30, height: 30, justifyContent: 'center', alignSelf: 'center', marginTop: 10 }} />
                         </View>
                     </View>
-                    <View>
-                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>รับเสื้อและเบอร์ที่ :  </Text>
-                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>วันที่ 27 มกราคม 2561</Text>
-                        <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit' }}>ใต้สะพานพระราม 8 (ฝั่งถนนอรุณอัมรินทร์ )</Text>
-                    </View>
+                    {this.state.detailPleace1 &&
+                        <View>
+                            <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>รับเสื้อและเบอร์ที่ :  </Text>
+                            {/* <Text style={{ fontSize: 10, fontFamily: 'kanit', paddingHorizontal: 50 }}></Text> */}
+                            <View style={{ marginHorizontal: 20}}>
+                                <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit' }} numberOfLines={2}>{this.state.pleace}</Text>
+                            </View>
+                        </View>
+                    }
+                    {this.state.detailPleace2 &&
+                        <View>
+                            <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>บริหารจัดส่ง :  </Text>
+                            {/* <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>วันที่ 27 มกราคม 2561</Text> */}
+                            <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit', paddingHorizontal: 10 }}>{this.state.pleace}</Text>
+                        </View>
+                    }
                     <View>
                         <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.state.priceCDO}.0 ฿</Text>
                     </View>
@@ -144,7 +168,7 @@ const mapStateToProps = (state) => {
         shirtphoto: state.shirtphoto,
         choiceSend: state.choiceSend,
         address: state.address,
-        creditcard : state.creditcard
+        creditcard: state.creditcard
     }
 }
 

@@ -63,7 +63,7 @@ class VerifyCode extends Component {
                 { text: 'ลองอีกครั้ง', onPress: () => console.log('ลองอีกครั้ง') },
             ])
         }
-        else if (status[0], Status == "1") {
+        else if (status[0].Status == "1") {
             this.gotoLogin()
         }
         else {

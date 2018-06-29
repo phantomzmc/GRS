@@ -6,22 +6,23 @@ class DetailRegister extends Component {
     state = {
         address: "106/13 หนองหอย เมืองเชียงใหม่ เชียงใหม่",
         statusPayment1: false,
-        statusPayment2: true
+        statusPayment2: true,
+        numberInvoice: "00"
     }
     componentDidMount() {
         this.setState({
-            address: this.props.userprofile.userprofile.Address + " " +
-                this.props.userprofile.userprofile.SubDistric + " " +
-                this.props.userprofile.userprofile.Distric + " " +
-                this.props.userprofile.userprofile.Province + " " +
-                this.props.userprofile.userprofile.PostCode
+            address: this.props.address.user.adress + " " +
+                this.props.address.user.subdistric + " " +
+                this.props.address.user.distric + " " +
+                this.props.address.user.province + " " +
+                this.props.address.user.postcode,
+            numberInvoice : this.props.invoice.invoice[0].InvoiceID
         })
-        if (this.props.creditcard.statusPayment == true) {
+        if (this.props.creditcard.charge.status == "successful") {
             this.setState({ statusPayment1: true, statusPayment2: false })
         }
-        else if (this.props.creditcard.statusPayment == false) {
+        else if (this.props.creditcard.charge.status == "failed") {
             this.setState({ statusPayment1: false, statusPayment2: true })
-
         }
     }
     render() {
@@ -37,7 +38,7 @@ class DetailRegister extends Component {
                             style={{ width: 100, height: 100 }} />
                     </View>
                     <View>
-                        <Text style={{ fontSize: 10, color: '#A9A9A9', fontFamily: 'kanit' }}> Order : number </Text>
+                        <Text style={{ fontSize: 10, color: '#A9A9A9', fontFamily: 'kanit' }}> Order : {this.state.numberInvoice} </Text>
                         <Text style={{ fontSize: 10, color: '#A9A9A9', fontFamily: 'kanit' }}> Date order </Text>
                     </View>
                 </View>
@@ -153,7 +154,8 @@ const mapStateToProps = (state) => {
         userprofile: state.userprofile,
         choiceSend: state.choiceSend,
         address: state.address,
-        creditcard: state.creditcard
+        creditcard: state.creditcard,
+        invoice: state.invoice
     }
 }
 export default connect(mapStateToProps)(DetailRegister);

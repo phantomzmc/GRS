@@ -1,8 +1,8 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 
-const token = (state = {} ,action) => {
-  switch (action.type){
-    case "setCreateToken" : {
+const token = (state = {}, action) => {
+  switch (action.type) {
+    case "setCreateToken": {
       state.token = action.payload
       break
     }
@@ -73,7 +73,11 @@ const event = (state = eventState, action) => {
       state.totalPrice = action.payload;
       break;
     }
-    case "setTotalRegister" : {
+    case "setTotalPromo": {
+      state.totalPromo = action.payload
+      break;
+    }
+    case "setTotalRegister": {
       state.totalRegister = action.payload;
       break;
     }
@@ -125,12 +129,15 @@ const creditcard = (state = credit, action) => {
       state.nameCredit = action.payload;
       break;
     }
-    case "setCreditPrice" : {
+    case "setCreditPrice": {
       state.vat = action.payload;
       break;
     }
-    case "setStatusPayment" : {
+    case "setStatusPayment": {
       state.statusPayment = action.payload
+    }
+    case "setCharge": {
+      state.charge = action.payload
     }
     default:
       break;
@@ -175,12 +182,21 @@ const userprofile = (state = {}, action) => {
   }
   return state;
 }
+const invoice = (state = {}, action) => {
+  switch (action.type) {
+    case "setInvoice": {
+      state.invoice = action.payload
+      break;
+    }
+  }
+  return state;
+}
 const friend = {
   friendRegis: {},
   dataDis: {},
   friendEvent: {},
-  shirtSize : {}
-  
+  shirtSize: {}
+
 }
 const friendlist = (state = friend, action) => {
   switch (action.type) {
@@ -212,18 +228,29 @@ const friendlist = (state = friend, action) => {
   }
   return state;
 }
-const network = (state = {},action) => {
-  switch (action.type){
-    case "setIP" : {
+const network = (state = {}, action) => {
+  switch (action.type) {
+    case "setIP": {
       state.ip = action.payload
       break;
     }
-    case "setLatitude" : {
+    case "setLatitude": {
       state.lat = action.payload
       break;
     }
-    case "setLongitude" : {
+    case "setLongitude": {
       state.long = action.payload
+      break;
+    }
+  }
+  return state;
+}
+
+const promocode = (state = {}, action) => {
+  switch (action.type) {
+    case "setDisPrice": {
+      state.disPrice = action.payload
+      break;
     }
   }
   return state;
@@ -248,7 +275,9 @@ const store = createStore(
     friendlist,
     username,
     userprofile,
-    network
+    invoice,
+    network,
+    promocode
   }),
   {},
   applyMiddleware(myLogger)

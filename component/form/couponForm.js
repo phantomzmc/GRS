@@ -3,16 +3,11 @@ import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, Alert, Stat
 import { Container, Form, Item, Label, Input } from "native-base";
 import { connect } from 'react-redux'
 import axios from 'axios'
+import req from '../../config/uri_req'
+import api_key from '../../config/api_key'
 import HeaderTeam from "../items/headerTeam";
 
-var uri = "http://api.shutterrunning2014.com/api/v2/grsv2m/_proc/Main.uspApplyPromoCode"
-var api_key = '36fda24fe5588fa4285ac6c6c2fdfbdb6b6bc9834699774c9bf777f706d05a88'
-var sessionToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQsInVzZXJfaWQiOjQsImVtYWlsIjoiYWR' +
-    'taW5AZ3V1cnVuLmNvbSIsImZvcmV2ZXIiOmZhbHNlLCJpc3MiOiJodHRwOlwvXC9hcGkuc2h1dHRlcnJ' +
-    '1bm5pbmcyMDE0LmNvbVwvYXBpXC92MlwvdXNlclwvc2Vzc2lvbiIsImlhdCI6MTUyMDU0NDU5MSwiZXh' +
-    'wIjoxNTIwNTQ4MTkxLCJuYmYiOjE1MjA1NDQ1OTEsImp0aSI6IjA1Y2UzN2NjMmU2NjIyZGJlNmMzNTg' +
-    '5MzE1NTI0YmZjIn0._7jHjGhTPfa3rVioC2MrjJfLwrMMxYQYiWhe8DK5V7k'
-var auth = 'Basic YWRtaW5AZ3V1cnVuLmNvbTpXWGJyRDI4THRJUjNNWW0='
+
 
 class CouponForm extends Component {
     constructor(state) {
@@ -37,6 +32,8 @@ class CouponForm extends Component {
         this.props.navigation.navigate('ShirtPhotoPlus')
     }
     checkPromoCode() {
+        let uri = req[0].uspApplyPromoCode
+        let apikey = api_key[0].api_key
         let data = ({
             params: [
                 { name: "EventID", value: this.props.event.event.EventID },
@@ -46,9 +43,8 @@ class CouponForm extends Component {
         })
         axios.post(uri, data, {
             headers: {
-                "X-DreamFactory-API-Key": api_key,
-                "X-DreamFactory-Session-Token": sessionToken,
-                "Authorization": auth
+                "X-DreamFactory-API-Key": apikey,
+                "X-DreamFactory-Session-Token": this.props.token.token,
             },
             responseType: 'json'
         })
@@ -70,17 +66,19 @@ class CouponForm extends Component {
     checkType() {
         let { status } = this.state
         if (status[0].PromoDiscountType == "1") {
-            this.setState({
-                discountType: "บาท"
-            })
+            const totalRegister = (this.props.event.totalPrice - status[0].PromoDiscount)
+            const value_dis = (this.props.event.totalPrice - totalRegister)
+            this.props.setTotalRegister(totalRegister)
+            this.props.setTotalPromo(totalRegister)
+            this.props.setDisPrice(value_dis)
         }
         else if (status[0].PromoDiscountType == "2") {
-            this.setState({
-                discountType: "เปอร์เซ็น",
-
-            })
+            const totalRegister = (this.props.event.totalPrice / status[0].PromoDiscount)
+            const value_dis = (this.props.event.totalPrice - totalRegister)
+            this.props.setTotalRegister(totalRegister)
+            this.props.setTotalPromo(totalRegister)
+            this.props.setDisPrice(value_dis)
         }
-        this.setState({ price: status[0].PromoDiscount })
     }
     checkOutput() {
         let { status } = this.state
@@ -154,9 +152,33 @@ class CouponForm extends Component {
 const mapStateToProps = (state) => {
     return {
         event: state.event,
-        userprofile: state.userprofile
+        userprofile: state.userprofile,
+        token : state.token
     }
 }
+const mapDispatchToProps = dispatch => {
+    return {
+        setDisPrice: (disPrice) => {
+            dispatch({
+                type: 'setDisPrice',
+                payload: disPrice
+            })
+        },
+        setTotalPromo : (totalPromo) => {
+            dispatch({
+                type : 'setTotalPromo',
+                payload : totalPromo
+            })
+        },
+        setTotalRegister : (totalRegister) => {
+            dispatch({
+                type : 'setTotalRegister',
+                payload : totalRegister
+            })
+        }
+    }
+}
+
 
 const styles = StyleSheet.create({
     container: {
@@ -224,4 +246,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default connect(mapStateToProps)(CouponForm)
+export default connect(mapStateToProps,mapDispatchToProps)(CouponForm)

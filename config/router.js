@@ -28,22 +28,10 @@ import ControlPayment from '../container/controlPayment'
 
 
 export default StackNavigator({
-    // GalleryScreen : {
-    //     screen : GalleryScreen
-    // },
-    // ButtonChangePayment: {
-    //     screen: ButtonChangePayment,
+    // TotalPayment: {
+    //     screen: TotalPayment,
     //     navigationOptions: {
     //         header : () => null
-    //     }
-    // },
-    // FriendListLayout : {
-    //     screen : FriendListLayout
-    // },
-    // ControlPayment: {
-    //     screen: ControlPayment,
-    //     navigationOptions: {
-    //         header: () => null
     //     }
     // },
     EventList: {

@@ -1,14 +1,16 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { View, ScrollView, StyleSheet, TouchableOpacity, AlertIOS, StatusBar } from 'react-native';
+import CheckBox from 'react-native-checkbox-heaven';
 import { Container, Icon, Text, Tab, Tabs, TabHeading, Card, CardItem, Body, Content } from 'native-base';
-
 import AddressForm from '../component/form/addressForm'
-// import ChoiceSend from '../component/items/choiceSend'
 import GetPleace from '../component/items/getPlece'
 import SummaryTotal from '../component/items/summary'
 import HeaderTeam from "../component/items/headerTeam";
 import { connect } from 'react-redux'
+import axios from 'axios'
+import req from '../config/uri_req'
+import api_key from '../config/api_key'
 
 
 class AddressLayout extends Component {
@@ -29,7 +31,14 @@ class AddressLayout extends Component {
             },
             modalVisible: false,
             active: true,
-            pageNumber: 0
+            pageNumber: 0,
+            checked: true,
+            checked2: false,
+            checkSubmit: false,
+            statusButton: true,
+            statusButton2: false,
+            pleace: "",
+            postPrice: "",
         }
     }
     componentWillMount = () => {
@@ -38,6 +47,35 @@ class AddressLayout extends Component {
             priceCDO: parseFloat(60.0)
         })
     }
+    componentDidMount() {
+        this.getPleaceItem()
+    }
+    getPleaceItem() {
+        let uri = req[0].uspGetPlaceItemLists
+        let apikey = api_key[0].api_key
+        let data = ({
+            params: {
+                value: this.props.event.event.EventID,
+            }
+        })
+        axios.post(uri, data, {
+            headers: {
+                "X-DreamFactory-API-Key": apikey,
+                "X-DreamFactory-Session-Token": this.props.token.token,
+            },
+            responseType: 'json'
+        })
+            .then((responseJson) => {
+                this.setState({
+                    isLoading: false,
+                    item: responseJson.data,
+                    pleace: responseJson.data[0].PlaceItemName,
+                    postPrice: responseJson.data[1].PlaceItemName
+                });
+                console.log(responseJson.data)
+            }).catch((error) => {
+            });
+    }
     nextToPayment = () => {
         // this.getChoice()
         this.props.navigation.navigate('ControlPayment')
@@ -45,18 +83,26 @@ class AddressLayout extends Component {
     gotoBack = () => {
         this.props.navigation.navigate('ShirtPhotoPlus')
     }
-    goTotalPayment = (fullname, email, adress, tel) => {
+    goTotalPayment = (fullname, lastname, email, adress, subdistric, distric, province, postcode, tel, note) => {
         this.nextToPayment()
-        this.props.setUser({ fullname: fullname, email, adress, tel })
+        this.props.setUser({ fullname: fullname, lastname, email, adress, subdistric, distric, province, postcode, tel, note })
     }
 
     getSumPleace = () => {
-        this.props.setSendChoice({ choice: 0, dataChoice: "รับเอง", priceCDO: parseFloat(0.0) })
+        this.setState({
+            checked: true,
+            checked2: false
+        })
+        this.props.setSendChoice({ choice: 0, dataChoice: "รับเอง", priceCDO: parseFloat(0.0), placeItemID: 1, detail: this.state.pleace })
         this.props.setTotalRegister(this.state.priceEvent)
         this.props.setTotal(this.state.priceEvent)
     }
     getSumPostman = () => {
-        this.props.setSendChoice({ choice: 1, dataChoice: "ส่งไปรษณีย์", priceCDO: parseFloat(60.0) })
+        this.setState({
+            checked: false,
+            checked2: true
+        })
+        this.props.setSendChoice({ choice: 1, dataChoice: "ส่งไปรษณีย์", priceCDO: parseFloat(65.0), placeItemID: 0, detail: this.state.postPrice })
         this.totalPriceRegis()
     }
     totalPriceRegis = () => {
@@ -65,6 +111,14 @@ class AddressLayout extends Component {
         this.props.setTotalRegister(sum)
         // this.props.setTotal(sum)
     }
+    handleOnChange() {
+        this.setState({
+            checkSubmit: !this.state.checkSubmit,
+            statusButton: !this.state.statusButton,
+            statusButton2: !this.state.statusButton2
+        })
+    }
+
     render() {
         return (
             <Container style={styles.container}>
@@ -77,31 +131,59 @@ class AddressLayout extends Component {
                     title={this.state.title}
                     goback={this.gotoBack.bind(this)}
                 />
-                <Tabs initialPage={this.state.pageNumber}>
-                    <Tab heading={<TabHeading><Icon name="md-flag" /><Text style={styles.textLabel} > เลือกรับเอง</Text></TabHeading>} onPress={this.getSumPleace.bind(this)}>
+                <ScrollView >
+                    <View style={styles.checkSubmit}>
+                        <CheckBox
+                            label='เลือกรับเอง'
+                            labelStyle={styles.labelStyle}
+                            iconSize={30}
+                            iconName='iosCircleFill'
+                            checked={this.state.checked}
+                            checkedColor='#008080'
+                            uncheckedColor='#1f1f1f'
+                            onChange={this.getSumPleace.bind(this)}
+                        />
+                    </View>
+                    <View>
                         <GetPleace
                             goPayment={this.nextToPayment.bind(this)}
                             funSumPleace={this.getSumPleace.bind(this)}
+                            detailPleace={this.state.pleace}
                         />
-                    </Tab>
-                    <Tab heading={<TabHeading><Icon name="md-map" /><Text style={styles.textLabel} > เลือกส่งไปรษณีย์</Text></TabHeading>} onPress={this.getSumPostman.bind(this)}>
-                        <ScrollView >
-                            <View style={{ paddingTop: 20, paddingHorizontal: 20 }}>
-                                <Card>
-                                    <View style={{ justifyContent: "center", alignItems: "center", padding: 20 }}>
-                                        <Text style={[styles.textTitle, { fontSize: 18, paddingBottom: 5 }]}>ค่าใช้จ่ายในการจัดส่งแบบไปรษณีย์</Text>
-                                        <Text style={styles.textTitle}>ไปรษณีย์ ค่าส่งคนแรก 65 บาท</Text>
-                                        <Text style={styles.textTitle}>คนที่ 2 หรือคนถัดไป คนล่ะ 35 บาท</Text>
-                                    </View>
-                                </Card>
+                    </View>
+                    <View style={styles.checkSubmit}>
+                        <CheckBox
+                            label='ส่งไปรษณีย์'
+                            labelStyle={styles.labelStyle}
+                            iconSize={30}
+                            iconName='iosCircleFill'
+                            checked={this.state.checked2}
+                            checkedColor='#008080'
+                            uncheckedColor='#1f1f1f'
+                            onChange={this.getSumPostman.bind(this)}
+                        />
+                    </View>
+                    <View style={{ paddingTop: 20, paddingHorizontal: 20 }}>
+                        <Card>
+                            <View style={{ justifyContent: "center", alignItems: "center", padding: 20 }}>
+                                <Text style={[styles.textTitle, { fontSize: 18, paddingBottom: 5 }]}>ค่าใช้จ่ายในการจัดส่งแบบไปรษณีย์</Text>
+                                <Text style={styles.textTitle}>{this.state.postPrice}</Text>
                             </View>
-                            <AddressForm
-                                getAddress={this.goTotalPayment.bind(this)}
-                                funSumPostman={this.getSumPostman.bind(this)}
-                            />
-                        </ScrollView>
-                    </Tab>
-                </Tabs>
+                        </Card>
+                    </View>
+                    {/* <View style={{ flexDirection: "row" }}>
+                        <Text>ข้อมูลสำหรับการจัดส่ง</Text>
+                        <TouchableOpacity>
+                            {this.state.icondetail &&
+                                <Icon />
+
+                            }
+                        </TouchableOpacity>
+                    </View> */}
+                    <AddressForm
+                        getAddress={this.goTotalPayment.bind(this)}
+                    />
+                </ScrollView>
                 <SummaryTotal />
             </Container>
         );
@@ -126,12 +208,51 @@ const styles = StyleSheet.create({
         fontSize: 14,
         justifyContent: "center",
         alignContent: "center",
-    }
+    },
+    checkSubmit: {
+        paddingTop: 10,
+        paddingHorizontal: 20,
+        justifyContent: "flex-start",
+        backgroundColor: "#f1f1f1"
+    },
+    labelStyle: {
+        padding: 20,
+        fontFamily: "kanit",
+        fontSize: 16
+    },
+    submitContainer: {
+        marginTop: 10,
+        alignItems: 'center',
+    },
+    buttonContainer: {
+        height: 40,
+        width: '80%',
+        backgroundColor: '#FC561F',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 20,
+        opacity: 0.5
+    },
+    buttonContainerOnPress: {
+        height: 40,
+        width: '80%',
+        backgroundColor: '#FC561F',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 20,
+    },
+    textButton: {
+        fontWeight: '500',
+        fontSize: 15,
+        color: '#fff',
+        fontFamily: 'Kanit',
+    },
 })
 
 const mapStateToProps = (state) => {
     return {
-        event: state.event
+        event: state.event,
+        token: state.token
     }
 }
 

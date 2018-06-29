@@ -6,14 +6,17 @@ export default
             uspGetCourseLists: url + "Main.uspGetCourseLists",
             uspGetEventList: url + "Main.uspGetEventList",
             uspCheckUsername: url + "Main.uspCheckUsername",
-            uspGetJerseyLists : url + "Main.uspGetJerseyLists",
-            uspGetUserProfile : url + "Main.uspGetUserProfile",
-            uspGetTambonSuggestion : url + "Main.uspGetTambonSuggestion",
-            uspGetAmphoeSuggestion : url + "Main.uspGetAmphoeSuggestion",
-            uspGetProvinceSuggestion : url + "Main.uspGetProvinceSuggestion",
-            uspCreateAccount : url + "Main.uspCreateAccount",
-            uspActivateAccount : url + "Main.uspActivateAccount",
-            uspSignIn : url + "Main.uspSignIn"
+            uspGetJerseyLists: url + "Main.uspGetJerseyLists",
+            uspGetUserProfile: url + "Main.uspGetUserProfile",
+            uspGetTambonSuggestion: url + "Main.uspGetTambonSuggestion",
+            uspGetAmphoeSuggestion: url + "Main.uspGetAmphoeSuggestion",
+            uspGetProvinceSuggestion: url + "Main.uspGetProvinceSuggestion",
+            uspCreateAccount: url + "Main.uspCreateAccount",
+            uspActivateAccount: url + "Main.uspActivateAccount",
+            uspSignIn: url + "Main.uspSignIn",
+            uspGetPlaceItemLists: url + "Main.uspGetPlaceItemLists",
+            uspAddRegister: url + "Main.uspAddRegister",
+            uspApplyPromoCode: url + "Main.uspApplyPromoCode"
 
         }
     ]

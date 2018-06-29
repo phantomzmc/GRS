@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Alert } from 'react-native';
+import SearchInput, { createFilter } from 'react-native-search-filter';
 import { Form, Input, Label, Item, Button } from "native-base";
 import axios from 'axios'
 import { connect } from 'react-redux'

@@ -40,7 +40,6 @@ class AddressForm extends Component {
         this.props.getAddress(fullname, lastname, email, adress, subdistric, distric, province, postcode, tel, note)
         console.log(this.state.fullname)
         console.log(this.state.email)
-        this.props.funSumPostman()
 
     }
     handleOnChange() {
@@ -59,7 +58,7 @@ class AddressForm extends Component {
                     <Item floatingLabel last>
                         <Label style={styles.textLabel}>{fullname}</Label>
                         <Input
-                            onChangeText={(fullname) => this.setState(fullname)}
+                            onChangeText={(fullname) => this.setState({ fullname: fullname })}
                         />
                     </Item>
                 </Form>
@@ -68,7 +67,7 @@ class AddressForm extends Component {
                     <Item floatingLabel last>
                         <Label style={styles.textLabel}>{lastname}</Label>
                         <Input
-                            onChangeText={(lastname) => this.setState(lastname)}
+                            onChangeText={(lastname) => this.setState({ lastname: lastname })}
                         />
                     </Item>
                 </Form>
@@ -77,7 +76,7 @@ class AddressForm extends Component {
                     <Item floatingLabel last>
                         <Label style={styles.textLabel}>{email}</Label>
                         <Input
-                            onChangeText={(email) => this.setState(email)}
+                            onChangeText={(email) => this.setState({ email: email })}
                         />
                     </Item>
                 </Form>
@@ -86,7 +85,7 @@ class AddressForm extends Component {
                     <Item floatingLabel last>
                         <Label style={styles.textLabel}>{adress}</Label>
                         <Input
-                            onChangeText={(adress) => this.setState(adress)}
+                            onChangeText={(adress) => this.setState({ adress: adress })}
                         />
                     </Item>
                 </Form>
@@ -95,7 +94,7 @@ class AddressForm extends Component {
                     <Item floatingLabel last>
                         <Label style={styles.textLabel}>{subdistric}</Label>
                         <Input
-                            onChangeText={(subdistric) => this.setState(subdistric)}
+                            onChangeText={(subdistric) => this.setState({ subdistric: subdistric })}
                         />
                     </Item>
                 </Form>
@@ -104,7 +103,7 @@ class AddressForm extends Component {
                     <Item floatingLabel last>
                         <Label style={styles.textLabel}>{distric}</Label>
                         <Input
-                            onChangeText={(distric) => this.setState(distric)}
+                            onChangeText={(distric) => this.setState({ distric: distric })}
                         />
                     </Item>
                 </Form>
@@ -113,7 +112,7 @@ class AddressForm extends Component {
                     <Item floatingLabel last>
                         <Label style={styles.textLabel}>{province}</Label>
                         <Input
-                            onChangeText={(province) => this.setState(province)}
+                            onChangeText={(province) => this.setState({ province: province })}
                         />
                     </Item>
                 </Form>
@@ -122,7 +121,7 @@ class AddressForm extends Component {
                     <Item floatingLabel last>
                         <Label style={styles.textLabel}>{postcode}</Label>
                         <Input
-                            onChangeText={(postcode) => this.setState(postcode)}
+                            onChangeText={(postcode) => this.setState({ postcode: postcode })}
                         />
                     </Item>
                 </Form>
@@ -131,7 +130,7 @@ class AddressForm extends Component {
                     <Item floatingLabel last>
                         <Label style={styles.textLabel}>{tel}</Label>
                         <Input
-                            onChangeText={(tel) => this.setState(tel)}
+                            onChangeText={(tel) => this.setState({ tel: tel })}
                         />
                     </Item>
                 </Form>
@@ -140,35 +139,16 @@ class AddressForm extends Component {
                     <Item floatingLabel last>
                         <Label style={styles.textLabel}>{note}</Label>
                         <Input
-                            onChangeText={(note) => this.setState(note)}
+                            onChangeText={(note) => this.setState({ note: note })}
                         />
                     </Item>
                 </Form>
-                <View style={styles.checkSubmit}>
-                    <CheckBox
-                        label='กดเพื่อยืนยันการรับเอง'
-                        labelStyle={styles.labelStyle}
-                        iconSize={30}
-                        iconName='iosCircleFill'
-                        checked={this.state.checked}
-                        checkedColor='#008080'
-                        uncheckedColor='#1f1f1f'
-                        onChange={this.handleOnChange.bind(this)}
-                    />
-                </View>
-                <View style={styles.submitContainer}>
-                    {this.state.statusButton &&
-                        <TouchableOpacity style={styles.buttonContainer}>
-                            <Text style={styles.textButton}>ถัดไป</Text>
-                        </TouchableOpacity>
-                    }
-                    {this.state.statusButton2 &&
-                        <TouchableOpacity style={styles.buttonContainerOnPress}
-                            onPress={() => this.putDataUser(fullname, lastname, email, adress, subdistric, distric, province, postcode, tel, note)}>
-                            <Text style={styles.textButton}>ถัดไป</Text>
-                        </TouchableOpacity>
-                    }
 
+                <View style={styles.submitContainer}>
+                    <TouchableOpacity style={styles.buttonContainerOnPress}
+                        onPress={() => this.putDataUser(fullname, lastname, email, adress, subdistric, distric, province, postcode, tel, note)}>
+                        <Text style={styles.textButton}>ยืนยัน</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         );
@@ -188,7 +168,7 @@ const styles = StyleSheet.create({
         fontFamily: 'kanit',
     },
     submitContainer: {
-        marginTop: 10,
+        marginTop: 20,
         alignItems: 'center',
     },
     buttonContainer: {

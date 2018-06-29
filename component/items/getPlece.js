@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import CheckBox from 'react-native-checkbox-heaven';
 import { Container, Header, Title, Content, Button, Icon, Card, CardItem, Text, Body, Left, Right, IconNB } from "native-base";
+import axios from 'axios'
+import req from '../../config/uri_req'
+import api_key from '../../config/api_key'
 
 
 class GetPleace extends Component {
@@ -10,18 +13,25 @@ class GetPleace extends Component {
         this.state = {
             checked: false,
             statusButton: true,
-            statusButton2: false
+            statusButton2: false,
+            item: [],
+            pleace: ""
         }
         this.gotoPayment = this.gotoPayment.bind(this)
     }
-    componentDidMount(){
+
+    componentDidMount() {
+        this.setState({
+            pleace : this.props.detailPleace
+        })
         this.props.funSumPleace()
+
     }
     handleOnChange() {
-        this.setState({ 
+        this.setState({
             checked: !this.state.checked,
-            statusButton : !this.state.statusButton,
-            statusButton2 : !this.state.statusButton2
+            statusButton: !this.state.statusButton,
+            statusButton2: !this.state.statusButton2
         })
     }
     gotoPayment() {
@@ -29,7 +39,7 @@ class GetPleace extends Component {
     }
     render() {
         return (
-            <Container>
+            <View>
                 <Content padder>
                     <Card>
                         <CardItem header bordered>
@@ -38,15 +48,12 @@ class GetPleace extends Component {
                         <CardItem bordered>
                             <Body>
                                 <Text style={styles.textCard}>
-
+                                    {this.props.detailPleace}
                                 </Text>
                             </Body>
                         </CardItem>
-                        <CardItem footer bordered>
-                            <Text style={styles.textCard}>เวลา</Text>
-                        </CardItem>
                     </Card>
-                    <View style={styles.checkSubmit}>
+                    {/* <View style={styles.checkSubmit}>
                         <CheckBox
                             label='กดเพื่อยืนยันการรับเอง'
                             labelStyle={styles.labelStyle}
@@ -71,9 +78,9 @@ class GetPleace extends Component {
                             </TouchableOpacity>
                         }
 
-                    </View>
+                    </View> */}
                 </Content>
-            </Container>
+            </View>
         );
     }
 }
