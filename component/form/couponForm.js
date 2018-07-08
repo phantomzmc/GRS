@@ -53,7 +53,6 @@ class CouponForm extends Component {
                 console.log(this.state.status)
                 this.checkOutput()
             }).catch((error) => {
-                console.error(error);
             });
     }
     changeStatus = () => {

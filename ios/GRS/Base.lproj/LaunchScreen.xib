@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="ipad9_7" orientation="portrait">
+    <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -16,7 +16,11 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Powered by React Native" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
-                    <rect key="frame" x="145" y="439" width="191" height="21"/>
+                    <rect key="frame" x="57" y="423" width="367" height="37"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="367" id="0W5-C3-kb5"/>
+                        <constraint firstAttribute="height" constant="37" id="jus-DZ-5w9"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <color key="highlightedColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -27,12 +31,12 @@
             </subviews>
             <color key="backgroundColor" red="1" green="0.3563782826967985" blue="0.18651078318003933" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="Jaa-T7-kir"/>
-                <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="145" id="P7L-6f-Zko"/>
+                <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="57" id="1AF-Aa-duM"/>
                 <constraint firstItem="Za6-Ok-1X1" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="183" id="U8H-iO-9v8"/>
-                <constraint firstItem="8ie-xW-0ye" firstAttribute="top" secondItem="Za6-Ok-1X1" secondAttribute="bottom" constant="174" id="jTd-Bo-oMc"/>
+                <constraint firstItem="8ie-xW-0ye" firstAttribute="top" secondItem="Za6-Ok-1X1" secondAttribute="bottom" constant="158" id="c08-4M-4fS"/>
                 <constraint firstAttribute="trailing" secondItem="Za6-Ok-1X1" secondAttribute="trailing" constant="183" id="lP9-LT-Xlb"/>
-                <constraint firstAttribute="trailing" secondItem="8ie-xW-0ye" secondAttribute="trailing" constant="144" id="nsb-Aa-TzL"/>
+                <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="lve-A5-HAr"/>
+                <constraint firstAttribute="trailing" secondItem="8ie-xW-0ye" secondAttribute="trailing" constant="56" id="p3b-Qt-C75"/>
                 <constraint firstItem="Za6-Ok-1X1" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="215" id="wHG-oE-ohn"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>

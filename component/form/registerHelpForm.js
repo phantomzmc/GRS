@@ -1,17 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import {
-  View,
-  Text,
-  TextInput,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-
-} from "react-native";
-import randomstringPromise from 'randomstring-promise';
-import Communications from 'react-native-communications';
-import { StackNavigator } from "react-navigation";
+import { View, Text, StyleSheet, TouchableOpacity, Image, } from "react-native";
+import KeyboardSpacer from 'react-native-keyboard-spacer';
 import { Form, Item, Input, Label, Picker, Icon } from 'native-base'
 import { connect } from 'react-redux'
 
@@ -34,25 +24,10 @@ class FormAddressRegister extends Component {
       email: ""
     };
   }
-  componentWillMount() {
-    let { verifycode, email } = this.state
-    randomstringPromise(10)
-      .then((verifycode) => {
-        this.setState({ verifycode : verifycode })
-        // console.log(code);  // u8KNs7aAw0DCOKO1MdEgVIcF2asajrdd
-        console.log(verifycode)
-        this.props.setVerify(verifycode)
-      });
-    this.setState({ email: this.props.profile.profile.email })
-  }
-
-
   sendData = (firstname, lastname, relation, tel) => {
-    let { verifycode, statusVerify } = this.state
-    Communications.email([this.state.email], null, null, 'GuuRun Code Verify', 'VerifyCode is : ' + this.state.verifycode)
-    this.props.goEvent(firstname, lastname, relation, tel, verifycode, statusVerify);
-    this.props.setHelp({ firstname, lastname, relation, tel,verifycode });
-    
+    this.props.goEvent(firstname, lastname, relation, tel);
+    this.props.setHelp({ firstname, lastname, relation, tel});
+
   };
 
   render() {
@@ -113,6 +88,8 @@ class FormAddressRegister extends Component {
             </Picker>
           </Form>
         </View>
+        <KeyboardSpacer />
+
         <View style={styles.submitContainer}>
           <TouchableOpacity
             style={styles.buttonContainer}

@@ -4,7 +4,8 @@ import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Alert, StatusBar 
 import { connect } from "react-redux";
 import { Container } from 'native-base'
 import axios from 'axios'
-
+import randomstringPromise from 'randomstring-promise';
+import MailGunSend from '../config/send-mailgun'
 import HeaderUser from "../component/items/header_profile";
 import FormHelpRegister from "../component/form/registerHelpForm";
 import HeaderTeam from '../component/items/headerTeam'
@@ -32,8 +33,32 @@ class UserHelpRegister extends Component {
         test: "asdaffg"
       }
     };
+    this.createVerifyCode = this.createVerifyCode.bind(this)
+
   }
-  createAccount = (ecfirstname, eclastname, ecrelation, ectel, activecode) => {
+  async sentData(activecode) {
+    const data = await MailGunSend.onSendMail({
+      'from': 'Guurun Support Team. <support@guurun.com>',
+      'to': this.props.profile.profile.email,
+      'subject': 'Guurun Support Team รหัสในการยืนยันตัวตน',
+      'text': 'สวัสดีคุณ ' + this.props.profile.profile.fullname + ' รหัสที่ใช้ในการยืนยันตัวตนขอผู้ใช้งานคือ : ' + activecode
+    })
+    console.log(data)
+  }
+  createVerifyCode() {
+    randomstringPromise(10)
+      .then((verifycode) => {
+        this.setState({ verifycode: verifycode })
+        // console.log(code);  // u8KNs7aAw0DCOKO1MdEgVIcF2asajrdd
+        console.log(verifycode)
+        this.props.setVerify(verifycode)
+      });
+  }
+  componentDidMount() {
+    this.createVerifyCode()
+  }
+  createAccount = (ecfirstname, eclastname, ecrelation, ectel) => {
+    let activecode = this.props.profile.verify
     let firstname = this.props.profile.profile.fullname
     let lastname = this.props.profile.profile.lastname
     let nickname = this.props.profile.profile.nickname
@@ -69,6 +94,7 @@ class UserHelpRegister extends Component {
       .then((response) => {
         this.setState({ isLoading: false, status: response.data });
         console.log("success")
+        this.sentData(activecode)
         this.gotoListEvent()
       }).catch((error) => {
         console.error(error);
@@ -113,7 +139,9 @@ class UserHelpRegister extends Component {
         <ScrollView>
           <View style={styles.container}>
             <HeaderUser Name={this.props.fullname} UserID={this.props.userid} />
-            <FormHelpRegister goEvent={this.createAccount.bind(this)} />
+            <FormHelpRegister
+              goEvent={this.createAccount.bind(this)}
+            />
           </View>
         </ScrollView>
       </Container>
@@ -129,8 +157,18 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => {
   return {
     profile: state.profile,
-    token : state.token
+    token: state.token
   }
 }
+const mapDispatchToProps = dispatch => {
+  return {
+    setVerify: verifycode => {
+      dispatch({
+        type: "setVerify",
+        payload: verifycode
+      });
+    }
+  };
+};
 
-export default connect(mapStateToProps)(UserHelpRegister);
+export default connect(mapStateToProps,mapDispatchToProps)(UserHelpRegister);

@@ -36,12 +36,6 @@ class ShirtPhotoPlus extends Component {
         if (this.props.event.event.PromoCodeStatus == 1 && this.props.event.event.PromoCodeRequired == 1) {
             console.log("status 1 ต้องกรอก")
             this.props.navigation.navigate("DiscountCoupon")
-            // Alert.alert("ส่วนลดค่าสมัคร", "กรุณากรอกรหัสส่วนลดในการสมัคร", [
-            //     {
-            //         text: "ยืนยัน",
-            //         onPress: () => this.props.navigation.navigate("DiscountCoupon")
-            //     },
-            // ])
         }
         else if ((this.props.event.event.PromoCodeStatus == 1 && this.props.event.event.PromoCodeRequired == 0) || (this.props.event.event.PromoCodeStatus == 0 && this.props.event.event.PromoCodeRequired == 1)) {
             console.log("status 2 กรอกหรือไม่กรอกก็ได้")

@@ -1,28 +1,23 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, StatusBar } from 'react-native';
 import { Container, Header, Item, Input, Button, Tab, Tabs, TabHeading, Icon } from 'native-base';
+import PropTypes from 'prop-types';
 import Modal from "react-native-modal";
 import axios from 'axios'
-
+import { connect } from 'react-redux'
 import datafriend from '../component/list/listFriend/dataFriend'
-
-import ButtonChage from '../component/items/bottonChage'
+import RegisterDistance from '../container/registerDistance'
+import HeaderTeam from '../component/items/headerTeam'
 import HeaderProfile from '../component/items/header_profile.js'
 import EventListFriend from '../component/list/listFriend/eventListFriend'
-import HeaderTeam from '../component/items/headerTeam'
 import ModalAddFriend from '../component/modal/addFriend'
 import ErrorModalAddFriend from '../component/modal/addFriend_error'
+import req from '../config/uri_req'
+import api_key from '../config/api_key'
 
-var uri = "http://api.shutterrunning2014.com/api/v2/grsv2m/_proc/Main.uspSearchFriend"
-var uri2 = "http://api.shutterrunning2014.com/api/v2/grsv2m/_proc/Main.uspAddFriendLists"
-var api_key = '36fda24fe5588fa4285ac6c6c2fdfbdb6b6bc9834699774c9bf777f706d05a88'
-var sessionToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQsInVzZXJfaWQiOjQsImVtYWlsIjoiYWR' +
-    'taW5AZ3V1cnVuLmNvbSIsImZvcmV2ZXIiOmZhbHNlLCJpc3MiOiJodHRwOlwvXC9hcGkuc2h1dHRlcnJ' +
-    '1bm5pbmcyMDE0LmNvbVwvYXBpXC92MlwvdXNlclwvc2Vzc2lvbiIsImlhdCI6MTUyMDU0NDU5MSwiZXh' +
-    'wIjoxNTIwNTQ4MTkxLCJuYmYiOjE1MjA1NDQ1OTEsImp0aSI6IjA1Y2UzN2NjMmU2NjIyZGJlNmMzNTg' +
-    '5MzE1NTI0YmZjIn0._7jHjGhTPfa3rVioC2MrjJfLwrMMxYQYiWhe8DK5V7k'
-var auth = 'Basic YWRtaW5AZ3V1cnVuLmNvbTpXWGJyRDI4THRJUjNNWW0='
-
+var uri = req[0].uspSearchFriend
+var uri2 = req[0].uspAddFriendLists
+var apikey = api_key[0].api_key
 
 class TeamList extends Component {
     constructor(props) {
@@ -31,6 +26,8 @@ class TeamList extends Component {
             title: "ลงทะเบียนแบบกลุ่ม",
             isModalVisible: false,
             isModalVisibleError: false,
+            pageNumber: 0,
+            activeTab: 0,
             searchText: "",
             friendOutput: [],
             addStatus: [],
@@ -48,8 +45,8 @@ class TeamList extends Component {
         })
         axios.post(uri, data, {
             headers: {
-                "X-DreamFactory-API-Key": api_key,
-                "X-DreamFactory-Session-Token": sessionToken,
+                "X-DreamFactory-API-Key": apikey,
+                "X-DreamFactory-Session-Token": this.props.token.token,
                 "Authorization": auth
             },
             responseType: 'json'
@@ -75,7 +72,7 @@ class TeamList extends Component {
         axios.post(uri2, data, {
             headers: {
                 "X-DreamFactory-API-Key": api_key,
-                "X-DreamFactory-Session-Token": sessionToken,
+                "X-DreamFactory-Session-Token": this.props.token.token,
                 "Authorization": auth
             },
             responseType: 'json'
@@ -84,8 +81,7 @@ class TeamList extends Component {
                 this.setState({ isLoading: false, addStatus: response.data });
                 console.log(this.state.addStatus[0])
             }).catch((error) => {
-                // this.setState({ isModalVisibleError: !this.state.isModalVisibleError })
-                console.error(error);
+                this.props.navigation.navigate('EventList')
             });
 
     }
@@ -117,66 +113,89 @@ class TeamList extends Component {
     render() {
         const { navigate } = this.props.navigation;
         return (
-            <View>
+            <Container style={styles.container}>
                 <HeaderTeam title={this.state.title} />
                 <StatusBar
                     barStyle="light-content"
                     hidden={false}
                     translucent={true}
                 />
-                <ScrollView>
-                    <View style={styles.container}>
-                        <HeaderProfile />
-                        <Header searchBar rounded>
-                            <Item>
-                                <Icon name="ios-search" />
-                                <Input
-                                    placeholder="ค้นหาเพื่อน"
-                                    returnKeyType={"next"}
-                                    onChangeText={(searchText) => this.setState({ searchText })}
-                                    onSubmitEditing={this.showModal.bind(this)}
-                                />
-                                <Icon name="ios-people" />
-                            </Item>
-                        </Header>
-                        <Tabs>
-                            <Tab heading={<TabHeading><Icon name="ios-people" /></TabHeading>}>
-                                <EventListFriend friend={datafriend} />
-                            </Tab>
-                            <Tab heading={<TabHeading><Icon name="ios-heart" /></TabHeading>}>
-                                <Text>No Icon</Text>
-                                <EventListFriend friend={datafriend} />
-                            </Tab>
-                        </Tabs>
-                        <Modal isVisible={this.state.isModalVisible}>
-                            <ModalAddFriend
-                                toggleModal={this.hideModal}
-                                outputfriend={this.state.friendOutput[0]}
-                                friend={datafriend}
-                                getAddFriend={this.addFriend.bind(this)} />
-                        </Modal>
-                        <Modal isVisible={this.state.isModalVisibleError}>
-                            <ErrorModalAddFriend 
-                                toggleModal={this.hideModalError}
-                                goRegister={this.gotoRegister.bind(this)}
-                            />
-                        </Modal>
-                        <View style={styles.submitContainer}>
-                            <TouchableOpacity style={styles.buttonContainer}
-                                onPress={() => navigate('FriendDistance')}>
-                                <Text style={styles.textButton}>+ เพิ่มในการสมัคร</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                </ScrollView>
-            </View>
+                <Tabs
+                    initialPage={1}
+                    page={1}
+                    tabBarUnderlineStyle={{ backgroundColor: "#FC561F", height: 2 }}>
+                    <Tab
+                        heading={<TabHeading><Text style={styles.textLabel}>ลงทะเบียนแบบเดียว</Text></TabHeading>}>
+                        <RegisterDistance />
+                    </Tab>
+                    <Tab
+                        heading={<TabHeading><Text style={styles.textLabel}>ลงทะเบียนแบบกลุ่ม</Text></TabHeading>}>
+                        <Container>
+                            <View>
+                                <ScrollView>
+                                    <View style={styles.container}>
+                                        <HeaderProfile />
+                                        <Header searchBar rounded>
+                                            <Item>
+                                                <Icon name="ios-search" />
+                                                <Input
+                                                    placeholder="ค้นหาเพื่อน"
+                                                    returnKeyType={"next"}
+                                                    onChangeText={(searchText) => this.setState({ searchText })}
+                                                    onSubmitEditing={this.showModal.bind(this)}
+                                                />
+                                                <Icon name="ios-people" />
+                                            </Item>
+                                        </Header>
+                                        <Tabs>
+                                            <Tab heading={<TabHeading><Icon name="ios-people" /></TabHeading>}>
+                                                <EventListFriend friend={datafriend} />
+                                            </Tab>
+                                            <Tab heading={<TabHeading><Icon name="ios-heart" /></TabHeading>}>
+                                                <Text>No Icon</Text>
+                                                <EventListFriend friend={datafriend} />
+                                            </Tab>
+                                        </Tabs>
+                                        <View style={styles.submitContainer}>
+                                            <TouchableOpacity style={styles.buttonContainer}
+                                                onPress={() => navigate('FriendDistance')}>
+                                                <Text style={styles.textButton}>+ เพิ่มในการสมัคร</Text>
+                                            </TouchableOpacity>
+                                        </View>
+                                        <Modal isVisible={this.state.isModalVisible}>
+                                            <ModalAddFriend
+                                                toggleModal={this.hideModal}
+                                                outputfriend={this.state.friendOutput[0]}
+                                                friend={datafriend}
+                                                getAddFriend={this.addFriend.bind(this)} />
+                                        </Modal>
+                                        <Modal isVisible={this.state.isModalVisibleError}>
+                                            <ErrorModalAddFriend
+                                                toggleModal={this.hideModalError}
+                                                goRegister={this.gotoRegister.bind(this)}
+                                            />
+                                        </Modal>
+
+                                    </View>
+                                </ScrollView>
+                            </View>
+                        </Container>
+
+                    </Tab>
+                </Tabs>
+            </Container>
         );
+    }
+}
+const mapStateToProps = state => {
+    return {
+        token: state.token
     }
 }
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: '#fff',
+        justifyContent: 'center',
+        backgroundColor: '#fff'
     },
     addFriend: {
         marginTop: 30,
@@ -208,6 +227,11 @@ const styles = StyleSheet.create({
         fontFamily: 'kanit',
         color: '#000',
     },
+    textLabel: {
+        color: '#FC561F',
+        fontSize: 12,
+        fontFamily: 'kanit',
+    },
 
 })
-export default TeamList;
+export default connect(mapStateToProps)(TeamList);

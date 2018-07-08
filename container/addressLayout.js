@@ -44,7 +44,7 @@ class AddressLayout extends Component {
     componentWillMount = () => {
         this.setState({
             priceEvent: parseFloat(this.props.event.totalPrice),
-            priceCDO: parseFloat(60.0)
+            priceCDO: parseFloat(65.0)
         })
     }
     componentDidMount() {

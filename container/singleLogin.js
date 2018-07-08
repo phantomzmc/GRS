@@ -26,15 +26,15 @@ class SingleLogin extends Component {
             status: [],
         }
     }
-    checkLoginSever () {
-        let { status,username } = this.state
+    checkLoginSever() {
+        let { status, username } = this.state
         let uri = req[0].uspCheckUsername
         let data = ({
             params: {
                 value: username,
             }
         })
-        axios.post(uri,data, {
+        axios.post(uri, data, {
             headers: {
                 "X-DreamFactory-API-Key": api[0].api_key,
                 "X-DreamFactory-Session-Token": this.props.token.token,
@@ -43,11 +43,9 @@ class SingleLogin extends Component {
         })
             .then((response) => {
                 this.setState({ isLoading: false, status: response.data });
-                console.log(this.state.status)
-                console.log(this.state.status[0].UsernameStatus)
                 this.checkLogin()
             }).catch((error) => {
-                console.error(error);
+                this.props.navigation.navigate('EventList')
             });
     }
     checkLogin() {
@@ -58,16 +56,6 @@ class SingleLogin extends Component {
         else if (this.state.username == "Admin") {
             this.gotoListEvent()
         }
-        // else if(this.state.status[0].UsernameStatus == "0"){
-        //     Alert.alert('ผู้ใช้งานยังไม่ได้ยืนยันตัวตน', 'กรุณาทำการกรอกรหัสเพื่อทำการยืนยันตัวตน', [
-        //         {
-        //             text: 'Cancel'
-        //         }, {
-        //             text: 'กรอกรหัสยืนยันตัวตน',
-        //             onPress: () => this.gotoVerify()
-        //         }
-        //     ], { cancelable: false })
-        // }
         else {
             Alert.alert('ยังไม่มีข้อมูลผู้ใช้งาน', 'กรุณาลงทะเบียนเพื่อเข้าใช้งาน', [
                 {
@@ -191,9 +179,9 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = (state) => {
-    return { 
+    return {
         profile: state.profile,
-        token : state.token
+        token: state.token
     }
 }
 
@@ -208,4 +196,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(SingleLogin)
+export default connect(mapStateToProps, mapDispatchToProps)(SingleLogin)

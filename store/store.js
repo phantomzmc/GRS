@@ -173,11 +173,15 @@ const username = (state = {}, action) => {
   }
   return state;
 }
-const userprofile = (state = {}, action) => {
+let datapic = ""
+const userprofile = (state = { datapic }, action) => {
   switch (action.type) {
     case "setUserProfile": {
       state.userprofile = action.payload
       break;
+    }
+    case "setPictureProfile": {
+      state.datapic = action.payload
     }
   }
   return state;

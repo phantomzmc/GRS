@@ -11,6 +11,7 @@ import {
 import DatePicker from 'react-native-datepicker'
 import axios from 'axios'
 import { Form, Item, Input, Label, Tabs, Tab, TabHeading, Icon, Toast } from 'native-base'
+import KeyboardSpacer from 'react-native-keyboard-spacer';
 import req from '../../config/uri_req'
 import api_key from '../../config/api_key'
 
@@ -237,6 +238,8 @@ class FormRegister extends Component {
               onChangeText={email => this.setState({ email })} />
           </Item>
         </Form>
+        <KeyboardSpacer/>
+
 
         <View style={styles.submitContainer}>
           <TouchableOpacity

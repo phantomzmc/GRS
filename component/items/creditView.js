@@ -11,7 +11,7 @@ const ibit_pkey = 'pkey_test_5b7nut5dlzyudruopsl'
 const ibit_skey = 'skey_test_5b7nwwrac7mvps7l3mp'
 const test_pkey = 'pkey_test_5ccy7tzubo9t8d0i71o'
 const test_skey = 'skey_test_5ccy7tzukutfwjoi8p3'
-Omise.config(test_pkey, test_skey, '2015-11-17');
+Omise.config(ibit_pkey, ibit_skey, '2015-11-17');
 
 class CreditView extends Component {
 

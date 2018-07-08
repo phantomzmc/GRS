@@ -16,7 +16,8 @@ export default
             uspSignIn: url + "Main.uspSignIn",
             uspGetPlaceItemLists: url + "Main.uspGetPlaceItemLists",
             uspAddRegister: url + "Main.uspAddRegister",
-            uspApplyPromoCode: url + "Main.uspApplyPromoCode"
-
+            uspApplyPromoCode: url + "Main.uspApplyPromoCode",
+            uspSearchFriend : url + "Main.uspSearchFriend",
+            uspAddFriendLists : url + "Main.uspAddFriendLists"
         }
     ]

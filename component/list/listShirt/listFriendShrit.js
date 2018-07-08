@@ -26,7 +26,7 @@ class ListShirt extends Component {
     componentDidMount() {
         let data = ({
             params: [
-                { name: "CourseID", value: this.props.friendlist.friendEvent[1].couseid },
+                { name: "CourseID", value: this.props.friendlist.dataDis.CourseID },
                 { name: "Gender", value: this.props.userprofile.userprofile.Gender }
             ]
         })
@@ -42,8 +42,6 @@ class ListShirt extends Component {
             .then((responseJson) => {
                 this.setState({ isLoading: false, dataSource: responseJson.data, });
                 console.log(this.state.dataSource)
-                this.props.setImageShirt(this.state.dataSource[0].JersePic)
-
             }).catch((error) => {
                 console.error(error);
             });

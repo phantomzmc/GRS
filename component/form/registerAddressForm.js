@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { View, Text, StyleSheet, TouchableOpacity, Alert, Image } from "react-native";
 import { Form, Item, Input, Label } from 'native-base'
+import KeyboardSpacer from 'react-native-keyboard-spacer';
 import ProvinceForm from './addressForm-province'
 import AmphoeForm from './addressForm-amphoe'
 import TambonForm from './addressForm-tunporn'
@@ -88,6 +89,7 @@ class FormAddressRegister extends Component {
             />
           </Item>
         </Form>
+        <KeyboardSpacer/>
 
         <View style={styles.submitContainer}>
           <TouchableOpacity

@@ -23,6 +23,10 @@ class HeaderProfile extends Component {
         }
     }
     componentWillMount = () => {
+        this.setState({
+            ImageSource: this.props.userprofile.datapic
+        })
+        console.log(this.props.userprofile.datapic)
         let uri = req[0].uspGetUserProfile
         let apikey = api_key[0].api_key
         let data = ({
@@ -82,9 +86,11 @@ class HeaderProfile extends Component {
                     statusButton: true
                 });
                 console.log(this.state.ImageSource)
+                this.props.setPictureProfile(response)
             }
         });
     }
+
     setData() {
         this.setState({
             fullname: this.props.userprofile.userprofile.FirstName,
@@ -190,6 +196,12 @@ const mapDispatchToprops = (dispatch) => {
             dispatch({
                 type: "setUserProfile",
                 payload: userprofile
+            })
+        },
+        setPictureProfile: (picprofile) => {
+            dispatch({
+                type: "setPictureProfile",
+                payload: picprofile
             })
         }
     }

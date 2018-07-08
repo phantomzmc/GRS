@@ -23,6 +23,7 @@ import Verify from '../container/verify'
 import ResetVerify from '../container/resetVerify'
 import ResetPassword from '../container/resetPassword'
 import FriendDistance from '../container/friendDistance'
+import TeamRegis from '../container/teamRegis'
 
 import ControlPayment from '../container/controlPayment'
 
@@ -34,6 +35,7 @@ export default StackNavigator({
     //         header : () => null
     //     }
     // },
+
     EventList: {
         screen: EventList,
         navigationOptions: {
@@ -196,6 +198,12 @@ export default StackNavigator({
     },
     GetPleace: {
         screen: GetPleace
+    },
+    TeamRegis : {
+        screen: TeamRegis,
+        navigationOptions: {
+            header: () => null
+        }
     }
 
 

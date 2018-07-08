@@ -5,7 +5,7 @@ import Switch from 'react-native-switch-pro'
 
 import ListFriendDistance from '../list/event/listFriendDistance'
 import ListFriendShirth from '../list/listShirt/listFriendShrit'
-import DropDownShirth from '../list/listShirt/dropdownShirt'
+import dataDistance from '../list/listevent/dataDistance'
 import dataFriend from '../list/listFriend/dataFriend';
 import dataShirts from '../list/listShirt/dataShirt'
 import { connect } from 'react-redux';
@@ -40,7 +40,11 @@ class CradFriendDistance extends Component {
     }
     passDistance = (item) => {
         this.passName()
-        this.setState({ dataDis: item, total: parseFloat(item.Fee) })
+        console.log(item)
+        this.setState({ dataDis: item, total: parseFloat(item.Fee), distance: !this.state.distance })
+        dataDistance.push(item)
+        console.log(dataDistance)
+        this.props.addDistanceFriend(dataDistance)
         this.props.getPriceTotal(this.state.total)
     }
     passShirt(item) {
@@ -123,7 +127,9 @@ class CradFriendDistance extends Component {
                                         </TouchableOpacity>
                                     </Right>
                                 </View>
-                                {this.state.sizeShirth && <ListFriendShirth getShirt={this.passShirt.bind(this)} />}
+                                {this.state.sizeShirth &&
+                                    <ListFriendShirth getShirt={this.passShirt.bind(this)} />
+                                }
                             </View>
                         </View>
                     </Body>
