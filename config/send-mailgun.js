@@ -1,9 +1,13 @@
+import req from '../config/uri_req'
+import api from '../config/api_key'
 
+let url = req[1].url_mailgun
+let auth = api[0].api_mailgun
 
 class MailGunSend {
     onSendMail(data) {
         let headers = {
-            'Authorization': 'Basic YXBpOmtleS03NDU3ZmE5NTI5NzcxZGVhN2U5OTdjYzk3MWIwN2M4NQ==',
+            'Authorization': auth,
             'Content-Type': 'application/x-www-form-urlencoded',
         }
         let formBody = [];
@@ -13,7 +17,7 @@ class MailGunSend {
             formBody.push(encodedKey + "=" + encodedValue);
         }
         formBody = formBody.join("&");
-        fetch("https://api.mailgun.net/v3/mg.guurun.com/messages", {
+        fetch(url, {
             method: 'POST',
             headers: headers,
             body: formBody,

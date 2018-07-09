@@ -19,15 +19,12 @@ class FormAddressRegister extends Component {
       lastname: "",
       relation: "ความสัมพันธ์",
       tel: "",
-      verifycode: "",
-      statusVerify: 0,
       email: ""
     };
   }
   sendData = (firstname, lastname, relation, tel) => {
-    this.props.goEvent(firstname, lastname, relation, tel);
     this.props.setHelp({ firstname, lastname, relation, tel});
-
+    this.props.goEvent(firstname, lastname, relation, tel);
   };
 
   render() {
@@ -66,6 +63,7 @@ class FormAddressRegister extends Component {
           <Item floatingLabel last>
             <Label style={styles.textLabel}>Ex.090-xxxxxx</Label>
             <Input
+              keyboardType="phone-pad"
               onChangeText={tel => this.setState({ tel })}
             />
           </Item>
@@ -190,12 +188,6 @@ const mapDispatchToProps = dispatch => {
       dispatch({
         type: "setHelp",
         payload: help
-      });
-    },
-    setVerify: verify => {
-      dispatch({
-        type: "setVerify",
-        payload: verify
       });
     }
   };

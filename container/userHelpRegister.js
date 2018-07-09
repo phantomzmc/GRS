@@ -4,7 +4,6 @@ import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Alert, StatusBar 
 import { connect } from "react-redux";
 import { Container } from 'native-base'
 import axios from 'axios'
-import randomstringPromise from 'randomstring-promise';
 import MailGunSend from '../config/send-mailgun'
 import HeaderUser from "../component/items/header_profile";
 import FormHelpRegister from "../component/form/registerHelpForm";
@@ -33,29 +32,20 @@ class UserHelpRegister extends Component {
         test: "asdaffg"
       }
     };
-    this.createVerifyCode = this.createVerifyCode.bind(this)
 
   }
-  async sentData(activecode) {
+
+componentDidMount(){
+  console.log(this.props.profile.verify)
+}
+  async sentVerifyCode() {
     const data = await MailGunSend.onSendMail({
       'from': 'Guurun Support Team. <support@guurun.com>',
       'to': this.props.profile.profile.email,
       'subject': 'Guurun Support Team รหัสในการยืนยันตัวตน',
-      'text': 'สวัสดีคุณ ' + this.props.profile.profile.fullname + ' รหัสที่ใช้ในการยืนยันตัวตนขอผู้ใช้งานคือ : ' + activecode
+      'text': 'สวัสดีคุณ ' + this.props.profile.profile.fullname + ' รหัสที่ใช้ในการยืนยันตัวตนขอผู้ใช้งานคือ : ' + this.props.profile.verify
     })
     console.log(data)
-  }
-  createVerifyCode() {
-    randomstringPromise(10)
-      .then((verifycode) => {
-        this.setState({ verifycode: verifycode })
-        // console.log(code);  // u8KNs7aAw0DCOKO1MdEgVIcF2asajrdd
-        console.log(verifycode)
-        this.props.setVerify(verifycode)
-      });
-  }
-  componentDidMount() {
-    this.createVerifyCode()
   }
   createAccount = (ecfirstname, eclastname, ecrelation, ectel) => {
     let activecode = this.props.profile.verify
@@ -94,7 +84,7 @@ class UserHelpRegister extends Component {
       .then((response) => {
         this.setState({ isLoading: false, status: response.data });
         console.log("success")
-        this.sentData(activecode)
+        this.sentVerifyCode()
         this.gotoListEvent()
       }).catch((error) => {
         console.error(error);
@@ -160,15 +150,6 @@ const mapStateToProps = state => {
     token: state.token
   }
 }
-const mapDispatchToProps = dispatch => {
-  return {
-    setVerify: verifycode => {
-      dispatch({
-        type: "setVerify",
-        payload: verifycode
-      });
-    }
-  };
-};
 
-export default connect(mapStateToProps,mapDispatchToProps)(UserHelpRegister);
+
+export default connect(mapStateToProps)(UserHelpRegister);

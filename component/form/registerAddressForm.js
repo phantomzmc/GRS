@@ -85,6 +85,7 @@ class FormAddressRegister extends Component {
           <Item floatingLabel last>
             <Label style={styles.textLabel}>Ex.10160</Label>
             <Input
+              keyboardType="phone-pad"
               onChangeText={postNumber => this.setState({ postNumber })}
             />
           </Item>

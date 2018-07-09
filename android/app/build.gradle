@@ -137,6 +137,10 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-randombytes')
+    compile project(':appcenter-crashes')
+    compile project(':appcenter-analytics')
+    compile project(':appcenter')
     compile project(':react-native-network-info')
     compile project(':react-native-image-picker')
     compile project(':react-native-view-shot')

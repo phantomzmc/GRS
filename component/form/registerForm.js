@@ -89,6 +89,20 @@ class FormRegister extends Component {
 
     }
   }
+  setGenMan() {
+    this.setState({ selectedIndex: 0 })
+    if (this.state.selectedIndex == 0) {
+      this.setState({ gen: "M" })
+      console.log(this.state.gen)
+    }
+  }
+  setGenWoMan() {
+    this.setState({ selectedIndex: 1 })
+    if (this.state.selectedIndex == 1) {
+      this.setState({ gen: "F" })
+      console.log(this.state.gen)
+    }
+  }
 
   render() {
     let { fullname, lastname, nickname, password, confirmpassword, teamname, bib, userid, tel, email, date, bloodtype, nation, gen } = this.state;
@@ -132,9 +146,17 @@ class FormRegister extends Component {
           <Tabs
             initialPage={this.state.selectedIndex}
             tabBarUnderlineStyle={{ backgroundColor: "#FC561F", height: 2 }}>
-            <Tab heading={<TabHeading ><Icon name="ios-man" style={{ color: "#FC561F" }} /><Text style={styles.tabGender}>ชาย</Text></TabHeading>} onPress={() => this.setState({ selectedIndex: 0, gen: "M" })}>
+            <Tab heading={
+              <TabHeading>
+                <Icon name="ios-man" style={{ color: "#FC561F" }} />
+                <Text style={styles.tabGender} onPress={() => this.setGenMan()}>ชาย</Text>
+              </TabHeading>}>
             </Tab>
-            <Tab heading={<TabHeading><Icon name="ios-woman" style={{ color: "#FC561F" }} /><Text style={styles.tabGender}>หญิง</Text></TabHeading>} onPress={() => this.setState({ selectedIndex: 1, gen: "F" })}>
+            <Tab heading={
+              <TabHeading>
+                <Icon name="ios-woman" style={{ color: "#FC561F" }} />
+                <Text style={styles.tabGender} onPress={() => this.setGenWoMan()}>หญิง</Text>
+              </TabHeading>}>
             </Tab>
           </Tabs>
         </View>
@@ -145,7 +167,8 @@ class FormRegister extends Component {
             <Label style={styles.textLabel}>Ex.15099999xxxxx</Label>
             <Input
               onChangeText={userid => this.setState({ userid })}
-              onEndEditing={this.checkUsernmae.bind(this)} />
+              onEndEditing={this.checkUsernmae.bind(this)}
+              keyboardType="phone-pad" />
           </Item>
         </Form>
         <Text style={styles.headForm}>กรุ๊ปเลือด</Text>
@@ -226,6 +249,7 @@ class FormRegister extends Component {
           <Item floatingLabel last>
             <Label style={styles.textLabel}>Ex.090-xxxxxx</Label>
             <Input
+              keyboardType="phone-pad"
               onChangeText={tel => this.setState({ tel })} />
           </Item>
         </Form>
@@ -235,10 +259,11 @@ class FormRegister extends Component {
           <Item floatingLabel last>
             <Label style={styles.textLabel}>Ex.abc@gmail.com</Label>
             <Input
+              keyboardType="email-address"
               onChangeText={email => this.setState({ email })} />
           </Item>
         </Form>
-        <KeyboardSpacer/>
+        <KeyboardSpacer />
 
 
         <View style={styles.submitContainer}>

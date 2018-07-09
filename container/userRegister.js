@@ -9,9 +9,8 @@ import {
   StatusBar
 } from "react-native";
 import { Container } from 'native-base'
-import { StackNavigator } from "react-navigation";
+import randomstringPromise from 'randomstring-promise/react-native';
 import { connect } from "react-redux";
-
 import HeaderUser from "../component/items/header_profile";
 import FormRegister from "../component/form/registerForm";
 import HeaderTeam from '../component/items/headerTeam'
@@ -25,10 +24,19 @@ class UserRegister extends Component {
     super(props);
     this.state = {
       title: "สมัครสมาชิก",
-      profile: {}
+      profile: {},
+      verifycode: ""
     };
   }
-
+  componentDidMount() {
+    randomstringPromise(10)
+      .then((verifycode) => {
+        this.setState({ verifycode: verifycode })
+        // console.log(code);  // u8KNs7aAw0DCOKO1MdEgVIcF2asajrdd
+        console.log("componentdidmouth : " + verifycode)
+        this.props.setVerify(this.state.verifycode)
+      });
+  }
   gotoListEvent = (
     fullname,
     lastname,
@@ -106,6 +114,12 @@ const mapDispatchToProps = dispatch => {
       dispatch({
         type: "setProfile",
         payload: profile
+      });
+    },
+    setVerify: verifycode => {
+      dispatch({
+        type: "setVerify",
+        payload: verifycode
       });
     }
   };

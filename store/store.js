@@ -35,24 +35,26 @@ const user = {
     userid: "",
     password: "",
   },
-  verify: {
-    statusVerify: 0
-  }
+  verify : ""
 };
 
 const profile = (state = user, action) => {
   switch (action.type) {
     case "setProfile": {
       state.profile = action.payload;
+      break;
     }
     case "setAddress": {
       state.address = action.payload;
+      break;
     }
     case "setHelp": {
       state.help = action.payload;
+      break;
     }
     case "setVerify": {
-      state.verify = action.payload
+      state.verify = action.payload;
+      break;
     }
   }
   return state;
