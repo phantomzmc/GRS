@@ -9,7 +9,14 @@ import {
     TouchableOpacity
 } from 'react-native';
 import { Card, Icon } from "native-base";
+import { connect } from "react-redux";
 import ImagePicker from 'react-native-image-picker';
+import Omise from '../../config/omise-config';
+const ibit_pkey = 'pkey_test_5b7nut5dlzyudruopsl'
+const ibit_skey = 'skey_test_5b7nwwrac7mvps7l3mp'
+const test_pkey = 'pkey_test_5ccy7tzubo9t8d0i71o'
+const test_skey = 'skey_test_5ccy7tzukutfwjoi8p3'
+Omise.config(test_pkey, test_skey, '2015-11-17');
 
 class TranferView extends Component {
     static propTypes = {
@@ -25,6 +32,16 @@ class TranferView extends Component {
             ImageSource: null,
             statusButton: false
         }
+    }
+    async getCustomer() {
+        let userprofile = this.props.userprofile.userprofile
+        const data = await Omise.createCustomer({
+            'description': userprofile.FirstName + " " +userprofile.LastName,
+            'email': userprofile.email
+        });
+        console.log(data)
+        this.props.setCharge(data.id)
+        this.goTotalPayment()
     }
     selectPhotoTapped() {
         const options = {
@@ -60,7 +77,9 @@ class TranferView extends Component {
             }
         });
     }
-
+    goTotalPayment() {
+        this.props.goAddress()
+    }
 
     render() {
         let { bank, branch, ACNumber, username } = this.state
@@ -137,7 +156,7 @@ class TranferView extends Component {
                         {this.state.statusButton &&
 
                             <TouchableOpacity style={[styles.buttonContainer]}
-                                onPress={() => this.props.goAddress()}>
+                                onPress={this.getCustomer.bind(this)}>
                                 <Text style={styles.textButton}>ถัดไป</Text>
                             </TouchableOpacity>
 
@@ -146,6 +165,22 @@ class TranferView extends Component {
                 </View>
             </ScrollView>
         );
+    }
+}
+const mapStateToProps = state => {
+    return {
+        event: state.event,
+        userprofile: state.userprofile
+    }
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        setCharge: (charges) => {
+            dispatch({
+                type: 'setCharge',
+                payload: charges
+            })
+        }
     }
 }
 
@@ -243,4 +278,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default TranferView;
+export default connect(mapStateToProps,mapDispatchToProps)(TranferView);

@@ -109,25 +109,29 @@ class TeamList extends Component {
         this.props.navigation.navigate('Register')
         this.hideModalError()
     }
+    gotoSingleRegis = () => {
+        this.props.navigation.navigate('ControlDistance')
+    }
+    goLogin = () => {
+        this.props.navigation.navigate('Login')
+    }
 
     render() {
         const { navigate } = this.props.navigation;
         return (
             <Container style={styles.container}>
-                <HeaderTeam title={this.state.title} />
+                <HeaderTeam 
+                    title={this.state.title}
+                    goback={this.goLogin.bind(this)} />
                 <StatusBar
                     barStyle="light-content"
                     hidden={false}
                     translucent={true}
                 />
                 <Tabs
-                    initialPage={1}
-                    page={1}
+                    initialPage={0}
+                    page={0}
                     tabBarUnderlineStyle={{ backgroundColor: "#FC561F", height: 2 }}>
-                    <Tab
-                        heading={<TabHeading><Text style={styles.textLabel}>ลงทะเบียนแบบเดียว</Text></TabHeading>}>
-                        <RegisterDistance />
-                    </Tab>
                     <Tab
                         heading={<TabHeading><Text style={styles.textLabel}>ลงทะเบียนแบบกลุ่ม</Text></TabHeading>}>
                         <Container>
@@ -180,7 +184,10 @@ class TeamList extends Component {
                                 </ScrollView>
                             </View>
                         </Container>
-
+                    </Tab>
+                    <Tab
+                        heading={<TabHeading><Text style={styles.textLabel} onPress={() => this.gotoSingleRegis()}>ลงทะเบียนแบบเดียว</Text></TabHeading>}>
+                        <RegisterDistance />
                     </Tab>
                 </Tabs>
             </Container>

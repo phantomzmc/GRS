@@ -6,6 +6,7 @@ import Switch from 'react-native-switch-pro'
 import ListFriendDistance from '../list/event/listFriendDistance'
 import ListFriendShirth from '../list/listShirt/listFriendShrit'
 import dataDistance from '../list/listevent/dataDistance'
+import dataPrice from '../list/listevent/dataPrice'
 import dataFriend from '../list/listFriend/dataFriend';
 import dataShirts from '../list/listShirt/dataShirt'
 import { connect } from 'react-redux';
@@ -43,7 +44,9 @@ class CradFriendDistance extends Component {
         console.log(item)
         this.setState({ dataDis: item, total: parseFloat(item.Fee), distance: !this.state.distance })
         dataDistance.push(item)
+        dataPrice.push(parseFloat(item.Fee))
         console.log(dataDistance)
+        console.log(dataPrice)
         this.props.addDistanceFriend(dataDistance)
         this.props.getPriceTotal(this.state.total)
     }

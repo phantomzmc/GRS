@@ -36,22 +36,27 @@ class ControlDistance extends Component {
     }
     goAddTeam() {
         console.log("Team")
-        Alert.alert("ลงทะเบียนแบบกลุ่ม", "การลงทะเบียนแบบกลุ่มจะต้องทำการเข้าสู่ระบบก่อน", [
-            {
-                text: "Cancel"
-            },
-            {
-                text: "เข้าสู่ระบบ",
-                onPress: () => this.goLogin()
-            },
-        ], { cancelable: false })
-
+        if(this.props.profile.statuslogin == 1){
+            this.props.navigation.navigate('TabRouter')
+        }
+        else{
+            Alert.alert("ลงทะเบียนแบบกลุ่ม", "การลงทะเบียนแบบกลุ่มจะต้องทำการเข้าสู่ระบบก่อน", [
+                {
+                    text: "Cancel"
+                },
+                {
+                    text: "เข้าสู่ระบบ",
+                    onPress: () => this.goLogin()
+                },
+            ], { cancelable: false })
+        }
     }
 
     render() {
         return (
             <Container style={styles.container}>
-                <HeaderTeam title={this.state.title}
+                <HeaderTeam 
+                    title={this.state.title}
                     goback={this.goSingleLogin.bind(this)} />
                 <StatusBar
                     barStyle="light-content"
@@ -75,7 +80,11 @@ class ControlDistance extends Component {
         );
     }
 }
-
+const mapStateToProps = state => {
+    return {
+        profile : state.profile
+    }
+}
 const mapDispatchToProps = (dispatch) => {
     return {
         setLogin: (login) => {
@@ -109,4 +118,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default connect(null, mapDispatchToProps)(ControlDistance);
+export default connect(mapStateToProps, mapDispatchToProps)(ControlDistance);

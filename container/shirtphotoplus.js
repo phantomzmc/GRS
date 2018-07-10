@@ -72,6 +72,9 @@ class ShirtPhotoPlus extends Component {
     _buttonStatus() {
         this.setState({ buttonStatus2: true, buttonStatus1: false })
     }
+    gotoListEvent = () => {
+        this.props.navigation.navigate('EventList')
+    }
 
     render() {
         let url = 'https://register.shutterrunning2014.com/assets/img/theme/'
@@ -95,6 +98,7 @@ class ShirtPhotoPlus extends Component {
                             getImageShirt={this.setImageShrirt.bind(this)}
                             statusButton={this._buttonStatus.bind(this)}
                             getShirt={this.passValueShirt.bind(this)}
+                            goEvent={this.gotoListEvent.bind(this)}
                         />
                     </View>
 

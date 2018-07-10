@@ -16,7 +16,26 @@ class Login extends Component {
             username: "",
             password: "",
             status: [],
+            login : 1
         }
+    }
+    componentDidMount(){
+        this.onConnect()
+    }
+    onConnect(){
+        let uri = req[0].session_token;
+        return axios.post(uri, {
+            email: "admin@guurun.com",
+            password: "WXbrD28LtIR3MYm"
+        },
+            {
+                responseType: 'json'
+            })
+            .then((response) => {
+                console.log(response)
+                token = response.data.session_token
+                this.props.setCreateToken(response.data.session_token)
+            })
     }
 
     checkLoginSever() {
@@ -42,14 +61,15 @@ class Login extends Component {
                 console.log(this.state.status[0].SignInStatus)
                 this.checkLogin()
             }).catch((error) => {
-                console.error(error);
+                this.props.navigation.navigate('EventList')
             });
     }
     checkLogin() {
-        let { status } = this.state
+        let { status,login } = this.state
         if (status[0].SignInStatus === "1" && status[0].ActivateStatus === "1") {
             this.props.setUsername(this.state.username)
             this.props.setUserProfile(status[0])
+            this.props.setStatusLogin(login)
             this.gotoTabTeam()
         }
         else if (status[0].SignInStatus === "1" && status[0].ActivateStatus === "0") {
@@ -164,7 +184,19 @@ const mapDispatchToProps = (dispatch) => {
                 type: "setUserProfile",
                 payload: userprofile
             })
-        }
+        },
+        setCreateToken: (token) => {
+            dispatch({
+                type: "setCreateToken",
+                payload: token
+            })
+        },
+        setStatusLogin : (login)=> {
+            dispatch({
+                type : "setStatusLogin",
+                payload : login
+            })
+        }   
     }
 }
 

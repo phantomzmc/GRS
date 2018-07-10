@@ -54,6 +54,7 @@ class FriendInEvent extends Component {
         })
     }
     passTotal = (price) => {
+        console.log(price)
         this.props.getSummaryPrice(price)
     }
     passFriendRegis = (regisFriend) => {

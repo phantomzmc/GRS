@@ -29,13 +29,7 @@ import ControlPayment from '../container/controlPayment'
 
 
 export default StackNavigator({
-    // TotalPayment: {
-    //     screen: TotalPayment,
-    //     navigationOptions: {
-    //         header : () => null
-    //     }
-    // },
-
+    
     EventList: {
         screen: EventList,
         navigationOptions: {
@@ -52,7 +46,7 @@ export default StackNavigator({
     Register: {
         screen: Register,
         navigationOptions: {
-            header : () => null
+            header: () => null
 
         }
     },
@@ -71,27 +65,27 @@ export default StackNavigator({
     UserAddressRegister: {
         screen: UserAddressRegister,
         navigationOptions: {
-            header : () => null
+            header: () => null
 
         }
     },
     UserHelpRegister: {
         screen: UserHelpRegister,
         navigationOptions: {
-            header : () => null
+            header: () => null
         }
     },
     Verify: {
         screen: Verify,
         navigationOptions: {
-            header : () => null
+            header: () => null
 
         }
     },
     ResetVerify: {
         screen: ResetVerify,
         navigationOptions: {
-            header : () => null
+            header: () => null
         }
     },
     ResetPassword: {
@@ -109,13 +103,13 @@ export default StackNavigator({
     ShirtPhotoPlus: {
         screen: ShirtPhotoPlus,
         navigationOptions: {
-            header : () => null
+            header: () => null
         }
     },
     DiscountCoupon: {
         screen: DiscountCoupon,
         navigationOptions: {
-            header : () => null
+            header: () => null
         }
     },
     ControlDistance: {
@@ -127,18 +121,18 @@ export default StackNavigator({
     ControlPayment: {
         screen: ControlPayment,
         navigationOptions: {
-            header : () => null
+            header: () => null
         }
     },
     ButtonChangePayment: {
         screen: ButtonChangePayment,
         navigationOptions: {
-            header : () => null
+            header: () => null
         }
     },
-    ButtonChangeTranfer:{
-        screen : ButtonChangeTranfer,
-        navigationOptions : {
+    ButtonChangeTranfer: {
+        screen: ButtonChangeTranfer,
+        navigationOptions: {
             header: () => null
         }
     },
@@ -151,7 +145,7 @@ export default StackNavigator({
     TeamList: {
         screen: TeamList,
         navigationOptions: {
-            header : () => null
+            header: () => null
         }
     },
 
@@ -164,13 +158,13 @@ export default StackNavigator({
     AddressLayout: {
         screen: AddressLayout,
         navigationOptions: {
-            header : () => null
+            header: () => null
         }
     },
     TotalPayment: {
         screen: TotalPayment,
         navigationOptions: {
-            header : () => null
+            header: () => null
         }
     },
     AddEventFriend: {
@@ -199,7 +193,7 @@ export default StackNavigator({
     GetPleace: {
         screen: GetPleace
     },
-    TeamRegis : {
+    TeamRegis: {
         screen: TeamRegis,
         navigationOptions: {
             header: () => null

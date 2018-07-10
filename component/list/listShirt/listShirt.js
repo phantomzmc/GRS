@@ -43,7 +43,7 @@ class ListShirt extends Component {
                 this.props.setImageShirt(this.state.dataSource[0].JersePic)
                 this.props.getImageShirt(this.state.dataSource[0].JersePic)
             }).catch((error) => {
-                console.error(error);
+                this.props.goEvent()
             });
 
     }
@@ -55,7 +55,6 @@ class ListShirt extends Component {
         this.props.setSizeShirt(item.JerseySizeValue)
         // Alert.alert("ไซค์เสื้อ : " + datashirt.label)
     }
-
     render() {
         if (this.state.isLoading) {
             return (

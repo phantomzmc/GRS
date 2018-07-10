@@ -35,9 +35,9 @@ class UserHelpRegister extends Component {
 
   }
 
-componentDidMount(){
-  console.log(this.props.profile.verify)
-}
+  componentDidMount() {
+    console.log(this.props.profile.verify)
+  }
   async sentVerifyCode() {
     const data = await MailGunSend.onSendMail({
       'from': 'Guurun Support Team. <support@guurun.com>',

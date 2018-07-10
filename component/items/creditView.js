@@ -59,13 +59,6 @@ class CreditView extends Component {
 
         });
         console.log(data)
-        // const charges = await Omise.createCharge({
-        //     amount: this.state.amount, // 1,000 Baht
-        //     currency: 'thb',
-        //     capture: true,
-        //     card: tokenId
-        // })
-        // this.openModal()
         this.checkPaymentModal(data)
         this.props.setCharge(data)
     }

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, StyleSheet, TouchableOpacity, Text,StatusBar } from 'react-native'
+import { View, StyleSheet, TouchableOpacity, Text, StatusBar } from 'react-native'
 import { Conatainer } from 'native-base'
 import { connect } from 'react-redux'
-import randomstringPromise from 'randomstring-promise';
+import randomstringPromise from 'randomstring-promise/react-native';
 
 import ResetVerifyForm from "../component/form/resetVerifyForm"
 import HeaderTeam from '../component/items/headerTeam'
@@ -20,22 +20,29 @@ class ResetVerify extends Component {
             statusVerify: 0
         }
     }
-    componentWillMount() {
-        let { verifycode } = this.state
-        console.log("verfity")
+    componentDidMount() {
         randomstringPromise(10)
             .then((verifycode) => {
-                this.setState({ verifycode })
+                this.setState({ verifycode: verifycode })
                 // console.log(code);  // u8KNs7aAw0DCOKO1MdEgVIcF2asajrdd
-                console.log(verifycode)
+                console.log("componentdidmouth : " + verifycode)
+                this.props.setVerify(this.state.verifycode)
             });
+    }
+    async sentVerifyCode() {
+        const data = await MailGunSend.onSendMail({
+            'from': 'Guurun Support Team. <support@guurun.com>',
+            'to': this.props.profile.profile.email,
+            'subject': 'Guurun Support Team รหัสในการยืนยันตัวตน',
+            'text': 'สวัสดีคุณ ' + this.props.profile.profile.fullname + ' รหัสที่ใช้ในการยืนยันตัวตนขอผู้ใช้งานคือ : ' + this.props.profile.verify
+        })
+        console.log(data)
     }
     gotoLogin = () => {
         this.props.navigation.navigate("Verify")
     }
     sendResetVerify() {
-        let { verifycode, statusVerify } = this.state
-        this.props.setVerify({ verifycode, statusVerify })
+        this.sentVerifyCode()        
     }
     gotoBack = () => {
         this.props.navigation.navigate('Verify')
@@ -54,7 +61,8 @@ class ResetVerify extends Component {
                     translucent={true}
                 />
                 <View style={styles.container}>
-                    <ResetVerifyForm sendNewCode={this.sendResetVerify.bind(this)}
+                    <ResetVerifyForm
+                        sendNewCode={this.sendResetVerify.bind(this)}
                         goLogin={this.gotoLogin.bind(this)} />
                     {/* <TouchableOpacity onPress={this.sendResetVerify.bind(this)}>
                     <Text>test</Text>
@@ -62,6 +70,11 @@ class ResetVerify extends Component {
                 </View>
             </View>
         );
+    }
+}
+const mapStateToProps = state => {
+    return {
+        profile: state.profile
     }
 }
 const mapDisPatchToProps = (dispatch) => {
@@ -81,4 +94,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default connect(null, mapDisPatchToProps)(ResetVerify);
+export default connect(mapStateToProps, mapDisPatchToProps)(ResetVerify);

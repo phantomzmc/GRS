@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import FriendInEvent from '../component/list/listFriend/frienInEvent'
 import { View, StyleSheet, TouchableOpacity, Text, ScrollView } from 'react-native';
-import { Footer } from "native-base";
+import { Container } from "native-base";
 import { connect } from 'react-redux'
 
 import HeaderTeam from '../component/items/headerTeam'
@@ -11,7 +11,6 @@ class FriendDistance extends Component {
     state = {
         title: "เลือกระยะทาง",
         price: [],
-        totals: 0
     }
 
     onButtonChangePayment = () => {
@@ -33,12 +32,11 @@ class FriendDistance extends Component {
         const sum = price.reduce(add)
         console.log(sum)
         this.props.setTotalPrice(sum)
-        this.setState({ totals: sum })
     }
 
     render() {
         return (
-            <View>
+            <Container>
                 <HeaderTeam title={this.state.title}
                     goback={this.onPressGoBack.bind(this)} />
                 <ScrollView>
@@ -51,11 +49,9 @@ class FriendDistance extends Component {
                             </TouchableOpacity>
                         </View>
                     </View>
-                    <View style={{ marginBottom: 60 }}>
-                        <SummaryTotal />
-                    </View>
                 </ScrollView>
-            </View>
+                <SummaryTotal />
+            </Container>
         )
     }
 }
@@ -101,4 +97,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(FriendDistance)
+export default connect(mapStateToProps, mapDispatchToProps)(FriendDistance)

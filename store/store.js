@@ -1,15 +1,5 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 
-const token = (state = {}, action) => {
-  switch (action.type) {
-    case "setCreateToken": {
-      state.token = action.payload
-      break
-    }
-  }
-  return state;
-}
-
 const eventState = {
   event: {
     name: "1",
@@ -35,9 +25,25 @@ const user = {
     userid: "",
     password: "",
   },
-  verify : ""
+  verify : "",
+  statuslogin : 0
 };
+const friend = {
+  friendRegis: {},
+  dataDis: {},
+  friendEvent: {},
+  shirtSize: {}
 
+}
+const token = (state = {}, action) => {
+  switch (action.type) {
+    case "setCreateToken": {
+      state.token = action.payload
+      break
+    }
+  }
+  return state;
+}
 const profile = (state = user, action) => {
   switch (action.type) {
     case "setProfile": {
@@ -56,10 +62,13 @@ const profile = (state = user, action) => {
       state.verify = action.payload;
       break;
     }
+    case "setStatusLogin" : {
+      state.statuslogin = action.payload;
+      break;
+    }
   }
   return state;
 };
-
 const event = (state = eventState, action) => {
   switch (action.type) {
     case "addEvent": {
@@ -86,7 +95,6 @@ const event = (state = eventState, action) => {
   }
   return state;
 };
-
 const shirtphoto = (state = {}, action) => {
   switch (action.type) {
     case "setPrice": {
@@ -105,13 +113,7 @@ const shirtphoto = (state = {}, action) => {
   }
   return state;
 };
-const photoplus = (
-  state = {
-    title: "Photo Plus Service",
-    pricePhoto: 100
-  },
-  action
-) => {
+const photoplus = ( state = {title: "Photo Plus Service",pricePhoto: 100},action) => {
   switch (action.type) {
     case "onPhotoPlus":
       state = {
@@ -124,7 +126,6 @@ const photoplus = (
   }
   return state;
 };
-
 const creditcard = (state = credit, action) => {
   switch (action.type) {
     case "setCredit": {
@@ -164,8 +165,6 @@ const address = (state = {}, action) => {
   }
   return state;
 };
-
-
 const username = (state = {}, action) => {
   switch (action.type) {
     case "setUsername": {
@@ -196,13 +195,6 @@ const invoice = (state = {}, action) => {
     }
   }
   return state;
-}
-const friend = {
-  friendRegis: {},
-  dataDis: {},
-  friendEvent: {},
-  shirtSize: {}
-
 }
 const friendlist = (state = friend, action) => {
   switch (action.type) {
@@ -251,7 +243,6 @@ const network = (state = {}, action) => {
   }
   return state;
 }
-
 const promocode = (state = {}, action) => {
   switch (action.type) {
     case "setDisPrice": {
@@ -261,8 +252,6 @@ const promocode = (state = {}, action) => {
   }
   return state;
 }
-
-
 const myLogger = store => next => action => {
   console.log("Log Action", action);
   next(action);

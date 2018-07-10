@@ -74,6 +74,7 @@ class AddressLayout extends Component {
                 });
                 console.log(responseJson.data)
             }).catch((error) => {
+                this.props.navigation.navigate('EventList')
             });
     }
     nextToPayment = () => {

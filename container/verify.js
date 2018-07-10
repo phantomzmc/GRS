@@ -45,7 +45,7 @@ class VerifyCode extends Component {
                 console.log(this.state.status[0].Status)
                 this.alertVerify()
             }).catch((error) => {
-                console.error(error);
+                this.props.navigation.navigate('EventList')
             });
     }
 
