@@ -86,8 +86,6 @@ class FormAddressRegister extends Component {
             </Picker>
           </Form>
         </View>
-        <KeyboardSpacer />
-
         <View style={styles.submitContainer}>
           <TouchableOpacity
             style={styles.buttonContainer}
@@ -96,6 +94,7 @@ class FormAddressRegister extends Component {
             <Text style={styles.textButton}>ยืนยัน</Text>
           </TouchableOpacity>
         </View>
+        <KeyboardSpacer />
       </View>
     );
   }

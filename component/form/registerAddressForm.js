@@ -90,8 +90,6 @@ class FormAddressRegister extends Component {
             />
           </Item>
         </Form>
-        <KeyboardSpacer/>
-
         <View style={styles.submitContainer}>
           <TouchableOpacity
             style={styles.buttonContainer}
@@ -102,6 +100,7 @@ class FormAddressRegister extends Component {
             <Text style={styles.textButton}>ถัดไป</Text>
           </TouchableOpacity>
         </View>
+        <KeyboardSpacer/>
       </View>
     );
   }

@@ -78,7 +78,7 @@ class TotalLayout extends Component {
                 this.setState({ isLoading: false, output: response.data });
                 this.props.setInvoice(this.state.output)
             }).catch((error) => {
-                this.props.navigation.navigate('EventList')
+                // this.props.navigation.navigate('EventList')
             });
     }
     onClick = () => {

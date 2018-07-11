@@ -5,6 +5,9 @@ import { Container, Header, Tab, Tabs, TabHeading, Icon, Text, Button } from 'na
 import { StackNavigator } from 'react-navigation';
 import { connect } from 'react-redux'
 import Login from '../container/login'
+import axios from "axios";
+import req from '../config/uri_req'
+import api from '../config/api_key'
 import RegisterDistance from '../container/registerDistance'
 import SummaryTotal from '../component/items/summary'
 import HeaderTeam from '../component/items/headerTeam'
@@ -22,7 +25,53 @@ class ControlDistance extends Component {
         }
         this.goAddTeam = this.goAddTeam.bind(this)
     }
-
+    componentDidMount() {
+        // this.fetchRegisEvent()
+        setTimeout(() => {
+            console.log('I do not leak!');
+            this.fetchRegisEvent()
+        }, 1000);
+    }
+    fetchRegisEvent() {
+        let userprofile = this.props.userprofile.userprofile
+        let event = this.props.event.event
+        const uri = req[0].uspCheckRegisterEvent
+        const apikey = api[0].api_key
+        let data = ({
+            params: [
+                { name: "EventID", value: event.EventID },
+                { name: "RunnerID", value: userprofile.RunnerID }
+            ]
+        })
+        axios.post(uri, data, {
+            headers: {
+                "X-DreamFactory-API-Key": apikey,
+                "X-DreamFactory-Session-Token": this.props.token.token,
+            },
+            responseType: 'json'
+        })
+            // .then((response) => response.json())
+            .then((responseJson) => {
+                this.setState({ isLoading: false, data: responseJson.data[0], });
+                console.log(this.state.data)
+                this.checkRegisEvent(this.state.data)
+            }).catch((error) => {
+                this.goListEvent()
+            });
+    }
+    checkRegisEvent(data) {
+        if (data.RegisterStatus == "1") {
+            Alert.alert("มีการสมัครลงทะเบียนแล้ว", "ผู้ใช้ได้ทำการสมัครรายการ " + this.props.event.event.EventName + " แล้ว", [
+                {
+                    text: "ตกลง",
+                    onPress: () => this.goListEvent()
+                },
+            ], { cancelable: false })
+        }
+    }
+    goListEvent = () => {
+        this.props.navigation.navigate("EventList")
+    }
     goLogin = () => {
         console.log(this.state.login)
         this.props.setLogin(this.state.login)
@@ -36,10 +85,10 @@ class ControlDistance extends Component {
     }
     goAddTeam() {
         console.log("Team")
-        if(this.props.profile.statuslogin == 1){
+        if (this.props.profile.statuslogin == 1) {
             this.props.navigation.navigate('TabRouter')
         }
-        else{
+        else {
             Alert.alert("ลงทะเบียนแบบกลุ่ม", "การลงทะเบียนแบบกลุ่มจะต้องทำการเข้าสู่ระบบก่อน", [
                 {
                     text: "Cancel"
@@ -55,7 +104,7 @@ class ControlDistance extends Component {
     render() {
         return (
             <Container style={styles.container}>
-                <HeaderTeam 
+                <HeaderTeam
                     title={this.state.title}
                     goback={this.goSingleLogin.bind(this)} />
                 <StatusBar
@@ -65,14 +114,14 @@ class ControlDistance extends Component {
                 />
                 <Tabs
                     initialPage={this.state.pageNumber}
-                    tabBarUnderlineStyle={{ backgroundColor: "#FC561F",height : 2 }}>
+                    tabBarUnderlineStyle={{ backgroundColor: "#FC561F", height: 2 }}>
                     <Tab
                         heading={<TabHeading><Text style={styles.textLabel}>ลงทะเบียนแบบเดียว</Text></TabHeading>}>
                         <RegisterDistance nextState={this.goNextState.bind(this)} />
                     </Tab>
                     <Tab
                         heading={<TabHeading><Text style={styles.textLabel} onPress={() => this.goAddTeam()}>ลงทะเบียนแบบกลุ่ม</Text></TabHeading>}
-                        >
+                    >
                     </Tab>
                 </Tabs>
                 <SummaryTotal />
@@ -82,7 +131,10 @@ class ControlDistance extends Component {
 }
 const mapStateToProps = state => {
     return {
-        profile : state.profile
+        profile: state.profile,
+        event: state.event,
+        userprofile: state.userprofile,
+        token: state.token
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -102,7 +154,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff'
     },
     textLabel: {
-        color : '#FC561F',
+        color: '#FC561F',
         fontSize: 12,
         fontFamily: 'kanit',
     },

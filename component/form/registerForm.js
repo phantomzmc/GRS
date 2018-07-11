@@ -263,9 +263,6 @@ class FormRegister extends Component {
               onChangeText={email => this.setState({ email })} />
           </Item>
         </Form>
-        <KeyboardSpacer />
-
-
         <View style={styles.submitContainer}>
           <TouchableOpacity
             style={styles.buttonContainer}
@@ -291,6 +288,7 @@ class FormRegister extends Component {
             <Text style={styles.textButton}>ถัดไป</Text>
           </TouchableOpacity>
         </View>
+        <KeyboardSpacer />
       </View>
     );
   }

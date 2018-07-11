@@ -5,13 +5,15 @@ import {
     Text,
     StyleSheet,
     ImageBackground,
-    KeyboardAvoidingView,
+    StatusBar,
     TouchableOpacity,
     Alert,
     TextInput
 } from 'react-native';
 import { connect } from 'react-redux'
+import { Header, Left, Right, Icon, Button, Body, Title, Container } from "native-base";
 import axios from 'axios'
+import HeaderTeam from '../component/items/headerTeam'
 import api from '../config/api_key'
 import req from '../config/uri_req'
 
@@ -24,6 +26,7 @@ class SingleLogin extends Component {
         this.state = {
             username: "",
             status: [],
+            title: "เข้าสู่ระบบ"
         }
     }
     checkLoginSever() {
@@ -45,15 +48,12 @@ class SingleLogin extends Component {
                 this.setState({ isLoading: false, status: response.data });
                 this.checkLogin()
             }).catch((error) => {
-                this.props.navigation.navigate('EventList')
+                this.gotoEvent()
             });
     }
     checkLogin() {
         if (this.state.status[0].UsernameStatus == "2") {
             this.props.setUsername(this.state.username)
-            this.gotoListEvent()
-        }
-        else if (this.state.username == "Admin") {
             this.gotoListEvent()
         }
         else {
@@ -68,6 +68,9 @@ class SingleLogin extends Component {
         }
 
     }
+    gotoEvent = () => {
+        this.props.navigation.navigate('EventList')
+    }
     gotoListEvent = () => {
         this.props.navigation.navigate('ControlDistance')
     }
@@ -79,46 +82,66 @@ class SingleLogin extends Component {
     }
     render() {
         return (
-            <ImageBackground
-                source={{
-                    uri: "http://register.shutterrunning2014.com/assets/img/theme/dongtanbg.jpg"
-                }}
-                style={{
-                    width: '100%',
-                    height: '100%',
-                    opacity: 1
-                }}>
-                <View style={styles.container}>
-                    <Text style={styles.textTitle} onPress={this.gotoListEvent}>
-                        ShutterRuning Service
+            <View>
+
+                <ImageBackground
+                    source={{
+                        uri: "http://register.shutterrunning2014.com/assets/img/theme/dongtanbg.jpg"
+                    }}
+                    style={{
+                        width: '100%',
+                        height: '100%',
+                        opacity: 1
+                    }}>
+                    <StatusBar
+                        barStyle="light-content"
+                        hidden={false}
+                        translucent={true}
+                    />
+                    <Header style={{ backgroundColor: 'transparent' }}>
+                        <Left>
+                            <Button transparent>
+                                <Icon name='arrow-back' style={{ color: "#fff" }} onPress={this.gotoEvent.bind(this)}/>
+                            </Button>
+                        </Left>
+                        <Body>
+                            <Title style={styles.title}>{this.state.title}</Title>
+                        </Body>
+                        <Right>
+
+                        </Right>
+                    </Header>
+                    <View style={styles.container}>
+                        <Text style={styles.textTitle} onPress={this.gotoListEvent}>
+                            ShutterRuning Service
                     </Text>
-                </View>
-                <View style={styles.formcontainer}>
-                    <TextInput
-                        placeholder="เลขบัตรประชาชน"
-                        returnKeyType="next"
-                        onSubmitEditing={() => this.passwordInput}
-                        onChangeText={(username) => this.setState({ username })}
-                        style={styles.input} />
-                    <View style={styles.loginContainer}>
+                    </View>
+                    <View style={styles.formcontainer}>
+                        <TextInput
+                            placeholder="เลขบัตรประชาชน"
+                            returnKeyType="next"
+                            onSubmitEditing={() => this.passwordInput}
+                            onChangeText={(username) => this.setState({ username })}
+                            style={styles.input} />
+                        <View style={styles.loginContainer}>
+                            <TouchableOpacity
+                                onPress={this.checkLoginSever.bind(this)}>
+                                <View style={styles.buttonContainer}>
+                                    <Text style={styles.textButton}>เข้าร่วมกิจกรรม</Text>
+                                </View>
+                            </TouchableOpacity>
+                        </View>
                         <TouchableOpacity
-                            style={styles.buttonContainer}
                             onPress={this
-                                .checkLoginSever
+                                .gotoRegister
                                 .bind(this)}>
-                            <Text style={styles.textButton}>เข้าร่วมกิจกรรม</Text>
+                            <Text style={styles.regisButton}>
+                                สมัครสมาชิก
+                        </Text>
                         </TouchableOpacity>
                     </View>
-                    <TouchableOpacity
-                        onPress={this
-                            .gotoRegister
-                            .bind(this)}>
-                        <Text style={styles.regisButton}>
-                            สมัครสมาชิก
-                        </Text>
-                    </TouchableOpacity>
-                </View>
-            </ImageBackground>
+                </ImageBackground>
+            </View>
         );
     }
 }
@@ -162,8 +185,9 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     buttonContainer: {
+        paddingHorizontal: 50,
         height: 40,
-        width: '75%',
+        width: '100%',
         backgroundColor: '#4CD946',
         justifyContent: 'center',
         alignItems: 'center',
@@ -175,6 +199,11 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontFamily: 'kanit'
 
+    },
+    title: {
+        fontFamily: "kanit",
+        color: "#fff",
+        fontSize: 16,
     }
 })
 

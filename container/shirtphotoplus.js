@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, StyleSheet, TouchableHighlight, Image, Alert, StatusBar } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image, Alert, StatusBar } from 'react-native';
 import { Container, Content, Card, CardItem, TabHeading } from 'native-base';
 import { connect } from 'react-redux'
 import ListShirt from '../component/list/listShirt/listShirt'
@@ -124,18 +124,17 @@ class ShirtPhotoPlus extends Component {
                     }
                     {this.state.buttonStatus1 &&
                         <View style={styles.submitContainer}>
-                            <TouchableHighlight style={styles.buttonContainer}>
+                            <TouchableOpacity style={styles.buttonContainer}>
                                 <Text style={styles.textButton}>ถัดไป</Text>
-                            </TouchableHighlight>
+                            </TouchableOpacity>
                         </View>
                     }
 
                     {this.state.buttonStatus2 &&
                         <View style={styles.submitContainer}>
-                            <TouchableHighlight style={styles.buttonContainerOnPress}>
-                                <Text style={styles.textButton}
-                                    onPress={this.goNextState}>ถัดไป</Text>
-                            </TouchableHighlight>
+                            <TouchableOpacity style={styles.buttonContainerOnPress} onPress={this.goNextState}>
+                                <Text style={styles.textButton}>ถัดไป</Text>
+                            </TouchableOpacity>
                         </View>
                     }
                 </ScrollView>

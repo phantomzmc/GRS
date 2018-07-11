@@ -18,7 +18,8 @@ export default
             uspAddRegister: url + "Main.uspAddRegister",
             uspApplyPromoCode: url + "Main.uspApplyPromoCode",
             uspSearchFriend: url + "Main.uspSearchFriend",
-            uspAddFriendLists: url + "Main.uspAddFriendLists"
+            uspAddFriendLists: url + "Main.uspAddFriendLists",
+            uspCheckRegisterEvent : url + "Main.uspCheckRegisterEvent"
         },
         {
             url_mailgun: "https://api.mailgun.net/v3/mg.guurun.com/messages"
