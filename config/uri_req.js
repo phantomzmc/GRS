@@ -19,7 +19,11 @@ export default
             uspApplyPromoCode: url + "Main.uspApplyPromoCode",
             uspSearchFriend: url + "Main.uspSearchFriend",
             uspAddFriendLists: url + "Main.uspAddFriendLists",
-            uspCheckRegisterEvent : url + "Main.uspCheckRegisterEvent"
+            uspCheckRegisterEvent: url + "Main.uspCheckRegisterEvent",
+            uspGetFriendLists: url + "Main.uspGetFriendLists",
+            uspUpdateUserProfile: url + "Main.uspUpdateUserProfile",
+            uspResetPassword: url + "Main.uspResetPassword",
+            uspCheckEmail: url + "Main.uspCheckEmail"
         },
         {
             url_mailgun: "https://api.mailgun.net/v3/mg.guurun.com/messages"

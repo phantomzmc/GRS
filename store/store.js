@@ -25,8 +25,9 @@ const user = {
     userid: "",
     password: "",
   },
-  verify : "",
-  statuslogin : 0
+  verify: "",
+  statuslogin: 0,
+  newpassword : ""
 };
 const friend = {
   friendRegis: {},
@@ -62,7 +63,11 @@ const profile = (state = user, action) => {
       state.verify = action.payload;
       break;
     }
-    case "setStatusLogin" : {
+    case "resetPassword" : {
+      state.newpassword = action.payload
+      break;
+    }
+    case "setStatusLogin": {
       state.statuslogin = action.payload;
       break;
     }
@@ -113,7 +118,7 @@ const shirtphoto = (state = {}, action) => {
   }
   return state;
 };
-const photoplus = ( state = {title: "Photo Plus Service",pricePhoto: 100},action) => {
+const photoplus = (state = { title: "Photo Plus Service", pricePhoto: 100 }, action) => {
   switch (action.type) {
     case "onPhotoPlus":
       state = {
@@ -183,6 +188,11 @@ const userprofile = (state = { datapic }, action) => {
     }
     case "setPictureProfile": {
       state.datapic = action.payload
+      break;
+    }
+    case "setUserStatus" : {
+      state.userstatus = action.payload
+      break;
     }
   }
   return state;
@@ -205,6 +215,7 @@ const friendlist = (state = friend, action) => {
       }
       break;
     case "addDistanceFriend":
+
       state.dataDis = action.payload
       break;
     case "addSize":

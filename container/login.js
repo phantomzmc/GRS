@@ -68,7 +68,7 @@ class Login extends Component {
         let { status,login } = this.state
         if (status[0].SignInStatus === "1" && status[0].ActivateStatus === "1") {
             this.props.setUsername(this.state.username)
-            this.props.setUserProfile(status[0])
+            this.props.setUserStatus(status[0])
             this.props.setStatusLogin(login)
             this.gotoTabTeam()
         }
@@ -179,10 +179,10 @@ const mapDispatchToProps = (dispatch) => {
                 payload: username
             })
         },
-        setUserProfile: (userprofile) => {
+        setUserStatus: (staus) => {
             dispatch({
-                type: "setUserProfile",
-                payload: userprofile
+                type: "setUserStatus",
+                payload: staus
             })
         },
         setCreateToken: (token) => {

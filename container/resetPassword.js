@@ -4,6 +4,9 @@ import { View, StyleSheet, TouchableOpacity, Text } from 'react-native'
 import { Conatainer } from 'native-base'
 import { connect } from 'react-redux'
 import randomstringPromise from 'randomstring-promise';
+import axios from 'axios'
+import req from '../config/uri_req';
+import api_key from '../config/api_key'
 
 import ResetPasswordForm from "../component/form/resetPasswordForm"
 
@@ -15,6 +18,8 @@ class ResetVerify extends Component {
         super(props)
         this.state = {
             password: "",
+            userid : "",
+            password : "",
             statusVerify: 0
         }
     }
@@ -24,36 +29,61 @@ class ResetVerify extends Component {
         randomstringPromise(10)
             .then((password) => {
                 this.setState({ password })
-                // console.log(code);  // u8KNs7aAw0DCOKO1MdEgVIcF2asajrdd
+                this.props.resetPassword(password)
                 console.log(password)
             });
     }
     gotoLogin = () => {
         this.props.navigation.navigate("Login")
     }
-    sendResetPassword() {
-        let { verifycode, statusVerify } = this.state
-        // this.props.setVerify({ verifycode, statusVerify })
+    sendResetPassword(email,password) {
+        let uri = req[0].uspResetPassword
+        let apikey = api_key[0].api_key
+        let data = ({
+            params: [
+                { name: "Email", value: email },
+                { name: "Password", value: password },
+                { name : "EncodeURL" , value : this.props.profile.newpassword}
+            ]
+        })
+        axios.post(uri, data, {
+            headers: {
+                "X-DreamFactory-API-Key": apikey,
+                "X-DreamFactory-Session-Token": this.props.token.token,
+            },
+            responseType: 'json'
+        })
+            .then((response) => {
+                this.setState({ isLoading: false, status: response.data[0] });
+                console.log(this.state.status)
+            }).catch((error) => {
+                this.props.navigation.navigate('EventList')
+            });
     }
 
     render() {
         return (
             <View style={styles.container}>
-                <ResetPasswordForm sendNewCode={this.sendResetPassword.bind(this)}
+                <ResetPasswordForm
+                    sendNewCode={this.sendResetPassword.bind(this)}
                     goLogin={this.gotoLogin.bind(this)} />
-                {/* <TouchableOpacity onPress={this.sendResetVerify.bind(this)}>
-                    <Text>test</Text>
-                </TouchableOpacity> */}
+
             </View>
         );
     }
 }
+const mapStateToProps = state => {
+    return {
+        profile : state.profile,
+        token : state.token
+    }
+}
 const mapDisPatchToProps = (dispatch) => {
     return {
-        setVerify: verify => {
+        resetPassword: password => {
             dispatch({
-                type: "set",
-                payload: verify
+                type: "resetPassword",
+                payload: password
             });
         }
     }
@@ -65,4 +95,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default connect(null, mapDisPatchToProps)(ResetVerify);
+export default connect(mapStateToProps, mapDisPatchToProps)(ResetVerify);

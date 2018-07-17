@@ -12,27 +12,19 @@ class FriendDistance extends Component {
         title: "เลือกระยะทาง",
         price: [],
     }
-
+    onTest=()=> {
+        this.props.navigation.navigate("ListTotalRegis")
+    }
+    onGotoAddress = () => {
+        this.props.navigation.navigate("AddressLayout")
+    }
     onButtonChangePayment = () => {
         this.props.navigation.navigate("ButtonChangePayment")
     }
     onPressGoBack = () => {
         this.props.navigation.navigate("TabRouter")
     }
-    passSummaryPrice = (total) => {
-        let { price } = this.state
-        price.push(total)
-        console.log(this.state.price)
-        this.sumValue()
-    }
-    sumValue = () => {
-        let { price } = this.state
-        const add = (a, b) =>
-            a + b
-        const sum = price.reduce(add)
-        console.log(sum)
-        this.props.setTotalPrice(sum)
-    }
+    
 
     render() {
         return (
@@ -41,10 +33,10 @@ class FriendDistance extends Component {
                     goback={this.onPressGoBack.bind(this)} />
                 <ScrollView>
                     <View style={styles.container}>
-                        <FriendInEvent getSummaryPrice={this.passSummaryPrice.bind(this)} />
+                        <FriendInEvent />
                         <View style={styles.submitContainer}>
                             <TouchableOpacity style={styles.buttonContainer}
-                                onPress={this.onButtonChangePayment.bind(this)}>
+                                onPress={this.onTest.bind(this)}>
                                 <Text style={styles.textButton}>ถัดไป</Text>
                             </TouchableOpacity>
                         </View>

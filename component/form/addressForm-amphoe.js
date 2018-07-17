@@ -23,6 +23,9 @@ class AddressFormAmphoe extends Component {
             isItems: true
         }
     }
+    componentDidMount = () => {
+        this.setState({ amphoe : this.props.setAmphoe})
+    }
     componentDidUpdate(prevProps, prevState) {
         if (this.state.amphoe && prevState.amphoe) {
             this.loadData = false
@@ -69,7 +72,7 @@ class AddressFormAmphoe extends Component {
         this.props.getamphoe(this.state.amphoe)
         this.hideItem()
     }
-
+    
     render() {
         let { emails, isItems } = this.state
         const filteredEmails = emails.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS))
@@ -77,7 +80,7 @@ class AddressFormAmphoe extends Component {
             <View style={styles.container}>
                 <Form>
                     <Item floatingLabel>
-                        <Label style={styles.text}>Ex.อำเภอ</Label>
+                        <Label style={styles.text}>{this.state.amphoe}</Label>
                         <Input
                             onChangeText={(term) => { this.searchUpdated(term) }}
                         />
@@ -128,8 +131,8 @@ const styles = StyleSheet.create({
     }
 });
 const mapStateToProps = state => {
-    return { 
-        token : state.token
+    return {
+        token: state.token
     }
 }
 

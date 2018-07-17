@@ -3,9 +3,10 @@ import PropTypes from "prop-types";
 import { View, Text, StyleSheet, TouchableOpacity, Alert, Image } from "react-native";
 import { Form, Item, Input, Label } from 'native-base'
 import KeyboardSpacer from 'react-native-keyboard-spacer';
-import ProvinceForm from './addressForm-province'
-import AmphoeForm from './addressForm-amphoe'
-import TambonForm from './addressForm-tunporn'
+import { connect } from 'react-redux'
+import ProvinceForm from '../addressForm-province'
+import AmphoeForm from '../addressForm-amphoe'
+import TambonForm from '../addressForm-tunporn'
 
 
 class FormAddressRegister extends Component {
@@ -22,6 +23,17 @@ class FormAddressRegister extends Component {
       postNumber: "",
       province: ""
     };
+  }
+  componentDidMount = () => {
+    let userprofile = this.props.userprofile.userprofile
+    this.setState({
+      number: userprofile.Address,
+      tambon: userprofile.SubDistric,
+      amphoe: userprofile.Distric,
+      country: userprofile.Country,
+      postNumber: userprofile.PostCode,
+      province: userprofile.Province
+    })
   }
   passProvince(city) {
     let { province } = this.state
@@ -42,12 +54,12 @@ class FormAddressRegister extends Component {
   };
 
   render() {
-    let { number, tambon, amphoe, province, country, postNumber} = this.state;
+    let { number, tambon, amphoe, province, country, postNumber } = this.state;
     return (
       <View style={styles.container}>
         <View style={styles.contectTitle}>
           <View style={styles.textTitle}>
-            <Image source={require('../icon/location-pointer.png')}
+            <Image source={require('../../icon/location-pointer.png')}
               style={styles.icon} />
 
           </View>
@@ -56,37 +68,46 @@ class FormAddressRegister extends Component {
         <Text style={styles.headForm}>บ้านเลขที่</Text>
         <Form>
           <Item floatingLabel last>
-            <Label style={styles.textLabel}>Ex.123/45</Label>
+            <Label style={styles.textLabel}>{number}</Label>
             <Input
-              onChangeText={number => this.setState({ number })}
+              onChangeText={number => this.setState({ number: number })}
             />
           </Item>
         </Form>
-        <Text style={styles.headForm}>แขวง / ตำบล : {this.state.tambon}</Text>
-        <TambonForm gettumporn={this.passTampon.bind(this)} />
+        <Text style={styles.headForm}>ตำบล : {this.state.tambon}</Text>
+        <TambonForm
+          setTambon={tambon}
+          gettumporn={this.passTampon.bind(this)}
+        />
 
-        <Text style={styles.headForm}>เขต / อำเภอ : {this.state.amphoe}</Text>
-        <AmphoeForm getamphoe={this.passAmphoe.bind(this)} />
+        <Text style={styles.headForm}>อำเภอ : {this.state.amphoe}</Text>
+        <AmphoeForm
+          setAmphoe={amphoe}
+          getamphoe={this.passAmphoe.bind(this)}
+        />
 
         <Text style={styles.headForm}>จังหวัด : {this.state.province}</Text>
-        <ProvinceForm getProvince={this.passProvince.bind(this)} />
+        <ProvinceForm
+          setProvince={province}
+          getProvince={this.passProvince.bind(this)}
+        />
 
         <Text style={styles.headForm}>ประเทศ</Text>
         <Form>
           <Item floatingLabel last>
-            <Label style={styles.textLabel}>Ex.ไทย</Label>
+            <Label style={styles.textLabel}>{country}</Label>
             <Input
-              onChangeText={country => this.setState({ country })}
+              onChangeText={country => this.setState({ country: country })}
             />
           </Item>
         </Form>
         <Text style={styles.headForm}>รหัสไปรษณีย์</Text>
         <Form>
           <Item floatingLabel last>
-            <Label style={styles.textLabel}>Ex.10160</Label>
+            <Label style={styles.textLabel}>{postNumber}</Label>
             <Input
               keyboardType="phone-pad"
-              onChangeText={postNumber => this.setState({ postNumber })}
+              onChangeText={postNumber => this.setState({ postNumber: postNumber })}
             />
           </Item>
         </Form>
@@ -100,12 +121,17 @@ class FormAddressRegister extends Component {
             <Text style={styles.textButton}>ถัดไป</Text>
           </TouchableOpacity>
         </View>
-        <KeyboardSpacer/>
+        <KeyboardSpacer />
       </View>
     );
   }
 }
-
+const mapStateToProps = state => {
+  return {
+    address: state.address,
+    userprofile: state.userprofile
+  }
+}
 const styles = StyleSheet.create({
   container: {
     padding: 20,
@@ -192,4 +218,4 @@ const styles = StyleSheet.create({
     fontFamily: 'kanit'
   }
 });
-export default FormAddressRegister;
+export default connect(mapStateToProps)(FormAddressRegister);

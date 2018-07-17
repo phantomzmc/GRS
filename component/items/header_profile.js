@@ -27,33 +27,7 @@ class HeaderProfile extends Component {
             ImageSource: this.props.userprofile.datapic
         })
         console.log(this.props.userprofile.datapic)
-        let uri = req[0].uspGetUserProfile
-        let apikey = api_key[0].api_key
-        let data = ({
-            params: {
-                value: this.props.username.username,
-            }
-        })
-        axios.post(uri, data, {
-            headers: {
-                "X-DreamFactory-API-Key": apikey,
-                "X-DreamFactory-Session-Token": this.props.token.token,
-            },
-            responseType: 'json'
-        })
-            .then((responseJson) => {
-                this.setState({ isLoading: false, user: responseJson.data });
-                console.log(this.state.user)
-                this.props.setUserProfile(this.state.user[0])
-                this.setData()
-            }).catch((error) => {
-                this.setState({
-                    fullname: "ชื่อ",
-                    lastname: "นามสกุล",
-                    gen: "เพศ",
-                    age: "อายุ",
-                })
-            });
+
     }
     selectPhotoTapped() {
         const options = {
@@ -86,9 +60,38 @@ class HeaderProfile extends Component {
                     statusButton: true
                 });
                 console.log(this.state.ImageSource)
+                console.log(response)
                 this.props.setPictureProfile(response)
+                this.upimageToServe(response)
             }
         });
+    }
+    upimageToServe(response) {
+        var photo = {
+            uri: response.uri,
+            type: 'image/jpeg',
+            name: response.fileName,
+            size: response.fileSize,
+        };
+        var form = new FormData();
+        form.append("imageLink", photo);
+
+        let uri = req[1].url_imgprofile
+        let data = form
+        axios.post("http://192.168.1.32:60/assets/img/uploads/", form, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'multipart/form-data',
+            },
+            responseType: 'json'
+        })
+            .then((responseJson) => {
+                this.setState({ status: responseJson.data });
+                console.log(responseJson)
+
+            }).catch((error) => {
+                console.error(error)
+            });
     }
 
     setData() {

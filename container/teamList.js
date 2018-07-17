@@ -47,7 +47,6 @@ class TeamList extends Component {
             headers: {
                 "X-DreamFactory-API-Key": apikey,
                 "X-DreamFactory-Session-Token": this.props.token.token,
-                "Authorization": auth
             },
             responseType: 'json'
         })
@@ -73,7 +72,6 @@ class TeamList extends Component {
             headers: {
                 "X-DreamFactory-API-Key": api_key,
                 "X-DreamFactory-Session-Token": this.props.token.token,
-                "Authorization": auth
             },
             responseType: 'json'
         })
@@ -120,7 +118,7 @@ class TeamList extends Component {
         const { navigate } = this.props.navigation;
         return (
             <Container style={styles.container}>
-                <HeaderTeam 
+                <HeaderTeam
                     title={this.state.title}
                     goback={this.goLogin.bind(this)} />
                 <StatusBar
@@ -129,9 +127,13 @@ class TeamList extends Component {
                     translucent={true}
                 />
                 <Tabs
-                    initialPage={0}
-                    page={0}
+                    initialPage={1}
+                    page={1}
                     tabBarUnderlineStyle={{ backgroundColor: "#FC561F", height: 2 }}>
+                    <Tab
+                        heading={<TabHeading><Text style={styles.textLabel} onPress={() => this.gotoSingleRegis()}>ลงทะเบียนแบบเดียว</Text></TabHeading>}>
+                        <RegisterDistance />
+                    </Tab>
                     <Tab
                         heading={<TabHeading><Text style={styles.textLabel}>ลงทะเบียนแบบกลุ่ม</Text></TabHeading>}>
                         <Container>
@@ -151,7 +153,11 @@ class TeamList extends Component {
                                                 <Icon name="ios-people" />
                                             </Item>
                                         </Header>
-                                        <Tabs>
+                                        <View>
+                                            <EventListFriend friend={datafriend} />
+
+                                        </View>
+                                        {/* <Tabs>
                                             <Tab heading={<TabHeading><Icon name="ios-people" /></TabHeading>}>
                                                 <EventListFriend friend={datafriend} />
                                             </Tab>
@@ -159,7 +165,7 @@ class TeamList extends Component {
                                                 <Text>No Icon</Text>
                                                 <EventListFriend friend={datafriend} />
                                             </Tab>
-                                        </Tabs>
+                                        </Tabs> */}
                                         <View style={styles.submitContainer}>
                                             <TouchableOpacity style={styles.buttonContainer}
                                                 onPress={() => navigate('FriendDistance')}>
@@ -185,10 +191,6 @@ class TeamList extends Component {
                             </View>
                         </Container>
                     </Tab>
-                    <Tab
-                        heading={<TabHeading><Text style={styles.textLabel} onPress={() => this.gotoSingleRegis()}>ลงทะเบียนแบบเดียว</Text></TabHeading>}>
-                        <RegisterDistance />
-                    </Tab>
                 </Tabs>
             </Container>
         );
@@ -196,7 +198,8 @@ class TeamList extends Component {
 }
 const mapStateToProps = state => {
     return {
-        token: state.token
+        token: state.token,
+        userprofile: state.userprofile
     }
 }
 const styles = StyleSheet.create({

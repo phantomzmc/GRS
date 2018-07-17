@@ -23,6 +23,9 @@ class TambonForm extends Component {
             isItems: true
         }
     }
+    componentDidMount = () =>{
+        this.setState({ tumporn : this.props.setTumporn})
+    }
     componentDidUpdate(prevProps, prevState) {
         if (this.state.tumporn && prevState.tumporn) {
             this.loadData = false
@@ -31,8 +34,6 @@ class TambonForm extends Component {
         else if (this.state.searchTerm && prevState.searchTerm) {
             this.loadData()
         }
-
-
     }
 
     loadData = () => {
@@ -79,7 +80,7 @@ class TambonForm extends Component {
             <View style={styles.container}>
                 <Form>
                     <Item floatingLabel>
-                        <Label style={styles.text}>Ex.ตำบล</Label>
+                        <Label style={styles.text}>{this.state.tumporn}</Label>
                         <Input
                             onChangeText={(term) => { this.searchUpdated(term) }}
                         />

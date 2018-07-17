@@ -8,28 +8,31 @@ class ResetPasswordForm extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            userid: "",
+            password: "",
             email: ""
         }
     }
     componentWillMount() {
-        console.log(this.props.profile.profile.userid)
-        console.log(this.props.profile.profile.email)
+        console.log(this.props.userprofile.userprofile.Password)
+        console.log(this.props.userprofile.userprofile.Email)
     }
-    checkResetVerify(userid, email) {
-        if (this.state.userid === this.props.profile.profile.userid && this.state.email === this.props.profile.profile.email) {
-            this.props.sendNewCode()
-            this.alertSuccess()
-        }
-        else if (this.state.userid !== this.props.profile.profile.userid) {
-            this.alertUserIDError()
-        }
-        else if (this.state.email !== this.props.profile.profile.email) {
-            this.alertEmailError()
-        }
-        else if (this.state.userid !== this.props.profile.profile.userid && this.state.email === this.props.profile.profile.email) {
-            this.alertAllError()
-        }
+    checkResetVerify() {
+        let { password , email} = this.state
+        this.props.sendNewCode(password,email)
+
+        // let { password , email} = this.state
+        // if (this.state.password === this.props.userprofile.userprofile.Password && this.state.email === this.props.userprofile.userprofile.Email) {
+        //     this.alertSuccess()
+        // }
+        // else if (this.state.password !== this.props.userprofile.userprofile.Password) {
+        //     this.alertUserIDError()
+        // }
+        // else if (this.state.email !== this.props.userprofile.userprofile.Email) {
+        //     this.alertEmailError()
+        // }
+        // else if (this.state.password !== this.props.userprofile.userprofile.Password && this.state.email === this.props.userprofile.userprofile.Email) {
+        //     this.alertAllError()
+        // }
     }
     alertSuccess() {
         Alert.alert('ร้องขอรหัสสำเร็จ', 'กรุณาตรวจสอบ Email ของท่าน', [
@@ -53,19 +56,11 @@ class ResetPasswordForm extends Component {
     }
 
     render() {
-        let { userid, email } = this.state
+        let { password, email } = this.state
         return (
             <View style={styles.container}>
                 <View style={styles.content}>
-                    <Text style={styles.textTitle}>กรอกรหัสบัตรประชาชนเเละ Email เพื่อทำการร้องขอรหัสการยืนยันตัวตนใหม่</Text>
-                    <Form style={styles.formInput}>
-                        <Item floatingLabel>
-                            <Label style={styles.textLabel}>รหัสประจำตัวประชาชน</Label>
-                            <Input
-                                onChangeText={userid => this.setState({ userid })}
-                            />
-                        </Item>
-                    </Form>
+                    <Text style={styles.textTitle}>กรอก Email และรหัสผ่านใหม่ เพื่อใช้ในการเข้าสู่ระบบครั้งต่อไป</Text>
                     <Form style={styles.formInput}>
                         <Item floatingLabel>
                             <Label style={styles.textLabel}>Email</Label>
@@ -74,10 +69,18 @@ class ResetPasswordForm extends Component {
                             />
                         </Item>
                     </Form>
+                    <Form style={styles.formInput}>
+                        <Item floatingLabel>
+                            <Label style={styles.textLabel}>รหัสผ่านใหม่</Label>
+                            <Input
+                                onChangeText={password => this.setState({ password })}
+                            />
+                        </Item>
+                    </Form>
                     <View style={styles.submitContainer}>
                         <TouchableOpacity
                             style={styles.buttonContainer}
-                            onPress={() => this.checkResetVerify(userid, email)}
+                            onPress={() => this.checkResetVerify(password, email)}
                         >
                             <Text style={styles.textButton}>ยืนยัน</Text>
                         </TouchableOpacity>
@@ -90,7 +93,7 @@ class ResetPasswordForm extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        profile: state.profile
+        userprofile: state.userprofile
     }
 }
 

@@ -24,7 +24,10 @@ import ResetVerify from '../container/resetVerify'
 import ResetPassword from '../container/resetPassword'
 import FriendDistance from '../container/friendDistance'
 import TeamRegis from '../container/teamRegis'
-
+import ListTotalRegis from '../component/list/listTotal/listTotalRegis'
+import EditProfile from '../component/form/editProfile/edit-userRegister'
+import EditProfileAddress from '../component/form/editProfile/edit-userAddressRegister'
+import EditProfileHelp from '../component/form/editProfile/edit-userHelpRegister'
 import ControlPayment from '../container/controlPayment'
 
 
@@ -198,7 +201,28 @@ export default StackNavigator({
         navigationOptions: {
             header: () => null
         }
-    }
+    },
+    EditProfile: {
+        screen: EditProfile,
+        navigationOptions: {
+            header: () => null
+        }
+    },
+    EditProfileAddress: {
+        screen: EditProfileAddress,
+        navigationOptions: {
+            header: () => null
+        }
+    },
+    EditProfileHelp: {
+        screen: EditProfileHelp,
+        navigationOptions: {
+            header: () => null
+        }
+    },
+    ListTotalRegis : {
+        screen : ListTotalRegis
+    },
 
 
 });

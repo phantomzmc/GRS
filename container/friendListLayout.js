@@ -5,21 +5,16 @@ import Modal from "react-native-modal";
 import axios from 'axios';
 import { connect } from "react-redux";
 import datafriend from '../component/list/listFriend/dataFriend'
-
 import FriendListView from '../component/list/listFriend/friendList'
 import HeaderTeam from '../component/items/headerTeam'
 import ModalAddFriend from '../component/modal/addFriend'
 import ErrorModalAddFriend from '../component/modal/addFriend_error'
+import req from '../config/uri_req'
+import api_key from '../config/api_key'
 
-var uri = "http://api.shutterrunning2014.com/api/v2/grsv2m/_proc/Main.uspSearchFriend"
-var uri2 = "http://api.shutterrunning2014.com/api/v2/grsv2m/_proc/Main.uspAddFriendLists"
-var api_key = '36fda24fe5588fa4285ac6c6c2fdfbdb6b6bc9834699774c9bf777f706d05a88'
-var sessionToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQsInVzZXJfaWQiOjQsImVtYWlsIjoiYWR' +
-    'taW5AZ3V1cnVuLmNvbSIsImZvcmV2ZXIiOmZhbHNlLCJpc3MiOiJodHRwOlwvXC9hcGkuc2h1dHRlcnJ' +
-    '1bm5pbmcyMDE0LmNvbVwvYXBpXC92MlwvdXNlclwvc2Vzc2lvbiIsImlhdCI6MTUyMDU0NDU5MSwiZXh' +
-    'wIjoxNTIwNTQ4MTkxLCJuYmYiOjE1MjA1NDQ1OTEsImp0aSI6IjA1Y2UzN2NjMmU2NjIyZGJlNmMzNTg' +
-    '5MzE1NTI0YmZjIn0._7jHjGhTPfa3rVioC2MrjJfLwrMMxYQYiWhe8DK5V7k'
-var auth = 'Basic YWRtaW5AZ3V1cnVuLmNvbTpXWGJyRDI4THRJUjNNWW0='
+var uri = req[0].uspSearchFriend
+var uri2 = req[0].uspAddFriendLists
+var apikey = api_key[0].api_key
 
 class FriendList extends Component {
     state = {
@@ -43,9 +38,8 @@ class FriendList extends Component {
         })
         axios.post(uri, data, {
             headers: {
-                "X-DreamFactory-API-Key": api_key,
-                "X-DreamFactory-Session-Token": sessionToken,
-                "Authorization": auth
+                "X-DreamFactory-API-Key": apikey,
+                "X-DreamFactory-Session-Token": this.props.token.token,
             },
             responseType: 'json'
         })
@@ -68,9 +62,8 @@ class FriendList extends Component {
         })
         axios.post(uri2, data, {
             headers: {
-                "X-DreamFactory-API-Key": api_key,
-                "X-DreamFactory-Session-Token": sessionToken,
-                "Authorization": auth
+                "X-DreamFactory-API-Key": apikey,
+                "X-DreamFactory-Session-Token": this.props.token.token,
             },
             responseType: 'json'
         })
@@ -78,8 +71,8 @@ class FriendList extends Component {
                 this.setState({ isLoading: false, addStatus: response.data });
                 console.log(this.state.addStatus[0])
             }).catch((error) => {
-                // this.setState({ isModalVisibleError: !this.state.isModalVisibleError })
-                console.error(error);
+                this.setState({ isModalVisibleError: !this.state.isModalVisibleError })
+                // console.error(error);
             });
 
     }
@@ -144,7 +137,8 @@ class FriendList extends Component {
                     />
                 </Modal>
 
-                <FriendListView AddFriendDetail={() => this.gotoAddFriendDetail()}
+                <FriendListView 
+                    AddFriendDetail={() => this.gotoAddFriendDetail()}
                     TeamList={() => this.gotoTeamList()}
                     friend={this.state.datafriendlist} />
             </View>
@@ -153,6 +147,7 @@ class FriendList extends Component {
 }
 const mapStateToProps = state => {
     return {
+        token : state.token,
         userprofile: state.userprofile
     }
 }

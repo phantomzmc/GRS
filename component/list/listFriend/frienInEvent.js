@@ -53,20 +53,7 @@ class FriendInEvent extends Component {
             }
         })
     }
-    passTotal = (price) => {
-        console.log(price)
-        this.props.getSummaryPrice(price)
-    }
-    passFriendRegis = (regisFriend) => {
-        let { friendRegis } = this.state
-        friendRegis.push(regisFriend)
-        if(regisFriend == ""){
-            console.log(this.state.friendRegis)
-        }
-        else if (regisFriend != ""){
-            this.props.addFriendInEvent(regisFriend)
-        }
-    }
+
     render() {
         return (
             <View>
@@ -77,8 +64,7 @@ class FriendInEvent extends Component {
                         <View style={styles.container}>
                             <CardFriendDistance distance={item}
                                 delete={this.deleteItem.bind(this)}
-                                getFriendRegis={this.passFriendRegis.bind(this)}
-                                getPriceTotal={this.passTotal.bind(this)}
+                                
                             />
                         </View>}
                     keyExtractor={this.keyExtractor} />

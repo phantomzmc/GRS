@@ -5,7 +5,7 @@ import { Button, Text, Icon, Footer, FooterTab } from "native-base";
 //import your tabs js file
 import TeamList from "../container/teamList";
 import FriendList from '../container/friendListLayout'
-import Profile from '../container/profile'
+import EditProfile from '../component/form/editProfile/edit-userRegister'
 import AddEventFriend from '../container/AddEventDetailFrind'
 import HistoryContainer from '../container/historyContainer'
 
@@ -54,8 +54,8 @@ var myTabs = TabNavigator({
             }
         }
     },
-    Profile: {
-        screen: Profile
+    EditProfile: {
+        screen: EditProfile
     },
 },
     {
@@ -94,7 +94,7 @@ var myTabs = TabNavigator({
                         <Button
                             vertical
                             active={props.navigationState.index === 3}
-                            onPress={() => props.navigation.navigate("Profile")}>
+                            onPress={() => props.navigation.navigate("EditProfile")}>
                             <Icon name="ios-contact" style={{ color: '#FC561F' }} />
                             <Text style={{ fontSize: 8, color: '#FC561F' }}>ข้อมูลส่วนตัว</Text>
                         </Button>

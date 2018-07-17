@@ -172,15 +172,6 @@ class AddressLayout extends Component {
                             </View>
                         </Card>
                     </View>
-                    {/* <View style={{ flexDirection: "row" }}>
-                        <Text>ข้อมูลสำหรับการจัดส่ง</Text>
-                        <TouchableOpacity>
-                            {this.state.icondetail &&
-                                <Icon />
-
-                            }
-                        </TouchableOpacity>
-                    </View> */}
                     <AddressForm
                         getAddress={this.goTotalPayment.bind(this)}
                     />

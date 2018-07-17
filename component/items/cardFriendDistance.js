@@ -15,6 +15,7 @@ class CradFriendDistance extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            name: this.props.distance.RunnerID,
             container: true,
             distance: false,
             sizeShirth: false,
@@ -22,50 +23,78 @@ class CradFriendDistance extends Component {
             total: parseFloat("0"),
             dataDis: [],
             dataShirt: [],
+            dataRegis: [],
             iconName: "arrow-forward",
-            value: false
+            value: false,
+
+            runnerid: "",
+            couseID: "",
+            nameRegis: "",
+            jersersize: "",
+            fee: ""
+
         }
-        this.getDataRegisFriend = this.getDataRegisFriend.bind(this)
     }
     componentDidMount() {
-        this.setState({ items: this.props.distance })
+        let dis = this.props.distance
+        this.setState({ items: dis, name: dis.RunnerID })
+        console.log(this.state.name)
     }
     onPressDeleteItem() {
         this.props.delete()
     }
+    sumPrice() {
+        const add = (a, b) =>
+            a + b
+        const sum = dataPrice.reduce(add)
+        console.log(sum)
+        this.props.setTotalRegister(sum)
+        this.props.setTotal(sum)
+    }
 
-    passName = (runnerid) => {
-        console.log(runnerid)
-        this.setState({ name: runnerid })
-        console.log(this.state.name)
-    }
-    passDistance = (item) => {
-        this.passName()
-        console.log(item)
-        this.setState({ dataDis: item, total: parseFloat(item.Fee), distance: !this.state.distance })
+    passDistance(item) {
+        this.setState({
+            dataDis: item,
+            total: parseFloat(item.Fee),
+            distance: !this.state.distance,
+            couseid: item.CourseID,
+            nameRegis: item.Distance,
+            runnerid: this.state.name,
+        })
         dataDistance.push(item)
-        dataPrice.push(parseFloat(item.Fee))
-        console.log(dataDistance)
-        console.log(dataPrice)
         this.props.addDistanceFriend(dataDistance)
-        this.props.getPriceTotal(this.state.total)
+        dataPrice.push(parseFloat(item.Fee))
+        this.sumPrice()
     }
+
     passShirt(item) {
-        dataShirts.push(item.JerseySizeValue)
+        this.setState({
+            sizeShirth: !this.state.sizeShirth,
+            dataShirt: item,
+            jersersize: item.JerseySizeValue
+        })
+        dataShirts.push(item)
         this.props.addSize(dataShirts)
+        this.getDataRegisFriend(item.JerseySizeValue)
     }
-    getDataRegisFriend = (item) => {
-        let { name, dataShirt, dataFriendRegis } = this.state
-        this.setState({ dataFriendRegis: { runnerid: name, couseid: item.CourseID, nameRegis: item.CourseName, dataDisRegis: item.Distance, dataFee: item.Fee, dataShirtRegis: dataShirt } })
-        dataFriend.push(dataFriendRegis)
+    getDataRegisFriend(JerseySizeValue) {
+        let { runnerid, couseid, nameRegis, total, jersersize, dataRegis } = this.state
+        let data = {
+            runnerid: runnerid,
+            couseid: couseid,
+            nameRegis: nameRegis,
+            fee: total,
+            size: JerseySizeValue
+        }
+        dataFriend.push(data)
         console.log(dataFriend)
-        this.props.getFriendRegis(dataFriend)
+        this.props.addFriendInEvent(dataFriend)
     }
     photoPlusSwitch = () => {
         let { dataFriendRegis } = this.state
         this.setState({ photoplusValue: 100 })
         console.log(this.state.photoplusValue)
-        this.getDataRegisFriend(dataFriendRegis)
+        // this.getDataRegisFriend(dataFriendRegis)
 
     }
     chageIcon = () => {
@@ -114,14 +143,13 @@ class CradFriendDistance extends Component {
                                 </View>
                                 {this.state.distance &&
                                     <ListFriendDistance
-                                        getRunnerID={this.passName.bind(this)}
                                         getDistance={this.passDistance.bind(this)}
                                         getFriend={this.getDataRegisFriend.bind(this)}
                                     />}
 
                                 <View style={{ flexDirection: 'row' }}>
                                     <Left>
-                                        <Text style={styles.labelTitle}>ขนาดไซค์เสื้อ : {this.state.dataShirt.label} {this.state.dataShirt.width}</Text>
+                                        <Text style={styles.labelTitle}>ขนาดไซค์เสื้อ : {this.state.dataShirt.JerseySizeValue} {this.state.dataShirt.JerseySizeDesc}</Text>
                                     </Left>
                                     <Right>
                                         <TouchableOpacity onPress={() => this.setState({ sizeShirth: !this.state.sizeShirth })}
@@ -173,6 +201,24 @@ const mapDispatchToProps = dispatch => {
             dispatch({
                 type: 'addSize',
                 payload: dataShirt
+            })
+        },
+        addFriendInEvent : (dataFriend) => {
+            dispatch({
+                type : 'addFriendInEvent',
+                payload : dataFriend
+            })
+        },
+        setTotalRegister: (sum) => {
+            dispatch({
+                type: 'setTotalRegister',
+                payload: sum
+            })
+        },
+        setTotal: (sum) => {
+            dispatch({
+                type: "setTotal",
+                payload: sum
             })
         }
     }

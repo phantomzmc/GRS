@@ -11,9 +11,10 @@ import {
 import DatePicker from 'react-native-datepicker'
 import axios from 'axios'
 import { Form, Item, Input, Label, Tabs, Tab, TabHeading, Icon, Toast } from 'native-base'
+import { connect } from 'react-redux'
 import KeyboardSpacer from 'react-native-keyboard-spacer';
-import req from '../../config/uri_req'
-import api_key from '../../config/api_key'
+import req from '../../../config/uri_req'
+import api_key from '../../../config/api_key'
 
 class FormRegister extends Component {
   static propTypes = {
@@ -41,7 +42,28 @@ class FormRegister extends Component {
       showToast: false
     };
   }
-
+  componentDidMount = () => {
+    let userprofile = this.props.userprofile.userprofile
+    this.setState({
+      fullname: userprofile.FirstName,
+      lastname: userprofile.LastName,
+      nickname: userprofile.NickName,
+      userid: userprofile.CitizenshipID,
+      teamname: userprofile.TeamName,
+      bib: userprofile.BIBName,
+      tel: userprofile.Phone,
+      email: userprofile.Email,
+      date: userprofile.DateOfBirth,
+      nation: userprofile.Nationality,
+      gen: userprofile.Gender,
+    })
+    if (this.state.gen == "M") {
+      this.setState({ selectedIndex: 0 })
+    }
+    else if (this.state.gen == "F") {
+      this.setState({ selectedIndex : 1})
+    }
+  }
   sendData = (fullname, lastname, nickname, password, confirmpassword, teamname, bib, userid, tel, email, date, bloodtype, nation, gen) => {
     this.props.goEvent(fullname, lastname, nickname, password, confirmpassword, teamname, bib, userid, tel, email, date, bloodtype, nation, gen);
   };
@@ -57,7 +79,7 @@ class FormRegister extends Component {
     axios.post(uri, data, {
       headers: {
         "X-DreamFactory-API-Key": apikey,
-        "X-DreamFactory-Session-Token": this.props.getToken,
+        "X-DreamFactory-Session-Token": this.props.token.token,
       },
       responseType: 'json'
     })
@@ -65,30 +87,6 @@ class FormRegister extends Component {
         this.setState({ isLoading: false, status: response.data });
         console.log(this.state.status[0].UsernameStatus)
         this.alertCheckUsername()
-      }).catch((error) => {
-        console.error(error);
-      });
-  }
-  checkEmail() {
-    let uri = req[0].uspCheckEmail
-    let apikey = api_key[0].api_key
-    let data = ({
-      params: [
-        { name: "Email", value: this.state.email },
-        { name: "EncodeURL", value: "" }
-      ]
-    })
-    axios.post(uri, data, {
-      headers: {
-        "X-DreamFactory-API-Key": apikey,
-        "X-DreamFactory-Session-Token": this.props.getToken,
-      },
-      responseType: 'json'
-    })
-      .then((response) => {
-        this.setState({ isLoading: false, status: response.data });
-        console.log(this.state.status[0].Status)
-        this.alertCheckEmail()
       }).catch((error) => {
         console.error(error);
       });
@@ -110,19 +108,6 @@ class FormRegister extends Component {
       ], { cancelable: false })
     }
     else if (status[0].UsernameStatus == "0") {
-
-    }
-  }
-  alertCheckEmail = () => {
-    let { status } = this.state
-    if (status[0].Status == "1") {
-      Alert.alert('มี Email นี้ในระบบแล้ว', 'กรุณาใช้ Email อื่น', [
-        {
-          text: 'ตกลง'
-        }
-      ], { cancelable: false })
-    }
-    else if (status[0].Status == "0") {
 
     }
   }
@@ -148,7 +133,7 @@ class FormRegister extends Component {
         <View style={styles.contectTitle}>
           <View style={styles.textTitle}>
             <Image
-              source={require("../icon/man-user.png")}
+              source={require("../../icon/man-user.png")}
               style={styles.icon}
             />
           </View>
@@ -157,24 +142,24 @@ class FormRegister extends Component {
         <Text style={styles.headForm}>ชื่อ - นามสกุล</Text>
         <Form>
           <Item floatingLabel>
-            <Label style={styles.textLabel}>ชื่อ</Label>
+            <Label style={styles.textLabel}>{fullname}</Label>
             <Input
-              onChangeText={fullname => this.setState({ fullname })}
+              onChangeText={fullname => this.setState({ fullname: fullname })}
             />
           </Item>
           <Item floatingLabel last>
-            <Label style={styles.textLabel}>นามสกุล</Label>
+            <Label style={styles.textLabel}>{lastname}</Label>
             <Input
-              onChangeText={lastname => this.setState({ lastname })}
+              onChangeText={lastname => this.setState({ lastname: lastname })}
             />
           </Item>
         </Form>
         <Text style={styles.headForm}>ชื่อเล่น</Text>
         <Form>
           <Item floatingLabel last>
-            <Label style={styles.textLabel}>ชื่อเล่น</Label>
+            <Label style={styles.textLabel}>{nickname}</Label>
             <Input
-              onChangeText={nickname => this.setState({ nickname })}
+              onChangeText={nickname => this.setState({ nickname: nickname })}
             />
           </Item>
         </Form>
@@ -182,6 +167,7 @@ class FormRegister extends Component {
         <View style={styles.conlorsegment}>
           <Tabs
             initialPage={this.state.selectedIndex}
+            page={this.state.selectedIndex}
             tabBarUnderlineStyle={{ backgroundColor: "#FC561F", height: 2 }}>
             <Tab heading={
               <TabHeading>
@@ -197,18 +183,18 @@ class FormRegister extends Component {
             </Tab>
           </Tabs>
         </View>
-        <Text style={styles.headForm}>รหัสบัตรประชาชน/หนังสือเดินทาง</Text>
+        {/* <Text style={styles.headForm}>รหัสบัตรประชาชน/หนังสือเดินทาง</Text>
 
         <Form>
           <Item floatingLabel last>
-            <Label style={styles.textLabel}>Ex.15099999xxxxx</Label>
+            <Label style={styles.textLabel}>{userid}</Label>
             <Input
-              onChangeText={userid => this.setState({ userid })}
+              onChangeText={userid => this.setState({ userid: userid })}
               onEndEditing={this.checkUsernmae.bind(this)}
               keyboardType="phone-pad" />
           </Item>
-        </Form>
-        <Text style={styles.headForm}>กรุ๊ปเลือด</Text>
+        </Form> */}
+        {/* <Text style={styles.headForm}>กรุ๊ปเลือด</Text>
         <Form>
           <Item floatingLabel last>
             <Label style={styles.textLabel}>Ex. A,B,O,AB</Label>
@@ -216,13 +202,13 @@ class FormRegister extends Component {
               onChangeText={bloodtype => this.setState({ bloodtype })}
             />
           </Item>
-        </Form>
+        </Form> */}
         <Text style={styles.headForm}>สัญชาติ</Text>
         <Form>
           <Item floatingLabel last>
-            <Label style={styles.textLabel}>Ex.ไทย,อเมริกัน</Label>
+            <Label style={styles.textLabel}>{nation}</Label>
             <Input
-              onChangeText={nation => this.setState({ nation })} />
+              onChangeText={nation => this.setState({ nation: nation })} />
           </Item>
         </Form>
         <Text style={styles.headForm}>รหัสผ่าน</Text>
@@ -275,30 +261,29 @@ class FormRegister extends Component {
         <Text style={styles.headForm}>ชื่อทีม</Text>
         <Form>
           <Item floatingLabel last>
-            <Label style={styles.textLabel}>Ex.Team...</Label>
+            <Label style={styles.textLabel}>{teamname}</Label>
             <Input
-              onChangeText={teamname => this.setState({ teamname })} />
+              onChangeText={teamname => this.setState({ teamname: teamname })} />
           </Item>
         </Form>
 
         <Text style={styles.headForm}>เบอร์โทรศัพท์</Text>
         <Form>
           <Item floatingLabel last>
-            <Label style={styles.textLabel}>Ex.090-xxxxxx</Label>
+            <Label style={styles.textLabel}>{tel}</Label>
             <Input
               keyboardType="phone-pad"
-              onChangeText={tel => this.setState({ tel })} />
+              onChangeText={tel => this.setState({ tel: tel })} />
           </Item>
         </Form>
 
         <Text style={styles.headForm}>Email</Text>
         <Form>
           <Item floatingLabel last>
-            <Label style={styles.textLabel}>Ex.abc@gmail.com</Label>
+            <Label style={styles.textLabel}>{email}</Label>
             <Input
               keyboardType="email-address"
-              onChangeText={email => this.setState({ email })} 
-              onEndEditing={this.checkEmail.bind(this)}/>
+              onChangeText={email => this.setState({ email: email })} />
           </Item>
         </Form>
         <View style={styles.submitContainer}>
@@ -329,6 +314,13 @@ class FormRegister extends Component {
         <KeyboardSpacer />
       </View>
     );
+  }
+}
+const mapStateToProps = (state) => {
+  return {
+    username: state.username,
+    userprofile: state.userprofile,
+    token: state.token
   }
 }
 
@@ -414,4 +406,4 @@ const styles = StyleSheet.create({
   }
 
 });
-export default FormRegister;
+export default connect(mapStateToProps)(FormRegister);

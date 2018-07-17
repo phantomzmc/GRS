@@ -12,6 +12,7 @@ import DetailRegister from '../component/items/detailRegister'
 import HeaderTeam from '../component/items/headerTeam'
 import CrargeLoading from '../component/modal/chargePayment_load'
 import ChargePaymentLoad from '../component/modal/chargePayment_load';
+import ChargeError from '../component/modal/chargePayment_error'
 
 class TotalLayout extends Component {
 
@@ -26,7 +27,8 @@ class TotalLayout extends Component {
             },
             imageURI: "",
             layout_invoice: false,
-            modalLoading: true
+            modalLoading: true,
+            modalError: false
         }
     }
     componentWillMount() {
@@ -78,7 +80,10 @@ class TotalLayout extends Component {
                 this.setState({ isLoading: false, output: response.data });
                 this.props.setInvoice(this.state.output)
             }).catch((error) => {
-                // this.props.navigation.navigate('EventList')
+                this.setState({ modalError: true })
+                setTimeout(() => {
+                    this.props.navigation.navigate('EventList')
+                },3000)
             });
     }
     onClick = () => {
@@ -131,6 +136,9 @@ class TotalLayout extends Component {
                 />
                 <Modal isVisible={this.state.modalLoading}>
                     <ChargePaymentLoad />
+                </Modal>
+                <Modal isVisible={this.state.modalError}>
+                    <ChargeError />
                 </Modal>
                 <ScrollView>
                     {this.state.layout_invoice &&
@@ -196,13 +204,13 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = dispatch => {
     return {
-        setInvoice: (invoice)=> {
+        setInvoice: (invoice) => {
             dispatch({
-                type : 'setInvoice',
-                payload : invoice
+                type: 'setInvoice',
+                payload: invoice
             })
         }
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(TotalLayout);
+export default connect(mapStateToProps, mapDispatchToProps)(TotalLayout);

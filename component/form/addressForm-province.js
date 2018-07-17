@@ -24,6 +24,9 @@ class ProvinceForm extends Component {
             isItems: true
         }
     }
+    componentDidMount = () => {
+        this.setState({ province : this.props.setProvince})
+    }
     componentDidUpdate(prevProps, prevState) {
         if (this.state.province && prevState.province) {
             this.loadData = false
@@ -80,7 +83,7 @@ class ProvinceForm extends Component {
             <View style={styles.container}>
                 <Form>
                     <Item floatingLabel>
-                        <Label style={styles.text}>Ex.กรุงเทพมหานคร</Label>
+                        <Label style={styles.text}>{this.state.province}</Label>
                         <Input
                             onChangeText={(term) => { this.searchUpdated(term) }}
                         />
