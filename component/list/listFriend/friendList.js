@@ -1,28 +1,27 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, FlatList, Alert, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, FlatList, Alert, TouchableOpacity, ListView, Icon } from 'react-native';
 import { connect } from 'react-redux'
 import axios from 'axios'
+import { SwipeListView } from 'react-native-swipe-list-view';
+import req from '../../../config/uri_req'
+import api_key from '../../../config/api_key'
 
-var uri = "http://api.shutterrunning2014.com/api/v2/grsv2m/_proc/Main.uspGetFriendLists"
-var api_key = '36fda24fe5588fa4285ac6c6c2fdfbdb6b6bc9834699774c9bf777f706d05a88'
-var sessionToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQsInVzZXJfaWQiOjQsImVtYWlsIjoiYWR' +
-    'taW5AZ3V1cnVuLmNvbSIsImZvcmV2ZXIiOmZhbHNlLCJpc3MiOiJodHRwOlwvXC9hcGkuc2h1dHRlcnJ' +
-    '1bm5pbmcyMDE0LmNvbVwvYXBpXC92MlwvdXNlclwvc2Vzc2lvbiIsImlhdCI6MTUyMDU0NDU5MSwiZXh' +
-    'wIjoxNTIwNTQ4MTkxLCJuYmYiOjE1MjA1NDQ1OTEsImp0aSI6IjA1Y2UzN2NjMmU2NjIyZGJlNmMzNTg' +
-    '5MzE1NTI0YmZjIn0._7jHjGhTPfa3rVioC2MrjJfLwrMMxYQYiWhe8DK5V7k'
-var auth = 'Basic YWRtaW5AZ3V1cnVuLmNvbTpXWGJyRDI4THRJUjNNWW0='
+let uri2 = req[0].uspDeleteFriendLists
+var uri = req[0].uspGetFriendLists
+var apikey = api_key[0].api_key
+
 
 class FriendListView extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            isRefesh  : false,
-            
+            isRefesh: false,
+
         }
-        // this.alertShow = this.alertShow.bind(this)
+        this.ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     }
 
-    componentDidMount(){
+    componentDidMount() {
         let data = ({
             params: [
                 { name: "RunnerID", value: this.props.userprofile.userprofile.RunnerID },
@@ -32,9 +31,8 @@ class FriendListView extends Component {
         })
         axios.post(uri, data, {
             headers: {
-                "X-DreamFactory-API-Key": api_key,
-                "X-DreamFactory-Session-Token": sessionToken,
-                "Authorization": auth
+                "X-DreamFactory-API-Key": apikey,
+                "X-DreamFactory-Session-Token": this.props.token.token,
             },
             responseType: 'json'
         })
@@ -45,9 +43,33 @@ class FriendListView extends Component {
                 // this.setState({ isModalVisibleError: !this.state.isModalVisibleError })
                 console.error(error);
             });
+        // this.setState({ dataSource: this.props.friendData })
     }
-
-    onRefesh = () =>{
+    deleteFriend(item) {
+        console.log("test : " + item)
+        let data = ({
+            params: [
+                { name: "RunnerID", value: this.props.userprofile.userprofile.RunnerID },
+                { name: "FriendID", value: item.RunnerID }
+            ]
+        })
+        axios.post(uri2, data, {
+            headers: {
+                "X-DreamFactory-API-Key": apikey,
+                "X-DreamFactory-Session-Token": this.props.token.token,
+            },
+            responseType: 'json'
+        })
+            .then((response) => {
+                this.setState({ isLoading: false, dataSource: response.data });
+                console.log(this.state.dataSource)
+                this.onRefesh()
+            }).catch((error) => {
+                // this.setState({ isModalVisibleError: !this.state.isModalVisibleError })
+                console.error(error);
+            });
+    }
+    onRefesh = () => {
         this.componentDidMount()
         // this.setState({ isRefesh : true})
         // datafriend.push(this.state.newitem)
@@ -59,7 +81,7 @@ class FriendListView extends Component {
             [
                 { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
                 { text: 'OK', onPress: () => this.props.AddFriendDetail() },
-                { text: 'หน้าหลัก' , onPress: () => this.props.TeamList()}
+                { text: 'หน้าหลัก', onPress: () => this.props.TeamList() }
             ],
             { cancelable: false }
         )
@@ -83,25 +105,39 @@ class FriendListView extends Component {
                     flex: 1,
                     // paddingTop: 20
                 }}>
-                <FlatList
+                <SwipeListView
+                    useFlatList
                     data={this.state.dataSource}
                     refreshing={this.state.isRefesh}
                     onRefresh={this.onRefesh}
-                    renderItem={({ item }) => <View style={styles.container}>{item.name}
-                        <View style={styles.cellFriend}>
-                            <View>
-                                <Image source={{ uri: item.imgAvatar }}
-                                    style={styles.avatar} />
-                            </View>
-                            <TouchableOpacity onPress={() => this.alertShow(item)}>
-                                <View style={styles.textListFriend}>
-                                    <Text style={styles.textName}>{item.FirstName} - {item.LastName}</Text>
-                                    <Text style={styles.textAge}>อายุ : {item.NickName} - {item.Gender}</Text>
+                    renderItem={({ item }) => (
+                        <View style={styles.container}>
+                            <View style={styles.cellFriend}>
+                                <View>
+                                    <Image source={{ uri: item.imgAvatar }}
+                                        style={styles.avatar} />
                                 </View>
+                                <TouchableOpacity>
+                                    <View style={styles.textListFriend}>
+                                        <Text style={styles.textName}>{item.FirstName} - {item.LastName}</Text>
+                                        {/* <Text style={styles.textAge}>อายุ : {item.NickName} - {item.Gender}</Text> */}
+                                    </View>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    )}
+                    data={this.state.dataSource}
+                    renderHiddenItem={({ item }) => (
+                        <View style={styles.rowBack}>
+                            <TouchableOpacity style={[styles.backRightBtn, styles.backRightBtnRight]} onPress={() => this.deleteFriend(item)}>
+                                <Text style={{ fontFamily: 'kanit', color: '#fff' }}>Delete</Text>
                             </TouchableOpacity>
                         </View>
-                    </View>}
-                    keyExtractor={(item, index) => index} />
+                    )}
+                    // leftOpenValue={75}
+                    rightOpenValue={-75}
+                />
+                
             </View >
 
         );
@@ -109,15 +145,16 @@ class FriendListView extends Component {
 }
 const mapStateToProps = state => {
     return {
-         userprofile : state.userprofile
+        userprofile: state.userprofile,
+        token: state.token
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        addFriend : (profile) => {
+        addFriend: (profile) => {
             dispatch({
                 type: 'addFriend',
-                payload :profile
+                payload: profile
             })
         }
     }
@@ -127,6 +164,7 @@ const mapDispatchToProps = (dispatch) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+
     },
     listview: {
         backgroundColor: '#fff',
@@ -136,6 +174,9 @@ const styles = StyleSheet.create({
         padding: 10,
         borderColor: '#f1f1f1',
         borderWidth: 1,
+        justifyContent: 'space-between',
+        alignItems : 'center',
+        backgroundColor: '#fff',
     },
     avatar: {
         width: 60,
@@ -145,17 +186,47 @@ const styles = StyleSheet.create({
         borderWidth: 2,
     },
     textListFriend: {
-        flexDirection: 'column',
-        justifyContent: 'center',
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        alignItems : 'center',
         paddingHorizontal: 30,
     },
     textName: {
+        
         fontSize: 17
     },
     textAge: {
         fontSize: 10,
         color: '#666666'
-    }
+    },
+    rowFront: {
+        alignItems: 'center',
+        backgroundColor: '#CCC',
+        borderBottomColor: 'black',
+        borderBottomWidth: 1,
+        justifyContent: 'center',
+        height: 50,
+    },
+    rowBack: {
+        alignItems: 'center',
+        backgroundColor: '#fff',
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingLeft: 15,
+    },
+    backRightBtn: {
+        alignItems: 'center',
+        bottom: 0,
+        justifyContent: 'center',
+        position: 'absolute',
+        top: 0,
+        width: 75
+    },
+    backRightBtnRight: {
+        backgroundColor: 'red',
+        right: 0
+    },
 })
 
-export default connect(mapStateToProps,mapDispatchToProps)(FriendListView);
+export default connect(mapStateToProps, mapDispatchToProps)(FriendListView);

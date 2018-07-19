@@ -61,26 +61,29 @@ class TeamList extends Component {
 
     }
     addFriend = (newitem) => {
-        datafriend.push(newitem)
-        let data = ({
-            params: [
-                { name: "RunnerID", value: this.props.userprofile.userprofile.RunnerID },
-                { name: "FriendID", value: newitem.RunnerID }
-            ]
-        })
-        axios.post(uri2, data, {
-            headers: {
-                "X-DreamFactory-API-Key": api_key,
-                "X-DreamFactory-Session-Token": this.props.token.token,
-            },
-            responseType: 'json'
-        })
-            .then((response) => {
-                this.setState({ isLoading: false, addStatus: response.data });
-                console.log(this.state.addStatus[0])
-            }).catch((error) => {
-                this.props.navigation.navigate('EventList')
-            });
+        this.state.datafriendlist.push(newitem)
+        console.log(newitem)
+        this.props.setFriendRegister(this.state.datafriendlist)
+        // let data = ({
+        //     params: [
+        //         { name: "RunnerID", value: this.props.userprofile.userprofile.RunnerID },
+        //         { name: "FriendID", value: newitem.RunnerID }
+        //     ]
+        // })
+        // axios.post(uri2, data, {
+        //     headers: {
+        //         "X-DreamFactory-API-Key": api_key,
+        //         "X-DreamFactory-Session-Token": this.props.token.token,
+        //     },
+        //     responseType: 'json'
+        // })
+        //     .then((response) => {
+        //         this.setState({ isLoading: false, addStatus: response.data });
+        //         console.log(this.state.addStatus[0])
+        //     }).catch((error) => {
+        //         console.error(error)
+        //         this.props.navigation.navigate('EventList')
+        //     });
 
     }
     checkRegisStatus = () => {
@@ -97,6 +100,7 @@ class TeamList extends Component {
     hideModalError = () => {
         this.setState({ isModalVisibleError: !this.state.isModalVisibleError })
     }
+
     gotoTeamList = () => {
         this.props.navigation.navigate('TabRouter')
     }
@@ -154,7 +158,9 @@ class TeamList extends Component {
                                             </Item>
                                         </Header>
                                         <View>
-                                            <EventListFriend friend={datafriend} />
+                                            <EventListFriend
+                                                friend={datafriend}
+                                            />
 
                                         </View>
                                         {/* <Tabs>
@@ -177,7 +183,8 @@ class TeamList extends Component {
                                                 toggleModal={this.hideModal}
                                                 outputfriend={this.state.friendOutput[0]}
                                                 friend={datafriend}
-                                                getAddFriend={this.addFriend.bind(this)} />
+                                                getAddFriend={this.addFriend.bind(this)}
+                                            />
                                         </Modal>
                                         <Modal isVisible={this.state.isModalVisibleError}>
                                             <ErrorModalAddFriend
@@ -194,6 +201,17 @@ class TeamList extends Component {
                 </Tabs>
             </Container>
         );
+    }
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        setFriendRegister: (datafriend) => {
+            dispatch({
+                type: 'setFriendRegister',
+                payload: datafriend
+            })
+        }
+
     }
 }
 const mapStateToProps = state => {
@@ -244,4 +262,4 @@ const styles = StyleSheet.create({
     },
 
 })
-export default connect(mapStateToProps)(TeamList);
+export default connect(mapStateToProps,mapDispatchToProps)(TeamList);

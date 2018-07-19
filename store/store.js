@@ -71,6 +71,10 @@ const profile = (state = user, action) => {
       state.statuslogin = action.payload;
       break;
     }
+    case "setStatusRegis" : {
+      state.statusRegis = action.payload;
+      break;
+    }
   }
   return state;
 };

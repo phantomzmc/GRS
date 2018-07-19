@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, FlatList, StyleSheet } from 'react-native';
+import { View, Text, FlatList, StyleSheet,Image } from 'react-native';
 import { connect } from "react-redux";
 
 
@@ -18,17 +18,25 @@ class ListTotalRegis extends Component {
     render() {
         return (
             <View>
-                <Text>{this.state.datatotal.dataDis.nameRegis} จ้าาาาา</Text>
                 <FlatList
                     data={this.state.datatotal.dataDis}
                     renderItem={({ item, index }) =>
                         <View style={styles.container}>
                             <View>
-                                <Text style={styles.textTitle}>{item.nameRegis}</Text>
-                                <Text style={styles.textTitle}>{item.size}</Text>
+                                <Image source={require('../../icon/calendar.png')}
+                                    style={{ width: 30, height: 30, justifyContent: 'center', alignSelf: 'center', marginTop: 10 }} />
                             </View>
-                            <View>
-                                <Text style={styles.textTitle}>{item.fee}</Text>
+                            <View style={{ flexDirection: 'column' }}>
+                                <View style={{ flexDirection: 'row' }}>
+                                    <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{item.firstname} {item.lastname}</Text>
+                                </View>
+                                <View style={{ flexDirection: 'column' }}>
+                                    <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit' }}>ระยะ : {item.nameRegis}</Text>
+                                    <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit' }}>ไซค์เสื้อ : {item.size}</Text>
+                                </View>
+                            </View>
+                            <View style={{ justifyContent: 'center' }}>
+                                <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{item.fee}.0 ฿</Text>
                             </View>
                         </View>}
                     keyExtractor={this.keyExtractor} />
@@ -46,18 +54,25 @@ const mapStateToProps = state => {
 
 const styles = StyleSheet.create({
     container: {
-        flexDirection : "row",
+        flexDirection: "row",
         margin: 10,
-        backgroundColor: "#fff"
+        backgroundColor: "#fff",
+        justifyContent: 'space-between'
     },
     textTitle: {
         fontFamily: "kanit",
-        padding: 10
+        padding: 10,
     },
-    contaiRigth : {
-        justifyContent : "flex-end"
+    textTitle2: {
+        fontFamily: "kanit",
+        padding: 10,
+        fontSize: 8,
+        color: '#1f1f1f'
     },
-    contaiLeft : {
+    contaiRigth: {
+        justifyContent: "flex-end"
+    },
+    contaiLeft: {
 
     }
 })

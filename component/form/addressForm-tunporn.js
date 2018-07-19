@@ -23,9 +23,9 @@ class TambonForm extends Component {
             isItems: true
         }
     }
-    componentDidMount = () =>{
-        this.setState({ tumporn : this.props.setTumporn})
-    }
+    // componentDidMount = () => {
+    //     this.setState({ tumporn: this.props.setTumporn })
+    // }
     componentDidUpdate(prevProps, prevState) {
         if (this.state.tumporn && prevState.tumporn) {
             this.loadData = false
@@ -71,7 +71,13 @@ class TambonForm extends Component {
         console.log(this.state.tumporn)
         this.props.gettumporn(this.state.tumporn)
         this.hideItem()
+        this.clearInput()
     }
+    clearInput = () => {
+        this.setState({ term : this.state.tumporn})
+        // this.textInputRef.clear();
+        
+      }
 
     render() {
         let { emails, isItems } = this.state
@@ -82,7 +88,9 @@ class TambonForm extends Component {
                     <Item floatingLabel>
                         <Label style={styles.text}>{this.state.tumporn}</Label>
                         <Input
+                            ref={ref => this.textInputRef = ref}
                             onChangeText={(term) => { this.searchUpdated(term) }}
+                            onEndEditing={this.clearInput.bind(this)}
                         />
                     </Item>
                 </Form>

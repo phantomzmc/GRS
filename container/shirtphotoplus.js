@@ -15,7 +15,8 @@ class ShirtPhotoPlus extends Component {
         imageShirt: "",
         buttonStatus1: true, //close
         buttonStatus2: false, //open
-        shirt: ""
+        shirt: "",
+        statusRegis : 0
     }
     componentDidMount = () => {
         if (this.props.event.distanceEvent.statusPhotoPlus == 1) {
@@ -35,10 +36,12 @@ class ShirtPhotoPlus extends Component {
         console.log("checkPromo")
         if (this.props.event.event.PromoCodeStatus == 1 && this.props.event.event.PromoCodeRequired == 1) {
             console.log("status 1 ต้องกรอก")
+            this.props.setStatusRegis(this.state.statusRegis)
             this.props.navigation.navigate("DiscountCoupon")
         }
         else if ((this.props.event.event.PromoCodeStatus == 1 && this.props.event.event.PromoCodeRequired == 0) || (this.props.event.event.PromoCodeStatus == 0 && this.props.event.event.PromoCodeRequired == 1)) {
             console.log("status 2 กรอกหรือไม่กรอกก็ได้")
+            this.props.setStatusRegis(this.state.statusRegis)
             Alert.alert("ส่วนลดค่าสมัคร", "รายการนี้มีส่วนลดค่าสมัคร ท่านสามารถกรอกรหัสเพื่อรับส่วนลดได้", [
                 {
                     text: "กรอกรหัสส่วนลด",
@@ -53,6 +56,7 @@ class ShirtPhotoPlus extends Component {
         }
         else if (this.props.event.event.PromoCodeStatus == 0 && this.props.event.event.PromoCodeRequired == 0) {
             console.log("status 0 ผ่าน")
+            this.props.setStatusRegis(this.state.statusRegis)
             this.props.navigation.navigate('AddressLayout')
         }
     }
@@ -196,6 +200,16 @@ const styles = StyleSheet.create({
         margin: 20
     }
 })
+const mapDispatchToProps = dispatch => {
+    return {
+        setStatusRegis : (regis) => {
+            dispatch({
+                type : 'setStatusRegis',
+                payload : regis
+            })
+        }
+    }
+}
 const mapStateToProps = (state) => {
     return {
         event: state.event,
@@ -206,4 +220,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps)(ShirtPhotoPlus)
+export default connect(mapStateToProps,mapDispatchToProps)(ShirtPhotoPlus)

@@ -19,7 +19,13 @@ class EventListFriend extends Component {
     }
     componentDidMount() {
         this.getFriend()
+        // this.autoRefresh()
     }
+    // autoRefresh(){
+    //     this.setTimeout(() => {
+    //         this.getFriend()
+    //     }, 2000);
+    // }
     getFriend() {
         let data = ({
             params: [
@@ -43,7 +49,7 @@ class EventListFriend extends Component {
                 console.error(error);
             });
     }
-    addFriend = (item) => {
+    addFriendEvent = (item) => {
         let { datafriend } = this.state
         datafriend.push(item)
         console.log(datafriend)
@@ -79,7 +85,7 @@ class EventListFriend extends Component {
                     renderItem={({ item }) =>
                         <CellEventListFriend
                             items={item}
-                            getAddFriend={this.addFriend.bind(this)} />
+                            getAddFriend={this.addFriendEvent.bind(this)} />
                     }
                     keyExtractor={(item, index) => index} />
             </View >

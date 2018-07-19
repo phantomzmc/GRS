@@ -11,11 +11,13 @@ class FriendDistance extends Component {
     state = {
         title: "เลือกระยะทาง",
         price: [],
+        statusRegis : 1
     }
     onTest=()=> {
         this.props.navigation.navigate("ListTotalRegis")
     }
     onGotoAddress = () => {
+        this.props.setStatusRegis(this.state.statusRegis)
         this.props.navigation.navigate("AddressLayout")
     }
     onButtonChangePayment = () => {
@@ -36,7 +38,7 @@ class FriendDistance extends Component {
                         <FriendInEvent />
                         <View style={styles.submitContainer}>
                             <TouchableOpacity style={styles.buttonContainer}
-                                onPress={this.onTest.bind(this)}>
+                                onPress={this.onGotoAddress.bind(this)}>
                                 <Text style={styles.textButton}>ถัดไป</Text>
                             </TouchableOpacity>
                         </View>
@@ -58,6 +60,12 @@ const mapDispatchToProps = dispatch => {
             dispatch({
                 type: 'setTotalPrice',
                 payload: totals
+            })
+        },
+        setStatusRegis : (regis) => {
+            dispatch({
+                type : 'setStatusRegis',
+                payload : regis
             })
         }
     }

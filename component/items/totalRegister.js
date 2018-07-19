@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, } from 'react-native';
+import { View, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
 import { Text } from 'native-base'
 import { connect } from 'react-redux'
+import ListTotalRegis from '../list/listTotal/listTotalRegis'
 
 class TotalRegister extends Component {
     state = {
@@ -11,6 +12,9 @@ class TotalRegister extends Component {
         creditPrice: "",
         detailPleace1: false,
         detailPleace2: false,
+        singleRegis: false,
+        teamRegis: true,
+        detailRegis: false
     }
     componentDidMount() {
         this.setState({
@@ -44,101 +48,131 @@ class TotalRegister extends Component {
             this.setState({ detailPleace2: !this.state.detailPleace2 })
         }
     }
+    showDetail = () => {
+        this.setState({ detailRegis: !this.state.detailRegis })
+    }
     render() {
         return (
-            <View style={styles.container}>
-                <View style={styles.detailRow}>
-                    <View>
-                        <View style={{ backgroundColor: 'red', width: 50, height: 50, borderRadius: 25, }}>
-                            <Image source={require('../icon/calendar.png')}
-                                style={{ width: 30, height: 30, justifyContent: 'center', alignSelf: 'center', marginTop: 10 }} />
-                        </View>
-                    </View>
-                    <View>
-                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.props.event.event.EventName} </Text>
-                        <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit' }}>({this.props.event.distanceEvent.distance} - {this.props.shirtphoto.size}) x 1 (Photo Plus)</Text>
-                    </View>
-                    <View>
-                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.state.total}.0 ฿</Text>
-                    </View>
-                </View>
-                <View style={styles.detailRow}>
-                    <View>
-                        <View style={{ backgroundColor: '#3BB1FA', width: 50, height: 50, borderRadius: 25, }}>
-                            <Image source={require('../icon/clothes.png')}
-                                style={{ width: 30, height: 30, justifyContent: 'center', alignSelf: 'center', marginTop: 10 }} />
-                        </View>
-                    </View>
-                    {this.state.detailPleace1 &&
-                        <View>
-                            <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>รับเสื้อและเบอร์ที่ :  </Text>
-                            {/* <Text style={{ fontSize: 10, fontFamily: 'kanit', paddingHorizontal: 50 }}></Text> */}
-                            <View style={{ marginHorizontal: 20}}>
-                                <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit' }} numberOfLines={2}>{this.state.pleace}</Text>
+            <ScrollView>
+                <View style={styles.container}>
+                    {this.state.singleRegis &&
+                        <View style={styles.detailRow}>
+                            <View>
+                                <View style={{ backgroundColor: 'red', width: 50, height: 50, borderRadius: 25, }}>
+                                    <Image source={require('../icon/calendar.png')}
+                                        style={{ width: 30, height: 30, justifyContent: 'center', alignSelf: 'center', marginTop: 10 }} />
+                                </View>
+                            </View>
+                            <View>
+                                <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.props.event.event.EventName} </Text>
+                                <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit' }}>({this.props.event.distanceEvent.distance} - {this.props.shirtphoto.size}) x 1 (Photo Plus)</Text>
+                            </View>
+                            <View>
+                                <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.state.total}.0 ฿</Text>
                             </View>
                         </View>
                     }
-                    {this.state.detailPleace2 &&
+                    {this.state.teamRegis &&
                         <View>
-                            <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>บริหารจัดส่ง :  </Text>
-                            {/* <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>วันที่ 27 มกราคม 2561</Text> */}
-                            <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit', paddingHorizontal: 10 }}>{this.state.pleace}</Text>
+                            <View style={styles.detailRow}>
+                                <View>
+                                    <View style={{ backgroundColor: 'green', width: 50, height: 50, borderRadius: 25, }}>
+                                        <Image source={require('../icon/group.png')}
+                                            style={{ width: 30, height: 30, justifyContent: 'center', alignSelf: 'center', marginTop: 10 }} />
+                                    </View>
+                                </View>
+                                <View>
+                                    <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.props.event.event.EventName} </Text>
+                                    <TouchableOpacity onPress={() => this.setState({ detailRegis: !this.state.detailRegis })}>
+                                        <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit' }}>รายละเอียด : แสดงรายชื่อ </Text>
+                                    </TouchableOpacity>
+                                </View>
+                                <View>
+                                    <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.state.total}.0 ฿</Text>
+                                </View>
+                            </View>
+                            {this.state.detailRegis &&
+                                <ListTotalRegis />
+                            }
                         </View>
                     }
-                    <View>
-                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.state.priceCDO}.0 ฿</Text>
-                    </View>
-                </View>
-                <View style={styles.detailRow}>
-                    <View>
-                        <View style={{ backgroundColor: '#FD9C00', width: 50, height: 50, borderRadius: 25, }}>
-                            <Image source={require('../icon/bank-cards.png')}
-                                style={{ width: 30, height: 30, justifyContent: 'center', alignSelf: 'center', marginTop: 10 }} />
-                        </View>
-                    </View>
-                    <View>
-                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>ค่าธรรมเนียมการใช้บัตรเครดิต/เดบิต</Text>
-                        {/* <Text style={{ fontSize: 7, color: '#8B8B8B' }}>(5 Km. - S) x 1 (Photo Plus)</Text> */}
-                    </View>
-                    <View>
-                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.state.creditPrice}.0 ฿</Text>
-                    </View>
-                </View>
-
-                {this.state.promotionStatus &&
                     <View style={styles.detailRow}>
                         <View>
-                            <View style={{ backgroundColor: '#4CD964', width: 50, height: 50, borderRadius: 25, }}>
-                                <Image source={require('../icon/price.png')}
+                            <View style={{ backgroundColor: '#3BB1FA', width: 50, height: 50, borderRadius: 25, }}>
+                                <Image source={require('../icon/clothes.png')}
+                                    style={{ width: 30, height: 30, justifyContent: 'center', alignSelf: 'center', marginTop: 10 }} />
+                            </View>
+                        </View>
+                        {this.state.detailPleace1 &&
+                            <View>
+                                <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>รับเสื้อและเบอร์ที่ :  </Text>
+                                {/* <Text style={{ fontSize: 10, fontFamily: 'kanit', paddingHorizontal: 50 }}></Text> */}
+                                <View style={{ marginHorizontal: 20 }}>
+                                    <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit' }} numberOfLines={2}>{this.state.pleace}</Text>
+                                </View>
+                            </View>
+                        }
+                        {this.state.detailPleace2 &&
+                            <View>
+                                <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>บริหารจัดส่ง :  </Text>
+                                {/* <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>วันที่ 27 มกราคม 2561</Text> */}
+                                <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit', paddingHorizontal: 10 }}>{this.state.pleace}</Text>
+                            </View>
+                        }
+                        <View>
+                            <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.state.priceCDO}.0 ฿</Text>
+                        </View>
+                    </View>
+                    <View style={styles.detailRow}>
+                        <View>
+                            <View style={{ backgroundColor: '#FD9C00', width: 50, height: 50, borderRadius: 25, }}>
+                                <Image source={require('../icon/bank-cards.png')}
                                     style={{ width: 30, height: 30, justifyContent: 'center', alignSelf: 'center', marginTop: 10 }} />
                             </View>
                         </View>
                         <View>
-                            <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>ส่วนลดค่าโปรโมชั่น 100.00 บาท</Text>
+                            <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>ค่าธรรมเนียมการใช้บัตรเครดิต/เดบิต</Text>
                             {/* <Text style={{ fontSize: 7, color: '#8B8B8B' }}>(5 Km. - S) x 1 (Photo Plus)</Text> */}
                         </View>
                         <View>
-                            <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>-100.00 ฿</Text>
+                            <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.state.creditPrice}.0 ฿</Text>
                         </View>
                     </View>
-                }
-                <View style={styles.detailRow}>
-                    <View>
-                        <View style={{ backgroundColor: '#FDD463', width: 50, height: 50, borderRadius: 25, }}>
-                            <Image source={require('../icon/bill.png')}
-                                style={{ width: 30, height: 30, justifyContent: 'center', alignSelf: 'center', marginTop: 10 }} />
+
+                    {this.state.promotionStatus &&
+                        <View style={styles.detailRow}>
+                            <View>
+                                <View style={{ backgroundColor: '#4CD964', width: 50, height: 50, borderRadius: 25, }}>
+                                    <Image source={require('../icon/price.png')}
+                                        style={{ width: 30, height: 30, justifyContent: 'center', alignSelf: 'center', marginTop: 10 }} />
+                                </View>
+                            </View>
+                            <View>
+                                <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>ส่วนลดค่าโปรโมชั่น 100.00 บาท</Text>
+                                {/* <Text style={{ fontSize: 7, color: '#8B8B8B' }}>(5 Km. - S) x 1 (Photo Plus)</Text> */}
+                            </View>
+                            <View>
+                                <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>-100.00 ฿</Text>
+                            </View>
                         </View>
-                    </View>
-                    <View>
-                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>รวมทั้งสิ้น</Text>
-                        {/* <Text style={{ fontSize: 7, color: '#8B8B8B' }}>(5 Km. - S) x 1 (Photo Plus)</Text> */}
-                    </View>
-                    <View>
-                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.state.totalRegister}.0 ฿</Text>
+                    }
+                    <View style={styles.detailRow}>
+                        <View>
+                            <View style={{ backgroundColor: '#FDD463', width: 50, height: 50, borderRadius: 25, }}>
+                                <Image source={require('../icon/bill.png')}
+                                    style={{ width: 30, height: 30, justifyContent: 'center', alignSelf: 'center', marginTop: 10 }} />
+                            </View>
+                        </View>
+                        <View>
+                            <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>รวมทั้งสิ้น</Text>
+                            {/* <Text style={{ fontSize: 7, color: '#8B8B8B' }}>(5 Km. - S) x 1 (Photo Plus)</Text> */}
+                        </View>
+                        <View>
+                            <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.state.totalRegister}.0 ฿</Text>
+                        </View>
                     </View>
                 </View>
-
-            </View>
+            </ScrollView>
         );
     }
 }

@@ -24,9 +24,9 @@ class ProvinceForm extends Component {
             isItems: true
         }
     }
-    componentDidMount = () => {
-        this.setState({ province : this.props.setProvince})
-    }
+    // componentDidMount = () => {
+    //     this.setState({ province : this.props.setProvince})
+    // }
     componentDidUpdate(prevProps, prevState) {
         if (this.state.province && prevState.province) {
             this.loadData = false

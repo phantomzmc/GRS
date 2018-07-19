@@ -26,18 +26,21 @@ class CradFriendDistance extends Component {
             dataRegis: [],
             iconName: "arrow-forward",
             value: false,
+            photoplus: false,
 
             runnerid: "",
             couseID: "",
             nameRegis: "",
             jersersize: "",
-            fee: ""
+            fee: "",
+            firstname : "",
+            lastname : ""
 
         }
     }
     componentDidMount() {
         let dis = this.props.distance
-        this.setState({ items: dis, name: dis.RunnerID })
+        this.setState({ items: dis, name: dis.RunnerID ,firstname : dis.FirstName ,lastname : dis.LastName })
         console.log(this.state.name)
     }
     onPressDeleteItem() {
@@ -60,11 +63,13 @@ class CradFriendDistance extends Component {
             couseid: item.CourseID,
             nameRegis: item.Distance,
             runnerid: this.state.name,
+            
         })
         dataDistance.push(item)
         this.props.addDistanceFriend(dataDistance)
         dataPrice.push(parseFloat(item.Fee))
         this.sumPrice()
+        this.checkPhotoPlus(item)
     }
 
     passShirt(item) {
@@ -78,9 +83,11 @@ class CradFriendDistance extends Component {
         this.getDataRegisFriend(item.JerseySizeValue)
     }
     getDataRegisFriend(JerseySizeValue) {
-        let { runnerid, couseid, nameRegis, total, jersersize, dataRegis } = this.state
+        let { runnerid, couseid, nameRegis, total, jersersize, dataRegis,firstname,lastname } = this.state
         let data = {
             runnerid: runnerid,
+            firstname : firstname,
+            lastname : lastname,
             couseid: couseid,
             nameRegis: nameRegis,
             fee: total,
@@ -104,6 +111,15 @@ class CradFriendDistance extends Component {
         }
         else if (iconName == "arrow-down") {
             this.setState({ iconName: "arrow-forward" })
+        }
+    }
+    checkPhotoPlus(item) {
+        let dis = this.props.friendlist.dataDis
+        if (item.PhotoPlusService == "0") {
+            this.setState({ photoplus: false })
+        }
+        else if (item.PhotoPlusService == "1") {
+            this.setState({ photoplus: true })
         }
     }
     render() {
@@ -165,20 +181,22 @@ class CradFriendDistance extends Component {
                         </View>
                     </Body>
                 </CardItem>
-                <CardItem>
-                    <Left>
-                        <Icon name="ios-camera-outline" style={{ fontSize: 20 }} />
-                        <Text style={{ fontFamily: "kanit", fontSize: 16 }}>Photo + Service</Text>
-                    </Left>
-                    <Right>
-                        <Switch
-                            width={60}
-                            height={30}
-                            value={this.state.value}
-                            onSyncPress={() => this.photoPlusSwitch()}
-                        />
-                    </Right>
-                </CardItem>
+                {this.state.photoplus &&
+                    <CardItem>
+                        <Left>
+                            <Icon name="ios-camera-outline" style={{ fontSize: 20 }} />
+                            <Text style={{ fontFamily: "kanit", fontSize: 16 }}>Photo + Service</Text>
+                        </Left>
+                        <Right>
+                            <Switch
+                                width={60}
+                                height={30}
+                                value={this.state.value}
+                                onSyncPress={() => this.photoPlusSwitch()}
+                            />
+                        </Right>
+                    </CardItem>
+                }
             </Card>
 
         );
@@ -186,7 +204,7 @@ class CradFriendDistance extends Component {
 }
 const mapStateToProps = state => {
     return {
-
+        friendlist: state.friendlist
     }
 }
 const mapDispatchToProps = dispatch => {
@@ -203,10 +221,10 @@ const mapDispatchToProps = dispatch => {
                 payload: dataShirt
             })
         },
-        addFriendInEvent : (dataFriend) => {
+        addFriendInEvent: (dataFriend) => {
             dispatch({
-                type : 'addFriendInEvent',
-                payload : dataFriend
+                type: 'addFriendInEvent',
+                payload: dataFriend
             })
         },
         setTotalRegister: (sum) => {

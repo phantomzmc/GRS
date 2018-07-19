@@ -26,7 +26,7 @@ class FriendList extends Component {
         addStatus: [],
         datafriendlist: []
     }
-
+    
     showModal = () => {
         let { searchText } = this.state
         let data = ({
@@ -53,7 +53,7 @@ class FriendList extends Component {
             });
     }
     addFriend = (newitem) => {
-        datafriend.push(newitem)
+        // datafriend.push(newitem)
         let data = ({
             params: [
                 { name: "RunnerID", value: this.props.userprofile.userprofile.RunnerID },
@@ -70,6 +70,7 @@ class FriendList extends Component {
             .then((response) => {
                 this.setState({ isLoading: false, addStatus: response.data });
                 console.log(this.state.addStatus[0])
+                this.componentDidMount()
             }).catch((error) => {
                 this.setState({ isModalVisibleError: !this.state.isModalVisibleError })
                 // console.error(error);
@@ -138,6 +139,7 @@ class FriendList extends Component {
                 </Modal>
 
                 <FriendListView 
+                    
                     AddFriendDetail={() => this.gotoAddFriendDetail()}
                     TeamList={() => this.gotoTeamList()}
                     friend={this.state.datafriendlist} />

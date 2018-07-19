@@ -56,6 +56,7 @@ class ResetVerify extends Component {
             .then((response) => {
                 this.setState({ isLoading: false, status: response.data[0] });
                 console.log(this.state.status)
+                this.gotoLogin()
             }).catch((error) => {
                 this.props.navigation.navigate('EventList')
             });
