@@ -30,8 +30,13 @@ import EditProfileAddress from '../component/form/editProfile/edit-userAddressRe
 import EditProfileHelp from '../component/form/editProfile/edit-userHelpRegister'
 import ControlPayment from '../container/controlPayment'
 
+import Test from '../mockdata'
+
 
 export default StackNavigator({
+    // Test : {
+    //     screen : Test
+    // },
     
     EventList: {
         screen: EventList,

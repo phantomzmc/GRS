@@ -60,21 +60,23 @@ class FriendInEvent extends Component {
                 <FlatList
                     data={this.state.dataSource}
                     refreshing={true}
+                    keyExtractor={(item, index) => item.key}
                     renderItem={({ item, index }) =>
                         <View style={styles.container}>
-                            <CardFriendDistance distance={item}
+                            <CardFriendDistance 
+                                distance={item}
+                                idkey={index}
                                 delete={this.deleteItem.bind(this)}
-                                
                             />
                         </View>}
-                    keyExtractor={this.keyExtractor} />
+                />
             </View >
         )
     }
 }
 const mapStateToProps = state => {
     return {
-        friendlist : state.friendlist
+        friendlist: state.friendlist
     }
 }
 const mapDispatchToProps = (dispatch) => {

@@ -22,6 +22,13 @@ class FriendListView extends Component {
     }
 
     componentDidMount() {
+        this.getFriend()
+        setTimeout(() => {
+            this.getFriend()
+        }, 500)
+
+    }
+    getFriend() {
         let data = ({
             params: [
                 { name: "RunnerID", value: this.props.userprofile.userprofile.RunnerID },
@@ -43,7 +50,6 @@ class FriendListView extends Component {
                 // this.setState({ isModalVisibleError: !this.state.isModalVisibleError })
                 console.error(error);
             });
-        // this.setState({ dataSource: this.props.friendData })
     }
     deleteFriend(item) {
         console.log("test : " + item)
@@ -71,8 +77,7 @@ class FriendListView extends Component {
     }
     onRefesh = () => {
         this.componentDidMount()
-        // this.setState({ isRefesh : true})
-        // datafriend.push(this.state.newitem)
+
 
     }
     alertShow(item) {
@@ -110,11 +115,12 @@ class FriendListView extends Component {
                     data={this.state.dataSource}
                     refreshing={this.state.isRefesh}
                     onRefresh={this.onRefesh}
-                    renderItem={({ item }) => (
+                    renderItem={({ item}) => (
                         <View style={styles.container}>
                             <View style={styles.cellFriend}>
                                 <View>
-                                    <Image source={{ uri: item.imgAvatar }}
+                                    <Image
+                                        source={require("../../icon/boy.png")}
                                         style={styles.avatar} />
                                 </View>
                                 <TouchableOpacity>
@@ -137,7 +143,7 @@ class FriendListView extends Component {
                     // leftOpenValue={75}
                     rightOpenValue={-75}
                 />
-                
+
             </View >
 
         );
@@ -171,11 +177,12 @@ const styles = StyleSheet.create({
     },
     cellFriend: {
         flexDirection: 'row',
-        padding: 10,
+        paddingHorizontal: 30,
+        paddingVertical: 10,
         borderColor: '#f1f1f1',
         borderWidth: 1,
-        justifyContent: 'space-between',
-        alignItems : 'center',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
         backgroundColor: '#fff',
     },
     avatar: {
@@ -183,16 +190,18 @@ const styles = StyleSheet.create({
         height: 60,
         borderRadius: 30,
         borderColor: '#fff',
-        borderWidth: 2,
+        borderWidth: 1,
+        resizeMode: 'contain'
+
     },
     textListFriend: {
         flexDirection: 'row',
-        justifyContent: 'flex-end',
-        alignItems : 'center',
-        paddingHorizontal: 30,
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingHorizontal: 50,
     },
     textName: {
-        
+
         fontSize: 17
     },
     textAge: {

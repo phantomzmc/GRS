@@ -4,6 +4,7 @@ import { Container } from 'native-base'
 import { connect } from 'react-redux'
 import { captureScreen } from "react-native-view-shot";
 import Modal from "react-native-modal";
+import CameraRollExtended from 'react-native-store-photos-album'
 import axios from 'axios'
 import req from '../config/uri_req'
 import api_key from '../config/api_key'
@@ -39,13 +40,17 @@ class TotalLayout extends Component {
         setTimeout(() => {
             if (this.state.modalLoading == true) {
                 this.setState({ modalLoading: false, layout_invoice: true })
+                this.captureScreenFunction()
             }
         }, 2000)
     }
     addRegister() {
+        console.log("addregis")
         let { userprofile, network, choiceSend, event, creditcard, address } = this.props
         let uri = req[0].uspAddRegister
         let apikey = api_key[0].api_key
+        let friendlists = this.props.friendlist.friendEvent
+        var myString = JSON.stringify(friendlists)
         let data = ({
             params: [
                 { name: "RunnerID", value: userprofile.userprofile.RunnerID },
@@ -56,19 +61,20 @@ class TotalLayout extends Component {
                 { name: "Longitude", value: network.long },
                 { name: "Latitude", value: network.lat },
                 { name: "TransactionID", value: "aSdFgHjKl" },
-                { name: "ChargesID", value: creditcard.charge.id },
+                { name: "ChargesID", value: "" },
                 { name: "NumberOfRunner", value: 1 },
                 { name: "PlaceItemID", value: choiceSend.choiceSend.placeItemID },
                 { name: "BillingInfo", value: "{\"FirstName\":\"" + address.user.fullname + "\",\"LastName\":\"" + address.user.lastname + "\",\"Address\":\"" + address.user.adress + "\",\"SubDistric\":\"" + address.user.subdistric + "\",\"Distric\":\"" + address.user.distric + "\",\"Province\":\"" + address.user.province + "\",\"PostCode\":\"" + address.user.postcode + "\",\"Country\":\"Thailand\",\"Phone\":\"" + address.user.tel + "\",\"Notes\":\"" + address.user.note + "\"}" },
-                { name: "RegisterList", value: "[{\"RunnerID\":\"" + userprofile.userprofile.RunnerID + "\",\"CourseID\":\"" + event.distanceEvent.id + "\",\"JerseySize\":\"L\",\"PhotoPlusService\":\"" + event.distanceEvent.statusPhotoPlus + "\",\"PromoCode\":\"\",\"CoursePrice\":\"" + event.distanceEvent.price + "\"},]" },
+                { name: "RegisterList", value: myString },
                 { name: "TeamName", value: userprofile.userprofile.TeamName },
                 { name: "EventID", value: event.event.EventID },
-                { name: "TotalPostPrice", value: choiceSend.priceCDO },
+                { name: "TotalPostPrice", value: choiceSend.choiceSend.priceCDO },
                 { name: "CreditFee", value: creditcard.vat },
                 { name: "TotalDiscount", value: 0 },
                 { name: "TotalAll", value: event.totalRegister }
             ]
         })
+        console.log(data)
         axios.post(uri, data, {
             headers: {
                 "X-DreamFactory-API-Key": apikey,
@@ -78,14 +84,16 @@ class TotalLayout extends Component {
         })
             .then((response) => {
                 this.setState({ isLoading: false, output: response.data });
+                console.log(this.state.output)
                 this.props.setInvoice(this.state.output)
             }).catch((error) => {
                 this.setState({ modalError: true })
                 setTimeout(() => {
                     this.props.navigation.navigate('EventList')
-                },3000)
+                }, 3000)
             });
     }
+
     onClick = () => {
         console.log(this.state.event)
         console.log(this.props.event.name)
@@ -111,7 +119,12 @@ class TotalLayout extends Component {
             quality: 0.8
         })
             .then(
-                uri => this.setState({ imageURI: uri }),
+                uri => {
+                    CameraRollExtended.saveToCameraRoll({
+                        uri: uri,
+                        album: 'GRS'
+                    }, 'photo')
+                },
                 Alert.alert('บันทึกสำเร็จ', 'ทำการบันทึกรายการเสร็จสิ้น', [
                     {
                         text: 'ตกลง',
@@ -199,7 +212,9 @@ const mapStateToProps = (state) => {
         shirtphoto: state.shirtphoto,
         creditcard: state.creditcard,
         token: state.token,
-        userprofile: state.userprofile
+        userprofile: state.userprofile,
+        friendlist: state.friendlist,
+        profile: state.profile
     }
 }
 const mapDispatchToProps = dispatch => {
@@ -208,6 +223,12 @@ const mapDispatchToProps = dispatch => {
             dispatch({
                 type: 'setInvoice',
                 payload: invoice
+            })
+        },
+        setRegislist: (list) => {
+            dispatch({
+                type: 'setRegislist',
+                payload: list
             })
         }
     }

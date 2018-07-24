@@ -7,7 +7,10 @@ class DetailRegister extends Component {
         address: "106/13 หนองหอย เมืองเชียงใหม่ เชียงใหม่",
         statusPayment1: false,
         statusPayment2: true,
-        numberInvoice: "00"
+        numberInvoice: "00",
+        date: new Date().getDate(),
+        month: new Date().getMonth(),
+        year: new Date().getFullYear()
     }
     componentDidMount() {
         this.setState({
@@ -16,7 +19,7 @@ class DetailRegister extends Component {
                 this.props.address.user.distric + " " +
                 this.props.address.user.province + " " +
                 this.props.address.user.postcode,
-            numberInvoice : this.props.invoice.invoice[0].InvoiceID
+            numberInvoice: this.props.invoice.invoice[0].InvoiceID
         })
         if (this.props.creditcard.charge.status == "successful") {
             this.setState({ statusPayment1: true, statusPayment2: false })
@@ -26,6 +29,7 @@ class DetailRegister extends Component {
         }
     }
     render() {
+        let { date, month, year } = this.state
         return (
             <View style={styles.container}>
                 <View style={styles.view1}>
@@ -39,7 +43,7 @@ class DetailRegister extends Component {
                     </View>
                     <View>
                         <Text style={{ fontSize: 10, color: '#A9A9A9', fontFamily: 'kanit' }}> Order : {this.state.numberInvoice} </Text>
-                        <Text style={{ fontSize: 10, color: '#A9A9A9', fontFamily: 'kanit' }}> Date order </Text>
+                        <Text style={{ fontSize: 10, color: '#A9A9A9', fontFamily: 'kanit' }}>{date}-{month}- {year}</Text>
                     </View>
                 </View>
                 <View style={styles.viewName}>

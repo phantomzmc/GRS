@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, FlatList, TouchableOpacity } from 'react-native';
+import { View, ActivityIndicator, FlatList } from 'react-native';
 import { connect } from 'react-redux'
 import axios from 'axios'
 import CellEventListFriend from './cell-eventListFriend'
@@ -16,10 +16,14 @@ class EventListFriend extends Component {
             datafriend: [],
             isRefesh: false,
         }
+        this.getFriend = this.getFriend.bind(this)
     }
-    componentDidMount() {
+    componentDidMount(){
         this.getFriend()
-        // this.autoRefresh()
+        setTimeout(()=>{
+            this.getFriend()
+            console.log("timeset")
+        },500)
     }
     // autoRefresh(){
     //     this.setTimeout(() => {
@@ -45,18 +49,17 @@ class EventListFriend extends Component {
                 this.setState({ isLoading: false, dataSource: response.data });
                 console.log(this.state.dataSource)
             }).catch((error) => {
+                this.setState({ isLoading : true})
                 // this.setState({ isModalVisibleError: !this.state.isModalVisibleError })
-                console.error(error);
+                // console.error(error);
             });
     }
-    addFriendEvent = (item) => {
-        let { datafriend } = this.state
-        datafriend.push(item)
-        console.log(datafriend)
+    addFriendEvent = (datafriend) => {
         this.props.setFriendRegister(datafriend)
     }
+    
     onRefesh = () => {
-        this.getFriend()
+        this.componentDidMount()
     }
     render() {
         let { selected, favorite } = this.state
@@ -82,10 +85,12 @@ class EventListFriend extends Component {
                     data={this.state.dataSource}
                     refreshing={this.state.isRefesh}
                     onRefresh={this.onRefesh}
-                    renderItem={({ item }) =>
+                    renderItem={({ item,index }) =>
                         <CellEventListFriend
                             items={item}
-                            getAddFriend={this.addFriendEvent.bind(this)} />
+                            idkey={index}
+                            getAddFriend={this.addFriendEvent.bind(this)}
+                        />
                     }
                     keyExtractor={(item, index) => index} />
             </View >

@@ -85,21 +85,21 @@ class UserHelpRegister extends Component {
   gotoListEvent = () => {
     Alert.alert(
       "สำเร็จ",
-      "ขั้นตอนการลงทะเบียนเกือบเสร็จสมบูรณ์แล้ว กรุณาตรวจสอบอีเมล์เพื่อยืนยันตัวตน",
+      "แก้ไขข้อมูลส่วนตัวเรียบร้อย",
       [
         {
           text: "ยกเลิก"
         },
         {
           text: "ตกลง",
-          onPress: () => this.gotoVerify()
+          onPress: () => this.gotoTeamList()
         }
       ],
       { cancelable: false }
     );
   };
-  gotoVerify = () => {
-    this.props.navigation.navigate("Verify");
+  gotoTeamList = () => {
+    this.props.navigation.navigate("TeamList");
   };
   gotoBack = () => {
     this.props.navigation.navigate('EditProfileAddress')

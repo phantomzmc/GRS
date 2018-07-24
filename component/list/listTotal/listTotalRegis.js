@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, FlatList, StyleSheet,Image } from 'react-native';
+import { View, Text, FlatList, StyleSheet, Image } from 'react-native';
 import { connect } from "react-redux";
 
 
@@ -8,11 +8,14 @@ class ListTotalRegis extends Component {
         super(props)
         this.state = {
             datatotal: {
-                dataDis: this.props.friendlist.friendEvent,
+                dataDis: this.props.friendlist.fullfriendEvent,
                 frindRegis: this.props.friendlist.friendRegis,
                 sizeshirt: this.props.friendlist.shirtSize
             },
         }
+    }
+    componentDidMount() {
+        console.log(this.state.datatotal.dataDis)
     }
 
     render() {
@@ -23,20 +26,20 @@ class ListTotalRegis extends Component {
                     renderItem={({ item, index }) =>
                         <View style={styles.container}>
                             <View>
-                                <Image source={require('../../icon/calendar.png')}
-                                    style={{ width: 30, height: 30, justifyContent: 'center', alignSelf: 'center', marginTop: 10 }} />
+                                <Image source={require('../../icon/boy.png')}
+                                    style={{ width: 30, height: 30,marginLeft: 20}} />
                             </View>
                             <View style={{ flexDirection: 'column' }}>
                                 <View style={{ flexDirection: 'row' }}>
-                                    <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{item.firstname} {item.lastname}</Text>
+                                    <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{item.firstname} - {item.lastname}</Text>
                                 </View>
                                 <View style={{ flexDirection: 'column' }}>
                                     <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit' }}>ระยะ : {item.nameRegis}</Text>
-                                    <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit' }}>ไซค์เสื้อ : {item.size}</Text>
+                                    <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit' }}>ไซค์เสื้อ : {item.JerseySize}</Text>
                                 </View>
                             </View>
                             <View style={{ justifyContent: 'center' }}>
-                                <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{item.fee}.0 ฿</Text>
+                                <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{item.CourseFee}.0 ฿</Text>
                             </View>
                         </View>}
                     keyExtractor={this.keyExtractor} />
@@ -57,7 +60,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         margin: 10,
         backgroundColor: "#fff",
-        justifyContent: 'space-between'
+        justifyContent: 'space-evenly'
     },
     textTitle: {
         fontFamily: "kanit",

@@ -14,7 +14,7 @@ class TotalRegister extends Component {
         detailPleace2: false,
         singleRegis: false,
         teamRegis: true,
-        detailRegis: false
+        detailRegis: true
     }
     componentDidMount() {
         this.setState({

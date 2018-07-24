@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import { View, FlatList, StyleSheet, Alert, TouchableOpacity, Image, ScrollView } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
-import Switch from 'react-native-switch-pro'
-
+import PhotoPlusFriend from './photoPlusFriend'
 import ListFriendDistance from '../list/event/listFriendDistance'
 import ListFriendShirth from '../list/listShirt/listFriendShrit'
 import dataDistance from '../list/listevent/dataDistance'
 import dataPrice from '../list/listevent/dataPrice'
 import dataFriend from '../list/listFriend/dataFriend';
 import dataShirts from '../list/listShirt/dataShirt'
+import dataFriendFull from '../list/listFriend/dataFriend-full'
 import { connect } from 'react-redux';
 
 class CradFriendDistance extends Component {
@@ -27,21 +27,23 @@ class CradFriendDistance extends Component {
             iconName: "arrow-forward",
             value: false,
             photoplus: false,
+            pricePhotoPlus: "",
 
             runnerid: "",
             couseID: "",
             nameRegis: "",
             jersersize: "",
             fee: "",
-            firstname : "",
-            lastname : ""
+            firstname: "",
+            lastname: "",
 
         }
     }
     componentDidMount() {
         let dis = this.props.distance
-        this.setState({ items: dis, name: dis.RunnerID ,firstname : dis.FirstName ,lastname : dis.LastName })
+        this.setState({ items: dis, name: dis.RunnerID, firstname: dis.FirstName, lastname: dis.LastName, index: this.props.idkey })
         console.log(this.state.name)
+        console.log("key : " + this.props.idkey)
     }
     onPressDeleteItem() {
         this.props.delete()
@@ -56,6 +58,7 @@ class CradFriendDistance extends Component {
     }
 
     passDistance(item) {
+        var price = item.CourseFee
         this.setState({
             dataDis: item,
             total: parseFloat(item.Fee),
@@ -63,14 +66,15 @@ class CradFriendDistance extends Component {
             couseid: item.CourseID,
             nameRegis: item.Distance,
             runnerid: this.state.name,
-            
+            photoplusService: item.PhotoPlusService
         })
         dataDistance.push(item)
         this.props.addDistanceFriend(dataDistance)
         dataPrice.push(parseFloat(item.Fee))
         this.sumPrice()
-        this.checkPhotoPlus(item)
+        this.checkPhotoPlus(item, price)
     }
+
 
     passShirt(item) {
         this.setState({
@@ -83,24 +87,37 @@ class CradFriendDistance extends Component {
         this.getDataRegisFriend(item.JerseySizeValue)
     }
     getDataRegisFriend(JerseySizeValue) {
-        let { runnerid, couseid, nameRegis, total, jersersize, dataRegis,firstname,lastname } = this.state
+        let { runnerid, couseid, nameRegis, total, jersersize, dataRegis, firstname, lastname } = this.state
         let data = {
-            runnerid: runnerid,
-            firstname : firstname,
-            lastname : lastname,
-            couseid: couseid,
+            RunnerID: runnerid,
+            CourseID: couseid,
+            JerseySize: JerseySizeValue,
+            PhotoPlusService: "0",
+            PromoCode: "",
+            CourseFee: total,
+        }
+        let fulldata = {
+            RunnerID: runnerid,
+            firstname: firstname,
+            lastname: lastname,
+            CourseID: couseid,
+            JerseySize: JerseySizeValue,
+            PhotoPlusService: "0",
+            PromoCode: "",
             nameRegis: nameRegis,
-            fee: total,
-            size: JerseySizeValue
+            CourseFee: total,
         }
         dataFriend.push(data)
-        console.log(dataFriend)
+        dataFriendFull.push(fulldata)
         this.props.addFriendInEvent(dataFriend)
+        this.props.addFullFriendInEvent(dataFriendFull)
     }
-    photoPlusSwitch = () => {
-        let { dataFriendRegis } = this.state
-        this.setState({ photoplusValue: 100 })
-        console.log(this.state.photoplusValue)
+    photoPlusSwitch = (photoplus) => {
+        let { index} = this.state
+        console.log(photoplus)
+        dataFriend[index].PhotoPlusService = photoplus
+        dataFriendFull[index].PhotoPlusService = photoplus
+        console.log(dataFriend)
         // this.getDataRegisFriend(dataFriendRegis)
 
     }
@@ -113,7 +130,7 @@ class CradFriendDistance extends Component {
             this.setState({ iconName: "arrow-forward" })
         }
     }
-    checkPhotoPlus(item) {
+    checkPhotoPlus(item, price) {
         let dis = this.props.friendlist.dataDis
         if (item.PhotoPlusService == "0") {
             this.setState({ photoplus: false })
@@ -121,26 +138,30 @@ class CradFriendDistance extends Component {
         else if (item.PhotoPlusService == "1") {
             this.setState({ photoplus: true })
         }
+        return price
     }
+
     render() {
         const { items } = this.state
         return (
             <Card>
                 <CardItem>
                     <Left>
-                        <Thumbnail source={{ uri: items.PicProfile }} />
-                        <Body style={{ paddingHorizontal: 5 }}>
+                        <Thumbnail
+                            source={require("../icon/boy.png")}
+                        />
+                        <Body style={{ paddingHorizontal: 20 }}>
                             <Text style={{ fontFamily: "kanit" }}>{items.FirstName} - {items.LastName}</Text>
                             <Text note style={{ fontFamily: "kanit" }}>{items.gen} -  {items.age}</Text>
                         </Body>
                     </Left>
-                    <Right>
+                    {/* <Right>
                         <View style={{ flexDirection: 'row' }}>
                             <TouchableOpacity onPress={this.onPressDeleteItem.bind(this)}>
                                 <Icon name="ios-trash-outline" style={{ color: 'red' }} />
                             </TouchableOpacity>
                         </View>
-                    </Right>
+                    </Right> */}
                 </CardItem>
                 <CardItem>
                     <Body>
@@ -148,7 +169,10 @@ class CradFriendDistance extends Component {
                             <View style={styles.dropdownstyle}>
                                 <View style={{ flexDirection: 'row', paddingVertical: 20 }}>
                                     <Left>
-                                        <Text style={styles.labelTitle}>ระยะทาง : {this.state.dataDis.CourseName} {this.state.dataDis.Distance}</Text>
+                                        <TouchableOpacity onPress={() => this.setState({ distance: !this.state.distance })}
+                                            onPressIn={() => this.chageIcon()}>
+                                            <Text style={styles.labelTitle}>ระยะทาง : {this.state.dataDis.CourseName} {this.state.dataDis.Distance}</Text>
+                                        </TouchableOpacity>
                                     </Left>
                                     <Right>
                                         <TouchableOpacity onPress={() => this.setState({ distance: !this.state.distance })}
@@ -165,7 +189,10 @@ class CradFriendDistance extends Component {
 
                                 <View style={{ flexDirection: 'row' }}>
                                     <Left>
-                                        <Text style={styles.labelTitle}>ขนาดไซค์เสื้อ : {this.state.dataShirt.JerseySizeValue} {this.state.dataShirt.JerseySizeDesc}</Text>
+                                        <TouchableOpacity onPress={() => this.setState({ sizeShirth: !this.state.sizeShirth })}
+                                            onPressIn={() => this.chageIcon()}>
+                                            <Text style={styles.labelTitle}>ขนาดไซค์เสื้อ : {this.state.dataShirt.JerseySizeValue} {this.state.dataShirt.JerseySizeDesc}</Text>
+                                        </TouchableOpacity>
                                     </Left>
                                     <Right>
                                         <TouchableOpacity onPress={() => this.setState({ sizeShirth: !this.state.sizeShirth })}
@@ -183,7 +210,10 @@ class CradFriendDistance extends Component {
                 </CardItem>
                 {this.state.photoplus &&
                     <CardItem>
-                        <Left>
+                        <PhotoPlusFriend
+                            setPhotoPlus={this.photoPlusSwitch.bind(this)}
+                        />
+                        {/* <Left>
                             <Icon name="ios-camera-outline" style={{ fontSize: 20 }} />
                             <Text style={{ fontFamily: "kanit", fontSize: 16 }}>Photo + Service</Text>
                         </Left>
@@ -194,7 +224,7 @@ class CradFriendDistance extends Component {
                                 value={this.state.value}
                                 onSyncPress={() => this.photoPlusSwitch()}
                             />
-                        </Right>
+                        </Right> */}
                     </CardItem>
                 }
             </Card>
@@ -204,7 +234,8 @@ class CradFriendDistance extends Component {
 }
 const mapStateToProps = state => {
     return {
-        friendlist: state.friendlist
+        friendlist: state.friendlist,
+        photoplus: state.photoplus
     }
 }
 const mapDispatchToProps = dispatch => {
@@ -225,6 +256,12 @@ const mapDispatchToProps = dispatch => {
             dispatch({
                 type: 'addFriendInEvent',
                 payload: dataFriend
+            })
+        },
+        addFullFriendInEvent: (fulldata) => {
+            dispatch({
+                type: 'addFullFriendInEvent',
+                payload: fulldata
             })
         },
         setTotalRegister: (sum) => {

@@ -27,12 +27,30 @@ const user = {
   },
   verify: "",
   statuslogin: 0,
-  newpassword : ""
+  newpassword: ""
 };
 const friend = {
   friendRegis: {},
   dataDis: {},
-  friendEvent: {},
+  friendEvent: {
+    RunnerID: "",
+    CourseID: "",
+    JerseySize: "",
+    PhotoPlusService: "",
+    PromoCode: "",
+    CourseFee: "",
+  },
+  fullfriendEvent: {
+    RunnerID: "",
+    firstname: "",
+    lastname: "",
+    CourseID: "",
+    JerseySize: "",
+    PhotoPlusService: "",
+    PromoCode: "",
+    nameRegis: "",
+    CourseFee: "",
+  },
   shirtSize: {}
 
 }
@@ -63,7 +81,7 @@ const profile = (state = user, action) => {
       state.verify = action.payload;
       break;
     }
-    case "resetPassword" : {
+    case "resetPassword": {
       state.newpassword = action.payload
       break;
     }
@@ -71,7 +89,7 @@ const profile = (state = user, action) => {
       state.statuslogin = action.payload;
       break;
     }
-    case "setStatusRegis" : {
+    case "setStatusRegis": {
       state.statusRegis = action.payload;
       break;
     }
@@ -194,7 +212,7 @@ const userprofile = (state = { datapic }, action) => {
       state.datapic = action.payload
       break;
     }
-    case "setUserStatus" : {
+    case "setUserStatus": {
       state.userstatus = action.payload
       break;
     }
@@ -229,6 +247,10 @@ const friendlist = (state = friend, action) => {
       state.friendEvent = action.payload
       break;
     }
+    case "addFullFriendInEvent": {
+      state.fullfriendEvent = action.payload
+      break;
+    }
     case "setFriendRegister": {
       state.friendRegis = action.payload
       break;
@@ -236,7 +258,10 @@ const friendlist = (state = friend, action) => {
     case "setTotalPrice": {
       state.friendTotalPrice = action.payload
       break;
-
+    }
+    
+    case "setRegislist": {
+      state.regislist = action.payload
     }
   }
   return state;

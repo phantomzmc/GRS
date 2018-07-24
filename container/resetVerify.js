@@ -4,6 +4,7 @@ import { View, StyleSheet, TouchableOpacity, Text, StatusBar } from 'react-nativ
 import { Conatainer } from 'native-base'
 import { connect } from 'react-redux'
 import randomstringPromise from 'randomstring-promise/react-native';
+import MailGunSend from '../config/send-mailgun'
 
 import ResetVerifyForm from "../component/form/resetVerifyForm"
 import HeaderTeam from '../component/items/headerTeam'
@@ -29,12 +30,12 @@ class ResetVerify extends Component {
                 this.props.setVerify(this.state.verifycode)
             });
     }
-    async sentVerifyCode() {
+    async sentVerifyCode(email) {
         const data = await MailGunSend.onSendMail({
             'from': 'Guurun Support Team. <support@guurun.com>',
-            'to': this.props.profile.profile.email,
+            'to': email,
             'subject': 'Guurun Support Team รหัสในการยืนยันตัวตน',
-            'text': 'สวัสดีคุณ ' + this.props.profile.profile.fullname + ' รหัสที่ใช้ในการยืนยันตัวตนขอผู้ใช้งานคือ : ' + this.props.profile.verify
+            'text': 'สวัสดีคุณ รหัสที่ใช้ในการยืนยันตัวตนขอผู้ใช้งานคือ : ' + this.props.profile.verify
         })
         console.log(data)
     }
@@ -62,7 +63,7 @@ class ResetVerify extends Component {
                 />
                 <View style={styles.container}>
                     <ResetVerifyForm
-                        sendNewCode={this.sendResetVerify.bind(this)}
+                        sendNewCode={this.sentVerifyCode.bind(this)}
                         goLogin={this.gotoLogin.bind(this)} />
                     {/* <TouchableOpacity onPress={this.sendResetVerify.bind(this)}>
                     <Text>test</Text>
@@ -74,7 +75,8 @@ class ResetVerify extends Component {
 }
 const mapStateToProps = state => {
     return {
-        profile: state.profile
+        profile: state.profile,
+        userprofile : state.userprofile
     }
 }
 const mapDisPatchToProps = (dispatch) => {

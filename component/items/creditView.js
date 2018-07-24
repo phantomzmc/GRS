@@ -11,7 +11,7 @@ const ibit_pkey = 'pkey_test_5b7nut5dlzyudruopsl'
 const ibit_skey = 'skey_test_5b7nwwrac7mvps7l3mp'
 const test_pkey = 'pkey_test_5ccy7tzubo9t8d0i71o'
 const test_skey = 'skey_test_5ccy7tzukutfwjoi8p3'
-Omise.config(ibit_pkey, ibit_skey, '2015-11-17');
+Omise.config(test_pkey, test_skey, '2015-11-17');
 
 class CreditView extends Component {
 
@@ -31,7 +31,7 @@ class CreditView extends Component {
         this.genTokenCredit = this.genTokenCredit.bind(this)
     }
 
-    async genTokenCredit(nameCredit, numberCredit, expCredit,yearCredit, cvcCredit) {
+    async genTokenCredit(nameCredit, numberCredit, expCredit, yearCredit, cvcCredit) {
         const data = await Omise.createToken({
             'card': {
                 'name': nameCredit,
@@ -67,7 +67,7 @@ class CreditView extends Component {
     }
     checkPaymentModal = (charges) => {
         if (charges.status == "successful") {
-            this.setState({ modalSuccess: !this.state.modalSuccess })
+            this.setState({ modalSuccess: !this.state.modalSuccess, statusPayment: true })
             setTimeout(() => {
                 this.props.goAddress()
                 this.setState({ modalSuccess: !this.state.modalSuccess })
@@ -75,20 +75,20 @@ class CreditView extends Component {
             console.log("successful")
         }
         else if (charges.status == "failed") {
-            this.setState({ modalFaild: !this.state.modalFaild })
+            this.setState({ modalFaild: !this.state.modalFaild, statusPayment: true })
             setTimeout(() => {
                 this.setState({ modalFaild: !this.state.modalFaild })
             }, 3000);
             console.log("failed")
         }
     }
-    putDataCredit = (nameCredit, numberCredit, expCredit,yearCredit, cvcCredit) => {
-        this.genTokenCredit(nameCredit, numberCredit, expCredit,yearCredit, cvcCredit)
-        this.props.setCredit({ nameCredit: nameCredit, numberCredit, expCredit,yearCredit, cvcCredit })
+    putDataCredit = (nameCredit, numberCredit, expCredit, yearCredit, cvcCredit) => {
+        this.genTokenCredit(nameCredit, numberCredit, expCredit, yearCredit, cvcCredit)
+        this.props.setCredit({ nameCredit: nameCredit, numberCredit, expCredit, yearCredit, cvcCredit })
         this.props.setStatusPayment(this.state.statusPayment)
     }
     render() {
-        let { nameCredit, numberCredit, expCredit,yearCredit, cvcCredit } = this.state
+        let { nameCredit, numberCredit, expCredit, yearCredit, cvcCredit } = this.state
         return (
             <View style={styles.container}>
                 <View style={styles.creditCard}>
@@ -203,7 +203,7 @@ class CreditView extends Component {
                 <View style={styles.submitContainer}>
                     <TouchableOpacity
                         style={styles.buttonContainer}
-                        onPress={() => this.putDataCredit(nameCredit, numberCredit, expCredit,yearCredit, cvcCredit)}>
+                        onPress={() => this.putDataCredit(nameCredit, numberCredit, expCredit, yearCredit, cvcCredit)}>
                         <Text style={styles.textButton}> ยืนยันและชำระค่าบริการ </Text>
                     </TouchableOpacity>
                 </View>

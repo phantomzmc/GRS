@@ -3,7 +3,7 @@ import { StyleSheet, Image, Text } from "react-native";
 import { View, Card, CardItem } from 'native-base';
 import CheckBox from 'react-native-checkbox-heaven';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import data from '../listevent/data';
+import datafriendRegis from './dataFriend-regis'
 
 class CellEventListFriend extends Component {
     constructor(props) {
@@ -13,7 +13,8 @@ class CellEventListFriend extends Component {
             checked: false,
             favorite: true,
             icon: "",
-            iconColor: ""
+            iconColor: "",
+            datafriend: [],
         }
         this.checkFavorite = this.checkFavorite.bind(this)
     }
@@ -23,11 +24,30 @@ class CellEventListFriend extends Component {
         console.log(this.props.items)
         console.log(this.state.item)
     }
-
+    addFriendEvent = (item) => {
+        let { datafriend } = this.state
+        datafriendRegis.push(item)
+        console.log(datafriendRegis)
+        this.props.getAddFriend(datafriendRegis)
+    }
+    removeFriendEvent = (index) => {
+        let { datafriend } = this.state
+        console.log(index)
+        datafriendRegis.splice(index, 1)
+        console.log(datafriendRegis)
+        this.props.getAddFriend(datafriendRegis)
+    }
     handleOnChange(val) {
-        this.props.getAddFriend(this.state.item)
-        console.log(this.state.item)
         this.setState({ checked: val })
+        if (this.state.checked == false) {
+            this.addFriendEvent(this.state.item)
+            console.log(this.state.item)
+        }
+        else if (this.state.checked == true) {
+            this.removeFriendEvent(this.props.idkey)
+            console.log(this.props.idkey)
+        }
+
     }
     chageColorIcon() {
         let { favorite } = this.state
@@ -51,7 +71,7 @@ class CellEventListFriend extends Component {
             console.log("2")
         }
     }
-    
+
     render() {
         let { item, favorite } = this.state
         return (
@@ -72,7 +92,8 @@ class CellEventListFriend extends Component {
                         <View style={styles.imgContainer}>
                             <View style={styles.listfriend}>
 
-                                <Image source={{ uri: item.imgAvatar }}
+                                <Image
+                                    source={require("../../icon/boy.png")}
                                     style={styles.imgAvatar} />
                                 <Icon
                                     name={this.state.icon}

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import FriendInEvent from '../component/list/listFriend/frienInEvent'
-import { View, StyleSheet, TouchableOpacity, Text, ScrollView } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Text, ScrollView, StatusBar } from 'react-native';
 import { Container } from "native-base";
 import { connect } from 'react-redux'
 
@@ -11,9 +11,9 @@ class FriendDistance extends Component {
     state = {
         title: "เลือกระยะทาง",
         price: [],
-        statusRegis : 1
+        statusRegis: 1
     }
-    onTest=()=> {
+    onTest = () => {
         this.props.navigation.navigate("ListTotalRegis")
     }
     onGotoAddress = () => {
@@ -26,11 +26,16 @@ class FriendDistance extends Component {
     onPressGoBack = () => {
         this.props.navigation.navigate("TabRouter")
     }
-    
+
 
     render() {
         return (
             <Container>
+                <StatusBar
+                    barStyle="light-content"
+                    hidden={false}
+                    translucent={true}
+                />
                 <HeaderTeam title={this.state.title}
                     goback={this.onPressGoBack.bind(this)} />
                 <ScrollView>
@@ -62,10 +67,10 @@ const mapDispatchToProps = dispatch => {
                 payload: totals
             })
         },
-        setStatusRegis : (regis) => {
+        setStatusRegis: (regis) => {
             dispatch({
-                type : 'setStatusRegis',
-                payload : regis
+                type: 'setStatusRegis',
+                payload: regis
             })
         }
     }

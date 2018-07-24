@@ -22,7 +22,7 @@ class HeaderProfile extends Component {
             ImageSource: null
         }
     }
-    componentWillMount = () => {
+    componentWillMount(){
         this.setState({
             ImageSource: this.props.userprofile.datapic
         })
@@ -94,13 +94,15 @@ class HeaderProfile extends Component {
             }
         });
     }
-    upimageToServe(response) {
+    
+    upimageToServe(response) {  
         var photo = {
             uri: response.uri,
             type: 'image/jpeg',
             name: response.fileName,
             size: response.fileSize,
         };
+        console.log(photo)
         var form = new FormData();
         form.append("imageLink", photo);
 

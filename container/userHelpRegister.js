@@ -66,12 +66,14 @@ class UserHelpRegister extends Component {
     let city = this.props.profile.address.city
     let country = this.props.profile.address.country
     let postnumber = this.props.profile.address.postNumber
+    let gen = this.props.profile.profile.gen
+    let picprofile = this.props.userprofile.datapic.fileName
 
     let uri = req[0].uspCreateAccount
     let apikey = api_key[0].api_key
     let data = ({
       params: {
-        value: "{\"ActivateCode\":\"" + activecode + "\",\"FirstName\":\"" + firstname + "\",\"LastName\":\"" + lastname + "\",\"NickName\":\"" + nickname + "\",\"IdentityType\":\"1\",\"CitizenshipID\":\"" + userid + "\",\"PassportID\":\"123\",\"Password\":\"" + password + "\",\"Gender\":\"F\",\"DateOfBirth\":\"" + journeyDate + "\",\"Nationality\":\"" + nation + "\",\"TeamName\":\"" + teamname + "\",\"BIBName\":\"" + bib + "\",\"Email\":\"" + email + "\",\"Phone\":\"" + tel + "\",\"Address\":\"" + address + "\",\"SubDistric\":\"" + t + "\",\"Distric\":\"" + a + "\",\"Province\":\"" + city + "\",\"Country\":\"" + country + "\",\"PostCode\":\"" + postnumber + "\",\"PicProfile\":\"1\",\"BackgroundProfile\":\"1\",\"PicGroup\":\"1\",\"ECFirstName\":\"" + ecfirstname + "\",\"ECLastName\":\"" + eclastname + "\",\"ECRelation\":\"" + ecrelation + "\",\"ECPhone\":\"" + ectel + "\"}"
+        value: "{\"ActivateCode\":\"" + activecode + "\",\"FirstName\":\"" + firstname + "\",\"LastName\":\"" + lastname + "\",\"NickName\":\"" + nickname + "\",\"IdentityType\":\"1\",\"CitizenshipID\":\"" + userid + "\",\"PassportID\":\"123\",\"Password\":\"" + password + "\",\"Gender\":\"" + gen + "\",\"DateOfBirth\":\"" + journeyDate + "\",\"Nationality\":\"" + nation + "\",\"TeamName\":\"" + teamname + "\",\"BIBName\":\"" + bib + "\",\"Email\":\"" + email + "\",\"Phone\":\"" + tel + "\",\"Address\":\"" + address + "\",\"SubDistric\":\"" + t + "\",\"Distric\":\"" + a + "\",\"Province\":\"" + city + "\",\"Country\":\"" + country + "\",\"PostCode\":\"" + postnumber + "\",\"PicProfile\":\"" + picprofile + "\",\"BackgroundProfile\":\"1\",\"PicGroup\":\"1\",\"ECFirstName\":\"" + ecfirstname + "\",\"ECLastName\":\"" + eclastname + "\",\"ECRelation\":\"" + ecrelation + "\",\"ECPhone\":\"" + ectel + "\"}"
       }
     })
     axios.post(uri, data, {
@@ -147,7 +149,8 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => {
   return {
     profile: state.profile,
-    token: state.token
+    token: state.token,
+    userprofile: state.userprofile
   }
 }
 

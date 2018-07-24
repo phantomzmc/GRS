@@ -13,6 +13,8 @@
 		00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302DC1ABCB9D200DB3ED1 /* libRCTNetwork.a */; };
 		00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
 		07C2C9F4442042B1A27500AB /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 261BB52071504EE18DE169AA /* Foundation.ttf */; };
+		1109925C2104C32600BE0077 /* libReactNativeStorePhotosAlbum.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 110992552104C30E00BE0077 /* libReactNativeStorePhotosAlbum.a */; };
+		110992632105B7A100BE0077 /* libRNUUIDGenerator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 110992622105B79200BE0077 /* libRNUUIDGenerator.a */; };
 		118FCC5920E24508003F1DC1 /* libRCTCameraRoll.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 118FCC3320E244E6003F1DC1 /* libRCTCameraRoll.a */; };
 		118FCC9F20E24C98003F1DC1 /* libQBImagePickerController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 118FCC9E20E24C98003F1DC1 /* libQBImagePickerController.a */; };
 		118FCCA120E24C98003F1DC1 /* libRSKImageCropper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 118FCCA020E24C98003F1DC1 /* libRSKImageCropper.a */; };
@@ -93,6 +95,20 @@
 			proxyType = 2;
 			remoteGlobalIDString = 832C81801AAF6DEF007FA2F7;
 			remoteInfo = RCTVibration;
+		};
+		110992542104C30E00BE0077 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 110992262104C30E00BE0077 /* ReactNativeStorePhotosAlbum.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 327633421BFAAD7E004DA88E;
+			remoteInfo = ReactNativeStorePhotosAlbum;
+		};
+		110992612105B79200BE0077 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1109925D2105B79200BE0077 /* RNUUIDGenerator.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNUUIDGenerator;
 		};
 		111C241720E0E73300A2AEF5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -407,6 +423,8 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* GRSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GRSTests.m; sourceTree = "<group>"; };
 		013946EBDA95492B94AABB14 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
+		110992262104C30E00BE0077 /* ReactNativeStorePhotosAlbum.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeStorePhotosAlbum.xcodeproj; path = "../node_modules/react-native-store-photos-album/ios/ReactNativeStorePhotosAlbum.xcodeproj"; sourceTree = "<group>"; };
+		1109925D2105B79200BE0077 /* RNUUIDGenerator.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNUUIDGenerator.xcodeproj; path = "../node_modules/react-native-uuid-generator/ios/RNUUIDGenerator.xcodeproj"; sourceTree = "<group>"; };
 		11153B9420E9C6D400F77C27 /* GRS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = GRS.entitlements; path = GRS/GRS.entitlements; sourceTree = "<group>"; };
 		118FCC2820E244E6003F1DC1 /* RCTCameraRoll.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCameraRoll.xcodeproj; path = "../node_modules/react-native/Libraries/CameraRoll/RCTCameraRoll.xcodeproj"; sourceTree = "<group>"; };
 		118FCC6C20E24C82003F1DC1 /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
@@ -471,6 +489,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				110992632105B7A100BE0077 /* libRNUUIDGenerator.a in Frameworks */,
+				1109925C2104C32600BE0077 /* libReactNativeStorePhotosAlbum.a in Frameworks */,
 				11C4DF4F20F3BDF10009F868 /* libRNRandomBytes.a in Frameworks */,
 				11D6DA9120E2DDAF0058C13C /* libRNViewShot.a in Frameworks */,
 				11D6DA9020E2D20B0058C13C /* libRNNetworkInfo.a in Frameworks */,
@@ -566,6 +586,22 @@
 				C0DD657345A3C2E9CC333DE9 /* Pods-GRS-tvOS.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		110992272104C30E00BE0077 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				110992552104C30E00BE0077 /* libReactNativeStorePhotosAlbum.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1109925E2105B79200BE0077 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				110992622105B79200BE0077 /* libRNUUIDGenerator.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		111C241220E0E73300A2AEF5 /* Products */ = {
@@ -740,6 +776,8 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				1109925D2105B79200BE0077 /* RNUUIDGenerator.xcodeproj */,
+				110992262104C30E00BE0077 /* ReactNativeStorePhotosAlbum.xcodeproj */,
 				11C4DF1420F3BDE40009F868 /* RNRandomBytes.xcodeproj */,
 				11D6DA5D20E2D1E40058C13C /* RNNetworkInfo.xcodeproj */,
 				118FCC6C20E24C82003F1DC1 /* RNImagePicker.xcodeproj */,
@@ -963,6 +1001,10 @@
 					ProjectRef = D70F5194FC3D47E78296DC7F /* ReactNativeIcons.xcodeproj */;
 				},
 				{
+					ProductGroup = 110992272104C30E00BE0077 /* Products */;
+					ProjectRef = 110992262104C30E00BE0077 /* ReactNativeStorePhotosAlbum.xcodeproj */;
+				},
+				{
 					ProductGroup = 118FCC6D20E24C82003F1DC1 /* Products */;
 					ProjectRef = 118FCC6C20E24C82003F1DC1 /* RNImagePicker.xcodeproj */;
 				},
@@ -973,6 +1015,10 @@
 				{
 					ProductGroup = 11C4DF1520F3BDE40009F868 /* Products */;
 					ProjectRef = 11C4DF1420F3BDE40009F868 /* RNRandomBytes.xcodeproj */;
+				},
+				{
+					ProductGroup = 1109925E2105B79200BE0077 /* Products */;
+					ProjectRef = 1109925D2105B79200BE0077 /* RNUUIDGenerator.xcodeproj */;
 				},
 				{
 					ProductGroup = 2AE1EC3A201CFE6C0004A0D8 /* Products */;
@@ -1024,6 +1070,20 @@
 			fileType = archive.ar;
 			path = libRCTVibration.a;
 			remoteRef = 00C302E31ABCB9EE00DB3ED1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		110992552104C30E00BE0077 /* libReactNativeStorePhotosAlbum.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libReactNativeStorePhotosAlbum.a;
+			remoteRef = 110992542104C30E00BE0077 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		110992622105B79200BE0077 /* libRNUUIDGenerator.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNUUIDGenerator.a;
+			remoteRef = 110992612105B79200BE0077 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		111C241820E0E73300A2AEF5 /* libRCTAutoComplete.a */ = {

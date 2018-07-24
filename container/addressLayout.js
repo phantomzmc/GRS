@@ -39,15 +39,17 @@ class AddressLayout extends Component {
             statusButton2: false,
             pleace: "",
             postPrice: "",
+            countFriend: this.props.friendlist.friendRegis.length
         }
     }
     componentWillMount = () => {
         this.setState({
             priceEvent: parseFloat(this.props.event.totalPrice),
-            priceCDO: parseFloat(65.0)
+            priceCDO: parseFloat(65.0),
         })
     }
     componentDidMount() {
+        this.getCountPostPrice()
         this.getPleaceItem()
     }
     getPleaceItem() {
@@ -82,7 +84,12 @@ class AddressLayout extends Component {
         this.props.navigation.navigate('ControlPayment')
     }
     gotoBack = () => {
-        this.props.navigation.navigate('ShirtPhotoPlus')
+        if (this.state.countFriend > 1) {
+            this.props.navigation.navigate('FriendDistance')
+        }
+        else {
+            this.props.navigation.navigate('ShirtPhotoPlus')
+        }
     }
     goTotalPayment = (fullname, lastname, email, adress, subdistric, distric, province, postcode, tel, note) => {
         this.nextToPayment()
@@ -111,6 +118,15 @@ class AddressLayout extends Component {
         const sum = priceCDO + priceEvent
         this.props.setTotalRegister(sum)
         // this.props.setTotal(sum)
+    }
+    getCountPostPrice() {
+        let { countFriend, priceCDO } = this.state
+        var defaultCDO = parseFloat(35.0)
+        if (countFriend > 1) {
+            var sumcount = priceCDO + (defaultCDO * (countFriend - 1))
+            console.log(sumcount)
+            this.setState({ priceCDO: sumcount })
+        }
     }
     handleOnChange() {
         this.setState({
@@ -244,7 +260,8 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => {
     return {
         event: state.event,
-        token: state.token
+        token: state.token,
+        friendlist: state.friendlist
     }
 }
 

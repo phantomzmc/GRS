@@ -139,7 +139,6 @@ class FriendList extends Component {
                 </Modal>
 
                 <FriendListView 
-                    
                     AddFriendDetail={() => this.gotoAddFriendDetail()}
                     TeamList={() => this.gotoTeamList()}
                     friend={this.state.datafriendlist} />

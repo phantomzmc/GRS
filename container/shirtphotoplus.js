@@ -32,6 +32,21 @@ class ShirtPhotoPlus extends Component {
             })
         }
     }
+    savedataRegis(){
+        let datadis = this.props.event.distanceEvent
+        let data = {
+            RunnerID: this.props.userprofile.userprofile.RunnerID,
+            CourseID: datadis.id,
+            JerseySize: this.state.shirt,
+            PhotoPlusService: datadis.statusPhotoPlus,
+            PromoCode: "",
+            CourseFee: datadis.price,
+        }
+        console.log(data)
+        this.props.addFriendInEvent(data)
+
+    }
+   
     goNextState = () => {
         console.log("checkPromo")
         if (this.props.event.event.PromoCodeStatus == 1 && this.props.event.event.PromoCodeRequired == 1) {
@@ -59,6 +74,7 @@ class ShirtPhotoPlus extends Component {
             this.props.setStatusRegis(this.state.statusRegis)
             this.props.navigation.navigate('AddressLayout')
         }
+        this.savedataRegis()
     }
     goPreveState = () => {
         this.props.navigation.navigate('ControlDistance')
@@ -207,7 +223,13 @@ const mapDispatchToProps = dispatch => {
                 type : 'setStatusRegis',
                 payload : regis
             })
-        }
+        },
+        addFriendInEvent: (dataFriend) => {
+            dispatch({
+                type: 'addFriendInEvent',
+                payload: dataFriend
+            })
+        },
     }
 }
 const mapStateToProps = (state) => {
@@ -216,7 +238,8 @@ const mapStateToProps = (state) => {
         creditcard: state.creditcard,
         shirtphoto: state.shirtphoto,
         photoplus: state.photoplus,
-        total: state.total
+        total: state.total,
+        userprofile : state.userprofile
     };
 };
 
