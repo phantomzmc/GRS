@@ -165,9 +165,17 @@ const creditcard = (state = credit, action) => {
     }
     case "setStatusPayment": {
       state.statusPayment = action.payload
+      break;
+
     }
     case "setCharge": {
       state.charge = action.payload
+      break;
+
+    }
+    case "setTypePayment" : {
+      state.typePayment = action.payload
+      break;
     }
     default:
       break;

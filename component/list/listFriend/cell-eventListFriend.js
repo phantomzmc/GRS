@@ -25,13 +25,11 @@ class CellEventListFriend extends Component {
         console.log(this.state.item)
     }
     addFriendEvent = (item) => {
-        let { datafriend } = this.state
         datafriendRegis.push(item)
         console.log(datafriendRegis)
         this.props.getAddFriend(datafriendRegis)
     }
     removeFriendEvent = (index) => {
-        let { datafriend } = this.state
         console.log(index)
         datafriendRegis.splice(index, 1)
         console.log(datafriendRegis)

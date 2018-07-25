@@ -41,17 +41,20 @@ class PhotoPlus extends Component {
 
     sumPrice = () => {
         let { value, priceEvent, pricePhotoPlus } = this.state
-        if (value == true) {
+        if (value === true) {
             const sum = pricePhotoPlus + priceEvent
             console.log(sum)
             this.setState({ totalPrice: sum })
             console.log(this.state.totalPrice)
             dataPrice.push(parseFloat(pricePhotoPlus))
-            this.props.setPhotoPlus("1")
-        }
-        else if (value == false) {
-            this.setState({ totalPrice: this.state.priceEvent })
             this.props.setPhotoPlus("0")
+
+        }
+        else if (value === false) {
+            this.setState({ totalPrice: this.state.priceEvent })
+            dataPrice.push(parseFloat(priceEvent))
+            this.props.setPhotoPlus("1")
+
         }
     }
 

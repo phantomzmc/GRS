@@ -10,7 +10,7 @@ import req from '../config/uri_req'
 import api_key from '../config/api_key'
 import TotalRegister from '../component/items/totalRegister'
 import DetailRegister from '../component/items/detailRegister'
-import HeaderTeam from '../component/items/headerTeam'
+import HeaderInvoice from '../component/items/headerInvoice'
 import CrargeLoading from '../component/modal/chargePayment_load'
 import ChargePaymentLoad from '../component/modal/chargePayment_load';
 import ChargeError from '../component/modal/chargePayment_error'
@@ -40,7 +40,9 @@ class TotalLayout extends Component {
         setTimeout(() => {
             if (this.state.modalLoading == true) {
                 this.setState({ modalLoading: false, layout_invoice: true })
-                this.captureScreenFunction()
+                // setTimeout(()=>{
+                //     this.captureScreenFunction()
+                // },1500)
             }
         }, 2000)
     }
@@ -54,14 +56,14 @@ class TotalLayout extends Component {
         let data = ({
             params: [
                 { name: "RunnerID", value: userprofile.userprofile.RunnerID },
-                { name: "PaymentType", value: 1 },
+                { name: "PaymentType", value: creditcard.typePayment },
                 { name: "PaymentStatus", value: 2 },
                 { name: "PaymentSlip", value: "" },
                 { name: "IPAddress", value: network.ip },
                 { name: "Longitude", value: network.long },
                 { name: "Latitude", value: network.lat },
-                { name: "TransactionID", value: "aSdFgHjKl" },
-                { name: "ChargesID", value: "" },
+                { name: "TransactionID", value: "" },
+                { name: "ChargesID", value: creditcard.charge.id },
                 { name: "NumberOfRunner", value: 1 },
                 { name: "PlaceItemID", value: choiceSend.choiceSend.placeItemID },
                 { name: "BillingInfo", value: "{\"FirstName\":\"" + address.user.fullname + "\",\"LastName\":\"" + address.user.lastname + "\",\"Address\":\"" + address.user.adress + "\",\"SubDistric\":\"" + address.user.subdistric + "\",\"Distric\":\"" + address.user.distric + "\",\"Province\":\"" + address.user.province + "\",\"PostCode\":\"" + address.user.postcode + "\",\"Country\":\"Thailand\",\"Phone\":\"" + address.user.tel + "\",\"Notes\":\"" + address.user.note + "\"}" },
@@ -139,9 +141,10 @@ class TotalLayout extends Component {
     render() {
         return (
             <Container>
-                <HeaderTeam
+                <HeaderInvoice
                     title={this.state.title}
-                    goback={this.gotoBack.bind(this)} />
+                    goback={this.gotoBack.bind(this)}
+                    onSave={this.captureScreenFunction.bind(this)} />
                 <StatusBar
                     barStyle="light-content"
                     hidden={false}

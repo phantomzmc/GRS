@@ -14,7 +14,7 @@ class PhotoPlus extends Component {
     constructor() {
         super();
         this.state = {
-            value: true,
+            value: false,
             pricePhotoPlus: null,
             textSwitch: "",
             // priceEvent: this.props.event.distanceEvent.price,
@@ -47,6 +47,8 @@ class PhotoPlus extends Component {
         }
         else if (value == false) {
             this.setState({ totalPrice: this.state.priceEvent })
+            console.log(this.state.totalPrice)
+
         }
     }
 

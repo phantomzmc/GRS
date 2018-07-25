@@ -29,10 +29,13 @@ class ControlPayment extends Component {
         console.log(credit)
         this.props.setTotalRegister(sum)
         this.props.setCreditPrice(credit)
+        this.props.setTypePayment(1)
     }
     sumTranfer(){
         this.props.setTotalRegister(this.props.event.totalRegister)
         this.props.setCreditPrice(0)
+        this.props.setTypePayment(2)
+
     }
     gotoPayment = () => {
         this.sumCredit()
@@ -108,6 +111,12 @@ const mapDispatchToProps = dispatch => {
             dispatch({
                 type : "setCreditPrice",
                 payload : credit
+            })
+        },
+        setTypePayment : (type) => {
+            dispatch({
+                type : "setTypePayment",
+                payload : type
             })
         }
     }

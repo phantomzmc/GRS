@@ -90,7 +90,7 @@ class HeaderProfile extends Component {
                 console.log(this.state.ImageSource)
                 console.log(response)
                 this.props.setPictureProfile(response)
-                this.upimageToServe(response)
+                // this.upimageToServe(response)
             }
         });
     }
