@@ -9,6 +9,7 @@ import dataPrice from '../list/listevent/dataPrice'
 import dataFriend from '../list/listFriend/dataFriend';
 import dataShirts from '../list/listShirt/dataShirt'
 import dataFriendFull from '../list/listFriend/dataFriend-full'
+import dataFriendRegis from '../list/listFriend/dataFriend-regis'
 import { connect } from 'react-redux';
 
 class CradFriendDistance extends Component {
@@ -39,14 +40,35 @@ class CradFriendDistance extends Component {
 
         }
     }
+    componentWillMount(){
+        clearInterval(this._interval);
+    }
     componentDidMount() {
         let dis = this.props.distance
-        this.setState({ items: dis, name: dis.RunnerID, firstname: dis.FirstName, lastname: dis.LastName, index: this.props.idkey })
-        console.log(this.state.name)
-        console.log("key : " + this.props.idkey)
+        this._interval = setInterval(() => {
+            this.setState({ items: dis, name: dis.RunnerID, firstname: dis.FirstName, lastname: dis.LastName, index: this.props.idkey })
+        }, 500);
     }
-    onPressDeleteItem() {
-        this.props.delete()
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.items != dataFriendRegis) {
+            console.log("update")
+            this.setState({ items : dataFriendRegis})
+        }
+    }
+    // componentDidMount() {
+    //     console.log(dataFriendRegis)
+    //     let dis = this.props.distance
+    //     this.setState({ items: dis, name: dis.RunnerID, firstname: dis.FirstName, lastname: dis.LastName, index: this.props.idkey })
+    //     console.log(this.state.items)
+    //     console.log("key : " + this.props.idkey)
+    // }
+    onPressDeleteItem(index) {
+        this.props.delete(index)
+        console.log(index)
+        // dataFriendRegis.splice(index, 1)
+        // console.log(dataFriendRegis)
+        // this.props.setFriendRegister(dataFriendRegis)
+        
     }
     sumPrice() {
         const add = (a, b) =>
@@ -113,7 +135,7 @@ class CradFriendDistance extends Component {
         this.props.addFullFriendInEvent(dataFriendFull)
     }
     photoPlusSwitch = (photoplus) => {
-        let { index} = this.state
+        let { index } = this.state
         console.log(photoplus)
         dataFriend[index].PhotoPlusService = photoplus
         dataFriendFull[index].PhotoPlusService = photoplus
@@ -150,18 +172,19 @@ class CradFriendDistance extends Component {
                         <Thumbnail
                             source={require("../icon/boy.png")}
                         />
-                        <Body style={{ paddingHorizontal: 20 }}>
-                            <Text style={{ fontFamily: "kanit" }}>{items.FirstName} - {items.LastName}</Text>
-                            <Text note style={{ fontFamily: "kanit" }}>{items.gen} -  {items.age}</Text>
-                        </Body>
                     </Left>
-                    {/* <Right>
+                    <Body style={{ paddingHorizontal: 20, justifyContent: "space-around" }}>
+                        <Text style={{ fontFamily: "kanit" }}>{items.FirstName} {items.LastName}</Text>
+                        <Text note style={{ fontFamily: "kanit" }}>{items.gen} -  {items.age}</Text>
+
+                    </Body>
+                    <Right>
                         <View style={{ flexDirection: 'row' }}>
-                            <TouchableOpacity onPress={this.onPressDeleteItem.bind(this)}>
+                            <TouchableOpacity onPress={() => this.onPressDeleteItem(this.props.idkey)}>
                                 <Icon name="ios-trash-outline" style={{ color: 'red' }} />
                             </TouchableOpacity>
                         </View>
-                    </Right> */}
+                    </Right>
                 </CardItem>
                 <CardItem>
                     <Body>
@@ -274,6 +297,12 @@ const mapDispatchToProps = dispatch => {
             dispatch({
                 type: "setTotal",
                 payload: sum
+            })
+        },
+        setFriendRegister : (dataFriend) => {
+            dispatch({
+                type : "setFriendRegister",
+                payload : dataFriend
             })
         }
     }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, FlatList, Alert, TouchableOpacity, ListView, Icon } from 'react-native';
+import { View, Text, StyleSheet, Image, RefreshControl, Alert, TouchableOpacity, ListView, Icon } from 'react-native';
 import { connect } from 'react-redux'
 import axios from 'axios'
 import { SwipeListView } from 'react-native-swipe-list-view';
@@ -77,8 +77,23 @@ class FriendListView extends Component {
     }
     onRefesh = () => {
         this.componentDidMount()
+    }
+    _refreshControl() {
+        console.log("_refreshControl")
+        return (
+            <RefreshControl
+                refreshing={this.state.isLoading}
+                onRefresh={() => this._refreshListView()} />
+        )
+    }
 
+    _refreshListView() {
+        console.log("_refreshListView")
 
+        //Start Rendering Spinner
+        this.setState({ isLoading: true })
+        this.getFriend()
+        this.setState({ isLoading: false }) //Stop Rendering Spinner
     }
     alertShow(item) {
         console.log(item)
@@ -112,6 +127,7 @@ class FriendListView extends Component {
                 }}>
                 <SwipeListView
                     useFlatList
+                    refreshControl={this._refreshControl()}
                     data={this.state.dataSource}
                     refreshing={this.state.isRefesh}
                     onRefresh={this.onRefesh}

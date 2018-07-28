@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ActivityIndicator, FlatList } from 'react-native';
+import { View, ActivityIndicator, FlatList,RefreshControl } from 'react-native';
 import { connect } from 'react-redux'
 import axios from 'axios'
 import CellEventListFriend from './cell-eventListFriend'
@@ -14,16 +14,17 @@ class EventListFriend extends Component {
         super(state)
         this.state = {
             datafriend: [],
-            isRefesh: false,
+            isRefesh: true,
         }
         this.getFriend = this.getFriend.bind(this)
     }
-    componentDidMount(){
+    componentDidMount() {
         this.getFriend()
-        setTimeout(()=>{
+        setTimeout(() => {
             this.getFriend()
             console.log("timeset")
-        },500)
+            this.setState({ isRefesh: false })
+        }, 500)
     }
     // autoRefresh(){
     //     this.setTimeout(() => {
@@ -49,18 +50,37 @@ class EventListFriend extends Component {
                 this.setState({ isLoading: false, dataSource: response.data });
                 console.log(this.state.dataSource)
             }).catch((error) => {
-                this.setState({ isLoading : true})
+                this.setState({ isLoading: true })
                 // this.setState({ isModalVisibleError: !this.state.isModalVisibleError })
                 // console.error(error);
             });
     }
     addFriendEvent = (datafriend) => {
         this.props.setFriendRegister(datafriend)
+        this._refreshControl()
     }
-    
+
     onRefesh = () => {
         this.componentDidMount()
     }
+    _refreshControl() {
+        console.log("_refreshControl")
+        return (
+            <RefreshControl
+                refreshing={this.state.isLoading}
+                onRefresh={() => this._refreshListView()} />
+        )
+    }
+
+    _refreshListView() {
+        console.log("_refreshListView")
+
+        //Start Rendering Spinner
+        this.setState({ isLoading: true })
+        this.getFriend()
+        this.setState({ isLoading: false }) //Stop Rendering Spinner
+    }
+
     render() {
         let { selected, favorite } = this.state
         if (this.state.isLoading) {
@@ -82,10 +102,11 @@ class EventListFriend extends Component {
                 }}>
                 <FlatList
                     horizontal
+                    refreshControl={this._refreshControl()}
                     data={this.state.dataSource}
                     refreshing={this.state.isRefesh}
                     onRefresh={this.onRefesh}
-                    renderItem={({ item,index }) =>
+                    renderItem={({ item, index }) =>
                         <CellEventListFriend
                             items={item}
                             idkey={index}

@@ -25,7 +25,7 @@ class ModalAddFriend extends Component {
         let { newitem } = this.state
         return (
             <View style={styles.modalContainer}>
-                <Thumbnail source={{ uri: "https://scontent.fbkk9-2.fna.fbcdn.net/v/t1.0-1/p320x320/31454067_1642595545789324_6450015206967595916_n.jpg?_nc_cat=0&oh=c1bc77925e6ad8268667693dae3da916&oe=5B86F157" }} />
+                <Thumbnail source={require("../icon/boy.png")} />
                 <View style={{ paddingVertical: 10, alignItems: "center" }}>
                     <Text style={{ fontSize: 18, fontFamily: "kanit" }}>{newitem.FirstName} - {newitem.LastName}</Text>
                     <Text style={{ fontSize: 16, fontFamily: "kanit" }}>{newitem.Gender} - {newitem.NickName}</Text>

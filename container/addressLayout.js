@@ -110,7 +110,7 @@ class AddressLayout extends Component {
             checked: false,
             checked2: true
         })
-        this.props.setSendChoice({ choice: 1, dataChoice: "ส่งไปรษณีย์", priceCDO: parseFloat(65.0), placeItemID: 0, detail: this.state.postPrice })
+        this.props.setSendChoice({ choice: 1, dataChoice: "ส่งไปรษณีย์", priceCDO: this.state.priceCDO, placeItemID: 0, detail: this.state.postPrice })
         this.totalPriceRegis()
     }
     totalPriceRegis = () => {

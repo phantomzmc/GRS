@@ -23,10 +23,11 @@ class RegisterDistance extends Component {
                 distanceName: "",
                 distance: "",
                 price: ""
-            }
+            },
         }
         // this.gotoShirtPhotoPlus = this.gotoShirtPhotoPlus.bind(this)
     }
+
     nextState = () => {
         this.props.navigation.navigate("ShirtPhotoPlus")
     }
@@ -46,6 +47,7 @@ class RegisterDistance extends Component {
                         โปรดเลือกระยะทาง
                      </Text>
                     <ListDistance onGotoshirt={this.gotoShirtPhotoPlus.bind(this)} />
+
                 </View>
             </ScrollView>
         );
@@ -65,10 +67,10 @@ const mapDisPatchToProps = (dispatch) => {
                 payload: totalPrice
             })
         },
-        setTotalRegister : (total) => {
+        setTotalRegister: (total) => {
             dispatch({
-                type : "setTotalRegister",
-                payload : total
+                type: "setTotalRegister",
+                payload: total
             })
         },
     }

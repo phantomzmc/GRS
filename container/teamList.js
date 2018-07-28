@@ -157,12 +157,10 @@ class TeamList extends Component {
                                                 <Icon name="ios-people" />
                                             </Item>
                                         </Header>
-                                        <View>
-                                            <EventListFriend
-                                                friend={datafriend}
-                                            />
+                                        <EventListFriend
+                                            friend={datafriend}
+                                        />
 
-                                        </View>
                                         {/* <Tabs>
                                             <Tab heading={<TabHeading><Icon name="ios-people" /></TabHeading>}>
                                                 <EventListFriend friend={datafriend} />
@@ -262,4 +260,4 @@ const styles = StyleSheet.create({
     },
 
 })
-export default connect(mapStateToProps,mapDispatchToProps)(TeamList);
+export default connect(mapStateToProps, mapDispatchToProps)(TeamList);

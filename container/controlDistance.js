@@ -21,14 +21,14 @@ class ControlDistance extends Component {
         this.state = {
             title: "ลงทะเบียนวิ่ง",
             pageNumber: 0,
-            login: 1
+            login: 1,
+            register: false
         }
         this.goAddTeam = this.goAddTeam.bind(this)
     }
     componentDidMount() {
         // this.fetchRegisEvent()
         setTimeout(() => {
-            console.log('I do not leak!');
             this.fetchRegisEvent()
         }, 1000);
     }
@@ -61,12 +61,22 @@ class ControlDistance extends Component {
     }
     checkRegisEvent(data) {
         if (data.RegisterStatus == "1") {
+            this.setState({ register: false })
             Alert.alert("มีการสมัครลงทะเบียนแล้ว", "ผู้ใช้ได้ทำการสมัครรายการ " + this.props.event.event.EventName + " แล้ว", [
                 {
-                    text: "ตกลง",
+                    text: "ไปยังรายการวิ่ง",
                     onPress: () => this.goListEvent()
                 },
-            ], { cancelable: false })
+                {
+                    text: "ลงทะเบียนแบบกลุ่ม",
+                    onPress: () => this.goAddTeam()
+                },
+            ], { cancelable: true })
+
+        }
+        else if (data.RegisterStatus == "0") {
+            this.setState({ register: true })
+
         }
     }
     goListEvent = () => {
@@ -77,9 +87,17 @@ class ControlDistance extends Component {
         this.props.setLogin(this.state.login)
         this.props.navigation.navigate("Login")
     }
-    goNextState = () => {
-        this.props.navigation.navigate('ShirtPhotoPlus')
+    checkDistanceRegis() {
+        goNextState = () => {
+            if (this.state.register == true) {
+                this.props.navigation.navigate('ShirtPhotoPlus')
+            }
+            else if (this.state.register == false) {
+                console.log("flase")
+            }
+        }
     }
+
     goSingleLogin = () => {
         this.props.navigation.navigate('SingleLogin')
     }
@@ -117,7 +135,11 @@ class ControlDistance extends Component {
                     tabBarUnderlineStyle={{ backgroundColor: "#FC561F", height: 2 }}>
                     <Tab
                         heading={<TabHeading><Text style={styles.textLabel}>ลงทะเบียนแบบเดียว</Text></TabHeading>}>
-                        <RegisterDistance nextState={this.goNextState.bind(this)} />
+                        <RegisterDistance
+                            nextState={this.checkDistanceRegis.bind(this)}
+                        />
+
+
                     </Tab>
                     <Tab
                         heading={<TabHeading><Text style={styles.textLabel} onPress={() => this.goAddTeam()}>ลงทะเบียนแบบกลุ่ม</Text></TabHeading>}

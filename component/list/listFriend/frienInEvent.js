@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { View, FlatList, StyleSheet, Alert, TouchableOpacity, Image, ScrollView } from 'react-native';
+import { View, FlatList, StyleSheet, Alert, ActivityIndicator, Image, RefreshControl } from 'react-native';
 import { connect } from "react-redux";
 import CardFriendDistance from '../../items/cardFriendDistance'
+import dataFriend from './dataFriend';
 
 
 class FriendInEvent extends Component {
@@ -10,28 +11,25 @@ class FriendInEvent extends Component {
         this.state = {
             index: [],
             deleteCellKey: null,
-            friendRegis: []
+            friendRegis: [],
+            isLoading: false,
+
         }
     }
     componentDidMount() {
         this.setState({
-            dataSource: this.props.friendlist.friendRegis
+            dataSource: this.props.friendlist.friendRegis,
         });
-    }
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.container != this.state.container) {
-            this.setState({ container: !this.state.container })
-            console.log("nextProps")
-        }
     }
     keyExtractor = (item, index) => {
         return index
     }
-    deleteItem() {
-        let { index, dataSource } = this.state
+    deleteItem(index) {
+        let { dataSource} = this.state
+        console.log("index : " + this.state.dataSource[index].FirstName)
         Alert.alert(
             'ลบรายชื่อเพื่อน',
-            'คุณต้องการลบ ' + dataSource.gen + '',
+            'คุณต้องการลบ ' + dataSource[index].FirstName + '',
             [
                 { text: 'ยกเลิก' },
                 {
@@ -39,31 +37,55 @@ class FriendInEvent extends Component {
                         dataSource.splice(index, 1)
                         console.log("delete")
                         console.log(dataSource)
-                        this.refreshFlatlist()
+                        this.props.setFriendRegister(dataSource)
+                        this._refreshListView()
+                        
                     }
                 }
             ], { cancelable: true }
         )
     }
-    refreshFlatlist = (deleteKey) => {
-        let { deleteCellKey } = this.state
-        this.setState((prevState) => {
-            return {
-                deleteCellKey: deleteKey
-            }
-        })
+    _refreshControl() {
+        console.log("_refreshControl")
+        return (
+            <RefreshControl
+                refreshing={this.state.isLoading}
+                onRefresh={() => this._refreshListView()} />
+        )
     }
 
+    _refreshListView() {
+        console.log("_refreshListView")
+
+        //Start Rendering Spinner
+        this.setState({ isLoading: true })
+        this.setState({ isLoading: false }) //Stop Rendering Spinner
+    }
+    
+
     render() {
+        if (this.state.isLoading) {
+            return (
+                <View
+                    style={{
+                        flex: 1,
+                        padding: 20
+                    }}>
+                    <ActivityIndicator />
+                </View>
+            )
+        }
         return (
             <View>
                 <FlatList
                     data={this.state.dataSource}
-                    refreshing={true}
+                    refreshControl={this._refreshControl()}
+                    refreshing={this.state.isLoading}
+                    onRefresh={this.onRefesh.bind(this)}
                     keyExtractor={(item, index) => item.key}
                     renderItem={({ item, index }) =>
                         <View style={styles.container}>
-                            <CardFriendDistance 
+                            <CardFriendDistance
                                 distance={item}
                                 idkey={index}
                                 delete={this.deleteItem.bind(this)}
@@ -85,6 +107,12 @@ const mapDispatchToProps = (dispatch) => {
             dispatch({
                 type: 'addFriendInEvent',
                 payload: regisFriend
+            })
+        },
+        setFriendRegister : (dataFriend) => {
+            dispatch({
+                type : 'setFriendRegister',
+                payload : dataFriend
             })
         }
     }

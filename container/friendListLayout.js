@@ -70,7 +70,7 @@ class FriendList extends Component {
             .then((response) => {
                 this.setState({ isLoading: false, addStatus: response.data });
                 console.log(this.state.addStatus[0])
-                this.componentDidMount()
+                // this.componentDidMount()
             }).catch((error) => {
                 this.setState({ isModalVisibleError: !this.state.isModalVisibleError })
                 // console.error(error);
