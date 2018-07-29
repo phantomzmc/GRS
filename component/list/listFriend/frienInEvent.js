@@ -21,11 +21,8 @@ class FriendInEvent extends Component {
             dataSource: this.props.friendlist.friendRegis,
         });
     }
-    keyExtractor = (item, index) => {
-        return index
-    }
     deleteItem(index) {
-        let { dataSource} = this.state
+        let { dataSource } = this.state
         console.log("index : " + this.state.dataSource[index].FirstName)
         Alert.alert(
             'ลบรายชื่อเพื่อน',
@@ -39,7 +36,7 @@ class FriendInEvent extends Component {
                         console.log(dataSource)
                         this.props.setFriendRegister(dataSource)
                         this._refreshListView()
-                        
+
                     }
                 }
             ], { cancelable: true }
@@ -61,7 +58,7 @@ class FriendInEvent extends Component {
         this.setState({ isLoading: true })
         this.setState({ isLoading: false }) //Stop Rendering Spinner
     }
-    
+
 
     render() {
         if (this.state.isLoading) {
@@ -81,7 +78,6 @@ class FriendInEvent extends Component {
                     data={this.state.dataSource}
                     refreshControl={this._refreshControl()}
                     refreshing={this.state.isLoading}
-                    onRefresh={this.onRefesh.bind(this)}
                     keyExtractor={(item, index) => item.key}
                     renderItem={({ item, index }) =>
                         <View style={styles.container}>
@@ -109,10 +105,10 @@ const mapDispatchToProps = (dispatch) => {
                 payload: regisFriend
             })
         },
-        setFriendRegister : (dataFriend) => {
+        setFriendRegister: (dataFriend) => {
             dispatch({
-                type : 'setFriendRegister',
-                payload : dataFriend
+                type: 'setFriendRegister',
+                payload: dataFriend
             })
         }
     }

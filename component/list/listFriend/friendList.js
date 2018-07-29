@@ -79,7 +79,7 @@ class FriendListView extends Component {
         this.componentDidMount()
     }
     _refreshControl() {
-        console.log("_refreshControl")
+        // console.log("_refreshControl")
         return (
             <RefreshControl
                 refreshing={this.state.isLoading}
@@ -88,7 +88,7 @@ class FriendListView extends Component {
     }
 
     _refreshListView() {
-        console.log("_refreshListView")
+        // console.log("_refreshListView")
 
         //Start Rendering Spinner
         this.setState({ isLoading: true })

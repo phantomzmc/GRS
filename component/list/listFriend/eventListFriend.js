@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ActivityIndicator, FlatList,RefreshControl } from 'react-native';
+import { View, ActivityIndicator, FlatList, RefreshControl } from 'react-native';
 import { connect } from 'react-redux'
 import axios from 'axios'
 import CellEventListFriend from './cell-eventListFriend'
@@ -14,7 +14,7 @@ class EventListFriend extends Component {
         super(state)
         this.state = {
             datafriend: [],
-            isRefesh: true,
+            isRefesh: false,
         }
         this.getFriend = this.getFriend.bind(this)
     }
@@ -23,7 +23,6 @@ class EventListFriend extends Component {
         setTimeout(() => {
             this.getFriend()
             console.log("timeset")
-            this.setState({ isRefesh: false })
         }, 500)
     }
     // autoRefresh(){
@@ -57,28 +56,20 @@ class EventListFriend extends Component {
     }
     addFriendEvent = (datafriend) => {
         this.props.setFriendRegister(datafriend)
-        this._refreshControl()
-    }
-
-    onRefesh = () => {
-        this.componentDidMount()
     }
     _refreshControl() {
-        console.log("_refreshControl")
+        this.getFriend()
         return (
             <RefreshControl
                 refreshing={this.state.isLoading}
                 onRefresh={() => this._refreshListView()} />
         )
     }
-
     _refreshListView() {
-        console.log("_refreshListView")
-
-        //Start Rendering Spinner
         this.setState({ isLoading: true })
-        this.getFriend()
-        this.setState({ isLoading: false }) //Stop Rendering Spinner
+        console.log("_refreshListView")
+        this.setState({ isLoading: false })
+
     }
 
     render() {
@@ -104,8 +95,6 @@ class EventListFriend extends Component {
                     horizontal
                     refreshControl={this._refreshControl()}
                     data={this.state.dataSource}
-                    refreshing={this.state.isRefesh}
-                    onRefresh={this.onRefesh}
                     renderItem={({ item, index }) =>
                         <CellEventListFriend
                             items={item}
@@ -113,6 +102,7 @@ class EventListFriend extends Component {
                             getAddFriend={this.addFriendEvent.bind(this)}
                         />
                     }
+
                     keyExtractor={(item, index) => index} />
             </View >
         );

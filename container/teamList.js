@@ -12,6 +12,8 @@ import HeaderProfile from '../component/items/header_profile.js'
 import EventListFriend from '../component/list/listFriend/eventListFriend'
 import ModalAddFriend from '../component/modal/addFriend'
 import ErrorModalAddFriend from '../component/modal/addFriend_error'
+import AddError from '../component/modal/addStatus_error'
+import AddStatus from '../component/modal/addStatus'
 import req from '../config/uri_req'
 import api_key from '../config/api_key'
 
@@ -26,6 +28,8 @@ class TeamList extends Component {
             title: "ลงทะเบียนแบบกลุ่ม",
             isModalVisible: false,
             isModalVisibleError: false,
+            isAddStatusError: false,
+            isAddStatus: false,
             pageNumber: 0,
             activeTab: 0,
             searchText: "",
@@ -60,31 +64,45 @@ class TeamList extends Component {
             });
 
     }
-    addFriend = (newitem) => {
+    _addFriend(newitem) {
         this.state.datafriendlist.push(newitem)
         console.log(newitem)
-        this.props.setFriendRegister(this.state.datafriendlist)
-        // let data = ({
-        //     params: [
-        //         { name: "RunnerID", value: this.props.userprofile.userprofile.RunnerID },
-        //         { name: "FriendID", value: newitem.RunnerID }
-        //     ]
-        // })
-        // axios.post(uri2, data, {
-        //     headers: {
-        //         "X-DreamFactory-API-Key": api_key,
-        //         "X-DreamFactory-Session-Token": this.props.token.token,
-        //     },
-        //     responseType: 'json'
-        // })
-        //     .then((response) => {
-        //         this.setState({ isLoading: false, addStatus: response.data });
-        //         console.log(this.state.addStatus[0])
-        //     }).catch((error) => {
-        //         console.error(error)
-        //         this.props.navigation.navigate('EventList')
-        //     });
+        // this.props.setFriendRegister(this.state.datafriendlist)
 
+        let data = ({
+            params: [
+                { name: "RunnerID", value: this.props.userprofile.userprofile.RunnerID },
+                { name: "FriendID", value: newitem.RunnerID }
+            ]
+        })
+        axios.post(uri2, data, {
+            headers: {
+                "X-DreamFactory-API-Key": apikey,
+                "X-DreamFactory-Session-Token": this.props.token.token,
+            },
+            responseType: 'json'
+        })
+            .then((response) => {
+                this.setState({ isLoading: false, addStatus: response.data });
+                console.log(this.state.addStatus[0])
+                this.checkAddFriendStatus()
+            }).catch((error) => {
+                console.error(error)
+                // this.props.navigation.navigate('EventList')
+            });
+
+    }
+    checkAddFriendStatus() {
+        console.log("checkAddFriendStatus")
+        if (this.state.addStatus[0].AddStatus == "0") {
+            this.setState({ isAddStatusError: true })
+        }
+        else if (this.state.addStatus[0].AddStatus == "1") {
+            this.setState({ isAddStatus: true })
+            setTimeout(() => {
+                this.setState({ isAddStatus: false })
+            }, 3000)
+        }
     }
     checkRegisStatus = () => {
         if (this.state.friendOutput[0] == undefined || this.state.friendOutput[0] == null) {
@@ -98,7 +116,10 @@ class TeamList extends Component {
         this.setState({ isModalVisible: !this.state.isModalVisible })
     }
     hideModalError = () => {
-        this.setState({ isModalVisibleError: !this.state.isModalVisibleError })
+        this.setState({
+            isModalVisibleError: !this.state.isModalVisibleError,
+            isAddStatusError: false
+        })
     }
 
     gotoTeamList = () => {
@@ -181,7 +202,7 @@ class TeamList extends Component {
                                                 toggleModal={this.hideModal}
                                                 outputfriend={this.state.friendOutput[0]}
                                                 friend={datafriend}
-                                                getAddFriend={this.addFriend.bind(this)}
+                                                getAddFriend={this._addFriend.bind(this)}
                                             />
                                         </Modal>
                                         <Modal isVisible={this.state.isModalVisibleError}>
@@ -189,6 +210,14 @@ class TeamList extends Component {
                                                 toggleModal={this.hideModalError}
                                                 goRegister={this.gotoRegister.bind(this)}
                                             />
+                                        </Modal>
+                                        <Modal isVisible={this.state.isAddStatusError}>
+                                            <AddError
+                                                toggleModal={this.hideModalError}
+                                            />
+                                        </Modal>
+                                        <Modal isVisible={this.state.isAddStatus}>
+                                            <AddStatus />
                                         </Modal>
 
                                     </View>
