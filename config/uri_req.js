@@ -28,6 +28,6 @@ export default
         },
         {
             url_mailgun: "https://api.mailgun.net/v3/mg.guurun.com/messages",
-            url_imgprofile : "http://192.168.1.32:60/assets/img/uploads/"
+            url_imgprofile : "https://upload.i-bitz.co.th/upload/"
         }
     ]

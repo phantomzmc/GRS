@@ -27,6 +27,7 @@ class ListDistance extends Component {
                 price: ""
             },
             pic: img,
+            isLoading : false
         }
     }
 
@@ -53,7 +54,10 @@ class ListDistance extends Component {
             .then((responseJson) => {
                 this.setState({ isLoading: false, dataSource: responseJson.data })
             }).catch((error) => {
-                console.error(error);
+                this.setState({ isLoading : true})
+                setTimeout(()=> {
+                    this.componentDidMount()
+                },2000)
             });
     }
     shirtPhotoPlus(item) {

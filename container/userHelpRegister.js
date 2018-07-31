@@ -67,7 +67,7 @@ class UserHelpRegister extends Component {
     let country = this.props.profile.address.country
     let postnumber = this.props.profile.address.postNumber
     let gen = this.props.profile.profile.gen
-    let picprofile = this.props.userprofile.datapic.fileName
+    let picprofile = this.props.userprofile.imgprofile
 
     let uri = req[0].uspCreateAccount
     let apikey = api_key[0].api_key

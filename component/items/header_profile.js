@@ -19,13 +19,16 @@ class HeaderProfile extends Component {
             age: "อายุ",
             eventname: "",
             user: [],
-            ImageSource: null
+            ImageSource: ""
         }
     }
-    componentWillMount(){
-        this.setState({
-            ImageSource: this.props.userprofile.datapic
-        })
+    componentDidMount() {
+        setTimeout(() => {
+            this.setState({
+                ImageSource: this.props.userprofile.userprofile.PicProfile
+            })
+        }, 2000)
+
         console.log(this.props.userprofile.datapic)
         let uri = req[0].uspGetUserProfile
         let apikey = api_key[0].api_key
@@ -84,18 +87,17 @@ class HeaderProfile extends Component {
                 // You can also display the image using data:
                 // let source = { uri: 'data:image/jpeg;base64,' + response.data };
                 this.setState({
-                    ImageSource: source,
                     statusButton: true
                 });
                 console.log(this.state.ImageSource)
                 console.log(response)
                 this.props.setPictureProfile(response)
-                // this.upimageToServe(response)
+                this.upimageToServe(response)
             }
         });
     }
-    
-    upimageToServe(response) {  
+
+    upimageToServe(response) {
         var photo = {
             uri: response.uri,
             type: 'image/jpeg',
@@ -108,19 +110,23 @@ class HeaderProfile extends Component {
 
         let uri = req[1].url_imgprofile
         let data = form
-        axios.post("http://192.168.1.32:60/assets/img/uploads/", form, {
+        axios.post(uri, form, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'multipart/form-data',
+                'Cache-Control': 'no-cache'
             },
             responseType: 'json'
         })
             .then((responseJson) => {
-                this.setState({ status: responseJson.data });
+                this.setState({ imagesProfile: responseJson.data.files[0] ,ImageSource : responseJson.config.data._parts[0][1]});
                 console.log(responseJson)
+                console.log(responseJson.config.data._parts[0])
+                console.log(this.state.imagesProfile)
+                this.props.setImageProfile(this.state.imagesProfile)
 
             }).catch((error) => {
-                console.error(error)
+                // console.error(error)
             });
     }
 
@@ -139,12 +145,12 @@ class HeaderProfile extends Component {
                 <View style={styles.container}>
                     <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)} style={styles.container}>
                         <View style={styles.imgContainer}>
-                            {this.state.ImageSource === null ?
+                            {this.state.ImageSource == "" ?
                                 <View style={styles.imgAvatar} >
                                     <Icon active name="user-circle-o" type="FontAwesome" size={10} />
                                     <Text style={{ fontFamily: "kanit", fontSize: 12, paddingTop: 10 }}>เพิ่มรูปภาพ</Text>
                                 </View> :
-                                <Image style={styles.imgAvatar} source={this.state.ImageSource} />
+                                <Image style={styles.imgAvatar} source={{ uri: this.state.ImageSource }} />
                             }
                         </View>
                     </TouchableOpacity>
@@ -235,6 +241,12 @@ const mapDispatchToprops = (dispatch) => {
             dispatch({
                 type: "setPictureProfile",
                 payload: picprofile
+            })
+        },
+        setImageProfile: (imgProfile) => {
+            dispatch({
+                type: "setImageProfile",
+                payload: imgProfile
             })
         }
     }

@@ -14,58 +14,22 @@ class EventListFriend extends Component {
         super(state)
         this.state = {
             datafriend: [],
-            isRefesh: false,
+            isLoading: false,
         }
-        this.getFriend = this.getFriend.bind(this)
     }
-    componentDidMount() {
-        this.getFriend()
-        setTimeout(() => {
-            this.getFriend()
-            console.log("timeset")
-        }, 500)
-    }
-    // autoRefresh(){
-    //     this.setTimeout(() => {
-    //         this.getFriend()
-    //     }, 2000);
-    // }
-    getFriend() {
-        let data = ({
-            params: [
-                { name: "RunnerID", value: this.props.userprofile.userprofile.RunnerID },
-                { name: "PageNo", value: "1" },
-                { name: "RowPerPage", value: "12" }
-            ]
-        })
-        axios.post(uri, data, {
-            headers: {
-                "X-DreamFactory-API-Key": apikey,
-                "X-DreamFactory-Session-Token": this.props.token.token
-            },
-            responseType: 'json'
-        })
-            .then((response) => {
-                this.setState({ isLoading: false, dataSource: response.data });
-                console.log(this.state.dataSource)
-            }).catch((error) => {
-                this.setState({ isLoading: true })
-                // this.setState({ isModalVisibleError: !this.state.isModalVisibleError })
-                // console.error(error);
-            });
-    }
+
     addFriendEvent = (datafriend) => {
         this.props.setFriendRegister(datafriend)
     }
     _refreshControl() {
-        this.getFriend()
+        console.log("refersh")
         return (
             <RefreshControl
                 refreshing={this.state.isLoading}
                 onRefresh={() => this._refreshListView()} />
         )
     }
-    _refreshListView() {
+    _refreshListView = () => {
         this.setState({ isLoading: true })
         console.log("_refreshListView")
         this.setState({ isLoading: false })
@@ -94,7 +58,7 @@ class EventListFriend extends Component {
                 <FlatList
                     horizontal
                     refreshControl={this._refreshControl()}
-                    data={this.state.dataSource}
+                    data={this.props.friend}
                     renderItem={({ item, index }) =>
                         <CellEventListFriend
                             items={item}

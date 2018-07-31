@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, StatusBar } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, StatusBar, RefreshControl } from 'react-native';
 import { Container, Header, Item, Input, Button, Tab, Tabs, TabHeading, Icon } from 'native-base';
 import PropTypes from 'prop-types';
 import Modal from "react-native-modal";
@@ -19,6 +19,7 @@ import api_key from '../config/api_key'
 
 var uri = req[0].uspSearchFriend
 var uri2 = req[0].uspAddFriendLists
+var uri3 = req[0].uspGetFriendLists
 var apikey = api_key[0].api_key
 
 class TeamList extends Component {
@@ -35,8 +36,21 @@ class TeamList extends Component {
             searchText: "",
             friendOutput: [],
             addStatus: [],
-            datafriendlist: []
+            datafriendlist: [],
+            refreshing: false
         }
+        this.getFriend = this.getFriend.bind(this)
+    }
+    componentDidMount() {
+        this.getFriend()
+        this._onRefresh()
+    }
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.dataSource != this.state.dataSource) {
+            console.log("update")
+            this.setState({ dataSource: this.state.dataSource })
+            this._onRefresh()
+        }      
     }
     showModal() {
         let { searchText } = this.state
@@ -64,6 +78,29 @@ class TeamList extends Component {
             });
 
     }
+    getFriend() {
+        let data = ({
+            params: [
+                { name: "RunnerID", value: this.props.userprofile.userprofile.RunnerID },
+                { name: "PageNo", value: "1" },
+                { name: "RowPerPage", value: "12" }
+            ]
+        })
+        axios.post(uri3, data, {
+            headers: {
+                "X-DreamFactory-API-Key": apikey,
+                "X-DreamFactory-Session-Token": this.props.token.token
+            },
+            responseType: 'json'
+        })
+            .then((response) => {
+                this.setState({ isLoading: false, dataSource: response.data });
+            }).catch((error) => {
+                this.setState({ isLoading: true })
+                // this.setState({ isModalVisibleError: !this.state.isModalVisibleError })
+                // console.error(error);
+            });
+    }
     _addFriend(newitem) {
         this.state.datafriendlist.push(newitem)
         console.log(newitem)
@@ -86,8 +123,13 @@ class TeamList extends Component {
                 this.setState({ isLoading: false, addStatus: response.data });
                 console.log(this.state.addStatus[0])
                 this.checkAddFriendStatus()
+                this._onRefresh()
             }).catch((error) => {
-                console.error(error)
+                this.setState({ isLoading: true })
+                setTimeout(()=> {
+                    this._addFriend(newitem)
+                },2000)
+ 
                 // this.props.navigation.navigate('EventList')
             });
 
@@ -99,10 +141,18 @@ class TeamList extends Component {
         }
         else if (this.state.addStatus[0].AddStatus == "1") {
             this.setState({ isAddStatus: true })
+            this.getFriend()
             setTimeout(() => {
                 this.setState({ isAddStatus: false })
             }, 3000)
         }
+    }
+    _onRefresh() {
+        this.setState({ refreshing: true })
+        this.getFriend()
+        setTimeout(() => {
+            this.setState({ refreshing: false })
+        }, 1000)
     }
     checkRegisStatus = () => {
         if (this.state.friendOutput[0] == undefined || this.state.friendOutput[0] == null) {
@@ -163,7 +213,13 @@ class TeamList extends Component {
                         heading={<TabHeading><Text style={styles.textLabel}>ลงทะเบียนแบบกลุ่ม</Text></TabHeading>}>
                         <Container>
                             <View>
-                                <ScrollView>
+                                <ScrollView
+                                    refreshControl={
+                                        <RefreshControl
+                                            refreshing={this.state.refreshing}
+                                            onRefresh={this._onRefresh.bind(this)}
+                                        />}
+                                >
                                     <View style={styles.container}>
                                         <HeaderProfile />
                                         <Header searchBar rounded>
@@ -179,7 +235,7 @@ class TeamList extends Component {
                                             </Item>
                                         </Header>
                                         <EventListFriend
-                                            friend={datafriend}
+                                            friend={this.state.dataSource}
                                         />
 
                                         {/* <Tabs>
@@ -238,7 +294,6 @@ const mapDispatchToProps = dispatch => {
                 payload: datafriend
             })
         }
-
     }
 }
 const mapStateToProps = state => {

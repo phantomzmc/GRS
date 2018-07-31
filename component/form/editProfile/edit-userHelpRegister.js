@@ -57,12 +57,12 @@ class UserHelpRegister extends Component {
     let city = this.props.profile.address.city
     let country = this.props.profile.address.country
     let postnumber = this.props.profile.address.postNumber
-
+    let imgprofile = this.props.userprofile.imgprofile
     let uri = req[0].uspUpdateUserProfile
     let apikey = api_key[0].api_key
     let data = ({
       params: {
-        value: "{\"Username\":\"" + username + "\",\"FirstName\":\"" + firstname + "\",\"LastName\":\"" + lastname + "\",\"NickName\":\"" + nickname + "\",\"Password\":\"" + password + "\",\"Gender\":\"" + gen + "\",\"DateOfBirth\":\"" + journeyDate + "\",\"Nationality\":\"" + nation + "\",\"TeamName\":\"" + teamname + "\",\"BIBName\":\"" + bib + "\",\"Email\":\"" + email + "\",\"Phone\":\"" + tel + "\",\"Address\":\"" + address + "\",\"SubDistric\":\"" + t + "\",\"Distric\":\"" + a + "\",\"Province\":\"" + city + "\",\"Country\":\"" + country + "\",\"PostCode\":\"" + postnumber + "\",\"PicProfile\":\"1\",\"BackgroundProfile\":\"1\",\"PicGroup\":\"1\",\"ECFirstName\":\"" + ecfirstname + "\",\"ECLastName\":\"" + eclastname + "\",\"ECRelation\":\"" + ecrelation + "\",\"ECPhone\":\"" + ectel + "\"}"
+        value: "{\"Username\":\"" + username + "\",\"FirstName\":\"" + firstname + "\",\"LastName\":\"" + lastname + "\",\"NickName\":\"" + nickname + "\",\"Password\":\"" + password + "\",\"Gender\":\"" + gen + "\",\"DateOfBirth\":\"" + journeyDate + "\",\"Nationality\":\"" + nation + "\",\"TeamName\":\"" + teamname + "\",\"BIBName\":\"" + bib + "\",\"Email\":\"" + email + "\",\"Phone\":\"" + tel + "\",\"Address\":\"" + address + "\",\"SubDistric\":\"" + t + "\",\"Distric\":\"" + a + "\",\"Province\":\"" + city + "\",\"Country\":\"" + country + "\",\"PostCode\":\"" + postnumber + "\",\"PicProfile\":\"" + imgprofile + "\",\"BackgroundProfile\":\"1\",\"PicGroup\":\"1\",\"ECFirstName\":\"" + ecfirstname + "\",\"ECLastName\":\"" + eclastname + "\",\"ECRelation\":\"" + ecrelation + "\",\"ECPhone\":\"" + ectel + "\"}"
       }
     })
     axios.post(uri, data, {
@@ -126,7 +126,7 @@ class UserHelpRegister extends Component {
           </View>
         </ScrollView>
       </Container>
-      
+
     );
   }
 }
@@ -138,7 +138,8 @@ const styles = StyleSheet.create({
 });
 const mapStateToProps = state => {
   return {
-    username : state.username,
+    username: state.username,
+    userprofile : state.userprofile,
     profile: state.profile,
     token: state.token
   }

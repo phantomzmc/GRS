@@ -220,6 +220,10 @@ const userprofile = (state = { datapic }, action) => {
       state.datapic = action.payload
       break;
     }
+    case "setImageProfile" : {
+      state.imgprofile = action.payload
+      break;
+    }
     case "setUserStatus": {
       state.userstatus = action.payload
       break;
@@ -245,7 +249,6 @@ const friendlist = (state = friend, action) => {
       }
       break;
     case "addDistanceFriend":
-
       state.dataDis = action.payload
       break;
     case "addSize":
@@ -267,7 +270,6 @@ const friendlist = (state = friend, action) => {
       state.friendTotalPrice = action.payload
       break;
     }
-    
     case "setRegislist": {
       state.regislist = action.payload
     }
