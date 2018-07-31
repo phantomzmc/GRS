@@ -91,7 +91,7 @@ class CellEventListFriend extends Component {
                             <View style={styles.listfriend}>
 
                                 <Image
-                                    source={require("../../icon/boy.png")}
+                                    source={{uri : item.PicProfile}}
                                     style={styles.imgAvatar} />
                                 <Icon
                                     name={this.state.icon}

@@ -131,12 +131,12 @@ class FriendListView extends Component {
                     data={this.state.dataSource}
                     refreshing={this.state.isRefesh}
                     onRefresh={this.onRefesh}
-                    renderItem={({ item}) => (
+                    renderItem={({ item }) => (
                         <View style={styles.container}>
                             <View style={styles.cellFriend}>
                                 <View>
                                     <Image
-                                        source={require("../../icon/boy.png")}
+                                        source={{ uri: item.PicProfile }}
                                         style={styles.avatar} />
                                 </View>
                                 <TouchableOpacity>

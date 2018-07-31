@@ -40,7 +40,7 @@ class CradFriendDistance extends Component {
 
         }
     }
-    componentWillMount(){
+    componentWillMount() {
         clearInterval(this._interval);
     }
     componentDidMount() {
@@ -52,7 +52,7 @@ class CradFriendDistance extends Component {
     componentWillReceiveProps(nextProps) {
         if (nextProps.items != dataFriendRegis) {
             console.log("update")
-            this.setState({ items : dataFriendRegis})
+            this.setState({ items: dataFriendRegis })
         }
     }
     // componentDidMount() {
@@ -68,7 +68,7 @@ class CradFriendDistance extends Component {
         // dataFriendRegis.splice(index, 1)
         // console.log(dataFriendRegis)
         // this.props.setFriendRegister(dataFriendRegis)
-        
+
     }
     sumPrice() {
         const add = (a, b) =>
@@ -170,7 +170,8 @@ class CradFriendDistance extends Component {
                 <CardItem>
                     <Left>
                         <Thumbnail
-                            source={require("../icon/boy.png")}
+                            // source={require("../icon/boy.png")}
+                            source={{ uri: items.PicProfile }}
                         />
                     </Left>
                     <Body style={{ paddingHorizontal: 20, justifyContent: "space-around" }}>
@@ -299,10 +300,10 @@ const mapDispatchToProps = dispatch => {
                 payload: sum
             })
         },
-        setFriendRegister : (dataFriend) => {
+        setFriendRegister: (dataFriend) => {
             dispatch({
-                type : "setFriendRegister",
-                payload : dataFriend
+                type: "setFriendRegister",
+                payload: dataFriend
             })
         }
     }

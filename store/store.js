@@ -173,7 +173,7 @@ const creditcard = (state = credit, action) => {
       break;
 
     }
-    case "setTypePayment" : {
+    case "setTypePayment": {
       state.typePayment = action.payload
       break;
     }
@@ -210,7 +210,7 @@ const username = (state = {}, action) => {
   return state;
 }
 let datapic = ""
-const userprofile = (state = { datapic }, action) => {
+const userprofile = (state = { datapic, userprofile : { PicProfile : "" } }, action) => {
   switch (action.type) {
     case "setUserProfile": {
       state.userprofile = action.payload
@@ -220,8 +220,9 @@ const userprofile = (state = { datapic }, action) => {
       state.datapic = action.payload
       break;
     }
-    case "setImageProfile" : {
-      state.imgprofile = action.payload
+    case "setImageProfile": {
+      state.imgprofile = action.payload,
+      state.userprofile.PicProfile = action.payload
       break;
     }
     case "setUserStatus": {

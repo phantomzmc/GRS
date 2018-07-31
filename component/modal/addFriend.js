@@ -6,7 +6,7 @@ class ModalAddFriend extends Component {
     state = {
         newitem: {
             FirstName: "Thunnathorn ",
-            LastName : "Yuvasin",
+            LastName: "Yuvasin",
             NickName: 22,
             Gender: "ชาย",
             favorites: 1,
@@ -25,7 +25,7 @@ class ModalAddFriend extends Component {
         let { newitem } = this.state
         return (
             <View style={styles.modalContainer}>
-                <Thumbnail source={require("../icon/boy.png")} />
+                <Thumbnail source={{ uri: newitem.PicProfile }} />
                 <View style={{ paddingVertical: 10, alignItems: "center" }}>
                     <Text style={{ fontSize: 18, fontFamily: "kanit" }}>{newitem.FirstName} - {newitem.LastName}</Text>
                     <Text style={{ fontSize: 16, fontFamily: "kanit" }}>{newitem.Gender} - {newitem.NickName}</Text>

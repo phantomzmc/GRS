@@ -83,7 +83,6 @@ class HeaderProfile extends Component {
                 console.log('User tapped custom button: ', response.customButton);
             }
             else {
-                let source = { uri: response.uri };
                 // You can also display the image using data:
                 // let source = { uri: 'data:image/jpeg;base64,' + response.data };
                 this.setState({
@@ -119,10 +118,10 @@ class HeaderProfile extends Component {
             responseType: 'json'
         })
             .then((responseJson) => {
-                this.setState({ imagesProfile: responseJson.data.files[0] ,ImageSource : responseJson.config.data._parts[0][1]});
+                this.setState({ imagesProfile: responseJson.data.files[0] ,ImageSource : responseJson.data.files[0]});
                 console.log(responseJson)
-                console.log(responseJson.config.data._parts[0])
                 console.log(this.state.imagesProfile)
+                console.log(this.state.ImageSource)
                 this.props.setImageProfile(this.state.imagesProfile)
 
             }).catch((error) => {
