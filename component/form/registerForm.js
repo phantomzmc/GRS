@@ -388,6 +388,14 @@ class FormRegister extends Component {
               onChangeText={teamname => this.setState({ teamname })} />
           </Item>
         </Form>
+        <Text style={styles.headForm}>BIBName</Text>
+        <Form>
+          <Item floatingLabel last>
+            <Label style={styles.textLabel}>Ex.bibname.</Label>
+            <Input
+              onChangeText={bib => this.setState({ bib })} />
+          </Item>
+        </Form>
         <View style={{ flexDirection: "row" }}>
           <Text style={styles.headForm}>เบอร์โทรศัพท์</Text>
           <Text style={styles.headdetail}> ** จำเป็น **</Text>
