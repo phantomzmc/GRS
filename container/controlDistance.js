@@ -87,16 +87,15 @@ class ControlDistance extends Component {
         this.props.setLogin(this.state.login)
         this.props.navigation.navigate("Login")
     }
-    checkDistanceRegis() {
-        goNextState = () => {
-            if (this.state.register == true) {
-                this.props.navigation.navigate('ShirtPhotoPlus')
-            }
-            else if (this.state.register == false) {
-                console.log("flase")
-            }
+    goNextState = () => {
+        if (this.state.register == true) {
+            this.props.navigation.navigate('ShirtPhotoPlus')
+        }
+        else if (this.state.register == false) {
+            console.log("flase")
         }
     }
+
 
     goSingleLogin = () => {
         this.props.navigation.navigate('SingleLogin')
@@ -136,7 +135,7 @@ class ControlDistance extends Component {
                     <Tab
                         heading={<TabHeading><Text style={styles.textLabel}>ลงทะเบียนแบบเดียว</Text></TabHeading>}>
                         <RegisterDistance
-                            nextState={this.checkDistanceRegis.bind(this)}
+                            nextState={this.goNextState.bind(this)}
                         />
 
 

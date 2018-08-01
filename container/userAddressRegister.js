@@ -11,7 +11,7 @@ import { StackNavigator } from "react-navigation";
 import {Container} from 'native-base'
 import { connect } from "react-redux";
 
-import HeaderUser from "../component/items/header_profile";
+import HeaderUser from "../component/items/header_register";
 import FormAddressRegister from "../component/form/registerAddressForm";
 import HeaderTeam from '../component/items/headerTeam'
 

@@ -6,7 +6,8 @@ import {
     StyleSheet,
     FlatList,
     ImageBackground,
-    TouchableOpacity
+    TouchableOpacity,
+    ActivityIndicator
 } from 'react-native';
 import { connect } from 'react-redux'
 import axios from 'axios'

@@ -25,7 +25,8 @@ class HeaderProfile extends Component {
     componentDidMount() {
         setTimeout(() => {
             this.setState({
-                ImageSource: this.props.userprofile.userprofile.PicProfile
+                ImageSource: this.props.userprofile.userprofile.PicProfile,
+                imgBackground: this.props.userprofile.userprofile.BackgroundProfile
             })
         }, 2000)
 
@@ -118,7 +119,7 @@ class HeaderProfile extends Component {
             responseType: 'json'
         })
             .then((responseJson) => {
-                this.setState({ imagesProfile: responseJson.data.files[0] ,ImageSource : responseJson.data.files[0]});
+                this.setState({ imagesProfile: responseJson.data.files[0], ImageSource: responseJson.data.files[0] });
                 console.log(responseJson)
                 console.log(this.state.imagesProfile)
                 console.log(this.state.ImageSource)
@@ -139,20 +140,20 @@ class HeaderProfile extends Component {
     }
     render() {
         return (
-            <ImageBackground source={{ uri: "http://www.jcmagazine.com/wp-content/uploads/2016/07/deporte-carrera.jpg" }}
+            <ImageBackground source={{ uri: this.state.imgBackground }}
                 style={styles.coverImg}>
                 <View style={styles.container}>
-                    <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)} style={styles.container}>
-                        <View style={styles.imgContainer}>
-                            {this.state.ImageSource == "" ?
+                    <View style={styles.imgContainer}>
+                        {/* {this.state.ImageSource == "" ?
                                 <View style={styles.imgAvatar} >
                                     <Icon active name="user-circle-o" type="FontAwesome" size={10} />
                                     <Text style={{ fontFamily: "kanit", fontSize: 12, paddingTop: 10 }}>เพิ่มรูปภาพ</Text>
                                 </View> :
                                 <Image style={styles.imgAvatar} source={{ uri: this.state.ImageSource }} />
-                            }
-                        </View>
-                    </TouchableOpacity>
+                            } */}
+                        <Image style={styles.imgAvatar} source={{ uri: this.state.ImageSource }} />
+
+                    </View>
                     <View style={styles.detailProfile}>
                         <Text style={styles.nameProfile}>{this.state.fullname} - {this.state.lastname} </Text>
                         <Text style={styles.ageProfile}>{this.state.gen} - {this.state.age}</Text>

@@ -12,6 +12,7 @@ import { Container } from 'native-base'
 import randomstringPromise from 'randomstring-promise/react-native';
 import { connect } from "react-redux";
 import HeaderUser from "../component/items/header_profile";
+import HeaderRegis from '../component/items/header_register'
 import FormRegister from "../component/form/registerForm";
 import HeaderTeam from '../component/items/headerTeam'
 
@@ -88,7 +89,7 @@ class UserRegister extends Component {
         />
         <ScrollView>
           <View style={styles.container}>
-            <HeaderUser Name={this.props.fullname} UserID={this.props.userid} />
+            <HeaderRegis Name={this.props.fullname} UserID={this.props.userid} />
             <FormRegister
               goEvent={this.gotoListEvent.bind(this)}
               getToken={this.props.token.token} />

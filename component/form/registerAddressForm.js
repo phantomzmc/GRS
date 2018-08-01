@@ -23,6 +23,55 @@ class FormAddressRegister extends Component {
       province: ""
     };
   }
+  checkInputValue(number, tambon, amphoe, province, country, postNumber){
+    if(number == ""){
+      Alert.alert('กรุณากรอกข้อมูลให้ครบถ้วน', 'กรุณากรอกบ้านเลขที่', [
+        {
+          text: 'ตกลง'
+        }
+      ], { cancelable: false })
+    }
+    else if(tambon == ""){
+      Alert.alert('กรุณากรอกข้อมูลให้ครบถ้วน', 'กรุณากรอกชื่อตำบล / แขวง', [
+        {
+          text: 'ตกลง'
+        }
+      ], { cancelable: false })
+
+    }
+    else if(amphoe == ""){
+      Alert.alert('กรุณากรอกข้อมูลให้ครบถ้วน', 'กรุณากรอกชื่ออำเภอ / เขต', [
+        {
+          text: 'ตกลง'
+        }
+      ], { cancelable: false })
+
+    }
+    else if(province == ""){
+      Alert.alert('กรุณากรอกข้อมูลให้ครบถ้วน', 'กรุณากรอกชื่อจังหวัด', [
+        {
+          text: 'ตกลง'
+        }
+      ], { cancelable: false })
+    }
+    else if(country == ""){
+      Alert.alert('กรุณากรอกข้อมูลให้ครบถ้วน', 'กรุณากรอกชื่อประเทศ', [
+        {
+          text: 'ตกลง'
+        }
+      ], { cancelable: false })
+    }
+    else if(postNumber == ""){
+      Alert.alert('กรุณากรอกข้อมูลให้ครบถ้วน', 'กรุณากรอกรหัสไปรษรณีย์', [
+        {
+          text: 'ตกลง'
+        }
+      ], { cancelable: false })
+    }
+    else {
+      this.sendData(number, tambon, amphoe, province, country, postNumber)
+    }
+  }
   passProvince(city) {
     let { province } = this.state
     this.setState({ province: city })
@@ -42,7 +91,7 @@ class FormAddressRegister extends Component {
   };
 
   render() {
-    let { number, tambon, amphoe, province, country, postNumber} = this.state;
+    let { number, tambon, amphoe, province, country, postNumber } = this.state;
     return (
       <View style={styles.container}>
         <View style={styles.contectTitle}>
@@ -53,7 +102,10 @@ class FormAddressRegister extends Component {
           </View>
           <Text style={styles.titleText}>ที่อยู่</Text>
         </View>
-        <Text style={styles.headForm}>บ้านเลขที่</Text>
+        <View style={{ flexDirection: "row" }}>
+          <Text style={styles.headForm}>บ้านเลขที่</Text>
+          <Text style={styles.headdetail}> ** จำเป็น **</Text>
+        </View>
         <Form>
           <Item floatingLabel last>
             <Label style={styles.textLabel}>Ex.123/45</Label>
@@ -62,16 +114,53 @@ class FormAddressRegister extends Component {
             />
           </Item>
         </Form>
-        <Text style={styles.headForm}>แขวง / ตำบล : {this.state.tambon}</Text>
-        <TambonForm gettumporn={this.passTampon.bind(this)} />
+        <View style={{ flexDirection: "row" }}>
+          <Text style={styles.headForm}>แขวง / ตำบล : {this.state.tambon}</Text>
+          <Text style={styles.headdetail}> ** จำเป็น **</Text>
+        </View>
 
-        <Text style={styles.headForm}>เขต / อำเภอ : {this.state.amphoe}</Text>
-        <AmphoeForm getamphoe={this.passAmphoe.bind(this)} />
+        <Form>
+          <Item floatingLabel last>
+            <Label style={styles.textLabel}>Ex.หนองหอย</Label>
+            <Input
+              onChangeText={tambon => this.setState({ tambon })}
+            />
+          </Item>
+        </Form>
 
-        <Text style={styles.headForm}>จังหวัด : {this.state.province}</Text>
-        <ProvinceForm getProvince={this.passProvince.bind(this)} />
+        {/* <TambonForm gettumporn={this.passTampon.bind(this)} /> */}
+        <View style={{ flexDirection: "row" }}>
+          <Text style={styles.headForm}>เขต / อำเภอ : {this.state.amphoe}</Text>
+          <Text style={styles.headdetail}> ** จำเป็น **</Text>
+        </View>
 
-        <Text style={styles.headForm}>ประเทศ</Text>
+        <Form>
+          <Item floatingLabel last>
+            <Label style={styles.textLabel}>Ex.เมืองเชียงใหม่</Label>
+            <Input
+              onChangeText={amphoe => this.setState({ amphoe })}
+            />
+          </Item>
+        </Form>
+        {/* <AmphoeForm getamphoe={this.passAmphoe.bind(this)} /> */}
+        <View style={{ flexDirection: "row" }}>
+          <Text style={styles.headForm}>จังหวัด : {this.state.province}</Text>
+          <Text style={styles.headdetail}> ** จำเป็น **</Text>
+        </View>
+
+        <Form>
+          <Item floatingLabel last>
+            <Label style={styles.textLabel}>Ex.เชียงใหม่</Label>
+            <Input
+              onChangeText={province => this.setState({ province })}
+            />
+          </Item>
+        </Form>
+        {/* <ProvinceForm getProvince={this.passProvince.bind(this)} /> */}
+        <View style={{ flexDirection: "row" }}>
+          <Text style={styles.headForm}>ประเทศ</Text>
+          <Text style={styles.headdetail}> ** จำเป็น **</Text>
+        </View>
         <Form>
           <Item floatingLabel last>
             <Label style={styles.textLabel}>Ex.ไทย</Label>
@@ -80,7 +169,10 @@ class FormAddressRegister extends Component {
             />
           </Item>
         </Form>
-        <Text style={styles.headForm}>รหัสไปรษณีย์</Text>
+        <View style={{ flexDirection: "row" }}>
+          <Text style={styles.headForm}>รหัสไปรษณีย์</Text>
+          <Text style={styles.headdetail}> ** จำเป็น **</Text>
+        </View>
         <Form>
           <Item floatingLabel last>
             <Label style={styles.textLabel}>Ex.10160</Label>
@@ -94,13 +186,13 @@ class FormAddressRegister extends Component {
           <TouchableOpacity
             style={styles.buttonContainer}
             onPress={() =>
-              this.sendData(number, tambon, amphoe, province, country, postNumber)
+              this.checkInputValue(number, tambon, amphoe, province, country, postNumber)
             }
           >
             <Text style={styles.textButton}>ถัดไป</Text>
           </TouchableOpacity>
         </View>
-        <KeyboardSpacer/>
+        <KeyboardSpacer />
       </View>
     );
   }
@@ -186,6 +278,13 @@ const styles = StyleSheet.create({
     fontFamily: 'kanit',
     fontSize: 16,
     paddingTop: 20
+  },
+  headdetail: {
+    paddingVertical: 25,
+    paddingHorizontal: 10,
+    fontSize: 12,
+    fontFamily: "kanit",
+    color: "red"
   },
   textLabel: {
     fontSize: 14,

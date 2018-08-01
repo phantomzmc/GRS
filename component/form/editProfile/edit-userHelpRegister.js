@@ -4,7 +4,7 @@ import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Alert, StatusBar 
 import { connect } from "react-redux";
 import { Container } from 'native-base'
 import axios from 'axios'
-import HeaderUser from "../../items/header_profile";
+import HeaderUser from "../../items/header_register";
 import FormHelpRegister from "./edit-registerHelpForm";
 import HeaderTeam from '../../items/headerTeam'
 import req from '../../../config/uri_req'
@@ -57,12 +57,14 @@ class UserHelpRegister extends Component {
     let city = this.props.profile.address.city
     let country = this.props.profile.address.country
     let postnumber = this.props.profile.address.postNumber
-    let imgprofile = this.props.userprofile.imgprofile
+    let imgprofile = this.props.userprofile.userprofile.PicProfile
+    let imgbackground = this.props.userprofile.userprofile.BackgroundProfile
+
     let uri = req[0].uspUpdateUserProfile
     let apikey = api_key[0].api_key
     let data = ({
       params: {
-        value: "{\"Username\":\"" + username + "\",\"FirstName\":\"" + firstname + "\",\"LastName\":\"" + lastname + "\",\"NickName\":\"" + nickname + "\",\"Password\":\"" + password + "\",\"Gender\":\"" + gen + "\",\"DateOfBirth\":\"" + journeyDate + "\",\"Nationality\":\"" + nation + "\",\"TeamName\":\"" + teamname + "\",\"BIBName\":\"" + bib + "\",\"Email\":\"" + email + "\",\"Phone\":\"" + tel + "\",\"Address\":\"" + address + "\",\"SubDistric\":\"" + t + "\",\"Distric\":\"" + a + "\",\"Province\":\"" + city + "\",\"Country\":\"" + country + "\",\"PostCode\":\"" + postnumber + "\",\"PicProfile\":\"" + imgprofile + "\",\"BackgroundProfile\":\"1\",\"PicGroup\":\"1\",\"ECFirstName\":\"" + ecfirstname + "\",\"ECLastName\":\"" + eclastname + "\",\"ECRelation\":\"" + ecrelation + "\",\"ECPhone\":\"" + ectel + "\"}"
+        value: "{\"Username\":\"" + username + "\",\"FirstName\":\"" + firstname + "\",\"LastName\":\"" + lastname + "\",\"NickName\":\"" + nickname + "\",\"Password\":\"" + password + "\",\"Gender\":\"" + gen + "\",\"DateOfBirth\":\"" + journeyDate + "\",\"Nationality\":\"" + nation + "\",\"TeamName\":\"" + teamname + "\",\"BIBName\":\"" + bib + "\",\"Email\":\"" + email + "\",\"Phone\":\"" + tel + "\",\"Address\":\"" + address + "\",\"SubDistric\":\"" + t + "\",\"Distric\":\"" + a + "\",\"Province\":\"" + city + "\",\"Country\":\"" + country + "\",\"PostCode\":\"" + postnumber + "\",\"PicProfile\":\"" + imgprofile + "\",\"BackgroundProfile\":\"" + imgbackground + "\",\"PicGroup\":\"1\",\"ECFirstName\":\"" + ecfirstname + "\",\"ECLastName\":\"" + eclastname + "\",\"ECRelation\":\"" + ecrelation + "\",\"ECPhone\":\"" + ectel + "\"}"
       }
     })
     axios.post(uri, data, {
@@ -139,7 +141,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => {
   return {
     username: state.username,
-    userprofile : state.userprofile,
+    userprofile: state.userprofile,
     profile: state.profile,
     token: state.token
   }

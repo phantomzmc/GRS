@@ -29,6 +29,7 @@ class RegisterDistance extends Component {
     }
 
     nextState = () => {
+        console.log("ShirtPhotoPlus")
         this.props.navigation.navigate("ShirtPhotoPlus")
     }
     gotoShirtPhotoPlus(distanceEvent) {

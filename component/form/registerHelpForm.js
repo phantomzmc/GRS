@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { View, Text, StyleSheet, TouchableOpacity, Image, } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image,Alert } from "react-native";
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import { Form, Item, Input, Label, Picker, Icon } from 'native-base'
 import { connect } from 'react-redux'
@@ -22,8 +22,41 @@ class FormAddressRegister extends Component {
       email: ""
     };
   }
+  checkInputValue(firstname, lastname, relation, tel){
+    if(firstname == ""){
+      Alert.alert('กรุณากรอกข้อมูลให้ครบถ้วน', 'กรุณากรอกชื่อ', [
+        {
+          text: 'ตกลง'
+        }
+      ], { cancelable: false })
+    }
+    else if(lastname == ""){
+      Alert.alert('กรุณากรอกข้อมูลให้ครบถ้วน', 'กรุณากรอกนามสกุล', [
+        {
+          text: 'ตกลง'
+        }
+      ], { cancelable: false })
+    }
+    else if( relation == ""){
+      Alert.alert('กรุณากรอกข้อมูลให้ครบถ้วน', 'ระบุความสัมพันธ์', [
+        {
+          text: 'ตกลง'
+        }
+      ], { cancelable: false })
+    }
+    else if(tel == ""){
+      Alert.alert('กรุณากรอกข้อมูลให้ครบถ้วน', 'กรุณากรอกเบอร์โทรศัพท์ฉุกเฉิน', [
+        {
+          text: 'ตกลง'
+        }
+      ], { cancelable: false })
+    }
+    else {
+      this.sendData(firstname, lastname, relation, tel)
+    }
+  }
   sendData = (firstname, lastname, relation, tel) => {
-    this.props.setHelp({ firstname, lastname, relation, tel});
+    this.props.setHelp({ firstname, lastname, relation, tel });
     this.props.goEvent(firstname, lastname, relation, tel);
   };
 
@@ -41,7 +74,10 @@ class FormAddressRegister extends Component {
           <Text style={styles.titleText}>กรณีฉุกเฉิน</Text>
         </View>
         {/* <View style={styles.addressContainer}> */}
-        <Text style={styles.headForm}>ชื่อ-นามสกุล</Text>
+        <View style={{ flexDirection: "row" }}>
+          <Text style={styles.headForm}>ชื่อ-นามสกุล</Text>
+          <Text style={styles.headdetail}> ** จำเป็น **</Text>
+        </View>
         <Form>
           <Item floatingLabel last>
             <Label style={styles.textLabel}>Ex.ชื่อ</Label>
@@ -58,7 +94,10 @@ class FormAddressRegister extends Component {
             />
           </Item>
         </Form>
-        <Text style={styles.headForm}>หมายเลขโทรศัพท์</Text>
+        <View style={{ flexDirection: "row" }}>
+          <Text style={styles.headForm}>หมายเลขโทรศัพท์</Text>
+          <Text style={styles.headdetail}> ** จำเป็น **</Text>
+        </View>
         <Form>
           <Item floatingLabel last>
             <Label style={styles.textLabel}>Ex.090-xxxxxx</Label>
@@ -89,7 +128,7 @@ class FormAddressRegister extends Component {
         <View style={styles.submitContainer}>
           <TouchableOpacity
             style={styles.buttonContainer}
-            onPress={() => this.sendData(firstname, lastname, relation, tel)}
+            onPress={() => this.checkInputValue(firstname, lastname, relation, tel)}
           >
             <Text style={styles.textButton}>ยืนยัน</Text>
           </TouchableOpacity>
@@ -169,6 +208,13 @@ const styles = StyleSheet.create({
     fontFamily: 'kanit',
     fontSize: 16,
     paddingTop: 20
+  },
+  headdetail: {
+    paddingVertical: 25,
+    paddingHorizontal: 10,
+    fontSize: 12,
+    fontFamily: "kanit",
+    color: "red"
   },
   textLabel: {
     fontSize: 14,

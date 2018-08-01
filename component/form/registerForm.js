@@ -88,11 +88,97 @@ class FormRegister extends Component {
       .then((response) => {
         this.setState({ isLoading: false, status: response.data });
         console.log(this.state.status[0].Status)
-        this.alertCheckEmail()
+        // this.alertCheckEmail()
       }).catch((error) => {
         console.error(error);
       });
   }
+  checkValueInput(fullname, lastname, nickname, password, confirmpassword, teamname, bib, userid, tel, email, date, bloodtype, nation, gen) {
+    if (fullname == "") {
+      Alert.alert('กรุณากรอกข้อมูลให้ครบถ้วน', 'กรุณากรอกชื่อ', [
+        {
+          text: 'ตกลง'
+        }
+      ], { cancelable: false })
+    }
+    else if (lastname == "") {
+      Alert.alert('กรุณากรอกข้อมูลให้ครบถ้วน', 'กรุณากรอกนามสกุล', [
+        {
+          text: 'ตกลง'
+        }
+      ], { cancelable: false })
+    }
+    else if (gen == "") {
+      Alert.alert('กรุณากรอกข้อมูลให้ครบถ้วน', 'กรุณาเลือกเพศ', [
+        {
+          text: 'ตกลง'
+        }
+      ], { cancelable: false })
+
+    }
+    else if (userid == "") {
+      Alert.alert('กรุณากรอกข้อมูลให้ครบถ้วน', 'กรุณากรอกรหัสบัตรประจำตัวประชาชน / หนังสือเดินทาง', [
+        {
+          text: 'ตกลง'
+        }
+      ], { cancelable: false })
+    }
+    else if (bloodtype == "") {
+      Alert.alert('กรุณากรอกข้อมูลให้ครบถ้วน', 'กรุณากรอกกรุ๊ปเลือด', [
+        {
+          text: 'ตกลง'
+        }
+      ], { cancelable: false })
+    }
+    else if (nation == "") {
+      Alert.alert('กรุณากรอกข้อมูลให้ครบถ้วน', 'กรุณากรอกสัญชาติ', [
+        {
+          text: 'ตกลง'
+        }
+      ], { cancelable: false })
+
+    }
+    else if (password == "") {
+      Alert.alert('กรุณากรอกข้อมูลให้ครบถ้วน', 'กรุณากรอกรหัสผ่าน', [
+        {
+          text: 'ตกลง'
+        }
+      ], { cancelable: false })
+    }
+    else if (confirmpassword == "") {
+      Alert.alert('กรุณากรอกข้อมูลให้ครบถ้วน', 'กรุณากรอกรหัสผ่านที่เหมือนกันอีกครั้ง', [
+        {
+          text: 'ตกลง'
+        }
+      ], { cancelable: false })
+    }
+    else if (date == "") {
+      Alert.alert('กรุณากรอกข้อมูลให้ครบถ้วน', 'กรุณากรอก วัน/เดือน/ปีเกิด', [
+        {
+          text: 'ตกลง'
+        }
+      ], { cancelable: false })
+    }
+    else if (tel == "") {
+      Alert.alert('กรุณากรอกข้อมูลให้ครบถ้วน', 'กรุณากรอกเบอร์โทรศัพท์', [
+        {
+          text: 'ตกลง'
+        }
+      ], { cancelable: false })
+
+    }
+    else if (email == "") {
+      Alert.alert('กรุณากรอกข้อมูลให้ครบถ้วน', 'กรุณากรอก Email', [
+        {
+          text: 'ตกลง'
+        }
+      ], { cancelable: false })
+    }
+    else {
+      this.sendData(fullname, lastname, nickname, password, confirmpassword, teamname, bib, userid, tel, email, date, bloodtype, nation, gen)
+    }
+  }
+
   alertCheckUsername = () => {
     let { status } = this.state
     if (status[0].UsernameStatus == "1") {
@@ -113,19 +199,19 @@ class FormRegister extends Component {
 
     }
   }
-  alertCheckEmail = () => {
-    let { status } = this.state
-    if (status[0].Status == "1") {
-      Alert.alert('มี Email นี้ในระบบแล้ว', 'กรุณาใช้ Email อื่น', [
-        {
-          text: 'ตกลง'
-        }
-      ], { cancelable: false })
-    }
-    else if (status[0].Status == "0") {
+  // alertCheckEmail = () => {
+  //   let { status } = this.state
+  //   if (status[0].Status == "1") {
+  //     Alert.alert('มี Email นี้ในระบบแล้ว', 'กรุณาใช้ Email อื่น', [
+  //       {
+  //         text: 'ตกลง'
+  //       }
+  //     ], { cancelable: false })
+  //   }
+  //   else if (status[0].Status == "0") {
 
-    }
-  }
+  //   }
+  // }
   setGenMan() {
     this.setState({ selectedIndex: 0 })
     if (this.state.selectedIndex == 0) {
@@ -154,7 +240,10 @@ class FormRegister extends Component {
           </View>
           <Text style={styles.titleText}>ข้อมูลส่วนตัว</Text>
         </View>
-        <Text style={styles.headForm}>ชื่อ - นามสกุล</Text>
+        <View style={{ flexDirection: "row" }}>
+          <Text style={styles.headForm}>ชื่อ - นามสกุล</Text>
+          <Text style={styles.headdetail}> ** จำเป็น **</Text>
+        </View>
         <Form>
           <Item floatingLabel>
             <Label style={styles.textLabel}>ชื่อ</Label>
@@ -178,7 +267,10 @@ class FormRegister extends Component {
             />
           </Item>
         </Form>
-        <Text style={styles.headForm}>เพศ</Text>
+        <View style={{ flexDirection: "row" }}>
+          <Text style={styles.headForm}>เพศ</Text>
+          <Text style={styles.headdetail}> ** จำเป็น **</Text>
+        </View>
         <View style={styles.conlorsegment}>
           <Tabs
             initialPage={this.state.selectedIndex}
@@ -197,8 +289,10 @@ class FormRegister extends Component {
             </Tab>
           </Tabs>
         </View>
-        <Text style={styles.headForm}>รหัสบัตรประชาชน/หนังสือเดินทาง</Text>
-
+        <View style={{ flexDirection: "row" }}>
+          <Text style={styles.headForm}>รหัสบัตรประชาชน/หนังสือเดินทาง</Text>
+          <Text style={styles.headdetail}> ** จำเป็น **</Text>
+        </View>
         <Form>
           <Item floatingLabel last>
             <Label style={styles.textLabel}>Ex.15099999xxxxx</Label>
@@ -208,7 +302,10 @@ class FormRegister extends Component {
               keyboardType="phone-pad" />
           </Item>
         </Form>
-        <Text style={styles.headForm}>กรุ๊ปเลือด</Text>
+        <View style={{ flexDirection: "row" }}>
+          <Text style={styles.headForm}>กรุ๊ปเลือด</Text>
+          <Text style={styles.headdetail}> ** จำเป็น **</Text>
+        </View>
         <Form>
           <Item floatingLabel last>
             <Label style={styles.textLabel}>Ex. A,B,O,AB</Label>
@@ -217,7 +314,10 @@ class FormRegister extends Component {
             />
           </Item>
         </Form>
-        <Text style={styles.headForm}>สัญชาติ</Text>
+        <View style={{ flexDirection: "row" }}>
+          <Text style={styles.headForm}>สัญชาติ</Text>
+          <Text style={styles.headdetail}> ** จำเป็น **</Text>
+        </View>
         <Form>
           <Item floatingLabel last>
             <Label style={styles.textLabel}>Ex.ไทย,อเมริกัน</Label>
@@ -225,7 +325,10 @@ class FormRegister extends Component {
               onChangeText={nation => this.setState({ nation })} />
           </Item>
         </Form>
-        <Text style={styles.headForm}>รหัสผ่าน</Text>
+        <View style={{ flexDirection: "row" }}>
+          <Text style={styles.headForm}>รหัสผ่าน</Text>
+          <Text style={styles.headdetail}> ** จำเป็น **</Text>
+        </View>
         <Form>
           <Item floatingLabel last>
             <Label style={styles.textLabel}>Ex.xxxxxxxxxxxx</Label>
@@ -235,8 +338,10 @@ class FormRegister extends Component {
             />
           </Item>
         </Form>
-
-        <Text style={styles.headForm}>ยืนยันรหัสผ่าน</Text>
+        <View style={{ flexDirection: "row" }}>
+          <Text style={styles.headForm}>ยืนยันรหัสผ่าน</Text>
+          <Text style={styles.headdetail}> ** จำเป็น **</Text>
+        </View>
         <Form>
           <Item floatingLabel last>
             <Label style={styles.textLabel}>Ex.xxxxxxxxxxxx</Label>
@@ -245,7 +350,10 @@ class FormRegister extends Component {
               onChangeText={confirmpassword => this.setState({ confirmpassword })} />
           </Item>
         </Form>
-        <Text style={styles.headForm}>วันเกิด</Text>
+        <View style={{ flexDirection: "row" }}>
+          <Text style={styles.headForm}>วันเกิด</Text>
+          <Text style={styles.headdetail}> ** จำเป็น **</Text>
+        </View>
         <View style={styles.containerDatePicker}>
           <DatePicker
             style={styles.datePickerText}
@@ -280,8 +388,10 @@ class FormRegister extends Component {
               onChangeText={teamname => this.setState({ teamname })} />
           </Item>
         </Form>
-
-        <Text style={styles.headForm}>เบอร์โทรศัพท์</Text>
+        <View style={{ flexDirection: "row" }}>
+          <Text style={styles.headForm}>เบอร์โทรศัพท์</Text>
+          <Text style={styles.headdetail}> ** จำเป็น **</Text>
+        </View>
         <Form>
           <Item floatingLabel last>
             <Label style={styles.textLabel}>Ex.090-xxxxxx</Label>
@@ -290,22 +400,24 @@ class FormRegister extends Component {
               onChangeText={tel => this.setState({ tel })} />
           </Item>
         </Form>
-
-        <Text style={styles.headForm}>Email</Text>
+        <View style={{ flexDirection: "row" }}>
+          <Text style={styles.headForm}>Email</Text>
+          <Text style={styles.headdetail}> ** จำเป็น **</Text>
+        </View>
         <Form>
           <Item floatingLabel last>
             <Label style={styles.textLabel}>Ex.abc@gmail.com</Label>
             <Input
               keyboardType="email-address"
-              onChangeText={email => this.setState({ email })} 
-              onEndEditing={this.checkEmail.bind(this)}/>
+              onChangeText={email => this.setState({ email })}
+              onEndEditing={this.checkEmail.bind(this)} />
           </Item>
         </Form>
         <View style={styles.submitContainer}>
           <TouchableOpacity
             style={styles.buttonContainer}
             onPress={() =>
-              this.sendData(
+              this.checkValueInput(
                 fullname,
                 lastname,
                 nickname,
@@ -399,6 +511,13 @@ const styles = StyleSheet.create({
     fontFamily: "kanit",
     fontSize: 16,
     paddingTop: 20
+  },
+  headdetail: {
+    paddingVertical: 25,
+    paddingHorizontal: 10,
+    fontSize: 12,
+    fontFamily: "kanit",
+    color: "red"
   },
   textLabel: {
     fontSize: 14,

@@ -10,7 +10,7 @@ import {
 import { StackNavigator } from "react-navigation";
 import {Container} from 'native-base'
 import { connect } from "react-redux";
-import HeaderUser from "../../items/header_profile";
+import HeaderUser from "../../items/header_register";
 import FormAddressRegister from "./edit-registerAddressForm";
 import HeaderTeam from '../../items/headerTeam'
 
