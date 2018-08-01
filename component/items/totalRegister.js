@@ -13,7 +13,7 @@ class TotalRegister extends Component {
         detailPleace1: false,
         detailPleace2: false,
         singleRegis: false,
-        teamRegis: true,
+        teamRegis: false,
         detailRegis: true
     }
     componentDidMount() {
@@ -26,6 +26,7 @@ class TotalRegister extends Component {
         })
         this.checkPromoStatus()
         this.checkPleaceItem()
+        this.checkTeamRegister()
     }
     checkPromoStatus = () => {
         console.log("checkPromoStatus")
@@ -48,6 +49,15 @@ class TotalRegister extends Component {
             this.setState({ detailPleace2: !this.state.detailPleace2 })
         }
     }
+    checkTeamRegister = () => {
+        let count = this.props.friendlist.friendEvent
+        if (count.length > 1) {
+            this.setState({ teamRegis: true })
+        }
+        else {
+            this.setState({ singleRegis: true })
+        }
+    }
     showDetail = () => {
         this.setState({ detailRegis: !this.state.detailRegis })
     }
@@ -64,8 +74,8 @@ class TotalRegister extends Component {
                                 </View>
                             </View>
                             <View>
-                                <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.props.event.event.EventName} </Text>
-                                <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit' }}>({this.props.event.distanceEvent.distance} - {this.props.shirtphoto.size}) x 1 (Photo Plus)</Text>
+                                <Text style={{ fontSize: 10, fontFamily: 'kanit', textAlign: 'center', width: 150 }}>{this.props.event.event.EventName} </Text>
+                                <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit', textAlign: 'center', width: 150 }}>({this.props.event.distanceEvent.distance} - {this.props.shirtphoto.size}) x 1 (Photo Plus)</Text>
                             </View>
                             <View>
                                 <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.state.total}.0 ฿</Text>
@@ -82,7 +92,7 @@ class TotalRegister extends Component {
                                     </View>
                                 </View>
                                 <View>
-                                    <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.props.event.event.EventName} </Text>
+                                    <Text style={{ fontSize: 10, fontFamily: 'kanit', textAlign: 'center', width: 150 }}>{this.props.event.event.EventName} </Text>
                                     <TouchableOpacity onPress={() => this.setState({ detailRegis: !this.state.detailRegis })}>
                                         <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit' }}>รายละเอียด : แสดงรายชื่อ </Text>
                                     </TouchableOpacity>
@@ -105,18 +115,18 @@ class TotalRegister extends Component {
                         </View>
                         {this.state.detailPleace1 &&
                             <View>
-                                <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>รับเสื้อและเบอร์ที่ :  </Text>
+                                <Text style={{ fontSize: 10, fontFamily: 'kanit', textAlign: 'center' }}>รับเสื้อและเบอร์ที่ :  </Text>
                                 {/* <Text style={{ fontSize: 10, fontFamily: 'kanit', paddingHorizontal: 50 }}></Text> */}
                                 <View style={{ marginHorizontal: 20 }}>
-                                    <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit' }} numberOfLines={2}>{this.state.pleace}</Text>
+                                    <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit', textAlign: 'center', width: 150 }}>{this.state.pleace}</Text>
                                 </View>
                             </View>
                         }
                         {this.state.detailPleace2 &&
                             <View>
-                                <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>บริหารจัดส่ง :  </Text>
+                                <Text style={{ fontSize: 10, fontFamily: 'kanit', textAlign: 'center' }}>บริหารจัดส่ง   </Text>
                                 {/* <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>วันที่ 27 มกราคม 2561</Text> */}
-                                <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit', paddingHorizontal: 10 }}>{this.state.pleace}</Text>
+                                <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit', textAlign: 'center', width: 150 }}>{this.state.pleace}</Text>
                             </View>
                         }
                         <View>
@@ -202,7 +212,8 @@ const mapStateToProps = (state) => {
         shirtphoto: state.shirtphoto,
         choiceSend: state.choiceSend,
         address: state.address,
-        creditcard: state.creditcard
+        creditcard: state.creditcard,
+        friendlist: state.friendlist
     }
 }
 
