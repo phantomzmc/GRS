@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, TouchableHighlight } from 'react-native';
 import { Form, Item, Input, Label, Icon, Card } from 'native-base'
 import { connect } from 'react-redux'
 import Modal from "react-native-modal";
@@ -26,7 +26,9 @@ class CreditView extends Component {
             statusPayment: false,
             modalLoad: false,
             modalSuccess: false,
-            modalFaild: false
+            modalFaild: false,
+            statusButton: true,
+            statusButtonOnPress: false
         }
         this.genTokenCredit = this.genTokenCredit.bind(this)
     }
@@ -80,6 +82,28 @@ class CreditView extends Component {
                 this.setState({ modalFaild: !this.state.modalFaild })
             }, 3000);
             console.log("failed")
+        }
+    }
+    checkInputValue = () => {
+        let { nameCredit, numberCredit, expCredit, yearCredit, cvcCredit } = this.state
+        console.log("checkInputValue")
+        if (nameCredit) {
+            this.setState({ statusButton: true })
+        }
+        else if (numberCredit == "") {
+            this.setState({ statusButton: true })
+        }
+        else if (expCredit == "") {
+            this.setState({ statusButton: true })
+        }
+        else if (yearCredit == "") {
+            this.setState({ statusButton: true })
+        }
+        else if (cvcCredit == "") {
+            this.setState({ statusButton: true })
+        }
+        else {
+            this.setState({ statusButtonOnPress: true, statusButton: false })
         }
     }
     putDataCredit = (nameCredit, numberCredit, expCredit, yearCredit, cvcCredit) => {
@@ -162,6 +186,7 @@ class CreditView extends Component {
                             <Label style={styles.textLabel}>Ex.123</Label>
                             <Input
                                 onChangeText={(cvcCredit) => this.setState({ cvcCredit })}
+                                onSubmitEditing={() => this.checkInputValue()}
                             />
                         </Item>
                     </Form>
@@ -201,11 +226,20 @@ class CreditView extends Component {
                 </Modal>
 
                 <View style={styles.submitContainer}>
-                    <TouchableOpacity
-                        style={styles.buttonContainer}
-                        onPress={() => this.putDataCredit(nameCredit, numberCredit, expCredit, yearCredit, cvcCredit)}>
-                        <Text style={styles.textButton}> ยืนยันและชำระค่าบริการ </Text>
-                    </TouchableOpacity>
+                    {this.state.statusButton &&
+                        <TouchableHighlight
+                            style={styles.buttonContainer}>
+                            <Text style={styles.textButton}> ยืนยันและชำระค่าบริการ </Text>
+                        </TouchableHighlight>
+                    }
+                    {this.state.statusButtonOnPress &&
+                        <TouchableOpacity
+                            style={styles.buttonContainerOnPress}
+                            onPress={() => this.putDataCredit(nameCredit, numberCredit, expCredit, yearCredit, cvcCredit)}>
+                            <Text style={styles.textButton}> ยืนยันและชำระค่าบริการ </Text>
+                        </TouchableOpacity>
+                    }
+
                 </View>
             </View>
         );
@@ -320,6 +354,15 @@ const styles = StyleSheet.create({
         marginBottom: 30
     },
     buttonContainer: {
+        height: 40,
+        width: '80%',
+        backgroundColor: '#FC561F',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 20,
+        opacity: 0.7
+    },
+    buttonContainerOnPress: {
         height: 40,
         width: '80%',
         backgroundColor: '#FC561F',

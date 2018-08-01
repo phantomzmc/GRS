@@ -6,7 +6,8 @@ import {
     StyleSheet,
     Image,
     ScrollView,
-    TouchableOpacity
+    TouchableOpacity,
+    TouchableHighlight
 } from 'react-native';
 import { Card, Icon } from "native-base";
 import { connect } from "react-redux";
@@ -30,17 +31,18 @@ class TranferView extends Component {
             ACNumber: "",
             username: "",
             ImageSource: null,
-            statusButton: false
+            statusButton: true,
+            statusButtonOnPress : false
         }
     }
     async getCustomer() {
         let userprofile = this.props.userprofile.userprofile
         const data = await Omise.createCustomer({
-            'description': userprofile.FirstName + " " +userprofile.LastName,
+            'description': userprofile.FirstName + " " + userprofile.LastName,
             'email': userprofile.email
         });
         console.log(data)
-        this.props.setCharge({ id : data.id})
+        this.props.setCharge({ id: data.id })
         this.goTotalPayment()
     }
     selectPhotoTapped() {
@@ -71,7 +73,8 @@ class TranferView extends Component {
                 // let source = { uri: 'data:image/jpeg;base64,' + response.data };
                 this.setState({
                     ImageSource: source,
-                    statusButton: true
+                    statusButton : false,
+                    statusButtonOnPress: true
                 });
                 console.log(this.state.ImageSource)
             }
@@ -154,8 +157,13 @@ class TranferView extends Component {
                     </View>
                     <View style={styles.submitContainer}>
                         {this.state.statusButton &&
+                            <TouchableHighlight style={[styles.buttonContainer]}>
+                                <Text style={styles.textButton}>ถัดไป</Text>
+                            </TouchableHighlight>
 
-                            <TouchableOpacity style={[styles.buttonContainer]}
+                        }
+                        {this.state.statusButtonOnPress &&
+                            <TouchableOpacity style={[styles.buttonContainerOnPress]}
                                 onPress={this.getCustomer.bind(this)}>
                                 <Text style={styles.textButton}>ถัดไป</Text>
                             </TouchableOpacity>
@@ -245,6 +253,15 @@ const styles = StyleSheet.create({
         backgroundColor: '#FC561F',
         justifyContent: 'center',
         alignItems: 'center',
+        borderRadius: 20,
+        opacity : 0.7
+    },
+    buttonContainerOnPress: {
+        height: 40,
+        width: '80%',
+        backgroundColor: '#FC561F',
+        justifyContent: 'center',
+        alignItems: 'center',
         borderRadius: 20
     },
     textButton: {
@@ -278,4 +295,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default connect(mapStateToProps,mapDispatchToProps)(TranferView);
+export default connect(mapStateToProps, mapDispatchToProps)(TranferView);

@@ -13,7 +13,7 @@ class Login extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            username: "",
+            username: this.props.username.username,
             password: "",
             status: [],
             login : 1
@@ -127,10 +127,10 @@ class Login extends Component {
                 </View>
                 <View style={styles.formcontainer}>
                     <TextInput
-                        placeholder="เลขบัตรประชาชน"
+                        placeholder={this.state.username}
                         returnKeyType="next"
                         onSubmitEditing={() => this.passwordInput}
-                        onChangeText={(username) => this.setState({ username })}
+                        onChangeText={(username) => this.setState({ username : username })}
                         style={styles.input}
                     />
                     <TextInput
@@ -168,7 +168,8 @@ const mapStateToProps = (state) => {
     return {
         profile: state.profile,
         login: state.login,
-        token : state.token
+        token : state.token,
+        username : state.username
     }
 }
 const mapDispatchToProps = (dispatch) => {
