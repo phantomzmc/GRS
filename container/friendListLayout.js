@@ -101,13 +101,22 @@ class FriendList extends Component {
         this.props.navigation.navigate('Register')
         this.hideModalError()
     }
+    
 
     render() {
         let { searchText } = this.state
         return (
             <View style={styles.container}>
                 <HeaderTeam
-                    title={this.state.title}/>
+                    title={this.state.title}
+                    menu={true}
+                    goback={() => this.props.navigation.navigate('ControlDistance')}
+                    goLogin={() => this.props.navigation.navigate("Login")}
+                    goFriendlist={() => this.props.navigation.navigate('FriendList')}
+                    goHistory={() => this.props.navigation.navigate('HistoryContainer')}
+                    goEditProfile={() => this.props.navigation.navigate('EditProfile')}
+                    goRegis={() => this.props.navigation.navigate('ControlDistance')}
+                />
                 <StatusBar
                     barStyle="light-content"
                     hidden={false}
@@ -115,14 +124,20 @@ class FriendList extends Component {
                 />
                 <Header searchBar rounded>
                     <Item>
-                        <Icon name="ios-search" />
+                        <Icon name="ios-people" />
                         <Input
-                            placeholder="ค้นหาเพื่อน"
+                            placeholder="ค้นหาเลขบัตรประชาชน/หนังสือเดินทาง"
+                            style={{ fontFamily: 'kanit', fontSize: 14, paddingHorizontal: 10 }}
                             returnKeyType={"next"}
                             onChangeText={(searchText) => this.setState({ searchText })}
-                            onSubmitEditing={this.showModal} />
-                        <Icon name="ios-people" />
+                        // onSubmitEditing={this.showModal} 
+                        />
+
                     </Item>
+                    <Button small iconLeft transparent primary onPress={this.showModal}>
+                        <Icon name="ios-search" />
+                        <Text style={{ fontFamily: 'kanit' }}>ค้นหา</Text>
+                    </Button>
                 </Header>
 
                 <Modal isVisible={this.state.isModalVisible}>
@@ -130,7 +145,9 @@ class FriendList extends Component {
                         toggleModal={this.hideModal}
                         outputfriend={this.state.friendOutput[0]}
                         friend={datafriend}
-                        getAddFriend={this.addFriend.bind(this)} />
+                        getAddFriend={this.addFriend.bind(this)}
+                        textAdd="เพิ่มเพื่อน"
+                    />
                 </Modal>
                 <Modal isVisible={this.state.isModalVisibleError}>
                     <ErrorModalAddFriend

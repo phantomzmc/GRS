@@ -102,6 +102,7 @@ class ShirtPhotoPlus extends Component {
             <Container>
                 <HeaderTeam
                     title={this.state.title}
+                    menu={false}
                     goback={this.goPreveState.bind(this)} />
                 <StatusBar
                     barStyle="light-content"

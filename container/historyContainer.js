@@ -7,12 +7,19 @@ class HistoryContainer extends Component {
     state = {
         title: "ประวัติการวิ่ง"
     }
-    
+
     render() {
         return (
             <View style={styles.container}>
                 <HeaderTeam
-                    title={this.state.title}                    
+                    title={this.state.title}
+                    menu={true}
+                    goback={() => this.props.navigation.navigate('ControlDistance')}
+                    goLogin={() => this.props.navigation.navigate("Login")}
+                    goFriendlist={() => this.props.navigation.navigate('FriendList')}
+                    goHistory={() => this.props.navigation.navigate('HistoryContainer')}
+                    goEditProfile={() => this.props.navigation.navigate('EditProfile')}
+                    goRegis={() => this.props.navigation.navigate('ControlDistance')}
                 />
                 <StatusBar
                     barStyle="light-content"

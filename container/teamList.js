@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, StatusBar, RefreshControl } from 'react-native';
-import { Container, Header, Item, Input, Button, Tab, Tabs, TabHeading, Icon } from 'native-base';
+import { View, StyleSheet, ScrollView, TouchableOpacity, StatusBar, RefreshControl } from 'react-native';
+import { Container, Header, Item, Input, Button, Tab, Tabs, TabHeading, Icon, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import Modal from "react-native-modal";
 import axios from 'axios'
@@ -14,6 +14,7 @@ import ModalAddFriend from '../component/modal/addFriend'
 import ErrorModalAddFriend from '../component/modal/addFriend_error'
 import AddError from '../component/modal/addStatus_error'
 import AddStatus from '../component/modal/addStatus'
+import FriendDistance from '../container/friendDistance'
 import req from '../config/uri_req'
 import api_key from '../config/api_key'
 
@@ -37,7 +38,9 @@ class TeamList extends Component {
             friendOutput: [],
             addStatus: [],
             datafriendlist: [],
-            refreshing: false
+            refreshing: false,
+            friendlist: true,
+            frienddistance: false
         }
         this.getFriend = this.getFriend.bind(this)
     }
@@ -50,9 +53,9 @@ class TeamList extends Component {
             console.log("update")
             this.setState({ dataSource: this.state.dataSource })
             this._onRefresh()
-        }      
+        }
     }
-    showModal() {
+    showModal = () => {
         let { searchText } = this.state
         let data = ({
             params: [
@@ -76,7 +79,6 @@ class TeamList extends Component {
                 this.setState({ isModalVisibleError: !this.state.isModalVisibleError })
                 // console.error(error);
             });
-
     }
     getFriend() {
         let data = ({
@@ -104,34 +106,11 @@ class TeamList extends Component {
     _addFriend(newitem) {
         this.state.datafriendlist.push(newitem)
         console.log(newitem)
-        // this.props.setFriendRegister(this.state.datafriendlist)
-
-        let data = ({
-            params: [
-                { name: "RunnerID", value: this.props.userprofile.userprofile.RunnerID },
-                { name: "FriendID", value: newitem.RunnerID }
-            ]
-        })
-        axios.post(uri2, data, {
-            headers: {
-                "X-DreamFactory-API-Key": apikey,
-                "X-DreamFactory-Session-Token": this.props.token.token,
-            },
-            responseType: 'json'
-        })
-            .then((response) => {
-                this.setState({ isLoading: false, addStatus: response.data });
-                console.log(this.state.addStatus[0])
-                this.checkAddFriendStatus()
-                this._onRefresh()
-            }).catch((error) => {
-                this.setState({ isLoading: true })
-                setTimeout(()=> {
-                    this._addFriend(newitem)
-                },2000)
- 
-                // this.props.navigation.navigate('EventList')
-            });
+        this.props.setFriendRegister(this.state.datafriendlist)
+        this.props.navigation.navigate('FriendDistance')
+        setTimeout(() => {
+            this.props.navigation.navigate('TeamList')
+        }, 2000)
 
     }
     checkAddFriendStatus() {
@@ -188,14 +167,25 @@ class TeamList extends Component {
     goLogin = () => {
         this.props.navigation.navigate('Login')
     }
+    gotoAddress = () => {
+        this.props.navigation.navigate("AddressLayout")
+    }
 
     render() {
         const { navigate } = this.props.navigation;
+        let { searchText } = this.state
         return (
             <Container style={styles.container}>
                 <HeaderTeam
                     title={this.state.title}
-                    goback={this.goLogin.bind(this)} />
+                    menu={true}
+                    goback={this.goLogin.bind(this)}
+                    goLogin={() => this.props.navigation.navigate("Login")}
+                    goFriendlist={() => this.props.navigation.navigate('FriendList')}
+                    goHistory={() => this.props.navigation.navigate('HistoryContainer')}
+                    goEditProfile={() => this.props.navigation.navigate('EditProfile')}
+                    goRegis={() => this.props.navigation.navigate('ControlDistance')}
+                />
                 <StatusBar
                     barStyle="light-content"
                     hidden={false}
@@ -224,41 +214,56 @@ class TeamList extends Component {
                                         <HeaderProfile />
                                         <Header searchBar rounded>
                                             <Item>
-                                                <Icon name="ios-search" />
+                                                <Icon name="ios-people" />
                                                 <Input
-                                                    placeholder="ค้นหาเพื่อน"
+                                                    placeholder="ค้นหาเลขบัตรประชาชน/หนังสือเดินทาง"
+                                                    style={{ fontFamily: 'kanit', fontSize: 14, paddingHorizontal: 10 }}
                                                     returnKeyType={"next"}
                                                     onChangeText={(searchText) => this.setState({ searchText })}
-                                                    onSubmitEditing={this.showModal.bind(this)}
+                                                    onSubmitEditing={this.showModal}
                                                 />
-                                                <Icon name="ios-people" />
-                                            </Item>
-                                        </Header>
-                                        <EventListFriend
-                                            friend={this.state.dataSource}
-                                        />
 
-                                        {/* <Tabs>
-                                            <Tab heading={<TabHeading><Icon name="ios-people" /></TabHeading>}>
-                                                <EventListFriend friend={datafriend} />
-                                            </Tab>
-                                            <Tab heading={<TabHeading><Icon name="ios-heart" /></TabHeading>}>
-                                                <Text>No Icon</Text>
-                                                <EventListFriend friend={datafriend} />
-                                            </Tab>
-                                        </Tabs> */}
-                                        <View style={styles.submitContainer}>
-                                            <TouchableOpacity style={styles.buttonContainer}
-                                                onPress={() => navigate('FriendDistance')}>
-                                                <Text style={styles.textButton}>+ เพิ่มในการสมัคร</Text>
-                                            </TouchableOpacity>
-                                        </View>
+                                            </Item>
+                                            <Button small iconLeft transparent primary onPress={this.showModal}>
+                                                <Icon name="ios-search" />
+                                                <Text style={{ fontFamily: 'kanit' }}>ค้นหา</Text>
+                                            </Button>
+                                        </Header>
+                                        <TouchableOpacity onPress={() => this.setState({ friendlist: !this.state.friendlist })} style={{ flexDirection: "row", justifyContent: 'space-between', backgroundColor: "#f1f1f1" }}>
+                                            <Text style={styles.text}>รายชื่อเพื่อน</Text>
+                                            <Icon name="ios-arrow-down" style={{ padding: 10 }} type="Ionicons" />
+                                        </TouchableOpacity>
+                                        {this.state.friendlist &&
+                                            <View>
+                                                <EventListFriend
+                                                    friend={this.state.dataSource}
+                                                />
+                                                <View style={styles.submitContainer}>
+                                                    <TouchableOpacity style={styles.buttonContainer}
+                                                        onPress={() => navigate('FriendDistance')}>
+                                                        <Text style={styles.textButton}>+ เพิ่มในการสมัคร</Text>
+                                                    </TouchableOpacity>
+                                                </View>
+                                            </View>
+                                        }
+                                        <TouchableOpacity onPress={() => this.setState({ frienddistance: !this.state.frienddistance })} style={{ flexDirection: "row", justifyContent: 'space-between', backgroundColor: "#f1f1f1" }}>
+                                            <Text style={styles.text}>ลงทะเบียนแบบกลุ่ม</Text>
+                                            <Icon name="ios-arrow-down" style={{ padding: 10 }} type="Ionicons" />
+                                        </TouchableOpacity>
+                                        {this.state.frienddistance &&
+                                            <View>
+                                                <FriendDistance 
+                                                    goAddress={()=>this.gotoAddress()}
+                                                />
+                                            </View>
+                                        }
                                         <Modal isVisible={this.state.isModalVisible}>
                                             <ModalAddFriend
                                                 toggleModal={this.hideModal}
                                                 outputfriend={this.state.friendOutput[0]}
                                                 friend={datafriend}
                                                 getAddFriend={this._addFriend.bind(this)}
+                                                textAdd="เพิ่มในการสมัคร"
                                             />
                                         </Modal>
                                         <Modal isVisible={this.state.isModalVisibleError}>
@@ -314,7 +319,7 @@ const styles = StyleSheet.create({
     submitContainer: {
         marginTop: 30,
         alignItems: 'center',
-        marginBottom: 100,
+        marginBottom: 30,
     },
     buttonContainer: {
         height: 40,
@@ -340,6 +345,13 @@ const styles = StyleSheet.create({
     textLabel: {
         color: '#FC561F',
         fontSize: 12,
+        fontFamily: 'kanit',
+    },
+    text: {
+        fontSize: 20,
+        fontWeight: '700',
+        color: '#000',
+        padding: 10,
         fontFamily: 'kanit',
     },
 

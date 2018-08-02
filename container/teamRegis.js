@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, StatusBar } from 'react-native';
-import { Container, Header, Item, Input, Button, Tab, Tabs, TabHeading, Icon } from 'native-base';
+import { View, StyleSheet, ScrollView, TouchableOpacity, StatusBar } from 'react-native';
+import { Container, Header, Item, Input, Button, Tab, Tabs, TabHeading, Icon, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import Modal from "react-native-modal";
 import axios from 'axios'
@@ -112,15 +112,19 @@ class TeamRegis extends Component {
                         <HeaderProfile />
                         <Header searchBar rounded>
                             <Item>
-                                <Icon name="ios-search" />
+                                <Icon name="ios-people" />
                                 <Input
-                                    placeholder="ค้นหาเพื่อน"
+                                    placeholder="ค้นหาเลขบัตรประชาชน/หนังสือเดินทาง"
+                                    style={{ fontFamily: 'kanit', fontSize: 14, paddingHorizontal: 10 }}
                                     returnKeyType={"next"}
                                     onChangeText={(searchText) => this.setState({ searchText })}
-                                    onSubmitEditing={this.showModal.bind(this)}
+                                    onSubmitEditing={this.showModal}
                                 />
-                                <Icon name="ios-people" />
                             </Item>
+                            <Button small iconLeft transparent primary onPress={this.showModal}>
+                                <Icon name="ios-search" />
+                                <Text>ค้นหา</Text>
+                            </Button>
                         </Header>
                         <Tabs>
                             <Tab heading={<TabHeading><Icon name="ios-people" /></TabHeading>}>

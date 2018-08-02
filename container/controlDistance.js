@@ -103,7 +103,7 @@ class ControlDistance extends Component {
     goAddTeam() {
         console.log("Team")
         if (this.props.profile.statuslogin == 1) {
-            this.props.navigation.navigate('TabRouter')
+            this.props.navigation.navigate('TeamList')
         }
         else {
             Alert.alert("ลงทะเบียนแบบกลุ่ม", "การลงทะเบียนแบบกลุ่มจะต้องทำการเข้าสู่ระบบก่อน", [
@@ -123,6 +123,7 @@ class ControlDistance extends Component {
             <Container style={styles.container}>
                 <HeaderTeam
                     title={this.state.title}
+                    menu={true}
                     goback={this.goSingleLogin.bind(this)}
                     goLogin={() => this.props.navigation.navigate("Login")} 
                     goFriendlist={()=> this.props.navigation.navigate('FriendList')}

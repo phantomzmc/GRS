@@ -18,7 +18,7 @@ class FriendDistance extends Component {
     }
     onGotoAddress = () => {
         this.props.setStatusRegis(this.state.statusRegis)
-        this.props.navigation.navigate("AddressLayout")
+        this.props.goAddress()
     }
     onButtonChangePayment = () => {
         this.props.navigation.navigate("ButtonChangePayment")
@@ -36,8 +36,7 @@ class FriendDistance extends Component {
                     hidden={false}
                     translucent={true}
                 />
-                <HeaderTeam title={this.state.title}
-                    goback={this.onPressGoBack.bind(this)} />
+                
                 <ScrollView>
                     <View style={styles.container}>
                         <FriendInEvent />

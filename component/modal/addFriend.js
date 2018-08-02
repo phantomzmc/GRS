@@ -37,7 +37,7 @@ class ModalAddFriend extends Component {
                     </Button>
                     <Button iconLeft rounded success onPress={this.onAddFriend.bind(this)} onPressOut={this.props.toggleModal} style={{ marginHorizontal: 10, justifyContent: "center" }}>
                         <Icon name="ios-add-outline" style={{ color: "#fff" }} />
-                        <Text style={styles.textButton}>เพิ่มเพื่อน</Text>
+                        <Text style={styles.textButton}>{this.props.textAdd}</Text>
                     </Button>
                 </View>
             </View>

@@ -29,7 +29,7 @@ class UserRegister extends Component {
       verifycode: ""
     };
   }
-  
+
   gotoListEvent = (
     fullname,
     lastname,
@@ -73,7 +73,13 @@ class UserRegister extends Component {
       <Container>
         <HeaderTeam
           title={this.state.title}
-          goback={this.gotoBack.bind(this)} />
+          menu={true}
+          goback={() => this.props.navigation.navigate('ControlDistance')}
+          goLogin={() => this.props.navigation.navigate("Login")}
+          goFriendlist={() => this.props.navigation.navigate('FriendList')}
+          goHistory={() => this.props.navigation.navigate('HistoryContainer')}
+          goEditProfile={() => this.props.navigation.navigate('EditProfile')}
+          goRegis={() => this.props.navigation.navigate('ControlDistance')} />
         <StatusBar
           barStyle="light-content"
           hidden={false}

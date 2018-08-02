@@ -30,6 +30,8 @@ import EditProfileAddress from '../component/form/editProfile/edit-userAddressRe
 import EditProfileHelp from '../component/form/editProfile/edit-userHelpRegister'
 import ControlPayment from '../container/controlPayment'
 import HeaderTeam from '../component/items/headerTeam'
+import FriendList from '../container/friendListLayout'
+import HistoryContainer from '../container/historyContainer'
 
 import Test from '../mockdata'
 
@@ -38,7 +40,7 @@ export default StackNavigator({
     // Test : {
     //     screen : Test
     // },
-    
+
     EventList: {
         screen: EventList,
         navigationOptions: {
@@ -145,12 +147,12 @@ export default StackNavigator({
             header: () => null
         }
     },
-    TabRouter: {
-        screen: TabRouter,
-        navigationOptions: {
-            header: () => null
-        }
-    },
+    // TabRouter: {
+    //     screen: TabRouter,
+    //     navigationOptions: {
+    //         header: () => null
+    //     }
+    // },
     TeamList: {
         screen: TeamList,
         navigationOptions: {
@@ -226,12 +228,26 @@ export default StackNavigator({
             header: () => null
         }
     },
-    ListTotalRegis : {
-        screen : ListTotalRegis
+    ListTotalRegis: {
+        screen: ListTotalRegis
     },
-    HeaderTeam : {
-        screen : HeaderTeam,
-    }
+    HeaderTeam: {
+        screen: HeaderTeam,
+    },
+    
+    FriendList: {
+        screen: FriendList,
+        navigationOptions: {
+            header: () => null
+        }
+    },
+    HistoryContainer: {
+        screen: HistoryContainer,
+        navigationOptions: {
+            header: () => null
+        }
+    },
+
 
 
 });

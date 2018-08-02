@@ -70,7 +70,7 @@ class Login extends Component {
             this.props.setUsername(this.state.username)
             this.props.setUserStatus(status[0])
             this.props.setStatusLogin(login)
-            this.gotoTabTeam()
+            this.gotoControlDistance()
         }
         else if (status[0].SignInStatus === "1" && status[0].ActivateStatus === "0") {
             Alert.alert('กรุณายืนยันตัวตน', 'ผู้ใช้งานยังไม่ได้ทำการยืนยันตัวตน กรุณายืนยันตัวตนด้วย', [
@@ -104,7 +104,10 @@ class Login extends Component {
         this.props.navigation.navigate('Verify')
     }
     gotoTabTeam = () => {
-        this.props.navigation.navigate("TabRouter")
+        this.props.navigation.navigate("TeamList")
+    }
+    gotoControlDistance = () => {
+        this.props.navigation.navigate("ControlDistance")
     }
     gotoDistance = () => {
         console.log(this.state.username)

@@ -85,7 +85,8 @@ class AddressLayout extends Component {
     }
     gotoBack = () => {
         if (this.state.countFriend > 1) {
-            this.props.navigation.navigate('FriendDistance')
+            // this.props.navigation.navigate('FriendDistance')
+            this.props.navigation.navigate('TeamList')
         }
         else {
             this.props.navigation.navigate('ShirtPhotoPlus')
@@ -146,6 +147,7 @@ class AddressLayout extends Component {
                 />
                 <HeaderTeam
                     title={this.state.title}
+                    menu={false}
                     goback={this.gotoBack.bind(this)}
                 />
                 <ScrollView >

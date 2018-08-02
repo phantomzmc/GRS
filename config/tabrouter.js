@@ -64,44 +64,44 @@ var myTabs = TabNavigator({
         tabBarOptions: {
             activeTintColor: '#FC561F',
         },
-        tabBarComponent: props => {
-            return (
-                <Footer>
-                    <FooterTab>
-                        <Button
-                            vertical
-                            activeTintColor='#FC561F'
-                            active={props.navigationState.index === 0}
-                            onPress={() => props.navigation.navigate("TeamList")}>
-                            <Icon name="ios-people" style={{ color: '#FC561F' }} />
-                            <Text style={{ fontSize: 8, color: '#FC561F' }}>ลงทะเบียนกลุ่ม</Text>
-                        </Button>
-                        <Button
-                            vertical
-                            activeTintColor='#FC561F'
-                            active={props.navigationState.index === 1}
-                            onPress={() => props.navigation.navigate("FriendList")}>
-                            <Icon name="ios-contacts" style={{ color: '#FC561F' }} />
-                            <Text style={{ fontSize: 8, color: '#FC561F' }}>รายชื่อเพื่อน</Text>
-                        </Button>
-                        <Button
-                            vertical
-                            active={props.navigationState.index === 2}
-                            onPress={() => props.navigation.navigate("HistoryContainer")}>
-                            <Icon name="ios-list" style={{ color: '#FC561F' }} />
-                            <Text style={{ fontSize: 8, color: '#FC561F' }}>ประวัติการวิ่ง</Text>
-                        </Button>
-                        <Button
-                            vertical
-                            active={props.navigationState.index === 3}
-                            onPress={() => props.navigation.navigate("EditProfile")}>
-                            <Icon name="ios-contact" style={{ color: '#FC561F' }} />
-                            <Text style={{ fontSize: 8, color: '#FC561F' }}>ข้อมูลส่วนตัว</Text>
-                        </Button>
-                    </FooterTab>
-                </Footer>
-            );
-        }
+        // tabBarComponent: props => {
+        //     return (
+        //         <Footer>
+        //             <FooterTab>
+        //                 <Button
+        //                     vertical
+        //                     activeTintColor='#FC561F'
+        //                     active={props.navigationState.index === 0}
+        //                     onPress={() => props.navigation.navigate("TeamList")}>
+        //                     <Icon name="ios-people" style={{ color: '#FC561F' }} />
+        //                     <Text style={{ fontSize: 8, color: '#FC561F' }}>ลงทะเบียนกลุ่ม</Text>
+        //                 </Button>
+        //                 <Button
+        //                     vertical
+        //                     activeTintColor='#FC561F'
+        //                     active={props.navigationState.index === 1}
+        //                     onPress={() => props.navigation.navigate("FriendList")}>
+        //                     <Icon name="ios-contacts" style={{ color: '#FC561F' }} />
+        //                     <Text style={{ fontSize: 8, color: '#FC561F' }}>รายชื่อเพื่อน</Text>
+        //                 </Button>
+        //                 <Button
+        //                     vertical
+        //                     active={props.navigationState.index === 2}
+        //                     onPress={() => props.navigation.navigate("HistoryContainer")}>
+        //                     <Icon name="ios-list" style={{ color: '#FC561F' }} />
+        //                     <Text style={{ fontSize: 8, color: '#FC561F' }}>ประวัติการวิ่ง</Text>
+        //                 </Button>
+        //                 <Button
+        //                     vertical
+        //                     active={props.navigationState.index === 3}
+        //                     onPress={() => props.navigation.navigate("EditProfile")}>
+        //                     <Icon name="ios-contact" style={{ color: '#FC561F' }} />
+        //                     <Text style={{ fontSize: 8, color: '#FC561F' }}>ข้อมูลส่วนตัว</Text>
+        //                 </Button>
+        //             </FooterTab>
+        //         </Footer>
+        //     );
+        // }
     });
 
 export default myTabs;
