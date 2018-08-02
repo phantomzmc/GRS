@@ -210,7 +210,7 @@ const username = (state = {}, action) => {
   return state;
 }
 let datapic = ""
-const userprofile = (state = { datapic, userprofile: { PicProfile: "", BackgroundProfile: "" } }, action) => {
+const userprofile = (state = { datapic, userprofile: { PicProfile: "", BackgroundProfile: "" }, userstatus : "" }, action) => {
   switch (action.type) {
     case "setUserProfile": {
       state.userprofile = action.payload
@@ -221,13 +221,13 @@ const userprofile = (state = { datapic, userprofile: { PicProfile: "", Backgroun
       break;
     }
     case "setImageProfile": {
-        state.imgprofile = action.payload,
+      state.imgprofile = action.payload,
         state.userprofile.PicProfile = action.payload
       break;
     }
     case "setImageBackground": {
-      state.imgbackground = action.payload, 
-      state.userprofile.BackgroundProfile = action.payload
+      state.imgbackground = action.payload,
+        state.userprofile.BackgroundProfile = action.payload
       break;
     }
     case "setUserStatus": {

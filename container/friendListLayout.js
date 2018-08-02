@@ -26,7 +26,7 @@ class FriendList extends Component {
         addStatus: [],
         datafriendlist: []
     }
-    
+
     showModal = () => {
         let { searchText } = this.state
         let data = ({
@@ -44,7 +44,7 @@ class FriendList extends Component {
             responseType: 'json'
         })
             .then((response) => {
-                this.setState({ isLoading: false, friendOutput: response.data});
+                this.setState({ isLoading: false, friendOutput: response.data });
                 console.log(this.state.friendOutput[0])
                 this.checkRegisStatus()
             }).catch((error) => {
@@ -106,7 +106,8 @@ class FriendList extends Component {
         let { searchText } = this.state
         return (
             <View style={styles.container}>
-                <HeaderTeam title={this.state.title} />
+                <HeaderTeam
+                    title={this.state.title}/>
                 <StatusBar
                     barStyle="light-content"
                     hidden={false}
@@ -138,7 +139,7 @@ class FriendList extends Component {
                     />
                 </Modal>
 
-                <FriendListView 
+                <FriendListView
                     AddFriendDetail={() => this.gotoAddFriendDetail()}
                     TeamList={() => this.gotoTeamList()}
                     friend={this.state.datafriendlist} />
@@ -148,7 +149,7 @@ class FriendList extends Component {
 }
 const mapStateToProps = state => {
     return {
-        token : state.token,
+        token: state.token,
         userprofile: state.userprofile
     }
 }

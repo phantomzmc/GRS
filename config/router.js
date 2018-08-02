@@ -29,6 +29,7 @@ import EditProfile from '../component/form/editProfile/edit-userRegister'
 import EditProfileAddress from '../component/form/editProfile/edit-userAddressRegister'
 import EditProfileHelp from '../component/form/editProfile/edit-userHelpRegister'
 import ControlPayment from '../container/controlPayment'
+import HeaderTeam from '../component/items/headerTeam'
 
 import Test from '../mockdata'
 
@@ -228,6 +229,9 @@ export default StackNavigator({
     ListTotalRegis : {
         screen : ListTotalRegis
     },
+    HeaderTeam : {
+        screen : HeaderTeam,
+    }
 
 
 });

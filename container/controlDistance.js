@@ -123,7 +123,13 @@ class ControlDistance extends Component {
             <Container style={styles.container}>
                 <HeaderTeam
                     title={this.state.title}
-                    goback={this.goSingleLogin.bind(this)} />
+                    goback={this.goSingleLogin.bind(this)}
+                    goLogin={() => this.props.navigation.navigate("Login")} 
+                    goFriendlist={()=> this.props.navigation.navigate('FriendList')}
+                    goHistory={()=> this.props.navigation.navigate('HistoryContainer')}
+                    goEditProfile={()=> this.props.navigation.navigate('EditProfile')}
+                    goRegis={()=> this.props.navigation.navigate('ControlDistance')}
+                    />
                 <StatusBar
                     barStyle="light-content"
                     hidden={false}
