@@ -17,6 +17,8 @@ import AddStatus from '../component/modal/addStatus'
 import FriendDistance from '../container/friendDistance'
 import req from '../config/uri_req'
 import api_key from '../config/api_key'
+import datafriendRegis from '../component/list/listFriend/dataFriend-regis'
+import SummaryTotal from '../component/items/summary'
 
 var uri = req[0].uspSearchFriend
 var uri2 = req[0].uspAddFriendLists
@@ -104,7 +106,7 @@ class TeamList extends Component {
             });
     }
     _checkAddFriend(newitem, status) {
-        var data = this.state.datafriendlist
+        var data = datafriendRegis
         var str_newitem = newitem
         for (i = 0; i <= data.length; i++) {
             if (JSON.stringify(str_newitem) == JSON.stringify(data[i])) {
@@ -116,7 +118,9 @@ class TeamList extends Component {
                 status = true
             }
         }
-        this._addFriend(newitem, status)
+        setTimeout(() => {
+            this._addFriend(newitem, status)
+        }, 1500)
         return status
     }
     _addFriend(newitem, status) {
@@ -124,24 +128,16 @@ class TeamList extends Component {
         var value = status
         console.log(value)
         if (value == false) {
-            Alert.alert(
-                'เพิ่มเพื่อนแล้ว',
-                'คุณได้เพิ่มเพื่อนคนนี้ลงในงานนี้แล้ว',
-                [
-                    { text: 'OK' },
-                ],
-                { cancelable: false }
-            )
+            this.setState({ isAddStatusError : true})
         }
         else if (value == true) {
-            this.state.datafriendlist.push(newitem)
-            this.props.setFriendRegister(this.state.datafriendlist)
+            datafriendRegis.push(newitem)
+            this.props.setFriendRegister(datafriendRegis)
             this.setState({ frienddistance: true })
             setTimeout(() => {
                 this.setState({ frienddistance: false })
             }, 1000)
         }
-
     }
     checkAddFriendStatus() {
         console.log("checkAddFriendStatus")
@@ -268,12 +264,12 @@ class TeamList extends Component {
                                                 <EventListFriend
                                                     friend={this.state.dataSource}
                                                 />
-                                                <View style={styles.submitContainer}>
+                                                {/* <View style={styles.submitContainer}>
                                                     <TouchableOpacity style={styles.buttonContainer}
                                                         onPress={() => navigate('FriendDistance')}>
                                                         <Text style={styles.textButton}>+ เพิ่มในการสมัคร</Text>
                                                     </TouchableOpacity>
-                                                </View>
+                                                </View> */}
                                             </View>
                                         }
                                         <TouchableOpacity onPress={() => this.setState({ frienddistance: !this.state.frienddistance })} style={{ flexDirection: "row", justifyContent: 'space-between', backgroundColor: "#f1f1f1" }}>
@@ -315,6 +311,7 @@ class TeamList extends Component {
                                 </ScrollView>
                             </View>
                         </Container>
+                        <SummaryTotal />
                     </Tab>
                 </Tabs>
             </Container>

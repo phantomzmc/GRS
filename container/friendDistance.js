@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import FriendInEvent from '../component/list/listFriend/frienInEvent'
-import { View, StyleSheet, TouchableOpacity, Text, ScrollView, StatusBar } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Text, ScrollView, StatusBar, TouchableHighlight } from 'react-native';
 import { Container } from "native-base";
 import { connect } from 'react-redux'
 
@@ -11,8 +11,28 @@ class FriendDistance extends Component {
     state = {
         title: "เลือกระยะทาง",
         price: [],
-        statusRegis: 1
+        statusRegis: 1,
+        statusButton: true,
+        statusButtonOnPress: false
     }
+    checkValueRegis() {
+        let friendlists = this.props.friendlist.friendRegis
+        let friendevent = this.props.friendlist.friendEvent
+        var countFriend = friendlists.length
+        var countInEvent = friendevent.length
+        console.log(countFriend)
+        console.log(countInEvent)
+
+        if (countFriend == countInEvent) {
+            console.log("update")
+            this.setState({ statusButtonOnPress: true, statusButton: false })
+        }
+        else if (countFriend != countInEvent) {
+            console.log("don't update")
+            this.setState({ statusButton: true, statusButtonOnPress: false })
+        }
+    }
+
     onTest = () => {
         this.props.navigation.navigate("ListTotalRegis")
     }
@@ -27,7 +47,6 @@ class FriendDistance extends Component {
         this.props.navigation.navigate("TabRouter")
     }
 
-
     render() {
         return (
             <Container>
@@ -36,19 +55,27 @@ class FriendDistance extends Component {
                     hidden={false}
                     translucent={true}
                 />
-                
                 <ScrollView>
-                    <View style={styles.container}>
-                        <FriendInEvent />
-                        <View style={styles.submitContainer}>
-                            <TouchableOpacity style={styles.buttonContainer}
+                <View style={styles.container}>
+                    <FriendInEvent />
+                    <View style={styles.submitContainer}>
+                        {this.state.statusButton &&
+                            <TouchableHighlight style={styles.buttonContainer}
+                                onPress={this.checkValueRegis.bind(this)}
+                            >
+                                <Text style={styles.textButton}>ถัดไป</Text>
+                            </TouchableHighlight>
+                        }
+                        {this.state.statusButtonOnPress &&
+                            <TouchableOpacity style={styles.buttonContaineronPress}
                                 onPress={this.onGotoAddress.bind(this)}>
                                 <Text style={styles.textButton}>ถัดไป</Text>
                             </TouchableOpacity>
-                        </View>
+                        }
+
                     </View>
+                </View>
                 </ScrollView>
-                <SummaryTotal />
             </Container>
         )
     }
@@ -85,6 +112,15 @@ const styles = StyleSheet.create({
         marginBottom: 30,
     },
     buttonContainer: {
+        height: 40,
+        width: '80%',
+        backgroundColor: '#FC561F',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 20,
+        opacity: 0.7
+    },
+    buttonContaineronPress: {
         height: 40,
         width: '80%',
         backgroundColor: '#FC561F',

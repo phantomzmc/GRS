@@ -17,45 +17,55 @@ class PhotoPlus extends Component {
             value: false,
             pricePhotoPlus: null,
             textSwitch: "",
-            // priceEvent: this.props.event.distanceEvent.price,
-            totalPrice: ""
+            totalPrice: "",
+            // priceEvent: parseFloat(this.props.event.totalRegister),
+            // pricePhotoPlus: parseFloat(this.props.friendlist.dataDis[0].PhotoPlusCost)
         }
     }
-    componentWillMount() {
-        this.setState({
-            priceEvent: parseFloat(this.props.event.totalRegister),
-            pricePhotoPlus: parseFloat(this.props.friendlist.dataDis[0].PhotoPlusCost)
-        })
-        console.log(this.state.priceEvent)
-        console.log(this.state.pricePhotoPlus)
-    }
+    componentDidMount() {
+        setTimeout(() => {
+            this.setState({
+                priceEvent: parseFloat(this.props.event.totalRegister),
+                pricePhotoPlus: parseFloat(this.props.friendlist.dataDis[0].PhotoPlusCost)
+            })
+            console.log(this.state.priceEvent)
+            console.log(this.state.pricePhotoPlus)
+            this.sumPhotoPlus()
+        }, 500)
 
+    }
     photoPlusSwitch = () => {
         let { dataFriendRegis } = this.state
-        this.sumPrice()
         this.setState({ value: !this.state.value })
+        this.sumPrices()
         // console.log(this.state.pricePhotoPlus)
-        this.props.setTotal(this.state.totalPrice)
-        this.props.setTotalRegister(this.state.totalPrice)
-    }
 
-    sumPrice = () => {
+    }
+    sumPhotoPlus() {
+        let { priceEvent, pricePhotoPlus } = this.state
+        const sum = pricePhotoPlus + priceEvent
+        console.log(sum)
+        dataPrice.push(parseFloat(pricePhotoPlus))
+        this.setState({ totalPrice: sum })
+    }
+    sumPrices() {
         let { value, priceEvent, pricePhotoPlus } = this.state
+        let index = this.props
         if (value === true) {
-            const sum = pricePhotoPlus + priceEvent
-            console.log(sum)
-            this.setState({ totalPrice: sum })
+            this.sumPhotoPlus()
             console.log(this.state.totalPrice)
-            dataPrice.push(parseFloat(pricePhotoPlus))
+            console.log(dataPrice)
             this.props.setPhotoPlus("0")
 
         }
         else if (value === false) {
             this.setState({ totalPrice: this.state.priceEvent })
-            dataPrice.push(parseFloat(priceEvent))
+            // dataPrice.push(parseFloat(priceEvent))
+            console.log(dataPrice)
             this.props.setPhotoPlus("1")
-
         }
+        this.props.setTotal(this.state.totalPrice)
+        this.props.setTotalRegister(this.state.totalPrice)
     }
 
     render() {
@@ -99,7 +109,7 @@ const mapDispatchToState = (dispatch) => {
                 payload: total
             })
         },
-       
+
     }
 }
 

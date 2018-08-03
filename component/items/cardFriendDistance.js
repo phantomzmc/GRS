@@ -71,6 +71,7 @@ class CradFriendDistance extends Component {
 
     }
     sumPrice() {
+        console.log(dataPrice)
         const add = (a, b) =>
             a + b
         const sum = dataPrice.reduce(add)
@@ -236,6 +237,7 @@ class CradFriendDistance extends Component {
                     <CardItem>
                         <PhotoPlusFriend
                             setPhotoPlus={this.photoPlusSwitch.bind(this)}
+                            index={this.state.index}
                         />
                         {/* <Left>
                             <Icon name="ios-camera-outline" style={{ fontSize: 20 }} />
