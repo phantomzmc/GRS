@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, ScrollView, TouchableOpacity, StatusBar, RefreshControl } from 'react-native';
+import { View, StyleSheet, ScrollView, TouchableOpacity, StatusBar, RefreshControl, Alert } from 'react-native';
 import { Container, Header, Item, Input, Button, Tab, Tabs, TabHeading, Icon, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import Modal from "react-native-modal";
@@ -103,14 +103,44 @@ class TeamList extends Component {
                 // console.error(error);
             });
     }
-    _addFriend(newitem) {
-        this.state.datafriendlist.push(newitem)
-        console.log(newitem)
-        this.props.setFriendRegister(this.state.datafriendlist)
-        this.props.navigation.navigate('FriendDistance')
-        setTimeout(() => {
-            this.props.navigation.navigate('TeamList')
-        }, 2000)
+    _checkAddFriend(newitem, status) {
+        var data = this.state.datafriendlist
+        var str_newitem = newitem
+        for (i = 0; i <= data.length; i++) {
+            if (JSON.stringify(str_newitem) == JSON.stringify(data[i])) {
+                console.log("ซ้ำ")
+                status = false
+                break;
+            }
+            else if (JSON.stringify(str_newitem) != JSON.stringify(data[i])) {
+                status = true
+            }
+        }
+        this._addFriend(newitem, status)
+        return status
+    }
+    _addFriend(newitem, status) {
+        // this._checkAddFriend(newitem)
+        var value = status
+        console.log(value)
+        if (value == false) {
+            Alert.alert(
+                'เพิ่มเพื่อนแล้ว',
+                'คุณได้เพิ่มเพื่อนคนนี้ลงในงานนี้แล้ว',
+                [
+                    { text: 'OK' },
+                ],
+                { cancelable: false }
+            )
+        }
+        else if (value == true) {
+            this.state.datafriendlist.push(newitem)
+            this.props.setFriendRegister(this.state.datafriendlist)
+            this.setState({ frienddistance: true })
+            setTimeout(() => {
+                this.setState({ frienddistance: false })
+            }, 1000)
+        }
 
     }
     checkAddFriendStatus() {
@@ -252,8 +282,8 @@ class TeamList extends Component {
                                         </TouchableOpacity>
                                         {this.state.frienddistance &&
                                             <View>
-                                                <FriendDistance 
-                                                    goAddress={()=>this.gotoAddress()}
+                                                <FriendDistance
+                                                    goAddress={() => this.gotoAddress()}
                                                 />
                                             </View>
                                         }
@@ -262,7 +292,7 @@ class TeamList extends Component {
                                                 toggleModal={this.hideModal}
                                                 outputfriend={this.state.friendOutput[0]}
                                                 friend={datafriend}
-                                                getAddFriend={this._addFriend.bind(this)}
+                                                getAddFriend={this._checkAddFriend.bind(this)}
                                                 textAdd="เพิ่มในการสมัคร"
                                             />
                                         </Modal>

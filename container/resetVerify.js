@@ -43,7 +43,7 @@ class ResetVerify extends Component {
         this.props.navigation.navigate("Verify")
     }
     sendResetVerify() {
-        this.sentVerifyCode()        
+        this.sentVerifyCode()
     }
     gotoBack = () => {
         this.props.navigation.navigate('Verify')
@@ -64,7 +64,9 @@ class ResetVerify extends Component {
                 <View style={styles.container}>
                     <ResetVerifyForm
                         sendNewCode={this.sentVerifyCode.bind(this)}
-                        goLogin={this.gotoLogin.bind(this)} />
+                        goLogin={this.gotoLogin.bind(this)}
+                        goback={this.gotoBack.bind(this)}
+                    />
                     {/* <TouchableOpacity onPress={this.sendResetVerify.bind(this)}>
                     <Text>test</Text>
                 </TouchableOpacity> */}
@@ -76,7 +78,7 @@ class ResetVerify extends Component {
 const mapStateToProps = state => {
     return {
         profile: state.profile,
-        userprofile : state.userprofile
+        userprofile: state.userprofile
     }
 }
 const mapDisPatchToProps = (dispatch) => {

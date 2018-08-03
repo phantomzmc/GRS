@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, StatusBar, Easing, Dimensions, TouchableHighlight } from "react-native";
-import { Container, Header, Left, Body, Right, Button, Icon, Title, Text, View } from 'native-base';
+import { StyleSheet, StatusBar, Easing, Dimensions, TouchableHighlight, Image } from "react-native";
+import { Thumbnail, Header, Left, Body, Right, Button, Icon, Title, Text, View } from 'native-base';
 import Menu, { MenuItem, MenuDivider } from 'react-native-material-menu';
 import Drawer from 'react-native-drawer-menu';
 import { connect } from "react-redux";
@@ -35,6 +35,7 @@ class HeaderTeam extends Component {
     };
 
     showMenu = () => {
+        this.setState({ nameUser: this.props.userprofile.userprofile.FirstName, uri: this.props.userprofile.userprofile.PicProfile })
         if (this.props.profile.statuslogin == 1) {
             this._menu.show();
         }
@@ -94,11 +95,18 @@ class HeaderTeam extends Component {
                             <Menu
                                 ref={this.setMenuRef}
                                 style={{ width: 250, height: 300 }}
-                                button={<Text onPress={this.showMenu} style={styles.title2}>{this.state.nameUser}</Text>}
+                                button=
+                                {
+                                    <View style={{ flexDirection: "row" }}>
+                                        {/* <Icon name='user-circle' type='FontAwesome' style={{ fontSize: 18, paddingRight: 10 }} /> */}
+                                        <Image source={{ uri: this.state.uri }} style={{ width: 30, height: 30, borderRadius: 15 }} />
+                                        <Text onPress={this.showMenu} style={styles.title2}>{this.state.nameUser}</Text>
+                                    </View>
+                                }
                             >
-                                <MenuItem onPress={this.checkLogin} style={{ padding: 10 }}>
+                                <MenuItem onPress={this.gotoProfile} style={{ padding: 10 }}>
                                     <Icon name='user-circle' type='FontAwesome' style={{ fontSize: 18 }} />
-                                    <Text style={styles.item_menu}>  ข้อมูลส่วนตัว</Text>
+                                    <Text style={styles.item_menu}>  {this.state.nameUser}</Text>
                                 </MenuItem>
                                 <MenuItem onPress={this.gotoFriendlist} style={{ padding: 10 }}>
                                     <Icon name='group' type='FontAwesome' style={{ fontSize: 18 }} />
@@ -142,7 +150,8 @@ const styles = StyleSheet.create({
     title2: {
         fontFamily: "kanit",
         color: "#fff",
-        fontSize: 14
+        fontSize: 14,
+        paddingLeft: 10
     },
     item_menu: {
         fontFamily: "kanit",

@@ -18,7 +18,7 @@ class ResetVerifyForm extends Component {
     }
     checkResetVerify(userid, email) {
         this.props.sendNewCode(this.state.email)
-
+        this.props.goback()
         // if (this.state.userid === this.props.profile.profile.userid && this.state.email === this.props.profile.profile.email) {
         //     this.alertSuccess()
         // }

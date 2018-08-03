@@ -360,11 +360,11 @@ class FormRegister extends Component {
             date={this.state.date}
             mode="date"
             placeholder="select date"
-            format="YYYY-MM-DD"
-            minDate="1920-01-01"
-            maxDate={this.state.date}
-            confirmBtnText="Confirm"
-            cancelBtnText="Cancel"
+            format="DD-MM-YYYY"
+            minDate="01-01-1920"
+            maxDate="31-12-2100"
+            confirmBtnText="ตกลง"
+            cancelBtnText="ยกเลิก"
             customStyles={{
               dateIcon: {
                 position: 'absolute',
