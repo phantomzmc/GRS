@@ -19,16 +19,23 @@ class HeaderRegister extends Component {
             age: "อายุ",
             eventname: "",
             user: [],
-            ImageSource: ""
+            ImageSource: "",
+            imgBackground: ""
         }
     }
     componentDidMount() {
-        setTimeout(() => {
-            this.setState({
-                ImageSource: this.props.userprofile.userprofile.PicProfile
-            })
-        }, 2000)
-
+        {
+            this.props.userprofile.userprofile.PicProfile && this.props.userprofile.userprofile.BackgroundProfile == "" ?
+                this.setState({ 
+                    ImageSource: "", 
+                    imgBackground: "" 
+                }) :
+                this.setState({ 
+                    ImageSource: this.props.userprofile.userprofile.PicProfile, 
+                    imgBackground: this.props.userprofile.userprofile.BackgroundProfile 
+                })
+        }
+        
         console.log(this.props.userprofile.datapic)
         let uri = req[0].uspGetUserProfile
         let apikey = api_key[0].api_key
@@ -192,7 +199,7 @@ class HeaderRegister extends Component {
             }).catch((error) => {
                 // console.error(error)
             });
-        }
+    }
 
     setData() {
         this.setState({
@@ -346,10 +353,10 @@ const mapDispatchToprops = (dispatch) => {
                 payload: imgProfile
             })
         },
-        setImageBackground : (imgBackground) => {
+        setImageBackground: (imgBackground) => {
             dispatch({
-                type : "setImageBackground",
-                payload : imgBackground
+                type: "setImageBackground",
+                payload: imgBackground
             })
         }
     }

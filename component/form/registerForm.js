@@ -38,7 +38,8 @@ class FormRegister extends Component {
       gen: "M",
       selectedIndex: 0,
       status: "",
-      showToast: false
+      showToast: false,
+      status_userid : true
     };
   }
 
@@ -187,7 +188,7 @@ class FormRegister extends Component {
   }
 
   alertCheckUsername = () => {
-    let { status } = this.state
+    let { status,userid } = this.state
     if (status[0].UsernameStatus == "1") {
       Alert.alert('นำเข้าผู้ใช้งานจากระบบเก่า (GRS ฟรี)', 'ควรยืนยัน Username และตั้งรหัสผ่าน', [
         {
@@ -196,13 +197,22 @@ class FormRegister extends Component {
       ], { cancelable: false })
     }
     else if (status[0].UsernameStatus == "2") {
+      this.setState({ status_userid: false })
       Alert.alert('มีผู้ใช้งานนี้ในระบบเเล้ว', 'กรุณาเปลี่ยนใหม่ให้ถูกต้อง', [
         {
           text: 'ตกลง'
         }
       ], { cancelable: false })
     }
+    // else if (userid.length < 13 || userid > 13){
+    //   Alert.alert('กรุณากรอกข้อมูลให้ถูกต้อง', 'กรุณาเปลี่ยนใหม่ให้ถูกต้อง', [
+    //     {
+    //       text: 'ตกลง'
+    //     }
+    //   ], { cancelable: false })
+    // }
     else if (status[0].UsernameStatus == "0") {
+      this.setState({ status_userid: true })
 
     }
   }
@@ -304,14 +314,27 @@ class FormRegister extends Component {
           <Text style={styles.headdetail}> ** จำเป็น **</Text>
         </View>
         <Form>
-          <Item floatingLabel last>
-            <Label style={styles.textLabel}>Ex.15099999xxxxx</Label>
-            <Input
-              style={{ fontFamily: "kanit" }}
-              onChangeText={userid => this.setState({ userid })}
-              onEndEditing={this.checkUsernmae.bind(this)}
-              keyboardType="phone-pad" />
-          </Item>
+          {this.state.status_userid == true ?
+            <Item floatingLabel last>
+              <Label style={styles.textLabel}>Ex.15099999xxxxx</Label>
+              <Input
+                style={{ fontFamily: "kanit" }}
+                onChangeText={userid => this.setState({ userid })}
+                onEndEditing={this.checkUsernmae.bind(this)}
+                keyboardType="phone-pad" />
+            </Item>
+            :
+            <Item error floatingLabel last>
+              <Label style={styles.textLabel}>Ex.15099999xxxxx</Label>
+              <Input
+                style={{ fontFamily: "kanit" }}
+                onChangeText={userid => this.setState({ userid })}
+                onEndEditing={this.checkUsernmae.bind(this)}
+                keyboardType="phone-pad" />
+                
+            </Item>
+          }
+
         </Form>
         <View style={{ flexDirection: "row" }}>
           <Text style={styles.headForm}>กรุ๊ปเลือด</Text>

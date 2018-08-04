@@ -55,7 +55,7 @@ class FormAddressRegister extends Component {
       this.sendData(firstname, lastname, relation, tel)
     }
   }
-  sendData = (firstname, lastname, relation, tel) => {
+  sendData(firstname, lastname, relation, tel){
     this.props.setHelp({ firstname, lastname, relation, tel });
     this.props.goEvent(firstname, lastname, relation, tel);
   };

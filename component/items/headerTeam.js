@@ -21,7 +21,12 @@ class HeaderTeam extends Component {
     _menu = null;
 
     componentDidMount() {
-        this.setState({ title: this.props.title, statusMenu: this.props.menu})
+        {
+            this.props.userprofile.userprofile.PicProfile == "" ?
+            this.setState({ nameUser: "ข้อมูลส่วนตัว" }) :
+            this.setState({ nameUser: this.props.userprofile.userprofile.PicProfile })
+        }
+        this.setState({ title: this.props.title, statusMenu: this.props.menu, })
     }
     onPressGoBack() {
         this.props.goback()
@@ -81,54 +86,54 @@ class HeaderTeam extends Component {
     render() {
         return (
             <View>
-                    <Header style={{ backgroundColor: "#FC561F" }}>
-                        <Left>
-                            <Button transparent onPress={this.onPressGoBack.bind(this)}>
-                                <Icon name='arrow-back' style={{ color: "#fff" }} />
-                            </Button>
-                        </Left>
-                        <Body>
-                            <Title style={styles.title}>{this.props.title}</Title>
-                        </Body>
-                        <Right>
-                            {this.state.statusMenu &&
-                                <Menu
-                                    ref={this.setMenuRef}
-                                    style={{ width: 250, height: 300 }}
-                                    button=
-                                    {
-                                        <View style={{ flexDirection: "row" }}>
-                                            {/* <Icon name='user-circle' type='FontAwesome' style={{ fontSize: 18, paddingRight: 10 }} /> */}
-                                            <Image source={{ uri: this.state.uri }} style={{ width: 30, height: 30, borderRadius: 15 }} />
-                                            <Text onPress={this.showMenu} style={styles.title2}>{this.state.nameUser}</Text>
-                                        </View>
-                                    }
-                                >
-                                    <MenuItem onPress={this.gotoProfile} style={{ padding: 10 }}>
-                                        <Icon name='user-circle' type='FontAwesome' style={{ fontSize: 18 }} />
-                                        <Text style={styles.item_menu}>  {this.state.nameUser}</Text>
-                                    </MenuItem>
-                                    <MenuItem onPress={this.gotoFriendlist} style={{ padding: 10 }}>
-                                        <Icon name='group' type='FontAwesome' style={{ fontSize: 18 }} />
-                                        <Text style={styles.item_menu}>  Friends List</Text>
-                                    </MenuItem>
-                                    <MenuItem onPress={this.gotoRegis} style={{ padding: 10 }}>
-                                        <Icon name='edit' type='FontAwesome' style={{ fontSize: 18 }} />
-                                        <Text style={styles.item_menu}>  ลงทะเบียน</Text>
-                                    </MenuItem>
-                                    <MenuItem onPress={this.gotoHistory} style={{ padding: 10 }}>
-                                        <Icon name='history' type='FontAwesome' style={{ fontSize: 18 }} />
-                                        <Text style={styles.item_menu}>  History</Text>
-                                    </MenuItem>
-                                    <MenuDivider />
-                                    <MenuItem onPress={() => this.props.goLogin()} style={{ padding: 10 }}>
-                                        <Icon name='log-out' type='Entypo' style={{ fontSize: 18 }} />
-                                        <Text style={styles.item_menu}>  ออกจากระบบ</Text>
-                                    </MenuItem>
-                                </Menu>
-                            }
-                        </Right>
-                    </Header>
+                <Header style={{ backgroundColor: "#FC561F" }}>
+                    <Left>
+                        <Button transparent onPress={this.onPressGoBack.bind(this)}>
+                            <Icon name='arrow-back' style={{ color: "#fff" }} />
+                        </Button>
+                    </Left>
+                    <Body>
+                        <Title style={styles.title}>{this.props.title}</Title>
+                    </Body>
+                    <Right>
+                        {this.state.statusMenu &&
+                            <Menu
+                                ref={this.setMenuRef}
+                                style={{ width: 250, height: 300 }}
+                                button=
+                                {
+                                    <View style={{ flexDirection: "row" }}>
+                                        {/* <Icon name='user-circle' type='FontAwesome' style={{ fontSize: 18, paddingRight: 10 }} /> */}
+                                        <Image source={{ uri: this.state.uri }} style={{ width: 30, height: 30, borderRadius: 15 }} />
+                                        <Text onPress={this.showMenu} style={styles.title2}>{this.state.nameUser}</Text>
+                                    </View>
+                                }
+                            >
+                                <MenuItem onPress={this.gotoProfile} style={{ padding: 10 }}>
+                                    <Icon name='user-circle' type='FontAwesome' style={{ fontSize: 18 }} />
+                                    <Text style={styles.item_menu}>  {this.state.nameUser}</Text>
+                                </MenuItem>
+                                <MenuItem onPress={this.gotoFriendlist} style={{ padding: 10 }}>
+                                    <Icon name='group' type='FontAwesome' style={{ fontSize: 18 }} />
+                                    <Text style={styles.item_menu}>  Friends List</Text>
+                                </MenuItem>
+                                <MenuItem onPress={this.gotoRegis} style={{ padding: 10 }}>
+                                    <Icon name='edit' type='FontAwesome' style={{ fontSize: 18 }} />
+                                    <Text style={styles.item_menu}>  ลงทะเบียน</Text>
+                                </MenuItem>
+                                <MenuItem onPress={this.gotoHistory} style={{ padding: 10 }}>
+                                    <Icon name='history' type='FontAwesome' style={{ fontSize: 18 }} />
+                                    <Text style={styles.item_menu}>  History</Text>
+                                </MenuItem>
+                                <MenuDivider />
+                                <MenuItem onPress={() => this.props.goLogin()} style={{ padding: 10 }}>
+                                    <Icon name='log-out' type='Entypo' style={{ fontSize: 18 }} />
+                                    <Text style={styles.item_menu}>  ออกจากระบบ</Text>
+                                </MenuItem>
+                            </Menu>
+                        }
+                    </Right>
+                </Header>
             </View>
         );
     }

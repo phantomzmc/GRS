@@ -15,7 +15,7 @@ import ImagePicker from 'react-native-image-picker';
 import Omise from '../../config/omise-config';
 const ibit_pkey = 'pkey_test_5b7nut5dlzyudruopsl'
 const ibit_skey = 'skey_test_5b7nwwrac7mvps7l3mp'
-const test_pkey = 'pkey_test_5ccy7tzubo9t8d0i71o'
+const test_pkey = 'pkey_test_5ctl7h1r2lazhxd1ovk'
 const test_skey = 'skey_test_5ctl7j62s80mqyznvd3'
 Omise.config(test_pkey, test_skey, '2015-11-17');
 

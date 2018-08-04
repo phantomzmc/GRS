@@ -9,7 +9,7 @@ import ChargePayment from '../modal/chargePayment'
 import ChargePaymentError from '../modal/chargePayment_error'
 const ibit_pkey = 'pkey_test_5b7nut5dlzyudruopsl'
 const ibit_skey = 'skey_test_5b7nwwrac7mvps7l3mp'
-const test_pkey = 'pkey_test_5ccy7tzubo9t8d0i71o'
+const test_pkey = 'pkey_test_5ctl7h1r2lazhxd1ovk'
 const test_skey = 'skey_test_5ctl7j62s80mqyznvd3'
 Omise.config(test_pkey, test_skey, '2015-11-17');
 
@@ -163,7 +163,7 @@ class CreditView extends Component {
                             <Label style={styles.textLabel}>Ex.1234 4567 8901 8764</Label>
                             <Input
                                 style={{ fontFamily: "kanit" }}
-
+                                keyboardType="phone-pad"
                                 onChangeText={(numberCredit) => this.setState({ numberCredit })}
                             />
                         </Item>
@@ -174,7 +174,7 @@ class CreditView extends Component {
                             <Label style={styles.textLabel}>เดือน</Label>
                             <Input
                                 style={{ fontFamily: "kanit" }}
-
+                                keyboardType="phone-pad"
                                 onChangeText={(expCredit) => this.setState({ expCredit })}
                             />
                         </Item>
@@ -182,7 +182,7 @@ class CreditView extends Component {
                             <Label style={styles.textLabel}>ปี</Label>
                             <Input
                                 style={{ fontFamily: "kanit" }}
-
+                                keyboardType="phone-pad"
                                 onChangeText={(yearCredit) => this.setState({ yearCredit })}
                             />
                         </Item>
@@ -194,9 +194,8 @@ class CreditView extends Component {
                             <Label style={styles.textLabel}>Ex.123</Label>
                             <Input
                                 style={{ fontFamily: "kanit" }}
-
+                                keyboardType="phone-pad"
                                 onChangeText={(cvcCredit) => this.setState({ cvcCredit })}
-                                onSubmitEditing={() => this.checkInputValue()}
                             />
                         </Item>
                     </Form>
