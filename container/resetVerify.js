@@ -3,11 +3,15 @@ import PropTypes from 'prop-types';
 import { View, StyleSheet, TouchableOpacity, Text, StatusBar } from 'react-native'
 import { Conatainer } from 'native-base'
 import { connect } from 'react-redux'
+import axios from 'axios'
 import randomstringPromise from 'randomstring-promise/react-native';
 import MailGunSend from '../config/send-mailgun'
 
 import ResetVerifyForm from "../component/form/resetVerifyForm"
 import HeaderTeam from '../component/items/headerTeam'
+
+import req from '../config/uri_req'
+import apikey from '../config/api_key'
 
 class ResetVerify extends Component {
     static propTypes = {
@@ -39,11 +43,32 @@ class ResetVerify extends Component {
         })
         console.log(data)
     }
+    sendResetVerify(userid , email) {
+        let uri = req[0].uspResetActivecode
+        let api_key = apikey[0].api_key
+        let data = ({
+            params: [
+                { name: "Username", value: userid },
+                { name: "ActivateCode", value: this.props.profile.verify }
+            ]
+        })
+        axios.post(uri, data, {
+            headers: {
+                "X-DreamFactory-API-Key": api_key,
+                "X-DreamFactory-Session-Token": this.props.token.token,
+            },
+            responseType: 'json'
+        })
+            // .then((response) => response.json())
+            .then((responseJson) => {
+                this.setState({ isLoading: false, data: responseJson.data[0], });
+                console.log(this.state.data)
+                this.sentVerifyCode(email)
+            }).catch((error) => {
+            });
+    }
     gotoLogin = () => {
         this.props.navigation.navigate("Verify")
-    }
-    sendResetVerify() {
-        this.sentVerifyCode()
     }
     gotoBack = () => {
         this.props.navigation.navigate('Verify')
@@ -63,7 +88,7 @@ class ResetVerify extends Component {
                 />
                 <View style={styles.container}>
                     <ResetVerifyForm
-                        sendNewCode={this.sentVerifyCode.bind(this)}
+                        sendNewCode={this.sendResetVerify.bind(this)}
                         goLogin={this.gotoLogin.bind(this)}
                         goback={this.gotoBack.bind(this)}
                     />
@@ -78,7 +103,8 @@ class ResetVerify extends Component {
 const mapStateToProps = state => {
     return {
         profile: state.profile,
-        userprofile: state.userprofile
+        userprofile: state.userprofile,
+        token: state.token
     }
 }
 const mapDisPatchToProps = (dispatch) => {

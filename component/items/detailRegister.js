@@ -35,7 +35,7 @@ class DetailRegister extends Component {
                 <View style={styles.view1}>
                     <View>
                         {this.state.statusPayment1 && <Text style={styles.typePaymentSuccess}> จ่ายเเล้ว </Text>}
-                        {this.state.statusPayment2 && <Text style={styles.typePaymentFalse}> ยังไม่ได้จ่าย </Text>}
+                        {this.state.statusPayment2 && <Text style={styles.typePaymentWarning}>รอดำเนินการ</Text>}
                     </View>
                     <View>
                         <Image source={{ uri: "https://www.qrstuff.com/images/sample.png" }}
@@ -124,8 +124,8 @@ const styles = StyleSheet.create({
         color: '#90EE90',
         fontFamily: 'kanit',
     },
-    typePaymentFalse: {
-        color: "red",
+    typePaymentWarning: {
+        color: "#FFA500",
         fontFamily: 'kanit',
     },
     textName1: {

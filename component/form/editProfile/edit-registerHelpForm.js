@@ -55,6 +55,7 @@ class FormAddressRegister extends Component {
           <Item floatingLabel last>
             <Label style={styles.textLabel}>{firstname}</Label>
             <Input
+              style={{ fontFamily: "kanit" }}
               onChangeText={firstname => this.setState({ firstname: firstname })}
             />
           </Item>
@@ -63,6 +64,7 @@ class FormAddressRegister extends Component {
           <Item floatingLabel last>
             <Label style={styles.textLabel}>{lastname}</Label>
             <Input
+              style={{ fontFamily: "kanit" }}
               onChangeText={lastname => this.setState({ lastname: lastname })}
             />
           </Item>
@@ -73,7 +75,8 @@ class FormAddressRegister extends Component {
             <Label style={styles.textLabel}>{tel}</Label>
             <Input
               keyboardType="phone-pad"
-              onChangeText={tel => this.setState({ tel : tel})}
+              style={{ fontFamily: "kanit" }}
+              onChangeText={tel => this.setState({ tel: tel })}
             />
           </Item>
         </Form>

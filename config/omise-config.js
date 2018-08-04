@@ -1,6 +1,6 @@
 const base64 = require("base-64");
 // const pkgConfig = require("./package.json");
-const vaultEndpoint = "https://vault.omise.co/";
+const vaultEndpoint = "https://vault.omise.co/tokens";
 const apiEndpoint = "https://api.omise.co/charges";
 const apiCustomer = "https://api.omise.co/customers";
 
@@ -68,7 +68,7 @@ class ReactNativeOmise {
      * @param {*} data
      */
     createToken(data) {
-        const tokenEndpoint = vaultEndpoint + "tokens";
+        const tokenEndpoint = vaultEndpoint;
         // set headers
         let headers = this.getHeaders();
 

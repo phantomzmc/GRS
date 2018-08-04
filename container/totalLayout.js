@@ -133,7 +133,7 @@ class TotalLayout extends Component {
                         onPress: () => this.gotoListEvent()
                     }
                 ], { cancelable: false }),
-                error => console.error("Oops, Something Went Wrong", error)
+                // error => console.error("Oops, Something Went Wrong", error)
             );
 
     }

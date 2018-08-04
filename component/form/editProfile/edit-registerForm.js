@@ -61,7 +61,7 @@ class FormRegister extends Component {
       this.setState({ selectedIndex: 0 })
     }
     else if (this.state.gen == "F") {
-      this.setState({ selectedIndex : 1})
+      this.setState({ selectedIndex: 1 })
     }
   }
   sendData = (fullname, lastname, nickname, password, confirmpassword, teamname, bib, userid, tel, email, date, bloodtype, nation, gen) => {
@@ -144,12 +144,14 @@ class FormRegister extends Component {
           <Item floatingLabel>
             <Label style={styles.textLabel}>{fullname}</Label>
             <Input
+              style={{ fontFamily: "kanit" }}
               onChangeText={fullname => this.setState({ fullname: fullname })}
             />
           </Item>
           <Item floatingLabel last>
             <Label style={styles.textLabel}>{lastname}</Label>
             <Input
+              style={{ fontFamily: "kanit" }}
               onChangeText={lastname => this.setState({ lastname: lastname })}
             />
           </Item>
@@ -159,6 +161,7 @@ class FormRegister extends Component {
           <Item floatingLabel last>
             <Label style={styles.textLabel}>{nickname}</Label>
             <Input
+              style={{ fontFamily: "kanit" }}
               onChangeText={nickname => this.setState({ nickname: nickname })}
             />
           </Item>
@@ -208,6 +211,7 @@ class FormRegister extends Component {
           <Item floatingLabel last>
             <Label style={styles.textLabel}>{nation}</Label>
             <Input
+              style={{ fontFamily: "kanit" }}
               onChangeText={nation => this.setState({ nation: nation })} />
           </Item>
         </Form>
@@ -217,6 +221,7 @@ class FormRegister extends Component {
             <Label style={styles.textLabel}>Ex.xxxxxxxxxxxx</Label>
             <Input
               secureTextEntry={true}
+              style={{ fontFamily: "kanit" }}
               onChangeText={password => this.setState({ password })}
             />
           </Item>
@@ -228,6 +233,7 @@ class FormRegister extends Component {
             <Label style={styles.textLabel}>Ex.xxxxxxxxxxxx</Label>
             <Input
               secureTextEntry={true}
+              style={{ fontFamily: "kanit" }}
               onChangeText={confirmpassword => this.setState({ confirmpassword })} />
           </Item>
         </Form>
@@ -263,6 +269,7 @@ class FormRegister extends Component {
           <Item floatingLabel last>
             <Label style={styles.textLabel}>{teamname}</Label>
             <Input
+              style={{ fontFamily: "kanit" }}
               onChangeText={teamname => this.setState({ teamname: teamname })} />
           </Item>
         </Form>
@@ -273,6 +280,7 @@ class FormRegister extends Component {
             <Label style={styles.textLabel}>{tel}</Label>
             <Input
               keyboardType="phone-pad"
+              style={{ fontFamily: "kanit" }}
               onChangeText={tel => this.setState({ tel: tel })} />
           </Item>
         </Form>
@@ -283,6 +291,7 @@ class FormRegister extends Component {
             <Label style={styles.textLabel}>{email}</Label>
             <Input
               keyboardType="email-address"
+              style={{ fontFamily: "kanit" }}
               onChangeText={email => this.setState({ email: email })} />
           </Item>
         </Form>

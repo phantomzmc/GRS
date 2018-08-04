@@ -10,8 +10,8 @@ import ChargePaymentError from '../modal/chargePayment_error'
 const ibit_pkey = 'pkey_test_5b7nut5dlzyudruopsl'
 const ibit_skey = 'skey_test_5b7nwwrac7mvps7l3mp'
 const test_pkey = 'pkey_test_5ccy7tzubo9t8d0i71o'
-const test_skey = 'skey_test_5ccy7tzukutfwjoi8p3'
-Omise.config(ibit_pkey, ibit_skey, '2015-11-17');
+const test_skey = 'skey_test_5ctl7j62s80mqyznvd3'
+Omise.config(test_pkey, test_skey, '2015-11-17');
 
 class CreditView extends Component {
 
@@ -37,6 +37,7 @@ class CreditView extends Component {
         const data = await Omise.createToken({
             'card': {
                 'name': nameCredit,
+                'city': 'Bangkok',
                 'number': numberCredit,
                 'expiration_month': parseInt(expCredit),
                 'expiration_year': parseInt(yearCredit),
@@ -87,20 +88,20 @@ class CreditView extends Component {
     checkInputValue = () => {
         let { nameCredit, numberCredit, expCredit, yearCredit, cvcCredit } = this.state
         console.log("checkInputValue")
-        if (nameCredit) {
-            this.setState({ statusButton: true })
+        if (nameCredit == "") {
+            this.setState({ statusButton: true, statusButtonOnPress: false })
         }
         else if (numberCredit == "") {
-            this.setState({ statusButton: true })
+            this.setState({ statusButton: true, statusButtonOnPress: false })
         }
         else if (expCredit == "") {
-            this.setState({ statusButton: true })
+            this.setState({ statusButton: true, statusButtonOnPress: false })
         }
         else if (yearCredit == "") {
-            this.setState({ statusButton: true })
+            this.setState({ statusButton: true, statusButtonOnPress: false })
         }
         else if (cvcCredit == "") {
-            this.setState({ statusButton: true })
+            this.setState({ statusButton: true, statusButtonOnPress: false })
         }
         else {
             this.setState({ statusButtonOnPress: true, statusButton: false })
@@ -151,6 +152,7 @@ class CreditView extends Component {
                         <Item floatingLabel last>
                             <Label style={styles.textLabel}>Ex.xxxxxxxxxxxx</Label>
                             <Input
+                                style={{ fontFamily: "kanit" }}
                                 onChangeText={(nameCredit) => this.setState({ nameCredit })}
                             />
                         </Item>
@@ -160,6 +162,8 @@ class CreditView extends Component {
                         <Item floatingLabel last>
                             <Label style={styles.textLabel}>Ex.1234 4567 8901 8764</Label>
                             <Input
+                                style={{ fontFamily: "kanit" }}
+
                                 onChangeText={(numberCredit) => this.setState({ numberCredit })}
                             />
                         </Item>
@@ -169,12 +173,16 @@ class CreditView extends Component {
                         <Item floatingLabel last>
                             <Label style={styles.textLabel}>เดือน</Label>
                             <Input
+                                style={{ fontFamily: "kanit" }}
+
                                 onChangeText={(expCredit) => this.setState({ expCredit })}
                             />
                         </Item>
                         <Item floatingLabel last>
                             <Label style={styles.textLabel}>ปี</Label>
                             <Input
+                                style={{ fontFamily: "kanit" }}
+
                                 onChangeText={(yearCredit) => this.setState({ yearCredit })}
                             />
                         </Item>
@@ -185,6 +193,8 @@ class CreditView extends Component {
                         <Item floatingLabel last>
                             <Label style={styles.textLabel}>Ex.123</Label>
                             <Input
+                                style={{ fontFamily: "kanit" }}
+
                                 onChangeText={(cvcCredit) => this.setState({ cvcCredit })}
                                 onSubmitEditing={() => this.checkInputValue()}
                             />
@@ -228,7 +238,8 @@ class CreditView extends Component {
                 <View style={styles.submitContainer}>
                     {this.state.statusButton &&
                         <TouchableHighlight
-                            style={styles.buttonContainer}>
+                            style={styles.buttonContainer}
+                            onPress={() => this.checkInputValue()}>
                             <Text style={styles.textButton}> ยืนยันและชำระค่าบริการ </Text>
                         </TouchableHighlight>
                     }

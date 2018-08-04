@@ -23,15 +23,15 @@ class FormAddressRegister extends Component {
       province: ""
     };
   }
-  checkInputValue(number, tambon, amphoe, province, country, postNumber){
-    if(number == ""){
+  checkInputValue(number, tambon, amphoe, province, country, postNumber) {
+    if (number == "") {
       Alert.alert('กรุณากรอกข้อมูลให้ครบถ้วน', 'กรุณากรอกบ้านเลขที่', [
         {
           text: 'ตกลง'
         }
       ], { cancelable: false })
     }
-    else if(tambon == ""){
+    else if (tambon == "") {
       Alert.alert('กรุณากรอกข้อมูลให้ครบถ้วน', 'กรุณากรอกชื่อตำบล / แขวง', [
         {
           text: 'ตกลง'
@@ -39,7 +39,7 @@ class FormAddressRegister extends Component {
       ], { cancelable: false })
 
     }
-    else if(amphoe == ""){
+    else if (amphoe == "") {
       Alert.alert('กรุณากรอกข้อมูลให้ครบถ้วน', 'กรุณากรอกชื่ออำเภอ / เขต', [
         {
           text: 'ตกลง'
@@ -47,21 +47,21 @@ class FormAddressRegister extends Component {
       ], { cancelable: false })
 
     }
-    else if(province == ""){
+    else if (province == "") {
       Alert.alert('กรุณากรอกข้อมูลให้ครบถ้วน', 'กรุณากรอกชื่อจังหวัด', [
         {
           text: 'ตกลง'
         }
       ], { cancelable: false })
     }
-    else if(country == ""){
+    else if (country == "") {
       Alert.alert('กรุณากรอกข้อมูลให้ครบถ้วน', 'กรุณากรอกชื่อประเทศ', [
         {
           text: 'ตกลง'
         }
       ], { cancelable: false })
     }
-    else if(postNumber == ""){
+    else if (postNumber == "") {
       Alert.alert('กรุณากรอกข้อมูลให้ครบถ้วน', 'กรุณากรอกรหัสไปรษรณีย์', [
         {
           text: 'ตกลง'
@@ -110,6 +110,7 @@ class FormAddressRegister extends Component {
           <Item floatingLabel last>
             <Label style={styles.textLabel}>Ex.123/45</Label>
             <Input
+              style={{ fontFamily: "kanit" }}
               onChangeText={number => this.setState({ number })}
             />
           </Item>
@@ -123,6 +124,7 @@ class FormAddressRegister extends Component {
           <Item floatingLabel last>
             <Label style={styles.textLabel}>Ex.หนองหอย</Label>
             <Input
+              style={{ fontFamily: "kanit" }}
               onChangeText={tambon => this.setState({ tambon })}
             />
           </Item>
@@ -138,6 +140,8 @@ class FormAddressRegister extends Component {
           <Item floatingLabel last>
             <Label style={styles.textLabel}>Ex.เมืองเชียงใหม่</Label>
             <Input
+              style={{ fontFamily: "kanit" }}
+
               onChangeText={amphoe => this.setState({ amphoe })}
             />
           </Item>
@@ -152,6 +156,7 @@ class FormAddressRegister extends Component {
           <Item floatingLabel last>
             <Label style={styles.textLabel}>Ex.เชียงใหม่</Label>
             <Input
+              style={{ fontFamily: "kanit" }}
               onChangeText={province => this.setState({ province })}
             />
           </Item>
@@ -165,6 +170,7 @@ class FormAddressRegister extends Component {
           <Item floatingLabel last>
             <Label style={styles.textLabel}>Ex.ไทย</Label>
             <Input
+              style={{ fontFamily: "kanit" }}
               onChangeText={country => this.setState({ country })}
             />
           </Item>
@@ -178,6 +184,7 @@ class FormAddressRegister extends Component {
             <Label style={styles.textLabel}>Ex.10160</Label>
             <Input
               keyboardType="phone-pad"
+              style={{ fontFamily: "kanit" }}
               onChangeText={postNumber => this.setState({ postNumber })}
             />
           </Item>

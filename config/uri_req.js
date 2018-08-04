@@ -24,7 +24,8 @@ export default
             uspUpdateUserProfile: url + "Main.uspUpdateUserProfile",
             uspResetPassword: url + "Main.uspResetPassword",
             uspCheckEmail: url + "Main.uspCheckEmail",
-            uspDeleteFriendLists : url + "Main.uspDeleteFriendLists"
+            uspDeleteFriendLists : url + "Main.uspDeleteFriendLists",
+            uspResetActivecode : url + "Main.uspResetActivecode"
         },
         {
             url_mailgun: "https://api.mailgun.net/v3/mg.guurun.com/messages",

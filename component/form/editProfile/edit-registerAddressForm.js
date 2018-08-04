@@ -70,33 +70,50 @@ class FormAddressRegister extends Component {
           <Item floatingLabel last>
             <Label style={styles.textLabel}>{number}</Label>
             <Input
+                          style={{ fontFamily : "kanit"}}
               onChangeText={number => this.setState({ number: number })}
             />
           </Item>
         </Form>
         <Text style={styles.headForm}>ตำบล : {this.state.tambon}</Text>
-        <TambonForm
-          setTambon={tambon}
-          gettumporn={this.passTampon.bind(this)}
-        />
+        <Form>
+          <Item floatingLabel last>
+            <Label style={styles.textLabel}>Ex.เชียงใหม่</Label>
+            <Input
+              style={{ fontFamily: "kanit" }}
+              onChangeText={tambon => this.setState({ tambon })}
+            />
+          </Item>
+        </Form>
 
         <Text style={styles.headForm}>อำเภอ : {this.state.amphoe}</Text>
-        <AmphoeForm
-          setAmphoe={amphoe}
-          getamphoe={this.passAmphoe.bind(this)}
-        />
+        <Form>
+          <Item floatingLabel last>
+            <Label style={styles.textLabel}>Ex.เชียงใหม่</Label>
+            <Input
+              style={{ fontFamily: "kanit" }}
+              onChangeText={amphoe => this.setState({ amphoe })}
+            />
+          </Item>
+        </Form>
 
         <Text style={styles.headForm}>จังหวัด : {this.state.province}</Text>
-        <ProvinceForm
-          setProvince={province}
-          getProvince={this.passProvince.bind(this)}
-        />
+        <Form>
+          <Item floatingLabel last>
+            <Label style={styles.textLabel}>Ex.เชียงใหม่</Label>
+            <Input
+              style={{ fontFamily: "kanit" }}
+              onChangeText={province => this.setState({ province })}
+            />
+          </Item>
+        </Form>
 
         <Text style={styles.headForm}>ประเทศ</Text>
         <Form>
           <Item floatingLabel last>
             <Label style={styles.textLabel}>{country}</Label>
             <Input
+                          style={{ fontFamily : "kanit"}}
               onChangeText={country => this.setState({ country: country })}
             />
           </Item>
@@ -107,6 +124,7 @@ class FormAddressRegister extends Component {
             <Label style={styles.textLabel}>{postNumber}</Label>
             <Input
               keyboardType="phone-pad"
+              style={{ fontFamily : "kanit"}}
               onChangeText={postNumber => this.setState({ postNumber: postNumber })}
             />
           </Item>

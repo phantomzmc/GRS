@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { View, Text, StyleSheet, TouchableOpacity, Image,Alert } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image, Alert } from "react-native";
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import { Form, Item, Input, Label, Picker, Icon } from 'native-base'
 import { connect } from 'react-redux'
@@ -22,29 +22,29 @@ class FormAddressRegister extends Component {
       email: ""
     };
   }
-  checkInputValue(firstname, lastname, relation, tel){
-    if(firstname == ""){
+  checkInputValue(firstname, lastname, relation, tel) {
+    if (firstname == "") {
       Alert.alert('กรุณากรอกข้อมูลให้ครบถ้วน', 'กรุณากรอกชื่อ', [
         {
           text: 'ตกลง'
         }
       ], { cancelable: false })
     }
-    else if(lastname == ""){
+    else if (lastname == "") {
       Alert.alert('กรุณากรอกข้อมูลให้ครบถ้วน', 'กรุณากรอกนามสกุล', [
         {
           text: 'ตกลง'
         }
       ], { cancelable: false })
     }
-    else if( relation == ""){
+    else if (relation == "") {
       Alert.alert('กรุณากรอกข้อมูลให้ครบถ้วน', 'ระบุความสัมพันธ์', [
         {
           text: 'ตกลง'
         }
       ], { cancelable: false })
     }
-    else if(tel == ""){
+    else if (tel == "") {
       Alert.alert('กรุณากรอกข้อมูลให้ครบถ้วน', 'กรุณากรอกเบอร์โทรศัพท์ฉุกเฉิน', [
         {
           text: 'ตกลง'
@@ -82,6 +82,7 @@ class FormAddressRegister extends Component {
           <Item floatingLabel last>
             <Label style={styles.textLabel}>Ex.ชื่อ</Label>
             <Input
+              style={{ fontFamily: "kanit" }}
               onChangeText={firstname => this.setState({ firstname })}
             />
           </Item>
@@ -90,6 +91,7 @@ class FormAddressRegister extends Component {
           <Item floatingLabel last>
             <Label style={styles.textLabel}>Ex.นามสกุล</Label>
             <Input
+              style={{ fontFamily: "kanit" }}
               onChangeText={lastname => this.setState({ lastname })}
             />
           </Item>
@@ -102,6 +104,7 @@ class FormAddressRegister extends Component {
           <Item floatingLabel last>
             <Label style={styles.textLabel}>Ex.090-xxxxxx</Label>
             <Input
+              style={{ fontFamily: "kanit" }}
               keyboardType="phone-pad"
               onChangeText={tel => this.setState({ tel })}
             />
@@ -119,9 +122,14 @@ class FormAddressRegister extends Component {
               onValueChange={(itemValue, itemIndex) => this.setState({ relation: itemValue })}
             >
               <Picker.Item label="ความสัมพันธ์" value="ความสัมพันธ์" />
+              <Picker.Item label="คู่สมรส" value="คู่สมรส" />
+              <Picker.Item label="เพื่อนสนิท" value="เพื่อนสนิท" />
               <Picker.Item label="พ่อแม่" value="พ่อแม่" />
-              <Picker.Item label="ญาติ" value="ญาติ" />
+              <Picker.Item label="ผู้ปกครอง" value="ผู้ปกครอง" />
+              <Picker.Item label="สมาชิกในครอบครัว" value="สมาชิกในครอบครัว" />
               <Picker.Item label="เพื่อน" value="เพื่อน" />
+              <Picker.Item label="ญาติ" value="ญาติ" />
+              <Picker.Item label="อื่นๆ" value="อื่นๆ" />
             </Picker>
           </Form>
         </View>

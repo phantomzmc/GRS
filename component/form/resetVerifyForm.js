@@ -16,42 +16,12 @@ class ResetVerifyForm extends Component {
         console.log(this.props.profile.profile.userid)
         console.log(this.props.profile.profile.email)
     }
-    checkResetVerify(userid, email) {
-        this.props.sendNewCode(this.state.email)
+    checkResetVerify() {
+        let { email, userid } = this.state
+        this.props.sendNewCode(userid, email)
         this.props.goback()
-        // if (this.state.userid === this.props.profile.profile.userid && this.state.email === this.props.profile.profile.email) {
-        //     this.alertSuccess()
-        // }
-        // else if (this.state.userid !== this.props.profile.profile.userid) {
-        //     this.alertUserIDError()
-        // }
-        // else if (this.state.email !== this.props.profile.profile.email) {
-        //     this.alertEmailError()
-        // }
-        // else if (this.state.userid !== this.props.profile.profile.userid && this.state.email === this.props.profile.profile.email) {
-        //     this.alertAllError()
-        // }
+
     }
-    // alertSuccess() {
-    //     Alert.alert('ร้องขอรหัสสำเร็จ', 'กรุณาตรวจสอบ Email ของท่าน', [
-    //         { text: 'ยืนยัน', onPress: () => this.props.goLogin() },
-    //     ])
-    // }
-    // alertUserIDError() {
-    //     Alert.alert('รหัสประชาชนไม่ถูกต้อง', 'กรุณากรอกรหัสประชาชนให้ถูกต้อง', [
-    //         { text: 'ลองอีกครั้ง', onPress: () => console.log('ลองอีกครั้ง') },
-    //     ])
-    // }
-    // alertEmailError() {
-    //     Alert.alert('Email ไม่ถูกต้อง', 'กรุณากรอก Email ให้ถูกต้อง', [
-    //         { text: 'ลองอีกครั้ง', onPress: () => console.log('ลองอีกครั้ง') },
-    //     ])
-    // }
-    // alertAllError() {
-    //     Alert.alert('รหัสประชาชนเเละEmail ไม่ถูกต้อง', 'กรุณากรอกรหัสประชาชนเเละ Email ให้ถูกต้อง', [
-    //         { text: 'ลองอีกครั้ง', onPress: () => console.log('ลองอีกครั้ง') },
-    //     ])
-    // }
 
     render() {
         let { userid, email } = this.state
@@ -108,7 +78,7 @@ const styles = StyleSheet.create({
     textTitle: {
         fontFamily: 'kanit',
         fontSize: 16,
-        textAlign : 'center'
+        textAlign: 'center'
     },
     textLabel: {
         fontFamily: 'kanit'
