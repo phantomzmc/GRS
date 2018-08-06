@@ -30,7 +30,7 @@ const user = {
   newpassword: ""
 };
 const friend = {
-  friendRegis: {},
+  friendRegis: [],
   dataDis: {},
   friendEvent: {
     RunnerID: "",

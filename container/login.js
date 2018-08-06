@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, Alert, TextInput } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, Alert, TextInput,StatusBar } from 'react-native';
+import { Header, Left, Right, Icon, Button, Body, Title, Container } from "native-base";
 import { connect } from 'react-redux'
 import axios from 'axios'
 import req from '../config/uri_req'
@@ -16,13 +17,14 @@ class Login extends Component {
             username: this.props.username.username,
             password: "",
             status: [],
-            login : 1
+            login: 1,
+            title : "เข้าสู่ระบบ"
         }
     }
-    componentDidMount(){
+    componentDidMount() {
         this.onConnect()
     }
-    onConnect(){
+    onConnect() {
         let uri = req[0].session_token;
         return axios.post(uri, {
             email: "admin@guurun.com",
@@ -65,7 +67,7 @@ class Login extends Component {
             });
     }
     checkLogin() {
-        let { status,login } = this.state
+        let { status, login } = this.state
         if (status[0].SignInStatus === "1" && status[0].ActivateStatus === "1") {
             this.props.setUsername(this.state.username)
             this.props.setUserStatus(status[0])
@@ -119,10 +121,31 @@ class Login extends Component {
     gotoResetPassword = () => {
         this.props.navigation.navigate('ResetPassword')
     }
+    gotoEvent = () => {
+        this.props.navigation.navigate('EventList')
+    }
     render() {
         return (
             <ImageBackground source={{ uri: "http://register.shutterrunning2014.com/assets/img/theme/dongtanbg.jpg" }}
                 style={{ width: '100%', height: '100%', opacity: 1 }}>
+                <StatusBar
+                    barStyle="light-content"
+                    hidden={false}
+                    translucent={true}
+                />
+                <Header style={{ backgroundColor: 'transparent' }}>
+                    <Left>
+                        <Button transparent>
+                            <Icon name='arrow-back' style={{ color: "#fff" }} onPress={this.gotoControlDistance.bind(this)} />
+                        </Button>
+                    </Left>
+                    <Body>
+                        <Title style={styles.title}>{this.state.title}</Title>
+                    </Body>
+                    <Right>
+
+                    </Right>
+                </Header>
                 <View style={styles.container}>
                     <Text style={styles.textTitle}>
                         ShutterRuning Service
@@ -133,7 +156,7 @@ class Login extends Component {
                         placeholder={this.state.username}
                         returnKeyType="next"
                         onSubmitEditing={() => this.passwordInput}
-                        onChangeText={(username) => this.setState({ username : username })}
+                        onChangeText={(username) => this.setState({ username: username })}
                         style={styles.input}
                     />
                     <TextInput
@@ -171,8 +194,8 @@ const mapStateToProps = (state) => {
     return {
         profile: state.profile,
         login: state.login,
-        token : state.token,
-        username : state.username
+        token: state.token,
+        username: state.username
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -195,12 +218,12 @@ const mapDispatchToProps = (dispatch) => {
                 payload: token
             })
         },
-        setStatusLogin : (login)=> {
+        setStatusLogin: (login) => {
             dispatch({
-                type : "setStatusLogin",
-                payload : login
+                type: "setStatusLogin",
+                payload: login
             })
-        }   
+        }
     }
 }
 
@@ -252,6 +275,11 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: '#fff',
         fontFamily: 'kanit'
+    },
+    title: {
+        fontFamily: "kanit",
+        color: "#fff",
+        fontSize: 16,
     }
 })
 export default connect(mapStateToProps, mapDispatchToProps)(Login)

@@ -7,9 +7,11 @@ import {
     View,
     Image,
     FlatList,
-    TouchableOpacity,
+    TouchableHighlight,
+    ImageBackground
 } from 'react-native';
 import { YellowBox } from 'react-native';
+import { Card, CardItem } from "native-base";
 import { connect } from 'react-redux'
 import axios from 'axios'
 import api from '../../../config/api_key'
@@ -31,13 +33,13 @@ class ListEvent extends Component {
                 tranferBank: ""
             },
             profile: "",
-            token : ""
+            token: ""
         }
     }
-    componentDidMount(){
+    componentDidMount() {
         this.onConnect()
     }
-    onConnect(){
+    onConnect() {
         let uri = req[0].session_token;
         return axios.post(uri, {
             email: "admin@guurun.com",
@@ -106,40 +108,45 @@ class ListEvent extends Component {
             )
         }
         return (
-            <View
-                style={{
-                    flex: 1,
-                    paddingTop: 20
-                }}>
-                <FlatList
-                    data={this.state.dataSource}
-                    renderItem={({ item }) => <View style={styles.background}>
-                        <View style={styles.containerCard}>
-                            <Image
-                                source={{
-                                    uri: url + item.BackgroundImage
-                                }}
-                                style={{
-                                    height: 200
-                                }} />
-                            <View style={styles.containerEventDetail}>
-                                <View style={styles.containerEventDate}>
-                                    <Text style={styles.dateText}>{item.EventID}</Text>
-                                    <Text style={styles.monthText}>{item.EventDate}</Text>
-                                </View>
-                                <TouchableOpacity
-                                    onPress={this
-                                        .gotoPayment
-                                        .bind(this, item)}>
-                                    <View style={styles.textName}>
-                                        <Text style={styles.name}>{item.EventName}</Text>
-                                    </View>
-                                </TouchableOpacity>
+            <ImageBackground style={{ width: "100%", height: "100%", opacity: 0.8 }} source={{ uri: 'https://register.shutterrunning2014.com/assets/img/theme/bg.jpg' }}>
+
+                <View
+                    style={{
+                        flex: 1,
+                    }}>
+                    <FlatList
+                        data={this.state.dataSource}
+                        renderItem={({ item }) =>
+                            <View style={styles.background}>
+                                <Card>
+                                    <TouchableHighlight onPress={this.gotoPayment.bind(this, item)}>
+                                        <View style={styles.containerCard} >
+                                            <Image
+                                                source={{
+                                                    uri: url + item.BackgroundImage
+                                                }}
+                                                style={{
+                                                    height: 200
+                                                }} />
+                                            <View style={styles.containerEventDetail}>
+                                                <View style={styles.containerEventDate}>
+                                                    <Text style={styles.dateText}>{item.EventID}</Text>
+                                                    <Text style={styles.monthText}>{item.EventDate}</Text>
+                                                </View>
+                                                <View style={styles.textName}>
+                                                    <Text style={styles.name}>{item.EventName}</Text>
+                                                </View>
+                                            </View>
+                                        </View>
+                                    </TouchableHighlight>
+
+                                </Card>
                             </View>
-                        </View>
-                    </View>}
-                    keyExtractor={(item, index) => index.toString()} />
-            </View >
+                        }
+                        keyExtractor={(item, index) => index.toString()} />
+                </View >
+            </ImageBackground>
+
         );
     }
 }
@@ -168,22 +175,23 @@ const mapDispatchtoProps = (dispatch) => {
 
 const styles = StyleSheet.create({
     background: {
-        backgroundColor: '#EFEFF4',
-        flex: 1
+        padding: 7.5
+        // backgroundColor: '#EFEFF4',
+        // flex: 1
     },
-    containerCard: {
-        justifyContent: 'center',
-        backgroundColor: '#fff',
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 3
-        },
-        shadowOpacity: 0.3,
-        shadowRadius: 4,
-        margin: 10,
-        borderRadius: 5
-    },
+    // containerCard: {
+    //     justifyContent: 'center',
+    //     backgroundColor: '#fff',
+    //     shadowColor: '#000',
+    //     shadowOffset: {
+    //         width: 0,
+    //         height: 3
+    //     },
+    //     shadowOpacity: 0.3,
+    //     shadowRadius: 4,
+    //     margin: 10,
+    //     borderRadius: 5
+    // },
     containerEventDetail: {
         padding: 15,
         flexDirection: 'row',
@@ -206,12 +214,13 @@ const styles = StyleSheet.create({
         flex: 1
     },
     textName: {
-        paddingRight: 30
+        width: 290,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     name: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'space-between',
+
         paddingLeft: 20,
         paddingRight: 60,
         paddingVertical: 15,

@@ -3,6 +3,7 @@ import { View, FlatList, StyleSheet, Alert, ActivityIndicator, Image, RefreshCon
 import { connect } from "react-redux";
 import CardFriendDistance from '../../items/cardFriendDistance'
 import dataFriend from './dataFriend';
+import dataPrice from '../listevent/dataPrice'
 
 
 class FriendInEvent extends Component {
@@ -32,6 +33,8 @@ class FriendInEvent extends Component {
                 {
                     text: 'ตกลง', onPress: () => {
                         dataSource.splice(index, 1)
+                        dataPrice.splice(index, 1)
+                        this.sumPrice(index)
                         console.log("delete")
                         console.log(dataSource)
                         this.props.setFriendRegister(dataSource)
@@ -41,6 +44,25 @@ class FriendInEvent extends Component {
                 }
             ], { cancelable: true }
         )
+    }
+    sumPrice(index) {
+        if (index == 0) {
+            this.props.setTotalRegister(0)
+            this.props.setTotal(0)
+        }
+        else if (dataPrice == "") {
+            this.props.setTotalRegister(0)
+            this.props.setTotal(0)
+        }
+        else if (index != 0) {
+            console.log(dataPrice)
+            const dis = (a, b) =>
+                a + b
+            const sum = dataPrice.reduce(dis)
+            console.log(sum)
+            this.props.setTotalRegister(sum)
+            this.props.setTotal(sum)
+        }
     }
     _refreshControl() {
         console.log("_refreshControl")
@@ -109,6 +131,18 @@ const mapDispatchToProps = (dispatch) => {
             dispatch({
                 type: 'setFriendRegister',
                 payload: dataFriend
+            })
+        },
+        setTotal: (dataPrice) => {
+            dispatch({
+                type: 'setTotal',
+                payload: dataPrice
+            })
+        },
+        setTotalRegister: (dataPrice) => {
+            dispatch({
+                type: 'setTotalRegister',
+                payload: dataPrice
             })
         }
     }

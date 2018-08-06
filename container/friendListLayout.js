@@ -101,7 +101,7 @@ class FriendList extends Component {
         this.props.navigation.navigate('Register')
         this.hideModalError()
     }
-    
+
 
     render() {
         let { searchText } = this.state
@@ -122,6 +122,7 @@ class FriendList extends Component {
                     hidden={false}
                     translucent={true}
                 />
+                
                 <Header searchBar rounded>
                     <Item>
                         <Icon name="ios-people" />
@@ -130,7 +131,7 @@ class FriendList extends Component {
                             style={{ fontFamily: 'kanit', fontSize: 14, paddingHorizontal: 10 }}
                             returnKeyType={"next"}
                             onChangeText={(searchText) => this.setState({ searchText })}
-                        // onSubmitEditing={this.showModal} 
+                            onSubmitEditing={this.showModal}
                         />
 
                     </Item>

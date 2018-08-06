@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, ScrollView, TouchableOpacity, StatusBar, RefreshControl, Alert } from 'react-native';
-import { Container, Header, Item, Input, Button, Tab, Tabs, TabHeading, Icon, Text } from 'native-base';
+import { View, StyleSheet, ScrollView, TouchableOpacity, StatusBar, RefreshControl, ImageBackground } from 'react-native';
+import { Container, Header, Item, Input, Button, Tab, Tabs, TabHeading, Icon, Text, CardItem } from 'native-base';
 import PropTypes from 'prop-types';
 import Modal from "react-native-modal";
 import axios from 'axios'
@@ -42,13 +42,15 @@ class TeamList extends Component {
             datafriendlist: [],
             refreshing: false,
             friendlist: true,
-            frienddistance: false
+            frienddistance: false,
+
         }
         this.getFriend = this.getFriend.bind(this)
     }
     componentDidMount() {
         this.getFriend()
         this._onRefresh()
+
     }
     componentWillReceiveProps(nextProps) {
         if (nextProps.dataSource != this.state.dataSource) {
@@ -56,6 +58,7 @@ class TeamList extends Component {
             this.setState({ dataSource: this.state.dataSource })
             this._onRefresh()
         }
+
     }
     showModal = () => {
         let { searchText } = this.state
@@ -128,7 +131,7 @@ class TeamList extends Component {
         var value = status
         console.log(value)
         if (value == false) {
-            this.setState({ isAddStatusError : true})
+            this.setState({ isAddStatusError: true })
         }
         else if (value == true) {
             datafriendRegis.push(newitem)
@@ -196,6 +199,9 @@ class TeamList extends Component {
     gotoAddress = () => {
         this.props.navigation.navigate("AddressLayout")
     }
+    gotoFriendList = () => {
+        this.props.navigation.navigate("FriendList")
+    }
 
     render() {
         const { navigate } = this.props.navigation;
@@ -238,6 +244,21 @@ class TeamList extends Component {
                                 >
                                     <View style={styles.container}>
                                         <HeaderProfile />
+                                        <ImageBackground style={{ width: "100%", opacity: 0.8 }} source={{ uri: 'https://register.shutterrunning2014.com/assets/img/theme/bg.jpg' }}>
+                                            <View style={styles.boxBackground}>
+                                                <TouchableOpacity onPress={() => this.setState({ frienddistance: !this.state.frienddistance })} style={{ flexDirection: "row", justifyContent: 'space-between' }}>
+                                                    <View style={{ flexDirection: "row" }}>
+                                                        <Icon name="ios-search" style={{ padding: 10, color: "#fff", fontSize: 16 }} />
+                                                        <Text style={styles.text}>ค้นหาเพื่อนของคุณเพื่อเพิ่มในการสมัคร</Text>
+
+                                                    </View>
+                                                    {/* {this.state.frienddistance == true ?
+                                                        <Icon name="ios-arrow-up" style={{ padding: 10, color: "#fff", fontSize: 16 }} type="Ionicons" /> :
+                                                        <Icon name="ios-arrow-down" style={{ padding: 10, color: "#fff", fontSize: 16 }} type="Ionicons" />
+                                                    } */}
+                                                </TouchableOpacity>
+                                            </View>
+                                        </ImageBackground>
                                         <Header searchBar rounded>
                                             <Item>
                                                 <Icon name="ios-people" />
@@ -255,27 +276,47 @@ class TeamList extends Component {
                                                 <Text style={{ fontFamily: 'kanit' }}>ค้นหา</Text>
                                             </Button>
                                         </Header>
-                                        <TouchableOpacity onPress={() => this.setState({ friendlist: !this.state.friendlist })} style={{ flexDirection: "row", justifyContent: 'space-between', backgroundColor: "#f1f1f1" }}>
-                                            <Text style={styles.text}>รายชื่อเพื่อน</Text>
-                                            <Icon name="ios-arrow-down" style={{ padding: 10 }} type="Ionicons" />
-                                        </TouchableOpacity>
+                                        <ImageBackground style={{ width: "100%", opacity: 0.8 }} source={{ uri: 'https://register.shutterrunning2014.com/assets/img/theme/bg.jpg' }}>
+                                            <View style={styles.boxBackground}>
+                                                <TouchableOpacity onPress={() => this.setState({ friendlist: !this.state.friendlist })} style={{ flexDirection: "row", justifyContent: 'space-between' }}>
+                                                    <View style={{ flexDirection: "row" }}>
+                                                        <Icon name="list-bullet" style={{ padding: 10, color: "#fff", fontSize: 16 }} type="Foundation" />
+                                                        <Text style={styles.text}>เลือกเพื่อนของคุณจาก FriendList</Text>
+                                                    </View>
+                                                    {this.state.frienddistance == true ?
+                                                        <Icon name="ios-arrow-up" style={{ padding: 10, color: "#fff", fontSize: 16 }} type="Ionicons" /> :
+                                                        <Icon name="ios-arrow-down" style={{ padding: 10, color: "#fff", fontSize: 16 }} type="Ionicons" />
+                                                    }
+                                                </TouchableOpacity>
+                                            </View>
+                                        </ImageBackground>
                                         {this.state.friendlist &&
                                             <View>
+                                                <View style={{ paddingHorizontal: 10, paddingTop: 30 }}>
+                                                    <Button block success onPress={()=> this.gotoFriendList()} >
+                                                        <Text style={styles.text}> + เพิ่มเพื่อนจาก FriendList</Text>
+                                                    </Button>
+                                                </View>
                                                 <EventListFriend
                                                     friend={this.state.dataSource}
                                                 />
-                                                {/* <View style={styles.submitContainer}>
-                                                    <TouchableOpacity style={styles.buttonContainer}
-                                                        onPress={() => navigate('FriendDistance')}>
-                                                        <Text style={styles.textButton}>+ เพิ่มในการสมัคร</Text>
-                                                    </TouchableOpacity>
-                                                </View> */}
                                             </View>
                                         }
-                                        <TouchableOpacity onPress={() => this.setState({ frienddistance: !this.state.frienddistance })} style={{ flexDirection: "row", justifyContent: 'space-between', backgroundColor: "#f1f1f1" }}>
-                                            <Text style={styles.text}>ลงทะเบียนแบบกลุ่ม</Text>
-                                            <Icon name="ios-arrow-down" style={{ padding: 10 }} type="Ionicons" />
-                                        </TouchableOpacity>
+                                        <ImageBackground style={{ width: "100%", opacity: 0.8 }} source={{ uri: 'https://register.shutterrunning2014.com/assets/img/theme/bg.jpg' }}>
+                                            <View style={styles.boxBackground}>
+                                                <TouchableOpacity onPress={() => this.setState({ frienddistance: !this.state.frienddistance })} style={{ flexDirection: "row", justifyContent: 'space-between' }}>
+                                                    <View style={{ flexDirection: "row" }}>
+                                                        <Icon name="group" style={{ padding: 10, color: "#fff", fontSize: 16 }} type="FontAwesome" />
+                                                        <Text style={styles.text}>รายชื่อเพื่อนที่สมัคร (2-10 คน)</Text>
+
+                                                    </View>
+                                                    {this.state.frienddistance == true ?
+                                                        <Icon name="ios-arrow-up" style={{ padding: 10, color: "#fff", fontSize: 16 }} type="Ionicons" /> :
+                                                        <Icon name="ios-arrow-down" style={{ padding: 10, color: "#fff", fontSize: 16 }} type="Ionicons" />
+                                                    }
+                                                </TouchableOpacity>
+                                            </View>
+                                        </ImageBackground>
                                         {this.state.frienddistance &&
                                             <View>
                                                 <FriendDistance
@@ -331,7 +372,8 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
     return {
         token: state.token,
-        userprofile: state.userprofile
+        userprofile: state.userprofile,
+        friendlist: state.friendlist
     }
 }
 const styles = StyleSheet.create({
@@ -375,12 +417,27 @@ const styles = StyleSheet.create({
         fontFamily: 'kanit',
     },
     text: {
-        fontSize: 20,
+        fontSize: 16,
         fontWeight: '700',
         color: '#000',
-        padding: 10,
+        padding: 5,
+        color: "#fff",
         fontFamily: 'kanit',
     },
+    boxBackground: {
+        backgroundColor: "#000",
+        opacity: 0.8,
+        width: '100%',
+        height: 35
+    },
+    boxCount: {
+        backgroundColor: "#fff",
+        width: 20,
+        height: 20,
+        borderRadius: 10,
+        justifyContent: "center",
+        alignItems: "center",
+    }
 
 })
 export default connect(mapStateToProps, mapDispatchToProps)(TeamList);

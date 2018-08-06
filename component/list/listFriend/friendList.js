@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, RefreshControl, Alert, TouchableOpacity, ListView, Icon } from 'react-native';
 import { connect } from 'react-redux'
 import axios from 'axios'
+import Modal from "react-native-modal";
+import ModalAddFriend from '../../modal/addFriend'
+import datafriend from '../../../component/list/listFriend/dataFriend'
+import datafriendRegis from '../../../component/list/listFriend/dataFriend-regis'
 import { SwipeListView } from 'react-native-swipe-list-view';
 import req from '../../../config/uri_req'
 import api_key from '../../../config/api_key'
@@ -16,6 +20,10 @@ class FriendListView extends Component {
         super(props)
         this.state = {
             isRefesh: false,
+            isModalVisible : false,
+            friend:{},
+            datafriendlist: [],
+
 
         }
         this.ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
@@ -78,8 +86,10 @@ class FriendListView extends Component {
     onRefesh = () => {
         this.componentDidMount()
     }
+    hideModal = () => {
+        this.setState({ isModalVisible: !this.state.isModalVisible })
+    }
     _refreshControl() {
-        // console.log("_refreshControl")
         return (
             <RefreshControl
                 refreshing={this.state.isLoading}
@@ -88,24 +98,50 @@ class FriendListView extends Component {
     }
 
     _refreshListView() {
-        // console.log("_refreshListView")
 
-        //Start Rendering Spinner
         this.setState({ isLoading: true })
         this.getFriend()
         this.setState({ isLoading: false }) //Stop Rendering Spinner
     }
+    _checkAddFriendList(item, status) {
+        var data = datafriendRegis
+        var str_item = item
+        for (i = 0; i <= data.length; i++) {
+            if (JSON.stringify(str_item) == JSON.stringify(data[i])) {
+                console.log("ซ้ำ")
+                status = false
+                break;
+            }
+            else if (JSON.stringify(str_item) != JSON.stringify(data[i])) {
+                status = true
+            }
+        }
+        setTimeout(() => {
+            this._addFriendList(item, status)
+        }, 1500)
+        return status
+    }
+    _addFriendList(item, status) {
+        // this._checkAddFriend(item)
+        var value = status
+        console.log(value)
+        if (value == false) {
+            this.setState({ isAddStatusError: true })
+        }
+        else if (value == true) {
+            datafriendRegis.push(item)
+            this.props.setFriendRegister(datafriendRegis)
+            this.setState({ frienddistance: true })
+            setTimeout(() => {
+                this.setState({ frienddistance: false })
+            }, 1000)
+        }
+    }
     alertShow(item) {
+        this.setState({ friend : item})
         console.log(item)
-        Alert.alert(item.name, " เพศ : " + item.gen + " อายุ : " + item.age,
-            [
-                { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-                { text: 'OK', onPress: () => this.props.AddFriendDetail() },
-                { text: 'หน้าหลัก', onPress: () => this.props.TeamList() }
-            ],
-            { cancelable: false }
-        )
-        this.props.addFriend(item)
+        this.hideModal()
+        this._checkAddFriendList(item)
     }
     render() {
         if (this.state.isLoading) {
@@ -139,10 +175,9 @@ class FriendListView extends Component {
                                         source={{ uri: item.PicProfile }}
                                         style={styles.avatar} />
                                 </View>
-                                <TouchableOpacity>
+                                <TouchableOpacity onPress={()=>this.alertShow(item)}>
                                     <View style={styles.textListFriend}>
                                         <Text style={styles.textName}>{item.FirstName} - {item.LastName}</Text>
-                                        {/* <Text style={styles.textAge}>อายุ : {item.NickName} - {item.Gender}</Text> */}
                                     </View>
                                 </TouchableOpacity>
                             </View>
@@ -159,6 +194,15 @@ class FriendListView extends Component {
                     // leftOpenValue={75}
                     rightOpenValue={-75}
                 />
+                <Modal isVisible={this.state.isModalVisible}>
+                    <ModalAddFriend
+                        toggleModal={this.hideModal}
+                        outputfriend={this.state.friend}
+                        friend={datafriend}
+                        getAddFriend={this._checkAddFriendList.bind(this)}
+                        textAdd="เพิ่มลงในการสมัคร"
+                    />
+                </Modal>
 
             </View >
 
@@ -177,6 +221,12 @@ const mapDispatchToProps = (dispatch) => {
             dispatch({
                 type: 'addFriend',
                 payload: profile
+            })
+        },
+        setFriendRegister: (datafriend) => {
+            dispatch({
+                type: 'setFriendRegister',
+                payload: datafriend
             })
         }
     }

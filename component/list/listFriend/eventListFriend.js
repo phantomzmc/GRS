@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, ActivityIndicator, FlatList, RefreshControl } from 'react-native';
+import { Icon, Text, Card, CardItem } from 'native-base';
 import { connect } from 'react-redux'
 import axios from 'axios'
 import CellEventListFriend from './cell-eventListFriend'
@@ -53,13 +54,25 @@ class EventListFriend extends Component {
             <View
                 style={{
                     flex: 1,
-                    padding: 20
+                    padding: 20,
+                    flexDirection : "row"
                 }}>
+                {/* <View style={{ paddingVertical: 20, paddingLeft: 10 }}>
+                    <Card style={{ justifyContent: "center" }}>
+                        <CardItem style={{ justifyContent: "center" }}>
+                            <Icon name="ios-add" type="Ionicons" style={{ fontSize: 50 }} />
+                        </CardItem>
+                        <CardItem>
+                            <Text>เลือกเพื่อนจาก FriendList</Text>
+                        </CardItem>
+                    </Card>
+                </View> */}
                 <FlatList
                     horizontal
                     refreshControl={this._refreshControl()}
                     data={this.props.friend}
                     renderItem={({ item, index }) =>
+
                         <CellEventListFriend
                             items={item}
                             idkey={index}

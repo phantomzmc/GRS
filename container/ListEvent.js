@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, View, StatusBar } from 'react-native';
+import { StyleSheet, View, StatusBar, ImageBackground } from 'react-native';
 import List from '../component/list/listevent/listevent'
 import { YellowBox } from 'react-native';
 import { connect } from 'react-redux'
@@ -37,9 +37,9 @@ class ListEvent extends Component {
         });
         navigator.geolocation.getCurrentPosition(
             (position) => {
-            this.props.setLatitude(position.coords.latitude)
-            this.props.setLongitude(position.coords.longitude)
-        })
+                this.props.setLatitude(position.coords.latitude)
+                this.props.setLongitude(position.coords.longitude)
+            })
     }
     setUserID = () => {
         console.log(this.props.profile.profile.userid)
@@ -73,17 +73,17 @@ class ListEvent extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
-                <StatusBar
-                    barStyle="light-content"
-                    hidden={false}
-                    translucent={true}
-                />
-                <List
-                    CheckLogin={this.checkUser.bind(this)}
-                    Profile={this.state.profile}
-                />
-            </View>
+                <View style={styles.container}>
+                    <StatusBar
+                        barStyle="light-content"
+                        hidden={false}
+                        translucent={true}
+                    />
+                    <List
+                        CheckLogin={this.checkUser.bind(this)}
+                        Profile={this.state.profile}
+                    />
+                </View>
         )
     }
 }
@@ -124,7 +124,6 @@ const mapDispatchToProps = dispatch => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
     }
 });
 export default connect(mapStateToProps, mapDispatchToProps)(ListEvent);

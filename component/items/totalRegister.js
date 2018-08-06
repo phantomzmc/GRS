@@ -94,7 +94,7 @@ class TotalRegister extends Component {
                                 <View>
                                     <Text style={{ fontSize: 10, fontFamily: 'kanit', textAlign: 'center', width: 150 }}>{this.props.event.event.EventName} </Text>
                                     <TouchableOpacity onPress={() => this.setState({ detailRegis: !this.state.detailRegis })}>
-                                        <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit' }}>รายละเอียด : แสดงรายชื่อ </Text>
+                                        <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit' ,textAlign: 'center'}}>รายละเอียด : แสดงรายชื่อ </Text>
                                     </TouchableOpacity>
                                 </View>
                                 <View>
