@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import FriendInEvent from '../component/list/listFriend/frienInEvent'
-import { View, StyleSheet, TouchableOpacity, Text, ScrollView, StatusBar, TouchableHighlight } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Text, ScrollView, StatusBar, TouchableHighlight, Alert } from 'react-native';
 import { Container } from "native-base";
 import { connect } from 'react-redux'
 
@@ -31,8 +31,32 @@ class FriendDistance extends Component {
             console.log("don't update")
             this.setState({ statusButton: true, statusButtonOnPress: false })
         }
-    }
 
+    }
+    checkItemRegis() {
+        let friendlists = this.props.friendlist.friendRegis
+        let friendevent = this.props.friendlist.friendEvent
+        var countFriend = friendlists.length
+        var countInEvent = friendevent.length
+
+        if (countInEvent < 2 || countFriend < 2) {
+            Alert.alert('กรุณาเพิ่มจำนวนเพื่อนในการสมัคร', 'การลงทะเบียนแบบกลุ่มจะต้องลงทะเบียนตั้งแต่ 2 คนขึ้นไป', [
+                {
+                    text: 'ตกลง'
+                }
+            ], { cancelable: false })
+        }
+        else if (countInEvent > 10 || countFriend > 10) {
+            Alert.alert('จำนวนเพื่อนเกินกำหนด', 'การลงทะเบียนแบบกลุ่มสามารถลงได้ไม่เกิน 10 คนต่อ 1 ครั้งเท่านั้น', [
+                {
+                    text: 'ตกลง'
+                }
+            ], { cancelable: false })
+        }
+        else {
+            this.onGotoAddress()
+        }
+    }
     onTest = () => {
         this.props.navigation.navigate("ListTotalRegis")
     }
@@ -56,25 +80,25 @@ class FriendDistance extends Component {
                     translucent={true}
                 />
                 <ScrollView>
-                <View style={styles.container}>
-                    <FriendInEvent />
-                    <View style={styles.submitContainer}>
-                        {this.state.statusButton &&
-                            <TouchableHighlight style={styles.buttonContainer}
-                                onPress={this.checkValueRegis.bind(this)}
-                            >
-                                <Text style={styles.textButton}>ถัดไป</Text>
-                            </TouchableHighlight>
-                        }
-                        {this.state.statusButtonOnPress &&
-                            <TouchableOpacity style={styles.buttonContaineronPress}
-                                onPress={this.onGotoAddress.bind(this)}>
-                                <Text style={styles.textButton}>ถัดไป</Text>
-                            </TouchableOpacity>
-                        }
+                    <View style={styles.container}>
+                        <FriendInEvent />
+                        <View style={styles.submitContainer}>
+                            {this.state.statusButton &&
+                                <TouchableHighlight style={styles.buttonContainer}
+                                    onPress={this.checkValueRegis.bind(this)}
+                                >
+                                    <Text style={styles.textButton}>ถัดไป</Text>
+                                </TouchableHighlight>
+                            }
+                            {this.state.statusButtonOnPress &&
+                                <TouchableOpacity style={styles.buttonContaineronPress}
+                                    onPress={() => this.checkItemRegis()}>
+                                    <Text style={styles.textButton}>ถัดไป</Text>
+                                </TouchableOpacity>
+                            }
 
+                        </View>
                     </View>
-                </View>
                 </ScrollView>
             </Container>
         )

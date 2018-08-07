@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, ActivityIndicator, FlatList, RefreshControl } from 'react-native';
-import { Icon, Text, Card, CardItem } from 'native-base';
+import { Icon, Text, Button, CardItem } from 'native-base';
 import { connect } from 'react-redux'
 import axios from 'axios'
 import CellEventListFriend from './cell-eventListFriend'
@@ -16,11 +16,19 @@ class EventListFriend extends Component {
         this.state = {
             datafriend: [],
             isLoading: false,
+            statusCheck: true
         }
     }
 
-    addFriendEvent = (datafriend) => {
-        this.props.setFriendRegister(datafriend)
+    // addFriendEvent = (datafriend) => {
+    //     this.props.setFriendRegister(datafriend)
+    // }
+    saveDataFriend = (datafriend) => {
+        this.setState({ datafriend: datafriend })
+    }
+    addFriendEvent() {
+        this.props.setFriendRegister(this.state.datafriend)
+        this.setState({ statusCheck: false })
     }
     _refreshControl() {
         console.log("refersh")
@@ -51,37 +59,37 @@ class EventListFriend extends Component {
             )
         }
         return (
-            <View
-                style={{
-                    flex: 1,
-                    padding: 20,
-                    flexDirection : "row"
-                }}>
-                {/* <View style={{ paddingVertical: 20, paddingLeft: 10 }}>
-                    <Card style={{ justifyContent: "center" }}>
-                        <CardItem style={{ justifyContent: "center" }}>
-                            <Icon name="ios-add" type="Ionicons" style={{ fontSize: 50 }} />
-                        </CardItem>
-                        <CardItem>
-                            <Text>เลือกเพื่อนจาก FriendList</Text>
-                        </CardItem>
-                    </Card>
-                </View> */}
-                <FlatList
-                    horizontal
-                    refreshControl={this._refreshControl()}
-                    data={this.props.friend}
-                    renderItem={({ item, index }) =>
+            <View>
+                <View
+                    style={{
+                        flex: 1,
+                        padding: 20,
+                        flexDirection: "row"
+                    }}>
+                    <FlatList
+                        horizontal
+                        refreshControl={this._refreshControl()}
+                        data={this.props.friend}
+                        renderItem={({ item, index }) =>
 
-                        <CellEventListFriend
-                            items={item}
-                            idkey={index}
-                            getAddFriend={this.addFriendEvent.bind(this)}
-                        />
-                    }
+                            <CellEventListFriend
+                                items={item}
+                                idkey={index}
+                                // getAddFriend={this.addFriendEvent.bind(this)}
+                                submitAddFriend={this.saveDataFriend.bind(this)}
+                                sendStatusCheck={this.state.statusCheck}
+                            />
+                        }
 
-                    keyExtractor={(item, index) => index} />
-            </View >
+                        keyExtractor={(item, index) => index}
+                    />
+                </View >
+                <View style={{ paddingHorizontal: 10, paddingVertical: 20 }}>
+                    <Button rounded block warning onPress={() => this.addFriendEvent()} >
+                        <Text style={{ fontFamily: 'kanit' }}> + เพิ่มเพื่อนลงในรายการวิ่ง</Text>
+                    </Button>
+                </View>
+            </View>
         );
     }
 }

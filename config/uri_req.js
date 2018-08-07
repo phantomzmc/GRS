@@ -24,11 +24,12 @@ export default
             uspUpdateUserProfile: url + "Main.uspUpdateUserProfile",
             uspResetPassword: url + "Main.uspResetPassword",
             uspCheckEmail: url + "Main.uspCheckEmail",
-            uspDeleteFriendLists : url + "Main.uspDeleteFriendLists",
-            uspResetActivecode : url + "Main.uspResetActivecode"
+            uspDeleteFriendLists: url + "Main.uspDeleteFriendLists",
+            uspResetActivecode: url + "Main.uspResetActivecode",
+            uspGetFriendSuggestion: url + "Main.uspGetFriendSuggestion"
         },
         {
             url_mailgun: "https://api.mailgun.net/v3/mg.guurun.com/messages",
-            url_imgprofile : "https://upload.i-bitz.co.th/upload/"
+            url_imgprofile: "https://upload.i-bitz.co.th/upload/"
         }
     ]

@@ -22,7 +22,7 @@ import SummaryTotal from '../component/items/summary'
 
 var uri = req[0].uspSearchFriend
 var uri2 = req[0].uspAddFriendLists
-var uri3 = req[0].uspGetFriendLists
+var uri3 = req[0].uspGetFriendSuggestion
 var apikey = api_key[0].api_key
 
 class TeamList extends Component {
@@ -42,7 +42,7 @@ class TeamList extends Component {
             datafriendlist: [],
             refreshing: false,
             friendlist: true,
-            frienddistance: false,
+            frienddistance: true,
 
         }
         this.getFriend = this.getFriend.bind(this)
@@ -89,8 +89,8 @@ class TeamList extends Component {
         let data = ({
             params: [
                 { name: "RunnerID", value: this.props.userprofile.userprofile.RunnerID },
-                { name: "PageNo", value: "1" },
-                { name: "RowPerPage", value: "12" }
+                { name: "ShowAmount", value: null },
+                { name: "EventID", value: this.props.event.event.EventID }
             ]
         })
         axios.post(uri3, data, {
@@ -102,7 +102,9 @@ class TeamList extends Component {
         })
             .then((response) => {
                 this.setState({ isLoading: false, dataSource: response.data });
-            }).catch((error) => {
+                console.log(this.state.dataSource)
+            })
+            .catch((error) => {
                 this.setState({ isLoading: true })
                 // this.setState({ isModalVisibleError: !this.state.isModalVisibleError })
                 // console.error(error);
@@ -137,9 +139,10 @@ class TeamList extends Component {
             datafriendRegis.push(newitem)
             this.props.setFriendRegister(datafriendRegis)
             this.setState({ frienddistance: true })
+            this.setState({ frienddistance: false })
             setTimeout(() => {
-                this.setState({ frienddistance: false })
-            }, 1000)
+                this.setState({ frienddistance: true })
+            }, 500)
         }
     }
     checkAddFriendStatus() {
@@ -269,7 +272,6 @@ class TeamList extends Component {
                                                     onChangeText={(searchText) => this.setState({ searchText })}
                                                     onSubmitEditing={this.showModal}
                                                 />
-
                                             </Item>
                                             <Button small iconLeft transparent primary onPress={this.showModal}>
                                                 <Icon name="ios-search" />
@@ -293,7 +295,7 @@ class TeamList extends Component {
                                         {this.state.friendlist &&
                                             <View>
                                                 <View style={{ paddingHorizontal: 10, paddingTop: 30 }}>
-                                                    <Button block success onPress={()=> this.gotoFriendList()} >
+                                                    <Button rounded block success onPress={() => this.gotoFriendList()} >
                                                         <Text style={styles.text}> + เพิ่มเพื่อนจาก FriendList</Text>
                                                     </Button>
                                                 </View>
@@ -373,7 +375,8 @@ const mapStateToProps = state => {
     return {
         token: state.token,
         userprofile: state.userprofile,
-        friendlist: state.friendlist
+        friendlist: state.friendlist,
+        event: state.event
     }
 }
 const styles = StyleSheet.create({

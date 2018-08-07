@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 import Modal from "react-native-modal";
 import ModalAddFriend from '../../modal/addFriend'
+import AddStatusError from '../../modal/addStatus_error'
 import datafriend from '../../../component/list/listFriend/dataFriend'
 import datafriendRegis from '../../../component/list/listFriend/dataFriend-regis'
 import { SwipeListView } from 'react-native-swipe-list-view';
@@ -20,11 +21,10 @@ class FriendListView extends Component {
         super(props)
         this.state = {
             isRefesh: false,
-            isModalVisible : false,
-            friend:{},
+            isModalVisible: false,
+            friend: {},
             datafriendlist: [],
-
-
+            isAddStatusError : false
         }
         this.ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     }
@@ -89,6 +89,11 @@ class FriendListView extends Component {
     hideModal = () => {
         this.setState({ isModalVisible: !this.state.isModalVisible })
     }
+    hideModalError = () => {
+        this.setState({
+            isAddStatusError: false
+        })
+    }
     _refreshControl() {
         return (
             <RefreshControl
@@ -138,10 +143,10 @@ class FriendListView extends Component {
         }
     }
     alertShow(item) {
-        this.setState({ friend : item})
+        this.setState({ friend: item })
         console.log(item)
         this.hideModal()
-        this._checkAddFriendList(item)
+        // this._checkAddFriendList(item)
     }
     render() {
         if (this.state.isLoading) {
@@ -175,7 +180,7 @@ class FriendListView extends Component {
                                         source={{ uri: item.PicProfile }}
                                         style={styles.avatar} />
                                 </View>
-                                <TouchableOpacity onPress={()=>this.alertShow(item)}>
+                                <TouchableOpacity onPress={() => this.alertShow(item)}>
                                     <View style={styles.textListFriend}>
                                         <Text style={styles.textName}>{item.FirstName} - {item.LastName}</Text>
                                     </View>
@@ -201,6 +206,12 @@ class FriendListView extends Component {
                         friend={datafriend}
                         getAddFriend={this._checkAddFriendList.bind(this)}
                         textAdd="เพิ่มลงในการสมัคร"
+                    />
+                </Modal>
+                <Modal isVisible={this.state.isAddStatusError}>
+                    <AddStatusError
+                        title="คุณได้เพิ่มเพื่อนคนนี้ในรายการวิ่งแล้ว"
+                        toggleModal={this.hideModalError}
                     />
                 </Modal>
 

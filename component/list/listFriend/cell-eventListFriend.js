@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { StyleSheet, Image, Text } from "react-native";
-import { View, Card, CardItem } from 'native-base';
+import { View, Card, CardItem, Left, Right } from 'native-base';
 import CheckBox from 'react-native-checkbox-heaven';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import datafriendRegis from './dataFriend-regis'
+import datafriend from './dataFriend'
 
 class CellEventListFriend extends Component {
     constructor(props) {
@@ -12,22 +12,30 @@ class CellEventListFriend extends Component {
             item: [],
             checked: false,
             favorite: true,
-            icon: "",
-            iconColor: "",
+            icon: "heart",
+            iconColor: "#F44336",
             datafriend: [],
         }
         this.checkFavorite = this.checkFavorite.bind(this)
     }
     componentDidMount() {
-        this.setState({ item: this.props.items })
+        this.setState({ item: this.props.items, statusCheck: this.props.sendStatusCheck })
         this.checkFavorite()
         console.log(this.props.items)
         console.log(this.state.item)
     }
     addFriendEvent = (item) => {
-        datafriendRegis.push(item)
-        console.log(datafriendRegis)
-        this.props.getAddFriend(datafriendRegis)
+        if (item.RegisterStatus == 0) {
+            datafriend.push(item)
+            console.log(datafriend)
+            this.props.submitAddFriend(datafriend)
+            // datafriendRegis.push(item)
+            // console.log(datafriendRegis)
+            // this.props.getAddFriend(datafriendRegis)
+        }
+        else if (item.RegisterStatus == 1) {
+            console.log("RegisterStatus == 1")
+        }
     }
     removeFriendEvent = (index) => {
         console.log(index)
@@ -76,30 +84,55 @@ class CellEventListFriend extends Component {
             <View style={styles.container}>
                 <Card>
                     <CardItem>
-                        <CheckBox
-                            iconSize={20}
-                            iconName='iosCircleMix'
-                            checked={this.state.checked}
-                            checkedColor='#FC561F'
-                            uncheckedColor='#C0C0C0'
-                            onChange={this.handleOnChange.bind(this)}
-                            style={{ flex: 1 }}
-                        />
+                        <Left>
+                            {item.RegisterStatus == 0 ?
+                                <CheckBox
+                                    iconSize={20}
+                                    iconName='iosCircleMix'
+                                    checked={this.state.checked}
+                                    checkedColor='#FC561F'
+                                    uncheckedColor='#C0C0C0'
+                                    onChange={this.handleOnChange.bind(this)}
+                                    style={{ flex: 1 }}
+                                /> :
+                                <View style={{ flexDirection: "row" }}>
+                                    <Icon name="check" type="FontAwesome" style={{ color: "#9ACD32" }} />
+                                    <Text style={styles.textStatusRegis}> สมัครรายการนี้แล้ว</Text>
+                                </View>
+                            }
+                        </Left>
+                        <Right>
+                            {item.RegisterStatus && item.FriendStatus == 1 ?
+                                <Icon
+                                    name="heart"
+                                    type="Foundation"
+                                    style={{ fontSize: 20, color: "#F44336" }}
+
+                                /> :
+                                <Icon
+                                    name="heart-o"
+                                    type="Foundation"
+                                    style={{ fontSize: 20, color: "#fff" }}
+
+                                />
+                            }
+                        </Right>
                     </CardItem>
+
                     <CardItem>
                         <View style={styles.imgContainer}>
                             <View style={styles.listfriend}>
+                                {item.RegisterStatus == 0 ?
+                                    <Image
+                                        source={{ uri: item.PicProfile }}
+                                        style={styles.imgAvatar2}
+                                    /> :
+                                    <Image
+                                        source={{ uri: item.PicProfile }}
+                                        style={styles.imgAvatar}
+                                    />
+                                }
 
-                                <Image
-                                    source={{uri : item.PicProfile}}
-                                    style={styles.imgAvatar} />
-                                <Icon
-                                    name={this.state.icon}
-                                    color={this.state.iconColor}
-                                    size={20}
-                                    style={{ marginBottom: 10, marginTop: 20 }}
-                                    onPress={this.chageColorIcon.bind(this)}
-                                />
                                 <CardItem>
                                     <View style={styles.detailList}>
                                         <Text style={styles.textName}>{item.FirstName} - {item.LastName}</Text>
@@ -129,9 +162,18 @@ const styles = StyleSheet.create({
         alignContent: 'center'
     },
     imgAvatar: {
-        width: 80,
-        height: 80,
-        borderRadius: 40,
+        width: 100,
+        height: 100,
+        borderRadius: 50,
+        borderWidth: 2,
+        borderColor: "#1E90FF"
+    },
+    imgAvatar2: {
+        width: 100,
+        height: 100,
+        borderRadius: 50,
+        borderWidth: 2,
+        borderColor: "#fff"
     },
     listfriend: {
         alignItems: 'center',
@@ -143,10 +185,15 @@ const styles = StyleSheet.create({
     },
     detailList: {
         flexDirection: 'row',
-        padding: 5
+        padding: 10
     },
     heart: {
         padding: 5,
+    },
+    textStatusRegis: {
+        fontFamily: 'kanit',
+        fontSize: 10,
+        color: "#9ACD32"
     }
 })
 

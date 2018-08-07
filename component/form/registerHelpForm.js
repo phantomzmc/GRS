@@ -136,7 +136,7 @@ class FormAddressRegister extends Component {
         <View style={styles.submitContainer}>
           <TouchableOpacity
             style={styles.buttonContainer}
-            onPress={() => this.checkInputValue(firstname, lastname, relation, tel)}
+            onPress={() => this.sendData(firstname, lastname, relation, tel)}
           >
             <Text style={styles.textButton}>ยืนยัน</Text>
           </TouchableOpacity>

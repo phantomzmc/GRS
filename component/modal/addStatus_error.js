@@ -11,7 +11,14 @@ class ErrorModalAddFriend extends Component {
     constructor(props) {
         super(props)
         this.state = {
-
+            title: "ผู้ใช้งานได้เป็นเพื่อนกับบุคคลนี้แล้ว"
+        }
+    }
+    componentDidMount() {
+        {
+            this.props.title == "" || this.props.title == undefined || this.props.title == null ?
+                this.setState({ title: "ผู้ใช้งานได้เป็นเพื่อนกับบุคคลนี้แล้ว" }) :
+                this.setState({ title: this.props.title })
         }
     }
 
@@ -21,14 +28,14 @@ class ErrorModalAddFriend extends Component {
                 <Icon name="ios-information-circle-outline" style={{ color: "red" }} />
                 <View style={{ paddingVertical: 10, alignItems: "center" }}>
                     <H1 style={{ color: "red", fontFamily: "kanit" }}>เพิ่มเพื่อนไม่สำเร็จ</H1>
-                    <Text style={{ fontSize: 16, fontFamily: "kanit" }}>ผู้ใช้งานได้เป็นเพื่อนกับบุคคลนี้แล้ว</Text>
+                    <Text style={{ fontSize: 16, fontFamily: "kanit" }}>{this.state.title}</Text>
                 </View>
                 <View style={{ flexDirection: "row", justifyContent: "center", paddingVertical: 10 }}>
                     <Button iconLeft rounded light onPress={this.props.toggleModal} style={{ marginHorizontal: 10, justifyContent: "center" }}>
                         <Icon name="ios-close-outline" />
                         <Text style={{ fontFamily: "kanit" }}>ปิด</Text>
                     </Button>
-                    
+
                 </View>
             </View>
         );
