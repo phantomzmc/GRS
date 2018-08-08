@@ -18,7 +18,7 @@ var apikey = api_key[0].api_key
 
 class FriendList extends Component {
     state = {
-        title: "รายชื่อเพื่อน",
+        title: "Friend List",
         isModalVisible: false,
         isModalVisibleError: false,
         searchText: "",
@@ -31,9 +31,9 @@ class FriendList extends Component {
         let { searchText } = this.state
         let data = ({
             params: [
-                { name: "RunnerID", value: "" },
+                { name: "RunnerID", value: this.props.userprofile.userprofile.RunnerID },
                 { name: "Keyword", value: searchText },
-                { name: "EventID", value: "" }
+                { name: "EventID", value: this.props.event.event.EventID }
             ]
         })
         axios.post(uri, data, {
@@ -168,7 +168,8 @@ class FriendList extends Component {
 const mapStateToProps = state => {
     return {
         token: state.token,
-        userprofile: state.userprofile
+        userprofile: state.userprofile,
+        event : state.event
     }
 }
 const styles = StyleSheet.create({

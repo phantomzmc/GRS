@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Button } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, RefreshControl, Button } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
 import { connect } from 'react-redux'
@@ -24,10 +24,19 @@ class RegisterDistance extends Component {
                 distance: "",
                 price: ""
             },
+            refreshing: false
         }
         // this.gotoShirtPhotoPlus = this.gotoShirtPhotoPlus.bind(this)
     }
-
+    componentDidMount(){
+        this._onRefresh()
+    }
+    _onRefresh() {
+        this.setState({ refreshing: true })
+        setTimeout(() => {
+            this.setState({ refreshing: false })
+        }, 1000)
+    }
     nextState = () => {
         console.log("ShirtPhotoPlus")
         this.props.navigation.navigate("ShirtPhotoPlus")
@@ -41,7 +50,12 @@ class RegisterDistance extends Component {
     }
     render() {
         return (
-            <ScrollView>
+            <ScrollView
+                refreshControl={
+                    <RefreshControl
+                        refreshing={this.state.refreshing}
+                        onRefresh={this._onRefresh.bind(this)}
+                    />}>
                 <View style={styles.container}>
                     <HeaderProfile />
                     <Text style={styles.text}>

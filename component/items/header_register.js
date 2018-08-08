@@ -234,7 +234,6 @@ class HeaderRegister extends Component {
                             <View style={styles.detailProfile}>
                                 <Text style={styles.nameProfile}>{this.state.fullname} - {this.state.lastname} </Text>
                                 <Text style={styles.ageProfile}>{this.state.gen} - {this.state.age}</Text>
-                                <Text style={styles.eventTitle}>{this.state.eventname}</Text>
                             </View>
                         </View>
                     </ImageBackground> :
@@ -259,7 +258,6 @@ class HeaderRegister extends Component {
                             <View style={styles.detailProfile}>
                                 <Text style={styles.nameProfile}>{this.state.fullname} - {this.state.lastname} </Text>
                                 <Text style={styles.ageProfile}>{this.state.gen} - {this.state.age}</Text>
-                                <Text style={styles.eventTitle}>{this.state.eventname}</Text>
                             </View>
                         </View>
                     </ImageBackground>

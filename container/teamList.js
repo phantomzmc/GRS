@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, ScrollView, TouchableOpacity, StatusBar, RefreshControl, ImageBackground } from 'react-native';
-import { Container, Header, Item, Input, Button, Tab, Tabs, TabHeading, Icon, Text, CardItem } from 'native-base';
+import { Container, Header, Item, Input, Button, Tab, Tabs, TabHeading, Icon, Text, CardItem, Card } from 'native-base';
 import PropTypes from 'prop-types';
 import Modal from "react-native-modal";
 import axios from 'axios'
@@ -18,6 +18,7 @@ import FriendDistance from '../container/friendDistance'
 import req from '../config/uri_req'
 import api_key from '../config/api_key'
 import datafriendRegis from '../component/list/listFriend/dataFriend-regis'
+import datafriendSug from '../component/list/listFriend/dataFriendSug-regis'
 import SummaryTotal from '../component/items/summary'
 
 var uri = req[0].uspSearchFriend
@@ -29,7 +30,7 @@ class TeamList extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            title: "ลงทะเบียนแบบกลุ่ม",
+            titleHead: "ลงทะเบียนแบบกลุ่ม",
             isModalVisible: false,
             isModalVisibleError: false,
             isAddStatusError: false,
@@ -43,7 +44,7 @@ class TeamList extends Component {
             refreshing: false,
             friendlist: true,
             frienddistance: true,
-
+            statusCheck: true
         }
         this.getFriend = this.getFriend.bind(this)
     }
@@ -52,21 +53,22 @@ class TeamList extends Component {
         this._onRefresh()
 
     }
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.dataSource != this.state.dataSource) {
-            console.log("update")
-            this.setState({ dataSource: this.state.dataSource })
-            this._onRefresh()
-        }
 
+    addFriendEvent() {
+        this.props.setFriendRegister(datafriendRegis)
+        this.setState({ frienddistance: false })
+        setTimeout(() => {
+            this.setState({ frienddistance: true })
+        }, 500)
+        this.setState({ statusCheck: false })
     }
     showModal = () => {
         let { searchText } = this.state
         let data = ({
             params: [
-                { name: "RunnerID", value: "" },
+                { name: "RunnerID", value: this.props.userprofile.userprofile.RunnerID },
                 { name: "Keyword", value: searchText },
-                { name: "EventID", value: "" }
+                { name: "EventID", value: this.props.event.event.EventID }
             ]
         })
         axios.post(uri, data, {
@@ -110,6 +112,7 @@ class TeamList extends Component {
                 // console.error(error);
             });
     }
+
     _checkAddFriend(newitem, status) {
         var data = datafriendRegis
         var str_newitem = newitem
@@ -169,7 +172,13 @@ class TeamList extends Component {
         if (this.state.friendOutput[0] == undefined || this.state.friendOutput[0] == null) {
             this.hideModalError()
         }
-        else {
+        else if (this.state.friendOutput[0].Himself == 1) {
+            this.setState({ isAddStatusError : true , titleError : "รหัสประชาชนนี้คือตัวท่านเอง"})
+        }
+        else if (this.state.friendOutput[0].RegisterStatus == 1) {
+            this.setState({ isAddStatusError : true , titleError : "บุคคลนี้ได้ทำการสมัครงานวิ่งนี้แล้ว"})
+        }
+        else if (this.state.friendOutput[0].RegisterStatus == 0 && this.state.friendOutput[0].Himself == 0) {
             this.hideModal()
         }
     }
@@ -212,7 +221,7 @@ class TeamList extends Component {
         return (
             <Container style={styles.container}>
                 <HeaderTeam
-                    title={this.state.title}
+                    title={this.state.titleHead}
                     menu={true}
                     goback={this.goLogin.bind(this)}
                     goLogin={() => this.props.navigation.navigate("Login")}
@@ -294,14 +303,20 @@ class TeamList extends Component {
                                         </ImageBackground>
                                         {this.state.friendlist &&
                                             <View>
-                                                <View style={{ paddingHorizontal: 10, paddingTop: 30 }}>
-                                                    <Button rounded block success onPress={() => this.gotoFriendList()} >
-                                                        <Text style={styles.text}> + เพิ่มเพื่อนจาก FriendList</Text>
+                                                <ScrollView
+                                                    horizontal={true}>
+                                                    <EventListFriend
+                                                        isAddFriendEvent={() => this.addFriendEvent()}
+                                                        goAddFriendList={() => this.gotoFriendList()}
+                                                        changeCheck={this.state.statusCheck}
+                                                        friend={this.state.dataSource}
+                                                    />
+                                                </ScrollView>
+                                                <View style={{ paddingHorizontal: 10, paddingVertical: 20 }}>
+                                                    <Button rounded block success onPress={() => this.addFriendEvent()} >
+                                                        <Text style={styles.text}> + เพิ่มเพื่อนในการสมัคร</Text>
                                                     </Button>
                                                 </View>
-                                                <EventListFriend
-                                                    friend={this.state.dataSource}
-                                                />
                                             </View>
                                         }
                                         <ImageBackground style={{ width: "100%", opacity: 0.8 }} source={{ uri: 'https://register.shutterrunning2014.com/assets/img/theme/bg.jpg' }}>
@@ -343,6 +358,7 @@ class TeamList extends Component {
                                         </Modal>
                                         <Modal isVisible={this.state.isAddStatusError}>
                                             <AddError
+                                                title={this.state.titleError}
                                                 toggleModal={this.hideModalError}
                                             />
                                         </Modal>
@@ -368,7 +384,8 @@ const mapDispatchToProps = dispatch => {
                 type: 'setFriendRegister',
                 payload: datafriend
             })
-        }
+        },
+
     }
 }
 const mapStateToProps = state => {

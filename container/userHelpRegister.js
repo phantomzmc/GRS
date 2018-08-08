@@ -90,7 +90,17 @@ class UserHelpRegister extends Component {
         this.sentVerifyCode()
         this.gotoListEvent()
       }).catch((error) => {
-        console.error(error);
+        console.log(error)
+        Alert.alert(
+          "ไม่สำเร็จ",
+          "สมัครสมาชิกไม่สำเร็จ กรุณาตรวจสอบข้อมูลของท่าน",
+          [
+            {
+              text: "ตกลง",
+            }
+          ],
+          { cancelable: false }
+        );
       });
   }
 
@@ -110,6 +120,7 @@ class UserHelpRegister extends Component {
       { cancelable: false }
     );
   };
+
   gotoVerify = () => {
     this.props.navigation.navigate("Verify");
   };

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, StyleSheet, TouchableOpacity, Alert, StatusBar } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Alert, StatusBar, ScrollView, RefreshControl } from 'react-native';
 import { Container, Header, Tab, Tabs, TabHeading, Icon, Text, Button } from 'native-base';
 import { StackNavigator } from 'react-navigation';
 import { connect } from 'react-redux'
@@ -22,12 +22,11 @@ class ControlDistance extends Component {
             title: "ลงทะเบียนวิ่ง",
             pageNumber: 0,
             login: 1,
-            register: false
+            register: false,
         }
         this.goAddTeam = this.goAddTeam.bind(this)
     }
     componentDidMount() {
-        // this.fetchRegisEvent()
         setTimeout(() => {
             this.fetchRegisEvent()
         }, 1000);
@@ -59,6 +58,7 @@ class ControlDistance extends Component {
                 this.goListEvent()
             });
     }
+
     checkRegisEvent(data) {
         if (data.RegisterStatus == "1") {
             this.setState({ register: false })
@@ -125,12 +125,12 @@ class ControlDistance extends Component {
                     title={this.state.title}
                     menu={true}
                     goback={this.goSingleLogin.bind(this)}
-                    goLogin={() => this.props.navigation.navigate("Login")} 
-                    goFriendlist={()=> this.props.navigation.navigate('FriendList')}
-                    goHistory={()=> this.props.navigation.navigate('HistoryContainer')}
-                    goEditProfile={()=> this.props.navigation.navigate('EditProfile')}
-                    goRegis={()=> this.props.navigation.navigate('ControlDistance')}
-                    />
+                    goLogin={() => this.props.navigation.navigate("Login")}
+                    goFriendlist={() => this.props.navigation.navigate('FriendList')}
+                    goHistory={() => this.props.navigation.navigate('HistoryContainer')}
+                    goEditProfile={() => this.props.navigation.navigate('EditProfile')}
+                    goRegis={() => this.props.navigation.navigate('ControlDistance')}
+                />
                 <StatusBar
                     barStyle="light-content"
                     hidden={false}
@@ -144,8 +144,6 @@ class ControlDistance extends Component {
                         <RegisterDistance
                             nextState={this.goNextState.bind(this)}
                         />
-
-
                     </Tab>
                     <Tab
                         heading={<TabHeading><Text style={styles.textLabel} onPress={() => this.goAddTeam()}>ลงทะเบียนแบบกลุ่ม</Text></TabHeading>}

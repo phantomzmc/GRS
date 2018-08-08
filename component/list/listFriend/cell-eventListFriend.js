@@ -4,6 +4,7 @@ import { View, Card, CardItem, Left, Right } from 'native-base';
 import CheckBox from 'react-native-checkbox-heaven';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import datafriend from './dataFriend'
+import datafriendRegis from './dataFriend-regis'
 
 class CellEventListFriend extends Component {
     constructor(props) {
@@ -15,6 +16,7 @@ class CellEventListFriend extends Component {
             icon: "heart",
             iconColor: "#F44336",
             datafriend: [],
+            statusCheck: true
         }
         this.checkFavorite = this.checkFavorite.bind(this)
     }
@@ -25,23 +27,60 @@ class CellEventListFriend extends Component {
         console.log(this.state.item)
     }
     addFriendEvent = (item) => {
-        if (item.RegisterStatus == 0) {
-            datafriend.push(item)
-            console.log(datafriend)
-            this.props.submitAddFriend(datafriend)
-            // datafriendRegis.push(item)
-            // console.log(datafriendRegis)
-            // this.props.getAddFriend(datafriendRegis)
-        }
-        else if (item.RegisterStatus == 1) {
-            console.log("RegisterStatus == 1")
-        }
+        this._cellCheckAddFriend(item)
+        // if (item.RegisterStatus == 0) {
+        //     // datafriendRegis.push(item)
+        //     // console.log(datafriendRegis)
+        //     // this.props.submitAddFriend(datafriend)
+        // }
+        // else if (item.RegisterStatus == 1) {
+        //     console.log("RegisterStatus == 1")
+        // }
     }
     removeFriendEvent = (index) => {
         console.log(index)
         datafriendRegis.splice(index, 1)
         console.log(datafriendRegis)
-        this.props.getAddFriend(datafriendRegis)
+        // this.props.getAddFriend(datafriendRegis)
+    }
+    _cellCheckAddFriend(item, status) {
+        var data = datafriendRegis
+        var str_newitem = item
+        for (i = 0; i <= data.length; i++) {
+            if (JSON.stringify(str_newitem) == JSON.stringify(data[i])) {
+                console.log("ซ้ำ")
+                status = false
+                break;
+            }
+            else if (JSON.stringify(str_newitem) != JSON.stringify(data[i])) {
+                status = true
+                
+            }
+            else {
+                status = false
+            }
+        }
+        setTimeout(() => {
+            this._cellAddFriend(item, status)
+        }, 1500)
+        return status
+    }
+    _cellAddFriend(item, status) {
+        // this._checkAddFriend(newitem)
+        var value = status
+        console.log(value)
+        if (value == false) {
+            // this.setState({ isAddStatusError: true })
+        }
+        else if (value == true) {
+            datafriendRegis.push(item)
+            // this.props.setFriendRegister(datafriendRegis)
+            // this.setState({ frienddistance: true })
+            // this.setState({ frienddistance: false })
+            // setTimeout(() => {
+            //     this.setState({ frienddistance: true })
+            // }, 500)
+        }
     }
     handleOnChange(val) {
         this.setState({ checked: val })
@@ -86,15 +125,23 @@ class CellEventListFriend extends Component {
                     <CardItem>
                         <Left>
                             {item.RegisterStatus == 0 ?
-                                <CheckBox
-                                    iconSize={20}
-                                    iconName='iosCircleMix'
-                                    checked={this.state.checked}
-                                    checkedColor='#FC561F'
-                                    uncheckedColor='#C0C0C0'
-                                    onChange={this.handleOnChange.bind(this)}
-                                    style={{ flex: 1 }}
-                                /> :
+                                <View>
+                                    {this.state.statusCheck == true ?
+                                        <CheckBox
+                                            iconSize={20}
+                                            iconName='iosCircleMix'
+                                            checked={this.state.checked}
+                                            checkedColor='#FC561F'
+                                            uncheckedColor='#C0C0C0'
+                                            onChange={this.handleOnChange.bind(this)}
+                                            style={{ flex: 1 }}
+                                        /> :
+                                        <View>
+
+                                        </View>
+                                    }
+
+                                </View> :
                                 <View style={{ flexDirection: "row" }}>
                                     <Icon name="check" type="FontAwesome" style={{ color: "#9ACD32" }} />
                                     <Text style={styles.textStatusRegis}> สมัครรายการนี้แล้ว</Text>
@@ -118,7 +165,6 @@ class CellEventListFriend extends Component {
                             }
                         </Right>
                     </CardItem>
-
                     <CardItem>
                         <View style={styles.imgContainer}>
                             <View style={styles.listfriend}>
@@ -132,7 +178,6 @@ class CellEventListFriend extends Component {
                                         style={styles.imgAvatar}
                                     />
                                 }
-
                                 <CardItem>
                                     <View style={styles.detailList}>
                                         <Text style={styles.textName}>{item.FirstName} - {item.LastName}</Text>

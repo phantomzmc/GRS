@@ -29,7 +29,6 @@ class CradFriendDistance extends Component {
             value: false,
             photoplus: false,
             pricePhotoPlus: "",
-
             runnerid: "",
             couseID: "",
             nameRegis: "",
@@ -37,16 +36,26 @@ class CradFriendDistance extends Component {
             fee: "",
             firstname: "",
             lastname: "",
+            index: this.props.idkey,
+
 
         }
     }
     componentWillMount() {
+
         clearInterval(this._interval);
     }
     componentDidMount() {
         let dis = this.props.distance
         this._interval = setInterval(() => {
-            this.setState({ items: dis, name: dis.RunnerID, firstname: dis.FirstName, lastname: dis.LastName, index: this.props.idkey })
+            this.setState({
+                items: dis,
+                name: dis.RunnerID,
+                firstname: dis.FirstName,
+                lastname: dis.LastName,
+                index: this.props.idkey,
+
+            })
         }, 500);
     }
     componentWillReceiveProps(nextProps) {
@@ -55,13 +64,7 @@ class CradFriendDistance extends Component {
             this.setState({ items: dataFriendRegis })
         }
     }
-    // componentDidMount() {
-    //     console.log(dataFriendRegis)
-    //     let dis = this.props.distance
-    //     this.setState({ items: dis, name: dis.RunnerID, firstname: dis.FirstName, lastname: dis.LastName, index: this.props.idkey })
-    //     console.log(this.state.items)
-    //     console.log("key : " + this.props.idkey)
-    // }
+
     onPressDeleteItem(index) {
         this.props.delete(index)
         console.log(index)
@@ -91,7 +94,7 @@ class CradFriendDistance extends Component {
             runnerid: this.state.name,
             photoplusService: item.PhotoPlusService
         })
-        dataDistance.push(item)
+        dataDistance[this.state.index] = item
         this.props.addDistanceFriend(dataDistance)
         dataPrice.push(parseFloat(item.Fee))
         this.sumPrice()
@@ -105,7 +108,8 @@ class CradFriendDistance extends Component {
             dataShirt: item,
             jersersize: item.JerseySizeValue
         })
-        dataShirts.push(item)
+        // dataShirts.push(item)
+        dataShirts[this.state.index] = item
         this.props.addSize(dataShirts)
         this.getDataRegisFriend(item.JerseySizeValue)
     }
@@ -165,7 +169,7 @@ class CradFriendDistance extends Component {
     }
 
     render() {
-        const { items } = this.state
+        const { items, index } = this.state
         return (
             <Card>
                 <CardItem>
@@ -196,7 +200,10 @@ class CradFriendDistance extends Component {
                                     <Left>
                                         <TouchableOpacity onPress={() => this.setState({ distance: !this.state.distance })}
                                             onPressIn={() => this.chageIcon()}>
-                                            <Text style={styles.labelTitle}>ระยะทาง : {this.state.dataDis.CourseName} {this.state.dataDis.Distance}</Text>
+                                            {dataDistance != "" ?
+                                                <Text style={styles.labelTitle}>ระยะทาง : {dataDistance[index].CourseName} {dataDistance[index].Distance}</Text> :
+                                                <Text style={styles.labelTitle}>ระยะทาง : {this.state.dataDis.CourseName} {this.state.dataDis.Distance}</Text>
+                                            }
                                         </TouchableOpacity>
                                     </Left>
                                     <Right>
@@ -216,7 +223,10 @@ class CradFriendDistance extends Component {
                                     <Left>
                                         <TouchableOpacity onPress={() => this.setState({ sizeShirth: !this.state.sizeShirth })}
                                             onPressIn={() => this.chageIcon()}>
-                                            <Text style={styles.labelTitle}>ขนาดไซค์เสื้อ : {this.state.dataShirt.JerseySizeValue} {this.state.dataShirt.JerseySizeDesc}</Text>
+                                            {dataShirts != "" ?
+                                                <Text style={styles.labelTitle}>ขนาดไซค์เสื้อ : {dataShirts[index].JerseySizeValue} {dataShirts[index].JerseySizeDesc}</Text> :
+                                                <Text style={styles.labelTitle}>ขนาดไซค์เสื้อ : {this.state.dataShirt.JerseySizeValue} {this.state.dataShirt.JerseySizeDesc}</Text>
+                                            }
                                         </TouchableOpacity>
                                     </Left>
                                     <Right>
@@ -239,18 +249,6 @@ class CradFriendDistance extends Component {
                             setPhotoPlus={this.photoPlusSwitch.bind(this)}
                             index={this.state.index}
                         />
-                        {/* <Left>
-                            <Icon name="ios-camera-outline" style={{ fontSize: 20 }} />
-                            <Text style={{ fontFamily: "kanit", fontSize: 16 }}>Photo + Service</Text>
-                        </Left>
-                        <Right>
-                            <Switch
-                                width={60}
-                                height={30}
-                                value={this.state.value}
-                                onSyncPress={() => this.photoPlusSwitch()}
-                            />
-                        </Right> */}
                     </CardItem>
                 }
             </Card>

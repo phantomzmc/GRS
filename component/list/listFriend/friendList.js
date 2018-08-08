@@ -268,8 +268,6 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         borderColor: '#fff',
         borderWidth: 1,
-        resizeMode: 'contain'
-
     },
     textListFriend: {
         flexDirection: 'row',

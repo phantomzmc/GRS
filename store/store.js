@@ -31,7 +31,7 @@ const user = {
 };
 const friend = {
   friendRegis: [],
-  dataDis: {},
+  dataDis: "",
   friendEvent: {
     RunnerID: "",
     CourseID: "",
@@ -51,8 +51,7 @@ const friend = {
     nameRegis: "",
     CourseFee: "",
   },
-  shirtSize: {}
-
+  shirtSize: ""
 }
 const token = (state = {}, action) => {
   switch (action.type) {
@@ -210,7 +209,7 @@ const username = (state = {}, action) => {
   return state;
 }
 let datapic = ""
-const userprofile = (state = { datapic, userprofile: { PicProfile: "", BackgroundProfile: "" }, userstatus : "" }, action) => {
+const userprofile = (state = { datapic, userprofile: { PicProfile: "", BackgroundProfile: "" }, userstatus: "" }, action) => {
   switch (action.type) {
     case "setUserProfile": {
       state.userprofile = action.payload
