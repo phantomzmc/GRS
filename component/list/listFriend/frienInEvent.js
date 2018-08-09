@@ -3,7 +3,10 @@ import { View, FlatList, StyleSheet, Alert, ActivityIndicator, Image, RefreshCon
 import { connect } from "react-redux";
 import CardFriendDistance from '../../items/cardFriendDistance'
 import dataFriend from './dataFriend';
+import dataFriendFull from './dataFriend-full'
 import dataPrice from '../listevent/dataPrice'
+import dataDis from '../listevent/dataDistance'
+import dataShirt from '../listShirt/dataShirt'
 
 
 class FriendInEvent extends Component {
@@ -24,6 +27,8 @@ class FriendInEvent extends Component {
     }
     deleteItem(index) {
         let { dataSource } = this.state
+        let dis = { CourseName: "", Distance: "" }
+        let shirt = { JerseySizeValue: "", JerseySizeDesc: "" }
         console.log("index : " + this.state.dataSource[index].FirstName)
         Alert.alert(
             'ลบรายชื่อเพื่อน',
@@ -34,12 +39,16 @@ class FriendInEvent extends Component {
                     text: 'ตกลง', onPress: () => {
                         dataSource.splice(index, 1)
                         dataPrice.splice(index, 1)
+                        dataFriend.splice(index, 1)
+                        dataFriendFull.splice(index, 1)
+                        dataDis[index] = dis
+                        dataShirt[index] = shirt
                         this.sumPrice(index)
-                        console.log("delete")
-                        console.log(dataSource)
-                        this.props.setFriendRegister(dataSource)
-                        this._refreshListView()
 
+                        this.props.setFriendRegister(dataSource)
+                        this.props.addFriendInEvent(dataFriend)
+                        this.props.addFullFriendInEvent(dataFriendFull)
+                        this._refreshListView()
                     }
                 }
             ], { cancelable: true }
@@ -75,7 +84,7 @@ class FriendInEvent extends Component {
 
     _refreshListView() {
         console.log("_refreshListView")
-
+        this.sumPrice()
         //Start Rendering Spinner
         this.setState({ isLoading: true })
         this.setState({ isLoading: false }) //Stop Rendering Spinner
@@ -125,6 +134,12 @@ const mapDispatchToProps = (dispatch) => {
             dispatch({
                 type: 'addFriendInEvent',
                 payload: regisFriend
+            })
+        },
+        addFullFriendInEvent: (dataFriendFull) => {
+            dispatch({
+                type: 'addFullFriendInEvent',
+                payload: dataFriendFull
             })
         },
         setFriendRegister: (dataFriend) => {
