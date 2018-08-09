@@ -398,7 +398,7 @@ class FormRegister extends Component {
             date={this.state.date}
             mode="date"
             placeholder="select date"
-            format="DD-MM-YYYY"
+            format="YYYY-MM-DD"
             minDate="01-01-1920"
             maxDate="31-12-2100"
             confirmBtnText="ตกลง"
