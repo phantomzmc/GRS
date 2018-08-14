@@ -20,6 +20,7 @@ class HistoryContainer extends Component {
                     goHistory={() => this.props.navigation.navigate('HistoryContainer')}
                     goEditProfile={() => this.props.navigation.navigate('EditProfile')}
                     goRegis={() => this.props.navigation.navigate('ControlDistance')}
+                    goSingleLogin={() => this.props.navigation.navigate('SingleLogin')}
                 />
                 <StatusBar
                     barStyle="light-content"

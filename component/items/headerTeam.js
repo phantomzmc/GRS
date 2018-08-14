@@ -109,7 +109,7 @@ class HeaderTeam extends Component {
                         {this.state.statusMenu &&
                             <Menu
                                 ref={this.setMenuRef}
-                                style={{ width: 250, height: 300 }}
+                                style={{ width: 300, height: 350 }}
                                 button=
                                 {
                                     <View style={{ flexDirection: "row" }}>
@@ -140,6 +140,11 @@ class HeaderTeam extends Component {
                                             <Icon name='history' type='FontAwesome' style={{ fontSize: 18, color: "#c0c0c0" }} />
                                             <Text style={[styles.item_menu, { color: "#c0c0c0" }]}>  History</Text>
                                         </MenuItem>
+                                        <MenuDivider />
+                                        <MenuItem onPress={this.hideMenu} style={{ padding: 10 }}>
+                                            <Icon name='close' type='FontAwesome' style={{ fontSize: 18, color: "#FF0000" }} />
+                                            <Text style={[styles.item_menu, { color: "#FF0000" }]}>   ปิด</Text>
+                                        </MenuItem>
                                     </View>
                                 }
 
@@ -169,9 +174,14 @@ class HeaderTeam extends Component {
                                             <Text style={styles.item_menu}>  History</Text>
                                         </MenuItem>
                                         <MenuDivider />
-                                        <MenuItem onPress={() => this.props.goLogin()} style={{ padding: 10 }}>
+                                        <MenuItem onPress={() => this.props.goSingleLogin()} style={{ padding: 10 }}>
                                             <Icon name='log-out' type='Entypo' style={{ fontSize: 18 }} />
                                             <Text style={styles.item_menu}>  ออกจากระบบ</Text>
+                                        </MenuItem>
+                                        <MenuDivider />
+                                        <MenuItem onPress={this.hideMenu} style={{ padding: 10 }}>
+                                            <Icon name='close' type='FontAwesome' style={{ fontSize: 18, color: "#FF0000" }} />
+                                            <Text style={[styles.item_menu, { color: "#FF0000" }]}>   ปิด</Text>
                                         </MenuItem>
                                     </View>
                                 }

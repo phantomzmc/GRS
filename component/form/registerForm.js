@@ -399,8 +399,8 @@ class FormRegister extends Component {
             mode="date"
             placeholder="select date"
             format="YYYY-MM-DD"
-            minDate="01-01-1920"
-            maxDate="31-12-2100"
+            minDate="1920-01-01"
+            maxDate="2100-12-31"
             confirmBtnText="ตกลง"
             cancelBtnText="ยกเลิก"
             customStyles={{

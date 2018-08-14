@@ -5,8 +5,8 @@ import { connect } from "react-redux";
 import { Container } from 'native-base'
 import axios from 'axios'
 import MailGunSend from '../config/send-mailgun'
-import HeaderUser from "../component/items/header_profile";
-// import HeaderUser from "../component/items/header_register";
+// import HeaderUser from "../component/items/header_profile";
+import HeaderUser from "../component/items/header_register";
 import FormHelpRegister from "../component/form/registerHelpForm";
 import HeaderTeam from '../component/items/headerTeam'
 import req from '../config/uri_req'
