@@ -64,7 +64,8 @@ class FormRegister extends Component {
       this.setState({ selectedIndex: 1 })
     }
   }
-  sendData = (fullname, lastname, nickname, password, confirmpassword, teamname, bib, userid, tel, email, date, bloodtype, nation, gen) => {
+  sendData = (fullname, lastname, nickname, teamname, bib, userid, tel, email, date, bloodtype, nation, gen) => {
+    const { password, confirmpassword } = this.state
     this.props.goEvent(fullname, lastname, nickname, password, confirmpassword, teamname, bib, userid, tel, email, date, bloodtype, nation, gen);
   };
 
@@ -127,7 +128,7 @@ class FormRegister extends Component {
   }
 
   render() {
-    let { fullname, lastname, nickname, password, confirmpassword, teamname, bib, userid, tel, email, date, bloodtype, nation, gen } = this.state;
+    let { fullname, lastname, nickname, teamname, bib, userid, tel, email, date, bloodtype, nation, gen } = this.state;
     return (
       <View style={styles.container}>
         <View style={styles.contectTitle}>
@@ -186,26 +187,18 @@ class FormRegister extends Component {
             </Tab>
           </Tabs>
         </View>
-        {/* <Text style={styles.headForm}>รหัสบัตรประชาชน/หนังสือเดินทาง</Text>
-
+        <Text style={styles.headForm}>รหัสบัตรประชาชน/หนังสือเดินทาง</Text>
         <Form>
-          <Item floatingLabel last>
+          <Item disabled floatingLabel last>
             <Label style={styles.textLabel}>{userid}</Label>
             <Input
+              disabled
               onChangeText={userid => this.setState({ userid: userid })}
               onEndEditing={this.checkUsernmae.bind(this)}
               keyboardType="phone-pad" />
           </Item>
-        </Form> */}
-        {/* <Text style={styles.headForm}>กรุ๊ปเลือด</Text>
-        <Form>
-          <Item floatingLabel last>
-            <Label style={styles.textLabel}>Ex. A,B,O,AB</Label>
-            <Input
-              onChangeText={bloodtype => this.setState({ bloodtype })}
-            />
-          </Item>
-        </Form> */}
+        </Form>
+
         <Text style={styles.headForm}>สัญชาติ</Text>
         <Form>
           <Item floatingLabel last>
@@ -215,28 +208,7 @@ class FormRegister extends Component {
               onChangeText={nation => this.setState({ nation: nation })} />
           </Item>
         </Form>
-        <Text style={styles.headForm}>รหัสผ่าน</Text>
-        <Form>
-          <Item floatingLabel last>
-            <Label style={styles.textLabel}>Ex.xxxxxxxxxxxx</Label>
-            <Input
-              secureTextEntry={true}
-              style={{ fontFamily: "kanit" }}
-              onChangeText={password => this.setState({ password })}
-            />
-          </Item>
-        </Form>
 
-        <Text style={styles.headForm}>ยืนยันรหัสผ่าน</Text>
-        <Form>
-          <Item floatingLabel last>
-            <Label style={styles.textLabel}>Ex.xxxxxxxxxxxx</Label>
-            <Input
-              secureTextEntry={true}
-              style={{ fontFamily: "kanit" }}
-              onChangeText={confirmpassword => this.setState({ confirmpassword })} />
-          </Item>
-        </Form>
         <Text style={styles.headForm}>วันเกิด</Text>
         <View style={styles.containerDatePicker}>
           <DatePicker
@@ -303,8 +275,6 @@ class FormRegister extends Component {
                 fullname,
                 lastname,
                 nickname,
-                password,
-                confirmpassword,
                 teamname,
                 bib,
                 userid,
