@@ -30,6 +30,7 @@ class FriendListView extends Component {
     }
 
     componentDidMount() {
+        this.setState({ isRefesh : true})
         this.getFriend()
         setTimeout(() => {
             this.getFriend()

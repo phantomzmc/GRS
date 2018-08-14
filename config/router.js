@@ -32,6 +32,7 @@ import ControlPayment from '../container/controlPayment'
 import HeaderTeam from '../component/items/headerTeam'
 import FriendList from '../container/friendListLayout'
 import HistoryContainer from '../container/historyContainer'
+import RegisterInfo from '../container/registerInfo'
 
 import Test from '../mockdata'
 
@@ -234,7 +235,7 @@ export default StackNavigator({
     HeaderTeam: {
         screen: HeaderTeam,
     },
-    
+
     FriendList: {
         screen: FriendList,
         navigationOptions: {
@@ -247,6 +248,12 @@ export default StackNavigator({
             header: () => null
         }
     },
+    RegisterInfo: {
+        screen: RegisterInfo,
+        navigationOptions: {
+            header: () => null
+        }
+    }
 
 
 

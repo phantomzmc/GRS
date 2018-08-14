@@ -80,6 +80,10 @@ class SingleLogin extends Component {
     gotoVerify = () => {
         this.props.navigation.navigate('Vefify')
     }
+    gotoRegisInfo = () => {
+        this.props.navigation.navigate('RegisterInfo')
+    }
+
     render() {
         return (
             <View>
@@ -139,6 +143,14 @@ class SingleLogin extends Component {
                                 สมัครสมาชิก
                         </Text>
                         </TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={this
+                                .gotoRegisInfo
+                                .bind(this)}>
+                            <Text style={styles.regisButton}>
+                                ตรวจสอบรายชื่อ
+                        </Text>
+                        </TouchableOpacity>
                     </View>
                 </ImageBackground>
             </View>
@@ -165,7 +177,7 @@ const styles = StyleSheet.create({
         borderRadius: 15
     },
     regisButton: {
-        padding: 20,
+        padding: 10,
         color: '#fff',
         alignSelf: 'center',
         fontFamily: 'kanit'

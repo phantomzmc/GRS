@@ -197,7 +197,7 @@ class AddressLayout extends Component {
                     <TouchableOpacity style={[styles.checkSubmit, { flexDirection: "row" ,justifyContent : "space-between"}]} onPress={() => this.setState({ isPost: !this.state.isPost })}>
                         <View style={{ flexDirection: "row" }}>
                             <Icon name="home-map-marker" type="MaterialCommunityIcons" />
-                            <Text style={styles.textTitle}>ที่อยู่ในการจัดส่งสินค้า</Text>
+                            <Text style={styles.textTitle}>ที่อยู่การจัดส่งไปรษณีย์</Text>
                         </View>
                         <View>
                             {this.state.isPost == false ?
