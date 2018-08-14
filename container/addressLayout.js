@@ -39,7 +39,9 @@ class AddressLayout extends Component {
             statusButton2: false,
             pleace: "",
             postPrice: "",
-            countFriend: this.props.friendlist.friendRegis.length
+            countFriend: this.props.friendlist.friendRegis.length,
+            isPleace: true,
+            isPost: false
         }
     }
     componentWillMount = () => {
@@ -163,13 +165,15 @@ class AddressLayout extends Component {
                             onChange={this.getSumPleace.bind(this)}
                         />
                     </View>
-                    <View>
-                        <GetPleace
-                            goPayment={this.nextToPayment.bind(this)}
-                            funSumPleace={this.getSumPleace.bind(this)}
-                            detailPleace={this.state.pleace}
-                        />
-                    </View>
+                    {this.state.checked &&
+                        <View>
+                            <GetPleace
+                                goPayment={this.nextToPayment.bind(this)}
+                                funSumPleace={this.getSumPleace.bind(this)}
+                                detailPleace={this.state.pleace}
+                            />
+                        </View>
+                    }
                     <View style={styles.checkSubmit}>
                         <CheckBox
                             label='ส่งไปรษณีย์'
@@ -182,7 +186,7 @@ class AddressLayout extends Component {
                             onChange={this.getSumPostman.bind(this)}
                         />
                     </View>
-                    <View style={{ paddingTop: 20, paddingHorizontal: 20 }}>
+                    <View style={{ paddingVertical: 20, paddingHorizontal: 20 }}>
                         <Card>
                             <View style={{ justifyContent: "center", alignItems: "center", padding: 20 }}>
                                 <Text style={[styles.textTitle, { fontSize: 18, paddingBottom: 5 }]}>ค่าใช้จ่ายในการจัดส่งแบบไปรษณีย์</Text>
@@ -190,9 +194,23 @@ class AddressLayout extends Component {
                             </View>
                         </Card>
                     </View>
-                    <AddressForm
-                        getAddress={this.goTotalPayment.bind(this)}
-                    />
+                    <TouchableOpacity style={[styles.checkSubmit, { flexDirection: "row" ,justifyContent : "space-between"}]} onPress={() => this.setState({ isPost: !this.state.isPost })}>
+                        <View style={{ flexDirection: "row" }}>
+                            <Icon name="home-map-marker" type="MaterialCommunityIcons" />
+                            <Text style={styles.textTitle}>ที่อยู่ในการจัดส่งสินค้า</Text>
+                        </View>
+                        <View>
+                            {this.state.isPost == false ?
+                                <Icon name="ios-arrow-down" type="Ionicons" /> :
+                                <Icon name="ios-arrow-up" type="Ionicons" />
+                            }
+                        </View>
+                    </TouchableOpacity>
+                    {(this.state.checked2 || this.state.isPost) &&
+                        <AddressForm
+                            getAddress={this.goTotalPayment.bind(this)}
+                        />
+                    }
                 </ScrollView>
                 <SummaryTotal />
             </Container>
@@ -218,6 +236,8 @@ const styles = StyleSheet.create({
         fontSize: 14,
         justifyContent: "center",
         alignContent: "center",
+        paddingHorizontal: 10,
+        paddingTop: 5
     },
     checkSubmit: {
         paddingTop: 10,
@@ -226,7 +246,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#f1f1f1"
     },
     labelStyle: {
-        padding: 20,
+        padding: 15,
         fontFamily: "kanit",
         fontSize: 16
     },

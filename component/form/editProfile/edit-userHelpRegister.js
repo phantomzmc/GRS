@@ -86,14 +86,14 @@ class UserHelpRegister extends Component {
 
   gotoListEvent = () => {
     Alert.alert(
-      "สำเร็จ",
-      "แก้ไขข้อมูลส่วนตัวเรียบร้อย",
+      "บันทึกการเปลี่ยนแปลงสำเร็จ",
+      "แก้ไขข้อมูลส่วนตัวของท่านเรียบร้อย",
       [
         {
           text: "ยกเลิก"
         },
         {
-          text: "ตกลง",
+          text: "ยืนยัน",
           onPress: () => this.gotoTeamList()
         }
       ],

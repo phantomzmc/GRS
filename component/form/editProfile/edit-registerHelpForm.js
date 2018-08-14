@@ -108,7 +108,7 @@ class FormAddressRegister extends Component {
             style={styles.buttonContainer}
             onPress={() => this.sendData(firstname, lastname, relation, tel)}
           >
-            <Text style={styles.textButton}>ยืนยัน</Text>
+            <Text style={styles.textButton}>บันทึกการเปลี่ยนแปลง</Text>
           </TouchableOpacity>
         </View>
         <KeyboardSpacer />
