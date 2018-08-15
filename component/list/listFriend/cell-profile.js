@@ -3,10 +3,11 @@ import { StyleSheet, Image, Text } from "react-native";
 import { View, Card, CardItem, Left, Right } from 'native-base';
 import CheckBox from 'react-native-checkbox-heaven';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { connect } from "react-redux";
 import datafriend from './dataFriend'
 import datafriendRegis from './dataFriend-regis'
 
-class CellEventListFriend extends Component {
+class CellProfile extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -18,11 +19,10 @@ class CellEventListFriend extends Component {
             datafriend: [],
             statusCheck: true
         }
-        this.checkFavorite = this.checkFavorite.bind(this)
     }
-    componentDidMount() {
+    componentWillMount() {
         this.setState({ item: this.props.items, statusCheck: this.props.sendStatusCheck })
-        this.checkFavorite()
+        // this.checkFavorite()
         console.log(this.props.items)
         console.log(this.state.item)
     }
@@ -100,20 +100,20 @@ class CellEventListFriend extends Component {
             console.log("true")
         }
     }
-    checkFavorite = () => {
-        let { item } = this.state
-        if (this.props.items.favorites == 1) {
-            this.setState({ icon: "heart", iconColor: "#F44336", favorite: true })
-            console.log("1")
-        }
-        else if (this.props.items.favorites == 0) {
-            this.setState({ icon: "heart-o", iconColor: "rgb(50, 50, 50)", favorite: false })
-            console.log("2")
-        }
-    }
+    // checkFavorite = () => {
+    //     let { item } = this.state
+    //     if (this.props.items.favorites == 1) {
+    //         this.setState({ icon: "heart", iconColor: "#F44336", favorite: true })
+    //         console.log("1")
+    //     }
+    //     else if (this.props.items.favorites == 0) {
+    //         this.setState({ icon: "heart-o", iconColor: "rgb(50, 50, 50)", favorite: false })
+    //         console.log("2")
+    //     }
+    // }
 
     render() {
-        let { item, favorite } = this.state
+        let item = this.props.userprofile.userprofile
         return (
             <View style={styles.container}>
                 <Card>
@@ -187,6 +187,12 @@ class CellEventListFriend extends Component {
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        userprofile : state.userprofile
+    }
+}
+
 const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
@@ -237,4 +243,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default CellEventListFriend
+export default connect(mapStateToProps)(CellProfile)

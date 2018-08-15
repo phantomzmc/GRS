@@ -4,12 +4,13 @@ import { Icon, Text, Button, CardItem, Container, Card } from 'native-base';
 import { connect } from 'react-redux'
 import axios from 'axios'
 import CellEventListFriend from './cell-eventListFriend'
+import CellProfile from './cell-profile'
 import datafriend from './dataFriend'
 import req from '../../../config/uri_req'
 import api_key from '../../../config/api_key'
 import { colors } from '../../../node_modules/react-native-elements';
 
-var uri = req[0].uspGetFriendLists
+var uri = req[0].uspSearchFriend
 var apikey = api_key[0].api_key
 
 class EventListFriend extends Component {
@@ -21,7 +22,30 @@ class EventListFriend extends Component {
             statusCheck: true
         }
     }
+    componentDidMount() {
+        let data = ({
+            params: [
+                { name: "RunnerID", value: this.props.userprofile.userprofile.RunnerID },
+                { name: "Keyword", value: this.props.userprofile.userprofile.Username },
+                { name: "EventID", value: this.props.event.event.EventID }
+            ]
+        })
+        axios.post(uri, data, {
+            headers: {
+                "X-DreamFactory-API-Key": apikey,
+                "X-DreamFactory-Session-Token": this.props.token.token
+            },
+            responseType: 'json'
+        })
+            .then((response) => {
+                this.setState({ dataSource: response.data[0] });
+                console.log(this.state.dataSource)
+            })
+            .catch((error) => {
 
+            });
+        return (this.state.dataSource)
+    }
     _refreshControl() {
         console.log("refersh")
         return (
@@ -52,19 +76,25 @@ class EventListFriend extends Component {
         }
         return (
             <View>
-
                 <View
                     style={{
                         padding: 10,
                         flexDirection: "row"
                     }}>
+
                     <View>
-                        <Card style={{ justifyContent: "center", backgroundColor: "#fff" ,opacity : 0.5}}>
-                            <CardItem style={{ alignItems: "center" ,backgroundColor: "#fff", opacity: 0.9}}>
+                        <Card style={{ justifyContent: "center", backgroundColor: "#fff", opacity: 0.5 }}>
+                            <CardItem style={{ alignItems: "center", backgroundColor: "#fff", opacity: 0.9 }}>
                                 <Icon type="Ionicons" name="ios-add-circle-outline" style={{ color: "#000" }} onPress={() => this.props.goAddFriendList()} />
                                 <Text style={{ fontFamily: "kanit", color: "#000" }} onPress={() => this.props.goAddFriendList()}>เพิ่ม Friend List</Text>
                             </CardItem>
                         </Card>
+                    </View>
+                    <View>
+                        <CellProfile
+                            items={this.state.dataSource}
+                            sendStatusCheck={this.props.changeCheck}
+                        />
                     </View>
                     <FlatList
                         horizontal
@@ -83,7 +113,6 @@ class EventListFriend extends Component {
                         keyExtractor={(item, index) => index}
                     />
                 </View >
-
             </View>
         );
     }
@@ -93,7 +122,8 @@ const mapStateToProps = (state) => {
     return {
         friendlist: state.friendlist,
         userprofile: state.userprofile,
-        token: state.token
+        token: state.token,
+        event: state.event
     }
 }
 const mapDispatchToProps = dispatch => {
