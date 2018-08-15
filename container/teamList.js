@@ -115,7 +115,15 @@ class TeamList extends Component {
 
     _checkAddFriend(newitem, status) {
         var data = datafriendRegis
-        var str_newitem = newitem
+        dataitem = {
+            RunnerID : newitem.RunnerID,
+            FirstName : newitem.FirstName,
+            LastName : newitem.LastName,
+            Gender : newitem.Gender,
+            PicProfile : newitem.PicProfile
+        }
+        var str_newitem = dataitem
+
         for (i = 0; i <= data.length; i++) {
             if (JSON.stringify(str_newitem) == JSON.stringify(data[i])) {
                 console.log("ซ้ำ")
@@ -127,19 +135,18 @@ class TeamList extends Component {
             }
         }
         setTimeout(() => {
-            this._addFriend(newitem, status)
+            this._addFriend(dataitem, status)
         }, 1500)
         return status
     }
-    _addFriend(newitem, status) {
-        // this._checkAddFriend(newitem)
+    _addFriend(dataitem, status) {
         var value = status
         console.log(value)
         if (value == false) {
             this.setState({ isAddStatusError: true })
         }
         else if (value == true) {
-            datafriendRegis.push(newitem)
+            datafriendRegis.push(dataitem)
             this.props.setFriendRegister(datafriendRegis)
             this.setState({ frienddistance: true })
             this.setState({ frienddistance: false })

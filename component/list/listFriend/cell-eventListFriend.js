@@ -66,14 +66,20 @@ class CellEventListFriend extends Component {
         return status
     }
     _cellAddFriend(item, status) {
-        // this._checkAddFriend(newitem)
         var value = status
+        dataitem = {
+            RunnerID : item.RunnerID,
+            FirstName : item.FirstName,
+            LastName : item.LastName,
+            Gender : item.Gender,
+            PicProfile : item.PicProfile
+        }
         console.log(value)
         if (value == false) {
             // this.setState({ isAddStatusError: true })
         }
         else if (value == true) {
-            datafriendRegis.push(item)
+            datafriendRegis.push(dataitem)
             
         }
     }
