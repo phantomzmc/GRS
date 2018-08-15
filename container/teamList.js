@@ -119,7 +119,6 @@ class TeamList extends Component {
             RunnerID : newitem.RunnerID,
             FirstName : newitem.FirstName,
             LastName : newitem.LastName,
-            Gender : newitem.Gender,
             PicProfile : newitem.PicProfile
         }
         var str_newitem = dataitem

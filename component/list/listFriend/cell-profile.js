@@ -21,21 +21,16 @@ class CellProfile extends Component {
         }
     }
     componentWillMount() {
-        this.setState({ item: this.props.items, statusCheck: this.props.sendStatusCheck })
-        // this.checkFavorite()
+        this.setState({
+            item: this.props.userprofile.userprofile,
+            regisStatus: this.props.userprofile.registerStatus.RegisterStatus,
+            statusCheck: this.props.sendStatusCheck
+        })
         console.log(this.props.items)
         console.log(this.state.item)
     }
     addFriendEvent = (item) => {
         this._cellCheckAddFriend(item)
-        // if (item.RegisterStatus == 0) {
-        //     // datafriendRegis.push(item)
-        //     // console.log(datafriendRegis)
-        //     // this.props.submitAddFriend(datafriend)
-        // }
-        // else if (item.RegisterStatus == 1) {
-        //     console.log("RegisterStatus == 1")
-        // }
     }
     removeFriendEvent = (index) => {
         console.log(index)
@@ -45,7 +40,13 @@ class CellProfile extends Component {
     }
     _cellCheckAddFriend(item, status) {
         var data = datafriendRegis
-        var str_newitem = item
+        dataitem = {
+            RunnerID: item.RunnerID,
+            FirstName: item.FirstName,
+            LastName: item.LastName,
+            PicProfile: item.PicProfile
+        }
+        var str_newitem = dataitem
         for (i = 0; i <= data.length; i++) {
             if (JSON.stringify(str_newitem) == JSON.stringify(data[i])) {
                 console.log("ซ้ำ")
@@ -54,18 +55,18 @@ class CellProfile extends Component {
             }
             else if (JSON.stringify(str_newitem) != JSON.stringify(data[i])) {
                 status = true
-                
+
             }
             else {
                 status = false
             }
         }
         setTimeout(() => {
-            this._cellAddFriend(item, status)
+            this._cellAddFriend(dataitem, status)
         }, 1500)
         return status
     }
-    _cellAddFriend(item, status) {
+    _cellAddFriend(dataitem, status) {
         // this._checkAddFriend(newitem)
         var value = status
         console.log(value)
@@ -73,8 +74,8 @@ class CellProfile extends Component {
             // this.setState({ isAddStatusError: true })
         }
         else if (value == true) {
-            datafriendRegis.push(item)
-            
+            datafriendRegis.push(dataitem)
+
         }
     }
     handleOnChange(val) {
@@ -83,10 +84,10 @@ class CellProfile extends Component {
             this.addFriendEvent(this.state.item)
             console.log(this.state.item)
         }
-        else if (this.state.checked == true) {
-            this.removeFriendEvent(this.props.idkey)
-            console.log(this.props.idkey)
-        }
+        // else if (this.state.checked == true) {
+        //     this.removeFriendEvent(this.props.idkey)
+        //     console.log(this.props.idkey)
+        // }
 
     }
     chageColorIcon() {
@@ -113,15 +114,15 @@ class CellProfile extends Component {
     // }
 
     render() {
-        let item = this.props.userprofile.userprofile
+        let { item, regisStatus } = this.state
         return (
             <View style={styles.container}>
                 <Card>
                     <CardItem>
                         <Left>
-                            {item.RegisterStatus == 0 ?
+                            {regisStatus == 0 ?
                                 <View>
-                                    {this.state.statusCheck == true ?
+                                    {this.state.checked == false ?
                                         <CheckBox
                                             iconSize={20}
                                             iconName='iosCircleMix'
@@ -144,26 +145,18 @@ class CellProfile extends Component {
                             }
                         </Left>
                         <Right>
-                            {item.RegisterStatus && item.FriendStatus == 1 ?
-                                <Icon
-                                    name="heart"
-                                    type="Foundation"
-                                    style={{ fontSize: 20, color: "#F44336" }}
+                            <Icon
+                                name="user"
+                                type="FontAwesome5"
+                                style={{ fontSize: 20, color: "#FC561F" }}
 
-                                /> :
-                                <Icon
-                                    name="heart-o"
-                                    type="Foundation"
-                                    style={{ fontSize: 20, color: "#fff" }}
-
-                                />
-                            }
+                            />
                         </Right>
                     </CardItem>
                     <CardItem>
                         <View style={styles.imgContainer}>
                             <View style={styles.listfriend}>
-                                {item.RegisterStatus == 0 ?
+                                {regisStatus == 0 ?
                                     <Image
                                         source={{ uri: item.PicProfile }}
                                         style={styles.imgAvatar2}
@@ -189,7 +182,7 @@ class CellProfile extends Component {
 
 const mapStateToProps = state => {
     return {
-        userprofile : state.userprofile
+        userprofile: state.userprofile
     }
 }
 

@@ -53,6 +53,7 @@ class ControlDistance extends Component {
             .then((responseJson) => {
                 this.setState({ isLoading: false, data: responseJson.data[0], });
                 console.log(this.state.data)
+                this.props.setRegisterStatus(this.state.data)
                 this.checkRegisEvent(this.state.data)
             }).catch((error) => {
                 this.goListEvent()
@@ -170,6 +171,12 @@ const mapDispatchToProps = (dispatch) => {
             dispatch({
                 type: "setLogin",
                 payload: login
+            })
+        },
+        setRegisterStatus: (status) => {
+            dispatch({
+                type : "setRegisterStatus",
+                payload : status
             })
         }
     }

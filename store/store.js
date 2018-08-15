@@ -248,6 +248,10 @@ const userprofile = (state = {
       state.userstatus = action.payload
       break;
     }
+    case "setRegisterStatus" : {
+      state.registerStatus = action.payload
+      break; 
+    }
   }
   return state;
 }

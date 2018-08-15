@@ -71,7 +71,6 @@ class CellEventListFriend extends Component {
             RunnerID : item.RunnerID,
             FirstName : item.FirstName,
             LastName : item.LastName,
-            Gender : item.Gender,
             PicProfile : item.PicProfile
         }
         console.log(value)
