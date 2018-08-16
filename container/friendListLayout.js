@@ -17,15 +17,20 @@ var uri2 = req[0].uspAddFriendLists
 var apikey = api_key[0].api_key
 
 class FriendList extends Component {
-    state = {
-        title: "Friend List",
-        isModalVisible: false,
-        isModalVisibleError: false,
-        searchText: "",
-        friendOutput: [],
-        addStatus: [],
-        datafriendlist: []
+    constructor(props){
+        super(props)
+        this.state = {
+            title: "Friend List",
+            isRefresh: true,
+            isModalVisible: false,
+            isModalVisibleError: false,
+            searchText: "",
+            friendOutput: [],
+            addStatus: [],
+            datafriendlist: [],
+        }
     }
+    
 
     showModal = () => {
         let { searchText } = this.state
@@ -70,10 +75,11 @@ class FriendList extends Component {
             .then((response) => {
                 this.setState({ isLoading: false, addStatus: response.data });
                 console.log(this.state.addStatus[0])
-                // this.componentDidMount()
+                // this.child.current.onRefesh()
+                // this.child.current.componentDidMount()
             }).catch((error) => {
-                this.setState({ isModalVisibleError: !this.state.isModalVisibleError })
-                // console.error(error);
+                // this.setState({ isModalVisibleError: !this.state.isModalVisibleError })
+                console.log(error);
             });
 
     }
@@ -124,7 +130,7 @@ class FriendList extends Component {
                     hidden={false}
                     translucent={true}
                 />
-                
+
                 <Header searchBar rounded>
                     <Item>
                         <Icon name="ios-people" />
@@ -162,7 +168,9 @@ class FriendList extends Component {
                 <FriendListView
                     AddFriendDetail={() => this.gotoAddFriendDetail()}
                     TeamList={() => this.gotoTeamList()}
-                    friend={this.state.datafriendlist} />
+                    friend={this.state.datafriendlist}
+                    ref={this.child}
+                />
             </View>
         );
     }
@@ -171,7 +179,7 @@ const mapStateToProps = state => {
     return {
         token: state.token,
         userprofile: state.userprofile,
-        event : state.event
+        event: state.event
     }
 }
 const styles = StyleSheet.create({

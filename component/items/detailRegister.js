@@ -55,11 +55,15 @@ class DetailRegister extends Component {
                 <View style={styles.viewSize}>
                     <View style={styles.box}>
                         <Text style={styles.boxTitle}>size</Text>
-                        <Text style={styles.boxName}>{this.props.shirtphoto.size}</Text>
+                        {/* <Text style={styles.boxName}>{this.props.shirtphoto.size}</Text> */}
+                        <Text style={styles.boxName}>{this.props.friendlist.fullfriendEvent[0].JerseySize}</Text>
+
                     </View>
                     <View style={styles.box}>
-                        <Text style={styles.boxTitle}>{this.props.event.distanceEvent.name}</Text>
-                        <Text style={styles.boxName}>{this.props.event.distanceEvent.distance}</Text>
+                        {/* <Text style={styles.boxTitle}>{this.props.event.distanceEvent.name}</Text>
+                        <Text style={styles.boxName}>{this.props.event.distanceEvent.distance}</Text> */}
+                        <Text style={styles.boxName}>{this.props.friendlist.fullfriendEvent[0].nameRegis}</Text> */}
+
                     </View>
                 </View>
                 <View style={styles.viewAddress}>
@@ -159,7 +163,8 @@ const mapStateToProps = (state) => {
         choiceSend: state.choiceSend,
         address: state.address,
         creditcard: state.creditcard,
-        invoice: state.invoice
+        invoice: state.invoice,
+        friendlist: state.friendlist
     }
 }
 export default connect(mapStateToProps)(DetailRegister);

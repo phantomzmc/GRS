@@ -149,7 +149,7 @@ class CellEventListFriend extends Component {
                             }
                         </Left>
                         <Right>
-                            {item.RegisterStatus && item.FriendStatus == 1 ?
+                            {item.FriendStatus == 0 ?
                                 <Icon
                                     name="heart"
                                     type="Foundation"
@@ -157,9 +157,9 @@ class CellEventListFriend extends Component {
 
                                 /> :
                                 <Icon
-                                    name="heart-o"
-                                    type="Foundation"
-                                    style={{ fontSize: 20, color: "#fff" }}
+                                    name="group"
+                                    type="FontAwesome"
+                                    style={{ fontSize: 20, color: "#C0C0C0" }}
 
                                 />
                             }
