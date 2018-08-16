@@ -20,13 +20,13 @@ class FriendInEvent extends Component {
 
         }
     }
-    componentDidMount() {
+    componentWillMount() {
         this.setState({
             dataSource: this.props.friendlist.friendRegis,
         });
     }
     deleteItem(index) {
-        let { dataSource } = this.state
+        let { dataSource, dataRegis } = this.state
         let dis = { CourseName: "", Distance: "" }
         let shirt = { JerseySizeValue: "", JerseySizeDesc: "" }
         console.log("index : " + this.state.dataSource[index].FirstName)
@@ -37,8 +37,17 @@ class FriendInEvent extends Component {
                 { text: 'ยกเลิก' },
                 {
                     text: 'ตกลง', onPress: () => {
+
                         dataSource.splice(index, 1)
-                        dataPrice.splice(index, 1)
+
+                        if (dataFriend[index].PhotoPlusService == 0) {
+                            dataPrice.splice(index, 1)
+                        }
+                        else if (dataFriend[index].PhotoPlusService == 1) {
+                            dataPrice.splice(index, 1),
+                            dataPrice.splice([index + 1], 1)
+                        }
+
                         dataFriend.splice(index, 1)
                         dataFriendFull.splice(index, 1)
                         dataDis[index] = dis
@@ -49,6 +58,7 @@ class FriendInEvent extends Component {
                         this.props.addFriendInEvent(dataFriend)
                         this.props.addFullFriendInEvent(dataFriendFull)
                         this._refreshListView()
+
                     }
                 }
             ], { cancelable: true }

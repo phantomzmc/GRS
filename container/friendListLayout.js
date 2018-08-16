@@ -103,8 +103,8 @@ class FriendList extends Component {
                 console.log(this.state.addStatus[0])
                 this.getFriend()
             }).catch((error) => {
-                // this.setState({ isModalVisibleError: !this.state.isModalVisibleError })
-                console.log(error);
+                this.setState({ isModalVisibleError: !this.state.isModalVisibleError })
+                // console.log(error);
             });
 
     }

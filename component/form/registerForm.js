@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import DatePicker from 'react-native-datepicker'
 import axios from 'axios'
-import { Form, Item, Input, Label, Tabs, Tab, TabHeading, Icon, Toast } from 'native-base'
+import { Form, Item, Input, Label, Tabs, Tab, TabHeading, Icon } from 'native-base'
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import req from '../../config/uri_req'
 import api_key from '../../config/api_key'
@@ -39,7 +39,7 @@ class FormRegister extends Component {
       selectedIndex: 0,
       status: "",
       showToast: false,
-      status_userid : true
+      status_userid: true,
     };
   }
 
@@ -188,7 +188,7 @@ class FormRegister extends Component {
   }
 
   alertCheckUsername = () => {
-    let { status,userid } = this.state
+    let { status, userid } = this.state
     if (status[0].UsernameStatus == "1") {
       Alert.alert('นำเข้าผู้ใช้งานจากระบบเก่า (GRS ฟรี)', 'ควรยืนยัน Username และตั้งรหัสผ่าน', [
         {
@@ -331,7 +331,7 @@ class FormRegister extends Component {
                 onChangeText={userid => this.setState({ userid })}
                 onEndEditing={this.checkUsernmae.bind(this)}
                 keyboardType="phone-pad" />
-                
+
             </Item>
           }
 
@@ -399,7 +399,7 @@ class FormRegister extends Component {
             mode="date"
             placeholder="select date"
             format="YYYY-MM-DD"
-            minDate="1920-01-01"
+            minDate="1900-01-01"
             maxDate="2100-12-31"
             confirmBtnText="ตกลง"
             cancelBtnText="ยกเลิก"

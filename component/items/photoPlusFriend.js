@@ -4,6 +4,7 @@ import { Left, Right, Icon } from 'native-base'
 import { View, Text, StyleSheet, Image, Alert } from 'react-native';
 import { connect } from 'react-redux'
 import dataPrice from '../list/listevent/dataPrice'
+import dataFriend from '../list/listFriend/dataFriend'
 import Switch from 'react-native-switch-pro'
 
 class PhotoPlus extends Component {
@@ -18,19 +19,19 @@ class PhotoPlus extends Component {
             pricePhotoPlus: null,
             textSwitch: "",
             totalPrice: "",
-            // priceEvent: parseFloat(this.props.event.totalRegister),
-            // pricePhotoPlus: parseFloat(this.props.friendlist.dataDis[0].PhotoPlusCost)
+            
         }
     }
     componentDidMount() {
         setTimeout(() => {
             this.setState({
                 priceEvent: parseFloat(this.props.event.totalRegister),
+                priceDistance: this.props.price,
                 pricePhotoPlus: parseFloat(this.props.friendlist.dataDis[0].PhotoPlusCost)
             })
             console.log(this.state.priceEvent)
             console.log(this.state.pricePhotoPlus)
-            this.sumPhotoPlus()
+            this.sumPhoto()
         }, 500)
 
     }
@@ -38,34 +39,39 @@ class PhotoPlus extends Component {
         let { dataFriendRegis } = this.state
         this.setState({ value: !this.state.value })
         this.sumPrices()
-        // console.log(this.state.pricePhotoPlus)
 
     }
-    sumPhotoPlus() {
-        let { priceEvent, pricePhotoPlus } = this.state
-        const sum = pricePhotoPlus + priceEvent
+    sumTotalPlus() {
+        const add = (a, b) =>
+            a + b
+        const sum = dataPrice.reduce(add)
         console.log(sum)
-        dataPrice.push(parseFloat(pricePhotoPlus))
         this.setState({ totalPrice: sum })
+        this.props.setTotal(sum)
+        this.props.setTotalRegister(sum)
+    }
+    sumPhoto() {
+        let { pricePhotoPlus, priceDistance } = this.state
+        const sum = priceDistance + pricePhotoPlus
+        console.log(sum)
+        this.setState({ totalDistance: sum })
     }
     sumPrices() {
-        let { value, priceEvent, pricePhotoPlus } = this.state
-        let index = this.props
-        if (value === true) {
-            this.sumPhotoPlus()
-            console.log(this.state.totalPrice)
+        let { value } = this.state
+        if (value == true) {
+            // this.setState({ totalPrice: this.state.priceEvent })
+            dataPrice.splice(this.props.indexs, 1, this.state.priceDistance)
             console.log(dataPrice)
+            this.sumTotalPlus()
             this.props.setPhotoPlus("0")
-
         }
-        else if (value === false) {
-            this.setState({ totalPrice: this.state.priceEvent })
-            // dataPrice.push(parseFloat(priceEvent))
+        else if (value == false) {
+            this.sumPhoto()
+            dataPrice.splice(this.props.indexs, 1, this.state.totalDistance)
             console.log(dataPrice)
+            this.sumTotalPlus()
             this.props.setPhotoPlus("1")
         }
-        this.props.setTotal(this.state.totalPrice)
-        this.props.setTotalRegister(this.state.totalPrice)
     }
 
     render() {

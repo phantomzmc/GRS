@@ -37,8 +37,6 @@ class CradFriendDistance extends Component {
             firstname: "",
             lastname: "",
             index: this.props.idkey,
-
-
         }
     }
     componentWillMount() {
@@ -247,7 +245,8 @@ class CradFriendDistance extends Component {
                     <CardItem>
                         <PhotoPlusFriend
                             setPhotoPlus={this.photoPlusSwitch.bind(this)}
-                            index={this.state.index}
+                            indexs={this.state.index}
+                            price={this.state.total}
                         />
                     </CardItem>
                 }
