@@ -24,17 +24,22 @@ class FriendListView extends Component {
             isModalVisible: false,
             friend: {},
             datafriendlist: [],
-            isAddStatusError : false
+            isAddStatusError: false
         }
         this.ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     }
 
     componentDidMount() {
         this.getFriend()
-        setTimeout(() => {
+    }
+    shouldComponentUpdate(nextProps) {
+        let { datafriend } = this.props
+        if (datafriend != nextProps.datafriend ) {
+            console.log("refresh list")
             this.getFriend()
-        }, 500)
-
+            return true
+        }
+        return true
     }
     getFriend() {
         let data = ({
@@ -168,7 +173,7 @@ class FriendListView extends Component {
                 }}>
                 <SwipeListView
                     useFlatList
-                    refreshControl={this._refreshControl()}
+                    refreshControl={this.props.refreshlist}
                     data={this.state.dataSource}
                     refreshing={this.state.isRefesh}
                     onRefresh={this.onRefesh}
@@ -199,6 +204,7 @@ class FriendListView extends Component {
                     // leftOpenValue={75}
                     rightOpenValue={-75}
                 />
+
                 <Modal isVisible={this.state.isModalVisible}>
                     <ModalAddFriend
                         toggleModal={this.hideModal}

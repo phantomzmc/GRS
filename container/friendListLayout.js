@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, TouchableOpacity, StatusBar } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, StatusBar, RefreshControl } from 'react-native';
 import { Header, Item, Icon, Input, Thumbnail, Button, Text } from 'native-base'
 import Modal from "react-native-modal";
 import axios from 'axios';
@@ -14,10 +14,11 @@ import api_key from '../config/api_key'
 
 var uri = req[0].uspSearchFriend
 var uri2 = req[0].uspAddFriendLists
+var uri3 = req[0].uspGetFriendLists
 var apikey = api_key[0].api_key
 
 class FriendList extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         this.state = {
             title: "Friend List",
@@ -30,8 +31,33 @@ class FriendList extends Component {
             datafriendlist: [],
         }
     }
-    
-
+    componentDidMount(){
+        this.getFriend()
+    }
+    getFriend() {
+        let data = ({
+            params: [
+                { name: "RunnerID", value: this.props.userprofile.userprofile.RunnerID },
+                { name: "PageNo", value: "1" },
+                { name: "RowPerPage", value: "12" }
+            ]
+        })
+        axios.post(uri3, data, {
+            headers: {
+                "X-DreamFactory-API-Key": apikey,
+                "X-DreamFactory-Session-Token": this.props.token.token,
+            },
+            responseType: 'json'
+        })
+            .then((response) => {
+                this.setState({ isLoading: false, dataSource: response.data });
+                console.log(this.state.dataSource)
+            }).catch((error) => {
+                // this.setState({ isModalVisibleError: !this.state.isModalVisibleError })
+                console.error(error);
+            });
+        return this.state.dataSource
+    }
     showModal = () => {
         let { searchText } = this.state
         let data = ({
@@ -73,10 +99,9 @@ class FriendList extends Component {
             responseType: 'json'
         })
             .then((response) => {
-                this.setState({ isLoading: false, addStatus: response.data });
+                this.setState({ isLoading: true, addStatus: response.data });
                 console.log(this.state.addStatus[0])
-                // this.child.current.onRefesh()
-                // this.child.current.componentDidMount()
+                this.getFriend()
             }).catch((error) => {
                 // this.setState({ isModalVisibleError: !this.state.isModalVisibleError })
                 console.log(error);
@@ -91,6 +116,7 @@ class FriendList extends Component {
             this.hideModal()
         }
     }
+
     hideModal = () => {
         this.setState({ isModalVisible: !this.state.isModalVisible })
     }
@@ -168,8 +194,7 @@ class FriendList extends Component {
                 <FriendListView
                     AddFriendDetail={() => this.gotoAddFriendDetail()}
                     TeamList={() => this.gotoTeamList()}
-                    friend={this.state.datafriendlist}
-                    ref={this.child}
+                    datafriend={this.state.dataSource}
                 />
             </View>
         );
