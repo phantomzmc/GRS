@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { View, StyleSheet, Image, FlatList, TouchableOpacity } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Left, Body, Right, Icon } from 'native-base';
 import { connect } from 'react-redux'
-
 import Modal from 'react-native-modal'
 import dataEvent from '../listevent/data'
 import ModalHistory from '../../modal/history'
@@ -15,10 +14,8 @@ class HistoryList extends Component {
             name: ""
         }
     }
-    componentDidMount = () => {
-        this.setState({
-            dataSource: dataEvent
-        })
+    componentDidMount() {
+        this.setState({ dataSource: this.props.historylist })
     }
     setItems(item) {
         console.log(item.name)
@@ -71,7 +68,9 @@ class HistoryList extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        friendlist: state.friendlist
+        friendlist: state.friendlist,
+        userprofile: state.userprofile,
+        token: state.token
     }
 }
 
