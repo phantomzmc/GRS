@@ -8,9 +8,11 @@ import {
     StatusBar,
     TouchableOpacity,
     Alert,
-    TextInput
+    TextInput,
+    ScrollView
 } from 'react-native';
 import { connect } from 'react-redux'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview'
 import { Header, Left, Right, Icon, Button, Body, Title, Container } from "native-base";
 import axios from 'axios'
 import HeaderTeam from '../component/items/headerTeam'
@@ -105,7 +107,7 @@ class SingleLogin extends Component {
                     <Header style={{ backgroundColor: 'transparent' }}>
                         <Left>
                             <Button transparent>
-                                <Icon name='arrow-back' style={{ color: "#fff" }} onPress={this.gotoEvent.bind(this)}/>
+                                <Icon name='arrow-back' style={{ color: "#fff" }} onPress={this.gotoEvent.bind(this)} />
                             </Button>
                         </Left>
                         <Body>
@@ -115,43 +117,47 @@ class SingleLogin extends Component {
 
                         </Right>
                     </Header>
-                    <View style={styles.container}>
-                        <Text style={styles.textTitle} onPress={this.gotoListEvent}>
-                            ShutterRuning Service
+                    <KeyboardAwareScrollView>
+                        <Container>
+                            <View style={styles.container}>
+                                <Text style={styles.textTitle} onPress={this.gotoListEvent}>
+                                    ShutterRuning Service
                     </Text>
-                    </View>
-                    <View style={styles.formcontainer}>
-                        <TextInput
-                            placeholder="เลขบัตรประชาชน"
-                            returnKeyType="next"
-                            onSubmitEditing={() => this.passwordInput}
-                            onChangeText={(username) => this.setState({ username })}
-                            style={styles.input} />
-                        <View style={styles.loginContainer}>
-                            <TouchableOpacity
-                                onPress={this.checkLoginSever.bind(this)}>
-                                <View style={styles.buttonContainer}>
-                                    <Text style={styles.textButton}>เข้าร่วมกิจกรรม</Text>
+                            </View>
+                            <View style={styles.formcontainer}>
+                                <TextInput
+                                    placeholder="เลขบัตรประชาชน"
+                                    returnKeyType="next"
+                                    onSubmitEditing={() => this.passwordInput}
+                                    onChangeText={(username) => this.setState({ username })}
+                                    style={styles.input} />
+                                <View style={styles.loginContainer}>
+                                    <TouchableOpacity
+                                        onPress={this.checkLoginSever.bind(this)}>
+                                        <View style={styles.buttonContainer}>
+                                            <Text style={styles.textButton}>เข้าร่วมกิจกรรม</Text>
+                                        </View>
+                                    </TouchableOpacity>
                                 </View>
-                            </TouchableOpacity>
-                        </View>
-                        <TouchableOpacity
-                            onPress={this
-                                .gotoRegister
-                                .bind(this)}>
-                            <Text style={styles.regisButton}>
-                                สมัครสมาชิก
+                                <TouchableOpacity
+                                    onPress={this
+                                        .gotoRegister
+                                        .bind(this)}>
+                                    <Text style={styles.regisButton}>
+                                        สมัครสมาชิก
                         </Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            onPress={this
-                                .gotoRegisInfo
-                                .bind(this)}>
-                            <Text style={styles.regisButton}>
-                                ตรวจสอบรายชื่อ
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                    onPress={this
+                                        .gotoRegisInfo
+                                        .bind(this)}>
+                                    <Text style={styles.regisButton}>
+                                        ตรวจสอบรายชื่อ
                         </Text>
-                        </TouchableOpacity>
-                    </View>
+                                </TouchableOpacity>
+                            </View>
+                        </Container>
+                    </KeyboardAwareScrollView>
                 </ImageBackground>
             </View>
         );

@@ -54,7 +54,7 @@ class CellEventListFriend extends Component {
             }
             else if (JSON.stringify(str_newitem) != JSON.stringify(data[i])) {
                 status = true
-                
+
             }
             else {
                 status = false
@@ -68,10 +68,10 @@ class CellEventListFriend extends Component {
     _cellAddFriend(item, status) {
         var value = status
         dataitem = {
-            RunnerID : item.RunnerID,
-            FirstName : item.FirstName,
-            LastName : item.LastName,
-            PicProfile : item.PicProfile
+            RunnerID: item.RunnerID,
+            FirstName: item.FirstName,
+            LastName: item.LastName,
+            PicProfile: item.PicProfile
         }
         console.log(value)
         if (value == false) {
@@ -79,7 +79,7 @@ class CellEventListFriend extends Component {
         }
         else if (value == true) {
             datafriendRegis.push(dataitem)
-            
+
         }
     }
     handleOnChange(val) {
@@ -87,6 +87,7 @@ class CellEventListFriend extends Component {
         if (this.state.checked == false) {
             this.addFriendEvent(this.state.item)
             console.log(this.state.item)
+            this.setState({ statusCheck: false })
         }
         else if (this.state.checked == true) {
             this.removeFriendEvent(this.props.idkey)
@@ -137,7 +138,9 @@ class CellEventListFriend extends Component {
                                             style={{ flex: 1 }}
                                         /> :
                                         <View>
-
+                                            <View style={{ backgroundColor: "#C0C0C0", width: 20, height: 20, borderRadius: 10 ,justifyContent : "center" ,alignItems : "center" }}>
+                                                <Icon name="check" type="FontAwesome" style={{ color: "#fff" }} />
+                                            </View>
                                         </View>
                                     }
 

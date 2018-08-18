@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, Alert, TextInput,StatusBar } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, Alert, TextInput, StatusBar } from 'react-native';
 import { Header, Left, Right, Icon, Button, Body, Title, Container } from "native-base";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import req from '../config/uri_req'
@@ -18,7 +19,7 @@ class Login extends Component {
             password: "",
             status: [],
             login: 1,
-            title : "เข้าสู่ระบบ"
+            title: "เข้าสู่ระบบ"
         }
     }
     componentDidMount() {
@@ -146,45 +147,49 @@ class Login extends Component {
 
                     </Right>
                 </Header>
+                <KeyboardAwareScrollView>
+                    <Container>
                 <View style={styles.container}>
                     <Text style={styles.textTitle}>
                         ShutterRuning Service
                     </Text>
                 </View>
-                <View style={styles.formcontainer}>
-                    <TextInput
-                        placeholder={this.state.username}
-                        returnKeyType="next"
-                        onSubmitEditing={() => this.passwordInput}
-                        onChangeText={(username) => this.setState({ username: username })}
-                        style={styles.input}
-                    />
-                    <TextInput
-                        placeholder="รหัสผ่าน"
-                        returnKeyType="go"
-                        secureTextEntry
-                        style={styles.input}
-                        ref={(input) => this.passwordInput = input}
-                        onChangeText={(password) => this.setState({ password })}
-                    />
-                    <View style={styles.loginContainer}>
-                        <TouchableOpacity style={styles.buttonContainer}
-                            onPress={this.checkLoginSever.bind(this)}>
-                            <Text style={styles.textButton}>Login</Text>
+                    <View style={styles.formcontainer}>
+                        <TextInput
+                            placeholder={this.state.username}
+                            returnKeyType="next"
+                            onSubmitEditing={() => this.passwordInput}
+                            onChangeText={(username) => this.setState({ username: username })}
+                            style={styles.input}
+                        />
+                        <TextInput
+                            placeholder="รหัสผ่าน"
+                            returnKeyType="go"
+                            secureTextEntry
+                            style={styles.input}
+                            ref={(input) => this.passwordInput = input}
+                            onChangeText={(password) => this.setState({ password })}
+                        />
+                        <View style={styles.loginContainer}>
+                            <TouchableOpacity style={styles.buttonContainer}
+                                onPress={this.checkLoginSever.bind(this)}>
+                                <Text style={styles.textButton}>Login</Text>
+                            </TouchableOpacity>
+                        </View>
+
+                        <TouchableOpacity onPress={this.gotoRegister.bind(this)}>
+                            <Text style={styles.regisButton}>
+                                สมัครสมาชิก
+                        </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={this.gotoResetPassword.bind(this)}>
+                            <Text style={styles.regisButton}>
+                                ขอรหัสผ่านใหม่
+                        </Text>
                         </TouchableOpacity>
                     </View>
-
-                    <TouchableOpacity onPress={this.gotoRegister.bind(this)}>
-                        <Text style={styles.regisButton}>
-                            สมัครสมาชิก
-                        </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={this.gotoResetPassword.bind(this)}>
-                        <Text style={styles.regisButton}>
-                            ขอรหัสผ่านใหม่
-                        </Text>
-                    </TouchableOpacity>
-                </View>
+                    </Container>
+                </KeyboardAwareScrollView>
             </ImageBackground>
         );
     }

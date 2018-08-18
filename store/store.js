@@ -46,7 +46,7 @@ const friend = {
     PromoCode: "",
     CourseFee: "",
   },
-  fullfriendEvent: {
+  fullfriendEvent: [{
     RunnerID: "",
     firstname: "",
     lastname: "",
@@ -56,7 +56,7 @@ const friend = {
     PromoCode: "",
     nameRegis: "",
     CourseFee: "",
-  },
+  }],
   shirtSize: ""
 }
 const token = (state = {}, action) => {

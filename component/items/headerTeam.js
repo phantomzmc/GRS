@@ -96,6 +96,11 @@ class HeaderTeam extends Component {
     render() {
         return (
             <View>
+                <StatusBar
+                    barStyle="light-content"
+                    hidden={false}
+                    translucent={true}
+                />
                 <Header style={{ backgroundColor: "#FC561F" }}>
                     <Left>
                         <Button transparent onPress={this.onPressGoBack.bind(this)}>

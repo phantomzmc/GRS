@@ -8,24 +8,15 @@ class DiscountCoupon extends Component {
 
     render() {
         return (
-            <ScrollView>
                 <View>
                     <CouponForm />
                 </View>
-            </ScrollView>
         );
     }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#f0f0f0',
-    },
-    containerCoupon: {
-        backgroundColor: '#000',
-    },
+    
 
 })
 

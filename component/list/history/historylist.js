@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, FlatList, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Image, FlatList, TouchableOpacity, Alert } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Left, Body, Right, Icon } from 'native-base';
 import { connect } from 'react-redux'
 import Modal from 'react-native-modal'
+
 import axios from 'axios'
-import dataEvent from '../listevent/data'
+import dataInvoice from './dataInvoice'
 import ModalHistory from '../../modal/history'
 import req from '../../../config/uri_req'
 import api_key from '../../../config/api_key'
@@ -18,7 +19,7 @@ class HistoryList extends Component {
         this.state = {
             isModalVisible: false,
             name: "",
-            dataSource : []
+            dataSource: []
         }
     }
     componentDidMount() {
@@ -42,13 +43,13 @@ class HistoryList extends Component {
             responseType: 'json'
         })
             .then((response) => {
-                this.setState({ isLoading: false, dataSource: response.data[0] });
-                console.log(this.state.dataSource)
+                this.setState({ isLoading: false, dataSource2: response.data[0] });
+                dataInvoice.splice(0,1, response.data[0])
+                console.log(dataInvoice)
             }).catch((error) => {
                 // this.setState({ isModalVisibleError: !this.state.isModalVisibleError })
                 console.error(error);
             });
-        return this.state.dataSource
     }
     setItems(item) {
         console.log(item.name)
@@ -56,9 +57,12 @@ class HistoryList extends Component {
         this.getDetailInvoice(item.InvoiceID)
         this._toggleModal()
     }
-    _toggleModal = (data) =>
+    _toggleModal = (data) => {
         this.setState({ isModalVisible: !this.state.isModalVisible });
 
+    }
+
+    
     render() {
         if (this.state.isLoading) {
             return (
@@ -92,8 +96,9 @@ class HistoryList extends Component {
                 <Modal isVisible={this.state.isModalVisible}>
                     <View style={{ flex: 1 }}>
                         <ModalHistory
-                            dataHistory={this.state.dataSource}
-                            toggleModal={this._toggleModal} />
+                            dataHistory={this.state.dataSource2}
+                            toggleModal={this._toggleModal}
+                            />
                     </View>
                 </Modal>
             </View >

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, Alert, StatusBar } from 'react-native';
-import { Container, Form, Item, Label, Input } from "native-base";
+import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, Alert, StatusBar, ScrollView } from 'react-native';
+import { Container, Form, Item, Label, Input, Card, CardItem } from "native-base";
 import { connect } from 'react-redux'
 import axios from 'axios'
 import req from '../../config/uri_req'
@@ -101,8 +101,9 @@ class CouponForm extends Component {
         }
     }
     render() {
+        let url = 'https://register.shutterrunning2014.com/assets/img/theme/'
         return (
-            <Container>
+            <View>
                 <HeaderTeam
                     title={this.state.title}
                     goback={this.gotoBack.bind(this)}
@@ -112,38 +113,46 @@ class CouponForm extends Component {
                     hidden={false}
                     translucent={true}
                 />
-                <View style={styles.container}>
-                    <Image source={{ uri: "http://shutterrunning2014.com/wp-content/uploads/2018/01/For-web-2014.png" }}
-                        style={styles.imgEvent} />
-                    <Text style={styles.textNameEvent}>
-                        {this.props.event.event.EventName}
-                    </Text>
-                    <Text style={styles.detailDiscountCoupon}>
-                        ส่วนลดค่าสมัครรายการวิ่ง {this.state.price} {this.state.discountType}
-                    </Text>
-                    <View style={{ width: '70%' }}>
-                        <Form>
-                            <Item floatingLabel last>
-                                <Label style={styles.textLabel}>รหัสคูปอง</Label>
-                                <Input
-                                    onChangeText={(coupon) => this.setState({ coupon })}
-                                    onEndEditing={() => this.changeStatus()} />
-                            </Item>
-                        </Form>
-                    </View>
-                    {this.state.button &&
-                        <TouchableOpacity style={styles.submitButtonDefalt}>
-                            <Text style={styles.textButton}>ถัดไป</Text>
-                        </TouchableOpacity>}
-                    {this.state.button2 &&
-                        <TouchableOpacity style={styles.submitButton}
-                            onPress={() => this.checkPromoCode()}>
-                            <Text style={styles.textButton}>ถัดไป</Text>
-                        </TouchableOpacity>
-                    }
+                <ScrollView>
+                    <Container style={{ padding: 5 }}>
+                        <Card>
+                            <CardItem>
+                                <View style={styles.container}>
+                                    <Image source={{ uri: url + this.props.event.event.BackgroundImage }}
+                                        style={styles.imgEvent} />
+                                    <Text style={styles.textNameEvent}>
+                                        {this.props.event.event.EventName}
+                                    </Text>
+                                    <Text style={styles.detailDiscountCoupon}>
+                                        ส่วนลดค่าสมัครรายการวิ่ง {this.state.price} {this.state.discountType}
+                                    </Text>
+                                    <View style={{ width: '70%' }}>
+                                        <Form>
+                                            <Item floatingLabel last>
+                                                <Label style={styles.textLabel}>รหัสคูปอง</Label>
+                                                <Input
+                                                    onChangeText={(coupon) => this.setState({ coupon })}
+                                                    onEndEditing={() => this.changeStatus()} />
+                                            </Item>
+                                        </Form>
+                                    </View>
+                                    {this.state.button &&
+                                        <TouchableOpacity style={styles.submitButtonDefalt}>
+                                            <Text style={styles.textButton}>ถัดไป</Text>
+                                        </TouchableOpacity>}
+                                    {this.state.button2 &&
+                                        <TouchableOpacity style={styles.submitButton}
+                                            onPress={() => this.checkPromoCode()}>
+                                            <Text style={styles.textButton}>ถัดไป</Text>
+                                        </TouchableOpacity>
+                                    }
 
-                </View>
-            </Container>
+                                </View>
+                            </CardItem>
+                        </Card>
+                    </Container>
+                </ScrollView>
+            </View>
         );
     }
 }
@@ -152,7 +161,7 @@ const mapStateToProps = (state) => {
     return {
         event: state.event,
         userprofile: state.userprofile,
-        token : state.token
+        token: state.token
     }
 }
 const mapDispatchToProps = dispatch => {
@@ -163,16 +172,16 @@ const mapDispatchToProps = dispatch => {
                 payload: disPrice
             })
         },
-        setTotalPromo : (totalPromo) => {
+        setTotalPromo: (totalPromo) => {
             dispatch({
-                type : 'setTotalPromo',
-                payload : totalPromo
+                type: 'setTotalPromo',
+                payload: totalPromo
             })
         },
-        setTotalRegister : (totalRegister) => {
+        setTotalRegister: (totalRegister) => {
             dispatch({
-                type : 'setTotalRegister',
-                payload : totalRegister
+                type: 'setTotalRegister',
+                payload: totalRegister
             })
         }
     }
@@ -183,7 +192,6 @@ const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
         flex: 1,
-        backgroundColor: '#fff',
     },
     imgEvent: {
         marginTop: 20,
@@ -245,4 +253,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default connect(mapStateToProps,mapDispatchToProps)(CouponForm)
+export default connect(mapStateToProps, mapDispatchToProps)(CouponForm)

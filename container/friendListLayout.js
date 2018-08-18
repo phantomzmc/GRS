@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, TouchableOpacity, StatusBar, RefreshControl } from 'react-native';
-import { Header, Item, Icon, Input, Thumbnail, Button, Text } from 'native-base'
+import { Header, Item, Icon, Input, Thumbnail, Button, Text, Container } from 'native-base'
 import Modal from "react-native-modal";
 import axios from 'axios';
 import { connect } from "react-redux";
@@ -31,7 +31,7 @@ class FriendList extends Component {
             datafriendlist: [],
         }
     }
-    componentDidMount(){
+    componentDidMount() {
         this.getFriend()
     }
     getFriend() {
@@ -138,7 +138,12 @@ class FriendList extends Component {
     render() {
         let { searchText } = this.state
         return (
-            <View style={styles.container}>
+            <Container style={styles.container}>
+                <StatusBar
+                    barStyle="light-content"
+                    hidden={false}
+                    translucent={true}
+                />
                 <HeaderTeam
                     title={this.state.title}
                     menu={true}
@@ -150,11 +155,6 @@ class FriendList extends Component {
                     goRegis={() => this.props.navigation.navigate('ControlDistance')}
                     goSingleLogin={() => this.props.navigation.navigate('SingleLogin')}
 
-                />
-                <StatusBar
-                    barStyle="light-content"
-                    hidden={false}
-                    translucent={true}
                 />
 
                 <Header searchBar rounded>
@@ -196,7 +196,7 @@ class FriendList extends Component {
                     TeamList={() => this.gotoTeamList()}
                     datafriend={this.state.dataSource}
                 />
-            </View>
+            </Container>
         );
     }
 }

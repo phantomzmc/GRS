@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, ScrollView, StatusBar, TouchableOpacity } from "react-native";
+import { View, StyleSheet, ScrollView, StatusBar, TouchableOpacity, Image } from "react-native";
 import { Text, CardItem, Card, Form, Item, Label, Input, Content, Button, Body, Icon, Container } from "native-base";
 import axios from 'axios'
 import { connect } from "react-redux";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview'
 import HeaderTeam from '../component/items/headerTeam'
 import ListRegisInfo from '../component/list/regisInfo/listRegisInfo'
 import api_key from '../config/api_key'
@@ -55,6 +56,8 @@ class RegisterInfo extends Component {
         this.props.navigation.navigate('SingleLogin')
     }
     render() {
+        let url = 'https://register.shutterrunning2014.com/assets/img/theme/'
+
         return (
             <Container>
                 <HeaderTeam
@@ -66,16 +69,17 @@ class RegisterInfo extends Component {
                     hidden={false}
                     translucent={true}
                 />
-                <ScrollView>
+                <KeyboardAwareScrollView>
                     <View style={styles.container}>
                         <Card>
                             <CardItem>
                                 <Body style={styles.bodyTitle}>
+                                    <Image source={{ uri: url + this.props.event.event.BackgroundImage }} style={styles.imgEvent} />
                                     <Text style={styles.titleEvent}>{this.state.titleEvent}</Text>
                                 </Body>
                             </CardItem>
-                            <CardItem>
-                                <Content>
+                            <CardItem style={{ justifyContent : "center"}}>
+                                <View>
                                     <Form>
                                         <Item floatingLabel>
                                             <Label style={{ fontFamily: "kanit" }}>ชื่อของคุณ</Label>
@@ -95,11 +99,11 @@ class RegisterInfo extends Component {
                                         <Icon name="md-search" type="Ionicons" />
                                         <Text style={{ fontFamily: "kanit" }}>ค้นหา</Text>
                                     </Button>
-                                </Content>
+                                </View>
                             </CardItem>
                         </Card>
                     </View>
-                </ScrollView>
+                </KeyboardAwareScrollView>
             </Container>
         )
     }
@@ -132,7 +136,13 @@ const styles = StyleSheet.create({
         padding: 20,
         fontFamily: 'kanit',
         fontSize: 12
-    }
+    },
+    imgEvent: {
+        margin: 10,
+        width: '100%',
+        height: 100,
+
+    },
 })
 
 
