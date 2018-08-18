@@ -24,7 +24,6 @@ class HistoryContainer extends Component {
         this.getHistory()
     }
     getHistory() {
-        console.log("test")
         let data = ({
             params: [
                 { name: "RunnerID", value: this.props.userprofile.userprofile.RunnerID },
@@ -47,6 +46,7 @@ class HistoryContainer extends Component {
                 // this.setState({ isModalVisibleError: !this.state.isModalVisibleError })
                 console.error(error);
             });
+        return this.state.dataSource
     }
     checkOutput(data) {
         if (data == "") {
@@ -80,7 +80,7 @@ class HistoryContainer extends Component {
                 <View style={styles.list}>
                     {this.state.statusData == true ?
                         <HistoryList
-                            historylist={this.state.dataSource}
+                            historyData={this.state.dataSource}
                         /> :
                         <View style={styles.containerNo}>
                             <View style={styles.bodyNo}>
@@ -114,10 +114,10 @@ const styles = StyleSheet.create({
     bodyNo: {
         alignItems: "center"
     },
-    textNo : {
-        fontFamily : 'kanit',
-        color : "#c0c0c0",
-        fontSize : 20
+    textNo: {
+        fontFamily: 'kanit',
+        color: "#c0c0c0",
+        fontSize: 20
     }
 
 })

@@ -27,8 +27,9 @@ export default
             uspDeleteFriendLists: url + "Main.uspDeleteFriendLists",
             uspResetActivecode: url + "Main.uspResetActivecode",
             uspGetFriendSuggestion: url + "Main.uspGetFriendSuggestion",
-            uspGetRegisterInfo : url + "Main.uspGetRegisterInfo",
-            uspGetInvoiceLists : url + "Main.uspGetInvoiceLists"
+            uspGetRegisterInfo: url + "Main.uspGetRegisterInfo",
+            uspGetInvoiceLists: url + "Main.uspGetInvoiceLists",
+            uspGetInvoice: url + "Main.uspGetInvoice"
         },
         {
             url_mailgun: "https://api.mailgun.net/v3/mg.guurun.com/messages",
