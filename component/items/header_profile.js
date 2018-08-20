@@ -24,11 +24,9 @@ class HeaderProfile extends Component {
     }
     componentWillMount() {
         this.checkLocalLogin()
-        setTimeout(() => {
-            this.getUserProfile()
-        }, 1000)
     }
     componentDidMount() {
+        // this.getUserProfile()
         setTimeout(() => {
             this.setState({
                 ImageSource: this.props.userprofile.userprofile.PicProfile,
@@ -36,13 +34,13 @@ class HeaderProfile extends Component {
             })
         }, 2000)
     }
-    getUserProfile() {
+    getUserProfile(username) {
         let uri = req[0].uspGetUserProfile
         let apikey = api_key[0].api_key
 
         let data = ({
             params: {
-                value: this.state.username,
+                value: username,
             }
         })
         axios.post(uri, data, {
@@ -73,6 +71,9 @@ class HeaderProfile extends Component {
                 let pared = JSON.parse(value)
                 console.log(pared.username);
                 this.setState({ username: pared.username })
+                console.log("state" + this.state.username)
+                this.getUserProfile(pared.username)
+
             }
             else if (value === null) {
                 this.gotoLogin()

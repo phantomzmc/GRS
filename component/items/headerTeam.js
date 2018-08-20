@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, StatusBar, Easing, Dimensions, TouchableHighlight, Image } from "react-native";
+import { StyleSheet, StatusBar, Easing, Dimensions, TouchableHighlight, Image, AsyncStorage } from "react-native";
 import { Thumbnail, Header, Left, Body, Right, Button, Icon, Title, Text, View } from 'native-base';
 import Menu, { MenuItem, MenuDivider } from 'react-native-material-menu';
 import Drawer from 'react-native-drawer-menu';
@@ -74,6 +74,14 @@ class HeaderTeam extends Component {
         let goSuccess = this.props.goRegis()
         this.checkLogin(goSuccess)
     }
+    gotoLogout = () => {
+        let goSuccess = this.props.goSingleLogin()
+        this.userLogout()
+    }
+    async userLogout() {
+        await AsyncStorage.removeItem('login');
+    }
+
     checkLogin = (goSuccess) => {
         console.log("checkLogin")
         let statusLogin = this.props.userprofile.userstatus
@@ -179,7 +187,7 @@ class HeaderTeam extends Component {
                                             <Text style={styles.item_menu}>  History</Text>
                                         </MenuItem>
                                         <MenuDivider />
-                                        <MenuItem onPress={() => this.props.goSingleLogin()} style={{ padding: 10 }}>
+                                        <MenuItem onPress={this.gotoLogout} style={{ padding: 10 }}>
                                             <Icon name='log-out' type='Entypo' style={{ fontSize: 18 }} />
                                             <Text style={styles.item_menu}>  ออกจากระบบ</Text>
                                         </MenuItem>

@@ -28,38 +28,40 @@ class ListDistance extends Component {
                 price: ""
             },
             pic: img,
-            isLoading : false
+            isLoading: false
         }
     }
 
     componentDidMount() {
-        const uri = req[0].uspGetCourseLists
-        let data = ({
-            params: [
-                {
-                    name: "EventID", value: this.props.event.event.EventID
+        setTimeout(() => {
+            const uri = req[0].uspGetCourseLists
+            let data = ({
+                params: [
+                    {
+                        name: "EventID", value: this.props.event.event.EventID
+                    },
+                    {
+                        name: "Username", value: this.props.username.username
+                    },
+                ]
+            })
+            axios.post(uri, data, {
+                headers: {
+                    "X-DreamFactory-API-Key": api[0].api_key,
+                    "X-DreamFactory-Session-Token": this.props.token.token
                 },
-                {
-                    name: "Username", value: this.props.username.username
-                },
-            ]
-        })
-        axios.post(uri, data, {
-            headers: {
-                "X-DreamFactory-API-Key": api[0].api_key,
-                "X-DreamFactory-Session-Token": this.props.token.token
-            },
-            responseType: 'json'
-        })
-            // .then((response) => response.json())
-            .then((responseJson) => {
-                this.setState({ isLoading: false, dataSource: responseJson.data })
-            }).catch((error) => {
-                this.setState({ isLoading : true})
-                setTimeout(()=> {
-                    this.componentDidMount()
-                },2000)
-            });
+                responseType: 'json'
+            })
+                // .then((response) => response.json())
+                .then((responseJson) => {
+                    this.setState({ isLoading: false, dataSource: responseJson.data })
+                }).catch((error) => {
+                    this.setState({ isLoading: true })
+                    setTimeout(() => {
+                        this.componentDidMount()
+                    }, 2000)
+                });
+        },2000)
     }
     shirtPhotoPlus(item) {
         this.setState({

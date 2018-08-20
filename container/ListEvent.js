@@ -30,6 +30,7 @@ class ListEvent extends Component {
     }
     componentDidMount() {
         this.getNetwork()
+        this.checkLocalLogin()
         setTimeout(() => {
             this.checkLocalLogin()
         }, 500)
@@ -38,15 +39,18 @@ class ListEvent extends Component {
     async checkLocalLogin() {
         try {
             const value = await AsyncStorage.getItem('login');
+            const parse = JSON.parse(value)
             if (value !== null) {
                 // We have data!!
-                console.log(value);
+                console.log(value)
+                console.log("test" + parse.username);
+                this.props.setStatusLogin(0)
             }
             else if(value === null) {
-                this.gotoLogin()
+                this.gotoSingleLogin()
             }
             else {
-                this.gotoLogin()
+                this.gotoSingleLogin()
             }
         } catch (error) {
             // Error retrieving data
@@ -144,6 +148,12 @@ const mapDispatchToProps = dispatch => {
             dispatch({
                 type: "setLongitude",
                 payload: long
+            })
+        },
+        setStatusLogin: (login) => {
+            dispatch({
+                type: "setStatusLogin",
+                payload: login
             })
         }
     }

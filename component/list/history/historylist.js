@@ -64,6 +64,8 @@ class HistoryList extends Component {
 
 
     render() {
+        let url = 'https://register.shutterrunning2014.com/assets/img/theme/'
+
         if (this.state.isLoading) {
             return (
                 <View>
@@ -81,10 +83,10 @@ class HistoryList extends Component {
                             <Card>
                                 <CardItem>
                                     <Left>
-                                        <Thumbnail source={{ uri: item.pic }} />
+                                        <Thumbnail source={{ uri: url + item.BackgroundImage }} />
                                         <TouchableOpacity onPress={() => this.setItems(item)}>
                                             <Body>
-                                                <Text style={{ fontFamily: "kanit" }}>{item.InvoiceDatetime}</Text>
+                                                <Text style={{ fontFamily: "kanit"   ,fontSize : 14}}>{item.EventName}</Text>
                                                 <Text note style={{ fontFamily: "kanit" }}>ใบเสร็จหมายเลข : {item.InvoiceID}</Text>
                                             </Body>
                                         </TouchableOpacity>

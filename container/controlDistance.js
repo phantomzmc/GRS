@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, StyleSheet, TouchableOpacity, Alert, StatusBar, ScrollView, RefreshControl } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Alert, StatusBar, AsyncStorage, RefreshControl } from 'react-native';
 import { Container, Header, Tab, Tabs, TabHeading, Icon, Text, Button } from 'native-base';
 import { StackNavigator } from 'react-navigation';
 import { connect } from 'react-redux'
@@ -27,10 +27,12 @@ class ControlDistance extends Component {
         this.goAddTeam = this.goAddTeam.bind(this)
     }
     componentDidMount() {
-        setTimeout(() => {
+        setTimeout(()=> {
             this.fetchRegisEvent()
-        }, 1000);
+        },2000)
+        this.fetchRegisEvent()
     }
+
     fetchRegisEvent() {
         let userprofile = this.props.userprofile.userprofile
         let event = this.props.event.event
@@ -175,8 +177,8 @@ const mapDispatchToProps = (dispatch) => {
         },
         setRegisterStatus: (status) => {
             dispatch({
-                type : "setRegisterStatus",
-                payload : status
+                type: "setRegisterStatus",
+                payload: status
             })
         }
     }

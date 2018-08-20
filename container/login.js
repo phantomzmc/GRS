@@ -22,6 +22,12 @@ class Login extends Component {
             title: "เข้าสู่ระบบ"
         }
     }
+    componentWillMount(){
+        this.getUsername()
+        if(this.state.username == ""){
+            this.setState({ username : this.props.profile.profile.userid})
+        }
+    }
     componentDidMount() {
         this.onConnect()
     }
@@ -74,8 +80,8 @@ class Login extends Component {
             this.props.setUserStatus(status[0])
             this.props.setStatusLogin(login)
             this.setLogin()
-            // this.gotoControlDistance()
-            this.gotoEvent()
+            this.gotoControlDistance()
+            // this.gotoEvent()
         }
         else if (status[0].SignInStatus === "1" && status[0].ActivateStatus === "0") {
             Alert.alert('กรุณายืนยันตัวตน', 'ผู้ใช้งานยังไม่ได้ทำการยืนยันตัวตน กรุณายืนยันตัวตนด้วย', [
@@ -113,7 +119,24 @@ class Login extends Component {
         }
         await AsyncStorage.setItem('login', JSON.stringify(username));
     }
-
+    async getUsername() {
+        try {
+            const value = await AsyncStorage.getItem('login');
+            if (value !== null) {
+                let pared = JSON.parse(value)
+                console.log(pared.username);
+                this.setState({ username: pared.username })
+            }
+            // else if (value === null) {
+            //     this.gotoLogin()
+            // }
+            // else {
+            //     this.gotoLogin()
+            // }
+        } catch (error) {
+            // Error retrieving data
+        }
+    }
     gotoVerify = () => {
         this.props.navigation.navigate('Verify')
     }

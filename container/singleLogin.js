@@ -9,7 +9,8 @@ import {
     TouchableOpacity,
     Alert,
     TextInput,
-    ScrollView
+    ScrollView,
+    AsyncStorage
 } from 'react-native';
 import { connect } from 'react-redux'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview'
@@ -56,7 +57,9 @@ class SingleLogin extends Component {
     checkLogin() {
         if (this.state.status[0].UsernameStatus == "2") {
             this.props.setUsername(this.state.username)
-            this.gotoListEvent()
+            // this.gotoListEvent()
+            this.gotoEvent()
+            this.setLogin()
         }
         else {
             Alert.alert('ยังไม่มีข้อมูลผู้ใช้งาน', 'กรุณาลงทะเบียนเพื่อเข้าใช้งาน', [
@@ -68,8 +71,15 @@ class SingleLogin extends Component {
                 }
             ], { cancelable: false })
         }
-
     }
+
+    async setLogin() {
+        let username = {
+            username: this.state.username,
+        }
+        await AsyncStorage.setItem('login', JSON.stringify(username));
+    }
+
     gotoEvent = () => {
         this.props.navigation.navigate('EventList')
     }
