@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ImageBackground, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, ImageBackground, Image, StyleSheet, TouchableOpacity, AsyncStorage } from 'react-native';
 import { Icon } from "native-base";
 import { connect } from 'react-redux'
 import ImagePicker from 'react-native-image-picker';
@@ -22,6 +22,12 @@ class HeaderProfile extends Component {
             ImageSource: ""
         }
     }
+    componentWillMount() {
+        this.checkLocalLogin()
+        setTimeout(() => {
+            this.getUserProfile()
+        }, 1000)
+    }
     componentDidMount() {
         setTimeout(() => {
             this.setState({
@@ -29,13 +35,14 @@ class HeaderProfile extends Component {
                 imgBackground: this.props.userprofile.userprofile.BackgroundProfile
             })
         }, 2000)
-
-        console.log(this.props.userprofile.datapic)
+    }
+    getUserProfile() {
         let uri = req[0].uspGetUserProfile
         let apikey = api_key[0].api_key
+
         let data = ({
             params: {
-                value: this.props.username.username,
+                value: this.state.username,
             }
         })
         axios.post(uri, data, {
@@ -58,8 +65,24 @@ class HeaderProfile extends Component {
                     age: "อายุ",
                 })
             });
-
-
+    }
+    async checkLocalLogin() {
+        try {
+            const value = await AsyncStorage.getItem('login');
+            if (value !== null) {
+                let pared = JSON.parse(value)
+                console.log(pared.username);
+                this.setState({ username: pared.username })
+            }
+            else if (value === null) {
+                this.gotoLogin()
+            }
+            else {
+                this.gotoLogin()
+            }
+        } catch (error) {
+            // Error retrieving data
+        }
     }
     selectPhotoTapped() {
         const options = {

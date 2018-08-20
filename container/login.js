@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, Alert, TextInput, StatusBar } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, Alert, TextInput, StatusBar,AsyncStorage } from 'react-native';
 import { Header, Left, Right, Icon, Button, Body, Title, Container } from "native-base";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview'
 import { connect } from 'react-redux'
@@ -73,7 +73,9 @@ class Login extends Component {
             this.props.setUsername(this.state.username)
             this.props.setUserStatus(status[0])
             this.props.setStatusLogin(login)
-            this.gotoControlDistance()
+            this.setLogin()
+            // this.gotoControlDistance()
+            this.gotoEvent()
         }
         else if (status[0].SignInStatus === "1" && status[0].ActivateStatus === "0") {
             Alert.alert('กรุณายืนยันตัวตน', 'ผู้ใช้งานยังไม่ได้ทำการยืนยันตัวตน กรุณายืนยันตัวตนด้วย', [
@@ -103,6 +105,15 @@ class Login extends Component {
             ], { cancelable: false })
         }
     }
+
+    async setLogin() {
+        let username = {
+            username: this.state.username,
+            password: this.state.password
+        }
+        await AsyncStorage.setItem('login', JSON.stringify(username));
+    }
+
     gotoVerify = () => {
         this.props.navigation.navigate('Verify')
     }

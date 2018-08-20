@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, View, StatusBar, ImageBackground } from 'react-native';
+import { StyleSheet, View, StatusBar, ImageBackground, AsyncStorage } from 'react-native';
 import List from '../component/list/listevent/listevent'
 import { YellowBox } from 'react-native';
 import { connect } from 'react-redux'
@@ -30,7 +30,29 @@ class ListEvent extends Component {
     }
     componentDidMount() {
         this.getNetwork()
+        setTimeout(() => {
+            this.checkLocalLogin()
+        }, 500)
     }
+    
+    async checkLocalLogin() {
+        try {
+            const value = await AsyncStorage.getItem('login');
+            if (value !== null) {
+                // We have data!!
+                console.log(value);
+            }
+            else if(value === null) {
+                this.gotoLogin()
+            }
+            else {
+                this.gotoLogin()
+            }
+        } catch (error) {
+            // Error retrieving data
+        }
+    }
+
     getNetwork() {
         NetworkInfo.getIPAddress(ip => {
             this.props.setIP(ip)
@@ -58,13 +80,18 @@ class ListEvent extends Component {
         console.log("gotoRegister")
         this.checkTeamRegis()
     }
-    gotoLogin = () => {
+    gotoSingleLogin = () => {
         this.props.navigation.navigate("SingleLogin")
+    }
+    gotoLogin = () => {
+        this.props.navigation.navigate("Login")
     }
     checkUser = () => {
         if (this.state.profile == "") {
             console.log("checkLogin")
-            this.gotoLogin()
+            this.props.navigation.navigate('ControlDistance')
+
+            // this.gotoLogin()
         }
         else {
             this.props.navigation.navigate('ControlDistance')
@@ -73,17 +100,17 @@ class ListEvent extends Component {
 
     render() {
         return (
-                <View style={styles.container}>
-                    <StatusBar
-                        barStyle="light-content"
-                        hidden={false}
-                        translucent={true}
-                    />
-                    <List
-                        CheckLogin={this.checkUser.bind(this)}
-                        Profile={this.state.profile}
-                    />
-                </View>
+            <View style={styles.container}>
+                <StatusBar
+                    barStyle="light-content"
+                    hidden={false}
+                    translucent={true}
+                />
+                <List
+                    CheckLogin={this.checkUser.bind(this)}
+                    Profile={this.state.profile}
+                />
+            </View>
         )
     }
 }
