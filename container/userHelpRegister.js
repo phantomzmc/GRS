@@ -149,6 +149,7 @@ class UserHelpRegister extends Component {
     };
     gotoVerify = () => {
         this.props.navigation.navigate("Verify");
+        this.props.setUsername(this.props.profile.profile.userid)
     };
     gotoBack = () => {
         this.props.navigation.navigate('UserAddressRegister')
@@ -191,6 +192,16 @@ const mapStateToProps = state => {
         userprofile: state.userprofile
     }
 }
+const mapDispatchToProps = dispatch => {
+    return {
+        setUsername: username => {
+            dispatch({
+                type: "setUsername",
+                payload: username
+            });
+        }
+    }
+}
 
 
-export default connect(mapStateToProps)(UserHelpRegister);
+export default connect(mapStateToProps,mapDispatchToProps)(UserHelpRegister);

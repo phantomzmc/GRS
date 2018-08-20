@@ -29,7 +29,8 @@ export default
             uspGetFriendSuggestion: url + "Main.uspGetFriendSuggestion",
             uspGetRegisterInfo: url + "Main.uspGetRegisterInfo",
             uspGetInvoiceLists: url + "Main.uspGetInvoiceLists",
-            uspGetInvoice: url + "Main.uspGetInvoice"
+            uspGetInvoice: url + "Main.uspGetInvoice",
+            uspGetPostPrice : url + "Main.uspGetPostPrice"
         },
         {
             url_mailgun: "https://api.mailgun.net/v3/mg.guurun.com/messages",

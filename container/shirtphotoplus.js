@@ -42,8 +42,20 @@ class ShirtPhotoPlus extends Component {
             PromoCode: "",
             CourseFee: datadis.price,
         }
+        let dataFull = [{
+            RunnerID: this.props.userprofile.userprofile.RunnerID,
+            CourseID: datadis.id,
+            JerseySize: this.state.shirt,
+            PhotoPlusService: datadis.statusPhotoPlus,
+            PromoCode: "",
+            CourseFee: datadis.price,
+            firstname : this.props.userprofile.userprofile.FirstName,
+            lastname : this.props.userprofile.userprofile.LastName,
+            nameRegis : datadis.name
+        }]
         console.log(data)
         this.props.addFriendInEvent(data)
+        this.props.addFullFriendInEvent(dataFull)
 
     }
    
@@ -231,6 +243,12 @@ const mapDispatchToProps = dispatch => {
                 payload: dataFriend
             })
         },
+        addFullFriendInEvent : (dataFriendFull) => {
+            dispatch({
+                type: 'addFullFriendInEvent',
+                payload : dataFriendFull
+            })
+        }
     }
 }
 const mapStateToProps = (state) => {

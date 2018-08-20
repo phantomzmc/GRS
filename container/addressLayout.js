@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { View, ScrollView, StyleSheet, TouchableOpacity, AlertIOS, StatusBar } from 'react-native';
+import { View, ScrollView, StyleSheet, TouchableOpacity, AlertIOS, StatusBar, TouchableHighlight } from 'react-native';
 import CheckBox from 'react-native-checkbox-heaven';
 import { Container, Icon, Text, Tab, Tabs, TabHeading, Card, CardItem, Body, Content } from 'native-base';
 import AddressForm from '../component/form/addressForm'
@@ -41,7 +41,8 @@ class AddressLayout extends Component {
             postPrice: "",
             countFriend: this.props.friendlist.friendRegis.length,
             isPleace: true,
-            isPost: false
+            isPost: false,
+            statusButton3: true
         }
     }
     componentWillMount = () => {
@@ -53,6 +54,18 @@ class AddressLayout extends Component {
     componentDidMount() {
         this.getCountPostPrice()
         this.getPleaceItem()
+        // this.getPostPrice()
+        this.setState({
+            fullname: this.props.userprofile.userprofile.FirstName,
+            lastname: this.props.userprofile.userprofile.LastName,
+            email: this.props.userprofile.userprofile.Email,
+            adress: this.props.userprofile.userprofile.Address,
+            subdistric: this.props.userprofile.userprofile.SubDistric,
+            distric: this.props.userprofile.userprofile.Distric,
+            province: this.props.userprofile.userprofile.Province,
+            postcode: this.props.userprofile.userprofile.PostCode,
+            tel: this.props.userprofile.userprofile.Phone,
+        })
     }
     getPleaceItem() {
         let uri = req[0].uspGetPlaceItemLists
@@ -81,6 +94,29 @@ class AddressLayout extends Component {
                 // this.props.navigation.navigate('EventList')
             });
     }
+    getPostPrice() {
+        let uri = req[0].uspGetPostPrice
+        let apikey = api_key[0].api_key
+        let data = ({
+            params: [
+                { name: "PlaceItemID", value: "1" },
+                { name: "NumberOfRunner", value: this.state.countFriend },
+            ]
+        })
+        axios.post(uri, data, {
+            headers: {
+                "X-DreamFactory-API-Key": apikey,
+                "X-DreamFactory-Session-Token": this.props.token.token,
+            },
+            responseType: 'json'
+        })
+            .then((responseJson) => {
+                this.setState({ priceCDO: responseJson.data[0] })
+                console.log(responseJson.data)
+            }).catch((error) => {
+                // this.props.navigation.navigate('EventList')
+            });
+    }
     nextToPayment = () => {
         // this.getChoice()
         this.props.navigation.navigate('ControlPayment')
@@ -98,7 +134,11 @@ class AddressLayout extends Component {
         this.nextToPayment()
         this.props.setUser({ fullname: fullname, lastname, email, adress, subdistric, distric, province, postcode, tel, note })
     }
-
+    goTotalPayment2 = () => {
+        let { fullname, lastname, email, adress, subdistric, distric, province, postcode, tel, note } = this.state
+        this.nextToPayment()
+        this.props.setUser({ fullname: fullname, lastname, email, adress, subdistric, distric, province, postcode, tel, note })
+    }
     getSumPleace = () => {
         this.setState({
             checked: true,
@@ -111,7 +151,8 @@ class AddressLayout extends Component {
     getSumPostman = () => {
         this.setState({
             checked: false,
-            checked2: true
+            checked2: true,
+            statusButton3: false
         })
         this.props.setSendChoice({ choice: 1, dataChoice: "ส่งไปรษณีย์", priceCDO: this.state.priceCDO, placeItemID: 0, detail: this.state.postPrice })
         this.totalPriceRegis()
@@ -194,7 +235,7 @@ class AddressLayout extends Component {
                             </View>
                         </Card>
                     </View>
-                    <TouchableOpacity style={[styles.checkSubmit, { flexDirection: "row" ,justifyContent : "space-between"}]} onPress={() => this.setState({ isPost: !this.state.isPost })}>
+                    <TouchableOpacity style={[styles.checkSubmit, { flexDirection: "row", justifyContent: "space-between" }]} onPress={() => this.setState({ isPost: !this.state.isPost })}>
                         <View style={{ flexDirection: "row" }}>
                             <Icon name="home-map-marker" type="MaterialCommunityIcons" />
                             <Text style={styles.textTitle}>ที่อยู่การจัดส่งไปรษณีย์</Text>
@@ -210,6 +251,25 @@ class AddressLayout extends Component {
                         <AddressForm
                             getAddress={this.goTotalPayment.bind(this)}
                         />
+                    }
+                    {this.state.checked == true ?
+                        <View style={styles.submitContainer}>
+                            {this.state.statusButton3 == true ?
+                                <TouchableHighlight style={styles.buttonContainer}
+                                    onPress={() => this.setState({ statusButton3: false })}>
+                                    <Text style={styles.textButton}>ยืนยัน</Text>
+                                </TouchableHighlight>
+                                :
+                                <TouchableOpacity style={styles.buttonContainerOnPress}
+                                    onPress={this.goTotalPayment2.bind(this)}>
+                                    <Text style={styles.textButton}>ยืนยัน</Text>
+                                </TouchableOpacity>
+                            }
+                        </View>
+                        :
+                        <View>
+
+                        </View>
                     }
                 </ScrollView>
                 <SummaryTotal />
@@ -251,7 +311,7 @@ const styles = StyleSheet.create({
         fontSize: 16
     },
     submitContainer: {
-        marginTop: 10,
+        marginTop: 20,
         alignItems: 'center',
     },
     buttonContainer: {
@@ -283,7 +343,8 @@ const mapStateToProps = (state) => {
     return {
         event: state.event,
         token: state.token,
-        friendlist: state.friendlist
+        friendlist: state.friendlist,
+        userprofile: state.userprofile
     }
 }
 

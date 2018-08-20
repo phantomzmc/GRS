@@ -125,6 +125,9 @@ class Login extends Component {
     gotoEvent = () => {
         this.props.navigation.navigate('EventList')
     }
+    gotoRegisInfo = () => {
+        this.props.navigation.navigate('RegisterInfo')
+    }
     render() {
         return (
             <ImageBackground source={{ uri: "http://register.shutterrunning2014.com/assets/img/theme/dongtanbg.jpg" }}
@@ -149,45 +152,53 @@ class Login extends Component {
                 </Header>
                 <KeyboardAwareScrollView>
                     <Container>
-                <View style={styles.container}>
-                    <Text style={styles.textTitle}>
-                        ShutterRuning Service
+                        <View style={styles.container}>
+                            <Text style={styles.textTitle}>
+                                ShutterRuning Service
                     </Text>
-                </View>
-                    <View style={styles.formcontainer}>
-                        <TextInput
-                            placeholder={this.state.username}
-                            returnKeyType="next"
-                            onSubmitEditing={() => this.passwordInput}
-                            onChangeText={(username) => this.setState({ username: username })}
-                            style={styles.input}
-                        />
-                        <TextInput
-                            placeholder="รหัสผ่าน"
-                            returnKeyType="go"
-                            secureTextEntry
-                            style={styles.input}
-                            ref={(input) => this.passwordInput = input}
-                            onChangeText={(password) => this.setState({ password })}
-                        />
-                        <View style={styles.loginContainer}>
-                            <TouchableOpacity style={styles.buttonContainer}
-                                onPress={this.checkLoginSever.bind(this)}>
-                                <Text style={styles.textButton}>Login</Text>
+                        </View>
+                        <View style={styles.formcontainer}>
+                            <TextInput
+                                placeholder={this.state.username}
+                                returnKeyType="next"
+                                onSubmitEditing={() => this.passwordInput}
+                                onChangeText={(username) => this.setState({ username: username })}
+                                style={styles.input}
+                            />
+                            <TextInput
+                                placeholder="รหัสผ่าน"
+                                returnKeyType="go"
+                                secureTextEntry
+                                style={styles.input}
+                                ref={(input) => this.passwordInput = input}
+                                onChangeText={(password) => this.setState({ password })}
+                            />
+                            <View style={styles.loginContainer}>
+                                <TouchableOpacity style={styles.buttonContainer}
+                                    onPress={this.checkLoginSever.bind(this)}>
+                                    <Text style={styles.textButton}>Login</Text>
+                                </TouchableOpacity>
+                            </View>
+
+                            <TouchableOpacity onPress={this.gotoRegister.bind(this)}>
+                                <Text style={styles.regisButton}>
+                                    สมัครสมาชิก
+                        </Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={this.gotoResetPassword.bind(this)}>
+                                <Text style={styles.regisButton}>
+                                    ขอรหัสผ่านใหม่
+                        </Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                onPress={this
+                                    .gotoRegisInfo
+                                    .bind(this)}>
+                                <Text style={styles.regisButton}>
+                                    ตรวจสอบรายชื่อ
+                        </Text>
                             </TouchableOpacity>
                         </View>
-
-                        <TouchableOpacity onPress={this.gotoRegister.bind(this)}>
-                            <Text style={styles.regisButton}>
-                                สมัครสมาชิก
-                        </Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={this.gotoResetPassword.bind(this)}>
-                            <Text style={styles.regisButton}>
-                                ขอรหัสผ่านใหม่
-                        </Text>
-                        </TouchableOpacity>
-                    </View>
                     </Container>
                 </KeyboardAwareScrollView>
             </ImageBackground>

@@ -54,16 +54,29 @@ class DetailRegister extends Component {
                 </View>
                 <View style={styles.viewSize}>
                     <View style={styles.box}>
-                        <Text style={styles.boxTitle}>size</Text>
+                        <Text style={styles.boxTitle}>ไซค์เสื้อ</Text>
                         {/* <Text style={styles.boxName}>{this.props.shirtphoto.size}</Text> */}
-                        <Text style={styles.boxName}>{this.props.friendlist.fullfriendEvent[0].JerseySize}</Text>
-
+                        {this.props.friendlist.fullfriendEvent[0].JerseySize = undefined ?
+                            <Text style={styles.boxName}>
+                                {this.props.friendlist.fullfriendEvent.JerseySize}
+                            </Text>
+                            :
+                            <Text style={styles.boxName}>
+                                {this.props.friendlist.fullfriendEvent[0].JerseySize}
+                            </Text>
+                        }
                     </View>
                     <View style={styles.box}>
-                        {/* <Text style={styles.boxTitle}>{this.props.event.distanceEvent.name}</Text>
-                        <Text style={styles.boxName}>{this.props.event.distanceEvent.distance}</Text> */}
-                        <Text style={styles.boxName}>{this.props.friendlist.fullfriendEvent[0].nameRegis}</Text> */}
-
+                        <Text style={styles.boxTitle}>ระยะทาง</Text>
+                        {this.props.friendlist.fullfriendEvent[0].nameRegis == undefined ?
+                            <Text style={styles.boxName}>
+                                {this.props.friendlist.fullfriendEvent.nameRegis}
+                            </Text>
+                            :
+                            <Text style={styles.boxName}>
+                                {this.props.friendlist.fullfriendEvent[0].nameRegis}
+                            </Text>
+                        }
                     </View>
                 </View>
                 <View style={styles.viewAddress}>
@@ -113,10 +126,13 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
     },
     box: {
+        width : 150,
         backgroundColor: '#FC561F',
         borderRadius: 10,
         padding: 10,
         paddingHorizontal: 40,
+        alignItems : "center",
+        justifyContent : "center"
     },
     viewAddress: {
         padding: 20,
@@ -142,13 +158,14 @@ const styles = StyleSheet.create({
     },
     boxTitle: {
         color: '#fff',
-        fontSize: 15,
+        fontSize: 16,
         fontFamily: 'kanit'
     },
     boxName: {
-        fontSize: 25,
+        fontSize: 18,
         color: '#fff',
-        fontFamily: 'kanit'
+        fontFamily: 'kanit',
+        justifyContent : "center"
     }
 
 })

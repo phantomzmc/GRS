@@ -44,7 +44,7 @@ class HistoryList extends Component {
         })
             .then((response) => {
                 this.setState({ isLoading: false, dataSource2: response.data[0] });
-                dataInvoice.splice(0,1, response.data[0])
+                dataInvoice.splice(0, 1, response.data[0])
                 console.log(dataInvoice)
             }).catch((error) => {
                 // this.setState({ isModalVisibleError: !this.state.isModalVisibleError })
@@ -62,7 +62,7 @@ class HistoryList extends Component {
 
     }
 
-    
+
     render() {
         if (this.state.isLoading) {
             return (
@@ -84,11 +84,14 @@ class HistoryList extends Component {
                                         <Thumbnail source={{ uri: item.pic }} />
                                         <TouchableOpacity onPress={() => this.setItems(item)}>
                                             <Body>
-                                                <Text>{item.name}</Text>
-                                                <Text note>{item.InvoiceID} - {item.month}</Text>
+                                                <Text style={{ fontFamily: "kanit" }}>{item.InvoiceDatetime}</Text>
+                                                <Text note style={{ fontFamily: "kanit" }}>ใบเสร็จหมายเลข : {item.InvoiceID}</Text>
                                             </Body>
                                         </TouchableOpacity>
                                     </Left>
+                                    <Right>
+                                        <Text note style={{ fontFamily: "kanit" }}>ยอดชำระ : {item.TotalAmount} </Text>
+                                    </Right>
                                 </CardItem>
                             </Card>
                         </View>}
@@ -98,7 +101,7 @@ class HistoryList extends Component {
                         <ModalHistory
                             dataHistory={this.state.dataSource2}
                             toggleModal={this._toggleModal}
-                            />
+                        />
                     </View>
                 </Modal>
             </View >
