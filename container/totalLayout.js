@@ -48,7 +48,7 @@ class TotalLayout extends Component {
     }
     addRegister() {
         console.log("addregis")
-        let { userprofile, network, choiceSend, event, creditcard, address } = this.props
+        let { userprofile, network, choiceSend, event, creditcard, address,promocode } = this.props
         let uri = req[0].uspAddRegister
         let apikey = api_key[0].api_key
         let friendlists = this.props.friendlist.friendEvent
@@ -72,7 +72,7 @@ class TotalLayout extends Component {
                 { name: "EventID", value: event.event.EventID },
                 { name: "TotalPostPrice", value: choiceSend.choiceSend.priceCDO },
                 { name: "CreditFee", value: creditcard.vat },
-                { name: "TotalDiscount", value: 0 },
+                { name: "TotalDiscount", value: promocode.disPrice },
                 { name: "TotalAll", value: event.totalRegister }
             ]
         })
@@ -214,7 +214,8 @@ const mapStateToProps = (state) => {
         token: state.token,
         userprofile: state.userprofile,
         friendlist: state.friendlist,
-        profile: state.profile
+        profile: state.profile,
+        promocode : state.promocode
     }
 }
 const mapDispatchToProps = dispatch => {

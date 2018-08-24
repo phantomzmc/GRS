@@ -54,6 +54,7 @@ class ShirtPhotoPlus extends Component {
             nameRegis : datadis.name
         }]
         console.log(data)
+        this.props.setSizeShirt(this.state.shirt)
         this.props.addFriendInEvent(data)
         this.props.addFullFriendInEvent(dataFull)
 
@@ -247,6 +248,12 @@ const mapDispatchToProps = dispatch => {
             dispatch({
                 type: 'addFullFriendInEvent',
                 payload : dataFriendFull
+            })
+        },
+        setSizeShirt : (shirt) => {
+            dispatch({
+                type : 'setSizeShirt',
+                payload : shirt
             })
         }
     }

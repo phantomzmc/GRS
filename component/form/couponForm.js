@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, Alert, StatusBar, ScrollView } from 'react-native';
 import { Container, Form, Item, Label, Input, Card, CardItem } from "native-base";
 import { connect } from 'react-redux'
+import KeyboardSpacer from 'react-native-keyboard-spacer';
+
 import axios from 'axios'
 import req from '../../config/uri_req'
 import api_key from '../../config/api_key'
@@ -23,9 +25,8 @@ class CouponForm extends Component {
         }
         this.checkPromoCode = this.checkPromoCode.bind(this)
         this.checkOutput = this.checkOutput.bind(this)
-        this.gotoAddress = this.gotoAddress.bind(this)
     }
-    gotoAddress() {
+    gotoAddress = () => {
         this.props.navigation.navigate('AddressLayout')
     }
     gotoBack = () => {
@@ -70,13 +71,18 @@ class CouponForm extends Component {
             this.props.setTotalRegister(totalRegister)
             this.props.setTotalPromo(totalRegister)
             this.props.setDisPrice(value_dis)
+            this.props.setCodePromo(this.state.coupon)
+            this.savedataRegis2()
+
         }
         else if (status[0].PromoDiscountType == "2") {
-            const totalRegister = (this.props.event.totalPrice / status[0].PromoDiscount)
+            const totalRegister = ((this.props.event.totalPrice * 100) / (100 + status[0].PromoDiscount))
             const value_dis = (this.props.event.totalPrice - totalRegister)
-            this.props.setTotalRegister(totalRegister)
-            this.props.setTotalPromo(totalRegister)
-            this.props.setDisPrice(value_dis)
+            this.props.setTotalRegister(parseInt(value_dis))
+            this.props.setTotalPromo(parseInt(value_dis))
+            this.props.setDisPrice(parseInt(totalRegister))
+            this.props.setCodePromo(this.state.coupon)
+            this.savedataRegis2()
         }
     }
     checkOutput() {
@@ -84,6 +90,7 @@ class CouponForm extends Component {
         if (status[0].PromoStatus == "1") {
             this.checkType()
             this.gotoAddress()
+
         }
         else if (status[0].PromoStatus == "0") {
             Alert.alert("รหัสส่วนลดนี้ถูกใช้งานเเล้ว")
@@ -99,6 +106,35 @@ class CouponForm extends Component {
                 },
             ])
         }
+    }
+    savedataRegis2() {
+        let datadis = this.props.event.distanceEvent
+        let userprofile = this.props.userprofile.userprofile
+        let shirt = this.props.shirtphoto.size
+        let promocode = this.props.promocode.promocode
+        let data = {
+            RunnerID: userprofile.RunnerID,
+            CourseID: datadis.id,
+            JerseySize: shirt,
+            PhotoPlusService: datadis.statusPhotoPlus,
+            PromoCode: promocode,
+            CourseFee: datadis.price,
+        }
+        let dataFull = [{
+            RunnerID: userprofile.RunnerID,
+            CourseID: datadis.id,
+            JerseySize: shirt,
+            PhotoPlusService: datadis.statusPhotoPlus,
+            PromoCode: promocode,
+            CourseFee: datadis.price,
+            firstname: userprofile.FirstName,
+            lastname: userprofile.LastName,
+            nameRegis: datadis.name
+        }]
+        console.log(data)
+        this.props.addFriendInEvent(data)
+        this.props.addFullFriendInEvent(dataFull)
+
     }
     render() {
         let url = 'https://register.shutterrunning2014.com/assets/img/theme/'
@@ -146,11 +182,12 @@ class CouponForm extends Component {
                                             <Text style={styles.textButton}>ถัดไป</Text>
                                         </TouchableOpacity>
                                     }
-
                                 </View>
                             </CardItem>
                         </Card>
                     </Container>
+                    <KeyboardSpacer />
+
                 </ScrollView>
             </View>
         );
@@ -161,7 +198,9 @@ const mapStateToProps = (state) => {
     return {
         event: state.event,
         userprofile: state.userprofile,
-        token: state.token
+        token: state.token,
+        shirtphoto: state.shirtphoto,
+        promocode: state.promocode
     }
 }
 const mapDispatchToProps = dispatch => {
@@ -182,6 +221,24 @@ const mapDispatchToProps = dispatch => {
             dispatch({
                 type: 'setTotalRegister',
                 payload: totalRegister
+            })
+        },
+        setCodePromo: (coupon) => {
+            dispatch({
+                type: 'setCodePromo',
+                payload: coupon
+            })
+        },
+        addFriendInEvent: (dataFriend) => {
+            dispatch({
+                type: 'addFriendInEvent',
+                payload: dataFriend
+            })
+        },
+        addFullFriendInEvent: (dataFriendFull) => {
+            dispatch({
+                type: 'addFullFriendInEvent',
+                payload: dataFriendFull
             })
         }
     }
@@ -221,23 +278,22 @@ const styles = StyleSheet.create({
         fontFamily: 'kanit'
     },
     submitButtonDefalt: {
-        margin: 30,
-        height: 50,
-        width: '75%',
-        alignContent: 'center',
-        justifyContent: 'center',
+        marginTop: 30,
+        height: 40,
+        width: '80%',
         backgroundColor: '#FC561F',
+        justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 20,
         opacity: 0.5
+
     },
     submitButton: {
-        margin: 30,
-        height: 50,
-        width: '75%',
-        alignContent: 'center',
-        justifyContent: 'center',
+        marginTop: 30,
+        height: 40,
+        width: '80%',
         backgroundColor: '#FC561F',
+        justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 20,
     },

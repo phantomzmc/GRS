@@ -158,11 +158,11 @@ class TotalRegister extends Component {
                                 </View>
                             </View>
                             <View>
-                                <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>ส่วนลดค่าโปรโมชั่น 100.00 บาท</Text>
+                                <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>ส่วนลดค่าโปรโมชั่น {this.props.promocode.disPrice}.0 บาท</Text>
                                 {/* <Text style={{ fontSize: 7, color: '#8B8B8B' }}>(5 Km. - S) x 1 (Photo Plus)</Text> */}
                             </View>
                             <View>
-                                <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>-100.00 ฿</Text>
+                                <Text style={{ fontSize: 10, fontFamily: 'kanit' }}> -{this.props.promocode.disPrice}.0 ฿</Text>
                             </View>
                         </View>
                     }
@@ -213,7 +213,8 @@ const mapStateToProps = (state) => {
         choiceSend: state.choiceSend,
         address: state.address,
         creditcard: state.creditcard,
-        friendlist: state.friendlist
+        friendlist: state.friendlist,
+        promocode : state.promocode
     }
 }
 

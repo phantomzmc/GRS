@@ -25,11 +25,11 @@ const user = {
     userid: "",
     password: ""
   },
-  help:{
-    firstname:"1",
-    lastname:"1",
-    relation:"ความสัมพันธ์",
-    tel:"1"
+  help: {
+    firstname: "1",
+    lastname: "1",
+    relation: "ความสัมพันธ์",
+    tel: "1"
   },
   verify: "",
   statuslogin: 0,
@@ -59,6 +59,7 @@ const friend = {
   }],
   shirtSize: ""
 }
+
 const token = (state = {}, action) => {
   switch (action.type) {
     case "setCreateToken": {
@@ -215,15 +216,15 @@ const username = (state = {}, action) => {
   return state;
 }
 let datapic = ""
-const userprofile = (state = { 
-  datapic, 
-  userprofile: { 
-    PicProfile: "", 
-    BackgroundProfile: "" 
-  }, 
-  imgprofile : "1",
-  imgbackground : "1",
-  userstatus: "" 
+const userprofile = (state = {
+  datapic,
+  userprofile: {
+    PicProfile: "",
+    BackgroundProfile: ""
+  },
+  imgprofile: "1",
+  imgbackground: "1",
+  userstatus: ""
 }, action) => {
   switch (action.type) {
     case "setUserProfile": {
@@ -248,9 +249,9 @@ const userprofile = (state = {
       state.userstatus = action.payload
       break;
     }
-    case "setRegisterStatus" : {
+    case "setRegisterStatus": {
       state.registerStatus = action.payload
-      break; 
+      break;
     }
   }
   return state;
@@ -317,10 +318,14 @@ const network = (state = {}, action) => {
   }
   return state;
 }
-const promocode = (state = {}, action) => {
+const promocode = (state = { disPrice: "", codepromo: "" }, action) => {
   switch (action.type) {
     case "setDisPrice": {
       state.disPrice = action.payload
+      break;
+    }
+    case "setCodePromo": {
+      state.promocode = action.payload
       break;
     }
   }
