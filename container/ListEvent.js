@@ -56,6 +56,9 @@ class ListEvent extends Component {
                 console.log("test2 ")
                 this.setState({ username: pared.username })
             }
+            else if(value === null) {
+                this.gotoLogin()
+            }
         } 
         catch (error) {
             // Error retrieving data

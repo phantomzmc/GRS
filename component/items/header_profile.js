@@ -155,11 +155,15 @@ class HeaderProfile extends Component {
     }
 
     setData() {
+        var date1 = new Date()
+        var date2 = new Date(this.props.userprofile.userprofile.DateOfBirth)
+        var age = parseInt((date1 - date2) / 31557600000)
+        
         this.setState({
             fullname: this.props.userprofile.userprofile.FirstName,
             lastname: this.props.userprofile.userprofile.LastName,
             gen: this.props.userprofile.userprofile.Gender,
-            age: this.props.userprofile.userprofile.DateOfBirth
+            age: age
         })
     }
     render() {
@@ -180,7 +184,7 @@ class HeaderProfile extends Component {
                     </View>
                     <View style={styles.detailProfile}>
                         <Text style={styles.nameProfile}>{this.state.fullname} - {this.state.lastname} </Text>
-                        <Text style={styles.ageProfile}>{this.state.gen} - {this.state.age}</Text>
+                        <Text style={styles.ageProfile}>เพศ : {this.state.gen} - อายุ : {this.state.age} ปี</Text>
                     </View>
                 </View>
             </ImageBackground>

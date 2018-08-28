@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { View, Text, StyleSheet, ScrollView, RefreshControl, Button } from 'react-native';
-import { StackNavigator } from 'react-navigation';
+import { View, Text, StyleSheet, ScrollView, RefreshControl } from 'react-native';
+import { Icon } from 'native-base';
 
 import { connect } from 'react-redux'
 import HeaderProfile from '../component/items/header_profile.js'
 import ListDistance from '../component/list/event/listdistance'
 import ButtonSubmit from '../component/items/buttonSubmit';
+import axios from 'axios'
+import req from '../config/uri_req'
+import api_key from '../config/api_key'
 
 
 class RegisterDistance extends Component {
@@ -24,12 +27,56 @@ class RegisterDistance extends Component {
                 distance: "",
                 price: ""
             },
-            refreshing: false
+            refreshing: false,
+            statusList: false
         }
         // this.gotoShirtPhotoPlus = this.gotoShirtPhotoPlus.bind(this)
     }
+    componentWillMount() {
+        setTimeout(() => {
+            this.setState({ statusList: true })
+        }, 1000)
+    }
     componentDidMount() {
         this._onRefresh()
+        setTimeout(() => {
+            this.fetchRegisEvent()
+        }, 1000)
+        console.log(this.props.statusRegis)
+    }
+    fetchRegisEvent() {
+        let userprofile = this.props.userprofile.userprofile
+        let event = this.props.event.event
+        const uri = req[0].uspCheckRegisterEvent
+        const apikey = api_key[0].api_key
+        let data = ({
+            params: [
+                { name: "EventID", value: event.EventID },
+                { name: "RunnerID", value: userprofile.RunnerID }
+            ]
+        })
+        axios.post(uri, data, {
+            headers: {
+                "X-DreamFactory-API-Key": apikey,
+                "X-DreamFactory-Session-Token": this.props.token.token,
+            },
+            responseType: 'json'
+        })
+            // .then((response) => response.json())
+            .then((responseJson) => {
+                this.setState({ data: responseJson.data[0], });
+                console.log(responseJson.data)
+                if (responseJson.data[0].RegisterStatus == "0") {
+                    this.setState({ statusRegis: 0 })
+                    console.log("statusRegis: true")
+                }
+                else if (responseJson.data[0].RegisterStatus == "1") {
+                    this.setState({ statusRegis: 1 })
+                    console.log("statusRegis: false")
+
+                }
+            }).catch((error) => {
+            });
     }
     _onRefresh() {
         this.setState({ refreshing: true })
@@ -61,16 +108,28 @@ class RegisterDistance extends Component {
                     <Text style={styles.text}>
                         โปรดเลือกระยะทาง
                      </Text>
-                    {this.props.statusRegis == true ?
-                        <ListDistance onGotoshirt={this.gotoShirtPhotoPlus.bind(this)} />
-                        :
+                    {this.state.statusList &&
                         <View>
-                            <Text>ลงทะเบียนงานนี้แล้ว</Text>
+                            {this.state.statusRegis == 0 ?
+                                <ListDistance onGotoshirt={this.gotoShirtPhotoPlus.bind(this)} />
+                                :
+                                <View style={styles.container2}>
+                                    <Icon name="ios-information-circle-outline" style={{ color: "red" }} />
+                                    <Text style={{ fontFamily: "kanit" }}>ลงทะเบียนงานนี้แล้ว</Text>
+                                </View>
+                            }
                         </View>
                     }
                 </View>
             </ScrollView>
         );
+    }
+}
+const mapStateToProps = (state) => {
+    return {
+        userprofile: state.userprofile,
+        event: state.event,
+        token: state.token
     }
 }
 const mapDisPatchToProps = (dispatch) => {
@@ -101,6 +160,11 @@ const styles = StyleSheet.create({
     container: {
 
     },
+    container2: {
+        marginVertical : 10,
+        alignItems: "center",
+        justifyContent: "center"
+    },
     text: {
         fontSize: 20,
         fontWeight: '700',
@@ -110,4 +174,4 @@ const styles = StyleSheet.create({
     },
 
 })
-export default connect(null, mapDisPatchToProps)(RegisterDistance);
+export default connect(mapStateToProps, mapDisPatchToProps)(RegisterDistance);

@@ -22,15 +22,14 @@ class ControlDistance extends Component {
             title: "ลงทะเบียนวิ่ง",
             pageNumber: 0,
             login: 1,
-            register: false,
         }
         this.goAddTeam = this.goAddTeam.bind(this)
     }
+    
     componentDidMount() {
         setTimeout(()=> {
             this.fetchRegisEvent()
-        },2000)
-        this.fetchRegisEvent()
+        },1000)
     }
 
     fetchRegisEvent() {
@@ -64,7 +63,6 @@ class ControlDistance extends Component {
 
     checkRegisEvent(data) {
         if (data.RegisterStatus == "1") {
-            this.setState({ register: false })
             Alert.alert("มีการสมัครลงทะเบียนแล้ว", "ผู้ใช้ได้ทำการสมัครรายการ " + this.props.event.event.EventName + " แล้ว", [
                 {
                     text: "ไปยังรายการวิ่ง",
@@ -75,10 +73,6 @@ class ControlDistance extends Component {
                     onPress: () => this.goAddTeam()
                 },
             ], { cancelable: true })
-
-        }
-        else if (data.RegisterStatus == "0") {
-            this.setState({ register: true })
 
         }
     }
@@ -103,22 +97,41 @@ class ControlDistance extends Component {
     goSingleLogin = () => {
         this.props.navigation.navigate('SingleLogin')
     }
-    goAddTeam() {
-        console.log("Team")
-        if (this.props.profile.statuslogin == 1) {
-            this.props.navigation.navigate('TeamList')
+    async goAddTeam() {
+        try {
+            const value = await AsyncStorage.getItem('login');
+            if (value !== null) {
+                this.props.navigation.navigate('TeamList')
+            }
+            else if (value === null){
+                Alert.alert("ลงทะเบียนแบบกลุ่ม", "การลงทะเบียนแบบกลุ่มจะต้องทำการเข้าสู่ระบบก่อน", [
+                    {
+                        text: "Cancel"
+                    },
+                    {
+                        text: "เข้าสู่ระบบ",
+                        onPress: () => this.goLogin()
+                    },
+                ], { cancelable: false })
+            }
+
         }
-        else {
-            Alert.alert("ลงทะเบียนแบบกลุ่ม", "การลงทะเบียนแบบกลุ่มจะต้องทำการเข้าสู่ระบบก่อน", [
-                {
-                    text: "Cancel"
-                },
-                {
-                    text: "เข้าสู่ระบบ",
-                    onPress: () => this.goLogin()
-                },
-            ], { cancelable: false })
+        catch (error){
+            
         }
+        // if (this.props.profile.statuslogin == 1) {
+        // }
+        // else {
+        //     Alert.alert("ลงทะเบียนแบบกลุ่ม", "การลงทะเบียนแบบกลุ่มจะต้องทำการเข้าสู่ระบบก่อน", [
+        //         {
+        //             text: "Cancel"
+        //         },
+        //         {
+        //             text: "เข้าสู่ระบบ",
+        //             onPress: () => this.goLogin()
+        //         },
+        //     ], { cancelable: false })
+        // }
     }
 
     render() {
@@ -148,7 +161,6 @@ class ControlDistance extends Component {
                         heading={<TabHeading><Text style={styles.textLabel}>ลงทะเบียนแบบเดียว</Text></TabHeading>}>
                         <RegisterDistance
                             nextState={this.goNextState.bind(this)}
-                            statusRegis={this.state.statusRegis}
                         />
                     </Tab>
                     <Tab
