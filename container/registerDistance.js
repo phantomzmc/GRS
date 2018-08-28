@@ -28,7 +28,7 @@ class RegisterDistance extends Component {
         }
         // this.gotoShirtPhotoPlus = this.gotoShirtPhotoPlus.bind(this)
     }
-    componentDidMount(){
+    componentDidMount() {
         this._onRefresh()
     }
     _onRefresh() {
@@ -61,8 +61,13 @@ class RegisterDistance extends Component {
                     <Text style={styles.text}>
                         โปรดเลือกระยะทาง
                      </Text>
-                    <ListDistance onGotoshirt={this.gotoShirtPhotoPlus.bind(this)} />
-
+                    {this.props.statusRegis == true ?
+                        <ListDistance onGotoshirt={this.gotoShirtPhotoPlus.bind(this)} />
+                        :
+                        <View>
+                            <Text>ลงทะเบียนงานนี้แล้ว</Text>
+                        </View>
+                    }
                 </View>
             </ScrollView>
         );

@@ -19,7 +19,8 @@ class HeaderTeam extends Component {
         statusMenu: false,
         statusCheckLogin: false,
         statusCheckLogin2: true,
-        uri: ""
+        uri: "",
+        statusLogin: ""
     }
     _menu = null;
 
@@ -30,6 +31,19 @@ class HeaderTeam extends Component {
                 this.setState({ uri: this.props.userprofile.userprofile.PicProfile, nameUser: this.props.userprofile.userprofile.FirstName })
         }
         this.setState({ title: this.props.title, statusMenu: this.props.menu, })
+    }
+    async getUsername() {
+        try {
+            const value = await AsyncStorage.getItem('login');
+            if (value !== null) {
+                let pared = JSON.parse(value)
+                console.log(pared.statusLogin);
+                this.setState({ statusLogin: pared.statusLogin })
+            }
+
+        } catch (error) {
+            // Error retrieving data
+        }
     }
     onPressGoBack() {
         this.props.goback()
@@ -111,9 +125,13 @@ class HeaderTeam extends Component {
                 />
                 <Header style={{ backgroundColor: "#FC561F" }}>
                     <Left>
-                        <Button transparent onPress={this.onPressGoBack.bind(this)}>
-                            <Icon name='arrow-back' style={{ color: "#fff" }} />
-                        </Button>
+                        {this.props.goback == false ?
+                            <View></View>
+                            :
+                            <Button transparent onPress={this.onPressGoBack.bind(this)}>
+                                <Icon name='arrow-back' style={{ color: "#fff" }} />
+                            </Button>
+                        }
                     </Left>
                     <Body>
                         <Title style={styles.title}>{this.props.title}</Title>
@@ -130,38 +148,36 @@ class HeaderTeam extends Component {
                                     </View>
                                 }
                             >
-                                {this.state.statusCheckLogin &&
-                                    <View>
-                                        <MenuItem style={{ padding: 10 }} onPress={() => this.props.goLogin()}>
-                                            <Icon name='login' type='Entypo' style={{ fontSize: 18 }} />
-                                            <Text style={styles.item_menu}>  เข้าสู่ระบบ</Text>
-                                        </MenuItem>
-                                        <MenuDivider />
-                                        <MenuItem style={{ padding: 10 }}>
-                                            <Icon name='user-circle' type='FontAwesome' style={{ fontSize: 18, color: "#c0c0c0" }} />
-                                            <Text style={[styles.item_menu, { color: "#c0c0c0" }]}>  ข้อมูลส่วนตัว</Text>
-                                        </MenuItem>
-                                        <MenuItem style={{ padding: 10 }}>
-                                            <Icon name='group' type='FontAwesome' style={{ fontSize: 18, color: "#c0c0c0" }} />
-                                            <Text style={[styles.item_menu, { color: "#c0c0c0" }]}>  Friends List</Text>
-                                        </MenuItem>
-                                        <MenuItem style={{ padding: 10 }}>
-                                            <Icon name='edit' type='FontAwesome' style={{ fontSize: 18, color: "#c0c0c0" }} />
-                                            <Text style={[styles.item_menu, { color: "#c0c0c0" }]}>  ลงทะเบียน</Text>
-                                        </MenuItem>
-                                        <MenuItem style={{ padding: 10 }}>
-                                            <Icon name='history' type='FontAwesome' style={{ fontSize: 18, color: "#c0c0c0" }} />
-                                            <Text style={[styles.item_menu, { color: "#c0c0c0" }]}>  History</Text>
-                                        </MenuItem>
-                                        <MenuDivider />
-                                        <MenuItem onPress={this.hideMenu} style={{ padding: 10 }}>
-                                            <Icon name='close' type='FontAwesome' style={{ fontSize: 18, color: "#FF0000" }} />
-                                            <Text style={[styles.item_menu, { color: "#FF0000" }]}>   ปิด</Text>
-                                        </MenuItem>
-                                    </View>
-                                }
+                                {/* <View>
+                                    <MenuItem style={{ padding: 10 }} onPress={() => this.props.goLogin()}>
+                                        <Icon name='login' type='Entypo' style={{ fontSize: 18 }} />
+                                        <Text style={styles.item_menu}>  เข้าสู่ระบบ</Text>
+                                    </MenuItem>
+                                    <MenuDivider />
+                                    <MenuItem style={{ padding: 10 }}>
+                                        <Icon name='user-circle' type='FontAwesome' style={{ fontSize: 18, color: "#c0c0c0" }} />
+                                        <Text style={[styles.item_menu, { color: "#c0c0c0" }]}>  ข้อมูลส่วนตัว</Text>
+                                    </MenuItem>
+                                    <MenuItem style={{ padding: 10 }}>
+                                        <Icon name='group' type='FontAwesome' style={{ fontSize: 18, color: "#c0c0c0" }} />
+                                        <Text style={[styles.item_menu, { color: "#c0c0c0" }]}>  Friends List</Text>
+                                    </MenuItem>
+                                    <MenuItem style={{ padding: 10 }}>
+                                        <Icon name='edit' type='FontAwesome' style={{ fontSize: 18, color: "#c0c0c0" }} />
+                                        <Text style={[styles.item_menu, { color: "#c0c0c0" }]}>  ลงทะเบียน</Text>
+                                    </MenuItem>
+                                    <MenuItem style={{ padding: 10 }}>
+                                        <Icon name='history' type='FontAwesome' style={{ fontSize: 18, color: "#c0c0c0" }} />
+                                        <Text style={[styles.item_menu, { color: "#c0c0c0" }]}>  History</Text>
+                                    </MenuItem>
+                                    <MenuDivider />
+                                    <MenuItem onPress={this.hideMenu} style={{ padding: 10 }}>
+                                        <Icon name='close' type='FontAwesome' style={{ fontSize: 18, color: "#FF0000" }} />
+                                        <Text style={[styles.item_menu, { color: "#FF0000" }]}>   ปิด</Text>
+                                    </MenuItem>
+                                </View> */}
 
-                                {this.state.statusCheckLogin2 &&
+
                                     <View>
                                         < MenuItem onPress={this.gotoProfile} style={{ padding: 10 }}>
                                             <Icon name='user-circle' type='FontAwesome' style={{ fontSize: 18 }} />
@@ -178,10 +194,17 @@ class HeaderTeam extends Component {
                                             <Icon name='group' type='FontAwesome' style={{ fontSize: 18 }} />
                                             <Text style={styles.item_menu}>  Friends List</Text>
                                         </MenuItem>
-                                        <MenuItem onPress={this.gotoRegis} style={{ padding: 10 }}>
-                                            <Icon name='edit' type='FontAwesome' style={{ fontSize: 18 }} />
-                                            <Text style={styles.item_menu}>  ลงทะเบียน</Text>
-                                        </MenuItem>
+                                        {this.props.statusRegis == false ?
+                                            <MenuItem style={{ padding: 10 }}>
+                                                <Icon name='edit' type='FontAwesome' style={{ fontSize: 18, color: "#c0c0c0" }} />
+                                                <Text style={[styles.item_menu, { color: "#c0c0c0" }]}>  ลงทะเบียน</Text>
+                                            </MenuItem>
+                                            :
+                                            <MenuItem onPress={this.gotoRegis} style={{ padding: 10 }}>
+                                                <Icon name='edit' type='FontAwesome' style={{ fontSize: 18 }} />
+                                                <Text style={styles.item_menu}>  ลงทะเบียน</Text>
+                                            </MenuItem>
+                                        }
                                         <MenuItem onPress={this.gotoHistory} style={{ padding: 10 }}>
                                             <Icon name='history' type='FontAwesome' style={{ fontSize: 18 }} />
                                             <Text style={styles.item_menu}>  History</Text>
@@ -197,7 +220,7 @@ class HeaderTeam extends Component {
                                             <Text style={[styles.item_menu, { color: "#FF0000" }]}>   ปิด</Text>
                                         </MenuItem>
                                     </View>
-                                }
+                                
 
                             </Menu>
                         }

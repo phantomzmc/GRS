@@ -115,7 +115,8 @@ class Login extends Component {
     async setLogin() {
         let username = {
             username: this.state.username,
-            password: this.state.password
+            password: this.state.password,
+            statusLogin : 1
         }
         await AsyncStorage.setItem('login', JSON.stringify(username));
     }
@@ -127,12 +128,7 @@ class Login extends Component {
                 console.log(pared.username);
                 this.setState({ username: pared.username })
             }
-            // else if (value === null) {
-            //     this.gotoLogin()
-            // }
-            // else {
-            //     this.gotoLogin()
-            // }
+            
         } catch (error) {
             // Error retrieving data
         }

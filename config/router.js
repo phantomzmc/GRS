@@ -45,14 +45,8 @@ export default StackNavigator({
     EventList: {
         screen: EventList,
         navigationOptions: {
-            title: 'รายการวิ่ง',
-            headerStyle: {
-                backgroundColor: '#FC561F'
-            },
-            headerTitleStyle: {
-                color: '#fff',
-                fontFamily: "Kanit",
-            }
+            header: () => null
+
         }
     },
     Register: {

@@ -36,7 +36,7 @@ class ListEvent extends Component {
             token: ""
         }
     }
-    componentDidMount() {
+    componentWillMount() {
         this.onConnect()
     }
     onConnect() {

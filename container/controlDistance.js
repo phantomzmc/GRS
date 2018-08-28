@@ -127,6 +127,7 @@ class ControlDistance extends Component {
                 <HeaderTeam
                     title={this.state.title}
                     menu={true}
+                    statusRegis={true}
                     goback={this.goSingleLogin.bind(this)}
                     goLogin={() => this.props.navigation.navigate("Login")}
                     goFriendlist={() => this.props.navigation.navigate('FriendList')}
@@ -147,6 +148,7 @@ class ControlDistance extends Component {
                         heading={<TabHeading><Text style={styles.textLabel}>ลงทะเบียนแบบเดียว</Text></TabHeading>}>
                         <RegisterDistance
                             nextState={this.goNextState.bind(this)}
+                            statusRegis={this.state.statusRegis}
                         />
                     </Tab>
                     <Tab

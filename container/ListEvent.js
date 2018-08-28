@@ -2,9 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, View, StatusBar, ImageBackground, AsyncStorage } from 'react-native';
 import List from '../component/list/listevent/listevent'
+import HeaderTeam from '../component/items/headerTeam'
 import { YellowBox } from 'react-native';
 import { connect } from 'react-redux'
 import { NetworkInfo } from 'react-native-network-info';
+import axios from 'axios'
+import api_key from '../config/api_key'
+import req from '../config/uri_req'
 
 class ListEvent extends Component {
     static propTypes = {
@@ -24,18 +28,23 @@ class ListEvent extends Component {
             token: "",
             ip: "",
             lat: "",
-            long: ""
+            long: "",
+            title: "รายการวิ่ง"
         }
 
     }
-    componentDidMount() {
+    componentWillMount() {
         this.getNetwork()
-        this.checkLocalLogin()
         setTimeout(() => {
             this.checkLocalLogin()
         }, 500)
     }
-    
+    componentDidMount() {
+        setTimeout(() => {
+            this.getUserProfile()
+        }, 2000)
+    }
+
     async checkLocalLogin() {
         try {
             const value = await AsyncStorage.getItem('login');
@@ -44,19 +53,14 @@ class ListEvent extends Component {
                 // We have data!!
                 console.log(value)
                 console.log("test" + parse.username);
-                this.props.setStatusLogin(0)
+                console.log("test2 ")
+                this.setState({ username: pared.username })
             }
-            else if(value === null) {
-                this.gotoSingleLogin()
-            }
-            else {
-                this.gotoSingleLogin()
-            }
-        } catch (error) {
+        } 
+        catch (error) {
             // Error retrieving data
         }
     }
-
     getNetwork() {
         NetworkInfo.getIPAddress(ip => {
             this.props.setIP(ip)
@@ -101,6 +105,39 @@ class ListEvent extends Component {
             this.props.navigation.navigate('ControlDistance')
         }
     }
+    getUserProfile = (username) => {
+        console.log(this.props.token.token)
+        console.log(this.props.username)
+        let uri = req[0].uspGetUserProfile
+        let apikey = api_key[0].api_key
+
+        let data = ({
+            params: {
+                value: username,
+            }
+        })
+        axios.post(uri, data, {
+            headers: {
+                "X-DreamFactory-API-Key": apikey,
+                "X-DreamFactory-Session-Token": this.props.token.token,
+            },
+            responseType: 'json'
+        })
+            .then((responseJson) => {
+                console.log("success")
+                this.setState({ isLoading: false, user: responseJson.data });
+                console.log(this.state.user)
+                this.props.setUserProfile(this.state.user[0])
+            }).catch((error) => {
+                console.log("error")
+                this.setState({
+                    fullname: "ชื่อ",
+                    lastname: "นามสกุล",
+                    gen: "เพศ",
+                    age: "อายุ",
+                })
+            });
+    }
 
     render() {
         return (
@@ -109,6 +146,18 @@ class ListEvent extends Component {
                     barStyle="light-content"
                     hidden={false}
                     translucent={true}
+                />
+                <HeaderTeam
+                    title={this.state.title}
+                    menu={true}
+                    statusRegis={false}
+                    goback={false}
+                    goLogin={() => this.props.navigation.navigate("Login")}
+                    goFriendlist={() => this.props.navigation.navigate('FriendList')}
+                    goHistory={() => this.props.navigation.navigate('HistoryContainer')}
+                    goEditProfile={() => this.props.navigation.navigate('EditProfile')}
+                    goRegis={false}
+                    goSingleLogin={() => this.props.navigation.navigate('SingleLogin')}
                 />
                 <List
                     CheckLogin={this.checkUser.bind(this)}
@@ -121,7 +170,8 @@ class ListEvent extends Component {
 const mapStateToProps = (state) => {
     return {
         profile: state.profile,
-        event: state.event
+        event: state.event,
+        token: state.token,
     }
 }
 const mapDispatchToProps = dispatch => {
@@ -154,6 +204,18 @@ const mapDispatchToProps = dispatch => {
             dispatch({
                 type: "setStatusLogin",
                 payload: login
+            })
+        },
+        setUserProfile: (userprofile) => {
+            dispatch({
+                type: "setUserProfile",
+                payload: userprofile
+            })
+        },
+        setUsername: (username) => {
+            dispatch({
+                type: "setUsername",
+                payload: username
             })
         }
     }
