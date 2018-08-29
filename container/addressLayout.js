@@ -192,7 +192,7 @@ class AddressLayout extends Component {
                     title={this.state.title}
                     menu={true}
                     statusRegis={true}
-                    goback={this.goSingleLogin.bind(this)}
+                    goback={this.gotoBack.bind(this)}
                     goLogin={() => this.props.navigation.navigate("Login")}
                     goFriendlist={() => this.props.navigation.navigate('FriendList')}
                     goHistory={() => this.props.navigation.navigate('HistoryContainer')}

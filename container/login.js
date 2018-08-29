@@ -80,8 +80,8 @@ class Login extends Component {
             this.props.setUserStatus(status[0])
             this.props.setStatusLogin(login)
             this.setLogin()
-            this.gotoControlDistance()
-            // this.gotoEvent()
+            // this.gotoControlDistance()
+            this.gotoEvent()
         }
         else if (status[0].SignInStatus === "1" && status[0].ActivateStatus === "0") {
             Alert.alert('กรุณายืนยันตัวตน', 'ผู้ใช้งานยังไม่ได้ทำการยืนยันตัวตน กรุณายืนยันตัวตนด้วย', [

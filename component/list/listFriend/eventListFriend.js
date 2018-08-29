@@ -106,7 +106,7 @@ class EventListFriend extends Component {
                                 items={item}
                                 idkey={index}
                                 sendStatusCheck={this.props.changeCheck}
-                            // getAddFriend={this.addFriendEvent.bind(this)}
+                                // getAddFriend={this.addFriendEvent.bind(this)}
                             />
                         }
 

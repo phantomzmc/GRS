@@ -2,23 +2,36 @@ import React, { Component } from 'react'
 import { View, StyleSheet, Text, TouchableOpacity, Alert } from 'react-native'
 import { Container, Button, Form, Input, Item, Label } from 'native-base'
 import { connect } from 'react-redux'
-import { map } from 'mobx';
+import MailGunSend from '../../config/send-mailgun'
 
 class ResetPasswordForm extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            userid : "",
             password: "",
-            email: ""
+            email: "",
+            verifycode: ""
+
         }
     }
     componentWillMount() {
         console.log(this.props.userprofile.userprofile.Password)
         console.log(this.props.userprofile.userprofile.Email)
     }
+    async sentVerifyCode(email) {
+        const data = await MailGunSend.onSendMail({
+            'from': 'Guurun Support Team. <support@guurun.com>',
+            'to': email,
+            'subject': 'Guurun Support Team รหัสในการเปลี่ยนรหัสผ่าน',
+            'text': 'สวัสดีคุณ รหัสที่ใช้ในการเปลี่ยนรหัสผ่านของผู้ใช้งานคือ : ' + this.props.profile.newpassword
+        })
+        console.log(data)
+    }
     checkResetVerify() {
-        let { password , email} = this.state
-        this.props.sendNewCode(password,email)
+        let { password, email } = this.state
+        this.sentVerifyCode(email)
+        this.props.sendNewCode(password, email)
 
         // let { password , email} = this.state
         // if (this.state.password === this.props.userprofile.userprofile.Password && this.state.email === this.props.userprofile.userprofile.Email) {
@@ -56,11 +69,19 @@ class ResetPasswordForm extends Component {
     }
 
     render() {
-        let { password, email } = this.state
+        let { password, email,userid } = this.state
         return (
             <View style={styles.container}>
                 <View style={styles.content}>
                     <Text style={styles.textTitle}>กรอก Email และรหัสผ่านใหม่ เพื่อใช้ในการเข้าสู่ระบบครั้งต่อไป</Text>
+                    <Form style={styles.formInput}>
+                        <Item floatingLabel>
+                            <Label style={styles.textLabel}>รหัสบัตรประจำตัวประชาชน</Label>
+                            <Input
+                                onChangeText={userid => this.setState({ userid })}
+                            />
+                        </Item>
+                    </Form>
                     <Form style={styles.formInput}>
                         <Item floatingLabel>
                             <Label style={styles.textLabel}>Email</Label>
@@ -69,18 +90,11 @@ class ResetPasswordForm extends Component {
                             />
                         </Item>
                     </Form>
-                    <Form style={styles.formInput}>
-                        <Item floatingLabel>
-                            <Label style={styles.textLabel}>รหัสผ่านใหม่</Label>
-                            <Input
-                                onChangeText={password => this.setState({ password })}
-                            />
-                        </Item>
-                    </Form>
+
                     <View style={styles.submitContainer}>
                         <TouchableOpacity
                             style={styles.buttonContainer}
-                            onPress={() => this.checkResetVerify(password, email)}
+                            onPress={() => this.checkResetVerify(userid, email)}
                         >
                             <Text style={styles.textButton}>ยืนยัน</Text>
                         </TouchableOpacity>
@@ -93,7 +107,18 @@ class ResetPasswordForm extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        userprofile: state.userprofile
+        userprofile: state.userprofile,
+        profile : state.profile
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setVerify: (verifycode) => {
+            dispatch({
+                type: "setVerify",
+                payload: verifycode
+            })
+        }
     }
 }
 
@@ -110,7 +135,7 @@ const styles = StyleSheet.create({
     textTitle: {
         fontFamily: 'kanit',
         fontSize: 16,
-        textAlign : 'center'
+        textAlign: 'center'
     },
     textLabel: {
         fontFamily: 'kanit'
@@ -137,4 +162,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default connect(mapStateToProps)(ResetPasswordForm)
+export default connect(mapStateToProps, mapDispatchToProps)(ResetPasswordForm)

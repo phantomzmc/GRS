@@ -185,7 +185,7 @@ class FriendListView extends Component {
                                         source={{ uri: item.PicProfile }}
                                         style={styles.avatar} />
                                 </View>
-                                <TouchableOpacity onPress={() => this.alertShow(item)}>
+                                <TouchableOpacity>
                                     <View style={styles.textListFriend}>
                                         <Text style={styles.textName}>{item.FirstName} - {item.LastName}</Text>
                                     </View>

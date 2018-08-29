@@ -73,7 +73,7 @@ class FriendDistance extends Component {
 
     render() {
         return (
-            <Container>
+            <View>
                 <StatusBar
                     barStyle="light-content"
                     hidden={false}
@@ -100,7 +100,7 @@ class FriendDistance extends Component {
                         </View>
                     </View>
                 </ScrollView>
-            </Container>
+            </View>
         )
     }
 }

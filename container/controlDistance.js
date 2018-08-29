@@ -25,11 +25,11 @@ class ControlDistance extends Component {
         }
         this.goAddTeam = this.goAddTeam.bind(this)
     }
-    
+
     componentDidMount() {
-        setTimeout(()=> {
+        setTimeout(() => {
             this.fetchRegisEvent()
-        },1000)
+        }, 1000)
     }
 
     fetchRegisEvent() {
@@ -85,12 +85,8 @@ class ControlDistance extends Component {
         this.props.navigation.navigate("Login")
     }
     goNextState = () => {
-        if (this.state.register == true) {
-            this.props.navigation.navigate('ShirtPhotoPlus')
-        }
-        else if (this.state.register == false) {
-            console.log("flase")
-        }
+        this.props.navigation.navigate('ShirtPhotoPlus')
+
     }
 
 
@@ -103,7 +99,7 @@ class ControlDistance extends Component {
             if (value !== null) {
                 this.props.navigation.navigate('TeamList')
             }
-            else if (value === null){
+            else if (value === null) {
                 Alert.alert("ลงทะเบียนแบบกลุ่ม", "การลงทะเบียนแบบกลุ่มจะต้องทำการเข้าสู่ระบบก่อน", [
                     {
                         text: "Cancel"
@@ -116,8 +112,8 @@ class ControlDistance extends Component {
             }
 
         }
-        catch (error){
-            
+        catch (error) {
+
         }
         // if (this.props.profile.statuslogin == 1) {
         // }

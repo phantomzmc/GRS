@@ -44,26 +44,24 @@ class ListEvent extends Component {
             this.getUserProfile()
         }, 2000)
     }
-
     async checkLocalLogin() {
         try {
             const value = await AsyncStorage.getItem('login');
-            const parse = JSON.parse(value)
             if (value !== null) {
-                // We have data!!
-                console.log(value)
-                console.log("test" + parse.username);
-                console.log("test2 ")
+                let pared = JSON.parse(value)
+                console.log(pared.username);
                 this.setState({ username: pared.username })
+                this.props.setUsername(pared.username)
             }
             else if(value === null) {
                 this.gotoLogin()
             }
-        } 
-        catch (error) {
+
+        } catch (error) {
             // Error retrieving data
         }
     }
+    
     getNetwork() {
         NetworkInfo.getIPAddress(ip => {
             this.props.setIP(ip)

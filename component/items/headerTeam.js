@@ -31,6 +31,7 @@ class HeaderTeam extends Component {
                 this.setState({ uri: this.props.userprofile.userprofile.PicProfile, nameUser: this.props.userprofile.userprofile.FirstName })
         }
         this.setState({ title: this.props.title, statusMenu: this.props.menu, })
+        this.getUsername()
     }
     async getUsername() {
         try {
@@ -57,12 +58,12 @@ class HeaderTeam extends Component {
     };
     checkStatusLogin() {
         this.setState({ nameUser: this.props.userprofile.userprofile.FirstName, uri: this.props.userprofile.userprofile.PicProfile })
-        if (this.props.profile.statuslogin == 1) {
+        if (this.state.statusLogin == "1") {
             this.setState({ statusCheckLogin2: true, statusCheckLogin: false })
             console.log(this.state.statusCheckLogin)
             // this._menu.show();
         }
-        else if (this.props.profile.statuslogin == 0) {
+        else if (this.state.statusLogin == "0") {
             this.setState({ statusCheckLogin: true, statusCheckLogin2: false })
             console.log(this.state.statusCheckLogin)
             // this.props.goLogin()
@@ -89,7 +90,7 @@ class HeaderTeam extends Component {
         this.checkLogin(goSuccess)
     }
     gotoLogout = () => {
-        let goSuccess = this.props.goSingleLogin()
+        let goSuccess = this.props.goLogin()
         this.userLogout()
     }
     async userLogout() {
@@ -99,13 +100,13 @@ class HeaderTeam extends Component {
     checkLogin = (goSuccess) => {
         console.log("checkLogin")
         let statusLogin = this.props.userprofile.userstatus
-        if (statusLogin === "") {
+        if (this.state.statusLogin === 0) {
             this.hideMenu()
             this.props.goLogin()
             console.log(" don't ok")
             value = false
         }
-        else if (statusLogin !== "") {
+        else if (this.state.statusLogin === 1) {
             this.hideMenu()
             console.log("ok")
             this.goSuccess

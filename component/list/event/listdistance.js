@@ -7,7 +7,8 @@ import {
     FlatList,
     ImageBackground,
     TouchableOpacity,
-    ActivityIndicator
+    ActivityIndicator,
+    AsyncStorage
 } from 'react-native';
 import { connect } from 'react-redux'
 import axios from 'axios'
@@ -31,8 +32,10 @@ class ListDistance extends Component {
             isLoading: false
         }
     }
-
-    componentDidMount() {
+    componentWillMount(){
+        this.getUser()
+    }
+    fecthDistance(username) {
         setTimeout(() => {
             const uri = req[0].uspGetCourseLists
             let data = ({
@@ -41,7 +44,7 @@ class ListDistance extends Component {
                         name: "EventID", value: this.props.event.event.EventID
                     },
                     {
-                        name: "Username", value: this.props.username.username
+                        name: "Username", value: username
                     },
                 ]
             })
@@ -55,13 +58,29 @@ class ListDistance extends Component {
                 // .then((response) => response.json())
                 .then((responseJson) => {
                     this.setState({ isLoading: false, dataSource: responseJson.data })
+                    console.log(this.state.dataSource)
                 }).catch((error) => {
                     this.setState({ isLoading: true })
                     setTimeout(() => {
                         this.componentDidMount()
                     }, 2000)
                 });
-        },2000)
+        },1000)
+    }
+    async getUser() {
+        try {
+            const value = await AsyncStorage.getItem('login');
+            if (value !== null) {
+                let pared = JSON.parse(value)
+                console.log(pared.username);
+                this.setState({ username: pared.username })
+                console.log("state" + this.state.username)
+                this.fecthDistance(pared.username)
+            }
+            
+        } catch (error) {
+            // Error retrieving data
+        }
     }
     shirtPhotoPlus(item) {
         this.setState({

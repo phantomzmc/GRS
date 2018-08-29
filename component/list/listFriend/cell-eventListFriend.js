@@ -37,15 +37,41 @@ class CellEventListFriend extends Component {
         //     console.log("RegisterStatus == 1")
         // }
     }
-    removeFriendEvent = (index) => {
-        console.log(index)
-        datafriendRegis.splice(index, 1)
-        console.log(datafriendRegis)
+    removeFriendEvent = (item) => {
+        var data = datafriendRegis
+        dataitem = {
+            RunnerID : item.RunnerID,
+            FirstName : item.FirstName,
+            LastName : item.LastName,
+            PicProfile : item.PicProfile
+        }
+        var str_newitem = dataitem
+        for (i = 0; i <= data.length; i++) {
+            if (JSON.stringify(str_newitem) == JSON.stringify(data[i])) {
+                console.log("ลบ")
+                datafriendRegis.splice(i, 1)
+                break;
+            }
+            else if (JSON.stringify(str_newitem) != JSON.stringify(data[i])) {
+                console.log("ผ่าน")
+
+            }
+        }
+
+        // console.log(datafriendRegis[index])
+        // datafriendRegis.splice(index, 1)
+        // console.log(datafriendRegis)
         // this.props.getAddFriend(datafriendRegis)
     }
     _cellCheckAddFriend(item, status) {
         var data = datafriendRegis
-        var str_newitem = item
+        dataitem = {
+            RunnerID : item.RunnerID,
+            FirstName : item.FirstName,
+            LastName : item.LastName,
+            PicProfile : item.PicProfile
+        }
+        var str_newitem = dataitem
         for (i = 0; i <= data.length; i++) {
             if (JSON.stringify(str_newitem) == JSON.stringify(data[i])) {
                 console.log("ซ้ำ")
@@ -62,7 +88,7 @@ class CellEventListFriend extends Component {
         }
         setTimeout(() => {
             this._cellAddFriend(item, status)
-        }, 1500)
+        }, 100)
         return status
     }
     _cellAddFriend(item, status) {
@@ -84,15 +110,18 @@ class CellEventListFriend extends Component {
     }
     handleOnChange(val) {
         this.setState({ checked: val })
-        if (this.state.checked == false) {
-            this.addFriendEvent(this.state.item)
-            console.log(this.state.item)
-            this.setState({ statusCheck: false })
-        }
-        else if (this.state.checked == true) {
-            this.removeFriendEvent(this.props.idkey)
-            console.log(this.props.idkey)
-        }
+        setTimeout(()=>{
+            if (this.state.checked == true) {
+                this.addFriendEvent(this.state.item)
+                console.log(this.state.item)
+                this.setState({ statusCheck: false })
+            }
+            else if (this.state.checked == false) {
+                this.removeFriendEvent(this.state.item)
+                // console.log(this.props.idkey)
+            }
+        },100)
+        
 
     }
     chageColorIcon() {
@@ -127,7 +156,6 @@ class CellEventListFriend extends Component {
                         <Left>
                             {item.RegisterStatus == 0 ?
                                 <View>
-                                    {this.state.statusCheck == true ?
                                         <CheckBox
                                             iconSize={20}
                                             iconName='iosCircleMix'
@@ -136,13 +164,14 @@ class CellEventListFriend extends Component {
                                             uncheckedColor='#C0C0C0'
                                             onChange={this.handleOnChange.bind(this)}
                                             style={{ flex: 1 }}
-                                        /> :
+                                        /> 
+                                        {/* :
                                         <View>
                                             <View style={{ backgroundColor: "#C0C0C0", width: 20, height: 20, borderRadius: 10 ,justifyContent : "center" ,alignItems : "center" }}>
                                                 <Icon name="check" type="FontAwesome" style={{ color: "#fff" }} />
                                             </View>
-                                        </View>
-                                    }
+                                        </View> */}
+                                    
 
                                 </View> :
                                 <View style={{ flexDirection: "row" }}>
