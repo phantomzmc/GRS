@@ -259,25 +259,12 @@ class AddressLayout extends Component {
                             getAddress={this.goTotalPayment.bind(this)}
                         />
                     }
-                    {this.state.checked == true ?
-                        <View style={styles.submitContainer}>
-                            {this.state.statusButton3 == true ?
-                                <TouchableHighlight style={styles.buttonContainer}
-                                    onPress={() => this.setState({ statusButton3: false })}>
-                                    <Text style={styles.textButton}>ยืนยัน</Text>
-                                </TouchableHighlight>
-                                :
-                                <TouchableOpacity style={styles.buttonContainerOnPress}
-                                    onPress={this.goTotalPayment2.bind(this)}>
-                                    <Text style={styles.textButton}>ยืนยัน</Text>
-                                </TouchableOpacity>
-                            }
-                        </View>
-                        :
-                        <View>
-
-                        </View>
-                    }
+                    <View style={styles.submitContainer}>
+                        <TouchableOpacity style={styles.buttonContainerOnPress}
+                            onPress={this.goTotalPayment2.bind(this)}>
+                            <Text style={styles.textButton}>ยืนยัน</Text>
+                        </TouchableOpacity>
+                    </View>
                 </ScrollView>
                 <SummaryTotal />
             </Container>

@@ -30,12 +30,17 @@ class TotalRegister extends Component {
     }
     checkPromoStatus = () => {
         console.log("checkPromoStatus")
-        if (this.props.event.event.PromoCodeRequired == "0") {
+        if (this.props.promocode.promocode == "") {
             this.setState({
                 promotionStatus: false
             })
         }
-        else if (this.props.event.event.PromoCodeRequired == "1" || this.props.event.event.PromoCodeStatus == "1") {
+        else if (this.props.event.event.PromoCodeRequired == "1" && this.props.event.event.PromoCodeStatus == "1") {
+            this.setState({
+                promotionStatus: true
+            })
+        }
+        else if(this.props.promocode.promocode != ""){
             this.setState({
                 promotionStatus: true
             })
@@ -78,7 +83,7 @@ class TotalRegister extends Component {
                                 <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit', textAlign: 'center', width: 150 }}>({this.props.event.distanceEvent.distance} - {this.props.shirtphoto.size}) x 1 (Photo Plus)</Text>
                             </View>
                             <View>
-                                <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.state.total}.0 ฿</Text>
+                                <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.props.event.totalEvent}.0 ฿</Text>
                             </View>
                         </View>
                     }

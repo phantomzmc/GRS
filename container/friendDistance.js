@@ -12,7 +12,7 @@ class FriendDistance extends Component {
         title: "เลือกระยะทาง",
         price: [],
         statusRegis: 1,
-        statusButton: true,
+        statusButton: false,
         statusButtonOnPress: false
     }
     checkValueRegis() {
@@ -25,11 +25,11 @@ class FriendDistance extends Component {
 
         if (countFriend == countInEvent) {
             console.log("update")
-            this.setState({ statusButtonOnPress: true, statusButton: false })
+            this.setState({ statusButton: false })
         }
         else if (countFriend != countInEvent) {
             console.log("don't update")
-            this.setState({ statusButton: true, statusButtonOnPress: false })
+            this.setState({ statusButton: true })
         }
 
     }
@@ -53,7 +53,13 @@ class FriendDistance extends Component {
                 }
             ], { cancelable: false })
         }
-        else {
+        else if (countFriend != countInEvent) {
+            Alert.alert('กรุณากรอกข้อมูลให้ครบถ้วน', 'กรุณากรอกข้อมูลระยะทางและไซค์เสื้อ', [
+                {
+                    text: 'ตกลง'
+                }
+            ], { cancelable: false })        }
+        else if (countFriend == countInEvent) {
             this.onGotoAddress()
         }
     }
@@ -83,14 +89,11 @@ class FriendDistance extends Component {
                     <View style={styles.container}>
                         <FriendInEvent />
                         <View style={styles.submitContainer}>
-                            {this.state.statusButton &&
-                                <TouchableHighlight style={styles.buttonContainer}
-                                    onPress={this.checkValueRegis.bind(this)}
-                                >
+                            {this.state.statusButton == true ?
+                                <TouchableHighlight style={styles.buttonContainer}>
                                     <Text style={styles.textButton}>ถัดไป</Text>
                                 </TouchableHighlight>
-                            }
-                            {this.state.statusButtonOnPress &&
+                                :
                                 <TouchableOpacity style={styles.buttonContaineronPress}
                                     onPress={() => this.checkItemRegis()}>
                                     <Text style={styles.textButton}>ถัดไป</Text>

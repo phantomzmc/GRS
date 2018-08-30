@@ -113,6 +113,10 @@ const event = (state = eventState, action) => {
       state.distanceEvent = action.payload;
       break;
     }
+    case "setTotalEvent" : {
+      state.totalEvent = action.payload
+      break;
+    }
     case "setTotal": {
       state.totalPrice = action.payload;
       break;
@@ -322,7 +326,7 @@ const network = (state = {}, action) => {
   }
   return state;
 }
-const promocode = (state = { disPrice: "", codepromo: "" }, action) => {
+const promocode = (state = { disPrice: "", promocode: "" }, action) => {
   switch (action.type) {
     case "setDisPrice": {
       state.disPrice = action.payload

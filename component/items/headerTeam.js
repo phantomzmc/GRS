@@ -95,6 +95,7 @@ class HeaderTeam extends Component {
     }
     async userLogout() {
         await AsyncStorage.removeItem('login');
+        this.props.setUsername("")
     }
 
     checkLogin = (goSuccess) => {
@@ -179,49 +180,52 @@ class HeaderTeam extends Component {
                                 </View> */}
 
 
-                                    <View>
-                                        < MenuItem onPress={this.gotoProfile} style={{ padding: 10 }}>
+                                <View>
+                                    {this.props.statusRegis == false ?
+                                        <View></View> :
+                                        <MenuItem onPress={this.gotoProfile} style={{ padding: 10 }}>
                                             <Icon name='user-circle' type='FontAwesome' style={{ fontSize: 18 }} />
                                             {/* // <Image source={{ uri: this.state.uri }} style={{ width: 30, height: 30, borderRadius: 15, justifyContent: "center", alignItems: "center" }} /> */}
 
                                             <Text style={styles.item_menu}>  {this.state.nameUser}</Text>
                                         </MenuItem>
-                                        <MenuDivider />
-                                        <MenuItem onPress={this.gotoProfile} style={{ padding: 10 }}>
-                                            <Icon name='user-circle' type='FontAwesome' style={{ fontSize: 18 }} />
-                                            <Text style={styles.item_menu}>  ข้อมูลส่วนตัว</Text>
+                                    }
+                                    <MenuDivider />
+                                    <MenuItem onPress={this.gotoProfile} style={{ padding: 10 }}>
+                                        <Icon name='user-circle' type='FontAwesome' style={{ fontSize: 18 }} />
+                                        <Text style={styles.item_menu}>  ข้อมูลส่วนตัว</Text>
+                                    </MenuItem>
+                                    <MenuItem onPress={this.gotoFriendlist} style={{ padding: 10 }}>
+                                        <Icon name='group' type='FontAwesome' style={{ fontSize: 18 }} />
+                                        <Text style={styles.item_menu}>  Friends List</Text>
+                                    </MenuItem>
+                                    {this.props.statusRegis == false ?
+                                        <MenuItem style={{ padding: 10 }}>
+                                            <Icon name='edit' type='FontAwesome' style={{ fontSize: 18, color: "#c0c0c0" }} />
+                                            <Text style={[styles.item_menu, { color: "#c0c0c0" }]}>  ลงทะเบียน</Text>
                                         </MenuItem>
-                                        <MenuItem onPress={this.gotoFriendlist} style={{ padding: 10 }}>
-                                            <Icon name='group' type='FontAwesome' style={{ fontSize: 18 }} />
-                                            <Text style={styles.item_menu}>  Friends List</Text>
+                                        :
+                                        <MenuItem onPress={this.gotoRegis} style={{ padding: 10 }}>
+                                            <Icon name='edit' type='FontAwesome' style={{ fontSize: 18 }} />
+                                            <Text style={styles.item_menu}>  ลงทะเบียน</Text>
                                         </MenuItem>
-                                        {this.props.statusRegis == false ?
-                                            <MenuItem style={{ padding: 10 }}>
-                                                <Icon name='edit' type='FontAwesome' style={{ fontSize: 18, color: "#c0c0c0" }} />
-                                                <Text style={[styles.item_menu, { color: "#c0c0c0" }]}>  ลงทะเบียน</Text>
-                                            </MenuItem>
-                                            :
-                                            <MenuItem onPress={this.gotoRegis} style={{ padding: 10 }}>
-                                                <Icon name='edit' type='FontAwesome' style={{ fontSize: 18 }} />
-                                                <Text style={styles.item_menu}>  ลงทะเบียน</Text>
-                                            </MenuItem>
-                                        }
-                                        <MenuItem onPress={this.gotoHistory} style={{ padding: 10 }}>
-                                            <Icon name='history' type='FontAwesome' style={{ fontSize: 18 }} />
-                                            <Text style={styles.item_menu}>  History</Text>
-                                        </MenuItem>
-                                        <MenuDivider />
-                                        <MenuItem onPress={this.gotoLogout} style={{ padding: 10 }}>
-                                            <Icon name='log-out' type='Entypo' style={{ fontSize: 18 }} />
-                                            <Text style={styles.item_menu}>  ออกจากระบบ</Text>
-                                        </MenuItem>
-                                        <MenuDivider />
-                                        <MenuItem onPress={this.hideMenu} style={{ padding: 10 }}>
-                                            <Icon name='close' type='FontAwesome' style={{ fontSize: 18, color: "#FF0000" }} />
-                                            <Text style={[styles.item_menu, { color: "#FF0000" }]}>   ปิด</Text>
-                                        </MenuItem>
-                                    </View>
-                                
+                                    }
+                                    <MenuItem onPress={this.gotoHistory} style={{ padding: 10 }}>
+                                        <Icon name='history' type='FontAwesome' style={{ fontSize: 18 }} />
+                                        <Text style={styles.item_menu}>  History</Text>
+                                    </MenuItem>
+                                    <MenuDivider />
+                                    <MenuItem onPress={this.gotoLogout} style={{ padding: 10 }}>
+                                        <Icon name='log-out' type='Entypo' style={{ fontSize: 18 }} />
+                                        <Text style={styles.item_menu}>  ออกจากระบบ</Text>
+                                    </MenuItem>
+                                    <MenuDivider />
+                                    <MenuItem onPress={this.hideMenu} style={{ padding: 10 }}>
+                                        <Icon name='close' type='FontAwesome' style={{ fontSize: 18, color: "#FF0000" }} />
+                                        <Text style={[styles.item_menu, { color: "#FF0000" }]}>   ปิด</Text>
+                                    </MenuItem>
+                                </View>
+
 
                             </Menu>
                         }
@@ -235,6 +239,16 @@ const mapStateToProps = state => {
     return {
         userprofile: state.userprofile,
         profile: state.profile
+    }
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        setUsername: (username) => {
+            dispatch({
+                type: "setUsername",
+                payload: username
+            })
+        }
     }
 }
 
@@ -268,4 +282,4 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
 })
-export default connect(mapStateToProps)(HeaderTeam)
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderTeam)

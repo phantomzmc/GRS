@@ -195,7 +195,7 @@ class CreditView extends Component {
                             <Input
                                 style={{ fontFamily: "kanit" }}
                                 keyboardType="phone-pad"
-                                onChangeText={(cvcCredit) => this.setState({ cvcCredit })}
+                                onChangeText={(cvcCredit) => this.setState({ cvcCredit, statusButton : false })}
                             />
                         </Item>
                     </Form>
@@ -235,21 +235,20 @@ class CreditView extends Component {
                 </Modal>
 
                 <View style={styles.submitContainer}>
-                    {this.state.statusButton &&
+                    {this.state.statusButton == true ?
                         <TouchableHighlight
                             style={styles.buttonContainer}
                             onPress={() => this.checkInputValue()}>
                             <Text style={styles.textButton}> ยืนยันและชำระค่าบริการ </Text>
                         </TouchableHighlight>
-                    }
-                    {this.state.statusButtonOnPress &&
+                        :
                         <TouchableOpacity
                             style={styles.buttonContainerOnPress}
                             onPress={() => this.putDataCredit(nameCredit, numberCredit, expCredit, yearCredit, cvcCredit)}>
                             <Text style={styles.textButton}> ยืนยันและชำระค่าบริการ </Text>
                         </TouchableOpacity>
-                    }
 
+                    }
                 </View>
             </View>
         );

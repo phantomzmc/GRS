@@ -34,6 +34,7 @@ class PhotoPlus extends Component {
     photoPlusSwitch = (value) => {
 
         this.sumPrice(value)
+        this.props.setTotalEvent(this.state.totalPrice.toString())
         this.props.setTotal(this.state.totalPrice.toString())
         this.props.setTotalRegister(this.state.totalPrice.toString())
     }
@@ -49,12 +50,14 @@ class PhotoPlus extends Component {
         if (value == false) {
             this.sumPhotoPlus()
             console.log(this.state.totalPrice)
+            this.props.setTotalEvent(this.state.totalPrice.toString())
             this.props.setTotal(this.state.totalPrice.toString())
             this.props.setTotalRegister(this.state.totalPrice.toString())
         }
         else if (value == true) {
             this.setState({ totalPrice: this.state.priceEvent })
             console.log(this.state.totalPrice)
+            this.props.setTotalEvent(this.state.totalPrice.toString())
             this.props.setTotal(this.state.totalPrice.toString())
             this.props.setTotalRegister(this.state.totalPrice.toString())
 
@@ -96,6 +99,12 @@ const mapDispatchToState = (dispatch) => {
                 payload: total
             })
         },
+        setTotalEvent : (totalEvent) => {
+            dispatch({
+                type : "setTotalEvent",
+                payload : totalEvent
+            })
+        }
     }
 }
 
