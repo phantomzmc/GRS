@@ -1,7 +1,7 @@
+
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { connect } from 'react-redux'
-
 class DetailRegister extends Component {
     state = {
         address: "106/13 หนองหอย เมืองเชียงใหม่ เชียงใหม่",
@@ -38,8 +38,7 @@ class DetailRegister extends Component {
                         {this.state.statusPayment2 && <Text style={styles.typePaymentWarning}>รอดำเนินการ</Text>}
                     </View>
                     <View>
-                        <Image source={{ uri: "https://www.qrstuff.com/images/sample.png" }}
-                            style={{ width: 100, height: 100 }} />
+                        
                     </View>
                     <View>
                         <Text style={{ fontSize: 10, color: '#A9A9A9', fontFamily: 'kanit' }}> Order : {this.state.numberInvoice} </Text>
@@ -126,13 +125,13 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
     },
     box: {
-        width : 150,
+        width: 150,
         backgroundColor: '#FC561F',
         borderRadius: 10,
         padding: 10,
         paddingHorizontal: 40,
-        alignItems : "center",
-        justifyContent : "center"
+        alignItems: "center",
+        justifyContent: "center"
     },
     viewAddress: {
         padding: 20,
@@ -165,7 +164,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: '#fff',
         fontFamily: 'kanit',
-        justifyContent : "center"
+        justifyContent: "center"
     }
 
 })

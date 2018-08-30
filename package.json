@@ -65,6 +65,7 @@
     "react-native-video": "^2.2.0",
     "react-native-view-shot": "^2.3.0",
     "react-navigation": "2.3.1",
+    "react-qr-code": "^0.1.2",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
@@ -82,7 +83,8 @@
     "preset": "react-native",
     "setupFiles": [
       "./node_modules/appcenter/test/AppCenterMock.js",
-      "./node_modules/appcenter-crashes/test/AppCenterCrashesMock.js"
+      "./node_modules/appcenter-crashes/test/AppCenterCrashesMock.js",
+      "./node_modules/appcenter-analytics/test/AppCenterAnalyticsMock.js"
     ]
   },
   "rnpm": {

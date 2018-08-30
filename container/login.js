@@ -15,7 +15,7 @@ class Login extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            username: this.props.username.username,
+            username: this.props.username !== null ? "รหัสบัตรประชาชน" :  this.props.profile.profile.userid,
             password: "",
             status: [],
             login: 1,
@@ -24,8 +24,8 @@ class Login extends Component {
     }
     componentWillMount(){
         this.getUsername()
-        if(this.state.username == ""){
-            this.setState({ username : this.props.profile.profile.userid})
+        if(this.props.username.username == "" && this.props.profile.profile.userid == ""){
+            this.setState({ username : "รหัสบัตรประชาชน"})
         }
     }
     componentDidMount() {

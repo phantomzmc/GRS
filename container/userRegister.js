@@ -38,6 +38,7 @@ class UserRegister extends Component {
         this.props.setVerify(this.state.verifycode)
       });
   }
+
   gotoListEvent = (
     fullname,
     lastname,
@@ -54,6 +55,7 @@ class UserRegister extends Component {
     nation,
     gen
   ) => {
+
     this.props.setProfile({
       fullname,
       lastname,
@@ -71,9 +73,11 @@ class UserRegister extends Component {
       gen
     });
     this.props.navigation.navigate("UserAddressRegister");
+
+
   };
   gotoBack = () => {
-    this.props.navigation.navigate('SingleLogin')
+    this.props.navigation.navigate('Login')
   }
 
   render() {
@@ -106,7 +110,8 @@ const styles = StyleSheet.create({
 });
 const mapStateToProps = state => {
   return {
-    token: state.token
+    token: state.token,
+    userprofile: state.userprofile
   }
 }
 const mapDispatchToProps = dispatch => {

@@ -96,6 +96,8 @@ class HeaderTeam extends Component {
     async userLogout() {
         await AsyncStorage.removeItem('login');
         this.props.setUsername("")
+        this.props.setImageProfile("")
+        this.props.setImageBackground("")
     }
 
     checkLogin = (goSuccess) => {
@@ -150,34 +152,6 @@ class HeaderTeam extends Component {
                                     </View>
                                 }
                             >
-                                {/* <View>
-                                    <MenuItem style={{ padding: 10 }} onPress={() => this.props.goLogin()}>
-                                        <Icon name='login' type='Entypo' style={{ fontSize: 18 }} />
-                                        <Text style={styles.item_menu}>  เข้าสู่ระบบ</Text>
-                                    </MenuItem>
-                                    <MenuDivider />
-                                    <MenuItem style={{ padding: 10 }}>
-                                        <Icon name='user-circle' type='FontAwesome' style={{ fontSize: 18, color: "#c0c0c0" }} />
-                                        <Text style={[styles.item_menu, { color: "#c0c0c0" }]}>  ข้อมูลส่วนตัว</Text>
-                                    </MenuItem>
-                                    <MenuItem style={{ padding: 10 }}>
-                                        <Icon name='group' type='FontAwesome' style={{ fontSize: 18, color: "#c0c0c0" }} />
-                                        <Text style={[styles.item_menu, { color: "#c0c0c0" }]}>  Friends List</Text>
-                                    </MenuItem>
-                                    <MenuItem style={{ padding: 10 }}>
-                                        <Icon name='edit' type='FontAwesome' style={{ fontSize: 18, color: "#c0c0c0" }} />
-                                        <Text style={[styles.item_menu, { color: "#c0c0c0" }]}>  ลงทะเบียน</Text>
-                                    </MenuItem>
-                                    <MenuItem style={{ padding: 10 }}>
-                                        <Icon name='history' type='FontAwesome' style={{ fontSize: 18, color: "#c0c0c0" }} />
-                                        <Text style={[styles.item_menu, { color: "#c0c0c0" }]}>  History</Text>
-                                    </MenuItem>
-                                    <MenuDivider />
-                                    <MenuItem onPress={this.hideMenu} style={{ padding: 10 }}>
-                                        <Icon name='close' type='FontAwesome' style={{ fontSize: 18, color: "#FF0000" }} />
-                                        <Text style={[styles.item_menu, { color: "#FF0000" }]}>   ปิด</Text>
-                                    </MenuItem>
-                                </View> */}
 
 
                                 <View>
@@ -247,6 +221,18 @@ const mapDispatchToProps = dispatch => {
             dispatch({
                 type: "setUsername",
                 payload: username
+            })
+        },
+        setImageProfile : (imgProfile) => {
+            dispatch({
+                type: "setImageProfile",
+                payload: imgProfile
+            })
+        },
+        setImageBackground : (imgBG) => {
+            dispatch({
+                type: "setImageBackground",
+                payload: imgBG
             })
         }
     }

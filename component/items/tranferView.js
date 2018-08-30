@@ -43,7 +43,22 @@ class TranferView extends Component {
         });
         console.log(data)
         this.props.setCharge({ id: data.id })
+        this.getCharges(data.id)
+    }
+    async getCharges(customer) {
+        const totalRegis = Number(this.props.event.totalRegister * 100)
+        this.setState({
+            amount: String(totalRegis)
+        })
+        const data = await Omise.createChargeTranfer({
+            'amount': this.state.amount,
+            'fail_fast': true,
+            
+
+        });
+        console.log(data)
         this.goTotalPayment()
+        this.props.setCharge(data)
     }
     selectPhotoTapped() {
         const options = {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, Alert, StatusBar, ScrollView } from 'react-native';
-import { Container, Form, Item, Label, Input, Card, CardItem } from "native-base";
+import { Container, Form, Item, Label, Input, Card, CardItem, Icon } from "native-base";
 import { connect } from 'react-redux'
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 
@@ -20,8 +20,8 @@ class CouponForm extends Component {
             status: [],
             discountType: "",
             price: "",
-            button: true,
-            button2: false
+            button: false,
+            form: true,
         }
         this.checkPromoCode = this.checkPromoCode.bind(this)
         this.checkOutput = this.checkOutput.bind(this)
@@ -33,28 +33,34 @@ class CouponForm extends Component {
         this.props.navigation.navigate('ShirtPhotoPlus')
     }
     checkPromoCode() {
-        let uri = req[0].uspApplyPromoCode
-        let apikey = api_key[0].api_key
-        let data = ({
-            params: [
-                { name: "EventID", value: this.props.event.event.EventID },
-                { name: "PromoCode", value: this.state.coupon },
-                { name: "RunnerID", value: this.props.userprofile.userprofile.RunnerID }
-            ]
-        })
-        axios.post(uri, data, {
-            headers: {
-                "X-DreamFactory-API-Key": apikey,
-                "X-DreamFactory-Session-Token": this.props.token.token,
-            },
-            responseType: 'json'
-        })
-            .then((response) => {
-                this.setState({ isLoading: false, status: response.data });
-                console.log(this.state.status)
-                this.checkOutput()
-            }).catch((error) => {
-            });
+        if (this.state.coupon == "") {
+            Alert.alert("กรุณากรอกรหัส เพื่อรับส่วนลดการสมัคร")
+            this.setState({ form : false})
+        }
+        else if (this.state.coupon != "") {
+            let uri = req[0].uspApplyPromoCode
+            let apikey = api_key[0].api_key
+            let data = ({
+                params: [
+                    { name: "EventID", value: this.props.event.event.EventID },
+                    { name: "PromoCode", value: this.state.coupon },
+                    { name: "RunnerID", value: this.props.userprofile.userprofile.RunnerID }
+                ]
+            })
+            axios.post(uri, data, {
+                headers: {
+                    "X-DreamFactory-API-Key": apikey,
+                    "X-DreamFactory-Session-Token": this.props.token.token,
+                },
+                responseType: 'json'
+            })
+                .then((response) => {
+                    this.setState({ isLoading: false, status: response.data });
+                    console.log(this.state.status)
+                    this.checkOutput()
+                }).catch((error) => {
+                });
+        }
     }
     changeStatus = () => {
         if (this.state.coupon != "")
@@ -93,7 +99,12 @@ class CouponForm extends Component {
 
         }
         else if (status[0].PromoStatus == "0") {
-            Alert.alert("รหัสส่วนลดนี้ถูกใช้งานเเล้ว")
+            Alert.alert("ส่วนลดค่าสมัคร", "รหัสนี้ไม่ถูกต้องหรือถูกใช้ไปแล้ว", [
+                {
+                    text: "ลองอีกครั้ง",
+                },
+            ])
+            this.setState({ form: false })
         }
         else if (status[0].PromoStatus == "0" && this.props.event.event.PromoCodeRequired == "0") {
             Alert.alert("ส่วนลดค่าสมัคร", "รหัสนี้ไม่ถูกต้องหรือถูกใช้ไปแล้ว", [
@@ -105,6 +116,7 @@ class CouponForm extends Component {
                     onPress: () => this.props.navigation.navigate('AddressLayout')
                 },
             ])
+            this.setState({ form: false })
         }
     }
     savedataRegis2() {
@@ -144,7 +156,7 @@ class CouponForm extends Component {
                     title={this.state.title}
                     menu={true}
                     statusRegis={true}
-                    goback={()=> this.props.navigation.navigate("ShirtPhotoPlus")}
+                    goback={() => this.props.navigation.navigate("ShirtPhotoPlus")}
                     goLogin={() => this.props.navigation.navigate("Login")}
                     goFriendlist={() => this.props.navigation.navigate('FriendList')}
                     goHistory={() => this.props.navigation.navigate('HistoryContainer')}
@@ -170,21 +182,27 @@ class CouponForm extends Component {
                                     <Text style={styles.detailDiscountCoupon}>
                                         ส่วนลดค่าสมัครรายการวิ่ง {this.state.price} {this.state.discountType}
                                     </Text>
-                                    <View style={{ width: '70%' }}>
+                                    <View style={{ width: '90%' }}>
                                         <Form>
-                                            <Item floatingLabel last>
-                                                <Label style={styles.textLabel}>รหัสคูปอง</Label>
-                                                <Input
-                                                    onChangeText={(coupon) => this.setState({ coupon })}
-                                                    onEndEditing={() => this.changeStatus()} />
-                                            </Item>
+                                            {this.state.form == true ?
+                                                <Item floatingLabel last>
+                                                    <Label style={styles.textLabel}>รหัสส่วนลด</Label>
+                                                    <Input
+                                                        onChangeText={(coupon) => this.setState({ coupon, button: false })}
+                                                    />
+                                                </Item>
+                                                :
+                                                <Item error>
+                                                    <Input placeholder='รหัสส่วนลด' />
+                                                </Item>
+                                            }
                                         </Form>
                                     </View>
-                                    {this.state.button &&
+                                    {this.state.button == true ?
                                         <TouchableOpacity style={styles.submitButtonDefalt}>
                                             <Text style={styles.textButton}>ถัดไป</Text>
-                                        </TouchableOpacity>}
-                                    {this.state.button2 &&
+                                        </TouchableOpacity>
+                                        :
                                         <TouchableOpacity style={styles.submitButton}
                                             onPress={() => this.checkPromoCode()}>
                                             <Text style={styles.textButton}>ถัดไป</Text>
@@ -271,7 +289,7 @@ const styles = StyleSheet.create({
     },
     detailDiscountCoupon: {
         fontSize: 18,
-        color: '#8A8A8F',
+        color: '#000',
         fontFamily: 'kanit'
     },
     inputCoupon: {

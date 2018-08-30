@@ -30,6 +30,10 @@ class ControlDistance extends Component {
         setTimeout(() => {
             this.fetchRegisEvent()
         }, 1000)
+        this.props.setTotal(0)
+        this.props.setTotalEvent(0)
+        this.props.setTotalPromo(0)
+        this.props.setTotalRegister(0)
     }
 
     fetchRegisEvent() {
@@ -76,6 +80,48 @@ class ControlDistance extends Component {
 
         }
     }
+    checkEventStatus() {
+        let event = this.props.event.event
+        const uri = req[0].uspGetEvent
+        const apikey = api[0].api_key
+        let data = ({
+            params: [
+                { name: "EventID", value: event.EventID },
+            ]
+        })
+        axios.post(uri, data, {
+            headers: {
+                "X-DreamFactory-API-Key": apikey,
+                "X-DreamFactory-Session-Token": this.props.token.token,
+            },
+            responseType: 'json'
+        })
+            // .then((response) => response.json())
+            .then((responseJson) => {
+                this.setState({ status: responseJson.data, });
+                console.log(this.state.status)
+                this.alertStatusEvent(responseJson.data)
+            }).catch((error) => {
+                this.goListEvent()
+            });
+    }
+    alertStatusEvent(status) {
+        if(status.EventStatus == 2) {
+            Alert.alert("รายการนี้มีผู้สมัครเต็มจำนวนแล้ว", "ผุ้ใช้งานสามารถสมัครรายการอื่นหรือตรวจสอบรายชื่อได้ที่นี่ " ,[
+                {
+                    text: "รายการวิ่งอื่น",
+                    onPress: () => this.goListEvent()
+                },
+                {
+                    text: "ตรวจสอบรายชื่อ",
+                    onPress: () => this.goRegisterInfo()
+                },
+            ], { cancelable: true })
+        }
+        else {
+            this.fetchRegisEvent()
+        }
+    }
     goListEvent = () => {
         this.props.navigation.navigate("EventList")
     }
@@ -88,10 +134,11 @@ class ControlDistance extends Component {
         this.props.navigation.navigate('ShirtPhotoPlus')
 
     }
-
-
     goSingleLogin = () => {
         this.props.navigation.navigate('SingleLogin')
+    }
+    goRegisterInfo = () => {
+        this.props.navigation.navigate('RegisterInfo')
     }
     async goAddTeam() {
         try {
@@ -190,7 +237,31 @@ const mapDispatchToProps = (dispatch) => {
                 type: "setRegisterStatus",
                 payload: status
             })
-        }
+        },
+        setTotalEvent: (totalEvent) => {
+            dispatch({
+                type: "setTotalEvent",
+                payload: totalEvent
+            })
+        },
+        setTotal: (total) => {
+            dispatch({
+                type: "setTotal",
+                payload: total
+            })
+        },
+        setTotalPromo: (totalPromo) => {
+            dispatch({
+                type: "setTotalPromo",
+                payload: totalPromo
+            })
+        },
+        setTotalRegister: (totalRegeis) => {
+            dispatch({
+                type: "setTotalRegister",
+                payload: totalRegeis
+            })
+        },
     }
 }
 

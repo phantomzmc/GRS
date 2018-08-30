@@ -242,7 +242,7 @@ class AddressLayout extends Component {
                             </View>
                         </Card>
                     </View>
-                    <TouchableOpacity style={[styles.checkSubmit, { flexDirection: "row", justifyContent: "space-between" }]} onPress={() => this.setState({ isPost: !this.state.isPost })}>
+                    <TouchableOpacity style={[styles.checkSubmit, { flexDirection: "row", justifyContent: "space-between" }]} onPress={() => this.setState({ isPost: !this.state.isPost ,checked : false })}>
                         <View style={{ flexDirection: "row" }}>
                             <Icon name="home-map-marker" type="MaterialCommunityIcons" />
                             <Text style={styles.textTitle}>ที่อยู่การจัดส่งไปรษณีย์</Text>
@@ -259,12 +259,14 @@ class AddressLayout extends Component {
                             getAddress={this.goTotalPayment.bind(this)}
                         />
                     }
+                    {this.state.checked && 
                     <View style={styles.submitContainer}>
                         <TouchableOpacity style={styles.buttonContainerOnPress}
                             onPress={this.goTotalPayment2.bind(this)}>
                             <Text style={styles.textButton}>ยืนยัน</Text>
                         </TouchableOpacity>
                     </View>
+                    }
                 </ScrollView>
                 <SummaryTotal />
             </Container>

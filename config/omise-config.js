@@ -3,6 +3,7 @@ const base64 = require("base-64");
 const vaultEndpoint = "https://vault.omise.co/tokens";
 const apiEndpoint = "https://api.omise.co/charges";
 const apiCustomer = "https://api.omise.co/customers";
+const apiTranfer = "https://api.omise.co/transfers"
 
 let _publicKey;
 let _secretKey;
@@ -169,7 +170,7 @@ class ReactNativeOmise {
                 return;
             }
 
-            return fetch(apiEndpoint, {
+            return fetch(apiTranfer, {
                 method: 'POST',
                 cache: 'no-cache',
                 headers: {

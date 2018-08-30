@@ -90,7 +90,7 @@ class RegisterDistance extends Component {
     }
     gotoShirtPhotoPlus(distanceEvent) {
         this.setState({ distanceEvent: distanceEvent })
-        this.props.setTotalEvent(dispatchEvent.price)
+        this.props.setTotalEvent(distanceEvent.price)
         this.props.setTotal(distanceEvent.price)
         this.props.setTotalRegister(distanceEvent.price)
         this.props.addDistance(distanceEvent)

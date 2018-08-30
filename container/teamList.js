@@ -30,7 +30,7 @@ class TeamList extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            titleHead: "ลงทะเบียนแบบกลุ่ม",
+            titleHead: "ลงทะเบียนวิ่ง",
             isModalVisible: false,
             isModalVisibleError: false,
             isAddStatusError: false,

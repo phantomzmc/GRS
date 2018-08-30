@@ -150,7 +150,7 @@ class TotalRegister extends Component {
                             {/* <Text style={{ fontSize: 7, color: '#8B8B8B' }}>(5 Km. - S) x 1 (Photo Plus)</Text> */}
                         </View>
                         <View>
-                            <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.state.creditPrice}.0 ฿</Text>
+                            <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.state.creditPrice}0 ฿</Text>
                         </View>
                     </View>
 
@@ -183,7 +183,7 @@ class TotalRegister extends Component {
                             {/* <Text style={{ fontSize: 7, color: '#8B8B8B' }}>(5 Km. - S) x 1 (Photo Plus)</Text> */}
                         </View>
                         <View>
-                            <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.state.totalRegister}.0 ฿</Text>
+                            <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.state.totalRegister}0 ฿</Text>
                         </View>
                     </View>
                 </View>
