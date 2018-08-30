@@ -39,8 +39,10 @@ class FriendInEvent extends Component {
                     text: 'ตกลง', onPress: () => {
 
                         dataSource.splice(index, 1)
-
-                        if (dataFriend[index].PhotoPlusService == 0) {
+                        if(dataFriend == ""){
+                            dataPrice.splice(index, 1)
+                        }
+                        else if (dataFriend[index].PhotoPlusService == 0) {
                             dataPrice.splice(index, 1)
                         }
                         else if (dataFriend[index].PhotoPlusService == 1) {

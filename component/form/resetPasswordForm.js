@@ -1,92 +1,62 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Text, TouchableOpacity, Alert } from 'react-native'
 import { Container, Button, Form, Input, Item, Label } from 'native-base'
-import { connect } from 'react-redux'
-import MailGunSend from '../../config/send-mailgun'
 
-class ResetPasswordForm extends Component {
+class ResetEncodeForm extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            userid : "",
             password: "",
-            email: "",
-            verifycode: ""
+            confirmpassword: ""
+        }
+    }
+
+    checkPassword() {
+        let { password, confirmpassword } = this.state
+        if (password === confirmpassword) {
+            this.props.sendNewCode(password)
+        }
+        else if (password !== confirmpassword) {
+            this.alertError()
+        }
+        else if ((password !== "" || password.length < 8) || (confirmpassword !== "" || confirmpassword.length < 8)) {
+            this.alertError1()
 
         }
     }
-    componentWillMount() {
-        console.log(this.props.userprofile.userprofile.Password)
-        console.log(this.props.userprofile.userprofile.Email)
+    alertError() {
+        Alert.alert('รหัสผ่านไม่ตรงกัน', 'กรุณากรอกรหัสผ่านให้ตรงกัน', [
+            { text: 'ลองอีกครั้ง', onPress: () => console.log('ลองอีกครั้ง') },
+        ])
     }
-    async sentVerifyCode(email) {
-        const data = await MailGunSend.onSendMail({
-            'from': 'Guurun Support Team. <support@guurun.com>',
-            'to': email,
-            'subject': 'Guurun Support Team รหัสในการเปลี่ยนรหัสผ่าน',
-            'text': 'สวัสดีคุณ รหัสที่ใช้ในการเปลี่ยนรหัสผ่านของผู้ใช้งานคือ : ' + this.props.profile.newpassword
-        })
-        console.log(data)
+    alertError1() {
+        Alert.alert('รหัสผ่านไม่ถูกต้อง', 'กรุณากรอกรหัสผ่านให้มากกว่า 8 ตัว', [
+            { text: 'ลองอีกครั้ง', onPress: () => console.log('ลองอีกครั้ง') },
+        ])
     }
-    checkResetVerify() {
-        let { password, email } = this.state
-        this.sentVerifyCode(email)
-        this.props.sendNewCode(password, email)
 
-        // let { password , email} = this.state
-        // if (this.state.password === this.props.userprofile.userprofile.Password && this.state.email === this.props.userprofile.userprofile.Email) {
-        //     this.alertSuccess()
-        // }
-        // else if (this.state.password !== this.props.userprofile.userprofile.Password) {
-        //     this.alertUserIDError()
-        // }
-        // else if (this.state.email !== this.props.userprofile.userprofile.Email) {
-        //     this.alertEmailError()
-        // }
-        // else if (this.state.password !== this.props.userprofile.userprofile.Password && this.state.email === this.props.userprofile.userprofile.Email) {
-        //     this.alertAllError()
-        // }
-    }
-    alertSuccess() {
-        Alert.alert('ร้องขอรหัสสำเร็จ', 'กรุณาตรวจสอบ Email ของท่าน', [
-            { text: 'ยืนยัน', onPress: () => this.props.goLogin() },
-        ])
-    }
-    alertUserIDError() {
-        Alert.alert('รหัสประชาชนไม่ถูกต้อง', 'กรุณากรอกรหัสประชาชนให้ถูกต้อง', [
-            { text: 'ลองอีกครั้ง', onPress: () => console.log('ลองอีกครั้ง') },
-        ])
-    }
-    alertEmailError() {
-        Alert.alert('Email ไม่ถูกต้อง', 'กรุณากรอก Email ให้ถูกต้อง', [
-            { text: 'ลองอีกครั้ง', onPress: () => console.log('ลองอีกครั้ง') },
-        ])
-    }
-    alertAllError() {
-        Alert.alert('รหัสประชาชนเเละEmail ไม่ถูกต้อง', 'กรุณากรอกรหัสประชาชนเเละ Email ให้ถูกต้อง', [
-            { text: 'ลองอีกครั้ง', onPress: () => console.log('ลองอีกครั้ง') },
-        ])
-    }
 
     render() {
-        let { password, email,userid } = this.state
+        let { password, confirmpassword } = this.state
         return (
             <View style={styles.container}>
                 <View style={styles.content}>
-                    <Text style={styles.textTitle}>กรอก Email และรหัสผ่านใหม่ เพื่อใช้ในการเข้าสู่ระบบครั้งต่อไป</Text>
+                    <Text style={styles.textTitle}>กรอก รหัสผ่านใหม่ เพื่อใช้ในการเข้าสู่ระบบครั้งต่อไป</Text>
                     <Form style={styles.formInput}>
                         <Item floatingLabel>
-                            <Label style={styles.textLabel}>รหัสบัตรประจำตัวประชาชน</Label>
+                            <Label style={styles.textLabel}>รหัสผ่านใหม่</Label>
                             <Input
-                                onChangeText={userid => this.setState({ userid })}
+                                secureTextEntry
+                                onChangeText={password => this.setState({ password })}
                             />
                         </Item>
                     </Form>
                     <Form style={styles.formInput}>
                         <Item floatingLabel>
-                            <Label style={styles.textLabel}>Email</Label>
+                            <Label style={styles.textLabel}>ยืนยันรหัสผ่าน</Label>
                             <Input
-                                onChangeText={email => this.setState({ email })}
+                                secureTextEntry
+                                onChangeText={confirmpassword => this.setState({ confirmpassword })}
                             />
                         </Item>
                     </Form>
@@ -94,7 +64,7 @@ class ResetPasswordForm extends Component {
                     <View style={styles.submitContainer}>
                         <TouchableOpacity
                             style={styles.buttonContainer}
-                            onPress={() => this.checkResetVerify(userid, email)}
+                            onPress={() => this.checkPassword(password, confirmpassword)}
                         >
                             <Text style={styles.textButton}>ยืนยัน</Text>
                         </TouchableOpacity>
@@ -105,22 +75,6 @@ class ResetPasswordForm extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        userprofile: state.userprofile,
-        profile : state.profile
-    }
-}
-const mapDispatchToProps = (dispatch) => {
-    return {
-        setVerify: (verifycode) => {
-            dispatch({
-                type: "setVerify",
-                payload: verifycode
-            })
-        }
-    }
-}
 
 const styles = StyleSheet.create({
     container: {
@@ -162,4 +116,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(ResetPasswordForm)
+export default ResetEncodeForm

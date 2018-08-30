@@ -8,53 +8,47 @@ class SubmitResetPassword extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            userid: "",
-            password: "",
-            email: "",
-            verifycode: ""
+            code: ""
 
         }
     }
 
-    async sentVerifyCode(email) {
-        const data = await MailGunSend.onSendMail({
-            'from': 'Guurun Support Team. <support@guurun.com>',
-            'to': email,
-            'subject': 'Guurun Support Team รหัสในการเปลี่ยนรหัสผ่าน',
-            'text': 'สวัสดีคุณ รหัสที่ใช้ในการเปลี่ยนรหัสผ่านของผู้ใช้งานคือ : ' + this.props.profile.newpassword
-        })
-        console.log(data)
-    }
-    checkResetVerify() {
+    checkEncode() {
+        let { code } = this.state
+        if (code != "" && code.length == 6) {
+            console.log(this.state.code)
+            this.props.codesubmit(this.state.code)
+        }
+        else if (code == "" || code.length < 6 || code.length > 6) {
+            Alert.alert('กรุณากรอกรหัสยืนยันให้ถูกต้อง', 'กรุณาตรวจสอบรหัสยืนยันทาง Email ให้ถูกต้อง', [
+                { text: 'ลองอีกครั้ง', onPress: () => console.log('ลองอีกครั้ง') },
+            ])
+        }
+
     }
 
+
     render() {
-        let { password, email, userid } = this.state
+        let { code } = this.state
         return (
             <View style={styles.container}>
                 <View style={styles.content}>
                     <View style={styles.inputWrapper1}>
-                    <Text style={styles.textTitle}>กรอก Email และรหัสผ่านใหม่ เพื่อใช้ในการเข้าสู่ระบบครั้งต่อไป</Text>
-
-                        <CodeInput
-                            ref="codeInputRef1"
-                            secureTextEntry
-                            className={'border-b'}
-                            codeLength={6}
-                            space={5}
-                            size={30}
-                            inputPosition='center'
-                            activeColor="#000"
-                            inactiveColor="#c0c0c0"
-                            onFulfill={(code) => this.setState(code)}
-                        />
+                        <Text style={styles.textTitle}>กรอก Code ที่ได้รับจาก Email เพื่อยืนยันการเปลี่ยนรหัสผ่าน</Text>
                     </View>
-
+                    <Form style={styles.formInput}>
+                        <Item floatingLabel>
+                            <Label style={styles.textLabel}></Label>
+                            <Input
+                                onChangeText={code => this.setState({ code })}
+                            />
+                        </Item>
+                    </Form>
 
                     <View style={styles.submitContainer}>
                         <TouchableOpacity
                             style={styles.buttonContainer}
-                            onPress={() => this.checkResetVerify(userid, email)}
+                            onPress={() => this.checkEncode(code)}
                         >
                             <Text style={styles.textButton}>ยืนยัน</Text>
                         </TouchableOpacity>
@@ -123,7 +117,7 @@ const styles = StyleSheet.create({
     inputWrapper1: {
         paddingVertical: 50,
         paddingHorizontal: 20,
-      },
+    },
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SubmitResetPassword)

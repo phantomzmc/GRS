@@ -150,7 +150,7 @@ class Login extends Component {
         this.props.navigation.navigate('Register')
     }
     gotoResetPassword = () => {
-        this.props.navigation.navigate('ResetPassword')
+        this.props.navigation.navigate('ResetEncode')
     }
     gotoEvent = () => {
         this.props.navigation.navigate('EventList')

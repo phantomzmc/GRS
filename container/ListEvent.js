@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, View, StatusBar, ImageBackground, AsyncStorage } from 'react-native';
+import { Container } from "native-base";
 import List from '../component/list/listevent/listevent'
 import HeaderTeam from '../component/items/headerTeam'
 import { YellowBox } from 'react-native';
@@ -142,7 +143,7 @@ class ListEvent extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <Container style={styles.container}>
                 <StatusBar
                     barStyle="light-content"
                     hidden={false}
@@ -164,7 +165,7 @@ class ListEvent extends Component {
                     CheckLogin={this.checkUser.bind(this)}
                     Profile={this.state.profile}
                 />
-            </View>
+            </Container>
         )
     }
 }
@@ -224,6 +225,7 @@ const mapDispatchToProps = dispatch => {
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1
     }
 });
 export default connect(mapStateToProps, mapDispatchToProps)(ListEvent);

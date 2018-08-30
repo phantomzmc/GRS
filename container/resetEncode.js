@@ -35,7 +35,7 @@ class ResetEncode extends Component {
             });
     }
     gotoLogin = () => {
-        this.props.navigation.navigate("Login")
+        this.props.navigation.navigate("SubmitEncode")
     }
     sendUpdateEncode(userid,email) {
         let uri = req[0].uspUpdateEncodeURL
@@ -57,8 +57,8 @@ class ResetEncode extends Component {
             .then((response) => {
                 this.setState({ isLoading: false, status: response.data[0] });
                 console.log(this.state.status)
-                // this.gotoLogin()
-                this.props.navigation.navigate('SubmitEncode')
+                this.gotoLogin()
+                // this.props.navigation.navigate('SubmitEncode')
             }).catch((error) => {
                 // this.props.navigation.navigate('EventList')
             });

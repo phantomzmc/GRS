@@ -11,11 +11,12 @@ import {
     ImageBackground
 } from 'react-native';
 import { YellowBox } from 'react-native';
-import { Card, CardItem } from "native-base";
+import { Card, CardItem ,Container } from "native-base";
 import { connect } from 'react-redux'
 import axios from 'axios'
 import api from '../../../config/api_key'
 import req from '../../../config/uri_req'
+import dataEvent from './dataEvent'
 
 
 class ListEvent extends Component {
@@ -70,11 +71,25 @@ class ListEvent extends Component {
             // .then((response) => response.json())
             .then((responseJson) => {
                 this.setState({ isLoading: false, dataSource: responseJson.data, });
-                console.log(this.state.dataSource)
+                this.checkStatusEvent(responseJson.data)
             }).catch((error) => {
                 console.error(error);
             });
 
+    }
+    checkStatusEvent = (event) => {
+        console.log(event)
+        event.map((item, i) => {
+            if (item.EventStatus == "1") {
+                console.log("เปิด", i)
+                dataEvent.push(item)
+            }
+            else if (item.EventStatus == "0") {
+                console.log("ปิด", i)
+            }
+        })
+        this.setState({ dataSource : dataEvent})
+        console.log(this.state.dataSource)
     }
     gotoPayment = (item) => {
         if (this.props.Profile == "") {

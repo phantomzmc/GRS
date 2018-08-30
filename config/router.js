@@ -21,6 +21,7 @@ import ButtonChangePayment from '../component/items/bottonChangePayment'
 import ButtonChangeTranfer from '../component/items/bottonChangeTranfer'
 import Verify from '../container/verify'
 import ResetVerify from '../container/resetVerify'
+import ResetEncode from '../container/resetEncode'
 import ResetPassword from '../container/resetPassword'
 import FriendDistance from '../container/friendDistance'
 import TeamRegis from '../container/teamRegis'
@@ -33,6 +34,7 @@ import HeaderTeam from '../component/items/headerTeam'
 import FriendList from '../container/friendListLayout'
 import HistoryContainer from '../container/historyContainer'
 import RegisterInfo from '../container/registerInfo'
+import SubmitEncode from '../container/submitEncode'
 
 import Test from '../mockdata'
 
@@ -94,8 +96,32 @@ export default StackNavigator({
             header: () => null
         }
     },
+    ResetEncode: {
+        screen: ResetEncode,
+        navigationOptions: {
+            title: "ขอรหัสผ่านใหม่",
+            headerStyle: {
+                backgroundColor: "#FC561F"
+            },
+            headerTitleStyle: {
+                color: "#fff"
+            }
+        }
+    },
     ResetPassword: {
         screen: ResetPassword,
+        navigationOptions: {
+            title: "ขอรหัสผ่านใหม่",
+            headerStyle: {
+                backgroundColor: "#FC561F"
+            },
+            headerTitleStyle: {
+                color: "#fff"
+            }
+        }
+    },
+    SubmitEncode: {
+        screen: SubmitEncode,
         navigationOptions: {
             title: "ขอรหัสผ่านใหม่",
             headerStyle: {

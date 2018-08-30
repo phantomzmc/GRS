@@ -253,6 +253,10 @@ const userprofile = (state = {
       state.registerStatus = action.payload
       break;
     }
+    case "setEmail" : {
+      state.email = action.payload
+      break;
+    }
   }
   return state;
 }
