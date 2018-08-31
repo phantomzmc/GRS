@@ -1,69 +1,85 @@
-import React, { Component } from "react";
-import {
-  Container,
-  Header,
-  Title,
-  Content,
-  Button,
-  Icon,
-  Left,
-  Right,
-  Body,
-  DatePicker,
-  Text
-} from "native-base";
+import React, { Component } from 'react'
+import { StyleSheet, ScrollView, View, Button } from 'react-native'
+import QRCode from 'react-native-qrcode-svg'
 
-class Test extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { chosenDate: new Date() };
 
-    this.setDate = this.setDate.bind(this);
+export default class App extends Component {
+  handlePress = () => {
+    this.qrcode.toDataURL(this.callback)
   }
-
-  setDate(newDate) {
-    this.setState({ chosenDate: newDate });
+  callback = (dataURL) => {
+    alert(dataURL)
   }
-  render() {
+  render () {
     return (
-      <Container>
-        <Header>
-          <Left>
-            <Button
-              transparent
-              onPress={() => this.props.navigation.navigate("DrawerOpen")}
-            >
-              <Icon name="ios-menu" />
-            </Button>
-          </Left>
-          <Body>
-            <Title>Date Picker</Title>
-          </Body>
-          <Right />
-        </Header>
-
-        <Content padder style={{ backgroundColor: "#fff" }}>
-          <DatePicker
-            defaultDate={new Date(2018, 4, 4)}
-            minimumDate={new Date(2018, 1, 1)}
-            maximumDate={new Date(2018, 12, 31)}
-            locale={"en"}
-            timeZoneOffsetInMinutes={undefined}
-            modalTransparent={false}
-            animationType={"fade"}
-            androidMode={"default"}
-            placeHolderText="Select date"
-            textStyle={{ color: "green" }}
-            placeHolderTextStyle={{ color: "#d3d3d3" }}
-            onDateChange={this.setDate}
+      <ScrollView contentContainerStyle={styles.container}>
+        <View style={styles.section}>
+          <QRCode value='thunnathorn' />
+        </View>
+        <View style={styles.section}>
+          <QRCode
+            value='hello world'
+            size={200}
           />
-          <Text>
-            Date: {this.state.chosenDate.toString().substr(4, 12)}
-          </Text>
-        </Content>
-      </Container>
-    );
+        </View>
+        <View style={styles.section}>
+          <QRCode
+            value='hello world'
+            color='blue'
+            backgroundColor='yellow'
+          />
+        </View>
+        <View style={styles.section}>
+          <QRCode
+            value='hello world'
+          />
+        </View>
+        <View style={styles.section}>
+          <QRCode
+            value='hello world'
+            logoSize={50}
+          />
+        </View>
+        <View style={styles.section}>
+          <QRCode
+            value='hello world'
+            logoMargin={10}
+          />
+        </View>
+        <View style={styles.section}>
+          <QRCode
+            value='hello world'
+            logoBorderRadius={15}
+          />
+        </View>
+        <View style={styles.section}>
+          <QRCode
+            value='hello world'
+            logoBackgroundColor='blue'
+            getRef={(c) => (this.qrcode = c)}
+          />
+          <Button title={'getDataURL'} onPress={this.handlePress} />
+        </View>
+        <View style={styles.section}>
+          <QRCode
+            value='hello world'
+            ecl='H'
+          />
+        </View>
+      </ScrollView>
+    )
   }
 }
 
-export default Test;
+const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+    paddingTop: 15,
+    paddingBottom: 15
+  },
+  section: {
+    marginTop: 15,
+    marginBottom: 15
+  }
+})

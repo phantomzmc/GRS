@@ -31,7 +31,8 @@ export default
             uspGetInvoiceLists: url + "Main.uspGetInvoiceLists",
             uspGetInvoice: url + "Main.uspGetInvoice",
             uspGetPostPrice : url + "Main.uspGetPostPrice",
-            uspUpdateEncodeURL : url + "Main.uspUpdateEncodeURL"
+            uspUpdateEncodeURL : url + "Main.uspUpdateEncodeURL",
+            uspGetEvent : url + "Main.uspGetEvent"
         },
         {
             url_mailgun: "https://api.mailgun.net/v3/mg.guurun.com/messages",

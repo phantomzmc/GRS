@@ -59,11 +59,11 @@ export default StackNavigator({
         }
     },
     SingleLogin: {
-        screen: SingleLogin,
+        screen: Login,
         navigationOptions: {
             header: () => null
         }
-    },
+    }, // ยกเลิก singlelogin 
     Login: {
         screen: Login,
         navigationOptions: {

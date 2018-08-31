@@ -12,6 +12,8 @@ pod 'QBImagePickerController'
   pod 'react-native-network-info', :path => '../node_modules/react-native-network-info'
 
   pod 'react-native-randombytes', :path => '../node_modules/react-native-randombytes'
+pod 'RNSVG', :path => '../node_modules/react-native-svg'
+
 
 end
 

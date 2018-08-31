@@ -2,6 +2,8 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { connect } from 'react-redux'
+import QRCode from 'react-native-qrcode-svg';
+
 class DetailRegister extends Component {
     state = {
         address: "106/13 หนองหอย เมืองเชียงใหม่ เชียงใหม่",
@@ -38,7 +40,10 @@ class DetailRegister extends Component {
                         {this.state.statusPayment2 && <Text style={styles.typePaymentWarning}>รอดำเนินการ</Text>}
                     </View>
                     <View>
-                        
+                        <QRCode
+                            value={this.props.invoice.invoice[0].InvoiceID}
+                            size={75}
+                        />
                     </View>
                     <View>
                         <Text style={{ fontSize: 10, color: '#A9A9A9', fontFamily: 'kanit' }}> Order : {this.state.numberInvoice} </Text>

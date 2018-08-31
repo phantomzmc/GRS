@@ -8,9 +8,9 @@
   },
   "dependencies": {
     "@leonardodino/react-native-datepicker": "^1.8.0",
-    "appcenter": "^1.6.0",
-    "appcenter-analytics": "^1.6.0",
-    "appcenter-crashes": "^1.6.0",
+    "appcenter": "^1.8.0",
+    "appcenter-analytics": "^1.8.0",
+    "appcenter-crashes": "^1.8.0",
     "axios": "^0.18.0",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-plugin-transform-runtime": "^6.23.0",
@@ -52,12 +52,14 @@
     "react-native-network-info": "^3.2.2",
     "react-native-omise": "^0.0.2",
     "react-native-popup-dialog": "^0.11.46",
+    "react-native-qrcode-svg": "^5.1.0",
     "react-native-randombytes": "^3.4.0",
     "react-native-router-flux": "^4.0.0-beta.28",
     "react-native-search-filter": "^0.1.3",
     "react-native-select-input-ios": "^1.2.0",
     "react-native-simple-modal": "^8.0.0",
     "react-native-store-photos-album": "francisco-sanchez-molina/react-native-store-photos-album",
+    "react-native-svg": "^6.5.2",
     "react-native-swipe-list-view": "^1.3.1",
     "react-native-switch-pro": "^0.4.11",
     "react-native-table-component": "^1.1.8",
@@ -65,7 +67,6 @@
     "react-native-video": "^2.2.0",
     "react-native-view-shot": "^2.3.0",
     "react-navigation": "2.3.1",
-    "react-qr-code": "^0.1.2",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
@@ -82,9 +83,9 @@
   "jest": {
     "preset": "react-native",
     "setupFiles": [
-      "./node_modules/appcenter/test/AppCenterMock.js",
-      "./node_modules/appcenter-crashes/test/AppCenterCrashesMock.js",
-      "./node_modules/appcenter-analytics/test/AppCenterAnalyticsMock.js"
+      "<rootDir>/node_modules/appcenter/test/AppCenterMock.js",
+      "<rootDir>/node_modules/appcenter-crashes/test/AppCenterCrashesMock.js",
+      "<rootDir>/node_modules/appcenter-analytics/test/AppCenterAnalyticsMock.js"
     ]
   },
   "rnpm": {

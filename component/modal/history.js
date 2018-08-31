@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, ScrollView,Alert } from 'react-native';
+import { View, StyleSheet, Image, ScrollView, Alert } from 'react-native';
 import { Card, CardItem, Body, Button, Text, Icon } from "native-base";
 import CameraRollExtended from 'react-native-store-photos-album'
 import { captureScreen } from "react-native-view-shot";
 import dataInvoice from '../list/history/dataInvoice'
+import QRCode from 'react-native-qrcode-svg';
 
 class ModalHistory extends Component {
     state = {
@@ -42,8 +43,8 @@ class ModalHistory extends Component {
                         text: 'ตกลง',
                     }
                 ], { cancelable: false }),
-            // error => console.error("Oops, Something Went Wrong", error)
-        );
+                // error => console.error("Oops, Something Went Wrong", error)
+            );
 
     }
     render() {
@@ -56,8 +57,10 @@ class ModalHistory extends Component {
                                 <Text style={styles.typePayment}> จ่ายเเล้ว </Text>
                             </View>
                             <View>
-                                {/* <Image source={{ uri: "https://www.qrstuff.com/images/sample.png" }}
-                                style={{ width: 75, height: 75 }} /> */}
+                                <QRCode
+                                    value={dataInvoice[0].Email}
+                                    size={75}
+                                />
                             </View>
                             <View>
                                 <Text style={{ fontSize: 10, color: '#A9A9A9', fontFamily: 'kanit' }}> Order : {dataInvoice[0].InvoiceID} </Text>
