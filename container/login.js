@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, Alert, TextInput, StatusBar,AsyncStorage } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, Alert, TextInput, StatusBar, AsyncStorage } from 'react-native';
 import { Header, Left, Right, Icon, Button, Body, Title, Container } from "native-base";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview'
 import { connect } from 'react-redux'
@@ -15,17 +15,17 @@ class Login extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            username: this.props.username !== null ? "รหัสบัตรประชาชน" :  this.props.profile.profile.userid,
+            username: this.props.username !== null ? "รหัสบัตรประชาชน" : this.props.profile.profile.userid,
             password: "",
             status: [],
             login: 1,
             title: "เข้าสู่ระบบ"
         }
     }
-    componentWillMount(){
+    componentWillMount() {
         this.getUsername()
-        if(this.props.username.username == "" && this.props.profile.profile.userid == ""){
-            this.setState({ username : "รหัสบัตรประชาชน"})
+        if (this.props.username.username == "" && this.props.profile.profile.userid == "") {
+            this.setState({ username: "รหัสบัตรประชาชน" })
         }
     }
     componentDidMount() {
@@ -73,9 +73,41 @@ class Login extends Component {
                 this.props.navigation.navigate('EventList')
             });
     }
+    getUserProfile() {
+        let { username } = this.state
+        let uri = req[0].uspGetUserProfile
+        let apikey = api_key[0].api_key
+
+        let data = ({
+            params: {
+                value: username,
+            }
+        })
+        axios.post(uri, data, {
+            headers: {
+                "X-DreamFactory-API-Key": apikey,
+                "X-DreamFactory-Session-Token": this.props.token.token,
+            },
+            responseType: 'json'
+        })
+            .then((responseJson) => {
+                this.setState({ isLoading: false, user: responseJson.data });
+                console.log(this.state.user)
+                this.props.setUserProfile(this.state.user[0])
+                this.setData()
+            }).catch((error) => {
+                this.setState({
+                    fullname: "ชื่อ",
+                    lastname: "นามสกุล",
+                    gen: "เพศ",
+                    age: "อายุ",
+                })
+            });
+    }
     checkLogin() {
         let { status, login } = this.state
         if (status[0].SignInStatus === "1" && status[0].ActivateStatus === "1") {
+            this.getUserProfile()
             this.props.setUsername(this.state.username)
             this.props.setUserStatus(status[0])
             this.props.setStatusLogin(login)
@@ -116,7 +148,7 @@ class Login extends Component {
         let username = {
             username: this.state.username,
             password: this.state.password,
-            statusLogin : 1
+            statusLogin: 1
         }
         await AsyncStorage.setItem('login', JSON.stringify(username));
     }
@@ -128,10 +160,22 @@ class Login extends Component {
                 console.log(pared.username);
                 this.setState({ username: pared.username })
             }
-            
+
         } catch (error) {
             // Error retrieving data
         }
+    }
+    setData() {
+        var date1 = new Date()
+        var date2 = new Date(this.props.userprofile.userprofile.DateOfBirth)
+        var age = parseInt((date1 - date2) / 31557600000)
+
+        this.setState({
+            fullname: this.props.userprofile.userprofile.FirstName,
+            lastname: this.props.userprofile.userprofile.LastName,
+            gen: this.props.userprofile.userprofile.Gender,
+            age: age
+        })
     }
     gotoVerify = () => {
         this.props.navigation.navigate('Verify')
@@ -241,7 +285,8 @@ const mapStateToProps = (state) => {
         profile: state.profile,
         login: state.login,
         token: state.token,
-        username: state.username
+        username: state.username,
+        userprofile: state.userprofile
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -269,7 +314,13 @@ const mapDispatchToProps = (dispatch) => {
                 type: "setStatusLogin",
                 payload: login
             })
-        }
+        },
+        setUserProfile: (userprofile) => {
+            dispatch({
+                type: "setUserProfile",
+                payload: userprofile
+            })
+        },
     }
 }
 

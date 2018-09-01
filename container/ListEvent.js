@@ -37,12 +37,11 @@ class ListEvent extends Component {
     componentWillMount() {
         this.getNetwork()
         setTimeout(() => {
-            this.checkLocalLogin()
         }, 500)
     }
     componentDidMount() {
         setTimeout(() => {
-            this.getUserProfile()
+            this.checkLocalLogin()
         }, 2000)
     }
     async checkLocalLogin() {
@@ -53,6 +52,7 @@ class ListEvent extends Component {
                 console.log(pared.username);
                 this.setState({ username: pared.username })
                 this.props.setUsername(pared.username)
+                this.getUserProfile(pared.username)
             }
             else if(value === null) {
                 this.gotoLogin()
@@ -109,12 +109,13 @@ class ListEvent extends Component {
     }
     getUserProfile = (username) => {
         console.log(this.props.token.token)
-        console.log(this.props.username)
+        console.log(username)
         let uri = req[0].uspGetUserProfile
         let apikey = api_key[0].api_key
 
         let data = ({
             params: {
+                namae : "Username",
                 value: username,
             }
         })
@@ -128,7 +129,7 @@ class ListEvent extends Component {
             .then((responseJson) => {
                 console.log("success")
                 this.setState({ isLoading: false, user: responseJson.data });
-                console.log(this.state.user)
+                console.log(responseJson)
                 this.props.setUserProfile(this.state.user[0])
             }).catch((error) => {
                 console.log("error")

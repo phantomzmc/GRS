@@ -23,7 +23,10 @@ class HeaderTeam extends Component {
         statusLogin: ""
     }
     _menu = null;
+    componentWillMount(){
+        this.getUsername()
 
+    }
     componentDidMount() {
         {
             this.props.userprofile.userprofile.PicProfile == "" ?
@@ -31,7 +34,6 @@ class HeaderTeam extends Component {
                 this.setState({ uri: this.props.userprofile.userprofile.PicProfile, nameUser: this.props.userprofile.userprofile.FirstName })
         }
         this.setState({ title: this.props.title, statusMenu: this.props.menu, })
-        this.getUsername()
     }
     async getUsername() {
         try {

@@ -58,7 +58,7 @@ class ModalHistory extends Component {
                             </View>
                             <View>
                                 <QRCode
-                                    value={dataInvoice[0].Email}
+                                    value={dataInvoice[0].InvoiceID}
                                     size={75}
                                 />
                             </View>
