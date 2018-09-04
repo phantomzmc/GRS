@@ -94,6 +94,7 @@ class HeaderTeam extends Component {
     gotoLogout = () => {
         let goSuccess = this.props.goLogin()
         this.userLogout()
+        this._menu.hide();
     }
     async userLogout() {
         await AsyncStorage.removeItem('login');

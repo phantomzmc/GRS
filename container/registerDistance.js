@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { View, Text, StyleSheet, ScrollView, RefreshControl } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, RefreshControl, ActivityIndicator } from 'react-native';
 import { Icon } from 'native-base';
 
 import { connect } from 'react-redux'
@@ -28,14 +28,15 @@ class RegisterDistance extends Component {
                 price: ""
             },
             refreshing: false,
-            statusList: false
+            statusList: false,
+            loading: true
         }
         // this.gotoShirtPhotoPlus = this.gotoShirtPhotoPlus.bind(this)
     }
     componentWillMount() {
-        setTimeout(() => {
-            this.setState({ statusList: true })
-        }, 1000)
+        // setTimeout(() => {
+        //     this.setState({ statusList: true })
+        // }, 1000)
     }
     componentDidMount() {
         this._onRefresh()
@@ -64,7 +65,7 @@ class RegisterDistance extends Component {
         })
             // .then((response) => response.json())
             .then((responseJson) => {
-                this.setState({ data: responseJson.data[0], });
+                this.setState({ data: responseJson.data[0], loading: false, statusList: true });
                 console.log(responseJson.data)
                 if (responseJson.data[0].RegisterStatus == "0") {
                     this.setState({ statusRegis: 0 })
@@ -76,6 +77,8 @@ class RegisterDistance extends Component {
 
                 }
             }).catch((error) => {
+                this.setState({ loading: true })
+                this.fetchRegisEvent()
             });
     }
     _onRefresh() {
@@ -109,6 +112,11 @@ class RegisterDistance extends Component {
                     <Text style={styles.text}>
                         โปรดเลือกระยะทาง
                      </Text>
+                    {this.state.loading &&
+                        <View style={{ justifyContent: "center" }}>
+                            <ActivityIndicator size="large"/>
+                        </View>
+                    }
                     {this.state.statusList &&
                         <View>
                             {this.state.statusRegis == 0 ?
@@ -153,10 +161,10 @@ const mapDisPatchToProps = (dispatch) => {
                 payload: total
             })
         },
-        setTotalEvent : (totalEvent) => {
+        setTotalEvent: (totalEvent) => {
             dispatch({
-                type : "setTotalEvent",
-                payload : totalEvent
+                type: "setTotalEvent",
+                payload: totalEvent
             })
         }
     }
@@ -168,7 +176,7 @@ const styles = StyleSheet.create({
 
     },
     container2: {
-        marginVertical : 10,
+        marginVertical: 10,
         alignItems: "center",
         justifyContent: "center"
     },

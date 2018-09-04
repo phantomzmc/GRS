@@ -184,7 +184,7 @@ class ControlDistance extends Component {
                     title={this.state.title}
                     menu={true}
                     statusRegis={true}
-                    goback={false}
+                    goback={() => this.props.navigation.navigate("EventList")}
                     goLogin={() => this.props.navigation.navigate("Login")}
                     goFriendlist={() => this.props.navigation.navigate('FriendList')}
                     goHistory={() => this.props.navigation.navigate('HistoryContainer')}

@@ -213,9 +213,7 @@ class Login extends Component {
                 />
                 <Header style={{ backgroundColor: 'transparent' }}>
                     <Left>
-                        <Button transparent>
-                            <Icon name='arrow-back' style={{ color: "#fff" }} onPress={this.gotoControlDistance.bind(this)} />
-                        </Button>
+                        
                     </Left>
                     <Body>
                         <Title style={styles.title}>{this.state.title}</Title>

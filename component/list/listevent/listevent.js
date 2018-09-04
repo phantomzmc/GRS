@@ -11,7 +11,7 @@ import {
     ImageBackground
 } from 'react-native';
 import { YellowBox } from 'react-native';
-import { Card, CardItem ,Container } from "native-base";
+import { Card, CardItem, Container } from "native-base";
 import { connect } from 'react-redux'
 import axios from 'axios'
 import api from '../../../config/api_key'
@@ -88,7 +88,7 @@ class ListEvent extends Component {
                 console.log("ปิด", i)
             }
         })
-        this.setState({ dataSource : dataEvent})
+        this.setState({ dataSource: dataEvent })
         console.log(this.state.dataSource)
     }
     gotoPayment = (item) => {
@@ -123,12 +123,8 @@ class ListEvent extends Component {
             )
         }
         return (
-            <ImageBackground style={{ width: "100%", height: "100%", opacity: 0.8 }} source={{ uri: 'https://register.shutterrunning2014.com/assets/img/theme/bg.jpg' }}>
-
-                <View
-                    style={{
-                        flex: 1,
-                    }}>
+            <Container>
+                <ImageBackground style={{ width: "100%", height: "100%", opacity: 0.8 }} source={{ uri: 'https://register.shutterrunning2014.com/assets/img/theme/bg.jpg' }}>
                     <FlatList
                         data={this.state.dataSource}
                         renderItem={({ item }) =>
@@ -159,8 +155,8 @@ class ListEvent extends Component {
                             </View>
                         }
                         keyExtractor={(item, index) => index.toString()} />
-                </View >
-            </ImageBackground>
+                </ImageBackground>
+            </Container>
 
         );
     }

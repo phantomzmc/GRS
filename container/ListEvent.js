@@ -54,7 +54,7 @@ class ListEvent extends Component {
                 this.props.setUsername(pared.username)
                 this.getUserProfile(pared.username)
             }
-            else if(value === null) {
+            else if (value === null) {
                 this.gotoLogin()
             }
 
@@ -62,7 +62,7 @@ class ListEvent extends Component {
             // Error retrieving data
         }
     }
-    
+
     getNetwork() {
         NetworkInfo.getIPAddress(ip => {
             this.props.setIP(ip)
@@ -115,7 +115,7 @@ class ListEvent extends Component {
 
         let data = ({
             params: {
-                namae : "Username",
+                namae: "Username",
                 value: username,
             }
         })
@@ -144,7 +144,7 @@ class ListEvent extends Component {
 
     render() {
         return (
-            <Container style={styles.container}>
+            <Container>
                 <StatusBar
                     barStyle="light-content"
                     hidden={false}
@@ -167,6 +167,7 @@ class ListEvent extends Component {
                     Profile={this.state.profile}
                 />
             </Container>
+
         )
     }
 }
