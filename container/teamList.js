@@ -229,7 +229,7 @@ class TeamList extends Component {
                 <HeaderTeam
                     title={this.state.titleHead}
                     menu={true}
-                    goback={this.goLogin.bind(this)}
+                    goback={() => this.props.navigation.navigate('EventList')}
                     goLogin={() => this.props.navigation.navigate("Login")}
                     goFriendlist={() => this.props.navigation.navigate('FriendList')}
                     goHistory={() => this.props.navigation.navigate('HistoryContainer')}

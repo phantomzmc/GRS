@@ -41,7 +41,16 @@ class ButtonChangePayment extends Component {
                 />
                 <HeaderTeam
                     title={this.state.title}
-                    goback={this.gotoBack.bind(this)} />
+                    menu={true}
+                    statusRegis={true}
+                    goback={() => this.props.navigation.navigate("ControlPayment")}
+                    goLogin={() => this.props.navigation.navigate("Login")}
+                    goFriendlist={() => this.props.navigation.navigate('FriendList')}
+                    goHistory={() => this.props.navigation.navigate('HistoryContainer')}
+                    goEditProfile={() => this.props.navigation.navigate('EditProfile')}
+                    goRegis={() => this.props.navigation.navigate('ControlDistance')}
+                    goSingleLogin={() => this.props.navigation.navigate('SingleLogin')}
+                />
                 <Tabs initialPage={this.state.pageNumber}>
                     <Tab heading={<TabHeading><Icon name="card" /><Text style={styles.textLabel}> ชำระผ่านบัตรเครดิต/เดบิต</Text></TabHeading>}>
                         <CreditPayment

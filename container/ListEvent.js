@@ -96,6 +96,9 @@ class ListEvent extends Component {
     gotoLogin = () => {
         this.props.navigation.navigate("Login")
     }
+    gotoRegisInfo =() => {
+        this.props.navigation.navigate("RegisterInfo")
+    }
     checkUser = () => {
         if (this.state.profile == "") {
             console.log("checkLogin")
@@ -165,6 +168,7 @@ class ListEvent extends Component {
                 <List
                     CheckLogin={this.checkUser.bind(this)}
                     Profile={this.state.profile}
+                    regisInfo={this.gotoRegisInfo.bind(this)}
                 />
             </Container>
 

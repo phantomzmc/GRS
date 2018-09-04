@@ -32,56 +32,39 @@ class ListDistance extends Component {
             isLoading: false
         }
     }
-    componentWillMount(){
-        this.getUser()
-    }
-    fecthDistance(username) {
-        setTimeout(() => {
-            const uri = req[0].uspGetCourseLists
-            let data = ({
-                params: [
-                    {
-                        name: "EventID", value: this.props.event.event.EventID
-                    },
-                    {
-                        name: "Username", value: username
-                    },
-                ]
-            })
-            axios.post(uri, data, {
-                headers: {
-                    "X-DreamFactory-API-Key": api[0].api_key,
-                    "X-DreamFactory-Session-Token": this.props.token.token
+    
+    componentDidMount() {
+        const uri = req[0].uspGetCourseLists
+        const apikey = api[0].api_key
+        let data = ({
+            params: [
+                {
+                    name: "EventID", value: this.props.event.event.EventID
                 },
-                responseType: 'json'
-            })
-                // .then((response) => response.json())
-                .then((responseJson) => {
-                    this.setState({ isLoading: false, dataSource: responseJson.data })
-                    console.log(this.state.dataSource)
-                }).catch((error) => {
-                    this.setState({ isLoading: true })
-                    setTimeout(() => {
-                        this.componentDidMount()
-                    }, 2000)
-                });
-        },1000)
+                {
+                    name: "Username", value: this.props.username.username
+                },
+            ]
+        })
+        axios.post(uri, data, {
+            headers: {
+                "X-DreamFactory-API-Key": apikey,
+                "X-DreamFactory-Session-Token": this.props.token.token
+            },
+            responseType: 'json'
+        })
+            // .then((response) => response.json())
+            .then((responseJson) => {
+                this.setState({ isLoading: false, dataSource: responseJson.data })
+                console.log(responseJson.data)
+            }).catch((error) => {
+                this.setState({ isLoading: true })
+                setTimeout(() => {
+                    this.componentDidMount()
+                }, 1000)
+            });
     }
-    async getUser() {
-        try {
-            const value = await AsyncStorage.getItem('login');
-            if (value !== null) {
-                let pared = JSON.parse(value)
-                console.log(pared.username);
-                this.setState({ username: pared.username })
-                console.log("state" + this.state.username)
-                this.fecthDistance(pared.username)
-            }
-            
-        } catch (error) {
-            // Error retrieving data
-        }
-    }
+    
     shirtPhotoPlus(item) {
         this.setState({
             distanceEvent: {

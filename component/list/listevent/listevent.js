@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 import {
     ActivityIndicator,
     StyleSheet,
-    Text,
     View,
     Image,
     FlatList,
     TouchableHighlight,
-    ImageBackground
+    ImageBackground,
+    TouchableOpacity
 } from 'react-native';
 import { YellowBox } from 'react-native';
-import { Card, CardItem, Container } from "native-base";
+import { Card, CardItem, Container, Icon, Button, Text } from "native-base";
 import { connect } from 'react-redux'
 import axios from 'axios'
 import api from '../../../config/api_key'
@@ -64,7 +64,7 @@ class ListEvent extends Component {
             headers: {
                 "X-DreamFactory-API-Key": api[0].api_key,
                 "X-DreamFactory-Session-Token": token,
-                // "Authorization": auth
+                'Cache-Control': 'no-cache'
             },
             responseType: 'json'
         })
@@ -108,7 +108,10 @@ class ListEvent extends Component {
             this.props.addEvent(item)
         }
     }
-
+    gotoRegisinfo(item) {
+        this.props.addEvent(item)
+        this.props.regisInfo()
+    }
     render() {
         let url = 'https://register.shutterrunning2014.com/assets/img/theme/'
         if (this.state.isLoading) {
@@ -146,11 +149,19 @@ class ListEvent extends Component {
                                                 </View>
                                                 <View style={styles.textName}>
                                                     <Text style={styles.name}>{item.EventName}</Text>
+
                                                 </View>
                                             </View>
                                         </View>
                                     </TouchableHighlight>
-
+                                    <CardItem footer borderedtem>
+                                        <View style={{ justifyContent: "flex-end", alignContent: "center", flexDirection: "row", backgroundColor: "#fff", flex: 1 }}>
+                                            <Button iconLeft small bordered warning onPress={this.gotoRegisinfo.bind(this, item)}>
+                                                <Icon name="search" type="Ionicons" />
+                                                <Text style={styles.info}>ตรวจสอบรายชื่อ</Text>
+                                            </Button>
+                                        </View>
+                                    </CardItem>
                                 </Card>
                             </View>
                         }
@@ -244,6 +255,10 @@ const styles = StyleSheet.create({
     },
     navBackground: {
         backgroundColor: '#FC561F'
+    },
+    info: {
+        fontFamily: 'kanit',
+
     }
 });
 export default connect(mapStateToProps, mapDispatchtoProps)(ListEvent);

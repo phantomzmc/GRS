@@ -52,8 +52,8 @@ class RegisterInfo extends Component {
             });
         return (this.state.data)
     }
-    goSingleLogin = () => {
-        this.props.navigation.navigate('SingleLogin')
+    goEventList = () => {
+        this.props.navigation.navigate('EventList')
     }
     render() {
         let url = 'https://register.shutterrunning2014.com/assets/img/theme/'
@@ -61,7 +61,7 @@ class RegisterInfo extends Component {
         return (
             <Container>
                 <HeaderTeam
-                    goback={this.goSingleLogin.bind(this)}
+                    goback={this.goEventList.bind(this)}
                     title="ตรวจสอบรายชื่อ"
                 />
                 <StatusBar

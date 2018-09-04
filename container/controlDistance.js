@@ -34,6 +34,7 @@ class ControlDistance extends Component {
         this.props.setTotalEvent(0)
         this.props.setTotalPromo(0)
         this.props.setTotalRegister(0)
+
     }
 
     fetchRegisEvent() {
@@ -67,17 +68,26 @@ class ControlDistance extends Component {
 
     checkRegisEvent(data) {
         if (data.RegisterStatus == "1") {
-            Alert.alert("มีการสมัครลงทะเบียนแล้ว", "ผู้ใช้ได้ทำการสมัครรายการ " + this.props.event.event.EventName + " แล้ว", [
-                {
-                    text: "ไปยังรายการวิ่ง",
-                    onPress: () => this.goListEvent()
-                },
-                {
-                    text: "ลงทะเบียนแบบกลุ่ม",
-                    onPress: () => this.goAddTeam()
-                },
-            ], { cancelable: true })
-
+            if (this.props.event.event.GroupRegister == 1) {
+                Alert.alert("มีการสมัครลงทะเบียนแล้ว", "ผู้ใช้ได้ทำการสมัครรายการ " + this.props.event.event.EventName + " แล้ว", [
+                    {
+                        text: "ไปยังรายการวิ่ง",
+                        onPress: () => this.goListEvent()
+                    },
+                    {
+                        text: "ลงทะเบียนแบบกลุ่ม",
+                        onPress: () => this.goAddTeam()
+                    },
+                ], { cancelable: true })
+            }
+            else if(this.props.event.event.GroupRegister == 0){
+                Alert.alert("มีการสมัครลงทะเบียนแล้ว", "ผู้ใช้ได้ทำการสมัครรายการ " + this.props.event.event.EventName + " แล้ว", [
+                    {
+                        text: "ไปยังรายการวิ่ง",
+                        onPress: () => this.goListEvent()
+                    }
+                ], { cancelable: true })
+            }
         }
     }
     checkEventStatus() {
@@ -106,8 +116,8 @@ class ControlDistance extends Component {
             });
     }
     alertStatusEvent(status) {
-        if(status.EventStatus == 2) {
-            Alert.alert("รายการนี้มีผู้สมัครเต็มจำนวนแล้ว", "ผุ้ใช้งานสามารถสมัครรายการอื่นหรือตรวจสอบรายชื่อได้ที่นี่ " ,[
+        if (status.EventStatus == 2) {
+            Alert.alert("รายการนี้มีผู้สมัครเต็มจำนวนแล้ว", "ผุ้ใช้งานสามารถสมัครรายการอื่นหรือตรวจสอบรายชื่อได้ที่นี่ ", [
                 {
                     text: "รายการวิ่งอื่น",
                     onPress: () => this.goListEvent()
@@ -141,40 +151,37 @@ class ControlDistance extends Component {
         this.props.navigation.navigate('RegisterInfo')
     }
     async goAddTeam() {
-        try {
-            const value = await AsyncStorage.getItem('login');
-            if (value !== null) {
-                this.props.navigation.navigate('TeamList')
-            }
-            else if (value === null) {
-                Alert.alert("ลงทะเบียนแบบกลุ่ม", "การลงทะเบียนแบบกลุ่มจะต้องทำการเข้าสู่ระบบก่อน", [
-                    {
-                        text: "Cancel"
-                    },
-                    {
-                        text: "เข้าสู่ระบบ",
-                        onPress: () => this.goLogin()
-                    },
-                ], { cancelable: false })
-            }
+        if (this.props.event.event.GroupRegister == 1) {
+            try {
+                const value = await AsyncStorage.getItem('login');
+                if (value !== null) {
+                    this.props.navigation.navigate('TeamList')
+                }
+                else if (value === null) {
+                    Alert.alert("ลงทะเบียนแบบกลุ่ม", "การลงทะเบียนแบบกลุ่มจะต้องทำการเข้าสู่ระบบก่อน", [
+                        {
+                            text: "Cancel"
+                        },
+                        {
+                            text: "เข้าสู่ระบบ",
+                            onPress: () => this.goLogin()
+                        },
+                    ], { cancelable: false })
+                }
 
+            }
+            catch (error) {
+            }
         }
-        catch (error) {
+        else if (this.props.event.event.GroupRegister == 2) {
+            Alert.alert("ไม่มีลงทะเบียนแบบกลุ่ม", "รายการวิ่งนี้ไม่ได้เปิดให้ลงทะเบียนแบบกลุ่ม", [
+                {
+                    text: "ตกลง"
+                },
+            ], { cancelable: false })
+        }
 
-        }
-        // if (this.props.profile.statuslogin == 1) {
-        // }
-        // else {
-        //     Alert.alert("ลงทะเบียนแบบกลุ่ม", "การลงทะเบียนแบบกลุ่มจะต้องทำการเข้าสู่ระบบก่อน", [
-        //         {
-        //             text: "Cancel"
-        //         },
-        //         {
-        //             text: "เข้าสู่ระบบ",
-        //             onPress: () => this.goLogin()
-        //         },
-        //     ], { cancelable: false })
-        // }
+
     }
 
     render() {
@@ -197,20 +204,26 @@ class ControlDistance extends Component {
                     hidden={false}
                     translucent={true}
                 />
-                <Tabs
-                    initialPage={this.state.pageNumber}
-                    tabBarUnderlineStyle={{ backgroundColor: "#FC561F", height: 2 }}>
-                    <Tab
-                        heading={<TabHeading><Text style={styles.textLabel}>ลงทะเบียนแบบเดียว</Text></TabHeading>}>
-                        <RegisterDistance
-                            nextState={this.goNextState.bind(this)}
-                        />
-                    </Tab>
-                    <Tab
-                        heading={<TabHeading><Text style={styles.textLabel} onPress={() => this.goAddTeam()}>ลงทะเบียนแบบกลุ่ม</Text></TabHeading>}
-                    >
-                    </Tab>
-                </Tabs>
+                {this.props.event.event.GroupRegister == 1 ?
+                    <Tabs
+                        initialPage={this.state.pageNumber}
+                        tabBarUnderlineStyle={{ backgroundColor: "#FC561F", height: 2 }}>
+                        <Tab
+                            heading={<TabHeading><Text style={styles.textLabel}>ลงทะเบียนแบบเดียว</Text></TabHeading>}>
+                            <RegisterDistance
+                                nextState={this.goNextState.bind(this)}
+                            />
+                        </Tab>
+                        <Tab
+                            heading={<TabHeading><Text style={styles.textLabel} onPress={() => this.goAddTeam()}>ลงทะเบียนแบบกลุ่ม</Text></TabHeading>}>
+                        </Tab>
+                    </Tabs>
+                    :
+                    <RegisterDistance
+                        nextState={this.goNextState.bind(this)}
+                    />
+                }
+
                 <SummaryTotal />
             </Container>
         );
