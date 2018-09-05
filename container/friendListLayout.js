@@ -82,7 +82,7 @@ class FriendList extends Component {
             responseType: 'json'
         })
             .then((response) => {
-                this.setState({ isLoading: false, friendOutput: response.data });
+                this.setState({ isLoading: false, friendOutput: response.data, searchText: '' });
                 console.log(this.state.friendOutput[0])
                 this.checkRegisStatus()
             }).catch((error) => {
@@ -168,15 +168,18 @@ class FriendList extends Component {
                     <Item>
                         <Icon name="ios-people" />
                         <Input
+                            hasRef={ref => (this.textInputRef = ref)}
                             placeholder="ค้นหาเลขบัตรประชาชน/หนังสือเดินทาง"
                             style={{ fontFamily: 'kanit', fontSize: 14, paddingHorizontal: 10 }}
                             returnKeyType={"next"}
-                            onChangeText={(searchText) => this.setState({ searchText })}
+                            value={this.state.searchText}
+                            onChangeText={(text) => this.setState({ searchText: text })}
                             onSubmitEditing={this.showModal}
                         />
 
                     </Item>
-                    <Button small iconLeft transparent primary onPress={this.showModal}>
+                    {/* <Button small iconLeft transparent primary onPress={this.showModal}> */}
+                    <Button small iconLeft transparent primary onPress={() => this.search.clear()}>
                         <Icon name="ios-search" />
                         <Text style={{ fontFamily: 'kanit' }}>ค้นหา</Text>
                     </Button>
