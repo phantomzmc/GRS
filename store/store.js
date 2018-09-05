@@ -19,6 +19,7 @@ const credit = {
     expCredit: "00/0000",
     cvcCredit: "XXX"
   },
+  paymentslip : ""
 };
 const user = {
   profile: {
@@ -187,6 +188,10 @@ const creditcard = (state = credit, action) => {
       state.typePayment = action.payload
       break;
     }
+    case "setPaymentSlip" :{
+      state.paymentslip = action.payload
+      break;
+    } 
     default:
       break;
   }

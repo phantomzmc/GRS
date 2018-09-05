@@ -73,7 +73,9 @@ class ListEvent extends Component {
                 this.setState({ isLoading: false, dataSource: responseJson.data, });
                 this.checkStatusEvent(responseJson.data)
             }).catch((error) => {
-                console.error(error);
+                this.setState({ isLoading : true })
+                this.feedEvent(token)
+                console.log(error);
             });
 
     }
@@ -119,9 +121,10 @@ class ListEvent extends Component {
                 <View
                     style={{
                         flex: 1,
-                        padding: 20
+                        justifyContent : "center",
+                        alignItems : "center"
                     }}>
-                    <ActivityIndicator />
+                    <ActivityIndicator size="large"/>
                 </View>
             )
         }

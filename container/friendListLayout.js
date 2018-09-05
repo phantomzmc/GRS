@@ -29,6 +29,7 @@ class FriendList extends Component {
             friendOutput: [],
             addStatus: [],
             datafriendlist: [],
+            statusFriend: true
         }
     }
     componentDidMount() {
@@ -51,7 +52,13 @@ class FriendList extends Component {
         })
             .then((response) => {
                 this.setState({ isLoading: false, dataSource: response.data });
-                console.log(this.state.dataSource)
+                if (this.state.dataSource == "" || this.state.dataSource == [] || this.state.dataSource == null) {
+                    this.setState({ statusFriend: true })
+                }
+                else if (this.state.dataSource != "") {
+                    this.setState({ statusFriend: false })
+                    console.log(this.state.dataSource)
+                }
             }).catch((error) => {
                 // this.setState({ isModalVisibleError: !this.state.isModalVisibleError })
                 console.error(error);
@@ -190,12 +197,20 @@ class FriendList extends Component {
                         goRegister={this.gotoRegister.bind(this)}
                     />
                 </Modal>
-
-                <FriendListView
-                    AddFriendDetail={() => this.gotoAddFriendDetail()}
-                    TeamList={() => this.gotoTeamList()}
-                    datafriend={this.state.dataSource}
-                />
+                {this.state.statusFriend == false ?
+                    <FriendListView
+                        AddFriendDetail={() => this.gotoAddFriendDetail()}
+                        TeamList={() => this.gotoTeamList()}
+                        datafriend={this.state.dataSource}
+                    />
+                    :
+                    <Container>
+                        <View style={styles.viewAlert}>
+                            <Icon name="alert" type="Ionicons" />
+                            <Text style={styles.textAlert}>ยังไม่มีรายชื่อเพื่อน</Text>
+                        </View>
+                    </Container>
+                }
             </Container>
         );
     }
@@ -216,6 +231,15 @@ const styles = StyleSheet.create({
         fontSize: 20,
         padding: 15,
     },
+    viewAlert: {
+        justifyContent: "center",
+        alignItems: "center",
+        flex: 1
+    },
+    textAlert: {
+        fontFamily: "kanit",
+        fontSize: 20
+    }
 })
 
 export default connect(mapStateToProps)(FriendList);

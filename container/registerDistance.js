@@ -113,8 +113,8 @@ class RegisterDistance extends Component {
                         โปรดเลือกระยะทาง
                      </Text>
                     {this.state.loading &&
-                        <View style={{ justifyContent: "center" }}>
-                            <ActivityIndicator size="large"/>
+                        <View style={{ justifyContent: "center", alignItems: "center", flex: 1 }}>
+                            <ActivityIndicator size="large" />
                         </View>
                     }
                     {this.state.statusList &&

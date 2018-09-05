@@ -12,6 +12,9 @@ import {
 import { Card, Icon } from "native-base";
 import { connect } from "react-redux";
 import ImagePicker from 'react-native-image-picker';
+import axios from 'axios'
+import apikey from '../../config/api_key'
+import req from '../../config/uri_req'
 import Omise from '../../config/omise-config';
 const ibit_pkey = 'pkey_test_5b7nut5dlzyudruopsl'
 const ibit_skey = 'skey_test_5b7nwwrac7mvps7l3mp'
@@ -92,8 +95,38 @@ class TranferView extends Component {
                     statusButtonOnPress: true
                 });
                 console.log(this.state.ImageSource)
+                this.upSlipToServe(response)
             }
         });
+    }
+    upSlipToServe(response) {
+        var photo = {
+            uri: response.uri,
+            type: 'image/jpeg',
+            name: response.fileName,
+            size: response.fileSize,
+        };
+        console.log(photo)
+        var form = new FormData();
+        form.append("imageLink", photo);
+
+        let uri = req[1].url_imgprofile
+        let data = form
+        axios.post(uri, form, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'multipart/form-data',
+                'Cache-Control': 'no-cache'
+            },
+            responseType: 'json'
+        })
+            .then((responseJson) => {
+                console.log(responseJson)
+                this.props.setPaymentSlip(responseJson.data.files[0])
+
+            }).catch((error) => {
+                // console.error(error)
+            });
     }
     goTotalPayment() {
         this.props.goAddress()
@@ -202,6 +235,12 @@ const mapDispatchToProps = dispatch => {
             dispatch({
                 type: 'setCharge',
                 payload: charges
+            })
+        },
+        setPaymentSlip: (silp) => {
+            dispatch({
+                type : 'setPaymentSlip',
+                payload : silp
             })
         }
     }
