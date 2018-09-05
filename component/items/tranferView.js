@@ -15,12 +15,7 @@ import ImagePicker from 'react-native-image-picker';
 import axios from 'axios'
 import apikey from '../../config/api_key'
 import req from '../../config/uri_req'
-import Omise from '../../config/omise-config';
-const ibit_pkey = 'pkey_test_5b7nut5dlzyudruopsl'
-const ibit_skey = 'skey_test_5b7nwwrac7mvps7l3mp'
-const test_pkey = 'pkey_test_5ctl7h1r2lazhxd1ovk'
-const test_skey = 'skey_test_5ctl7j62s80mqyznvd3'
-Omise.config(test_pkey, test_skey, '2015-11-17');
+
 
 class TranferView extends Component {
     static propTypes = {
@@ -38,30 +33,8 @@ class TranferView extends Component {
             statusButtonOnPress : false
         }
     }
-    async getCustomer() {
-        let userprofile = this.props.userprofile.userprofile
-        const data = await Omise.createCustomer({
-            'description': userprofile.FirstName + " " + userprofile.LastName,
-            'email': userprofile.email
-        });
-        console.log(data)
-        this.props.setCharge({ id: data.id })
-        this.getCharges(data.id)
-    }
-    async getCharges(customer) {
-        const totalRegis = Number(this.props.event.totalRegister * 100)
-        this.setState({
-            amount: String(totalRegis)
-        })
-        const data = await Omise.createChargeTranfer({
-            'amount': this.state.amount,
-            'fail_fast': true,
-            
-
-        });
-        console.log(data)
+    getCustomer() {
         this.goTotalPayment()
-        this.props.setCharge(data)
     }
     selectPhotoTapped() {
         const options = {

@@ -40,7 +40,7 @@ class TotalRegister extends Component {
                 promotionStatus: true
             })
         }
-        else if(this.props.promocode.promocode != ""){
+        else if (this.props.promocode.promocode != "") {
             this.setState({
                 promotionStatus: true
             })
@@ -80,7 +80,11 @@ class TotalRegister extends Component {
                             </View>
                             <View>
                                 <Text style={{ fontSize: 10, fontFamily: 'kanit', textAlign: 'center', width: 150 }}>{this.props.event.event.EventName} </Text>
-                                <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit', textAlign: 'center', width: 150 }}>({this.props.event.distanceEvent.distance} - {this.props.shirtphoto.size}) x 1 (Photo Plus)</Text>
+                                <Text style={styles.textSubDetail}>({this.props.event.distanceEvent.distance} - {this.props.shirtphoto.size}) </Text>
+                                {this.props.friendlist.friendEvent.PhotoPlusService == 1 ?
+                                    <Text style={styles.textSubDetail}>x 1 (Photo Plus)</Text> :
+                                    <Text></Text>
+                                }
                             </View>
                             <View>
                                 <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{this.props.event.totalEvent}.0 ฿</Text>
@@ -99,7 +103,7 @@ class TotalRegister extends Component {
                                 <View>
                                     <Text style={{ fontSize: 10, fontFamily: 'kanit', textAlign: 'center', width: 150 }}>{this.props.event.event.EventName} </Text>
                                     <TouchableOpacity onPress={() => this.setState({ detailRegis: !this.state.detailRegis })}>
-                                        <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit' ,textAlign: 'center'}}>รายละเอียด : แสดงรายชื่อ </Text>
+                                        <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit', textAlign: 'center' }}>รายละเอียด : แสดงรายชื่อ </Text>
                                     </TouchableOpacity>
                                 </View>
                                 <View>
@@ -208,7 +212,15 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+    },
+    textSubDetail: {
+        fontSize: 7,
+        color: '#8B8B8B',
+        fontFamily: 'kanit',
+        textAlign: 'center',
+        width: 150
     }
+
 })
 const mapStateToProps = (state) => {
     return {
@@ -219,7 +231,7 @@ const mapStateToProps = (state) => {
         address: state.address,
         creditcard: state.creditcard,
         friendlist: state.friendlist,
-        promocode : state.promocode
+        promocode: state.promocode
     }
 }
 

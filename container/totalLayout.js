@@ -58,7 +58,7 @@ class TotalLayout extends Component {
                 { name: "RunnerID", value: userprofile.userprofile.RunnerID },
                 { name: "PaymentType", value: creditcard.typePayment },
                 { name: "PaymentStatus", value: 2 },
-                { name: "PaymentSlip", value: "" },
+                { name: "PaymentSlip", value: creditcard.paymentslip },
                 { name: "IPAddress", value: network.ip },
                 { name: "Longitude", value: network.long },
                 { name: "Latitude", value: network.lat },
