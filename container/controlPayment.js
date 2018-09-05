@@ -23,16 +23,16 @@ class ControlPayment extends Component {
         })
     }
     sumCredit(){
-        sum = (this.props.event.totalRegister * 105)/100
+        sum = (this.props.event.totalAddress * 105)/100
         console.log(sum)
-        credit = (parseFloat(sum).toFixed(1) - this.props.event.totalRegister)
+        credit = (parseFloat(sum).toFixed(1) - this.props.event.totalAddress)
         console.log(credit)
         this.props.setTotalRegister(parseFloat(sum).toFixed(1))
         this.props.setCreditPrice(parseFloat(credit).toFixed(1))
         this.props.setTypePayment(1)
     }
     sumTranfer(){
-        this.props.setTotalRegister(this.props.event.totalRegister)
+        this.props.setTotalRegister(this.props.event.totalAddress)
         this.props.setCreditPrice(0)
         this.props.setTypePayment(2)
 

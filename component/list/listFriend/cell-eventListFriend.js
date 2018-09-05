@@ -26,8 +26,8 @@ class CellEventListFriend extends Component {
         console.log(this.props.items)
         console.log(this.state.item)
     }
-    addFriendEvent = (item) => {
-        this._cellCheckAddFriend(item)
+    addFriendEvent = (item, idkey) => {
+        this._cellCheckAddFriend(item, idkey)
         // if (item.RegisterStatus == 0) {
         //     // datafriendRegis.push(item)
         //     // console.log(datafriendRegis)
@@ -40,10 +40,10 @@ class CellEventListFriend extends Component {
     removeFriendEvent = (item) => {
         var data = datafriendRegis
         dataitem = {
-            RunnerID : item.RunnerID,
-            FirstName : item.FirstName,
-            LastName : item.LastName,
-            PicProfile : item.PicProfile
+            RunnerID: item.RunnerID,
+            FirstName: item.FirstName,
+            LastName: item.LastName,
+            PicProfile: item.PicProfile
         }
         var str_newitem = dataitem
         for (i = 0; i <= data.length; i++) {
@@ -63,13 +63,15 @@ class CellEventListFriend extends Component {
         // console.log(datafriendRegis)
         // this.props.getAddFriend(datafriendRegis)
     }
-    _cellCheckAddFriend(item, status) {
+    _cellCheckAddFriend(item, idkey, status) {
+        console.log("_cellCheckAddFriend" + idkey)
         var data = datafriendRegis
         dataitem = {
-            RunnerID : item.RunnerID,
-            FirstName : item.FirstName,
-            LastName : item.LastName,
-            PicProfile : item.PicProfile
+            key : idkey,
+            RunnerID: item.RunnerID,
+            FirstName: item.FirstName,
+            LastName: item.LastName,
+            PicProfile: item.PicProfile
         }
         var str_newitem = dataitem
         for (i = 0; i <= data.length; i++) {
@@ -110,9 +112,9 @@ class CellEventListFriend extends Component {
     }
     handleOnChange(val) {
         this.setState({ checked: val })
-        setTimeout(()=>{
+        setTimeout(() => {
             if (this.state.checked == true) {
-                this.addFriendEvent(this.state.item)
+                this.addFriendEvent(this.state.item, this.props.idkey)
                 console.log(this.state.item)
                 this.setState({ statusCheck: false })
             }
@@ -120,8 +122,8 @@ class CellEventListFriend extends Component {
                 this.removeFriendEvent(this.state.item)
                 // console.log(this.props.idkey)
             }
-        },100)
-        
+        }, 100)
+
 
     }
     chageColorIcon() {
@@ -156,22 +158,22 @@ class CellEventListFriend extends Component {
                         <Left>
                             {item.RegisterStatus == 0 ?
                                 <View>
-                                        <CheckBox
-                                            iconSize={20}
-                                            iconName='iosCircleMix'
-                                            checked={this.state.checked}
-                                            checkedColor='#FC561F'
-                                            uncheckedColor='#C0C0C0'
-                                            onChange={this.handleOnChange.bind(this)}
-                                            style={{ flex: 1 }}
-                                        /> 
-                                        {/* :
+                                    <CheckBox
+                                        iconSize={20}
+                                        iconName='iosCircleMix'
+                                        checked={this.state.checked}
+                                        checkedColor='#FC561F'
+                                        uncheckedColor='#C0C0C0'
+                                        onChange={this.handleOnChange.bind(this)}
+                                        style={{ flex: 1 }}
+                                    />
+                                    {/* :
                                         <View>
                                             <View style={{ backgroundColor: "#C0C0C0", width: 20, height: 20, borderRadius: 10 ,justifyContent : "center" ,alignItems : "center" }}>
                                                 <Icon name="check" type="FontAwesome" style={{ color: "#fff" }} />
                                             </View>
                                         </View> */}
-                                    
+
 
                                 </View> :
                                 <View style={{ flexDirection: "row" }}>

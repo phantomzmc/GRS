@@ -23,7 +23,7 @@ class HeaderTeam extends Component {
         statusLogin: ""
     }
     _menu = null;
-    componentWillMount(){
+    componentWillMount() {
         this.getUsername()
 
     }
@@ -97,10 +97,32 @@ class HeaderTeam extends Component {
         this._menu.hide();
     }
     async userLogout() {
+        let friendEvent = {
+            RunnerID: "",
+            CourseID: "",
+            JerseySize: "",
+            PhotoPlusService: "",
+            PromoCode: "",
+            CourseFee: "",
+        }
+        let fullfriendEvent = [{
+            RunnerID: "",
+            firstname: "",
+            lastname: "",
+            CourseID: "",
+            JerseySize: "",
+            PhotoPlusService: "",
+            PromoCode: "",
+            nameRegis: "",
+            CourseFee: "",
+        }]
         await AsyncStorage.removeItem('login');
         this.props.setUsername("")
         this.props.setImageProfile("")
         this.props.setImageBackground("")
+        this.props.addFriendInEvent(friendEvent)
+        this.props.addFullFriendInEvent(fullfriendEvent)
+        this.props.setFriendRegister("")
     }
 
     checkLogin = (goSuccess) => {
@@ -226,16 +248,34 @@ const mapDispatchToProps = dispatch => {
                 payload: username
             })
         },
-        setImageProfile : (imgProfile) => {
+        setImageProfile: (imgProfile) => {
             dispatch({
                 type: "setImageProfile",
                 payload: imgProfile
             })
         },
-        setImageBackground : (imgBG) => {
+        setImageBackground: (imgBG) => {
             dispatch({
                 type: "setImageBackground",
                 payload: imgBG
+            })
+        },
+        addFriendInEvent: (friendEvent) => {
+            dispatch({
+                type: "addFriendInEvent",
+                payload: friendEvent
+            })
+        },
+        addFullFriendInEvent: (fullfriendEvent) => {
+            dispatch({
+                type: "addFullFriendInEvent",
+                payload: fullfriendEvent
+            })
+        },
+        setFriendRegister: (friendRegis) => {
+            dispatch({
+                type: "setFriendRegister",
+                payload: friendRegis
             })
         }
     }

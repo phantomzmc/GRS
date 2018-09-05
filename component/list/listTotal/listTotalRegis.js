@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, FlatList, StyleSheet, Image } from 'react-native';
 import { connect } from "react-redux";
-import { Container, Row, Col, Left, Right, Body,Content } from "native-base";
+import { Container, Row, Col, Left, Right, Body, Content } from "native-base";
 
 
 class ListTotalRegis extends Component {
@@ -44,6 +44,14 @@ class ListTotalRegis extends Component {
                                         <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit' }}>ระยะ : {item.nameRegis}</Text>
                                         <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit' }}>ไซค์เสื้อ : {item.JerseySize}</Text>
                                     </View>
+                                    {
+                                        item.PhotoPlusService == 1 ?
+                                            <View>
+                                                <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit' }}> x1 PhotoPlusService </Text>
+                                            </View>
+                                            :
+                                            <View></View>
+                                    }
                                 </View>
                             </Content>
                             <Right>

@@ -84,10 +84,10 @@ class CellProfile extends Component {
             this.addFriendEvent(this.state.item)
             console.log(this.state.item)
         }
-        // else if (this.state.checked == true) {
-        //     this.removeFriendEvent(this.props.idkey)
-        //     console.log(this.props.idkey)
-        // }
+        else if (this.state.checked == true) {
+            this.removeFriendEvent(this.props.idkey)
+            console.log(this.props.idkey)
+        }
 
     }
     chageColorIcon() {
@@ -122,21 +122,15 @@ class CellProfile extends Component {
                         <Left>
                             {regisStatus == 0 ?
                                 <View>
-                                    {this.state.checked == false ?
-                                        <CheckBox
-                                            iconSize={20}
-                                            iconName='iosCircleMix'
-                                            checked={this.state.checked}
-                                            checkedColor='#FC561F'
-                                            uncheckedColor='#C0C0C0'
-                                            onChange={this.handleOnChange.bind(this)}
-                                            style={{ flex: 1 }}
-                                        /> :
-                                        <View>
-
-                                        </View>
-                                    }
-
+                                    <CheckBox
+                                        iconSize={20}
+                                        iconName='iosCircleMix'
+                                        checked={this.state.checked}
+                                        checkedColor='#FC561F'
+                                        uncheckedColor='#C0C0C0'
+                                        onChange={this.handleOnChange.bind(this)}
+                                        style={{ flex: 1 }}
+                                    />
                                 </View> :
                                 <View style={{ flexDirection: "row" }}>
                                     <Icon name="check" type="FontAwesome" style={{ color: "#9ACD32" }} />

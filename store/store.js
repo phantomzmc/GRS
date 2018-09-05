@@ -122,6 +122,10 @@ const event = (state = eventState, action) => {
       state.totalPrice = action.payload;
       break;
     }
+    case "setTotalAddress" : {
+      state.totalAddress = action.payload;
+      break;
+    }
     case "setTotalPromo": {
       state.totalPromo = action.payload
       break;

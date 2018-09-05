@@ -47,7 +47,7 @@ class AddressLayout extends Component {
     }
     componentWillMount = () => {
         this.setState({
-            priceEvent: parseFloat(this.props.event.totalRegister),
+            priceEvent: parseFloat(this.props.event.totalPrice),
             priceCDO: parseFloat(65.0),
         })
     }
@@ -146,6 +146,7 @@ class AddressLayout extends Component {
         })
         this.props.setSendChoice({ choice: 0, dataChoice: "รับเอง", priceCDO: parseFloat(0.0), placeItemID: 1, detail: this.state.pleace })
         this.props.setTotalRegister(this.state.priceEvent)
+        this.props.setTotalAddress(this.state.priceEvent)
         this.props.setTotal(this.state.priceEvent)
     }
     getSumPostman = () => {
@@ -161,6 +162,7 @@ class AddressLayout extends Component {
         let { priceEvent, priceCDO } = this.state
         const sum = priceCDO + priceEvent
         this.props.setTotalRegister(sum)
+        this.props.setTotalAddress(sum)
         // this.props.setTotal(sum)
     }
     getCountPostPrice() {
@@ -370,6 +372,12 @@ const mapDisPacthToProps = (dispatch) => {
                 payload: total
             })
         },
+        setTotalAddress : (totalAddress) => {
+            dispatch({
+                type : "setTotalAddress",
+                payload : totalAddress
+            })
+        }
     }
 }
 
