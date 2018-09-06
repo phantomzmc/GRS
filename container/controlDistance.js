@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, StyleSheet, TouchableOpacity, Alert, StatusBar, AsyncStorage, RefreshControl } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Alert, StatusBar, AsyncStorage, Linking } from 'react-native';
 import { Container, Header, Tab, Tabs, TabHeading, Icon, Text, Button } from 'native-base';
 import { StackNavigator } from 'react-navigation';
 import { connect } from 'react-redux'
@@ -28,7 +28,7 @@ class ControlDistance extends Component {
 
     componentDidMount() {
         setTimeout(() => {
-            this.fetchRegisEvent()
+            this.checkEventStatus()
         }, 1000)
         this.props.setTotal(0)
         this.props.setTotalEvent(0)
@@ -80,7 +80,7 @@ class ControlDistance extends Component {
                     },
                 ], { cancelable: true })
             }
-            else if(this.props.event.event.GroupRegister == 0){
+            else if (this.props.event.event.GroupRegister == 0) {
                 Alert.alert("มีการสมัครลงทะเบียนแล้ว", "ผู้ใช้ได้ทำการสมัครรายการ " + this.props.event.event.EventName + " แล้ว", [
                     {
                         text: "ไปยังรายการวิ่ง",
@@ -116,11 +116,11 @@ class ControlDistance extends Component {
             });
     }
     alertStatusEvent(status) {
-        if (status.EventStatus == 2) {
+        if (status[0].EventStatus == "2") {
             Alert.alert("รายการนี้มีผู้สมัครเต็มจำนวนแล้ว", "ผุ้ใช้งานสามารถสมัครรายการอื่นหรือตรวจสอบรายชื่อได้ที่นี่ ", [
                 {
                     text: "รายการวิ่งอื่น",
-                    onPress: () => this.goListEvent()
+                    onPress: () => Linking.openURL('http://shutterrunning2014.com/')
                 },
                 {
                     text: "ตรวจสอบรายชื่อ",
@@ -128,7 +128,7 @@ class ControlDistance extends Component {
                 },
             ], { cancelable: true })
         }
-        else {
+        else if ((status[0].EventStatus == "1")) {
             this.fetchRegisEvent()
         }
     }

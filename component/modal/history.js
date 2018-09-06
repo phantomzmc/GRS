@@ -54,7 +54,10 @@ class ModalHistory extends Component {
                     <ScrollView>
                         <CardItem style={styles.view1}>
                             <View>
-                                <Text style={styles.typePayment}> จ่ายเเล้ว </Text>
+                                {dataInvoice[0].PaymentStatus == 2 ?
+                                    <Text style={styles.typePayment}> จ่ายเเล้ว </Text> :
+                                    <Text style={styles.typePaymentWarning}>รอดำเนินการ</Text>
+                                }
                             </View>
                             <View>
                                 <QRCode
@@ -63,8 +66,14 @@ class ModalHistory extends Component {
                                 />
                             </View>
                             <View>
-                                <Text style={{ fontSize: 10, color: '#A9A9A9', fontFamily: 'kanit' }}> Order : {dataInvoice[0].InvoiceID} </Text>
-                                {/* <Text style={{ fontSize: 10, color: '#A9A9A9', fontFamily: 'kanit', width: 50 }}></Text> */}
+                                {/* <View style={{ flex : 0 ,justifyContent : "flex-end"}}>
+                                    <Text style={styles.subTextHead}>ชำระเงิน</Text>
+                                    {dataInvoice[0].PaymentType == 1 ?
+                                        <Text style={styles.subTextHead}>บัตรเครดิต/เดรบิต</Text> :
+                                        <Text style={styles.subTextHead}>โอนเงินผ่านธนาคาร</Text>
+                                    }
+                                </View> */}
+                                <Text style={styles.subTextHead}> Order : {dataInvoice[0].InvoiceID} </Text>
                             </View>
                         </CardItem>
                         <CardItem style={styles.viewName}>
@@ -74,7 +83,7 @@ class ModalHistory extends Component {
                                         <Text style={styles.textName3}>Email</Text>
                                         <Text style={styles.textName4}>{dataInvoice[0].Email}</Text>
                                     </View>
-                                    <View style={{ flex: 0, alignItems: 'center'  }}>
+                                    <View style={{ flex: 0, alignItems: 'center' }}>
                                         <Text style={styles.textName3}>โทรศัพท์</Text>
                                         <Text style={styles.textName4}>{dataInvoice[0].Phone}</Text>
                                     </View>
@@ -87,7 +96,7 @@ class ModalHistory extends Component {
                             <View style={styles.viewAddress}>
                                 <View style={{ flex: 1 }}>
                                     <Text style={styles.textName3}>ที่อยู่</Text>
-                                    <Text style={{ fontFamily: 'kanit', fontSize: 14 ,marginRight : 10}}>{dataInvoice[0].Address} {dataInvoice[0].SubDistric} {dataInvoice[0].Distric} {dataInvoice[0].Province} {dataInvoice[0].PostCode}</Text>
+                                    <Text style={{ fontFamily: 'kanit', fontSize: 14, marginRight: 10 }}>{dataInvoice[0].Address} {dataInvoice[0].SubDistric} {dataInvoice[0].Distric} {dataInvoice[0].Province} {dataInvoice[0].PostCode}</Text>
                                 </View>
                                 <View style={{ flex: 0, alignItems: 'center' }}>
                                     <Text style={styles.textName3}>วันที่</Text>
@@ -248,6 +257,10 @@ const styles = StyleSheet.create({
         color: '#90EE90',
         fontFamily: 'kanit',
     },
+    typePaymentWarning: {
+        color: "#FFA500",
+        fontFamily: 'kanit',
+    },
     textName1: {
         fontSize: 14,
         color: '#a9a9a9',
@@ -292,6 +305,11 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.5,
         shadowRadius: 2,
     },
+    subTextHead: {
+        fontSize: 10,
+        color: '#A9A9A9',
+        fontFamily: 'kanit'
+    }
 
 })
 

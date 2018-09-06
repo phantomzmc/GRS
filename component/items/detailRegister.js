@@ -23,10 +23,10 @@ class DetailRegister extends Component {
                 this.props.address.user.postcode,
             numberInvoice: this.props.invoice.invoice[0].InvoiceID
         })
-        if (this.props.creditcard.charge.status == "successful") {
+        if (this.props.creditcard.statusPayment == 2) {
             this.setState({ statusPayment1: true, statusPayment2: false })
         }
-        else if (this.props.creditcard.charge.status == "failed") {
+        else if (this.props.creditcard.statusPayment == 1) {
             this.setState({ statusPayment1: false, statusPayment2: true })
         }
     }

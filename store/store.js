@@ -19,7 +19,11 @@ const credit = {
     expCredit: "00/0000",
     cvcCredit: "XXX"
   },
-  paymentslip : ""
+  paymentslip : "",
+  charge : {
+    id : ""
+  }
+
 };
 const user = {
   profile: {
@@ -335,7 +339,7 @@ const network = (state = {}, action) => {
   }
   return state;
 }
-const promocode = (state = { disPrice: "", promocode: "" }, action) => {
+const promocode = (state = { disPrice: 0, promocode: "" }, action) => {
   switch (action.type) {
     case "setDisPrice": {
       state.disPrice = action.payload

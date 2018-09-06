@@ -48,7 +48,7 @@ class TotalLayout extends Component {
     }
     addRegister() {
         console.log("addregis")
-        let { userprofile, network, choiceSend, event, creditcard, address,promocode } = this.props
+        let { userprofile, network, choiceSend, event, creditcard, address, promocode } = this.props
         let uri = req[0].uspAddRegister
         let apikey = api_key[0].api_key
         let friendlists = this.props.friendlist.friendEvent
@@ -57,7 +57,7 @@ class TotalLayout extends Component {
             params: [
                 { name: "RunnerID", value: userprofile.userprofile.RunnerID },
                 { name: "PaymentType", value: creditcard.typePayment },
-                { name: "PaymentStatus", value: 2 },
+                { name: "PaymentStatus", value: creditcard.statusPayment },
                 { name: "PaymentSlip", value: creditcard.paymentslip },
                 { name: "IPAddress", value: network.ip },
                 { name: "Longitude", value: network.long },
@@ -95,7 +95,7 @@ class TotalLayout extends Component {
                 }, 3000)
             });
     }
-    genQRCode(){
+    genQRCode() {
 
     }
 
@@ -147,7 +147,7 @@ class TotalLayout extends Component {
                 <HeaderInvoice
                     title={this.state.title}
                     goback={this.gotoBack.bind(this)}
-                    onSave={this.captureScreenFunction.bind(this)} 
+                    onSave={this.captureScreenFunction.bind(this)}
                     menu={true}
                     statusRegis={true}
                     goLogin={() => this.props.navigation.navigate("Login")}
@@ -156,7 +156,7 @@ class TotalLayout extends Component {
                     goEditProfile={() => this.props.navigation.navigate('EditProfile')}
                     goRegis={() => this.props.navigation.navigate('ControlDistance')}
                     goSingleLogin={() => this.props.navigation.navigate('SingleLogin')}
-                    />
+                />
                 <StatusBar
                     barStyle="light-content"
                     hidden={false}
@@ -174,7 +174,7 @@ class TotalLayout extends Component {
                             <DetailRegister />
                             <TotalRegister />
                             <View style={styles.submitContainer}>
-                                
+
                                 <TouchableOpacity style={styles.buttonContainer}
                                     onPress={this.onClick.bind(this)}>
                                     <Text style={styles.textButton}>ปิด</Text>
@@ -227,7 +227,7 @@ const mapStateToProps = (state) => {
         userprofile: state.userprofile,
         friendlist: state.friendlist,
         profile: state.profile,
-        promocode : state.promocode
+        promocode: state.promocode
     }
 }
 const mapDispatchToProps = dispatch => {

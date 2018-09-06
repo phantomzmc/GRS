@@ -23,7 +23,7 @@ class CreditView extends Component {
             expCredit: "02",
             yearCredit: "20",
             cvcCredit: "XXX",
-            statusPayment: false,
+            statusPayment: 2,
             modalLoad: false,
             modalSuccess: false,
             modalFaild: false,
@@ -70,7 +70,7 @@ class CreditView extends Component {
     }
     checkPaymentModal = (charges) => {
         if (charges.status == "successful") {
-            this.setState({ modalSuccess: !this.state.modalSuccess, statusPayment: true })
+            this.setState({ modalSuccess: !this.state.modalSuccess, statusPayment: 2 })
             setTimeout(() => {
                 this.props.goAddress()
                 this.setState({ modalSuccess: !this.state.modalSuccess })
@@ -78,7 +78,7 @@ class CreditView extends Component {
             console.log("successful")
         }
         else if (charges.status == "failed") {
-            this.setState({ modalFaild: !this.state.modalFaild, statusPayment: true })
+            this.setState({ modalFaild: !this.state.modalFaild })
             setTimeout(() => {
                 this.setState({ modalFaild: !this.state.modalFaild })
             }, 3000);

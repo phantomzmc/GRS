@@ -8,7 +8,7 @@ class ResetEncodeForm extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            userid : "",
+            userid: "",
             password: "",
             email: "",
             verifycode: ""
@@ -30,33 +30,36 @@ class ResetEncodeForm extends Component {
         this.alertSuccess()
     }
     checkResetVerify() {
-        let { password, email ,userid} = this.state
-        this.sentVerifyCode(email)
-        this.props.sendNewCode(userid, email)
-        this.props.setEmail(email)
-        // let { password , email} = this.state
-        // if (this.state.password === this.props.userprofile.userprofile.Password && this.state.email === this.props.userprofile.userprofile.Email) {
-        //     this.alertSuccess()
-        // }
-        // else if (this.state.password !== this.props.userprofile.userprofile.Password) {
-        //     this.alertUserIDError()
-        // }
-        // else if (this.state.email !== this.props.userprofile.userprofile.Email) {
-        //     this.alertEmailError()
-        // }
-        // else if (this.state.password !== this.props.userprofile.userprofile.Password && this.state.email === this.props.userprofile.userprofile.Email) {
-        //     this.alertAllError()
-        // }
+        let { password, email, userid } = this.state
+        if (email != "" && userid != "") {
+            this.sentVerifyCode(email)
+            this.props.sendNewCode(userid, email)
+            this.props.setEmail(email)
+        }
+        else if(email == "" && userid == ""){
+            Alert.alert('ร้องขอรหัสไม่สำเร็จ', 'กรุณากรอก Emailและรหัสบัตรประจำตัวประชาชน ของท่าน', [
+                { text: 'ตกลง' },
+            ])
+        }
+        else if(email == "") {
+            Alert.alert('ร้องขอรหัสไม่สำเร็จ', 'กรุณากรอก Email ของท่าน', [
+                { text: 'ตกลง' },
+            ])
+        }
+        else if(userid == ""){
+            Alert.alert('ร้องขอรหัสไม่สำเร็จ', 'กรุณากรอกรหัสบัตรประจำตัวประชาชนของท่าน', [
+                { text: 'ตกลง' },
+            ])
+        }
     }
     alertSuccess() {
         Alert.alert('ร้องขอรหัสสำเร็จ', 'กรุณาตรวจสอบ Email ของท่าน', [
             { text: 'ยืนยัน', onPress: () => this.props.goLogin() },
         ])
     }
-    
 
     render() {
-        let { password, email,userid } = this.state
+        let { password, email, userid } = this.state
         return (
             <View style={styles.container}>
                 <View style={styles.content}>
@@ -95,7 +98,7 @@ class ResetEncodeForm extends Component {
 const mapStateToProps = (state) => {
     return {
         userprofile: state.userprofile,
-        profile : state.profile
+        profile: state.profile
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -108,8 +111,8 @@ const mapDispatchToProps = (dispatch) => {
         },
         setEmail: (email) => {
             dispatch({
-                type : "setEmail",
-                payload : email
+                type: "setEmail",
+                payload: email
             })
         }
     }

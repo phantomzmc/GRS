@@ -96,6 +96,7 @@ class TranferView extends Component {
             .then((responseJson) => {
                 console.log(responseJson)
                 this.props.setPaymentSlip(responseJson.data.files[0])
+                this.props.setStatusPayment(1)
 
             }).catch((error) => {
                 // console.error(error)
@@ -214,6 +215,12 @@ const mapDispatchToProps = dispatch => {
             dispatch({
                 type : 'setPaymentSlip',
                 payload : silp
+            })
+        },
+        setStatusPayment : (status) => {
+            dispatch({
+                type : 'setStatusPayment',
+                payload : status
             })
         }
     }

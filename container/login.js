@@ -213,7 +213,7 @@ class Login extends Component {
                 />
                 <Header style={{ backgroundColor: 'transparent' }}>
                     <Left>
-                        
+
                     </Left>
                     <Body>
                         <Title style={styles.title}>{this.state.title}</Title>
@@ -260,14 +260,6 @@ class Login extends Component {
                             <TouchableOpacity onPress={this.gotoResetPassword.bind(this)}>
                                 <Text style={styles.regisButton}>
                                     ขอรหัสผ่านใหม่
-                        </Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                onPress={this
-                                    .gotoRegisInfo
-                                    .bind(this)}>
-                                <Text style={styles.regisButton}>
-                                    ตรวจสอบรายชื่อ
                         </Text>
                             </TouchableOpacity>
                         </View>

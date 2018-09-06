@@ -86,9 +86,14 @@ class ListEvent extends Component {
                 console.log("เปิด", i)
                 dataEvent.push(item)
             }
+            else if( item.EventStatus == "2"){
+                console.log("เปิด", i)
+                dataEvent.push(item)
+            }
             else if (item.EventStatus == "0") {
                 console.log("ปิด", i)
             }
+            
         })
         this.setState({ dataSource: dataEvent })
         console.log(this.state.dataSource)
