@@ -118,6 +118,9 @@ class FormRegister extends Component {
       this.setState({ gen: "M" })
       console.log(this.state.gen)
     }
+    setTimeout(() => {
+      this.setState({ gen: "M" })
+    }, 100)
   }
   setGenWoMan() {
     this.setState({ selectedIndex: 1 })
@@ -125,6 +128,9 @@ class FormRegister extends Component {
       this.setState({ gen: "F" })
       console.log(this.state.gen)
     }
+    setTimeout(() => {
+      this.setState({ gen: "F" })
+    }, 100)
   }
 
   render() {
@@ -175,14 +181,18 @@ class FormRegister extends Component {
             tabBarUnderlineStyle={{ backgroundColor: "#FC561F", height: 2 }}>
             <Tab heading={
               <TabHeading>
-                <Icon name="ios-man" style={{ color: "#FC561F" }} />
-                <Text style={styles.tabGender} onPress={() => this.setGenMan()}>ชาย</Text>
+                <TouchableOpacity style={styles.gender} onPress={() => this.setGenMan()}>
+                  <Icon name="ios-man" style={{ color: "#FC561F" }} onPress={() => this.setGenMan()} />
+                  <Text style={styles.tabGender} onPress={() => this.setGenMan()}>ชาย</Text>
+                </TouchableOpacity>
               </TabHeading>}>
             </Tab>
             <Tab heading={
               <TabHeading>
-                <Icon name="ios-woman" style={{ color: "#FC561F" }} />
-                <Text style={styles.tabGender} onPress={() => this.setGenWoMan()}>หญิง</Text>
+                <TouchableOpacity style={styles.gender} onPress={() => this.setGenWoMan()}>
+                  <Icon name="ios-woman" style={{ color: "#FC561F" }} onPress={() => this.setGenWoMan()} />
+                  <Text style={styles.tabGender} onPress={() => this.setGenWoMan()}>หญิง</Text>
+                </TouchableOpacity>
               </TabHeading>}>
             </Tab>
           </Tabs>
@@ -382,6 +392,13 @@ const styles = StyleSheet.create({
     fontFamily: "kanit",
     paddingHorizontal: 10,
     color: "#FC561F"
+  },
+  gender: {
+    flexDirection: "row",
+    backgroundColor : "#fff",
+    flex: 1,
+    justifyContent: "center",
+    padding: 10
   }
 
 });

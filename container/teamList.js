@@ -79,7 +79,7 @@ class TeamList extends Component {
             responseType: 'json'
         })
             .then((response) => {
-                this.setState({ isLoading: false, friendOutput: response.data });
+                this.setState({ isLoading: false, friendOutput: response.data ,searchText : ''});
                 console.log(this.state.friendOutput[0])
                 this.checkRegisStatus()
             }).catch((error) => {
@@ -286,7 +286,8 @@ class TeamList extends Component {
                                                     placeholder="ค้นหาเลขบัตรประชาชน/หนังสือเดินทาง"
                                                     style={{ fontFamily: 'kanit', fontSize: 14, paddingHorizontal: 10 }}
                                                     returnKeyType={"next"}
-                                                    onChangeText={(searchText) => this.setState({ searchText })}
+                                                    value={this.state.searchText}
+                                                    onChangeText={(text) => this.setState({ searchText : text })}
                                                     onSubmitEditing={this.showModal}
                                                 />
                                             </Item>

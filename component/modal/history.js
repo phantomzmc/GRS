@@ -74,7 +74,7 @@ class ModalHistory extends Component {
                                         <Text style={styles.textName3}>Email</Text>
                                         <Text style={styles.textName4}>{dataInvoice[0].Email}</Text>
                                     </View>
-                                    <View style={{ alignContent: "flex-end" }}>
+                                    <View style={{ flex: 0, alignItems: 'center'  }}>
                                         <Text style={styles.textName3}>โทรศัพท์</Text>
                                         <Text style={styles.textName4}>{dataInvoice[0].Phone}</Text>
                                     </View>
@@ -86,12 +86,12 @@ class ModalHistory extends Component {
                         <CardItem>
                             <View style={styles.viewAddress}>
                                 <View style={{ flex: 1 }}>
-                                    <Text style={styles.textName3}>Address</Text>
-                                    <Text style={{ fontFamily: 'kanit', fontSize: 14 }}>{dataInvoice[0].Address} {dataInvoice[0].SubDistric} {dataInvoice[0].Distric} {dataInvoice[0].Province} {dataInvoice[0].PostCode}</Text>
+                                    <Text style={styles.textName3}>ที่อยู่</Text>
+                                    <Text style={{ fontFamily: 'kanit', fontSize: 14 ,marginRight : 10}}>{dataInvoice[0].Address} {dataInvoice[0].SubDistric} {dataInvoice[0].Distric} {dataInvoice[0].Province} {dataInvoice[0].PostCode}</Text>
                                 </View>
-                                <View style={{ alignContent: 'flex-end' }}>
+                                <View style={{ flex: 0, alignItems: 'center' }}>
                                     <Text style={styles.textName3}>วันที่</Text>
-                                    <Text style={{ fontFamily: 'kanit', fontSize: 14 }}>{this.state.date}</Text>
+                                    <Text style={{ fontFamily: 'kanit', fontSize: 14 }}>{dataInvoice[0].InvoiceDatetime.substr(0, 11)}</Text>
                                 </View>
                             </View>
                         </CardItem>
@@ -154,22 +154,26 @@ class ModalHistory extends Component {
                                         <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{dataInvoice[0].TotalCreditFee} ฿</Text>
                                     </View>
                                 </View>
-
-                                <View style={styles.detailRow}>
-                                    <View>
-                                        <View style={{ backgroundColor: '#4CD964', width: 50, height: 50, borderRadius: 25, }}>
-                                            <Image source={require('../icon/price.png')}
-                                                style={{ width: 30, height: 30, justifyContent: 'center', alignSelf: 'center', marginTop: 10 }} />
+                                {dataInvoice[0].TotalDiscount == 0 ?
+                                    <View></View>
+                                    :
+                                    <View style={styles.detailRow}>
+                                        <View>
+                                            <View style={{ backgroundColor: '#4CD964', width: 50, height: 50, borderRadius: 25, }}>
+                                                <Image source={require('../icon/price.png')}
+                                                    style={{ width: 30, height: 30, justifyContent: 'center', alignSelf: 'center', marginTop: 10 }} />
+                                            </View>
+                                        </View>
+                                        <View>
+                                            <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>ส่วนลดค่าโปรโมชั่น {dataInvoice[0].TotalDiscount} บาท</Text>
+                                            {/* <Text style={{ fontSize: 7, color: '#8B8B8B' }}>(5 Km. - S) x 1 (Photo Plus)</Text> */}
+                                        </View>
+                                        <View>
+                                            <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{dataInvoice[0].TotalDiscount}0 ฿</Text>
                                         </View>
                                     </View>
-                                    <View>
-                                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>ส่วนลดค่าโปรโมชั่น 1000 บาท</Text>
-                                        {/* <Text style={{ fontSize: 7, color: '#8B8B8B' }}>(5 Km. - S) x 1 (Photo Plus)</Text> */}
-                                    </View>
-                                    <View>
-                                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{dataInvoice[0].TotalDiscount}0 ฿</Text>
-                                    </View>
-                                </View>
+                                }
+
 
                                 <View style={styles.detailRow}>
                                     <View>

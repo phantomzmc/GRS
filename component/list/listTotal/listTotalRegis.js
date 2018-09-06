@@ -31,8 +31,8 @@ class ListTotalRegis extends Component {
                         <View style={styles.container}>
                             <Left>
                                 <View>
-                                    <Image source={require('../../icon/boy.png')}
-                                        style={{ width: 30, height: 30, marginLeft: 20 }} />
+                                    <Image source={{ uri: item.picProfile }}
+                                        style={{ width: 30, height: 30, marginLeft: 20,borderRadius : 15}} />
                                 </View>
                             </Left>
                             <Content>
