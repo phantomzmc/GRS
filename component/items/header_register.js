@@ -23,13 +23,19 @@ class HeaderRegister extends Component {
             imgBackground: ""
         }
     }
+    setNullImage(){
+        this.setState({ 
+            ImageSource: "", 
+            imgBackground: "" 
+        })
+        this.props.setImageProfile("")
+        this.props.setImageBackground("")
+    }
     componentDidMount() {
         {
             this.props.userprofile.userprofile.PicProfile && this.props.userprofile.userprofile.BackgroundProfile == "" ?
-                this.setState({ 
-                    ImageSource: "", 
-                    imgBackground: "" 
-                }) :
+                this.setNullImage()      
+                :
                 this.setState({ 
                     ImageSource: this.props.userprofile.userprofile.PicProfile, 
                     imgBackground: this.props.userprofile.userprofile.BackgroundProfile 
