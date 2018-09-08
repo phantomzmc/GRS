@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, StatusBar, ScrollView } from 'react-native'
-import { Text, Container } from "native-base";
+import { Text, Container, Icon } from "native-base";
 import HistoryList from '../component/list/history/historylist'
 import HeaderTeam from '../component/items/headerTeam'
 import { connect } from "react-redux";
@@ -60,7 +60,7 @@ class HistoryContainer extends Component {
     }
     render() {
         return (
-            <View style={styles.container}>
+            <Container style={styles.container}>
                 <HeaderTeam
                     title={this.state.title}
                     menu={true}
@@ -77,19 +77,19 @@ class HistoryContainer extends Component {
                     hidden={false}
                     translucent={true}
                 />
-                <View style={styles.list}>
-                    {this.state.statusData == true ?
-                        <HistoryList
-                            historyData={this.state.dataSource}
-                        /> :
-                        <View style={styles.containerNo}>
-                            <View style={styles.bodyNo}>
-                                <Text style={styles.textNo}>ไม่มีรายการสมัคร</Text>
-                            </View>
+                {this.state.statusData == true ?
+                    <HistoryList
+                        historyData={this.state.dataSource}
+                    /> :
+                    <Container>
+                        <View style={styles.viewAlert}>
+                            <Icon name="alert" type="Ionicons" />
+                            <Text style={styles.textAlert}>ไม่มีรายการสมัคร</Text>
                         </View>
-                    }
-                </View>
-            </View>
+                    </Container>
+                }
+
+            </Container>
 
         );
     }
@@ -106,17 +106,19 @@ const styles = StyleSheet.create({
 
     },
     list: {
-        padding: 10
+        padding: 10,
+        paddingHorizontal : 10
     },
     containerNo: {
-        justifyContent: "center"
+
     },
-    bodyNo: {
-        alignItems: "center"
+    viewAlert: {
+        justifyContent: "center",
+        alignItems: "center",
+        flex: 1
     },
-    textNo: {
-        fontFamily: 'kanit',
-        color: "#c0c0c0",
+    textAlert: {
+        fontFamily: "kanit",
         fontSize: 20
     }
 

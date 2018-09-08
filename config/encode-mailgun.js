@@ -4,29 +4,7 @@ import api from '../config/api_key'
 let url = req[1].url_mailgun
 let auth = api[0].api_mailgun
 
-class MailGunSend {
-    onSendMail(data) {
-        let headers = {
-            'Authorization': auth,
-            'Content-Type': 'application/x-www-form-urlencoded',
-        }
-        let formBody = [];
-        for (let property in data) {
-            let encodedKey = encodeURIComponent(property);
-            let encodedValue = encodeURIComponent(data[property]);
-            formBody.push(encodedKey + "=" + encodedValue);
-        }
-        formBody = formBody.join("&");
-        fetch(url, {
-            method: 'POST',
-            headers: headers,
-            body: formBody,
-
-        }).then((response) => response.json())
-            .then((responseData) => {
-                console.log(responseData);
-            })
-    }
+class MailGunEncode {
     onSendEncode(data) {
         let headers = {
             'Authorization': auth,
@@ -52,9 +30,8 @@ class MailGunSend {
 }
 
 
-const mailgunsend = new MailGunSend();
+const mailgunEncode = new MailGunEncode();
 
 module.exports = {
-    onSendMail: mailgunsend.onSendMail,
-    onSendEncode : mailgunsend.onSendEncode
+    onSendEncode : mailgunEncode.onSendEncode
 }

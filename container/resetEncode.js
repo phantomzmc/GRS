@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native'
 import { Conatainer } from 'native-base'
 import { connect } from 'react-redux'
-import randomstringPromise from 'randomstring-promise';
+import randomstringPromise from 'randomstring-promise/react-native';
 import SubmitResetPassword from '../component/form/submitResetPass'
 import axios from 'axios'
 import req from '../config/uri_req';
@@ -20,18 +20,16 @@ class ResetEncode extends Component {
         this.state = {
             password: "",
             userid : "",
-            password : "",
+            verifycode : "",
             statusVerify: 0
         }
     }
     componentWillMount() {
-        let { password } = this.state
-        console.log("verfity")
         randomstringPromise(6)
-            .then((password) => {
-                this.setState({ password })
-                this.props.resetPassword(password)
-                console.log(password)
+            .then((verifycode) => {
+                this.props.resetPassword(verifycode)
+                this.setState({ verifycode : verifycode})
+                console.log(this.state.verifycode)
             });
     }
     gotoLogin = () => {
@@ -69,7 +67,8 @@ class ResetEncode extends Component {
             <View style={styles.container}>
                 <ResetPasswordForm
                     sendNewCode={this.sendUpdateEncode.bind(this)}
-                    goLogin={this.gotoLogin.bind(this)} />
+                    goLogin={this.gotoLogin.bind(this)} 
+                    />
                 {/* <SubmitResetPassword /> */}
 
             </View>

@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import { View, StyleSheet, Text, TouchableOpacity, Alert } from 'react-native'
 import { Container, Button, Form, Input, Item, Label } from 'native-base'
 import { connect } from 'react-redux'
-import MailGunSend from '../../config/send-mailgun'
-
+import MailGunEncode from '../../config/encode-mailgun'
 class ResetEncodeForm extends Component {
     constructor(props) {
         super(props)
@@ -11,42 +10,41 @@ class ResetEncodeForm extends Component {
             userid: "",
             password: "",
             email: "",
-            verifycode: ""
+            verifycode : "",
+            verifycode2: "8KPzd9cGcy"
 
         }
     }
-    componentWillMount() {
-        console.log(this.props.userprofile.userprofile.Password)
-        console.log(this.props.userprofile.userprofile.Email)
-    }
-    async sentVerifyCode(email) {
-        const data = await MailGunSend.onSendMail({
+    async sentEncode(email) {
+        const data = await MailGunEncode.onSendEncode({
             'from': 'Guurun Support Team. <support@guurun.com>',
             'to': email,
             'subject': 'Guurun Support Team รหัสในการเปลี่ยนรหัสผ่าน',
-            'text': 'สวัสดีคุณ รหัสที่ใช้ในการเปลี่ยนรหัสผ่านของผู้ใช้งานคือ : ' + this.props.profile.newpassword
+            'text': 'สวัสดีคุณ ' + email + ' รหัสที่ใช้ในการเปลี่ยนรหัสผ่านของผู้ใช้งานคือ : ' + this.props.profile.newpassword
         })
         console.log(data)
-        this.alertSuccess()
     }
     checkResetVerify() {
         let { password, email, userid } = this.state
         if (email != "" && userid != "") {
-            this.sentVerifyCode(email)
-            this.props.sendNewCode(userid, email)
+            this.sentEncode(email)
             this.props.setEmail(email)
+            setTimeout(()=>{
+                this.alertSuccess()
+                this.props.sendNewCode(userid, email)
+            },1000)
         }
-        else if(email == "" && userid == ""){
+        else if (email == "" && userid == "") {
             Alert.alert('ร้องขอรหัสไม่สำเร็จ', 'กรุณากรอก Emailและรหัสบัตรประจำตัวประชาชน ของท่าน', [
                 { text: 'ตกลง' },
             ])
         }
-        else if(email == "") {
+        else if (email == "") {
             Alert.alert('ร้องขอรหัสไม่สำเร็จ', 'กรุณากรอก Email ของท่าน', [
                 { text: 'ตกลง' },
             ])
         }
-        else if(userid == ""){
+        else if (userid == "") {
             Alert.alert('ร้องขอรหัสไม่สำเร็จ', 'กรุณากรอกรหัสบัตรประจำตัวประชาชนของท่าน', [
                 { text: 'ตกลง' },
             ])
@@ -63,7 +61,7 @@ class ResetEncodeForm extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.content}>
-                    <Text style={styles.textTitle}>กรอก Email และรหัสผ่านใหม่ เพื่อใช้ในการเข้าสู่ระบบครั้งต่อไป</Text>
+                    <Text style={styles.textTitle}>กรอก Email และรหัสผ่านใหม่ เพื่อใช้ในการเข้าสู่ระบบครั้งต่อไป : {this.props.profile.newpassword}</Text>
                     <Form style={styles.formInput}>
                         <Item floatingLabel>
                             <Label style={styles.textLabel}>รหัสบัตรประจำตัวประชาชน</Label>

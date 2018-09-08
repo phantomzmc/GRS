@@ -38,7 +38,7 @@ const user = {
   },
   verify: "",
   statuslogin: 0,
-  newpassword: ""
+  newpassword : ""
 };
 const friend = {
   friendRegis: [],

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, Alert, TextInput, StatusBar, AsyncStorage } from 'react-native';
 import { Header, Left, Right, Icon, Button, Body, Title, Container } from "native-base";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview'
+import randomstringPromise from 'randomstring-promise/react-native';
 import { connect } from 'react-redux'
 import axios from 'axios'
 import req from '../config/uri_req'
@@ -310,7 +311,7 @@ const mapDispatchToProps = (dispatch) => {
                 type: "setUserProfile",
                 payload: userprofile
             })
-        },
+        }
     }
 }
 
