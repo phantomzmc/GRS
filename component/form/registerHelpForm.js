@@ -111,7 +111,7 @@ class FormAddressRegister extends Component {
           </Item>
         </Form>
         <View style={styles.viewPicker}>
-          <Text style={styles.headForm}>ความสัมพันธ์</Text>
+          <Text style={styles.headForm2}>ความสัมพันธ์</Text>
           <Form>
             <Picker
               mode="dropdown"
@@ -205,17 +205,21 @@ const styles = StyleSheet.create({
     fontFamily: "kanit"
   },
   viewPicker: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    justifyContent : "space-between"
   },
-  picker: {
-    paddingTop: 15,
-    padding: 30
-  },
+  
 
   headForm: {
     fontFamily: 'kanit',
     fontSize: 16,
     paddingTop: 20
+  },
+  headForm2: {
+    fontFamily: 'kanit',
+    fontSize: 16,
+    paddingTop: 10
+
   },
   headdetail: {
     paddingVertical: 25,

@@ -4,7 +4,7 @@ import { View, StyleSheet, TouchableOpacity, Alert, StatusBar, AsyncStorage, Lin
 import { Container, Header, Tab, Tabs, TabHeading, Icon, Text, Button } from 'native-base';
 import { StackNavigator } from 'react-navigation';
 import { connect } from 'react-redux'
-import Login from '../container/login'
+import Spinner from 'react-native-loading-spinner-overlay';
 import axios from "axios";
 import req from '../config/uri_req'
 import api from '../config/api_key'
@@ -22,6 +22,7 @@ class ControlDistance extends Component {
             title: "ลงทะเบียนวิ่ง",
             pageNumber: 0,
             login: 1,
+            visible: true
         }
         this.goAddTeam = this.goAddTeam.bind(this)
     }
@@ -57,12 +58,13 @@ class ControlDistance extends Component {
         })
             // .then((response) => response.json())
             .then((responseJson) => {
-                this.setState({ isLoading: false, data: responseJson.data[0], });
+                this.setState({ isLoading: false, data: responseJson.data[0], visible: false });
                 console.log(this.state.data)
                 this.props.setRegisterStatus(this.state.data)
                 this.checkRegisEvent(this.state.data)
             }).catch((error) => {
-                this.goListEvent()
+                this.setState({ visible: true })
+                this.fetchRegisEvent()
             });
     }
 
@@ -108,11 +110,12 @@ class ControlDistance extends Component {
         })
             // .then((response) => response.json())
             .then((responseJson) => {
-                this.setState({ status: responseJson.data, });
+                this.setState({ status: responseJson.data, visible: false });
                 console.log(this.state.status)
                 this.alertStatusEvent(responseJson.data)
             }).catch((error) => {
-                this.goListEvent()
+                this.setState({ visible: true })
+                this.checkEventStatus()
             });
     }
     alertStatusEvent(status) {
@@ -214,19 +217,22 @@ class ControlDistance extends Component {
                             <RegisterDistance
                                 nextState={this.goNextState.bind(this)}
                             />
+                            <View style={{ flex: 1 }}>
+                                <Spinner visible={this.state.visible} textContent={"รอสักครู่..."} textStyle={{ color: '#FFF' }} />
+                            </View>
                         </Tab>
                         <Tab
                             heading={<TabHeading><Text style={styles.textLabel} onPress={() => this.goAddTeam()}>ลงทะเบียนแบบกลุ่ม</Text></TabHeading>}>
                         </Tab>
                     </Tabs>
                     :
-                    <RegisterDistance
-                        nextState={this.goNextState.bind(this)}
-                    />
+                        <RegisterDistance
+                            nextState={this.goNextState.bind(this)}
+                        />
                 }
 
-                <SummaryTotal 
-                    total={parseFloat(this.props.event.totalRegister).toFixed(2) }
+                <SummaryTotal
+                    total={parseFloat(this.props.event.totalRegister).toFixed(2)}
                 />
             </Container>
         );

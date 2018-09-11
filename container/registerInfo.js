@@ -18,7 +18,8 @@ class RegisterInfo extends Component {
             titleEvent: "EventName",
             eventid: "",
             term: "",
-            islistinfo: false
+            islistinfo: false,
+            search: ""
         }
     }
     componentDidMount() {
@@ -33,7 +34,7 @@ class RegisterInfo extends Component {
         let data = ({
             params: [
                 { name: "EventID", value: this.state.eventid },
-                { name: "Keyword", value: this.state.term }
+                { name: "Keyword", value: this.state.search }
             ]
         })
         axios.post(uri, data, {
@@ -47,10 +48,24 @@ class RegisterInfo extends Component {
             .then((responseJson) => {
                 this.setState({ isLoading: false, data: responseJson.data, islistinfo: true });
                 console.log(this.state.data)
+                this.errorRegisInfo(this.state.data)
             }).catch((error) => {
                 console.log(error)
             });
         return (this.state.data)
+    }
+    errorRegisInfo(data) {
+        if (data == "") {
+            Alert.alert("ค้นหาไม่พบ", "ผู้ใช้งานนี้ยังไม่ได้ทำการสมัครรายการวิ่งนี้", [
+                {
+                    text: "ค้นหาอีกครั้ง",
+                    onPress: () => this.setState({ search: "",islistinfo : false })
+                }
+            ])
+        }
+        else if(data != ""){
+            this.setState({ search: "",islistinfo : true })
+        }
     }
     goEventList = () => {
         this.props.navigation.navigate('EventList')
@@ -71,31 +86,32 @@ class RegisterInfo extends Component {
                 />
                 <KeyboardAwareScrollView>
                     <View style={styles.container}>
-                        <Card>
-                            <CardItem>
+                        <Card style={{ borderRadius : 10}}>
+                            <CardItem style={{ borderRadius : 10}}> 
                                 <Body style={styles.bodyTitle}>
                                     <Image source={{ uri: url + this.props.event.event.BackgroundImage }} style={styles.imgEvent} />
                                     <Text style={styles.titleEvent}>{this.state.titleEvent}</Text>
                                 </Body>
                             </CardItem>
-                            <CardItem style={{ justifyContent : "center"}}>
+                            <CardItem style={{ justifyContent: "center",borderRadius : 10 }}>
                                 <View>
                                     <Form>
                                         <Item floatingLabel>
                                             <Label style={{ fontFamily: "kanit" }}>ชื่อของคุณ</Label>
                                             <Input
                                                 style={{ fontFamily: "kanit" }}
-                                                onChangeText={(term) => this.setState({ term })}
+                                                value={this.state.search}
+                                                onChangeText={(term) => this.setState({ search: term })}
                                             />
                                         </Item>
                                     </Form>
                                     <Label style={styles.subDetail}> - พิมพ์ชื่อของคุณเพื่อดูรายละเอียดด้านล่าง</Label>
-                                    {this.state.islistinfo &&
+                                    {(this.state.search != "") || this.state.islistinfo &&
                                         <ListRegisInfo
                                             dataitems={this.state.data}
                                         />
                                     }
-                                    <Button block success style={{ paddingVertical: 20 }} onPress={this.getRegisInfo.bind(this)}>
+                                    <Button block success style={{ marginVertical: 20 }} onPress={this.getRegisInfo.bind(this)}>
                                         <Icon name="md-search" type="Ionicons" />
                                         <Text style={{ fontFamily: "kanit" }}>ค้นหา</Text>
                                     </Button>

@@ -46,11 +46,11 @@ class AddressLayout extends Component {
         }
     }
     componentWillMount = () => {
-        if(this.props.choiceSend.choiceSend.choice == 0){
-            this.setState({ checked : true , checked2 : false})
+        if (this.props.choiceSend.choiceSend.choice == 0) {
+            this.setState({ checked: true, checked2: false })
         }
-        else if(this.props.choiceSend.choiceSend.choice == 1){
-            this.setState({ checked : false ,checked2 : true})
+        else if (this.props.choiceSend.choiceSend.choice == 1) {
+            this.setState({ checked: false, checked2: true })
         }
         this.setState({
             priceEvent: parseFloat(this.props.event.totalEvent),
@@ -253,7 +253,7 @@ class AddressLayout extends Component {
                             </View>
                         </Card>
                     </View>
-                    <TouchableOpacity style={[styles.checkSubmit, { flexDirection: "row", justifyContent: "space-between" }]} onPress={() => this.setState({ isPost: !this.state.isPost ,checked : false })}>
+                    <TouchableOpacity style={[styles.checkSubmit, { flexDirection: "row", justifyContent: "space-between" }]} onPress={() => this.setState({ isPost: !this.state.isPost, checked: false })}>
                         <View style={{ flexDirection: "row" }}>
                             <Icon name="home-map-marker" type="MaterialCommunityIcons" />
                             <Text style={styles.textTitle}>ที่อยู่การจัดส่งไปรษณีย์</Text>
@@ -270,17 +270,17 @@ class AddressLayout extends Component {
                             getAddress={this.goTotalPayment.bind(this)}
                         />
                     }
-                    {this.state.checked && 
-                    <View style={styles.submitContainer}>
-                        <TouchableOpacity style={styles.buttonContainerOnPress}
-                            onPress={this.goTotalPayment2.bind(this)}>
-                            <Text style={styles.textButton}>ยืนยัน</Text>
-                        </TouchableOpacity>
-                    </View>
+                    {this.state.checked &&
+                        <View style={styles.submitContainer}>
+                            <TouchableOpacity style={styles.buttonContainerOnPress}
+                                onPress={this.goTotalPayment2.bind(this)}>
+                                <Text style={styles.textButton}>ยืนยัน</Text>
+                            </TouchableOpacity>
+                        </View>
                     }
                 </ScrollView>
-                <SummaryTotal 
-                    total={parseFloat(this.props.event.totalRegister).toFixed(2) }
+                <SummaryTotal
+                    total={parseFloat(this.props.event.totalRegister).toFixed(2)}
                 />
             </Container>
         );
@@ -320,7 +320,7 @@ const styles = StyleSheet.create({
         fontSize: 16
     },
     submitContainer: {
-        marginTop: 20,
+        marginVertical: 20,
         alignItems: 'center',
     },
     buttonContainer: {
@@ -354,7 +354,7 @@ const mapStateToProps = (state) => {
         token: state.token,
         friendlist: state.friendlist,
         userprofile: state.userprofile,
-        choiceSend : state.choiceSend
+        choiceSend: state.choiceSend
     }
 }
 
@@ -384,10 +384,10 @@ const mapDisPacthToProps = (dispatch) => {
                 payload: total
             })
         },
-        setTotalAddress : (totalAddress) => {
+        setTotalAddress: (totalAddress) => {
             dispatch({
-                type : "setTotalAddress",
-                payload : totalAddress
+                type: "setTotalAddress",
+                payload: totalAddress
             })
         }
     }

@@ -4,7 +4,8 @@ const eventState = {
   event: {
     name: "1",
     date: "date",
-    tranferBank: ""
+    tranferBank: "",
+    EventID : ""
   },
   distanceEvent: {
     distanceName: "",

@@ -81,8 +81,7 @@ class FormAddressRegister extends Component {
           </Item>
         </Form>
         <View style={styles.viewPicker}>
-          <Text style={styles.headForm}>ความสัมพันธ์</Text>
-          <Form>
+          <Text style={styles.headForm2}>ความสัมพันธ์</Text>
             <Picker
               mode="dropdown"
               iosHeader="เลือกความสัมพันธ์"
@@ -101,7 +100,6 @@ class FormAddressRegister extends Component {
               <Picker.Item label="ญาติ" value="ญาติ" />
               <Picker.Item label="อื่นๆ" value="อื่นๆ" />
             </Picker>
-          </Form>
         </View>
         <View style={styles.submitContainer}>
           <TouchableOpacity
@@ -175,17 +173,24 @@ const styles = StyleSheet.create({
     fontFamily: "kanit"
   },
   viewPicker: {
-    flexDirection: 'row'
+    justifyContent : "space-between",
+    flexDirection: 'row',
+    alignItems : "center",
+
   },
   picker: {
-    paddingTop: 15,
-    padding: 30
+    fontFamily: 'kanit',
+    fontSize: 16,
   },
 
   headForm: {
     fontFamily: 'kanit',
     fontSize: 16,
     paddingTop: 20
+  },
+  headForm2 : {
+    fontFamily: 'kanit',
+    fontSize: 16,
   },
   textLabel: {
     fontSize: 14,

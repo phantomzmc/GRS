@@ -20,7 +20,12 @@ class HeaderTeam extends Component {
         statusCheckLogin: false,
         statusCheckLogin2: true,
         uri: "",
-        statusLogin: ""
+        statusLogin: "",
+        profile : {
+            Username : "",
+            FirstName : "",
+            LastName : ""
+        }
     }
     _menu = null;
     componentWillMount() {
@@ -122,6 +127,7 @@ class HeaderTeam extends Component {
         this.props.setImageBackground("")
         this.props.addFriendInEvent(friendEvent)
         this.props.addFullFriendInEvent(fullfriendEvent)
+        this.props.setUserProfile(this.state.profile)
         this.props.setFriendRegister("")
     }
 
@@ -276,6 +282,12 @@ const mapDispatchToProps = dispatch => {
             dispatch({
                 type: "setFriendRegister",
                 payload: friendRegis
+            })
+        },
+        setUserProfile : (profile) => {
+            dispatch({
+                type : "setUserProfile",
+                payload : profile
             })
         }
     }

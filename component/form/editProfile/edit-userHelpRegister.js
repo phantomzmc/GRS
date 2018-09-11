@@ -101,7 +101,12 @@ class UserHelpRegister extends Component {
     );
   };
   gotoTeamList = () => {
-    this.props.navigation.navigate("TeamList");
+    if (this.props.event.event.EventID == "") {
+      this.props.navigation.navigate("EventList")
+    }
+    else {
+      this.props.navigation.navigate("TeamList");
+    }
   };
   gotoBack = () => {
     this.props.navigation.navigate('EditProfileAddress')
@@ -143,7 +148,8 @@ const mapStateToProps = state => {
     username: state.username,
     userprofile: state.userprofile,
     profile: state.profile,
-    token: state.token
+    token: state.token,
+    event: state.event
   }
 }
 

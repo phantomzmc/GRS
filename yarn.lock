@@ -5688,6 +5688,10 @@ react-native-keyboard-spacer@^0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/react-native-keyboard-spacer/-/react-native-keyboard-spacer-0.4.1.tgz#46f18a320432098a25ea9fa89f5143dd254d332d"
 
+react-native-loading-spinner-overlay@^0.5.2:
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/react-native-loading-spinner-overlay/-/react-native-loading-spinner-overlay-0.5.2.tgz#b7bcd277476d596615fd7feee601789f9bdc7acc"
+
 react-native-material-menu@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/react-native-material-menu/-/react-native-material-menu-0.4.0.tgz#e892dd1425c872c05fc08cc65bc82879751b87ad"

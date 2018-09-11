@@ -64,34 +64,38 @@ class HeaderRegister extends Component {
         }
 
         console.log(this.props.userprofile.datapic)
-        let uri = req[0].uspGetUserProfile
-        let apikey = api_key[0].api_key
-        let data = ({
-            params: {
-                value: this.props.username.username,
-            }
-        })
-        axios.post(uri, data, {
-            headers: {
-                "X-DreamFactory-API-Key": apikey,
-                "X-DreamFactory-Session-Token": this.props.token.token,
-            },
-            responseType: 'json'
-        })
-            .then((responseJson) => {
-                this.setState({ isLoading: false, user: responseJson.data });
-                console.log(this.state.user)
-                this.props.setUserProfile(this.state.user[0])
-                this.setData()
-                this.fixBugimage(this.state.user[0])
-            }).catch((error) => {
-                this.setState({
-                    fullname: "ชื่อ",
-                    lastname: "นามสกุล",
-                    gen: "เพศ",
-                    age: "อายุ",
-                })
-            });
+        if(this.props.userprofile.userprofile == ""){
+            let uri = req[0].uspGetUserProfile
+            let apikey = api_key[0].api_key
+            let data = ({
+                params: {
+                    value: this.props.username.username,
+                }
+            })
+            axios.post(uri, data, {
+                headers: {
+                    "X-DreamFactory-API-Key": apikey,
+                    "X-DreamFactory-Session-Token": this.props.token.token,
+                },
+                responseType: 'json'
+            })
+                .then((responseJson) => {
+                    this.setState({ isLoading: false, user: responseJson.data });
+                    console.log(this.state.user)
+                    this.props.setUserProfile(this.state.user[0])
+                    this.setData()
+                    this.fixBugimage(this.state.user[0])
+                }).catch((error) => {
+                    this.setState({
+                        fullname: "ชื่อ",
+                        lastname: "นามสกุล",
+                        gen: "เพศ",
+                        age: "อายุ",
+                    })
+                });
+        }
+
+        
 
 
     }
