@@ -117,16 +117,17 @@ class ControlDistance extends Component {
     }
     alertStatusEvent(status) {
         if (status[0].EventStatus == "2") {
-            Alert.alert("รายการนี้มีผู้สมัครเต็มจำนวนแล้ว", "ผุ้ใช้งานสามารถสมัครรายการอื่นหรือตรวจสอบรายชื่อได้ที่นี่ ", [
-                {
-                    text: "รายการวิ่งอื่น",
-                    onPress: () => Linking.openURL('http://shutterrunning2014.com/')
-                },
-                {
-                    text: "ตรวจสอบรายชื่อ",
-                    onPress: () => this.goRegisterInfo()
-                },
-            ], { cancelable: true })
+            this.props.navigation.navigate("EventFullRegis")
+            // Alert.alert("รายการนี้มีผู้สมัครเต็มจำนวนแล้ว", "ผุ้ใช้งานสามารถสมัครรายการอื่นหรือตรวจสอบรายชื่อได้ที่นี่ ", [
+            //     {
+            //         text: "รายการวิ่งอื่น",
+            //         onPress: () => Linking.openURL('http://shutterrunning2014.com/')
+            //     },
+            //     {
+            //         text: "ตรวจสอบรายชื่อ",
+            //         onPress: () => this.goRegisterInfo()
+            //     },
+            // ], { cancelable: true })
         }
         else if ((status[0].EventStatus == "1")) {
             this.fetchRegisEvent()

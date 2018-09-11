@@ -179,7 +179,7 @@ class FriendList extends Component {
 
                     </Item>
                     {/* <Button small iconLeft transparent primary onPress={this.showModal}> */}
-                    <Button small iconLeft transparent primary onPress={() => this.search.clear()}>
+                    <Button small iconLeft transparent primary onPress={() => this.showModal()}>
                         <Icon name="ios-search" />
                         <Text style={{ fontFamily: 'kanit' }}>ค้นหา</Text>
                     </Button>

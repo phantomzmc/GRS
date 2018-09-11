@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina5_5" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Powered by React Native" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Powered by ibitz" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
                     <rect key="frame" x="57" y="423" width="367" height="37"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="367" id="0W5-C3-kb5"/>
@@ -25,19 +25,19 @@
                     <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <color key="highlightedColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="str-logo-sm" translatesAutoresizingMaskIntoConstraints="NO" id="Za6-Ok-1X1">
-                    <rect key="frame" x="183" y="215" width="114" height="50"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ItunesArtwork" translatesAutoresizingMaskIntoConstraints="NO" id="lda-Wy-Bjv">
+                    <rect key="frame" x="173" y="111" width="135" height="131"/>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" red="1" green="0.3563782826967985" blue="0.18651078318003933" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.9137254901960784" green="0.3843137254901961" blue="0.11764705882352941" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="lda-Wy-Bjv" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="173" id="14U-WU-MlC"/>
                 <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="57" id="1AF-Aa-duM"/>
-                <constraint firstItem="Za6-Ok-1X1" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="183" id="U8H-iO-9v8"/>
-                <constraint firstItem="8ie-xW-0ye" firstAttribute="top" secondItem="Za6-Ok-1X1" secondAttribute="bottom" constant="158" id="c08-4M-4fS"/>
-                <constraint firstAttribute="trailing" secondItem="Za6-Ok-1X1" secondAttribute="trailing" constant="183" id="lP9-LT-Xlb"/>
+                <constraint firstItem="lda-Wy-Bjv" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="111" id="Uq4-Dz-tng"/>
+                <constraint firstItem="8ie-xW-0ye" firstAttribute="top" secondItem="lda-Wy-Bjv" secondAttribute="bottom" constant="181" id="hIy-3h-o5S"/>
                 <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="lve-A5-HAr"/>
+                <constraint firstAttribute="trailing" secondItem="lda-Wy-Bjv" secondAttribute="trailing" constant="172" id="mg0-BS-ytJ"/>
                 <constraint firstAttribute="trailing" secondItem="8ie-xW-0ye" secondAttribute="trailing" constant="56" id="p3b-Qt-C75"/>
-                <constraint firstItem="Za6-Ok-1X1" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="215" id="wHG-oE-ohn"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -45,6 +45,6 @@
         </view>
     </objects>
     <resources>
-        <image name="str-logo-sm" width="73" height="50"/>
+        <image name="ItunesArtwork" width="512" height="512"/>
     </resources>
 </document>

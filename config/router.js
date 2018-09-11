@@ -35,6 +35,7 @@ import FriendList from '../container/friendListLayout'
 import HistoryContainer from '../container/historyContainer'
 import RegisterInfo from '../container/registerInfo'
 import SubmitEncode from '../container/submitEncode'
+import EventFullRegis from '../container/eventFullRegis'
 
 import Test from '../mockdata'
 
@@ -272,6 +273,12 @@ export default StackNavigator({
         screen: RegisterInfo,
         navigationOptions: {
             header: () => null
+        }
+    },
+    EventFullRegis : {
+        screen : EventFullRegis,
+        navigationOptions : {
+            header:() => null
         }
     }
 
