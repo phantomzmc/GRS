@@ -61,7 +61,9 @@ class ButtonChangePayment extends Component {
                         <TotalRegister />
                     </Tab>
                 </Tabs>
-                <SummaryTotal />
+                <SummaryTotal 
+                    total={parseFloat(this.props.event.totalRegister).toFixed(2)}
+                />
             </Container>
         );
     }

@@ -30,10 +30,10 @@ class ControlDistance extends Component {
         setTimeout(() => {
             this.checkEventStatus()
         }, 1000)
-        this.props.setTotal(0)
-        this.props.setTotalEvent(0)
-        this.props.setTotalPromo(0)
-        this.props.setTotalRegister(0)
+        this.props.setTotal(parseFloat(0).toFixed(2))
+        this.props.setTotalEvent(parseFloat(0).toFixed(2))
+        this.props.setTotalPromo(parseFloat(0).toFixed(2))
+        this.props.setTotalRegister(parseFloat(0).toFixed(2))
 
     }
 
@@ -225,7 +225,9 @@ class ControlDistance extends Component {
                     />
                 }
 
-                <SummaryTotal />
+                <SummaryTotal 
+                    total={parseFloat(this.props.event.totalRegister).toFixed(2) }
+                />
             </Container>
         );
     }

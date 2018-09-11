@@ -19,9 +19,9 @@ const credit = {
     expCredit: "00/0000",
     cvcCredit: "XXX"
   },
-  paymentslip : "",
-  charge : {
-    id : ""
+  paymentslip: "",
+  charge: {
+    id: ""
   }
 
 };
@@ -38,7 +38,7 @@ const user = {
   },
   verify: "",
   statuslogin: 0,
-  newpassword : ""
+  newpassword: ""
 };
 const friend = {
   friendRegis: [],
@@ -118,7 +118,7 @@ const event = (state = eventState, action) => {
       state.distanceEvent = action.payload;
       break;
     }
-    case "setTotalEvent" : {
+    case "setTotalEvent": {
       state.totalEvent = action.payload
       break;
     }
@@ -126,7 +126,7 @@ const event = (state = eventState, action) => {
       state.totalPrice = action.payload;
       break;
     }
-    case "setTotalAddress" : {
+    case "setTotalAddress": {
       state.totalAddress = action.payload;
       break;
     }
@@ -196,16 +196,20 @@ const creditcard = (state = credit, action) => {
       state.typePayment = action.payload
       break;
     }
-    case "setPaymentSlip" :{
+    case "setPaymentSlip": {
       state.paymentslip = action.payload
       break;
-    } 
+    }
     default:
       break;
   }
   return state;
 };
-const choiceSend = (state = {}, action) => {
+const choiceSend = (state = choiceSend = {
+  choiceSend : {
+    choice: 0
+  }
+}, action) => {
   switch (action.type) {
     case "setSendChoice": {
       state.choiceSend = action.payload;
@@ -239,8 +243,8 @@ const userprofile = (state = {
     PicProfile: "",
     BackgroundProfile: ""
   },
-  imgprofile: "1",
-  imgbackground: "1",
+  imgprofile: "",
+  imgbackground: "",
   userstatus: ""
 }, action) => {
   switch (action.type) {
@@ -270,7 +274,7 @@ const userprofile = (state = {
       state.registerStatus = action.payload
       break;
     }
-    case "setEmail" : {
+    case "setEmail": {
       state.email = action.payload
       break;
     }

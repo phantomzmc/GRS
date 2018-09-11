@@ -22,26 +22,47 @@ class HeaderRegister extends Component {
             ImageSource: "",
             imgBackground: ""
         }
+        this.fixBugimage = this.fixBugimage.bind(this)
     }
-    setNullImage(){
-        this.setState({ 
-            ImageSource: "", 
-            imgBackground: "" 
+    setNullImage() {
+        this.setState({
+            ImageSource: "",
+            imgBackground: ""
         })
         this.props.setImageProfile("")
         this.props.setImageBackground("")
     }
+    fixBugimage(user) {
+        console.log("fixBugimage")
+        let strPicProfile = JSON.stringify(this.props.userprofile.userprofile.PicProfile)
+        let strBackground = JSON.stringify(this.props.userprofile.userprofile.BackgroundProfile)
+        if (strPicProfile != JSON.stringify(user.PicProfile)) {
+            this.setState({
+                ImageSource: this.props.userprofile.imgprofile
+            })
+            this.props.setImageProfile(this.props.userprofile.imgprofile)
+            console.log("picprofile")
+
+        }
+        else if (strBackground == JSON.stringify(user.BackgroundProfile)) {
+            this.setState({
+                ImageBackground: this.props.userprofile.imgbackground
+            })
+            this.props.setImageProfile(this.props.userprofile.imgbackground)
+            console.log("background")
+        }
+    }
     componentDidMount() {
         {
             this.props.userprofile.userprofile.PicProfile && this.props.userprofile.userprofile.BackgroundProfile == "" ?
-                this.setNullImage()      
+                this.setNullImage()
                 :
-                this.setState({ 
-                    ImageSource: this.props.userprofile.userprofile.PicProfile, 
-                    imgBackground: this.props.userprofile.userprofile.BackgroundProfile 
+                this.setState({
+                    ImageSource: this.props.userprofile.userprofile.PicProfile,
+                    imgBackground: this.props.userprofile.userprofile.BackgroundProfile
                 })
         }
-        
+
         console.log(this.props.userprofile.datapic)
         let uri = req[0].uspGetUserProfile
         let apikey = api_key[0].api_key
@@ -62,6 +83,7 @@ class HeaderRegister extends Component {
                 console.log(this.state.user)
                 this.props.setUserProfile(this.state.user[0])
                 this.setData()
+                this.fixBugimage(this.state.user[0])
             }).catch((error) => {
                 this.setState({
                     fullname: "ชื่อ",
@@ -214,6 +236,8 @@ class HeaderRegister extends Component {
             gen: this.props.userprofile.userprofile.Gender,
             age: this.props.userprofile.userprofile.DateOfBirth
         })
+        this.fixBugimage()
+
     }
     render() {
         return (

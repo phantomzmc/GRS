@@ -46,10 +46,19 @@ class AddressLayout extends Component {
         }
     }
     componentWillMount = () => {
+        if(this.props.choiceSend.choiceSend.choice == 0){
+            this.setState({ checked : true , checked2 : false})
+        }
+        else if(this.props.choiceSend.choiceSend.choice == 1){
+            this.setState({ checked : false ,checked2 : true})
+        }
         this.setState({
-            priceEvent: parseFloat(this.props.event.totalRegister),
+            priceEvent: parseFloat(this.props.event.totalEvent),
             priceCDO: parseFloat(65.0),
         })
+        console.log(this.state.priceEvent)
+        console.log(this.state.priceCDO)
+
     }
     componentDidMount() {
         this.getCountPostPrice()
@@ -270,7 +279,9 @@ class AddressLayout extends Component {
                     </View>
                     }
                 </ScrollView>
-                <SummaryTotal />
+                <SummaryTotal 
+                    total={parseFloat(this.props.event.totalRegister).toFixed(2) }
+                />
             </Container>
         );
     }
@@ -342,7 +353,8 @@ const mapStateToProps = (state) => {
         event: state.event,
         token: state.token,
         friendlist: state.friendlist,
-        userprofile: state.userprofile
+        userprofile: state.userprofile,
+        choiceSend : state.choiceSend
     }
 }
 

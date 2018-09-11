@@ -18,6 +18,7 @@ class SummaryTotal extends Component {
             this.setState({ totalRegister: this.props.event.totalRegister })
         }, 500);
         console.log(this.state.totalRegister)
+        console.log(this.props)
     }
     componentWillReceiveProps(nextProps) {
         if (nextProps.totalRegister != this.props.event.totalRegister) {
@@ -36,7 +37,7 @@ class SummaryTotal extends Component {
                 <View style={styles.container}>
                     <View style={styles.box}>
                         <Text style={styles.textSummary}>สรุปค่าสมัครทั้งหมด : </Text>
-                        <Text style={styles.textSummary}>{this.state.totalRegister} บาท</Text>
+                        <Text style={styles.textSummary}>{this.props.total} บาท</Text>
                     </View>
                 </View>
             </ImageBackground>

@@ -180,7 +180,9 @@ class ShirtPhotoPlus extends Component {
                         </View>
                     }
                 </ScrollView>
-                <SummaryTotal />
+                <SummaryTotal 
+                    total={parseFloat(this.props.event.totalRegister).toFixed(2) }
+                />
             </Container>
         );
     }
