@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, StatusBar, ScrollView } from 'react-native'
 import { Text, Container, Icon } from "native-base";
+import Spinner from 'react-native-loading-spinner-overlay';
 import HistoryList from '../component/list/history/historylist'
 import HeaderTeam from '../component/items/headerTeam'
 import { connect } from "react-redux";
@@ -16,7 +17,8 @@ class HistoryContainer extends Component {
         super(props)
         this.state = {
             title: "ประวัติการวิ่ง",
-            statusData: true
+            statusData: true,
+            visible: true
         }
     }
 
@@ -43,8 +45,8 @@ class HistoryContainer extends Component {
                 console.log(this.state.dataSource)
                 this.checkOutput(response.data)
             }).catch((error) => {
-                // this.setState({ isModalVisibleError: !this.state.isModalVisibleError })
-                console.error(error);
+                this.getHistory()
+                console.log(error);
             });
         return this.state.dataSource
     }
@@ -71,23 +73,28 @@ class HistoryContainer extends Component {
                     goEditProfile={() => this.props.navigation.navigate('EditProfile')}
                     goRegis={() => this.props.navigation.navigate('ControlDistance')}
                     goSingleLogin={() => this.props.navigation.navigate('SingleLogin')}
+                    goContacts={()=> this.props.navigation.navigate('Contacts')}
+
                 />
                 <StatusBar
                     barStyle="light-content"
                     hidden={false}
                     translucent={true}
                 />
-                {this.state.statusData == true ?
-                    <HistoryList
-                        historyData={this.state.dataSource}
-                    /> :
-                    <Container>
-                        <View style={styles.viewAlert}>
-                            <Icon name="alert" type="Ionicons" />
-                            <Text style={styles.textAlert}>ไม่มีรายการสมัคร</Text>
-                        </View>
-                    </Container>
-                }
+                <View style={{ flex: 1 }}>
+                    <Spinner visible={this.state.visible} textContent={"รอสักครู่..."} textStyle={{ color: '#FFF' }} />
+                    {this.state.statusData == true ?
+                        <HistoryList
+                            historyData={this.state.dataSource}
+                        /> :
+                        <Container>
+                            <View style={styles.viewAlert}>
+                                <Icon name="alert" type="Ionicons" />
+                                <Text style={styles.textAlert}>ไม่มีรายการสมัคร</Text>
+                            </View>
+                        </Container>
+                    }
+                </View>
 
             </Container>
 
@@ -107,7 +114,7 @@ const styles = StyleSheet.create({
     },
     list: {
         padding: 10,
-        paddingHorizontal : 10
+        paddingHorizontal: 10
     },
     containerNo: {
 

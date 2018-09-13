@@ -12,6 +12,7 @@ import {
 import { Card, Icon } from "native-base";
 import { connect } from "react-redux";
 import ImagePicker from 'react-native-image-picker';
+import HTML from 'react-native-render-html';
 import axios from 'axios'
 import apikey from '../../config/api_key'
 import req from '../../config/uri_req'
@@ -30,7 +31,7 @@ class TranferView extends Component {
             username: "",
             ImageSource: null,
             statusButton: true,
-            statusButtonOnPress : false
+            statusButtonOnPress: false
         }
     }
     getCustomer() {
@@ -64,7 +65,7 @@ class TranferView extends Component {
                 // let source = { uri: 'data:image/jpeg;base64,' + response.data };
                 this.setState({
                     ImageSource: source,
-                    statusButton : false,
+                    statusButton: false,
                     statusButtonOnPress: true
                 });
                 console.log(this.state.ImageSource)
@@ -117,7 +118,7 @@ class TranferView extends Component {
                                 style={{
                                     flexDirection: 'column'
                                 }}>
-                                <Text style={styles.textCardNumber}>{this.props.detailPayment}</Text>
+                                <HTML html={this.props.detailPayment} baseFontStyle={{ fontFamily: "kanit" ,color : "#fff",fontSize : 12 }} />
                                 {/* <Text style={styles.textNumber}>{branch}</Text> */}
                             </View>
 
@@ -213,14 +214,14 @@ const mapDispatchToProps = dispatch => {
         },
         setPaymentSlip: (silp) => {
             dispatch({
-                type : 'setPaymentSlip',
-                payload : silp
+                type: 'setPaymentSlip',
+                payload: silp
             })
         },
-        setStatusPayment : (status) => {
+        setStatusPayment: (status) => {
             dispatch({
-                type : 'setStatusPayment',
-                payload : status
+                type: 'setStatusPayment',
+                payload: status
             })
         }
     }
@@ -245,7 +246,7 @@ const styles = StyleSheet.create({
     },
     textCardNumber: {
         color: '#fff',
-        fontSize: 12
+        fontSize: 5
     },
     textNumber: {
         color: '#fff',
@@ -288,7 +289,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 20,
-        opacity : 0.7
+        opacity: 0.7
     },
     buttonContainerOnPress: {
         height: 40,

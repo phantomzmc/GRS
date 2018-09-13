@@ -14,6 +14,7 @@ import HeaderInvoice from '../component/items/headerInvoice'
 import CrargeLoading from '../component/modal/chargePayment_load'
 import ChargePaymentLoad from '../component/modal/chargePayment_load';
 import ChargeError from '../component/modal/chargePayment_error'
+import MailGunSend from '../config/send-mailgun'
 
 class TotalLayout extends Component {
 
@@ -40,11 +41,11 @@ class TotalLayout extends Component {
         setTimeout(() => {
             if (this.state.modalLoading == true) {
                 this.setState({ modalLoading: false, layout_invoice: true })
-                // setTimeout(()=>{
-                //     this.captureScreenFunction()
-                // },1500)
+                setTimeout(() => {
+                    this.captureScreenFunction()
+                }, 500)
             }
-        }, 2000)
+        }, 1000)
     }
     addRegister() {
         console.log("addregis")
@@ -97,6 +98,15 @@ class TotalLayout extends Component {
     }
     genQRCode() {
 
+    }
+    async sendEmailInvoice() {
+        const data = await MailGunSend.onSendMail({
+            'from': 'Guurun Support Team. <support@guurun.com>',
+            'to': this.props.profile.profile.email,
+            'subject': 'Guurun Support Team รหัสในการยืนยันตัวตน',
+            'text': 'สวัสดีคุณ ' + this.props.profile.profile.fullname + ' รหัสที่ใช้ในการยืนยันตัวตนขอผู้ใช้งานคือ : ' + this.props.profile.verify,
+        })
+        console.log(data)
     }
 
     onClick = () => {
@@ -156,6 +166,7 @@ class TotalLayout extends Component {
                     goEditProfile={() => this.props.navigation.navigate('EditProfile')}
                     goRegis={() => this.props.navigation.navigate('ControlDistance')}
                     goSingleLogin={() => this.props.navigation.navigate('SingleLogin')}
+                    goContacts={()=> this.props.navigation.navigate('Contacts')}
                 />
                 <StatusBar
                     barStyle="light-content"

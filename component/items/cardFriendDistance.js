@@ -188,7 +188,7 @@ class CradFriendDistance extends Component {
                     <Right>
                         <View style={{ flexDirection: 'row' }}>
                             <TouchableOpacity onPress={() => this.onPressDeleteItem(this.props.idkey)}>
-                                <Icon name="ios-trash-outline" style={{ color: 'red' }} />
+                                <Icon name="ios-trash-outline" style={{ color: 'red',fontSize : 50}} />
                             </TouchableOpacity>
                         </View>
                     </Right>
@@ -210,7 +210,7 @@ class CradFriendDistance extends Component {
                                     <Right>
                                         <TouchableOpacity onPress={() => this.setState({ distance: !this.state.distance })}
                                             onPressIn={() => this.chageIcon()}>
-                                            <Icon name={this.state.iconName} style={{ fontSize: 20 }} />
+                                            <Icon name={this.state.iconName} style={{ fontSize: 30 }} />
                                         </TouchableOpacity>
                                     </Right>
                                 </View>
@@ -233,7 +233,7 @@ class CradFriendDistance extends Component {
                                     <Right>
                                         <TouchableOpacity onPress={() => this.setState({ sizeShirth: !this.state.sizeShirth })}
                                             onPressIn={() => this.chageIcon()}>
-                                            <Icon name={this.state.iconName} style={{ fontSize: 20 }} />
+                                            <Icon name={this.state.iconName} style={{ fontSize: 30 }} />
                                         </TouchableOpacity>
                                     </Right>
                                 </View>

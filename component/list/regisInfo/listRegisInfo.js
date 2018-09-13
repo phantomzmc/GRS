@@ -72,6 +72,9 @@ const styles = StyleSheet.create({
         fontFamily: "kanit",
         fontSize: 18,
         paddingVertical: 10
+    },
+    textValue : {
+        fontFamily : "kanit"
     }
 })
 

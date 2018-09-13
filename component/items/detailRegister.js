@@ -40,10 +40,16 @@ class DetailRegister extends Component {
                         {this.state.statusPayment2 && <Text style={styles.typePaymentWarning}>รอดำเนินการ</Text>}
                     </View>
                     <View>
-                        <QRCode
-                            value={this.props.invoice.invoice[0].InvoiceID}
-                            size={75}
-                        />
+                        {this.props.creditcard.statusPayment == 2 ?
+                            <QRCode
+                                value={this.props.invoice.invoice[0].InvoiceID}
+                                size={75}
+                            /> :
+                            <View style={styles.disQRcode}>
+                                <Text style={styles.textName3}>QR Code</Text>
+                            </View>
+                        }
+
                     </View>
                     <View>
                         <Text style={{ fontSize: 10, color: '#A9A9A9', fontFamily: 'kanit' }}> Order : {this.state.numberInvoice} </Text>
@@ -170,6 +176,21 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontFamily: 'kanit',
         justifyContent: "center"
+    },
+    disQRcode: {
+        width: 75,
+        height: 75,
+        borderRadius: 37.5,
+        borderColor: "#FFA500",
+        borderWidth: 1,
+        justifyContent : "center",
+        alignItems : "center",
+        flex: 1
+    },
+    textName3: {
+        fontSize: 12,
+        color: '#a9a9a9',
+        fontFamily: 'kanit',
     }
 
 })

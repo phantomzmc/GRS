@@ -73,7 +73,7 @@ class ListEvent extends Component {
                 this.setState({ isLoading: false, dataSource: responseJson.data, });
                 this.checkStatusEvent(responseJson.data)
             }).catch((error) => {
-                this.setState({ isLoading : true })
+                this.setState({ isLoading: true })
                 this.feedEvent(token)
                 console.log(error);
             });
@@ -86,14 +86,14 @@ class ListEvent extends Component {
                 console.log("เปิด", i)
                 dataEvent.push(item)
             }
-            else if( item.EventStatus == "2"){
+            else if (item.EventStatus == "2") {
                 console.log("เปิด", i)
                 dataEvent.push(item)
             }
             else if (item.EventStatus == "0") {
                 console.log("ปิด", i)
             }
-            
+
         })
         this.setState({ dataSource: dataEvent })
         console.log(this.state.dataSource)
@@ -126,10 +126,10 @@ class ListEvent extends Component {
                 <View
                     style={{
                         flex: 1,
-                        justifyContent : "center",
-                        alignItems : "center"
+                        justifyContent: "center",
+                        alignItems: "center"
                     }}>
-                    <ActivityIndicator size="large"/>
+                    <ActivityIndicator size="large" />
                 </View>
             )
         }
@@ -150,21 +150,29 @@ class ListEvent extends Component {
                                                 style={{
                                                     height: 200
                                                 }} />
+                                            <View style={styles.textName}>
+                                                <Text style={styles.name}>{item.EventName}</Text>
+                                            </View>
                                             <View style={styles.containerEventDetail}>
-                                                <View style={styles.containerEventDate}>
-                                                    <Text style={styles.dateText}>{item.EventID}</Text>
-                                                    <Text style={styles.monthText}>{item.EventDate}</Text>
+                                                <Text style={styles.monthText}>วันที่จัดงาน : {item.EventDate}</Text>
+                                                <View style={{ flexDirection : "row" , backgroundColor : "#FC561F" ,padding : 5 , borderRadius : 5}} onPress={this.gotoPayment.bind(this, item)}>
+                                                    <Icon name="ios-person-add" type="Ionicons" style={{ color : '#fff', paddingLeft : 5}}/>
+                                                    <Text style={styles.addRegis}> สมัครรายการวิ่ง</Text>
                                                 </View>
-                                                <View style={styles.textName}>
-                                                    <Text style={styles.name}>{item.EventName}</Text>
-
-                                                </View>
+                                                {/* <Button iconLeft small primary onPress={this.gotoPayment.bind(this, item)}>
+                                                    <Icon name="ios-person-add" type="Ionicons" />
+                                                    <Text style={styles.info}> สมัครรายการวิ่ง</Text>
+                                                </Button> */}
                                             </View>
                                         </View>
                                     </TouchableHighlight>
                                     <CardItem footer borderedtem>
-                                        <View style={{ justifyContent: "flex-end", alignContent: "center", flexDirection: "row", backgroundColor: "#fff", flex: 1 }}>
-                                            <Button iconLeft small bordered warning onPress={this.gotoRegisinfo.bind(this, item)}>
+                                        <View style={{ justifyContent: "space-between", alignContent: "center", flexDirection: "row", backgroundColor: "#fff", flex: 1 }}>
+                                            <Button iconLeft small bordered success onPress={this.gotoRegisinfo.bind(this, item)}>
+                                                <Icon name="ios-list" type="Ionicons" />
+                                                <Text style={styles.info}>รายละเอียดงานวิ่ง</Text>
+                                            </Button>
+                                            <Button iconLeft small bordered danger onPress={this.gotoRegisinfo.bind(this, item)}>
                                                 <Icon name="search" type="Ionicons" />
                                                 <Text style={styles.info}>ตรวจสอบรายชื่อ</Text>
                                             </Button>
@@ -224,6 +232,7 @@ const styles = StyleSheet.create({
     // },
     containerEventDetail: {
         padding: 15,
+        justifyContent: "space-between",
         flexDirection: 'row',
         alignItems: 'center'
     },
@@ -237,24 +246,21 @@ const styles = StyleSheet.create({
     },
     monthText: {
         color: '#FC561F',
-        fontSize: 20,
+        fontSize: 14,
         fontFamily: "Kanit"
     },
     containerEventName: {
         flex: 1
     },
     textName: {
-        width: 290,
-        alignItems: 'center',
-        justifyContent: 'center',
+        paddingTop: 30,
+        paddingHorizontal: 20
+        // alignItems: 'center',
+        // justifyContent: 'center',
     },
     name: {
         flex: 1,
-
-        paddingLeft: 20,
-        paddingRight: 60,
-        paddingVertical: 15,
-        fontSize: 16,
+        fontSize: 20,
         fontFamily: "Kanit"
     },
     listView: {
@@ -267,6 +273,12 @@ const styles = StyleSheet.create({
     info: {
         fontFamily: 'kanit',
 
+    },
+    addRegis: {
+        fontFamily: 'kanit',
+        paddingVertical: 5,
+        paddingHorizontal: 10,
+        color: '#fff'
     }
 });
 export default connect(mapStateToProps, mapDispatchtoProps)(ListEvent);

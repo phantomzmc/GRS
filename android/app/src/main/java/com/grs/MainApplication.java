@@ -14,7 +14,7 @@ import com.brentvatne.react.ReactVideoPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.rgabs.omise.OmisePackage;
 import com.smixx.reactnativeicons.ReactNativeIcons;
-import org.reactnative.camera.RNCameraPackage;
+//import org.reactnative.camera.RNCameraPackage;
 import com.imagepicker.ImagePickerPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
@@ -47,10 +47,9 @@ public class MainApplication extends Application implements ReactApplication {
             new ReactVideoPackage(),
             new VectorIconsPackage(),
             new OmisePackage(),
-            new ReactNativeIcons(),
-            new RNCameraPackage(),
-            new ImagePickerPackage(),
-            new VectorIconsPackage()
+            new ReactNativeIcons()
+//            new RNCameraPackage(),
+//            new VectorIconsPackage()
       );
     }
 

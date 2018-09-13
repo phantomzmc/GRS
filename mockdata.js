@@ -1,72 +1,31 @@
 import React, { Component } from 'react'
-import { StyleSheet, ScrollView, View, Button } from 'react-native'
-import QRCode from 'react-native-qrcode-svg'
+import { StyleSheet, TouchableHighlight, View, Text } from 'react-native'
+import MailGunSend from './config/send-mailgun'
 
 
 export default class App extends Component {
-  handlePress = () => {
-    this.qrcode.toDataURL(this.callback)
+
+  componentDidMount() {
+    this.sendEmailInvoice()
   }
-  callback = (dataURL) => {
-    alert(dataURL)
+  async sendEmailInvoice() {
+    const data = await MailGunSend.onSendInvoice({
+      'from': 'Guurun Support Team. <support@guurun.com>',
+      'to': 'phantomzmc@gmail.com',
+      'subject': 'Guurun Support Team รหัสในการยืนยันตัวตน',
+      'text': 'สวัสดีคุณ ',
+      'html': '<html xmlns="http://www.w3.org/1999/xhtml"><head><meta name="viewport" content="width=device-width" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Billing e.g. invoices and receipts</title><link href="styles.css" media="all" rel="stylesheet" type="text/css" /> </head><body><center><h1>Test</h1></center></body></html>'
+    })
+    console.log(data)
   }
-  render () {
+
+  render() {
     return (
-      <ScrollView contentContainerStyle={styles.container}>
-        <View style={styles.section}>
-          <QRCode value='thunnathorn' />
-        </View>
-        <View style={styles.section}>
-          <QRCode
-            value='hello world'
-            size={200}
-          />
-        </View>
-        <View style={styles.section}>
-          <QRCode
-            value='hello world'
-            color='blue'
-            backgroundColor='yellow'
-          />
-        </View>
-        <View style={styles.section}>
-          <QRCode
-            value='hello world'
-          />
-        </View>
-        <View style={styles.section}>
-          <QRCode
-            value='hello world'
-            logoSize={50}
-          />
-        </View>
-        <View style={styles.section}>
-          <QRCode
-            value='hello world'
-            logoMargin={10}
-          />
-        </View>
-        <View style={styles.section}>
-          <QRCode
-            value='hello world'
-            logoBorderRadius={15}
-          />
-        </View>
-        <View style={styles.section}>
-          <QRCode
-            value='hello world'
-            logoBackgroundColor='blue'
-            getRef={(c) => (this.qrcode = c)}
-          />
-          <Button title={'getDataURL'} onPress={this.handlePress} />
-        </View>
-        <View style={styles.section}>
-          <QRCode
-            value='hello world'
-            ecl='H'
-          />
-        </View>
-      </ScrollView>
+      <View>
+        <TouchableHighlight onPress={() => this.sentVerifyCode.bind(this)}>
+          <Text>Test Email</Text>
+        </TouchableHighlight>
+      </View>
     )
   }
 }

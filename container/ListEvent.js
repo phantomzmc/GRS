@@ -164,6 +164,7 @@ class ListEvent extends Component {
                     goEditProfile={() => this.props.navigation.navigate('EditProfile')}
                     goRegis={false}
                     goSingleLogin={() => this.props.navigation.navigate('SingleLogin')}
+                    goContacts={()=> this.props.navigation.navigate('Contacts')}
                 />
                 <List
                     CheckLogin={this.checkUser.bind(this)}

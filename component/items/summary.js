@@ -10,26 +10,16 @@ class SummaryTotal extends Component {
             totalRegister: ""
         }
     }
-    componentWillMount(){
-        clearInterval(this._interval);
-    }
-    componentDidMount() {
-        this._interval = setInterval(() => {
-            this.setState({ totalRegister: this.props.event.totalRegister })
-        }, 500);
-        console.log(this.state.totalRegister)
-        console.log(this.props)
-    }
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.totalRegister != this.props.event.totalRegister) {
-            console.log("update")
-            this.setState({ totalRegister: this.props.event.totalRegister })
-        }
-        else if (nextProps.totalRegister != this.props.friendlist.friendTotalPrice) {
-            console.log("friend update ")
-            this.setState({ totalRegister: this.props.friendlist.friendTotalPrice })
-        }
-    }
+    // componentWillMount(){
+    //     clearInterval(this._interval);
+    // }
+    // componentDidMount() {
+    //     this._interval = setInterval(() => {
+    //         this.setState({ totalRegister: this.props.event.totalRegister })
+    //     }, 500);
+    //     console.log(this.state.totalRegister)
+    //     console.log(this.props)
+    // }
 
     render() {
         return (

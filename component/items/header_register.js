@@ -13,10 +13,10 @@ class HeaderRegister extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            fullname: "ชื่อ",
-            lastname: "นามสกุล",
-            gen: "เพศ",
-            age: "อายุ",
+            fullname: this.props.userprofile.userprofile.FirstName,
+            lastname: this.props.userprofile.userprofile.LastName,
+            gen: this.props.userprofile.userprofile.Gender,
+            age: this.props.userprofile.userprofile.DateOfBirth,
             eventname: "",
             user: [],
             ImageSource: "",
@@ -52,7 +52,7 @@ class HeaderRegister extends Component {
             console.log("background")
         }
     }
-    componentDidMount() {
+    componentWillMount() {
         {
             this.props.userprofile.userprofile.PicProfile && this.props.userprofile.userprofile.BackgroundProfile == "" ?
                 this.setNullImage()
@@ -94,10 +94,6 @@ class HeaderRegister extends Component {
                     })
                 });
         }
-
-        
-
-
     }
     selectPhotoTapped() {
         const options = {
@@ -233,21 +229,11 @@ class HeaderRegister extends Component {
             });
     }
 
-    setData() {
-        this.setState({
-            fullname: this.props.userprofile.userprofile.FirstName,
-            lastname: this.props.userprofile.userprofile.LastName,
-            gen: this.props.userprofile.userprofile.Gender,
-            age: this.props.userprofile.userprofile.DateOfBirth
-        })
-        this.fixBugimage()
-
-    }
     render() {
         return (
             <View>
-                {this.state.imgBackground == "" ?
-                    <ImageBackground source={{ uri: "http://www.jcmagazine.com/wp-content/uploads/2016/07/deporte-carrera.jpg" }} style={styles.coverImg} >
+                {this.props.userprofile.userprofile.BackgroundProfile == "" ?
+                    <View style={styles.cover} >
                         <View style={styles.container}>
                             <View style={{ padding: 10, alignItems: "flex-end" }}>
                                 <TouchableOpacity onPress={this.selectPhotoTapped2.bind(this)}>
@@ -256,7 +242,7 @@ class HeaderRegister extends Component {
                             </View>
                             <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)} style={styles.container}>
                                 <View style={styles.imgContainer}>
-                                    {this.state.ImageSource == "" ?
+                                    {this.props.userprofile.userprofile.PicProfile == "" ?
                                         <View style={styles.imgAvatar} >
                                             <Icon active name="user-circle-o" type="FontAwesome" size={10} />
                                             <Text style={{ fontFamily: "kanit", fontSize: 12, paddingTop: 10 }}>เพิ่มรูปภาพ</Text>
@@ -270,7 +256,7 @@ class HeaderRegister extends Component {
                                 <Text style={styles.ageProfile}>{this.state.gen} - {this.state.age}</Text>
                             </View>
                         </View>
-                    </ImageBackground> :
+                    </View> :
                     <ImageBackground source={{ uri: this.state.imgBackground }} style={styles.coverImg} >
                         <View style={styles.container}>
                             <View style={{ padding: 10, alignItems: "flex-end" }}>
@@ -305,6 +291,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'flex-start'
+    },
+    cover : {
+        backgroundColor : '#e0e0e0'
     },
     coverImg: {
         width: '100%',

@@ -24,7 +24,7 @@ import ResetVerify from '../container/resetVerify'
 import ResetEncode from '../container/resetEncode'
 import ResetPassword from '../container/resetPassword'
 import FriendDistance from '../container/friendDistance'
-import TeamRegis from '../container/teamRegis'
+// import TeamRegis from '../container/teamRegis'
 import ListTotalRegis from '../component/list/listTotal/listTotalRegis'
 import EditProfile from '../component/form/editProfile/edit-userRegister'
 import EditProfileAddress from '../component/form/editProfile/edit-userAddressRegister'
@@ -36,6 +36,7 @@ import HistoryContainer from '../container/historyContainer'
 import RegisterInfo from '../container/registerInfo'
 import SubmitEncode from '../container/submitEncode'
 import EventFullRegis from '../container/eventFullRegis'
+import Contacts from '../container/contacts'
 
 import Test from '../mockdata'
 
@@ -43,6 +44,12 @@ import Test from '../mockdata'
 export default StackNavigator({
     // Test : {
     //     screen : Test
+    // },
+    // TeamList: {
+    //     screen: TeamList,
+    //     navigationOptions: {
+    //         header: () => null
+    //     }
     // },
 
     EventList: {
@@ -226,12 +233,12 @@ export default StackNavigator({
     GetPleace: {
         screen: GetPleace
     },
-    TeamRegis: {
-        screen: TeamRegis,
-        navigationOptions: {
-            header: () => null
-        }
-    },
+    // TeamRegis: {
+    //     screen: TeamRegis,
+    //     navigationOptions: {
+    //         header: () => null
+    //     }
+    // },
     EditProfile: {
         screen: EditProfile,
         navigationOptions: {
@@ -279,6 +286,12 @@ export default StackNavigator({
         screen : EventFullRegis,
         navigationOptions : {
             header:() => null
+        }
+    },
+    Contacts : {
+        screen : Contacts,
+        navigationOptions : {
+            header : () => null
         }
     }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, Image, Text } from "react-native";
+import { StyleSheet, Image, Text,TouchableOpacity } from "react-native";
 import { View, Card, CardItem, Left, Right } from 'native-base';
 import CheckBox from 'react-native-checkbox-heaven';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -25,6 +25,9 @@ class CellEventListFriend extends Component {
         this.checkFavorite()
         console.log(this.props.items)
         console.log(this.state.item)
+    }
+    onCheck(){
+
     }
     addFriendEvent = (item, idkey) => {
         this._cellCheckAddFriend(item, idkey)
@@ -67,7 +70,7 @@ class CellEventListFriend extends Component {
         console.log("_cellCheckAddFriend" + idkey)
         var data = datafriendRegis
         dataitem = {
-            key : idkey,
+            key: idkey,
             RunnerID: item.RunnerID,
             FirstName: item.FirstName,
             LastName: item.LastName,
@@ -152,14 +155,19 @@ class CellEventListFriend extends Component {
     render() {
         let { item, favorite } = this.state
         return (
-            <View style={styles.container}>
-                <Card>
+            <TouchableOpacity style={styles.container} onChange={item.RegisterStatus == 0 ? this.handleOnChange.bind(this) : this.onCheck.bind(this)}>
+                <Card
+                    style={this.state.checked == false ?
+                        styles.cardDefal :
+                        styles.card
+                    }
+                >
                     <CardItem>
                         <Left>
                             {item.RegisterStatus == 0 ?
                                 <View>
                                     <CheckBox
-                                        iconSize={20}
+                                        iconSize={40}
                                         iconName='iosCircleMix'
                                         checked={this.state.checked}
                                         checkedColor='#FC561F'
@@ -221,7 +229,7 @@ class CellEventListFriend extends Component {
                         </View>
                     </CardItem>
                 </Card>
-            </View>
+            </TouchableOpacity>
         )
     }
 }
@@ -231,9 +239,15 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         flex: 1,
         backgroundColor: '#fff',
-        paddingHorizontal: 10
+        paddingHorizontal: 10,
     },
+    cardDefal : {
+    },
+    card: {
+        borderColor: '#FC561F',
+        borderWidth: 2,
 
+    },
     imgContainer: {
         marginVertical: 5,
         flexDirection: 'row',

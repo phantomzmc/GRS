@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, StyleSheet, Switch, Alert } from 'react-native';
+import { Card, CardItem } from 'native-base'
 
 import { connect } from 'react-redux'
 // import Switch from 'react-native-switch-pro'
@@ -27,7 +28,7 @@ class PhotoPlus extends Component {
             pricePhotoPlus: parseFloat(this.props.event.distanceEvent.pricePhotoPlus)
         })
     }
-    componentDidMount(){
+    componentDidMount() {
         this.sumPhotoPlus()
     }
 
@@ -38,7 +39,7 @@ class PhotoPlus extends Component {
         this.props.setTotal(this.state.totalPrice.toString())
         this.props.setTotalRegister(this.state.totalPrice.toString())
     }
-    sumPhotoPlus(){
+    sumPhotoPlus() {
         let { priceEvent, pricePhotoPlus } = this.state
         const sum = pricePhotoPlus + priceEvent
         this.setState({ totalPrice: sum })
@@ -67,14 +68,25 @@ class PhotoPlus extends Component {
     render() {
         let { price, title } = this.state
         return (
-            <View style={styles.container}>
-                <Text style={{
-                    fontFamily: "Kanit"
-                }}>{this.props.titleName}
-                </Text>
-                <Switch
-                    onValueChange={(value) => this.sumPrice(value)}
-                    value={this.state.SwitchOnValueHolder} />
+            <View>
+                <View style={styles.container}>
+                    <Text style={{
+                        fontFamily: "Kanit"
+                    }}>{this.props.titleName}
+                    </Text>
+                    <Switch
+                        onValueChange={(value) => this.sumPrice(value)}
+                        value={this.state.SwitchOnValueHolder} />
+                </View>
+                <View style={{ padding: 10 }}>
+                    <Card style={{ borderRadius: 10 }}>
+                        <CardItem style={{ borderRadius: 10 }}>
+                            <Text style={{ fontFamily: "kanit", justifyContent: "space-around" }}>
+                                Photo+ Service เป็นบริการพิเศษสำหรับงานวิ่งนี้โดยทีมงานช่างภาพของ Shutterrunning คุณสามารถเลือกหรือไม่เลือกบริการ Photo+ ได้ ถ้าคุณเลือกบริการนี้เราจะทำการส่งไฟล์ภาพวิ่งของคุณทั้งหมดในงาน {this.props.event.event.EventName} ไปยังเมล์ของคุณทันที อย่างไรก็ตามถ้าเราหาคุณไม่เจอในงานวิ่งนี้ เรายินดีคืนค่าบริการ Photo+ นี้ให้คุณภายใน 5 วัน โดยเราจะติดต่อคุณทาง email หรือ ทางโทรศัพท์
+                            </Text>
+                        </CardItem>
+                    </Card>
+                </View>
             </View>
         );
     }
@@ -99,10 +111,10 @@ const mapDispatchToState = (dispatch) => {
                 payload: total
             })
         },
-        setTotalEvent : (totalEvent) => {
+        setTotalEvent: (totalEvent) => {
             dispatch({
-                type : "setTotalEvent",
-                payload : totalEvent
+                type: "setTotalEvent",
+                payload: totalEvent
             })
         }
     }

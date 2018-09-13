@@ -206,7 +206,7 @@ class Login extends Component {
     render() {
         return (
             <ImageBackground source={{ uri: "http://register.shutterrunning2014.com/assets/img/theme/dongtanbg.jpg" }}
-                style={{ width: '100%', height: '100%', opacity: 1 }}>
+                style={{ width: '100%', height: '115%', opacity: 1 }}>
                 <StatusBar
                     barStyle="light-content"
                     hidden={false}

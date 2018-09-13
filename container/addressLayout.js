@@ -42,7 +42,9 @@ class AddressLayout extends Component {
             countFriend: this.props.friendlist.friendRegis.length,
             isPleace: true,
             isPost: false,
-            statusButton3: true
+            statusButton3: true,
+            layoutPleace: false,
+            layoutPost: false
         }
     }
     componentWillMount = () => {
@@ -53,16 +55,15 @@ class AddressLayout extends Component {
             this.setState({ checked: false, checked2: true })
         }
         this.setState({
-            priceEvent: parseFloat(this.props.event.totalEvent),
+            priceEvent: parseFloat(this.props.event.totalPrice),
             priceCDO: parseFloat(65.0),
         })
         console.log(this.state.priceEvent)
         console.log(this.state.priceCDO)
-
+        this.getPleaceItem()
     }
     componentDidMount() {
         this.getCountPostPrice()
-        this.getPleaceItem()
         // this.getPostPrice()
         this.setState({
             fullname: this.props.userprofile.userprofile.FirstName,
@@ -99,6 +100,7 @@ class AddressLayout extends Component {
                     postPrice: responseJson.data[1].PlaceItemName
                 });
                 console.log(responseJson.data)
+                this.checkPleacSelect()
             }).catch((error) => {
                 // this.props.navigation.navigate('EventList')
             });
@@ -125,6 +127,28 @@ class AddressLayout extends Component {
             }).catch((error) => {
                 // this.props.navigation.navigate('EventList')
             });
+    }
+    checkPleacSelect() {
+        if((this.state.item[0].PlaceItemSelected == 1 || this.state.item[1].PlaceItemSelected == 1) && (this.state.item[0].PlaceItemSelected == 0 || this.state.item[1].PlaceItemSelected == 0)){
+            this.setState({
+                layoutPleace: true,
+                layoutPost : true,
+                checked : true,
+                checked2 : false
+            })
+        }
+        else if (this.state.item[0].PlaceItemSelected == 1 || this.state.item[1].PlaceItemSelected == 1) {
+            this.setState({
+                layoutPleace: true,
+                checked : true
+            })
+        }
+        else if (this.state.item[0].PlaceItemSelected == 0 || this.state.item[1].PlaceItemSelected == 0) {
+            this.setState({ 
+                layoutPost: true,
+                checked2 : true
+             })
+        }
     }
     nextToPayment = () => {
         // this.getChoice()
@@ -210,66 +234,85 @@ class AddressLayout extends Component {
                     goEditProfile={() => this.props.navigation.navigate('EditProfile')}
                     goRegis={() => this.props.navigation.navigate('ControlDistance')}
                     goSingleLogin={() => this.props.navigation.navigate('SingleLogin')}
+                    goContacts={()=> this.props.navigation.navigate('Contacts')}
+
                 />
                 <ScrollView >
-                    <View style={styles.checkSubmit}>
-                        <CheckBox
-                            label='เลือกรับเอง'
-                            labelStyle={styles.labelStyle}
-                            iconSize={30}
-                            iconName='iosCircleFill'
-                            checked={this.state.checked}
-                            checkedColor='#008080'
-                            uncheckedColor='#1f1f1f'
-                            onChange={this.getSumPleace.bind(this)}
-                        />
-                    </View>
-                    {this.state.checked &&
-                        <View>
-                            <GetPleace
-                                goPayment={this.nextToPayment.bind(this)}
-                                funSumPleace={this.getSumPleace.bind(this)}
-                                detailPleace={this.state.pleace}
-                            />
-                        </View>
-                    }
-                    <View style={styles.checkSubmit}>
-                        <CheckBox
-                            label='ส่งไปรษณีย์'
-                            labelStyle={styles.labelStyle}
-                            iconSize={30}
-                            iconName='iosCircleFill'
-                            checked={this.state.checked2}
-                            checkedColor='#008080'
-                            uncheckedColor='#1f1f1f'
-                            onChange={this.getSumPostman.bind(this)}
-                        />
-                    </View>
-                    <View style={{ paddingVertical: 20, paddingHorizontal: 20 }}>
-                        <Card>
-                            <View style={{ justifyContent: "center", alignItems: "center", padding: 20 }}>
-                                <Text style={[styles.textTitle, { fontSize: 18, paddingBottom: 5 }]}>ค่าใช้จ่ายในการจัดส่งแบบไปรษณีย์</Text>
-                                <Text style={styles.textTitle}>{this.state.postPrice}</Text>
+                    <View>
+                        {this.state.layoutPleace &&
+                            <View>
+                                <View style={styles.checkSubmit}>
+                                    <CheckBox
+                                        label='เลือกรับเอง'
+                                        labelStyle={styles.labelStyle}
+                                        iconSize={30}
+                                        iconName='iosCircleFill'
+                                        checked={this.state.checked}
+                                        checkedColor='#008080'
+                                        uncheckedColor='#1f1f1f'
+                                        onChange={this.getSumPleace.bind(this)}
+                                    />
+                                </View>
+                                <View>
+                                    {this.state.checked &&
+                                        <View>
+                                            <GetPleace
+                                                goPayment={this.nextToPayment.bind(this)}
+                                                funSumPleace={this.getSumPleace.bind(this)}
+                                                detailPleace={this.state.pleace}
+                                            />
+                                        </View>
+                                    }
+                                </View>
                             </View>
-                        </Card>
+                        }
                     </View>
-                    <TouchableOpacity style={[styles.checkSubmit, { flexDirection: "row", justifyContent: "space-between" }]} onPress={() => this.setState({ isPost: !this.state.isPost, checked: false })}>
-                        <View style={{ flexDirection: "row" }}>
-                            <Icon name="home-map-marker" type="MaterialCommunityIcons" />
-                            <Text style={styles.textTitle}>ที่อยู่การจัดส่งไปรษณีย์</Text>
-                        </View>
-                        <View>
-                            {this.state.isPost == false ?
-                                <Icon name="ios-arrow-down" type="Ionicons" /> :
-                                <Icon name="ios-arrow-up" type="Ionicons" />
-                            }
-                        </View>
-                    </TouchableOpacity>
-                    {(this.state.checked2 || this.state.isPost) &&
-                        <AddressForm
-                            getAddress={this.goTotalPayment.bind(this)}
-                        />
-                    }
+                    <View>
+                        {this.state.layoutPost &&
+                            <View>
+                                <View style={styles.checkSubmit}>
+                                    <CheckBox
+                                        label='ส่งไปรษณีย์'
+                                        labelStyle={styles.labelStyle}
+                                        iconSize={30}
+                                        iconName='iosCircleFill'
+                                        checked={this.state.checked2}
+                                        checkedColor='#008080'
+                                        uncheckedColor='#1f1f1f'
+                                        onChange={this.getSumPostman.bind(this)}
+                                    />
+                                </View>
+                                <View style={{ paddingVertical: 20, paddingHorizontal: 20 }}>
+                                    <Card>
+                                        <View style={{ justifyContent: "center", alignItems: "center", padding: 20 }}>
+                                            <Text style={[styles.textTitle, { fontSize: 18, paddingBottom: 5 }]}>ค่าใช้จ่ายในการจัดส่งแบบไปรษณีย์</Text>
+                                            <Text style={styles.textTitle}>{this.state.postPrice}</Text>
+                                        </View>
+                                    </Card>
+                                </View>
+                                <TouchableOpacity style={[styles.checkSubmit, { flexDirection: "row", justifyContent: "space-between" }]} onPress={() => this.setState({ isPost: !this.state.isPost, checked: false })}>
+                                    <View style={{ flexDirection: "row" }}>
+                                        <Icon name="home-map-marker" type="MaterialCommunityIcons" />
+                                        <Text style={styles.textTitle}>ที่อยู่การจัดส่งไปรษณีย์</Text>
+                                    </View>
+                                    <View>
+                                        {this.state.isPost == false ?
+                                            <Icon name="ios-arrow-down" type="Ionicons" /> :
+                                            <Icon name="ios-arrow-up" type="Ionicons" />
+                                        }
+                                    </View>
+                                </TouchableOpacity>
+                                <View>
+                                    {(this.state.checked2 || this.state.isPost) &&
+                                        <AddressForm
+                                            getAddress={this.goTotalPayment.bind(this)}
+                                        />
+                                    }
+                                </View>
+                            </View>
+                        }
+                    </View>
+
                     {this.state.checked &&
                         <View style={styles.submitContainer}>
                             <TouchableOpacity style={styles.buttonContainerOnPress}

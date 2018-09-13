@@ -30,7 +30,7 @@ class ControlDistance extends Component {
     componentDidMount() {
         setTimeout(() => {
             this.checkEventStatus()
-        }, 1000)
+        }, 100)
         this.props.setTotal(parseFloat(0).toFixed(2))
         this.props.setTotalEvent(parseFloat(0).toFixed(2))
         this.props.setTotalPromo(parseFloat(0).toFixed(2))
@@ -202,6 +202,8 @@ class ControlDistance extends Component {
                     goEditProfile={() => this.props.navigation.navigate('EditProfile')}
                     goRegis={() => this.props.navigation.navigate('ControlDistance')}
                     goSingleLogin={() => this.props.navigation.navigate('SingleLogin')}
+                    goContacts={()=> this.props.navigation.navigate('Contacts')}
+
                 />
                 <StatusBar
                     barStyle="light-content"

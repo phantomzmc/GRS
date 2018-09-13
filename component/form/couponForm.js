@@ -76,6 +76,7 @@ class CouponForm extends Component {
             const value_dis = (this.props.event.totalPrice - totalRegister)
             this.props.setTotalRegister(totalRegister)
             this.props.setTotalPromo(totalRegister)
+            this.props.setTotal(totalRegister)
             this.props.setDisPrice(value_dis)
             this.props.setCodePromo(this.state.coupon)
             this.savedataRegis2()
@@ -86,6 +87,7 @@ class CouponForm extends Component {
             const value_dis = (this.props.event.totalPrice - totalRegister)
             this.props.setTotalRegister(parseInt(value_dis))
             this.props.setTotalPromo(parseInt(value_dis))
+            this.props.setTotal(parseInt(value_dis))
             this.props.setDisPrice(parseInt(totalRegister))
             this.props.setCodePromo(this.state.coupon)
             this.savedataRegis2()
@@ -163,6 +165,8 @@ class CouponForm extends Component {
                     goEditProfile={() => this.props.navigation.navigate('EditProfile')}
                     goRegis={() => this.props.navigation.navigate('ControlDistance')}
                     goSingleLogin={() => this.props.navigation.navigate('SingleLogin')}
+                    goContacts={()=> this.props.navigation.navigate('Contacts')}
+
                 />
                 <StatusBar
                     barStyle="light-content"
@@ -241,6 +245,12 @@ const mapDispatchToProps = dispatch => {
             dispatch({
                 type: 'setTotalPromo',
                 payload: totalPromo
+            })
+        },
+        setTotal : (totalPrice) => {
+            dispatch({
+                type : 'setTotal',
+                payload : totalPrice
             })
         },
         setTotalRegister: (totalRegister) => {

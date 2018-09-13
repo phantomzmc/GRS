@@ -5,7 +5,7 @@ const eventState = {
     name: "1",
     date: "date",
     tranferBank: "",
-    EventID : ""
+    EventID: ""
   },
   distanceEvent: {
     distanceName: "",
@@ -64,6 +64,14 @@ const friend = {
     CourseFee: "",
   }],
   shirtSize: ""
+}
+const headRegis = {
+  PicProfile: "",
+  BackgroundProfile: "",
+  FirstName: "",
+  LastName: "",
+  DateOfBirth: "",
+  Gender: ""
 }
 
 const token = (state = {}, action) => {
@@ -207,7 +215,7 @@ const creditcard = (state = credit, action) => {
   return state;
 };
 const choiceSend = (state = choiceSend = {
-  choiceSend : {
+  choiceSend: {
     choice: 0
   }
 }, action) => {
@@ -241,12 +249,19 @@ let datapic = ""
 const userprofile = (state = {
   datapic,
   userprofile: {
+    FirstName: "ชื่อ",
+    LastName: "นามสกุล",
+    Gender: "เพศ",
+    DateOfBirth: "อายุ",
     PicProfile: "",
     BackgroundProfile: ""
   },
   imgprofile: "",
   imgbackground: "",
-  userstatus: ""
+  userstatus: "",
+  registerStatus : {
+    RegisterStatus : 0
+  }
 }, action) => {
   switch (action.type) {
     case "setUserProfile": {
@@ -357,6 +372,35 @@ const promocode = (state = { disPrice: 0, promocode: "" }, action) => {
   }
   return state;
 }
+const headProfile = (state = headRegis, action) => {
+  switch (action.type) {
+    case "headProfile": {
+      state.PicProfile = action.payload
+      break;
+    }
+    case "headBackground": {
+      state.BackgroundProfile = action.payload
+      break;
+    }
+    case "headFirstName": {
+      state.FirstName = action.payload
+      break;
+    }
+    case "headLastName": {
+      state.LastName = action.payload
+      break;
+    }
+    case "headAge": {
+      state.DateOfBirth = action.payload
+      break;
+    }
+    case "headGender": {
+      state.Gender = action.payload
+      break;
+    }
+  }
+  return state;
+}
 const myLogger = store => next => action => {
   console.log("Log Action", action);
   next(action);
@@ -377,7 +421,8 @@ const store = createStore(
     userprofile,
     invoice,
     network,
-    promocode
+    promocode,
+    headProfile
   }),
   {},
   applyMiddleware(myLogger)

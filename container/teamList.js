@@ -44,14 +44,20 @@ class TeamList extends Component {
             refreshing: false,
             friendlist: true,
             frienddistance: true,
-            statusCheck: true
+            statusCheck: true,
+            totalRegister : 0
         }
         this.getFriend = this.getFriend.bind(this)
+    }
+    componentWillMount(){
+        clearInterval(this._interval);
     }
     componentDidMount() {
         this.getFriend()
         this._onRefresh()
-
+        this._interval = setInterval(() => {
+            this.setState({ totalRegister: this.props.event.totalRegister })
+        }, 500);
     }
 
     addFriendEvent() {
@@ -236,6 +242,7 @@ class TeamList extends Component {
                     goEditProfile={() => this.props.navigation.navigate('EditProfile')}
                     goRegis={() => this.props.navigation.navigate('ControlDistance')}
                     goSingleLogin={() => this.props.navigation.navigate('SingleLogin')}
+                    goContacts={()=> this.props.navigation.navigate('Contacts')}
 
                 />
                 <StatusBar
@@ -379,7 +386,9 @@ class TeamList extends Component {
                                 </ScrollView>
                             </View>
                         </Container>
-                        <SummaryTotal />
+                        <SummaryTotal 
+                            total={parseFloat(this.state.totalRegister).toFixed(2)}
+                        />
                     </Tab>
                 </Tabs>
             </Container>

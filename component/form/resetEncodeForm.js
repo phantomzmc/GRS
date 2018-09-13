@@ -61,7 +61,7 @@ class ResetEncodeForm extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.content}>
-                    <Text style={styles.textTitle}>กรอก Email และรหัสผ่านใหม่ เพื่อใช้ในการเข้าสู่ระบบครั้งต่อไป : {this.props.profile.newpassword}</Text>
+                    <Text style={styles.textTitle}>กรอก Email และรหัสผ่านใหม่ เพื่อใช้ในการเข้าสู่ระบบครั้งต่อไป </Text>
                     <Form style={styles.formInput}>
                         <Item floatingLabel>
                             <Label style={styles.textLabel}>รหัสบัตรประจำตัวประชาชน</Label>

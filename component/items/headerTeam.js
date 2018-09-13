@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, StatusBar, Easing, Dimensions, TouchableHighlight, Image, AsyncStorage } from "react-native";
+import { StyleSheet, StatusBar, Easing, Dimensions, TouchableHighlight, Image, AsyncStorage,ScrollView } from "react-native";
 import { Thumbnail, Header, Left, Body, Right, Button, Icon, Title, Text, View } from 'native-base';
 import Menu, { MenuItem, MenuDivider } from 'react-native-material-menu';
 import Drawer from 'react-native-drawer-menu';
@@ -21,10 +21,14 @@ class HeaderTeam extends Component {
         statusCheckLogin2: true,
         uri: "",
         statusLogin: "",
-        profile : {
-            Username : "",
-            FirstName : "",
-            LastName : ""
+        profile: {
+            FirstName: "ชื่อ",
+            LastName: "นามสกุล",
+            Gender: "เพศ",
+            DateOfBirth: "อายุ",
+            PicProfile: "",
+            BackgroundProfile: "",
+            Username: ""
         }
     }
     _menu = null;
@@ -81,25 +85,33 @@ class HeaderTeam extends Component {
         this.checkStatusLogin()
     };
     gotoProfile = () => {
-        let goSuccess = this.props.goEditProfile()
-        this.checkLogin(goSuccess)
+        this.props.goEditProfile()
+        this._menu.hide();
+        // this.checkLogin(goSuccess)
     }
     gotoFriendlist = () => {
-        let goSuccess = this.props.goFriendlist()
-        this.checkLogin(goSuccess)
+        this.props.goFriendlist()
+        this._menu.hide();
+        // this.checkLogin(goSuccess)
     }
     gotoHistory = () => {
-        let goSuccess = this.props.goHistory()
-        this.checkLogin(goSuccess)
+        this.props.goHistory()
+        this._menu.hide();
+        // this.checkLogin(goSuccess)
     }
     gotoRegis = () => {
-        let goSuccess = this.props.goRegis()
-        this.checkLogin(goSuccess)
+        this.props.goRegis()
+        this._menu.hide();
+        // this.checkLogin(goSuccess)
     }
     gotoLogout = () => {
-        let goSuccess = this.props.goLogin()
+        this.props.goLogin()
         this.userLogout()
         this._menu.hide();
+    }
+    gotoContacts = () => {
+        this.props.goContacts()
+        this._menu.hide()
     }
     async userLogout() {
         let friendEvent = {
@@ -131,24 +143,24 @@ class HeaderTeam extends Component {
         this.props.setFriendRegister("")
     }
 
-    checkLogin = (goSuccess) => {
-        console.log("checkLogin")
-        let statusLogin = this.props.userprofile.userstatus
-        if (this.state.statusLogin === 0) {
-            this.hideMenu()
-            this.props.goLogin()
-            console.log(" don't ok")
-            value = false
-        }
-        else if (this.state.statusLogin === 1) {
-            this.hideMenu()
-            console.log("ok")
-            this.goSuccess
-            value = true
-        }
-        console.log(value)
-        return value
-    }
+    // checkLogin = (goSuccess) => {
+    //     console.log("checkLogin")
+    //     let statusLogin = this.props.userprofile.userstatus
+    //     if (this.state.statusLogin === 0) {
+    //         this.hideMenu()
+    //         this.props.goLogin()
+    //         console.log(" don't ok")
+    //         value = false
+    //     }
+    //     else if (this.state.statusLogin === 1) {
+    //         this.hideMenu()
+    //         console.log("ok")
+    //         this.goSuccess
+    //         value = true
+    //     }
+    //     console.log(value)
+    //     return value
+    // }
 
     render() {
         return (
@@ -175,7 +187,7 @@ class HeaderTeam extends Component {
                         {this.state.statusMenu &&
                             <Menu
                                 ref={this.setMenuRef}
-                                style={{ width: 300, height: 350 }}
+                                style={{ width: 300, height: 400 }}
                                 button=
                                 {
                                     <View style={{ flexDirection: "row" }}>
@@ -185,7 +197,7 @@ class HeaderTeam extends Component {
                             >
 
 
-                                <View>
+                                <ScrollView>
                                     {this.props.statusRegis == false ?
                                         <View></View> :
                                         <MenuItem onPress={this.gotoProfile} style={{ padding: 10 }}>
@@ -220,6 +232,11 @@ class HeaderTeam extends Component {
                                         <Text style={styles.item_menu}>  History</Text>
                                     </MenuItem>
                                     <MenuDivider />
+                                    <MenuItem onPress={this.gotoContacts} style={{ padding: 10 }}>
+                                        <Icon name='ios-call' type='Ionicons' style={{ fontSize: 18 }} />
+                                        <Text style={styles.item_menu}>  ติดต่อสอบถาม</Text>
+                                    </MenuItem>
+                                    <MenuDivider />
                                     <MenuItem onPress={this.gotoLogout} style={{ padding: 10 }}>
                                         <Icon name='log-out' type='Entypo' style={{ fontSize: 18 }} />
                                         <Text style={styles.item_menu}>  ออกจากระบบ</Text>
@@ -229,7 +246,7 @@ class HeaderTeam extends Component {
                                         <Icon name='close' type='FontAwesome' style={{ fontSize: 18, color: "#FF0000" }} />
                                         <Text style={[styles.item_menu, { color: "#FF0000" }]}>   ปิด</Text>
                                     </MenuItem>
-                                </View>
+                                </ScrollView>
 
 
                             </Menu>
@@ -284,10 +301,10 @@ const mapDispatchToProps = dispatch => {
                 payload: friendRegis
             })
         },
-        setUserProfile : (profile) => {
+        setUserProfile: (profile) => {
             dispatch({
-                type : "setUserProfile",
-                payload : profile
+                type: "setUserProfile",
+                payload: profile
             })
         }
     }

@@ -16,9 +16,19 @@ class ShirtPhotoPlus extends Component {
         buttonStatus1: true, //close
         buttonStatus2: false, //open
         shirt: "",
-        statusRegis : 0
+        statusRegis : 0,
+        totalRegister : 0
     }
+    componentWillMount(){
+        this.setState({ totalRegister : this.props.event.totalRegister})
+        clearInterval(this._interval);
+    }
+    
     componentDidMount = () => {
+        this._interval = setInterval(() => {
+            this.setState({ totalRegister: this.props.event.totalRegister })
+        }, 500);
+
         if (this.props.event.distanceEvent.statusPhotoPlus == 1) {
             this.setState({
                 isItems: !this.state.isItems,
@@ -124,6 +134,7 @@ class ShirtPhotoPlus extends Component {
                     goEditProfile={() => this.props.navigation.navigate('EditProfile')}
                     goRegis={() => this.props.navigation.navigate('ControlDistance')}
                     goSingleLogin={() => this.props.navigation.navigate('SingleLogin')}
+                    goContacts={()=> this.props.navigation.navigate('Contacts')}
                 />
                 <StatusBar
                     barStyle="light-content"
@@ -181,7 +192,7 @@ class ShirtPhotoPlus extends Component {
                     }
                 </ScrollView>
                 <SummaryTotal 
-                    total={parseFloat(this.props.event.totalRegister).toFixed(2) }
+                    total={parseFloat(this.state.totalRegister).toFixed(2) }
                 />
             </Container>
         );

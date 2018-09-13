@@ -216,19 +216,7 @@ class FormRegister extends Component {
 
     }
   }
-  // alertCheckEmail = () => {
-  //   let { status } = this.state
-  //   if (status[0].Status == "1") {
-  //     Alert.alert('มี Email นี้ในระบบแล้ว', 'กรุณาใช้ Email อื่น', [
-  //       {
-  //         text: 'ตกลง'
-  //       }
-  //     ], { cancelable: false })
-  //   }
-  //   else if (status[0].Status == "0") {
 
-  //   }
-  // }
   setGenMan() {
     this.setState({ selectedIndex: 0 })
     if (this.state.selectedIndex == 0) {
@@ -372,33 +360,60 @@ class FormRegister extends Component {
               onChangeText={nation => this.setState({ nation })} />
           </Item>
         </Form>
+
         <View style={{ flexDirection: "row" }}>
           <Text style={styles.headForm}>รหัสผ่าน</Text>
           <Text style={styles.headdetail}> ** จำเป็น **</Text>
         </View>
-        <Form>
-          <Item floatingLabel last>
-            <Label style={styles.textLabel}>Ex.xxxxxxxxxxxx</Label>
-            <Input
-              style={{ fontFamily: "kanit" }}
-              secureTextEntry={true}
-              onChangeText={password => this.setState({ password })}
-            />
-          </Item>
-        </Form>
+        {password.length < 6 ?
+          <Form>
+            <Item floatingLabel last>
+              <Label style={styles.textLabel}>Ex.xxxxxxxxxxxx</Label>
+              <Input
+                style={{ fontFamily: "kanit" }}
+                secureTextEntry={true}
+                onChangeText={password => this.setState({ password })}
+              />
+            </Item>
+          </Form>
+          :
+          <Form>
+            <Item success floatingLabel last>
+              <Label style={styles.textLabel}>Ex.xxxxxxxxxxxx</Label>
+              <Input
+                style={{ fontFamily: "kanit" }}
+                secureTextEntry={true}
+                onChangeText={password => this.setState({ password })}
+              />
+            </Item>
+          </Form>
+        }
         <View style={{ flexDirection: "row" }}>
           <Text style={styles.headForm}>ยืนยันรหัสผ่าน</Text>
           <Text style={styles.headdetail}> ** จำเป็น **</Text>
         </View>
-        <Form>
-          <Item floatingLabel last>
-            <Label style={styles.textLabel}>Ex.xxxxxxxxxxxx</Label>
-            <Input
-              style={{ fontFamily: "kanit" }}
-              secureTextEntry={true}
-              onChangeText={confirmpassword => this.setState({ confirmpassword })} />
-          </Item>
-        </Form>
+        {confirmpassword.length < 6 ?
+
+          <Form>
+            <Item floatingLabel last>
+              <Label style={styles.textLabel}>Ex.xxxxxxxxxxxx</Label>
+              <Input
+                style={{ fontFamily: "kanit" }}
+                secureTextEntry={true}
+                onChangeText={confirmpassword => this.setState({ confirmpassword })} />
+            </Item>
+          </Form>
+          :
+          <Form>
+            <Item success floatingLabel last>
+              <Label style={styles.textLabel}>Ex.xxxxxxxxxxxx</Label>
+              <Input
+                style={{ fontFamily: "kanit" }}
+                secureTextEntry={true}
+                onChangeText={confirmpassword => this.setState({ confirmpassword })} />
+            </Item>
+          </Form>
+        }
         <View style={{ flexDirection: "row" }}>
           <Text style={styles.headForm}>วันเกิด</Text>
           <Text style={styles.headdetail}> ** จำเป็น **</Text>
@@ -597,7 +612,7 @@ const styles = StyleSheet.create({
   },
   gender: {
     flexDirection: "row",
-    backgroundColor : "#fff",
+    backgroundColor: "#fff",
     flex: 1,
     justifyContent: "center",
     padding: 10
