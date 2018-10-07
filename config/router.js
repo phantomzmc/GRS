@@ -37,14 +37,14 @@ import RegisterInfo from '../container/registerInfo'
 import SubmitEncode from '../container/submitEncode'
 import EventFullRegis from '../container/eventFullRegis'
 import Contacts from '../container/contacts'
-
+import MailInvoice from '../component/templete/mail_invoice'
 import Test from '../mockdata'
 
 
 export default StackNavigator({
-    // Test : {
-    //     screen : Test
-    // },
+    Test : {
+        screen : Test
+    },
     // TeamList: {
     //     screen: TeamList,
     //     navigationOptions: {

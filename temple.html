@@ -1,24 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            background-color: #eeeeee;
+            width: 100%;
+        }
+
+        td,
+        th {
+            /* border: 1px solid #dddddd; */
+            text-align: left;
+            padding: 8px;
+        }
+        tr {
+            border: 1px solid #111;
+        }
+        
+
+        #hr {
+            color: #FC561F;
+            text-align: center;
+        }
+        h4{
+            color: #FC561F
+        }
+        #textRigth {
+            text-align: right;
+        }
+        h2{
+        text-align: center; 
+        }
+        line{
+            height: 10px;
+        }
+    </style>
     <title>OrderInvoice</title>
 </head>
 
 <body>
     <h2>Order รอการชำระเงิน โครงการ ............. </h2>
-    <p>ข้อมูลการสมัครของท่านถุฏบัทึกลงในฐานข้อมูลแล้ว</p>
-    <table>
+    <p id="hr">ข้อมูลการสมัครของท่านถูกบันทึกลงในระบบเรียบร้อยแล้ว กรุณารอใบยืนยันการสมัครเพื่อนำไปลงทะเบียนรับเสื้อและเบอร์วิ่งในวันเวลาที่กำหนด</p>
+    <hr id="line">
+    <table width="100%">
         <tr>
-            <thead>No.</thead>
-            <thead>Name-Lastname</thead>
-            <thead>Course</thead>
-            <thead>Jersey</thead>
-            <thead>Qty</thead>
-            <thead>Total</thead>
+            <th>No.</th>
+            <th>Name-Lastname</th>
+            <th>Course</th>
+            <th>Jersey</th>
+            <th>Qty</th>
+            <th>Total</th>
         </tr>
         <tr>
             <td>1</td>
@@ -26,22 +59,28 @@
             <td>4 km</td>
             <td>M-4k</td>
             <td>1</td>
-            <td>500.00</td>
+            <td id="textRigth">500.00</td>
         </tr>
         <tr>
-            <td rowspan="5">รับเสื้อ</td>
-            <td>0.00</td>
+            <td colspan="5" id="textRigth">รับเสื้อ</td>
+            <td id="textRigth">0.00</td>
         </tr>
         <tr>
-            <td rowspan="5">ค่าธรรมเนียม</td>
-            <td>0.00</td>
+            <td colspan="5" id="textRigth">ค่าธรรมเนียม</td>
+            <td id="textRigth">0.00</td>
         </tr>
         <tr>
-            <td rowspan="5">All Total</td>
-            <td>500.00</td>
+            <td colspan="5" id="textRigth">All Total</td>
+            <td id="textRigth">500.00</td>
         </tr>
 
     </table>
+    <p id="hr">อีเมล์ฉบับนี้เป็นระบบอัตโนมัติ กรุณาอย่าตอบกลับในอีเมล์นี้ หากต้องการความช่วยเหลือเพิ่ม โปรดติดต่อฝ่ายรับสมัคร</p>
+    <hr id="line">
+    <h4>Shutter Running Services</h4>
+    <p>7 Market Today krungthepkreetra 7 Huamark</p>
+    <p>Bangkapi</p>
+    <p>Bangkok, Thailand 10240 Phone: (+66) 2 111 2201 http://shutterrunning2014.com
+    </p>
 </body>
-
 </html>

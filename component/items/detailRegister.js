@@ -12,8 +12,10 @@ class DetailRegister extends Component {
         numberInvoice: "00",
         date: new Date().getDate(),
         month: new Date().getMonth(),
-        year: new Date().getFullYear()
+        year: new Date().getFullYear(),
+        countFriend : this.props.friendlist.friendEvent
     }
+    
     componentDidMount() {
         this.setState({
             address: this.props.address.user.adress + " " +
@@ -40,7 +42,7 @@ class DetailRegister extends Component {
                         {this.state.statusPayment2 && <Text style={styles.typePaymentWarning}>รอดำเนินการ</Text>}
                     </View>
                     <View>
-                        {this.props.creditcard.statusPayment == 2 ?
+                        {this.state.countFriend === 1 ?
                             <QRCode
                                 value={this.props.invoice.invoice[0].InvoiceID}
                                 size={75}
@@ -49,7 +51,6 @@ class DetailRegister extends Component {
                                 <Text style={styles.textName3}>QR Code</Text>
                             </View>
                         }
-
                     </View>
                     <View>
                         <Text style={{ fontSize: 10, color: '#A9A9A9', fontFamily: 'kanit' }}> Order : {this.state.numberInvoice} </Text>

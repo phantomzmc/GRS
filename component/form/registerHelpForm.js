@@ -71,7 +71,7 @@ class FormAddressRegister extends Component {
               style={styles.icon}
             />
           </View>
-          <Text style={styles.titleText}>กรณีฉุกเฉิน</Text>
+          <Text style={styles.titleText}>ผู้ที่สามารถติดต่อได้ในกรณีฉุกเฉิน</Text>
         </View>
         {/* <View style={styles.addressContainer}> */}
         <View style={{ flexDirection: "row" }}>

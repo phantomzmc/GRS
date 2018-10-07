@@ -158,8 +158,8 @@ class ShirtPhotoPlus extends Component {
                     {this.state.buttonStatus2 &&
                         <View style={styles.cardview}>
                             <Content>
-                                <Card>
-                                    <CardItem>
+                                <Card style={{ borderColor : "#FC561F" ,borderRadius : 10 }}>
+                                    <CardItem style={{ borderColor : "#FC561F" ,borderRadius : 10,borderWidth : 2}}>
                                         <TabHeading style={{ backgroundColor : "#fff"}}>
                                             <Text style={styles.textSizeCard}>ไซค์เสื้อที่เลือก : {this.state.shirt}</Text>
                                         </TabHeading>
@@ -168,7 +168,7 @@ class ShirtPhotoPlus extends Component {
                             </Content>
                         </View>
                     }
-                    {this.state.isItems && <Text style={styles.textSize}>Photo Plus + </Text>}
+                    {this.state.isItems && <Text style={styles.textSize}>Photo + Service</Text>}
                     {this.state.isItems2 &&
                         <PhotoPlus 
                             titleName={this.props.photoplus.title}
@@ -244,7 +244,8 @@ const styles = StyleSheet.create({
         fontSize: 20,
         justifyContent: 'center',
         alignItems: 'center',
-        marginLeft: 5
+        marginLeft: 5,
+        color : "#FC561F"
     },
     cardview: {
         flexDirection: 'row',
