@@ -15,6 +15,9 @@ import CrargeLoading from '../component/modal/chargePayment_load'
 import ChargePaymentLoad from '../component/modal/chargePayment_load';
 import ChargeError from '../component/modal/chargePayment_error'
 import MailGunSend from '../config/send-mailgun'
+// import dataFriendFull from '../component/list/listFriend/dataFriend-full'
+
+const dataFriend2 = []
 
 class TotalLayout extends Component {
 
@@ -30,7 +33,8 @@ class TotalLayout extends Component {
             imageURI: "",
             layout_invoice: false,
             modalLoading: true,
-            modalError: false
+            modalError: false,
+            dataFriendFull: this.props.friendlist.fullfriendEvent
         }
     }
     componentWillMount() {
@@ -43,6 +47,7 @@ class TotalLayout extends Component {
                 this.setState({ modalLoading: false, layout_invoice: true })
                 setTimeout(() => {
                     this.captureScreenFunction()
+                    this.loopTable()
                 }, 500)
             }
         }, 1000)
@@ -99,14 +104,46 @@ class TotalLayout extends Component {
     genQRCode() {
 
     }
-    async sendEmailInvoice() {
+    async sendEmailInvoice(str) {
+        const strTable = str.toString()
         const data = await MailGunSend.onSendMail({
             'from': 'Guurun Support Team. <support@guurun.com>',
-            'to': this.props.profile.profile.email,
+            'to': this.props.userprofile.userprofile.Email,
             'subject': 'Guurun Support Team รหัสในการยืนยันตัวตน',
             'text': 'สวัสดีคุณ ' + this.props.profile.profile.fullname + ' รหัสที่ใช้ในการยืนยันตัวตนขอผู้ใช้งานคือ : ' + this.props.profile.verify,
+            'html': '<!DOCTYPE html><html><head><meta charset="UTF-8"><style>#table1 {background-color: #eeeeee;width: 100%;}#table2 {width: 100%;}td,th {text-align: left;padding: 8px;}tr {' +
+                'border: 1px solid #111;}#hr {color: #FC561F;text-align: center;}h4 {color: #FC561F;text-align: center;}#textRigth {text-align: right;}h2 {text-align: center;}line {height: 10px;}' +
+                'p {text-align: center;}</style><title>OrderInvoice</title></head><body><h2>Order รอการชำระเงิน โครงการ ' + this.props.event.event.EventName + ' </h2><p id="hr">ข้อมูลการสมัครของท่านถูกบันทึกลงในระบบเรียบร้อยแล้วกรุณารอใบยืนยันการสมัครเพื่อนำไปลงทะเบียนรับเสื้อและเบอร์วิ่งในวันเวลาที่กำหนด</p><hr id="line">' +
+                '<table id="table1"><tr><td colspan="6">ใบเสร็จหมายเลขที่ #' + this.state.output[0].InvoiceID + '</td></tr><tr><th>No.</th><th>Name-Lastname</th><th>Course</th><th>Jersey</th><th>Qty</th><th>Total</th></tr>'
+                + strTable + '<tr><td colspan="5" id="textRigth">รับเสื้อ ' + this.props.choiceSend.choiceSend.detail + '</td><td id="textRigth">' + this.props.choiceSend.choiceSend.priceCDO + '.00</td>' +
+                '</tr><tr><td colspan="5" id="textRigth">ค่าธรรมเนียมการใช้บัตรเครดิต/เดบิต</td><td id="textRigth">' + this.props.creditcard.vat + '</td></tr><tr><td colspan="5" id="textRigth">All Total</td><td id="textRigth">' + this.props.event.totalRegister + '</td></tr>' +
+                '</table><table id="table2"><tr><td colspan="6"><p id="hr">อีเมล์ฉบับนี้เป็นระบบอัตโนมัติ กรุณาอย่าตอบกลับในอีเมล์นี้ หากต้องการความช่วยเหลือเพิ่มโปรดติดต่อฝ่ายรับสมัคร</p></td></tr><tr><td colspan="6"><hr id="line">' +
+                '</td></tr><tr><td colspan="6"><h4>Shutter Running Services</h4><p>7 Market Today krungthepkreetra 7 Huamark</p><p>Bangkapi</p><p>Bangkok, Thailand 10240 Phone: (+66) 2 111 2201 </p><p>http://shutterrunning2014.com</p>' +
+                '</td></tr></table></body></html>'
         })
         console.log(data)
+    }
+    loopTable() {
+        const { dataFriendFull } = this.state
+        console.log(dataFriendFull)
+        for (i = 0; i < dataFriendFull.length; i++) {
+            strTable = '<tr><td></td><td>' + dataFriendFull[i].firstname + dataFriendFull[i].lastname + '</td><td>' + dataFriendFull[i].nameRegis + '</td><td>' + dataFriendFull[i].JerseySize + '</td><td>' + "1" + '</td><td id="textRigth">' + dataFriendFull[i].CourseFee + '</td></tr>'
+            dataFriend2.push(strTable)
+            // console.log(dataFriendFull[i].lastname)
+        }
+        setTimeout(() => {
+            this.atToString()
+        }, 1000)
+    }
+    atToString() {
+        var str = ""
+        for (i = 0; i < dataFriend2.length; i++) {
+            str = str + dataFriend2[i]
+        }
+        setTimeout(() => {
+            console.log(str)
+            this.sendEmailInvoice(str)
+        }, 2000)
     }
 
     onClick = () => {
@@ -166,7 +203,7 @@ class TotalLayout extends Component {
                     goEditProfile={() => this.props.navigation.navigate('EditProfile')}
                     goRegis={() => this.props.navigation.navigate('ControlDistance')}
                     goSingleLogin={() => this.props.navigation.navigate('SingleLogin')}
-                    goContacts={()=> this.props.navigation.navigate('Contacts')}
+                    goContacts={() => this.props.navigation.navigate('Contacts')}
                 />
                 <StatusBar
                     barStyle="light-content"
@@ -238,7 +275,8 @@ const mapStateToProps = (state) => {
         userprofile: state.userprofile,
         friendlist: state.friendlist,
         profile: state.profile,
-        promocode: state.promocode
+        promocode: state.promocode,
+        invoice: state.invoice
     }
 }
 const mapDispatchToProps = dispatch => {

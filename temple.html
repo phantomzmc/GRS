@@ -1,11 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
     <meta charset="UTF-8">
     <style>
-        table {
-            font-family: arial, sans-serif;
+        #table1 {
+            /* font-family: arial, sans-serif; */
             background-color: #eeeeee;
+            width: 100%;
+        }
+
+        #table2 {
             width: 100%;
         }
 
@@ -15,26 +20,36 @@
             text-align: left;
             padding: 8px;
         }
+
         tr {
             border: 1px solid #111;
         }
-        
+
 
         #hr {
             color: #FC561F;
             text-align: center;
         }
-        h4{
-            color: #FC561F
+
+        h4 {
+            color: #FC561F;
+            text-align: center;
         }
+
         #textRigth {
             text-align: right;
         }
-        h2{
-        text-align: center; 
+
+        h2 {
+            text-align: center;
         }
-        line{
+
+        line {
             height: 10px;
+        }
+
+        p {
+            text-align: center;
         }
     </style>
     <title>OrderInvoice</title>
@@ -42,9 +57,13 @@
 
 <body>
     <h2>Order รอการชำระเงิน โครงการ ............. </h2>
-    <p id="hr">ข้อมูลการสมัครของท่านถูกบันทึกลงในระบบเรียบร้อยแล้ว กรุณารอใบยืนยันการสมัครเพื่อนำไปลงทะเบียนรับเสื้อและเบอร์วิ่งในวันเวลาที่กำหนด</p>
+    <p id="hr">ข้อมูลการสมัครของท่านถูกบันทึกลงในระบบเรียบร้อยแล้ว
+        กรุณารอใบยืนยันการสมัครเพื่อนำไปลงทะเบียนรับเสื้อและเบอร์วิ่งในวันเวลาที่กำหนด</p>
     <hr id="line">
-    <table width="100%">
+    <table id="table1">
+        <tr>
+            <td colspan="6">ใบเสร็จหมายเลขที่ #</td>
+        </tr>
         <tr>
             <th>No.</th>
             <th>Name-Lastname</th>
@@ -73,14 +92,29 @@
             <td colspan="5" id="textRigth">All Total</td>
             <td id="textRigth">500.00</td>
         </tr>
-
     </table>
-    <p id="hr">อีเมล์ฉบับนี้เป็นระบบอัตโนมัติ กรุณาอย่าตอบกลับในอีเมล์นี้ หากต้องการความช่วยเหลือเพิ่ม โปรดติดต่อฝ่ายรับสมัคร</p>
-    <hr id="line">
-    <h4>Shutter Running Services</h4>
-    <p>7 Market Today krungthepkreetra 7 Huamark</p>
-    <p>Bangkapi</p>
-    <p>Bangkok, Thailand 10240 Phone: (+66) 2 111 2201 http://shutterrunning2014.com
-    </p>
+    <table id="table2">
+        <tr>
+            <td colspan="6">
+                <p id="hr">อีเมล์ฉบับนี้เป็นระบบอัตโนมัติ กรุณาอย่าตอบกลับในอีเมล์นี้ หากต้องการความช่วยเหลือเพิ่ม
+                    โปรดติดต่อฝ่ายรับสมัคร</p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6">
+                <hr id="line">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6">
+                <h4>Shutter Running Services</h4>
+                <p>7 Market Today krungthepkreetra 7 Huamark</p>
+                <p>Bangkapi</p>
+                <p>Bangkok, Thailand 10240 Phone: (+66) 2 111 2201 </p>
+                <p>http://shutterrunning2014.com</p>
+            </td>
+        </tr>
+    </table>
 </body>
+
 </html>

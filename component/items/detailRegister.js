@@ -13,9 +13,9 @@ class DetailRegister extends Component {
         date: new Date().getDate(),
         month: new Date().getMonth(),
         year: new Date().getFullYear(),
-        countFriend : this.props.friendlist.friendEvent
+        countFriend: this.props.friendlist.friendEvent
     }
-    
+
     componentDidMount() {
         this.setState({
             address: this.props.address.user.adress + " " +
@@ -33,7 +33,7 @@ class DetailRegister extends Component {
         }
     }
     render() {
-        let { date, month, year } = this.state
+        let { date, month, year, countFriend } = this.state
         return (
             <View style={styles.container}>
                 <View style={styles.view1}>
@@ -42,14 +42,15 @@ class DetailRegister extends Component {
                         {this.state.statusPayment2 && <Text style={styles.typePaymentWarning}>รอดำเนินการ</Text>}
                     </View>
                     <View>
-                        {this.state.countFriend === 1 ?
-                            <QRCode
-                                value={this.props.invoice.invoice[0].InvoiceID}
-                                size={75}
-                            /> :
+                        {countFriend.length > 1 || this.props.creditcard.statusPayment == 1 ?
                             <View style={styles.disQRcode}>
                                 <Text style={styles.textName3}>QR Code</Text>
                             </View>
+                            :
+                            <QRCode
+                                value={this.props.invoice.invoice[0].InvoiceID}
+                                size={75}
+                            />
                         }
                     </View>
                     <View>
@@ -184,8 +185,8 @@ const styles = StyleSheet.create({
         borderRadius: 37.5,
         borderColor: "#FFA500",
         borderWidth: 1,
-        justifyContent : "center",
-        alignItems : "center",
+        justifyContent: "center",
+        alignItems: "center",
         flex: 1
     },
     textName3: {
