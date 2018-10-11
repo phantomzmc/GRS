@@ -15,7 +15,6 @@ import CrargeLoading from '../component/modal/chargePayment_load'
 import ChargePaymentLoad from '../component/modal/chargePayment_load';
 import ChargeError from '../component/modal/chargePayment_error'
 import MailGunSend from '../config/send-mailgun'
-// import dataFriendFull from '../component/list/listFriend/dataFriend-full'
 
 const dataFriend2 = []
 
@@ -94,12 +93,41 @@ class TotalLayout extends Component {
                 this.setState({ isLoading: false, output: response.data });
                 console.log(this.state.output)
                 this.props.setInvoice(this.state.output)
+                this.getInvoiceID(response.data[0].InvoiceID)
             }).catch((error) => {
                 this.setState({ modalError: true })
                 setTimeout(() => {
                     this.props.navigation.navigate('EventList')
                 }, 3000)
             });
+    }
+    getInvoiceID(invoiceid) {
+        let uri = req[0].uspGetRegisterListsOfInvoice
+        let apikey = api_key[0].api_key
+        let data = ({
+            params: [
+                { name: "InvoiceID", value: invoiceid }
+            ]
+        })
+        console.log(data)
+        axios.post(uri, data, {
+            headers: {
+                "X-DreamFactory-API-Key": apikey,
+                "X-DreamFactory-Session-Token": this.props.token.token,
+            },
+            responseType: 'json'
+        })
+            .then((response) => {
+                this.setState({ isLoading: false, invoiceID: response.data[0].RegisterID });
+                console.log(response.data)
+                this.props.setRegisterID(response.data[0].RegisterID)
+            }).catch((error) => {
+                this.setState({ modalError: true })
+                // setTimeout(() => {
+                //     this.props.navigation.navigate('EventList')
+                // }, 3000)
+            });
+
     }
     genQRCode() {
 
@@ -291,6 +319,12 @@ const mapDispatchToProps = dispatch => {
             dispatch({
                 type: 'setRegislist',
                 payload: list
+            })
+        },
+        setRegisterID : (registerid) => {
+            dispatch({
+                type : 'setRegisterID',
+                payload : registerid
             })
         }
     }

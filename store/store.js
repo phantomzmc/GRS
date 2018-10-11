@@ -303,6 +303,10 @@ const invoice = (state = {}, action) => {
       state.invoice = action.payload
       break;
     }
+    case "setRegisterID" : {
+      state.registerid = action.payload
+      break;
+    }
   }
   return state;
 }

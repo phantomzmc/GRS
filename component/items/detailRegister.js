@@ -17,13 +17,15 @@ class DetailRegister extends Component {
     }
 
     componentDidMount() {
+        console.log(this.props.invoice.registerid)
         this.setState({
             address: this.props.address.user.adress + " " +
                 this.props.address.user.subdistric + " " +
                 this.props.address.user.distric + " " +
                 this.props.address.user.province + " " +
                 this.props.address.user.postcode,
-            numberInvoice: this.props.invoice.invoice[0].InvoiceID
+            numberInvoice: this.props.invoice.invoice[0].InvoiceID,
+            regisID : this.props.invoice.invoice.RegisterID
         })
         if (this.props.creditcard.statusPayment == 2) {
             this.setState({ statusPayment1: true, statusPayment2: false })
@@ -48,7 +50,7 @@ class DetailRegister extends Component {
                             </View>
                             :
                             <QRCode
-                                value={this.props.invoice.invoice[0].InvoiceID}
+                                value={this.props.invoice.registerid}
                                 size={75}
                             />
                         }
