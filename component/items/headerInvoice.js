@@ -224,22 +224,22 @@ const mapDispatchToProps = dispatch => {
 
 const styles = StyleSheet.create({
     title: {
-        fontFamily: "kanit",
+        fontFamily: "Kanit",
         color: "#fff",
         fontSize: 14
     },
     title2: {
-        fontFamily: "kanit",
+        fontFamily: "Kanit",
         color: "#fff",
         fontSize: 14,
         paddingLeft: 10,
     },
     item_menu: {
-        fontFamily: "kanit",
+        fontFamily: "Kanit",
         fontSize: 18,
     },
     titleHead2: {
-        fontFamily: "kanit",
+        fontFamily: "Kanit",
         color: "#fff",
         fontSize: 18,
         fontWeight: "bold",

@@ -344,7 +344,7 @@ const styles = StyleSheet.create({
         flexDirection: "column"
     },
     textTitle: {
-        fontFamily: "kanit",
+        fontFamily: "Kanit",
         fontSize: 14,
         justifyContent: "center",
         alignContent: "center",
@@ -359,7 +359,7 @@ const styles = StyleSheet.create({
     },
     labelStyle: {
         padding: 15,
-        fontFamily: "kanit",
+        fontFamily: "Kanit",
         fontSize: 16
     },
     submitContainer: {

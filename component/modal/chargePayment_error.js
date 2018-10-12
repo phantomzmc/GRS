@@ -11,7 +11,7 @@ class ChargePaymentError extends Component {
             <View style={styles.modalContainer}>
                 <View style={{ flexDirection: "row" }}>
                     <Icon name="error" type="MaterialIcons" style={{ color: "#F44336", paddingHorizontal: 10 }} />
-                    <Text style={{ fontSize: 18, fontFamily: "kanit", color: "#F44336" }}>ชำระเงินไม่สำเร็จ</Text>
+                    <Text style={{ fontSize: 18, fontFamily: "Kanit", color: "#F44336" }}>ชำระเงินไม่สำเร็จ</Text>
                 </View>
             </View>
         );
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     },
     textButton: {
         color: '#fff',
-        fontFamily: 'kanit'
+        fontFamily: 'Kanit'
     }
 })
 

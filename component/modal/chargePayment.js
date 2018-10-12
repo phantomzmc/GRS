@@ -11,7 +11,7 @@ class ChargePayment extends Component {
             <View style={styles.modalContainer}>
                 <View style={{ flexDirection: "row" }}>
                     <Icon name="check-circle" type="FontAwesome" style={{ color: "#558B2F", paddingHorizontal: 10 }} />
-                    <Text style={{ fontSize: 18, fontFamily: "kanit", color: "#558B2F" }}>ชำระเงินสำเร็จ</Text>
+                    <Text style={{ fontSize: 18, fontFamily: "Kanit", color: "#558B2F" }}>ชำระเงินสำเร็จ</Text>
                 </View>
             </View>
         );
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     },
     textButton: {
         color: '#fff',
-        fontFamily: 'kanit'
+        fontFamily: 'Kanit'
     }
 })
 

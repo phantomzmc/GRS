@@ -295,12 +295,12 @@ const styles = StyleSheet.create({
     textNameEvent: {
         fontSize: 20,
         margin: 20,
-        fontFamily: 'kanit'
+        fontFamily: 'Kanit'
     },
     detailDiscountCoupon: {
         fontSize: 18,
         color: '#000',
-        fontFamily: 'kanit'
+        fontFamily: 'Kanit'
     },
     inputCoupon: {
         height: 50,
@@ -311,7 +311,7 @@ const styles = StyleSheet.create({
         margin: 20,
         alignItems: 'center',
         paddingHorizontal: 20,
-        fontFamily: 'kanit'
+        fontFamily: 'Kanit'
     },
     submitButtonDefalt: {
         marginTop: 30,
@@ -337,11 +337,11 @@ const styles = StyleSheet.create({
     textButton: {
         color: '#fff',
         fontSize: 18,
-        fontFamily: 'kanit'
+        fontFamily: 'Kanit'
     },
     textLabel: {
         fontSize: 18,
-        fontFamily: 'kanit'
+        fontFamily: 'Kanit'
     }
 })
 

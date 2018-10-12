@@ -10,7 +10,7 @@ import ModalHistory from '../../modal/history'
 import req from '../../../config/uri_req'
 import api_key from '../../../config/api_key'
 
-var uri = req[0].uspGetInvoice
+var uri = req[0].uspGetRegisterListsOfInvoice
 var apikey = api_key[0].api_key
 
 class HistoryList extends Component {

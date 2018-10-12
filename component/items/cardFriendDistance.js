@@ -181,8 +181,8 @@ class CradFriendDistance extends Component {
                         />
                     </Left>
                     <Body style={{ paddingHorizontal: 20, justifyContent: "space-around" }}>
-                        <Text style={{ fontFamily: "kanit" }}>{items.FirstName} {items.LastName}</Text>
-                        <Text note style={{ fontFamily: "kanit" }}>{items.gen} -  {items.age}</Text>
+                        <Text style={{ fontFamily: "Kanit" }}>{items.FirstName} {items.LastName}</Text>
+                        <Text note style={{ fontFamily: "Kanit" }}>{items.gen} -  {items.age}</Text>
 
                     </Body>
                     <Right>
@@ -324,7 +324,7 @@ const styles = StyleSheet.create({
 
     },
     labelTitle: {
-        fontFamily: 'kanit',
+        fontFamily: 'Kanit',
         fontSize: 16
     }
 

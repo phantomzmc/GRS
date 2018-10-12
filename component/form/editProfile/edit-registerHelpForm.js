@@ -55,7 +55,7 @@ class FormAddressRegister extends Component {
           <Item floatingLabel last>
             <Label style={styles.textLabel}>{firstname}</Label>
             <Input
-              style={{ fontFamily: "kanit" }}
+              style={{ fontFamily: "Kanit" }}
               onChangeText={firstname => this.setState({ firstname: firstname })}
             />
           </Item>
@@ -64,7 +64,7 @@ class FormAddressRegister extends Component {
           <Item floatingLabel last>
             <Label style={styles.textLabel}>{lastname}</Label>
             <Input
-              style={{ fontFamily: "kanit" }}
+              style={{ fontFamily: "Kanit" }}
               onChangeText={lastname => this.setState({ lastname: lastname })}
             />
           </Item>
@@ -75,7 +75,7 @@ class FormAddressRegister extends Component {
             <Label style={styles.textLabel}>{tel}</Label>
             <Input
               keyboardType="phone-pad"
-              style={{ fontFamily: "kanit" }}
+              style={{ fontFamily: "Kanit" }}
               onChangeText={tel => this.setState({ tel: tel })}
             />
           </Item>
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontSize: 15,
-    fontFamily: "kanit",
+    fontFamily: "Kanit",
     color: "#fc561f"
   },
   contectTitle: {
@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     height: 35,
     marginTop: 15,
-    fontFamily: "kanit"
+    fontFamily: "Kanit"
   },
 
   submitContainer: {
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     fontSize: 16,
     color: "#fff",
-    fontFamily: "kanit"
+    fontFamily: "Kanit"
   },
   viewPicker: {
     justifyContent : "space-between",
@@ -179,22 +179,22 @@ const styles = StyleSheet.create({
 
   },
   picker: {
-    fontFamily: 'kanit',
+    fontFamily: 'Kanit',
     fontSize: 16,
   },
 
   headForm: {
-    fontFamily: 'kanit',
+    fontFamily: 'Kanit',
     fontSize: 16,
     paddingTop: 20
   },
   headForm2 : {
-    fontFamily: 'kanit',
+    fontFamily: 'Kanit',
     fontSize: 16,
   },
   textLabel: {
     fontSize: 14,
-    fontFamily: 'kanit'
+    fontFamily: 'Kanit'
   }
 });
 

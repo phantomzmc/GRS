@@ -64,11 +64,11 @@ const styles = StyleSheet.create({
     container: {
     },
     textTitle: {
-        fontFamily: 'kanit'
+        fontFamily: 'Kanit'
     },
     textDetail: {
         fontSize: 12,
-        fontFamily: 'kanit',
+        fontFamily: 'Kanit',
         color: '#1e1e1e'
     }
 });

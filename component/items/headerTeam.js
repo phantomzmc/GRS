@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, StatusBar, Easing, Dimensions, TouchableHighlight, Image, AsyncStorage,ScrollView } from "react-native";
+import { StyleSheet, StatusBar, Easing, Dimensions, TouchableHighlight, Image, AsyncStorage, ScrollView, Platform } from "react-native";
 import { Thumbnail, Header, Left, Body, Right, Button, Icon, Title, Text, View } from 'native-base';
 import Menu, { MenuItem, MenuDivider } from 'react-native-material-menu';
 import Drawer from 'react-native-drawer-menu';
@@ -143,25 +143,6 @@ class HeaderTeam extends Component {
         this.props.setFriendRegister("")
     }
 
-    // checkLogin = (goSuccess) => {
-    //     console.log("checkLogin")
-    //     let statusLogin = this.props.userprofile.userstatus
-    //     if (this.state.statusLogin === 0) {
-    //         this.hideMenu()
-    //         this.props.goLogin()
-    //         console.log(" don't ok")
-    //         value = false
-    //     }
-    //     else if (this.state.statusLogin === 1) {
-    //         this.hideMenu()
-    //         console.log("ok")
-    //         this.goSuccess
-    //         value = true
-    //     }
-    //     console.log(value)
-    //     return value
-    // }
-
     render() {
         return (
             <View>
@@ -170,7 +151,7 @@ class HeaderTeam extends Component {
                     hidden={false}
                     translucent={true}
                 />
-                <Header style={{ backgroundColor: "#FC561F" }}>
+                <Header androidStatusBarColor="#FC561F" style={styles.header}>
                     <Left>
                         {this.props.goback == false ?
                             <View></View>
@@ -311,23 +292,35 @@ const mapDispatchToProps = dispatch => {
 }
 
 const styles = StyleSheet.create({
+    header: {
+        backgroundColor: '#FC561F',
+        ...Platform.select({
+            ios: {
+                
+            },
+            android: {
+                paddingTop: 15,
+                paddingBottom : 0
+            },
+        })
+    },
     title: {
-        fontFamily: "kanit",
+        fontFamily: "Kanit",
         color: "#fff",
         fontSize: 14
     },
     title2: {
-        fontFamily: "kanit",
+        fontFamily: "Kanit",
         color: "#fff",
         fontSize: 14,
         paddingLeft: 10,
     },
     item_menu: {
-        fontFamily: "kanit",
+        fontFamily: "Kanit",
         fontSize: 18,
     },
     titleHead2: {
-        fontFamily: "kanit",
+        fontFamily: "Kanit",
         color: "#fff",
         fontSize: 18,
         fontWeight: "bold",

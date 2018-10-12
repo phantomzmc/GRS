@@ -86,7 +86,7 @@ class EventListFriend extends Component {
                         <Card style={{ justifyContent: "center", backgroundColor: "#fff", opacity: 0.5 }}>
                             <CardItem style={{ alignItems: "center", backgroundColor: "#fff", opacity: 0.9 }}>
                                 <Icon type="Ionicons" name="ios-add-circle-outline" style={{ color: "#000" }} onPress={() => this.props.goAddFriendList()} />
-                                <Text style={{ fontFamily: "kanit", color: "#000" }} onPress={() => this.props.goAddFriendList()}>เพิ่ม Friend List</Text>
+                                <Text style={{ fontFamily: "Kanit", color: "#000" }} onPress={() => this.props.goAddFriendList()}>เพิ่ม Friend List</Text>
                             </CardItem>
                         </Card>
                     </View>

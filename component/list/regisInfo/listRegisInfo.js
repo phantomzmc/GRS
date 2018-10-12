@@ -69,12 +69,12 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
     textDetail: {
-        fontFamily: "kanit",
+        fontFamily: "Kanit",
         fontSize: 18,
         paddingVertical: 10
     },
     textValue : {
-        fontFamily : "kanit"
+        fontFamily : "Kanit"
     }
 })
 

@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
     },
     name: {
         color: '#fff',
-        fontFamily: 'kanit',
+        fontFamily: 'Kanit',
         fontSize: 20,
         fontWeight: '500'
     },
@@ -144,13 +144,13 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 26,
         fontWeight: '500',
-        fontFamily: 'kanit'
+        fontFamily: 'Kanit'
     },
     price: {
         color: '#fff',
         fontSize: 20,
         fontWeight: '500',
-        fontFamily: 'kanit'
+        fontFamily: 'Kanit'
     },
     listview: {}
 })

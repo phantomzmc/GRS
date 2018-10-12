@@ -281,7 +281,7 @@ const styles = StyleSheet.create({
         fontWeight: '500',
         fontSize: 15,
         color: '#fff',
-        fontFamily: 'kanit'
+        fontFamily: 'Kanit'
     },
     submitContainer: {
         marginTop: 30,

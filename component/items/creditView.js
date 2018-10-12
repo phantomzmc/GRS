@@ -152,7 +152,7 @@ class CreditView extends Component {
                         <Item floatingLabel last>
                             <Label style={styles.textLabel}>Ex.xxxxxxxxxxxx</Label>
                             <Input
-                                style={{ fontFamily: "kanit" }}
+                                style={{ fontFamily: "Kanit" }}
                                 onChangeText={(nameCredit) => this.setState({ nameCredit })}
                             />
                         </Item>
@@ -162,7 +162,7 @@ class CreditView extends Component {
                         <Item floatingLabel last>
                             <Label style={styles.textLabel}>Ex.1234 4567 8901 8764</Label>
                             <Input
-                                style={{ fontFamily: "kanit" }}
+                                style={{ fontFamily: "Kanit" }}
                                 keyboardType="phone-pad"
                                 onChangeText={(numberCredit) => this.setState({ numberCredit })}
                             />
@@ -173,7 +173,7 @@ class CreditView extends Component {
                         <Item floatingLabel last>
                             <Label style={styles.textLabel}>เดือน</Label>
                             <Input
-                                style={{ fontFamily: "kanit" }}
+                                style={{ fontFamily: "Kanit" }}
                                 keyboardType="phone-pad"
                                 onChangeText={(expCredit) => this.setState({ expCredit })}
                             />
@@ -181,7 +181,7 @@ class CreditView extends Component {
                         <Item floatingLabel last>
                             <Label style={styles.textLabel}>ปี</Label>
                             <Input
-                                style={{ fontFamily: "kanit" }}
+                                style={{ fontFamily: "Kanit" }}
                                 keyboardType="phone-pad"
                                 onChangeText={(yearCredit) => this.setState({ yearCredit })}
                             />
@@ -193,7 +193,7 @@ class CreditView extends Component {
                         <Item floatingLabel last>
                             <Label style={styles.textLabel}>Ex.123</Label>
                             <Input
-                                style={{ fontFamily: "kanit" }}
+                                style={{ fontFamily: "Kanit" }}
                                 keyboardType="phone-pad"
                                 onChangeText={(cvcCredit) => this.setState({ cvcCredit, statusButton : false })}
                             />
@@ -405,16 +405,16 @@ const styles = StyleSheet.create({
         fontFamily: "Kanit"
     },
     headForm: {
-        fontFamily: 'kanit',
+        fontFamily: 'Kanit',
         fontSize: 16,
         paddingTop: 20
     },
     textLabel: {
         fontSize: 14,
-        fontFamily: 'kanit'
+        fontFamily: 'Kanit'
     },
     textDetail: {
-        fontFamily: 'kanit',
+        fontFamily: 'Kanit',
         padding: 15
 
     }

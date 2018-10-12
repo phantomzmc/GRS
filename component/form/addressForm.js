@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         borderWidth: 1.5,
         marginBottom: 20,
-        fontFamily: 'kanit',
+        fontFamily: 'Kanit',
     },
     submitContainer: {
         marginTop: 20,
@@ -195,17 +195,17 @@ const styles = StyleSheet.create({
         fontFamily: 'Kanit',
     },
     headForm: {
-        fontFamily: 'kanit',
+        fontFamily: 'Kanit',
         fontSize: 16,
         paddingTop: 20
     },
     textLabel: {
         fontSize: 14,
-        fontFamily: 'kanit'
+        fontFamily: 'Kanit'
     },
     labelStyle: {
         padding: 20,
-        fontFamily: "kanit",
+        fontFamily: "Kanit",
         fontSize: 16
     },
     checkSubmit: {

@@ -171,7 +171,7 @@ class FriendList extends Component {
                         <Input
                             hasRef={ref => (this.textInputRef = ref)}
                             placeholder="ค้นหาเลขบัตรประชาชน/หนังสือเดินทาง"
-                            style={{ fontFamily: 'kanit', fontSize: 14, paddingHorizontal: 10 }}
+                            style={{ fontFamily: 'Kanit', fontSize: 14, paddingHorizontal: 10 }}
                             returnKeyType={"next"}
                             value={this.state.searchText}
                             onChangeText={(text) => this.setState({ searchText: text })}
@@ -182,7 +182,7 @@ class FriendList extends Component {
                     {/* <Button small iconLeft transparent primary onPress={this.showModal}> */}
                     <Button small iconLeft transparent primary onPress={() => this.showModal()}>
                         <Icon name="ios-search" />
-                        <Text style={{ fontFamily: 'kanit' }}>ค้นหา</Text>
+                        <Text style={{ fontFamily: 'Kanit' }}>ค้นหา</Text>
                     </Button>
                 </Header>
 
@@ -241,7 +241,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     textAlert: {
-        fontFamily: "kanit",
+        fontFamily: "Kanit",
         fontSize: 20
     }
 })

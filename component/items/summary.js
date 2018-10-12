@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     textSummary: {
         padding: 10,
         fontSize: 20,
-        fontFamily: 'kanit',
+        fontFamily: 'Kanit',
         color: '#fff',
     }
 })

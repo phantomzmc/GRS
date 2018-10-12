@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     textAlert: {
-        fontFamily: "kanit",
+        fontFamily: "Kanit",
         fontSize: 20
     }
 

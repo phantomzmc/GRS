@@ -213,7 +213,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     textName: {
-        fontFamily: 'kanit',
+        fontFamily: 'Kanit',
         fontSize: 15
     },
     detailList: {
@@ -224,7 +224,7 @@ const styles = StyleSheet.create({
         padding: 5,
     },
     textStatusRegis: {
-        fontFamily: 'kanit',
+        fontFamily: 'Kanit',
         fontSize: 10,
         color: "#9ACD32"
     }

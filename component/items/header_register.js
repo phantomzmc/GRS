@@ -245,7 +245,7 @@ class HeaderRegister extends Component {
                                     {this.props.userprofile.userprofile.PicProfile == "" ?
                                         <View style={styles.imgAvatar} >
                                             <Icon active name="user-circle-o" type="FontAwesome" size={10} />
-                                            <Text style={{ fontFamily: "kanit", fontSize: 12, paddingTop: 10 }}>เพิ่มรูปภาพ</Text>
+                                            <Text style={{ fontFamily: "Kanit", fontSize: 12, paddingTop: 10 }}>เพิ่มรูปภาพ</Text>
                                         </View> :
                                         <Image style={styles.imgAvatar} source={{ uri: this.state.ImageSource }} />
                                     }
@@ -269,7 +269,7 @@ class HeaderRegister extends Component {
                                     {this.state.ImageSource == "" ?
                                         <View style={styles.imgAvatar} >
                                             <Icon active name="user-circle-o" type="FontAwesome" size={10} />
-                                            <Text style={{ fontFamily: "kanit", fontSize: 12, paddingTop: 10 }}>เพิ่มรูปภาพ</Text>
+                                            <Text style={{ fontFamily: "Kanit", fontSize: 12, paddingTop: 10 }}>เพิ่มรูปภาพ</Text>
                                         </View> :
                                         <Image style={styles.imgAvatar} source={{ uri: this.state.ImageSource }} />
                                     }
@@ -324,7 +324,7 @@ const styles = StyleSheet.create({
     nameProfile: {
         color: '#fff',
         fontSize: 20,
-        fontFamily: 'kanit',
+        fontFamily: 'Kanit',
         fontWeight: '900',
         marginBottom: 10,
         marginTop: 20,
@@ -333,14 +333,14 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 14,
         fontWeight: '900',
-        fontFamily: 'kanit',
+        fontFamily: 'Kanit',
         marginBottom: 10
     },
     eventTitle: {
         color: '#fff',
         fontSize: 18,
         fontWeight: '900',
-        fontFamily: 'kanit',
+        fontFamily: 'Kanit',
         marginBottom: 20
     }
 })

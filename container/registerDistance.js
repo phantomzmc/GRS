@@ -124,7 +124,7 @@ class RegisterDistance extends Component {
                                 :
                                 <View style={styles.container2}>
                                     <Icon name="ios-information-circle-outline" style={{ color: "red" }} />
-                                    <Text style={{ fontFamily: "kanit" }}>ลงทะเบียนงานนี้แล้ว</Text>
+                                    <Text style={{ fontFamily: "Kanit" }}>ลงทะเบียนงานนี้แล้ว</Text>
                                 </View>
                             }
                         </View>
@@ -182,10 +182,9 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 20,
-        fontWeight: '700',
         color: '#000',
         padding: 10,
-        fontFamily: 'kanit',
+        fontFamily: "Kanit",
     },
 
 })

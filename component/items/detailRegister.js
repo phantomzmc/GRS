@@ -56,8 +56,8 @@ class DetailRegister extends Component {
                         }
                     </View>
                     <View>
-                        <Text style={{ fontSize: 10, color: '#A9A9A9', fontFamily: 'kanit' }}> Order : {this.state.numberInvoice} </Text>
-                        <Text style={{ fontSize: 10, color: '#A9A9A9', fontFamily: 'kanit' }}>{date}-{month}- {year}</Text>
+                        <Text style={{ fontSize: 10, color: '#A9A9A9', fontFamily: 'Kanit' }}> Order : {this.state.numberInvoice} </Text>
+                        <Text style={{ fontSize: 10, color: '#A9A9A9', fontFamily: 'Kanit' }}>{date}-{month}- {year}</Text>
                     </View>
                 </View>
                 <View style={styles.viewName}>
@@ -96,12 +96,12 @@ class DetailRegister extends Component {
                 <View style={styles.viewAddress}>
                     <View style={{ flex: 1, alignItems: 'center' }}>
                         <Text style={styles.textName1}>Address</Text>
-                        {/* <Text style={{ fontFamily: 'kanit' }}>{this.props.address.user.adress}</Text> */}
-                        <Text style={{ fontFamily: 'kanit' }}>{this.state.address}</Text>
+                        {/* <Text style={{ fontFamily: 'Kanit' }}>{this.props.address.user.adress}</Text> */}
+                        <Text style={{ fontFamily: 'Kanit' }}>{this.state.address}</Text>
                     </View>
                     <View style={{ flex: 1, alignItems: 'center' }}>
                         <Text style={styles.textName1}>วันที่</Text>
-                        <Text style={{ fontFamily: 'kanit' }}>{this.props.event.event.EventDate}</Text>
+                        <Text style={{ fontFamily: 'Kanit' }}>{this.props.event.event.EventDate}</Text>
                     </View>
                 </View>
 
@@ -156,29 +156,29 @@ const styles = StyleSheet.create({
     },
     typePaymentSuccess: {
         color: '#90EE90',
-        fontFamily: 'kanit',
+        fontFamily: 'Kanit',
     },
     typePaymentWarning: {
         color: "#FFA500",
-        fontFamily: 'kanit',
+        fontFamily: 'Kanit',
     },
     textName1: {
         color: '#a9a9a9',
-        fontFamily: 'kanit',
+        fontFamily: 'Kanit',
     },
     textName2: {
         fontSize: 20,
-        fontFamily: 'kanit',
+        fontFamily: 'Kanit',
     },
     boxTitle: {
         color: '#fff',
         fontSize: 16,
-        fontFamily: 'kanit'
+        fontFamily: 'Kanit'
     },
     boxName: {
         fontSize: 18,
         color: '#fff',
-        fontFamily: 'kanit',
+        fontFamily: 'Kanit',
         justifyContent: "center"
     },
     disQRcode: {
@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
     textName3: {
         fontSize: 12,
         color: '#a9a9a9',
-        fontFamily: 'kanit',
+        fontFamily: 'Kanit',
     }
 
 })

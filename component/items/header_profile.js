@@ -175,7 +175,7 @@ class HeaderProfile extends Component {
                         {/* {this.state.ImageSource == "" ?
                                 <View style={styles.imgAvatar} >
                                     <Icon active name="user-circle-o" type="FontAwesome" size={10} />
-                                    <Text style={{ fontFamily: "kanit", fontSize: 12, paddingTop: 10 }}>เพิ่มรูปภาพ</Text>
+                                    <Text style={{ fontFamily: "Kanit", fontSize: 12, paddingTop: 10 }}>เพิ่มรูปภาพ</Text>
                                 </View> :
                                 <Image style={styles.imgAvatar} source={{ uri: this.state.ImageSource }} />
                             } */}
@@ -226,23 +226,20 @@ const styles = StyleSheet.create({
     nameProfile: {
         color: '#fff',
         fontSize: 20,
-        fontFamily: 'kanit',
-        fontWeight: '900',
+        fontFamily: 'Kanit',
         marginBottom: 10,
         marginTop: 20,
     },
     ageProfile: {
         color: '#fff',
         fontSize: 14,
-        fontWeight: '900',
-        fontFamily: 'kanit',
+        fontFamily: 'Kanit',
         marginBottom: 10
     },
     eventTitle: {
         color: '#fff',
         fontSize: 18,
-        fontWeight: '900',
-        fontFamily: 'kanit',
+        fontFamily: 'Kanit',
         marginBottom: 20
     }
 })

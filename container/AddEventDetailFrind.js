@@ -39,12 +39,12 @@ const styles = StyleSheet.create({
     textDistance : {
         padding: 15,
         fontSize: 20,
-        fontFamily: 'kanit',
+        fontFamily: 'Kanit',
     },
     textSizeshirth :{
         padding: 15,
         fontSize: 20,
-        fontFamily: 'kanit',
+        fontFamily: 'Kanit',
     },
     submitContainer: {
         marginTop: 30,

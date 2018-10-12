@@ -13,7 +13,7 @@ class ChargePaymentLoad extends Component {
                     <View>
                         <Spinner />
                         <View style={{ paddingVertical: 10, alignItems: "center" }}>
-                            <Text style={{ fontSize: 18, fontFamily: "kanit" }}>ระบบกำลังทำการตรวจสอบ</Text>
+                            <Text style={{ fontSize: 18, fontFamily: "Kanit" }}>ระบบกำลังทำการตรวจสอบ</Text>
                         </View>
                     </View>
                 }
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     },
     textButton: {
         color: '#fff',
-        fontFamily: 'kanit'
+        fontFamily: 'Kanit'
     }
 })
 

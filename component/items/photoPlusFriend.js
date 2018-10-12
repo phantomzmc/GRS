@@ -80,7 +80,7 @@ class PhotoPlus extends Component {
             <View style={styles.container}>
                 <Left style={{ justifyContent: 'space-between' }}>
                     <Icon name="ios-camera-outline" style={{ fontSize: 20 }} />
-                    <Text style={{ fontFamily: "kanit", fontSize: 16 }}>Photo + Service</Text>
+                    <Text style={{ fontFamily: "Kanit", fontSize: 16 }}>Photo + Service</Text>
                 </Left>
                 <Right>
                     <Switch

@@ -81,7 +81,7 @@ class PhotoPlus extends Component {
                 <View style={{ padding: 10 }}>
                     <Card style={{ borderRadius: 10 }}>
                         <CardItem style={{ borderRadius: 10 }}>
-                            <Text style={{ fontFamily: "kanit", justifyContent: "space-around" }}>
+                            <Text style={{ fontFamily: "Kanit", justifyContent: "space-around" }}>
                                 Photo+ Service เป็นบริการพิเศษสำหรับงานวิ่งนี้โดยทีมงานช่างภาพของ Shutterrunning คุณสามารถเลือกหรือไม่เลือกบริการ Photo+ ได้ ถ้าคุณเลือกบริการนี้เราจะทำการส่งไฟล์ภาพวิ่งของคุณทั้งหมดในงาน {this.props.event.event.EventName} ไปยังเมล์ของคุณทันที อย่างไรก็ตามถ้าเราหาคุณไม่เจอในงานวิ่งนี้ เรายินดีคืนค่าบริการ Photo+ นี้ให้คุณภายใน 5 วัน โดยเราจะติดต่อคุณทาง email หรือ ทางโทรศัพท์
                             </Text>
                         </CardItem>

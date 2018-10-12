@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     labelCard: {
         paddingVertical: 20,
         fontSize: 20,
-        fontFamily: "kanit",
+        fontFamily: "Kanit",
         color: "#FC561F"
     }
 })

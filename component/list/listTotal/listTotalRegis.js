@@ -38,16 +38,16 @@ class ListTotalRegis extends Component {
                             <Content>
                                 <View style={{ flexDirection: 'column' }}>
                                     <View style={{ flexDirection: 'row' }}>
-                                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{item.firstname} {item.lastname}</Text>
+                                        <Text style={{ fontSize: 10, fontFamily: 'Kanit' }}>{item.firstname} {item.lastname}</Text>
                                     </View>
                                     <View style={{ flexDirection: 'column' }}>
-                                        <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit' }}>ระยะ : {item.nameRegis}</Text>
-                                        <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit' }}>ไซค์เสื้อ : {item.JerseySize}</Text>
+                                        <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'Kanit' }}>ระยะ : {item.nameRegis}</Text>
+                                        <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'Kanit' }}>ไซค์เสื้อ : {item.JerseySize}</Text>
                                     </View>
                                     {
                                         item.PhotoPlusService == 1 ?
                                             <View>
-                                                <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit' }}> x1 PhotoPlusService </Text>
+                                                <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'Kanit' }}> x1 PhotoPlusService </Text>
                                             </View>
                                             :
                                             <View></View>
@@ -56,7 +56,7 @@ class ListTotalRegis extends Component {
                             </Content>
                             <Right>
                                 <View>
-                                    <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{item.CourseFee}.0 ฿</Text>
+                                    <Text style={{ fontSize: 10, fontFamily: 'Kanit' }}>{item.CourseFee}.0 ฿</Text>
                                 </View>
                             </Right>>
                         </View>}
@@ -80,11 +80,11 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff",
     },
     textTitle: {
-        fontFamily: "kanit",
+        fontFamily: "Kanit",
         padding: 10,
     },
     textTitle2: {
-        fontFamily: "kanit",
+        fontFamily: "Kanit",
         padding: 10,
         fontSize: 8,
         color: '#1f1f1f'

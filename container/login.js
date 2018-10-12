@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, Alert, TextInput, StatusBar, AsyncStorage } from 'react-native';
-import { Header, Left, Right, Icon, Button, Body, Title, Container } from "native-base";
+import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, Alert, TextInput, StatusBar, AsyncStorage, Platform } from 'react-native';
+import { Header, Left, Right, Icon, Button, Body, Title, Container, Form, Item, Input, Label } from "native-base";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview'
 import randomstringPromise from 'randomstring-promise/react-native';
 import { connect } from 'react-redux'
@@ -16,7 +16,7 @@ class Login extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            username: this.props.username !== null ? "รหัสบัตรประชาชน" : this.props.profile.profile.userid,
+            username: this.props.username !== null ? "" : this.props.profile.profile.userid,
             password: "",
             status: [],
             login: 1,
@@ -26,7 +26,7 @@ class Login extends Component {
     componentWillMount() {
         this.getUsername()
         if (this.props.username.username == "" && this.props.profile.profile.userid == "") {
-            this.setState({ username: "รหัสบัตรประชาชน" })
+            this.setState({ username: "" })
         }
     }
     componentDidMount() {
@@ -50,6 +50,7 @@ class Login extends Component {
 
     checkLoginSever() {
         let { username, password } = this.state
+        console.log(username + password)
         let uri = req[0].uspSignIn
         let apikey = api_key[0].api_key
         let data = ({
@@ -69,7 +70,18 @@ class Login extends Component {
                 this.setState({ isLoading: false, status: response.data });
                 console.log(this.state.status)
                 console.log(this.state.status[0].SignInStatus)
-                this.checkLogin()
+                // this.checkLogin()
+
+                // ระบบ login error
+                this.getUserProfile()
+                this.props.setUsername(this.state.username)
+                this.props.setUserStatus(status[0])
+                this.props.setStatusLogin(login)
+                this.setLogin()
+                this.gotoEvent()
+                // ระบบ login error
+
+
             }).catch((error) => {
                 this.props.navigation.navigate('EventList')
             });
@@ -113,7 +125,6 @@ class Login extends Component {
             this.props.setUserStatus(status[0])
             this.props.setStatusLogin(login)
             this.setLogin()
-            // this.gotoControlDistance()
             this.gotoEvent()
         }
         else if (status[0].SignInStatus === "1" && status[0].ActivateStatus === "0") {
@@ -212,7 +223,8 @@ class Login extends Component {
                     hidden={false}
                     translucent={true}
                 />
-                <Header style={{ backgroundColor: 'transparent' }}>
+
+                <Header androidStatusBarColor="#2c3e50" style={{ backgroundColor: 'none', marginTop: Platform.OS === 'ios' ? 0 : 15 }}>
                     <Left>
 
                     </Left>
@@ -228,41 +240,51 @@ class Login extends Component {
                         <View style={styles.container}>
                             <Text style={styles.textTitle}>
                                 ShutterRuning Service
-                    </Text>
+                             </Text>
                         </View>
                         <View style={styles.formcontainer}>
-                            <TextInput
-                                placeholder={this.state.username}
-                                returnKeyType="next"
-                                onSubmitEditing={() => this.passwordInput}
-                                onChangeText={(username) => this.setState({ username: username })}
-                                style={styles.input}
-                            />
-                            <TextInput
-                                placeholder="รหัสผ่าน"
-                                returnKeyType="go"
-                                secureTextEntry
-                                style={styles.input}
-                                ref={(input) => this.passwordInput = input}
-                                onChangeText={(password) => this.setState({ password })}
-                            />
-                            <View style={styles.loginContainer}>
-                                <TouchableOpacity style={styles.buttonContainer}
-                                    onPress={this.checkLoginSever.bind(this)}>
-                                    <Text style={styles.textButton}>Login</Text>
+                            <View style={styles.formcontainer2}>
+                                <Form>
+                                    <Item floatingLabel>
+                                        <Label style={{ fontFamily: 'Kanit' }}>รหัสบัตรประจำตัวประชาชน : {this.state.username}</Label>
+                                        <Input
+                                            returnKeyType="next"
+                                            onSubmitEditing={() => this.passwordInput}
+                                            onChangeText={(username) => this.setState({ username: username })}
+                                            style={Platform.OS === 'ios' ? styles.input : styles.inputAndroid}
+                                        />
+                                    </Item>
+                                    <Item floatingLabel>
+                                        <Label style={{ fontFamily: 'Kanit' }}>รหัสผ่าน : </Label>
+                                        <Input
+                                            returnKeyType="go"
+                                            secureTextEntry
+                                            style={Platform.OS === 'ios' ? styles.input : styles.inputAndroid}
+                                            ref={(input) => this.passwordInput = input}
+                                            onChangeText={(password) => this.setState({ password })}
+                                        />
+                                    </Item>
+                                </Form>
+
+                                <View style={styles.loginContainer}>
+                                    {/* <TouchableOpacity style={styles.buttonContainer}
+                                        onPress={this.checkLoginSever.bind(this)}>
+                                        <Text style={styles.textButton}>Login</Text>
+                                    </TouchableOpacity> */}
+                                    <Button block success onPress={this.checkLoginSever.bind(this)}>
+                                        <Text style={styles.textButton}>Login</Text>
+                                    </Button>
+                                </View>
+                                <TouchableOpacity onPress={this.gotoRegister.bind(this)}>
+                                    <Text style={styles.regisButton}>สมัครสมาชิก</Text>
+                                </TouchableOpacity>
+
+                                <TouchableOpacity onPress={this.gotoResetPassword.bind(this)}>
+                                    <Text style={styles.regisButton}>ขอรหัสผ่านใหม่</Text>
                                 </TouchableOpacity>
                             </View>
 
-                            <TouchableOpacity onPress={this.gotoRegister.bind(this)}>
-                                <Text style={styles.regisButton}>
-                                    สมัครสมาชิก
-                        </Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={this.gotoResetPassword.bind(this)}>
-                                <Text style={styles.regisButton}>
-                                    ขอรหัสผ่านใหม่
-                        </Text>
-                            </TouchableOpacity>
+
                         </View>
                     </Container>
                 </KeyboardAwareScrollView>
@@ -323,32 +345,41 @@ const styles = StyleSheet.create({
 
     },
     textTitle: {
-        fontFamily: 'kanit',
+        fontFamily: 'Kanit',
         fontSize: 34,
         color: '#fff',
-        fontWeight: '700',
     },
     formcontainer: {
-        flex: 2,
-        padding: 20,
+        flex: 4,
+        paddingHorizontal: 20,
+
+    },
+    formcontainer2: {
+        marginTop: 20,
+        justifyContent: 'center',
+        backgroundColor: '#fff',
+        borderRadius: 10,
+        paddingBottom: 20
     },
     regisButton: {
         marginTop: 20,
-        color: '#fff',
+        color: '#000',
         alignSelf: 'center',
-        fontFamily: 'kanit'
+        fontFamily: 'Kanit'
     },
     input: {
-        fontFamily: 'kanit',
-        height: 40,
-        backgroundColor: '#fff',
-        opacity: 0.8,
-        marginBottom: 20,
-        paddingHorizontal: 20,
-        borderRadius: 20,
+        fontFamily: 'Kanit',
+        marginBottom: 10,
+    },
+    inputAndroid: {
+        fontFamily: 'Kanit',
+        marginBottom: 10,
     },
     loginContainer: {
         alignItems: 'center',
+        marginTop: 30,
+        marginBottom: 20,
+        paddingHorizontal: 10
     },
     buttonContainer: {
         height: 40,
@@ -359,13 +390,12 @@ const styles = StyleSheet.create({
         borderRadius: 20,
     },
     textButton: {
-        fontWeight: '700',
         fontSize: 20,
         color: '#fff',
-        fontFamily: 'kanit'
+        fontFamily: 'Kanit'
     },
     title: {
-        fontFamily: "kanit",
+        fontFamily: "Kanit",
         color: "#fff",
         fontSize: 16,
     }

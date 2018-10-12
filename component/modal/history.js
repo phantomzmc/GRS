@@ -102,11 +102,11 @@ class ModalHistory extends Component {
                             <View style={styles.viewAddress}>
                                 <View style={{ flex: 1 }}>
                                     <Text style={styles.textName3}>ที่อยู่</Text>
-                                    <Text style={{ fontFamily: 'kanit', fontSize: 14, marginRight: 10 }}>{dataInvoice[0].Address} {dataInvoice[0].SubDistric} {dataInvoice[0].Distric} {dataInvoice[0].Province} {dataInvoice[0].PostCode}</Text>
+                                    <Text style={{ fontFamily: 'Kanit', fontSize: 14, marginRight: 10 }}>{dataInvoice[0].Address} {dataInvoice[0].SubDistric} {dataInvoice[0].Distric} {dataInvoice[0].Province} {dataInvoice[0].PostCode}</Text>
                                 </View>
                                 <View style={{ flex: 0, alignItems: 'center' }}>
                                     <Text style={styles.textName3}>วันที่</Text>
-                                    <Text style={{ fontFamily: 'kanit', fontSize: 14 }}>{dataInvoice[0].InvoiceDatetime.substr(0, 11)}</Text>
+                                    <Text style={{ fontFamily: 'Kanit', fontSize: 14 }}>{dataInvoice[0].InvoiceDatetime.substr(0, 11)}</Text>
                                 </View>
                             </View>
                         </CardItem>
@@ -120,11 +120,11 @@ class ModalHistory extends Component {
                                         </View>
                                     </View>
                                     <View>
-                                        <Text style={{ fontSize: 10, fontFamily: 'kanit', textAlign: 'center', width: 150 }}>{dataInvoice[0].EventName} </Text>
-                                        {/* <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit', textAlign: 'center', width: 150 }}>({this.props.event.distanceEvent.distance} - {this.props.shirtphoto.size}) x 1 (Photo Plus)</Text> */}
+                                        <Text style={{ fontSize: 10, fontFamily: 'Kanit', textAlign: 'center', width: 150 }}>{dataInvoice[0].EventName} </Text>
+                                        {/* <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'Kanit', textAlign: 'center', width: 150 }}>({this.props.event.distanceEvent.distance} - {this.props.shirtphoto.size}) x 1 (Photo Plus)</Text> */}
                                     </View>
                                     <View>
-                                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{parseFloat(dataInvoice[0].TotalFee).toFixed(2)} ฿</Text>
+                                        <Text style={{ fontSize: 10, fontFamily: 'Kanit' }}>{parseFloat(dataInvoice[0].TotalFee).toFixed(2)} ฿</Text>
                                     </View>
                                 </View>
 
@@ -137,21 +137,21 @@ class ModalHistory extends Component {
                                     </View>
                                     {dataInvoice[0].PlaceItemID == 1 ?
                                         <View>
-                                            <Text style={{ fontSize: 10, fontFamily: 'kanit', textAlign: 'center' }}>รับเสื้อและเบอร์ที่ :  </Text>
-                                            {/* <Text style={{ fontSize: 10, fontFamily: 'kanit', paddingHorizontal: 50 }}></Text> */}
+                                            <Text style={{ fontSize: 10, fontFamily: 'Kanit', textAlign: 'center' }}>รับเสื้อและเบอร์ที่ :  </Text>
+                                            {/* <Text style={{ fontSize: 10, fontFamily: 'Kanit', paddingHorizontal: 50 }}></Text> */}
                                             <View style={{ marginHorizontal: 20 }}>
-                                                <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit', textAlign: 'center', width: 150 }}>{parseFloat(dataInvoice[0].PlaceItemName).toFixed(2)} ฿</Text>
+                                                <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'Kanit', textAlign: 'center', width: 150 }}>{parseFloat(dataInvoice[0].PlaceItemName).toFixed(2)} ฿</Text>
                                             </View>
                                         </View>
                                         :
                                         <View>
-                                            <Text style={{ fontSize: 10, fontFamily: 'kanit', textAlign: 'center' }}>บริหารจัดส่ง   </Text>
-                                            {/* <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>วันที่ 27 มกราคม 2561</Text> */}
-                                            <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit', textAlign: 'center', width: 150 }}>{dataInvoice[0].Address} {dataInvoice[0].SubDistric} {dataInvoice[0].Distric} {dataInvoice[0].Province} {dataInvoice[0].PostCode}</Text>
+                                            <Text style={{ fontSize: 10, fontFamily: 'Kanit', textAlign: 'center' }}>บริหารจัดส่ง   </Text>
+                                            {/* <Text style={{ fontSize: 10, fontFamily: 'Kanit' }}>วันที่ 27 มกราคม 2561</Text> */}
+                                            <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'Kanit', textAlign: 'center', width: 150 }}>{dataInvoice[0].Address} {dataInvoice[0].SubDistric} {dataInvoice[0].Distric} {dataInvoice[0].Province} {dataInvoice[0].PostCode}</Text>
                                         </View>
                                     }
                                     <View>
-                                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{parseFloat(dataInvoice[0].TotalPost).toFixed(2)} ฿</Text>
+                                        <Text style={{ fontSize: 10, fontFamily: 'Kanit' }}>{parseFloat(dataInvoice[0].TotalPost).toFixed(2)} ฿</Text>
                                     </View>
                                 </View>
                                 <View style={styles.detailRow}>
@@ -162,11 +162,11 @@ class ModalHistory extends Component {
                                         </View>
                                     </View>
                                     <View>
-                                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>ค่าธรรมเนียมการใช้บัตรเครดิต/เดบิต</Text>
+                                        <Text style={{ fontSize: 10, fontFamily: 'Kanit' }}>ค่าธรรมเนียมการใช้บัตรเครดิต/เดบิต</Text>
                                         {/* <Text style={{ fontSize: 7, color: '#8B8B8B' }}>(5 Km. - S) x 1 (Photo Plus)</Text> */}
                                     </View>
                                     <View>
-                                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{parseFloat(dataInvoice[0].TotalCreditFee).toFixed(2)} ฿</Text>
+                                        <Text style={{ fontSize: 10, fontFamily: 'Kanit' }}>{parseFloat(dataInvoice[0].TotalCreditFee).toFixed(2)} ฿</Text>
                                     </View>
                                 </View>
                                 {dataInvoice[0].TotalDiscount == 0 ?
@@ -180,11 +180,11 @@ class ModalHistory extends Component {
                                             </View>
                                         </View>
                                         <View>
-                                            <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>ส่วนลดค่าโปรโมชั่น {parseFloat(dataInvoice[0].TotalDiscount).toFixed(2)} บาท</Text>
+                                            <Text style={{ fontSize: 10, fontFamily: 'Kanit' }}>ส่วนลดค่าโปรโมชั่น {parseFloat(dataInvoice[0].TotalDiscount).toFixed(2)} บาท</Text>
                                             {/* <Text style={{ fontSize: 7, color: '#8B8B8B' }}>(5 Km. - S) x 1 (Photo Plus)</Text> */}
                                         </View>
                                         <View>
-                                            <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{parseFloat(dataInvoice[0].TotalDiscount).toFixed(2)} ฿</Text>
+                                            <Text style={{ fontSize: 10, fontFamily: 'Kanit' }}>{parseFloat(dataInvoice[0].TotalDiscount).toFixed(2)} ฿</Text>
                                         </View>
                                     </View>
                                 }
@@ -198,11 +198,11 @@ class ModalHistory extends Component {
                                         </View>
                                     </View>
                                     <View>
-                                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>รวมทั้งสิ้น</Text>
+                                        <Text style={{ fontSize: 10, fontFamily: 'Kanit' }}>รวมทั้งสิ้น</Text>
                                         {/* <Text style={{ fontSize: 7, color: '#8B8B8B' }}>(5 Km. - S) x 1 (Photo Plus)</Text> */}
                                     </View>
                                     <View>
-                                        <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{parseFloat(dataInvoice[0].TotalAll).toFixed(2)} ฿</Text>
+                                        <Text style={{ fontSize: 10, fontFamily: 'Kanit' }}>{parseFloat(dataInvoice[0].TotalAll).toFixed(2)} ฿</Text>
                                     </View>
                                 </View>
                             </View>
@@ -211,11 +211,11 @@ class ModalHistory extends Component {
                             <View style={{ flexDirection: "row" }}>
                                 <Button rounded success onPress={this.onSaveInvoice.bind(this)} style={{ marginHorizontal: 10 }}>
                                     <Icon name="ios-add-circle-outline" />
-                                    <Text style={{ fontFamily: "kanit" }}>บันทึก</Text>
+                                    <Text style={{ fontFamily: "Kanit" }}>บันทึก</Text>
                                 </Button>
                                 <Button rounded light onPress={this.props.toggleModal} style={{ marginHorizontal: 10 }}>
                                     <Icon name="ios-remove-circle-outline" />
-                                    <Text style={{ fontFamily: "kanit" }}>ปิด</Text>
+                                    <Text style={{ fontFamily: "Kanit" }}>ปิด</Text>
                                 </Button>
                             </View>
                         </CardItem>
@@ -261,41 +261,41 @@ const styles = StyleSheet.create({
     },
     typePayment: {
         color: '#90EE90',
-        fontFamily: 'kanit',
+        fontFamily: 'Kanit',
     },
     typePaymentWarning: {
         color: "#FFA500",
-        fontFamily: 'kanit',
+        fontFamily: 'Kanit',
         fontSize: 12,
         width: 80
     },
     textName1: {
         fontSize: 14,
         color: '#a9a9a9',
-        fontFamily: 'kanit',
+        fontFamily: 'Kanit',
     },
     textName2: {
         fontSize: 16,
-        fontFamily: 'kanit',
+        fontFamily: 'Kanit',
     },
     textName3: {
         fontSize: 12,
         color: '#a9a9a9',
-        fontFamily: 'kanit',
+        fontFamily: 'Kanit',
     },
     textName4: {
         fontSize: 14,
-        fontFamily: 'kanit',
+        fontFamily: 'Kanit',
     },
     boxTitle: {
         color: '#fff',
         fontSize: 15,
-        fontFamily: 'kanit'
+        fontFamily: 'Kanit'
     },
     boxName: {
         fontSize: 25,
         color: '#fff',
-        fontFamily: 'kanit'
+        fontFamily: 'Kanit'
     },
     detailRow: {
         height: 60,
@@ -316,7 +316,7 @@ const styles = StyleSheet.create({
     subTextHead: {
         fontSize: 10,
         color: '#A9A9A9',
-        fontFamily: 'kanit'
+        fontFamily: 'Kanit'
     },
     disQRcode: {
         width: 75,

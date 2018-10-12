@@ -127,12 +127,12 @@ const styles = StyleSheet.create({
         padding: 20
     },
     textTitle: {
-        fontFamily: 'kanit',
+        fontFamily: 'Kanit',
         fontSize: 16,
         textAlign: 'center'
     },
     textLabel: {
-        fontFamily: 'kanit'
+        fontFamily: 'Kanit'
     },
     submitContainer: {
         marginTop: 30,
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
         fontWeight: "700",
         fontSize: 16,
         color: "#fff",
-        fontFamily: "kanit"
+        fontFamily: "Kanit"
     },
 })
 

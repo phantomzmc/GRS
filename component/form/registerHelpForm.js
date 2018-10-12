@@ -82,7 +82,7 @@ class FormAddressRegister extends Component {
           <Item floatingLabel last>
             <Label style={styles.textLabel}>Ex.ชื่อ</Label>
             <Input
-              style={{ fontFamily: "kanit" }}
+              style={{ fontFamily: "Kanit" }}
               onChangeText={firstname => this.setState({ firstname })}
             />
           </Item>
@@ -91,7 +91,7 @@ class FormAddressRegister extends Component {
           <Item floatingLabel last>
             <Label style={styles.textLabel}>Ex.นามสกุล</Label>
             <Input
-              style={{ fontFamily: "kanit" }}
+              style={{ fontFamily: "Kanit" }}
               onChangeText={lastname => this.setState({ lastname })}
             />
           </Item>
@@ -104,7 +104,7 @@ class FormAddressRegister extends Component {
           <Item floatingLabel last>
             <Label style={styles.textLabel}>Ex.090-xxxxxx</Label>
             <Input
-              style={{ fontFamily: "kanit" }}
+              style={{ fontFamily: "Kanit" }}
               keyboardType="phone-pad"
               onChangeText={tel => this.setState({ tel })}
             />
@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontSize: 15,
-    fontFamily: "kanit",
+    fontFamily: "Kanit",
     color: "#fc561f"
   },
   contectTitle: {
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     height: 35,
     marginTop: 15,
-    fontFamily: "kanit"
+    fontFamily: "Kanit"
   },
 
   submitContainer: {
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     fontSize: 16,
     color: "#fff",
-    fontFamily: "kanit"
+    fontFamily: "Kanit"
   },
   viewPicker: {
     flexDirection: 'row',
@@ -211,12 +211,12 @@ const styles = StyleSheet.create({
   
 
   headForm: {
-    fontFamily: 'kanit',
+    fontFamily: 'Kanit',
     fontSize: 16,
     paddingTop: 20
   },
   headForm2: {
-    fontFamily: 'kanit',
+    fontFamily: 'Kanit',
     fontSize: 16,
     paddingTop: 10
 
@@ -225,12 +225,12 @@ const styles = StyleSheet.create({
     paddingVertical: 25,
     paddingHorizontal: 10,
     fontSize: 12,
-    fontFamily: "kanit",
+    fontFamily: "Kanit",
     color: "red"
   },
   textLabel: {
     fontSize: 14,
-    fontFamily: 'kanit'
+    fontFamily: 'Kanit'
   }
 });
 

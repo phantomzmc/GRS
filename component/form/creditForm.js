@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         borderWidth: 1.5,
         marginBottom: 20,
-        fontFamily: 'kanit'
+        fontFamily: 'Kanit'
     },
     container3: {
         flexDirection: 'row',

@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     },
     textTitle: {
         padding: 20,
-        fontFamily: 'kanit',
+        fontFamily: 'Kanit',
         fontSize: 16,
         textAlign: 'center'
     },
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
         fontWeight: "700",
         fontSize: 16,
         color: "#fff",
-        fontFamily: "kanit"
+        fontFamily: "Kanit"
     },
     containerNewCode: {
         flexDirection: 'row',

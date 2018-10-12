@@ -79,7 +79,7 @@ class TotalRegister extends Component {
                                 </View>
                             </View>
                             <View>
-                                <Text style={{ fontSize: 10, fontFamily: 'kanit', textAlign: 'center', width: 150 }}>{this.props.event.event.EventName} </Text>
+                                <Text style={{ fontSize: 10, fontFamily: 'Kanit', textAlign: 'center', width: 150 }}>{this.props.event.event.EventName} </Text>
                                 <Text style={styles.textSubDetail}>({this.props.event.distanceEvent.distance} - {this.props.shirtphoto.size}) </Text>
                                 {this.props.friendlist.friendEvent.PhotoPlusService == 1 ?
                                     <Text style={styles.textSubDetail}>x 1 (Photo Plus)</Text> :
@@ -87,7 +87,7 @@ class TotalRegister extends Component {
                                 }
                             </View>
                             <View>
-                                <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{parseFloat(this.props.event.totalEvent).toFixed(2)} ฿</Text>
+                                <Text style={{ fontSize: 10, fontFamily: 'Kanit' }}>{parseFloat(this.props.event.totalEvent).toFixed(2)} ฿</Text>
                             </View>
                         </View>
                     }
@@ -101,13 +101,13 @@ class TotalRegister extends Component {
                                     </View>
                                 </View>
                                 <View>
-                                    <Text style={{ fontSize: 10, fontFamily: 'kanit', textAlign: 'center', width: 150 }}>{this.props.event.event.EventName} </Text>
+                                    <Text style={{ fontSize: 10, fontFamily: 'Kanit', textAlign: 'center', width: 150 }}>{this.props.event.event.EventName} </Text>
                                     <TouchableOpacity onPress={() => this.setState({ detailRegis: !this.state.detailRegis })}>
-                                        <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit', textAlign: 'center' }}>รายละเอียด : แสดงรายชื่อ </Text>
+                                        <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'Kanit', textAlign: 'center' }}>รายละเอียด : แสดงรายชื่อ </Text>
                                     </TouchableOpacity>
                                 </View>
                                 <View>
-                                    <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{parseFloat(this.state.total).toFixed(2)} ฿</Text>
+                                    <Text style={{ fontSize: 10, fontFamily: 'Kanit' }}>{parseFloat(this.state.total).toFixed(2)} ฿</Text>
                                 </View>
                             </View>
                             {this.state.detailRegis &&
@@ -124,22 +124,22 @@ class TotalRegister extends Component {
                         </View>
                         {this.state.detailPleace1 &&
                             <View>
-                                <Text style={{ fontSize: 10, fontFamily: 'kanit', textAlign: 'center' }}>รับเสื้อและเบอร์ที่ :  </Text>
-                                {/* <Text style={{ fontSize: 10, fontFamily: 'kanit', paddingHorizontal: 50 }}></Text> */}
+                                <Text style={{ fontSize: 10, fontFamily: 'Kanit', textAlign: 'center' }}>รับเสื้อและเบอร์ที่ :  </Text>
+                                {/* <Text style={{ fontSize: 10, fontFamily: 'Kanit', paddingHorizontal: 50 }}></Text> */}
                                 <View style={{ marginHorizontal: 20 }}>
-                                    <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit', textAlign: 'center', width: 150 }}>{this.state.pleace}</Text>
+                                    <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'Kanit', textAlign: 'center', width: 150 }}>{this.state.pleace}</Text>
                                 </View>
                             </View>
                         }
                         {this.state.detailPleace2 &&
                             <View>
-                                <Text style={{ fontSize: 10, fontFamily: 'kanit', textAlign: 'center' }}>บริหารจัดส่ง   </Text>
-                                {/* <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>วันที่ 27 มกราคม 2561</Text> */}
-                                <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'kanit', textAlign: 'center', width: 150 }}>{this.state.pleace}</Text>
+                                <Text style={{ fontSize: 10, fontFamily: 'Kanit', textAlign: 'center' }}>บริหารจัดส่ง   </Text>
+                                {/* <Text style={{ fontSize: 10, fontFamily: 'Kanit' }}>วันที่ 27 มกราคม 2561</Text> */}
+                                <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'Kanit', textAlign: 'center', width: 150 }}>{this.state.pleace}</Text>
                             </View>
                         }
                         <View>
-                            <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{parseFloat(this.state.priceCDO).toFixed(2)} ฿</Text>
+                            <Text style={{ fontSize: 10, fontFamily: 'Kanit' }}>{parseFloat(this.state.priceCDO).toFixed(2)} ฿</Text>
                         </View>
                     </View>
                     <View style={styles.detailRow}>
@@ -150,11 +150,11 @@ class TotalRegister extends Component {
                             </View>
                         </View>
                         <View>
-                            <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>ค่าธรรมเนียมการใช้บัตรเครดิต/เดบิต</Text>
+                            <Text style={{ fontSize: 10, fontFamily: 'Kanit' }}>ค่าธรรมเนียมการใช้บัตรเครดิต/เดบิต</Text>
                             {/* <Text style={{ fontSize: 7, color: '#8B8B8B' }}>(5 Km. - S) x 1 (Photo Plus)</Text> */}
                         </View>
                         <View>
-                            <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{parseFloat(this.state.creditPrice).toFixed(2)} ฿</Text>
+                            <Text style={{ fontSize: 10, fontFamily: 'Kanit' }}>{parseFloat(this.state.creditPrice).toFixed(2)} ฿</Text>
                         </View>
                     </View>
 
@@ -167,11 +167,11 @@ class TotalRegister extends Component {
                                 </View>
                             </View>
                             <View>
-                                <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>ส่วนลดค่าโปรโมชั่น {parseFloat(this.props.promocode.disPrice).toFixed(2)} บาท</Text>
+                                <Text style={{ fontSize: 10, fontFamily: 'Kanit' }}>ส่วนลดค่าโปรโมชั่น {parseFloat(this.props.promocode.disPrice).toFixed(2)} บาท</Text>
                                 {/* <Text style={{ fontSize: 7, color: '#8B8B8B' }}>(5 Km. - S) x 1 (Photo Plus)</Text> */}
                             </View>
                             <View>
-                                <Text style={{ fontSize: 10, fontFamily: 'kanit' }}> -{parseFloat(this.props.promocode.disPrice).toFixed(2)} ฿</Text>
+                                <Text style={{ fontSize: 10, fontFamily: 'Kanit' }}> -{parseFloat(this.props.promocode.disPrice).toFixed(2)} ฿</Text>
                             </View>
                         </View>
                     }
@@ -183,11 +183,11 @@ class TotalRegister extends Component {
                             </View>
                         </View>
                         <View>
-                            <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>รวมทั้งสิ้น</Text>
+                            <Text style={{ fontSize: 10, fontFamily: 'Kanit' }}>รวมทั้งสิ้น</Text>
                             {/* <Text style={{ fontSize: 7, color: '#8B8B8B' }}>(5 Km. - S) x 1 (Photo Plus)</Text> */}
                         </View>
                         <View>
-                            <Text style={{ fontSize: 10, fontFamily: 'kanit' }}>{parseFloat(this.state.totalRegister).toFixed(2)} ฿</Text>
+                            <Text style={{ fontSize: 10, fontFamily: 'Kanit' }}>{parseFloat(this.state.totalRegister).toFixed(2)} ฿</Text>
                         </View>
                     </View>
                 </View>
@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
     textSubDetail: {
         fontSize: 7,
         color: '#8B8B8B',
-        fontFamily: 'kanit',
+        fontFamily: 'Kanit',
         textAlign: 'center',
         width: 150
     }

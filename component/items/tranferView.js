@@ -118,7 +118,7 @@ class TranferView extends Component {
                                 style={{
                                     flexDirection: 'column'
                                 }}>
-                                <HTML html={this.props.detailPayment} baseFontStyle={{ fontFamily: "kanit" ,color : "#fff",fontSize : 12 }} />
+                                <HTML html={this.props.detailPayment} baseFontStyle={{ fontFamily: "Kanit" ,color : "#fff",fontSize : 12 }} />
                                 {/* <Text style={styles.textNumber}>{branch}</Text> */}
                             </View>
 
@@ -148,7 +148,7 @@ class TranferView extends Component {
                                 {this.state.ImageSource === null ?
                                     <View style={{ flexDirection: "row" }}>
                                         <Icon name="camera" type="Entypo" style={{ fontSize: 20, color: "#FC561F", marginRight: 10 }} />
-                                        <Text style={{ fontFamily: "kanit", color: "#FC561F" }}>เลือกรูปภาพ</Text>
+                                        <Text style={{ fontFamily: "Kanit", color: "#FC561F" }}>เลือกรูปภาพ</Text>
                                     </View> :
                                     <Image style={styles.ImageContainer} source={this.state.ImageSource} />
                                 }
@@ -323,7 +323,7 @@ const styles = StyleSheet.create({
         fontFamily: "Kanit"
     },
     textDetail: {
-        fontFamily: 'kanit',
+        fontFamily: 'Kanit',
         padding: 15
     }
 

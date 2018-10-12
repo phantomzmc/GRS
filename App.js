@@ -12,5 +12,8 @@ import store from './store/store'
 export default () =>
 
   <Provider store={store}>
-    <Navigation />
+
+    <Navigation
+      initialRoute={{ statusBarHidden: true }}
+    />
   </Provider>;

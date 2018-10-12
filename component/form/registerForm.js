@@ -259,14 +259,14 @@ class FormRegister extends Component {
           <Item floatingLabel>
             <Label style={styles.textLabel}>ชื่อ</Label>
             <Input
-              style={{ fontFamily: "kanit" }}
+              style={{ fontFamily: "Kanit" }}
               onChangeText={fullname => this.setState({ fullname })}
             />
           </Item>
           <Item floatingLabel last>
             <Label style={styles.textLabel}>นามสกุล</Label>
             <Input
-              style={{ fontFamily: "kanit" }}
+              style={{ fontFamily: "Kanit" }}
               onChangeText={lastname => this.setState({ lastname })}
             />
           </Item>
@@ -276,7 +276,7 @@ class FormRegister extends Component {
           <Item floatingLabel last>
             <Label style={styles.textLabel}>ชื่อเล่น</Label>
             <Input
-              style={{ fontFamily: "kanit" }}
+              style={{ fontFamily: "Kanit" }}
               onChangeText={nickname => this.setState({ nickname })}
             />
           </Item>
@@ -317,7 +317,7 @@ class FormRegister extends Component {
             <Item floatingLabel last>
               <Label style={styles.textLabel}>Ex.15099999xxxxx</Label>
               <Input
-                style={{ fontFamily: "kanit" }}
+                style={{ fontFamily: "Kanit" }}
                 onChangeText={userid => this.setState({ userid })}
                 onEndEditing={this.checkUsernmae.bind(this)}
                 keyboardType="phone-pad" />
@@ -326,7 +326,7 @@ class FormRegister extends Component {
             <Item error floatingLabel last>
               <Label style={styles.textLabel}>Ex.15099999xxxxx</Label>
               <Input
-                style={{ fontFamily: "kanit" }}
+                style={{ fontFamily: "Kanit" }}
                 onChangeText={userid => this.setState({ userid })}
                 onEndEditing={this.checkUsernmae.bind(this)}
                 keyboardType="phone-pad" />
@@ -343,7 +343,7 @@ class FormRegister extends Component {
           <Item floatingLabel last>
             <Label style={styles.textLabel}>Ex. A,B,O,AB</Label>
             <Input
-              style={{ fontFamily: "kanit" }}
+              style={{ fontFamily: "Kanit" }}
               onChangeText={bloodtype => this.setState({ bloodtype })}
             />
           </Item>
@@ -356,7 +356,7 @@ class FormRegister extends Component {
           <Item floatingLabel last>
             <Label style={styles.textLabel}>Ex.ไทย,อเมริกัน</Label>
             <Input
-              style={{ fontFamily: "kanit" }}
+              style={{ fontFamily: "Kanit" }}
               onChangeText={nation => this.setState({ nation })} />
           </Item>
         </Form>
@@ -370,7 +370,7 @@ class FormRegister extends Component {
             <Item floatingLabel last>
               <Label style={styles.textLabel}>Ex.xxxxxxxxxxxx</Label>
               <Input
-                style={{ fontFamily: "kanit" }}
+                style={{ fontFamily: "Kanit" }}
                 secureTextEntry={true}
                 onChangeText={password => this.setState({ password })}
               />
@@ -381,7 +381,7 @@ class FormRegister extends Component {
             <Item success floatingLabel last>
               <Label style={styles.textLabel}>Ex.xxxxxxxxxxxx</Label>
               <Input
-                style={{ fontFamily: "kanit" }}
+                style={{ fontFamily: "Kanit" }}
                 secureTextEntry={true}
                 onChangeText={password => this.setState({ password })}
               />
@@ -398,7 +398,7 @@ class FormRegister extends Component {
             <Item floatingLabel last>
               <Label style={styles.textLabel}>Ex.xxxxxxxxxxxx</Label>
               <Input
-                style={{ fontFamily: "kanit" }}
+                style={{ fontFamily: "Kanit" }}
                 secureTextEntry={true}
                 onChangeText={confirmpassword => this.setState({ confirmpassword })} />
             </Item>
@@ -408,7 +408,7 @@ class FormRegister extends Component {
             <Item success floatingLabel last>
               <Label style={styles.textLabel}>Ex.xxxxxxxxxxxx</Label>
               <Input
-                style={{ fontFamily: "kanit" }}
+                style={{ fontFamily: "Kanit" }}
                 secureTextEntry={true}
                 onChangeText={confirmpassword => this.setState({ confirmpassword })} />
             </Item>
@@ -449,7 +449,7 @@ class FormRegister extends Component {
           <Item floatingLabel last>
             <Label style={styles.textLabel}>Ex.Team...</Label>
             <Input
-              style={{ fontFamily: "kanit" }}
+              style={{ fontFamily: "Kanit" }}
 
               onChangeText={teamname => this.setState({ teamname })} />
           </Item>
@@ -459,7 +459,7 @@ class FormRegister extends Component {
           <Item floatingLabel last>
             <Label style={styles.textLabel}>Ex.bibname.</Label>
             <Input
-              style={{ fontFamily: "kanit" }}
+              style={{ fontFamily: "Kanit" }}
 
               onChangeText={bib => this.setState({ bib })} />
           </Item>
@@ -472,7 +472,7 @@ class FormRegister extends Component {
           <Item floatingLabel last>
             <Label style={styles.textLabel}>Ex.090-xxxxxx</Label>
             <Input
-              style={{ fontFamily: "kanit" }}
+              style={{ fontFamily: "Kanit" }}
 
               keyboardType="phone-pad"
               onChangeText={tel => this.setState({ tel })} />
@@ -486,7 +486,7 @@ class FormRegister extends Component {
           <Item floatingLabel last>
             <Label style={styles.textLabel}>Ex.abc@gmail.com</Label>
             <Input
-              style={{ fontFamily: "kanit" }}
+              style={{ fontFamily: "Kanit" }}
               keyboardType="email-address"
               onChangeText={email => this.setState({ email })}
               onEndEditing={this.checkEmail.bind(this)} />
@@ -541,7 +541,7 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontSize: 15,
-    fontFamily: "kanit",
+    fontFamily: "Kanit",
     color: "#fc561f"
   },
   contectTitle: {
@@ -573,7 +573,7 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     fontSize: 16,
     color: "#fff",
-    fontFamily: "kanit"
+    fontFamily: "Kanit"
   },
 
   datePickerText: {
@@ -581,13 +581,13 @@ const styles = StyleSheet.create({
     paddingLeft: 30,
     width: "80%",
     justifyContent: "center",
-    fontFamily: "kanit"
+    fontFamily: "Kanit"
   },
   containerDatePicker: {
     flexDirection: 'row'
   },
   headForm: {
-    fontFamily: "kanit",
+    fontFamily: "Kanit",
     fontSize: 16,
     paddingTop: 20
   },
@@ -595,18 +595,18 @@ const styles = StyleSheet.create({
     paddingVertical: 25,
     paddingHorizontal: 10,
     fontSize: 12,
-    fontFamily: "kanit",
+    fontFamily: "Kanit",
     color: "red"
   },
   textLabel: {
     fontSize: 14,
-    fontFamily: "kanit"
+    fontFamily: "Kanit"
   },
   tabStyle: {
     backgroundColor: '#fff'
   },
   tabGender: {
-    fontFamily: "kanit",
+    fontFamily: "Kanit",
     paddingHorizontal: 10,
     color: "#FC561F"
   },

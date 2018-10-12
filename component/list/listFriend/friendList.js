@@ -197,7 +197,7 @@ class FriendListView extends Component {
                     renderHiddenItem={({ item }) => (
                         <View style={styles.rowBack}>
                             <TouchableOpacity style={[styles.backRightBtn, styles.backRightBtnRight]} onPress={() => this.deleteFriend(item)}>
-                                <Text style={{ fontFamily: 'kanit', color: '#fff' }}>Delete</Text>
+                                <Text style={{ fontFamily: 'Kanit', color: '#fff' }}>Delete</Text>
                             </TouchableOpacity>
                         </View>
                     )}

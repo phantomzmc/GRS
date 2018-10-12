@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 14,
-        fontFamily: "kanit"
+        fontFamily: "Kanit"
     },
     list: {
     },
@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1
     },
     textValue: {
-        fontFamily: "kanit"
+        fontFamily: "Kanit"
     }
 });
 const mapStateToProps = state => {

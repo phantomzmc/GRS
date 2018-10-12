@@ -71,11 +71,11 @@ const styles = StyleSheet.create({
     },
     head1: {
         marginVertical: 10,
-        fontFamily: "kanit",
+        fontFamily: "Kanit",
         fontSize: 20
     },
     head2: {
-        fontFamily: "kanit",
+        fontFamily: "Kanit",
 
     },
     contaiText: {

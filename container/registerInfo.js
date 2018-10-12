@@ -97,9 +97,9 @@ class RegisterInfo extends Component {
                                 <View>
                                     <Form>
                                         <Item floatingLabel>
-                                            <Label style={{ fontFamily: "kanit" }}>ชื่อของคุณ</Label>
+                                            <Label style={{ fontFamily: "Kanit" }}>ชื่อของคุณ</Label>
                                             <Input
-                                                style={{ fontFamily: "kanit" }}
+                                                style={{ fontFamily: "Kanit" }}
                                                 value={this.state.search}
                                                 onChangeText={(term) => this.setState({ search: term })}
                                             />
@@ -113,7 +113,7 @@ class RegisterInfo extends Component {
                                     }
                                     <Button block success style={{ marginVertical: 20 }} onPress={this.getRegisInfo.bind(this)}>
                                         <Icon name="md-search" type="Ionicons" />
-                                        <Text style={{ fontFamily: "kanit" }}>ค้นหา</Text>
+                                        <Text style={{ fontFamily: "Kanit" }}>ค้นหา</Text>
                                     </Button>
                                 </View>
                             </CardItem>
@@ -144,13 +144,13 @@ const styles = StyleSheet.create({
     },
     titleEvent: {
         textAlign: "center",
-        fontFamily: 'kanit',
+        fontFamily: 'Kanit',
         width: 250,
         fontSize: 20,
     },
     subDetail: {
         padding: 20,
-        fontFamily: 'kanit',
+        fontFamily: 'Kanit',
         fontSize: 12
     },
     imgEvent: {

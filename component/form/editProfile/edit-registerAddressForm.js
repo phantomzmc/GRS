@@ -70,7 +70,7 @@ class FormAddressRegister extends Component {
           <Item floatingLabel last>
             <Label style={styles.textLabel}>{number}</Label>
             <Input
-                          style={{ fontFamily : "kanit"}}
+                          style={{ fontFamily : "Kanit"}}
               onChangeText={number => this.setState({ number: number })}
             />
           </Item>
@@ -80,7 +80,7 @@ class FormAddressRegister extends Component {
           <Item floatingLabel last>
             <Label style={styles.textLabel}>Ex.เชียงใหม่</Label>
             <Input
-              style={{ fontFamily: "kanit" }}
+              style={{ fontFamily: "Kanit" }}
               onChangeText={tambon => this.setState({ tambon })}
             />
           </Item>
@@ -91,7 +91,7 @@ class FormAddressRegister extends Component {
           <Item floatingLabel last>
             <Label style={styles.textLabel}>Ex.เชียงใหม่</Label>
             <Input
-              style={{ fontFamily: "kanit" }}
+              style={{ fontFamily: "Kanit" }}
               onChangeText={amphoe => this.setState({ amphoe })}
             />
           </Item>
@@ -102,7 +102,7 @@ class FormAddressRegister extends Component {
           <Item floatingLabel last>
             <Label style={styles.textLabel}>Ex.เชียงใหม่</Label>
             <Input
-              style={{ fontFamily: "kanit" }}
+              style={{ fontFamily: "Kanit" }}
               onChangeText={province => this.setState({ province })}
             />
           </Item>
@@ -113,7 +113,7 @@ class FormAddressRegister extends Component {
           <Item floatingLabel last>
             <Label style={styles.textLabel}>{country}</Label>
             <Input
-                          style={{ fontFamily : "kanit"}}
+                          style={{ fontFamily : "Kanit"}}
               onChangeText={country => this.setState({ country: country })}
             />
           </Item>
@@ -124,7 +124,7 @@ class FormAddressRegister extends Component {
             <Label style={styles.textLabel}>{postNumber}</Label>
             <Input
               keyboardType="phone-pad"
-              style={{ fontFamily : "kanit"}}
+              style={{ fontFamily : "Kanit"}}
               onChangeText={postNumber => this.setState({ postNumber: postNumber })}
             />
           </Item>
@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontSize: 15,
-    fontFamily: "kanit",
+    fontFamily: "Kanit",
     color: '#fc561f'
   },
   contectTitle: {
@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     height: 35,
     marginTop: 15,
-    fontFamily: "kanit"
+    fontFamily: "Kanit"
   },
   conlorsegment: {
     marginTop: 10
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     height: 35,
     marginTop: 15,
-    fontFamily: "kanit"
+    fontFamily: "Kanit"
   },
   submitContainer: {
     marginTop: 30,
@@ -221,19 +221,19 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     fontSize: 16,
     color: "#fff",
-    fontFamily: "kanit"
+    fontFamily: "Kanit"
   },
   datepicker: {
     padding: 50
   },
   headForm: {
-    fontFamily: 'kanit',
+    fontFamily: 'Kanit',
     fontSize: 16,
     paddingTop: 20
   },
   textLabel: {
     fontSize: 14,
-    fontFamily: 'kanit'
+    fontFamily: 'Kanit'
   }
 });
 export default connect(mapStateToProps)(FormAddressRegister);

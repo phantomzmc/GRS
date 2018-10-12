@@ -149,7 +149,7 @@ class ListEvent extends Component {
         return (
             <Container>
                 <StatusBar
-                    barStyle="light-content"
+                    barStyle="dark-content"
                     hidden={false}
                     translucent={true}
                 />

@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
         fontSize: 34,
         color: '#fff',
         fontWeight: '700',
-        fontFamily: 'kanit'
+        fontFamily: 'Kanit'
     },
     formcontainer: {
         flex: 2,
@@ -196,11 +196,11 @@ const styles = StyleSheet.create({
         padding: 10,
         color: '#fff',
         alignSelf: 'center',
-        fontFamily: 'kanit'
+        fontFamily: 'Kanit'
 
     },
     input: {
-        fontFamily: 'kanit',
+        fontFamily: 'Kanit',
         height: 40,
         backgroundColor: '#fff',
         opacity: 0.8,
@@ -225,11 +225,11 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         fontSize: 16,
         color: '#fff',
-        fontFamily: 'kanit'
+        fontFamily: 'Kanit'
 
     },
     title: {
-        fontFamily: "kanit",
+        fontFamily: "Kanit",
         color: "#fff",
         fontSize: 16,
     }

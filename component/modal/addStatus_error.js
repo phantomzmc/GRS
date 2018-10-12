@@ -27,13 +27,13 @@ class ErrorModalAddFriend extends Component {
             <View style={styles.modalContainer}>
                 <Icon name="ios-information-circle-outline" style={{ color: "red" }} />
                 <View style={{ paddingVertical: 10, alignItems: "center" }}>
-                    <H1 style={{ color: "red", fontFamily: "kanit" }}>เพิ่มเพื่อนไม่สำเร็จ</H1>
-                    <Text style={{ fontSize: 16, fontFamily: "kanit" }}>{this.state.title}</Text>
+                    <H1 style={{ color: "red", fontFamily: "Kanit" }}>เพิ่มเพื่อนไม่สำเร็จ</H1>
+                    <Text style={{ fontSize: 16, fontFamily: "Kanit" }}>{this.state.title}</Text>
                 </View>
                 <View style={{ flexDirection: "row", justifyContent: "center", paddingVertical: 10 }}>
                     <Button iconLeft rounded light onPress={this.props.toggleModal} style={{ marginHorizontal: 10, justifyContent: "center" }}>
                         <Icon name="ios-close-outline" />
-                        <Text style={{ fontFamily: "kanit" }}>ปิด</Text>
+                        <Text style={{ fontFamily: "Kanit" }}>ปิด</Text>
                     </Button>
 
                 </View>
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     },
     textButton: {
         color: '#fff',
-        fontFamily: 'kanit'
+        fontFamily: 'Kanit'
     }
 })
 export default ErrorModalAddFriend;

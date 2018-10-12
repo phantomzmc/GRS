@@ -87,7 +87,7 @@ class GetPleace extends Component {
 
 const styles = StyleSheet.create({
     textCard: {
-        fontFamily: 'kanit'
+        fontFamily: 'Kanit'
     },
     submitContainer: {
         marginTop: 30,
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     },
     labelStyle: {
         padding: 20,
-        fontFamily: "kanit",
+        fontFamily: "Kanit",
         fontSize: 16
     },
     checkSubmit: {

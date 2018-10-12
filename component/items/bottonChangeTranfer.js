@@ -101,12 +101,12 @@ const styles = StyleSheet.create({
     },
     textLabel: {
         fontSize: 10,
-        fontFamily: 'kanit',
+        fontFamily: 'Kanit',
     },
     button: {
         padding: 5,
         fontSize: 10,
-        fontFamily: 'kanit',
+        fontFamily: 'Kanit',
         borderColor: '#FC561F',
         borderRadius: 5,
         borderWidth: 1,

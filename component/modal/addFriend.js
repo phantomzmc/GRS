@@ -27,13 +27,13 @@ class ModalAddFriend extends Component {
             <View style={styles.modalContainer}>
                 <Thumbnail source={{ uri: newitem.PicProfile }} />
                 <View style={{ paddingVertical: 10, alignItems: "center" }}>
-                    <Text style={{ fontSize: 18, fontFamily: "kanit" }}>{newitem.FirstName} - {newitem.LastName}</Text>
-                    <Text style={{ fontSize: 16, fontFamily: "kanit" }}>{newitem.Gender} - {newitem.NickName}</Text>
+                    <Text style={{ fontSize: 18, fontFamily: "Kanit" }}>{newitem.FirstName} - {newitem.LastName}</Text>
+                    <Text style={{ fontSize: 16, fontFamily: "Kanit" }}>{newitem.Gender} - {newitem.NickName}</Text>
                 </View>
                 <View style={{ flexDirection: "row", justifyContent: "space-around", paddingVertical: 10 }}>
                     <Button iconLeft rounded light onPress={this.props.toggleModal} style={{ marginHorizontal: 10, justifyContent: "center" }}>
                         <Icon name="ios-close-outline" />
-                        <Text style={{ fontFamily: "kanit" }}>ปิด</Text>
+                        <Text style={{ fontFamily: "Kanit" }}>ปิด</Text>
                     </Button>
                     <Button iconLeft rounded success onPress={this.onAddFriend.bind(this)} onPressOut={this.props.toggleModal} style={{ marginHorizontal: 10, justifyContent: "center" }}>
                         <Icon name="ios-add-outline" style={{ color: "#fff" }} />
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     },
     textButton: {
         color: '#fff',
-        fontFamily: 'kanit'
+        fontFamily: 'Kanit'
     }
 })
 

@@ -271,11 +271,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#FC561F'
     },
     info: {
-        fontFamily: 'kanit',
+        fontFamily: "Kanit"
 
     },
     addRegis: {
-        fontFamily: 'kanit',
+        fontFamily: 'Kanit',
         paddingVertical: 5,
         paddingHorizontal: 10,
         color: '#fff'

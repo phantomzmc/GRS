@@ -129,10 +129,10 @@ const styles = StyleSheet.create({
     content: {
     },
     title: {
-        fontFamily: 'kanit'
+        fontFamily: 'Kanit'
     },
     detail: {
-        fontFamily: 'kanit',
+        fontFamily: 'Kanit',
         color: '#666666'
     }
 })
