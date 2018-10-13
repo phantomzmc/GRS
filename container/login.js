@@ -70,18 +70,7 @@ class Login extends Component {
                 this.setState({ isLoading: false, status: response.data });
                 console.log(this.state.status)
                 console.log(this.state.status[0].SignInStatus)
-                // this.checkLogin()
-
-                // ระบบ login error
-                this.getUserProfile()
-                this.props.setUsername(this.state.username)
-                this.props.setUserStatus(status[0])
-                this.props.setStatusLogin(login)
-                this.setLogin()
-                this.gotoEvent()
-                // ระบบ login error
-
-
+                this.checkLogin()
             }).catch((error) => {
                 this.props.navigation.navigate('EventList')
             });

@@ -21,6 +21,9 @@ import datafriendRegis from '../component/list/listFriend/dataFriend-regis'
 import datafriendSug from '../component/list/listFriend/dataFriendSug-regis'
 import SummaryTotal from '../component/items/summary'
 
+import SegmentedControlTab from 'react-native-segmented-control-tab'
+
+
 var uri = req[0].uspSearchFriend
 var uri2 = req[0].uspAddFriendLists
 var uri3 = req[0].uspGetFriendSuggestion
@@ -45,11 +48,14 @@ class TeamList extends Component {
             friendlist: true,
             frienddistance: true,
             statusCheck: true,
-            totalRegister : 0
+            totalRegister: 0,
+            selectedIndex: 1,
+            teamlayout: true,
+            singlelayout: false
         }
         this.getFriend = this.getFriend.bind(this)
     }
-    componentWillMount(){
+    componentWillMount() {
         clearInterval(this._interval);
     }
     componentDidMount() {
@@ -85,7 +91,7 @@ class TeamList extends Component {
             responseType: 'json'
         })
             .then((response) => {
-                this.setState({ isLoading: false, friendOutput: response.data ,searchText : ''});
+                this.setState({ isLoading: false, friendOutput: response.data, searchText: '' });
                 console.log(this.state.friendOutput[0])
                 this.checkRegisStatus()
             }).catch((error) => {
@@ -122,10 +128,10 @@ class TeamList extends Component {
     _checkAddFriend(newitem, status) {
         var data = datafriendRegis
         dataitem = {
-            RunnerID : newitem.RunnerID,
-            FirstName : newitem.FirstName,
-            LastName : newitem.LastName,
-            PicProfile : newitem.PicProfile
+            RunnerID: newitem.RunnerID,
+            FirstName: newitem.FirstName,
+            LastName: newitem.LastName,
+            PicProfile: newitem.PicProfile
         }
         var str_newitem = dataitem
 
@@ -185,10 +191,10 @@ class TeamList extends Component {
             this.hideModalError()
         }
         else if (this.state.friendOutput[0].Himself == 1) {
-            this.setState({ isAddStatusError : true , titleError : "รหัสประชาชนนี้คือตัวท่านเอง"})
+            this.setState({ isAddStatusError: true, titleError: "รหัสประชาชนนี้คือตัวท่านเอง" })
         }
         else if (this.state.friendOutput[0].RegisterStatus == 1) {
-            this.setState({ isAddStatusError : true , titleError : "บุคคลนี้ได้ทำการสมัครงานวิ่งนี้แล้ว"})
+            this.setState({ isAddStatusError: true, titleError: "บุคคลนี้ได้ทำการสมัครงานวิ่งนี้แล้ว" })
         }
         else if (this.state.friendOutput[0].RegisterStatus == 0 && this.state.friendOutput[0].Himself == 0) {
             this.hideModal()
@@ -226,6 +232,18 @@ class TeamList extends Component {
     gotoFriendList = () => {
         this.props.navigation.navigate("FriendList")
     }
+    handleIndexChange = (index) => {
+        this.setState({
+            ...this.state,
+            selectedIndex: index,
+        });
+        if (index === 0) {
+            this.setState({ singlelayout: true, teamlayout: false })
+        }
+        else if (index === 1) {
+            this.setState({ singlelayout: false, teamlayout: true })
+        }
+    }
 
     render() {
         const { navigate } = this.props.navigation;
@@ -242,7 +260,7 @@ class TeamList extends Component {
                     goEditProfile={() => this.props.navigation.navigate('EditProfile')}
                     goRegis={() => this.props.navigation.navigate('ControlDistance')}
                     goSingleLogin={() => this.props.navigation.navigate('SingleLogin')}
-                    goContacts={()=> this.props.navigation.navigate('Contacts')}
+                    goContacts={() => this.props.navigation.navigate('Contacts')}
 
                 />
                 <StatusBar
@@ -250,147 +268,155 @@ class TeamList extends Component {
                     hidden={false}
                     translucent={true}
                 />
-                <Tabs
-                    initialPage={1}
-                    page={1}
-                    tabBarUnderlineStyle={{ backgroundColor: "#FC561F", height: 2 }}>
-                    <Tab
-                        heading={<TabHeading><Text style={styles.textLabel} onPress={() => this.gotoSingleRegis()}>ลงทะเบียนแบบเดียว</Text></TabHeading>}>
+                <SegmentedControlTab
+                    values={['ลงทะเบียนแบบเดียว', 'ลงทะเบียนแบบกลุ่ม']}
+                    selectedIndex={this.state.selectedIndex}
+                    onTabPress={this.handleIndexChange}
+                    tabsContainerStyle={{ height: 50, backgroundColor: '#f2f2f2' }}
+                    tabStyle={{ backgroundColor: '#f2f2f2', borderWidth: 0, borderColor: 'transparent' }}
+                    activeTabStyle={{ backgroundColor: 'white', marginTop: 2 }}
+                    tabTextStyle={{ color: '#444444', fontFamily: "Kanit" }}
+                    activeTabTextStyle={{ color: '#FC561F', fontFamily: "Kanit" }}
+                />
+                {this.state.singlelayout &&
+                    <Container>
                         <RegisterDistance />
-                    </Tab>
-                    <Tab
-                        heading={<TabHeading><Text style={styles.textLabel}>ลงทะเบียนแบบกลุ่ม</Text></TabHeading>}>
-                        <Container>
-                            <View>
-                                <ScrollView
-                                    refreshControl={
-                                        <RefreshControl
-                                            refreshing={this.state.refreshing}
-                                            onRefresh={this._onRefresh.bind(this)}
-                                        />}
-                                >
-                                    <View style={styles.container}>
-                                        <HeaderProfile />
-                                        <ImageBackground style={{ width: "100%", opacity: 0.8 }} source={{ uri: 'https://register.shutterrunning2014.com/assets/img/theme/bg.jpg' }}>
-                                            <View style={styles.boxBackground}>
-                                                <TouchableOpacity onPress={() => this.setState({ frienddistance: !this.state.frienddistance })} style={{ flexDirection: "row", justifyContent: 'space-between' }}>
-                                                    <View style={{ flexDirection: "row" }}>
-                                                        <Icon name="ios-search" style={{ padding: 10, color: "#fff", fontSize: 16 }} />
-                                                        <Text style={styles.text}>ค้นหาเพื่อนของคุณเพื่อเพิ่มในการสมัคร</Text>
+                        <SummaryTotal
+                            total={parseFloat(this.state.totalRegister).toFixed(2)}
+                        />
+                    </Container>
+                }
 
-                                                    </View>
-                                                    {/* {this.state.frienddistance == true ?
+                {this.state.teamlayout &&
+                    <Container>
+                        <ScrollView
+                            refreshControl={
+                                <RefreshControl
+                                    refreshing={this.state.refreshing}
+                                    onRefresh={this._onRefresh.bind(this)}
+                                />}
+                        >
+                            <View style={styles.container}>
+                                <HeaderProfile />
+                                <ImageBackground style={{ width: "100%", opacity: 0.8 }} source={{ uri: 'https://register.shutterrunning2014.com/assets/img/theme/bg.jpg' }}>
+                                    <View style={styles.boxBackground}>
+                                        <TouchableOpacity onPress={() => this.setState({ frienddistance: !this.state.frienddistance })} style={{ flexDirection: "row", justifyContent: 'space-between' }}>
+                                            <View style={{ flexDirection: "row" }}>
+                                                <Icon name="ios-search" style={{ padding: 10, color: "#fff", fontSize: 16 }} />
+                                                <Text style={styles.text}>ค้นหาเพื่อนของคุณเพื่อเพิ่มในการสมัคร</Text>
+
+                                            </View>
+                                            {/* {this.state.frienddistance == true ?
                                                         <Icon name="ios-arrow-up" style={{ padding: 10, color: "#fff", fontSize: 16 }} type="Ionicons" /> :
                                                         <Icon name="ios-arrow-down" style={{ padding: 10, color: "#fff", fontSize: 16 }} type="Ionicons" />
                                                     } */}
-                                                </TouchableOpacity>
-                                            </View>
-                                        </ImageBackground>
-                                        <Header searchBar rounded>
-                                            <Item>
-                                                <Icon name="ios-people" />
-                                                <Input
-                                                    placeholder="ค้นหาเลขบัตรประชาชน/หนังสือเดินทาง"
-                                                    style={{ fontFamily: 'kanit', fontSize: 14, paddingHorizontal: 10 }}
-                                                    returnKeyType={"next"}
-                                                    value={this.state.searchText}
-                                                    onChangeText={(text) => this.setState({ searchText : text })}
-                                                    onSubmitEditing={this.showModal}
-                                                />
-                                            </Item>
-                                            <Button small iconLeft transparent primary onPress={this.showModal}>
-                                                <Icon name="ios-search" />
-                                                <Text style={{ fontFamily: 'kanit' }}>ค้นหา</Text>
-                                            </Button>
-                                        </Header>
-                                        <ImageBackground style={{ width: "100%", opacity: 0.8 }} source={{ uri: 'https://register.shutterrunning2014.com/assets/img/theme/bg.jpg' }}>
-                                            <View style={styles.boxBackground}>
-                                                <TouchableOpacity onPress={() => this.setState({ friendlist: !this.state.friendlist })} style={{ flexDirection: "row", justifyContent: 'space-between' }}>
-                                                    <View style={{ flexDirection: "row" }}>
-                                                        <Icon name="list-bullet" style={{ padding: 10, color: "#fff", fontSize: 16 }} type="Foundation" />
-                                                        <Text style={styles.text}>เลือกเพื่อนของคุณจาก FriendList</Text>
-                                                    </View>
-                                                    {this.state.frienddistance == true ?
-                                                        <Icon name="ios-arrow-up" style={{ padding: 10, color: "#fff", fontSize: 16 }} type="Ionicons" /> :
-                                                        <Icon name="ios-arrow-down" style={{ padding: 10, color: "#fff", fontSize: 16 }} type="Ionicons" />
-                                                    }
-                                                </TouchableOpacity>
-                                            </View>
-                                        </ImageBackground>
-                                        {this.state.friendlist &&
-                                            <View>
-                                                <ScrollView
-                                                    horizontal={true}>
-                                                    <EventListFriend
-                                                        isAddFriendEvent={() => this.addFriendEvent()}
-                                                        goAddFriendList={() => this.gotoFriendList()}
-                                                        changeCheck={this.state.statusCheck}
-                                                        friend={this.state.dataSource}
-                                                    />
-                                                </ScrollView>
-                                                <View style={{ paddingHorizontal: 10, paddingVertical: 20 }}>
-                                                    <Button rounded block success onPress={() => this.addFriendEvent()} >
-                                                        <Text style={styles.text}> + เพิ่มเพื่อนในการสมัคร</Text>
-                                                    </Button>
-                                                </View>
-                                            </View>
-                                        }
-                                        <ImageBackground style={{ width: "100%", opacity: 0.8 }} source={{ uri: 'https://register.shutterrunning2014.com/assets/img/theme/bg.jpg' }}>
-                                            <View style={styles.boxBackground}>
-                                                <TouchableOpacity onPress={() => this.setState({ frienddistance: !this.state.frienddistance })} style={{ flexDirection: "row", justifyContent: 'space-between' }}>
-                                                    <View style={{ flexDirection: "row" }}>
-                                                        <Icon name="group" style={{ padding: 10, color: "#fff", fontSize: 16 }} type="FontAwesome" />
-                                                        <Text style={styles.text}>รายชื่อเพื่อนที่สมัคร (2-10 คน)</Text>
-
-                                                    </View>
-                                                    {this.state.frienddistance == true ?
-                                                        <Icon name="ios-arrow-up" style={{ padding: 10, color: "#fff", fontSize: 16 }} type="Ionicons" /> :
-                                                        <Icon name="ios-arrow-down" style={{ padding: 10, color: "#fff", fontSize: 16 }} type="Ionicons" />
-                                                    }
-                                                </TouchableOpacity>
-                                            </View>
-                                        </ImageBackground>
-                                        {this.state.frienddistance &&
-                                            <View>
-                                                <FriendDistance
-                                                    goAddress={() => this.gotoAddress()}
-                                                />
-                                            </View>
-                                        }
-                                        <Modal isVisible={this.state.isModalVisible}>
-                                            <ModalAddFriend
-                                                toggleModal={this.hideModal}
-                                                outputfriend={this.state.friendOutput[0]}
-                                                friend={datafriend}
-                                                getAddFriend={this._checkAddFriend.bind(this)}
-                                                textAdd="เพิ่มในการสมัคร"
-                                            />
-                                        </Modal>
-                                        <Modal isVisible={this.state.isModalVisibleError}>
-                                            <ErrorModalAddFriend
-                                                toggleModal={this.hideModalError}
-                                                goRegister={this.gotoRegister.bind(this)}
-                                            />
-                                        </Modal>
-                                        <Modal isVisible={this.state.isAddStatusError}>
-                                            <AddError
-                                                title={this.state.titleError}
-                                                toggleModal={this.hideModalError}
-                                            />
-                                        </Modal>
-                                        <Modal isVisible={this.state.isAddStatus}>
-                                            <AddStatus />
-                                        </Modal>
-
+                                        </TouchableOpacity>
                                     </View>
-                                </ScrollView>
+                                </ImageBackground>
+                                <Item style={{ flexDirection: "row" }}>
+                                    <Icon name="ios-people" style={{ padding: 10 }} />
+                                    <Input
+                                        placeholder="ค้นหาเลขบัตรประชาชน/หนังสือเดินทาง"
+                                        style={{ fontFamily: 'kanit', fontSize: 14, paddingHorizontal: 10 }}
+                                        returnKeyType={"next"}
+                                        value={this.state.searchText}
+                                        onChangeText={(text) => this.setState({ searchText: text })}
+                                        onSubmitEditing={this.showModal}
+                                    />
+                                    <View>
+                                        <Button small iconLeft transparent primary onPress={this.showModal}>
+                                            <Icon name="ios-search" />
+                                            <Text style={{ fontFamily: 'kanit' }}>ค้นหา</Text>
+                                        </Button>
+                                    </View>
+                                </Item>
+
+                                <ImageBackground style={{ width: "100%", opacity: 0.8 }} source={{ uri: 'https://register.shutterrunning2014.com/assets/img/theme/bg.jpg' }}>
+                                    <View style={styles.boxBackground}>
+                                        <TouchableOpacity onPress={() => this.setState({ friendlist: !this.state.friendlist })} style={{ flexDirection: "row", justifyContent: 'space-between' }}>
+                                            <View style={{ flexDirection: "row" }}>
+                                                <Icon name="list-bullet" style={{ padding: 10, color: "#fff", fontSize: 16 }} type="Foundation" />
+                                                <Text style={styles.text}>เลือกเพื่อนของคุณจาก FriendList</Text>
+                                            </View>
+                                            {this.state.frienddistance == true ?
+                                                <Icon name="ios-arrow-up" style={{ padding: 10, color: "#fff", fontSize: 16 }} type="Ionicons" /> :
+                                                <Icon name="ios-arrow-down" style={{ padding: 10, color: "#fff", fontSize: 16 }} type="Ionicons" />
+                                            }
+                                        </TouchableOpacity>
+                                    </View>
+                                </ImageBackground>
+                                {this.state.friendlist &&
+                                    <View>
+                                        <ScrollView
+                                            horizontal={true}>
+                                            <EventListFriend
+                                                isAddFriendEvent={() => this.addFriendEvent()}
+                                                goAddFriendList={() => this.gotoFriendList()}
+                                                changeCheck={this.state.statusCheck}
+                                                friend={this.state.dataSource}
+                                            />
+                                        </ScrollView>
+                                        <View style={{ paddingHorizontal: 10, paddingVertical: 20 }}>
+                                            <Button rounded block success onPress={() => this.addFriendEvent()} >
+                                                <Text style={styles.text}> + เพิ่มเพื่อนในการสมัคร</Text>
+                                            </Button>
+                                        </View>
+                                    </View>
+                                }
+                                <ImageBackground style={{ width: "100%", opacity: 0.8 }} source={{ uri: 'https://register.shutterrunning2014.com/assets/img/theme/bg.jpg' }}>
+                                    <View style={styles.boxBackground}>
+                                        <TouchableOpacity onPress={() => this.setState({ frienddistance: !this.state.frienddistance })} style={{ flexDirection: "row", justifyContent: 'space-between' }}>
+                                            <View style={{ flexDirection: "row" }}>
+                                                <Icon name="group" style={{ padding: 10, color: "#fff", fontSize: 16 }} type="FontAwesome" />
+                                                <Text style={styles.text}>รายชื่อเพื่อนที่สมัคร (2-10 คน)</Text>
+
+                                            </View>
+                                            {this.state.frienddistance == true ?
+                                                <Icon name="ios-arrow-up" style={{ padding: 10, color: "#fff", fontSize: 16 }} type="Ionicons" /> :
+                                                <Icon name="ios-arrow-down" style={{ padding: 10, color: "#fff", fontSize: 16 }} type="Ionicons" />
+                                            }
+                                        </TouchableOpacity>
+                                    </View>
+                                </ImageBackground>
+                                {this.state.frienddistance &&
+                                    <View>
+                                        <FriendDistance
+                                            goAddress={() => this.gotoAddress()}
+                                        />
+                                    </View>
+                                }
+                                <Modal isVisible={this.state.isModalVisible}>
+                                    <ModalAddFriend
+                                        toggleModal={this.hideModal}
+                                        outputfriend={this.state.friendOutput[0]}
+                                        friend={datafriend}
+                                        getAddFriend={this._checkAddFriend.bind(this)}
+                                        textAdd="เพิ่มในการสมัคร"
+                                    />
+                                </Modal>
+                                <Modal isVisible={this.state.isModalVisibleError}>
+                                    <ErrorModalAddFriend
+                                        toggleModal={this.hideModalError}
+                                        goRegister={this.gotoRegister.bind(this)}
+                                    />
+                                </Modal>
+                                <Modal isVisible={this.state.isAddStatusError}>
+                                    <AddError
+                                        title={this.state.titleError}
+                                        toggleModal={this.hideModalError}
+                                    />
+                                </Modal>
+                                <Modal isVisible={this.state.isAddStatus}>
+                                    <AddStatus />
+                                </Modal>
+
                             </View>
-                        </Container>
-                        <SummaryTotal 
+                        </ScrollView>
+                        <SummaryTotal
                             total={parseFloat(this.state.totalRegister).toFixed(2)}
                         />
-                    </Tab>
-                </Tabs>
+                    </Container>
+                }
             </Container>
         );
     }
@@ -416,7 +442,6 @@ const mapStateToProps = state => {
 }
 const styles = StyleSheet.create({
     container: {
-        justifyContent: 'center',
         backgroundColor: '#fff'
     },
     addFriend: {

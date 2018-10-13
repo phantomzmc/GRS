@@ -11,6 +11,8 @@ import api from '../config/api_key'
 import RegisterDistance from '../container/registerDistance'
 import SummaryTotal from '../component/items/summary'
 import HeaderTeam from '../component/items/headerTeam'
+import SegmentedControlTab from 'react-native-segmented-control-tab'
+
 
 class ControlDistance extends Component {
     static propTypes = {
@@ -22,7 +24,10 @@ class ControlDistance extends Component {
             title: "ลงทะเบียนวิ่ง",
             pageNumber: 0,
             login: 1,
-            visible: true
+            visible: true,
+            selectedIndex: 0,
+            teamlayout: false,
+            singlelayout: true
         }
         this.goAddTeam = this.goAddTeam.bind(this)
     }
@@ -187,6 +192,19 @@ class ControlDistance extends Component {
 
 
     }
+    handleIndexChange = (index) => {
+        this.setState({
+            ...this.state,
+            selectedIndex: index,
+        });
+        if (index === 0) {
+            this.setState({ singlelayout: true, teamlayout: false })
+        }
+        else if (index === 1) {
+            this.goAddTeam()
+            // this.setState({ singlelayout: false, teamlayout: true })
+        }
+    }
 
     render() {
         return (
@@ -202,7 +220,7 @@ class ControlDistance extends Component {
                     goEditProfile={() => this.props.navigation.navigate('EditProfile')}
                     goRegis={() => this.props.navigation.navigate('ControlDistance')}
                     goSingleLogin={() => this.props.navigation.navigate('SingleLogin')}
-                    goContacts={()=> this.props.navigation.navigate('Contacts')}
+                    goContacts={() => this.props.navigation.navigate('Contacts')}
 
                 />
                 <StatusBar
@@ -211,27 +229,64 @@ class ControlDistance extends Component {
                     translucent={true}
                 />
                 {this.props.event.event.GroupRegister == 1 ?
-                    <Tabs
-                        initialPage={this.state.pageNumber}
-                        tabBarUnderlineStyle={{ backgroundColor: "#FC561F", height: 2 }}>
-                        <Tab
-                            heading={<TabHeading><Text style={styles.textLabel}>ลงทะเบียนแบบเดียว</Text></TabHeading>}>
-                            <RegisterDistance
-                                nextState={this.goNextState.bind(this)}
-                            />
-                            <View style={{ flex: 1 }}>
-                                <Spinner visible={this.state.visible} textContent={"รอสักครู่..."} textStyle={{ color: '#FFF' }} />
-                            </View>
-                        </Tab>
-                        <Tab
-                            heading={<TabHeading><Text style={styles.textLabel} onPress={() => this.goAddTeam()}>ลงทะเบียนแบบกลุ่ม</Text></TabHeading>}>
-                        </Tab>
-                    </Tabs>
+                    <SegmentedControlTab
+                        values={['ลงทะเบียนแบบเดียว', 'ลงทะเบียนแบบกลุ่ม']}
+                        selectedIndex={this.state.selectedIndex}
+                        onTabPress={this.handleIndexChange}
+                        tabsContainerStyle={{ height: 50, backgroundColor: '#f2f2f2' }}
+                        tabStyle={{ backgroundColor: '#f2f2f2', borderWidth: 0, borderColor: 'transparent' }}
+                        activeTabStyle={{ backgroundColor: 'white', marginTop: 2 }}
+                        tabTextStyle={{ color: '#444444', fontFamily: "Kanit" }}
+                        activeTabTextStyle={{ color: '#FC561F', fontFamily: "Kanit" }}
+                    />
+                    // <RegisterDistance
+                    //     nextState={this.goNextState.bind(this)}
+                    // />
+                    // <View style={{ flex: 1 }}>
+                    //     <Spinner visible={this.state.visible} textContent={"รอสักครู่..."} textStyle={{ color: '#FFF' }} />
+                    // </View>
+                    // <Tabs
+                    //     initialPage={this.state.pageNumber}
+                    //     tabBarUnderlineStyle={{ backgroundColor: "#FC561F", height: 2 }}>
+                    //     <Tab
+                    //         heading={<TabHeading><Text style={styles.textLabel}>ลงทะเบียนแบบเดียว</Text></TabHeading>}>
+                    //         <RegisterDistance
+                    //             nextState={this.goNextState.bind(this)}
+                    //         />
+                    //         <View style={{ flex: 1 }}>
+                    //             <Spinner visible={this.state.visible} textContent={"รอสักครู่..."} textStyle={{ color: '#FFF' }} />
+                    //         </View>
+                    //     </Tab>
+                    //     <Tab
+                    //         heading={<TabHeading><Text style={styles.textLabel} onPress={() => this.goAddTeam()}>ลงทะเบียนแบบกลุ่ม</Text></TabHeading>}>
+                    //     </Tab>
+                    // </Tabs>
+                    // :
+                    // <RegisterDistance
+                    //     nextState={this.goNextState.bind(this)}
+                    // />
                     :
+                    <View></View>
+                }
+                {this.state.singlelayout &&
+                    <Container>
                         <RegisterDistance
                             nextState={this.goNextState.bind(this)}
                         />
+                        <View style={{ flex: 1 }}>
+                            <Spinner visible={this.state.visible} textContent={"รอสักครู่..."} textStyle={{ color: '#FFF' }} />
+                        </View>
+                    </Container>
                 }
+                {this.props.event.event.GroupRegister !== 1 ?
+                    <View></View>
+                    :
+                    <RegisterDistance
+                        nextState={this.goNextState.bind(this)}
+                    />
+                }
+
+
 
                 <SummaryTotal
                     total={parseFloat(this.props.event.totalRegister).toFixed(2)}

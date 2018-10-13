@@ -282,7 +282,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 50,
     },
     textName: {
-
+        fontFamily : "Kanit",
         fontSize: 17
     },
     textAge: {

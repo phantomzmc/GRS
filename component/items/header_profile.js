@@ -65,8 +65,10 @@ class HeaderProfile extends Component {
             });
     }
     async checkLocalLogin() {
+        console.log("checkLocalLogin")
         try {
             const value = await AsyncStorage.getItem('login');
+            console.log(value)
             if (value !== null) {
                 let pared = JSON.parse(value)
                 console.log(pared.username);

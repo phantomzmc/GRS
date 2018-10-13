@@ -154,37 +154,41 @@ class FriendList extends Component {
                 <HeaderTeam
                     title={this.state.title}
                     menu={true}
-                    goback={() => this.props.navigation.navigate('ControlDistance')}
+                    goback={() => this.props.navigation.navigate('EventList')}
                     goLogin={() => this.props.navigation.navigate("Login")}
                     goFriendlist={() => this.props.navigation.navigate('FriendList')}
                     goHistory={() => this.props.navigation.navigate('HistoryContainer')}
                     goEditProfile={() => this.props.navigation.navigate('EditProfile')}
                     goRegis={() => this.props.navigation.navigate('ControlDistance')}
                     goSingleLogin={() => this.props.navigation.navigate('SingleLogin')}
-                    goContacts={()=> this.props.navigation.navigate('Contacts')}
+                    goContacts={() => this.props.navigation.navigate('Contacts')}
 
                 />
 
-                <Header searchBar rounded>
-                    <Item>
-                        <Icon name="ios-people" />
-                        <Input
-                            hasRef={ref => (this.textInputRef = ref)}
-                            placeholder="ค้นหาเลขบัตรประชาชน/หนังสือเดินทาง"
-                            style={{ fontFamily: 'Kanit', fontSize: 14, paddingHorizontal: 10 }}
-                            returnKeyType={"next"}
-                            value={this.state.searchText}
-                            onChangeText={(text) => this.setState({ searchText: text })}
-                            onSubmitEditing={this.showModal}
-                        />
+                {/* <Header searchBar rounded androidStatusBarColor="#FC561F" style={styles.header}> */}
 
-                    </Item>
-                    {/* <Button small iconLeft transparent primary onPress={this.showModal}> */}
-                    <Button small iconLeft transparent primary onPress={() => this.showModal()}>
-                        <Icon name="ios-search" />
-                        <Text style={{ fontFamily: 'Kanit' }}>ค้นหา</Text>
-                    </Button>
-                </Header>
+                <Item style={{ flexDirection: "row" }}>
+                    <Icon name="ios-people" style={{ padding : 10}}/>
+                    <Input
+                        hasRef={ref => (this.textInputRef = ref)}
+                        placeholder="ค้นหาเลขบัตรประชาชน/หนังสือเดินทาง"
+                        style={{ fontFamily: 'Kanit', fontSize: 14, paddingHorizontal: 10 }}
+                        returnKeyType={"next"}
+                        value={this.state.searchText}
+                        onChangeText={(text) => this.setState({ searchText: text })}
+                        onSubmitEditing={this.showModal}
+                    />
+                    <View>
+                        <Button small iconLeft transparent primary onPress={() => this.showModal()}>
+                            <Icon name="ios-search" />
+                            <Text style={{ fontFamily: 'Kanit' }}>ค้นหา</Text>
+                        </Button>
+                    </View>
+                </Item>
+
+                {/* <Button small iconLeft transparent primary onPress={this.showModal}> */}
+
+                {/* </Header> */}
 
                 <Modal isVisible={this.state.isModalVisible}>
                     <ModalAddFriend
