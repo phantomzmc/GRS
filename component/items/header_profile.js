@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ImageBackground, Image, StyleSheet, TouchableOpacity, AsyncStorage } from 'react-native';
+import { View, Text, ImageBackground, Image, StyleSheet, TouchableOpacity, AsyncStorage, Platform } from 'react-native';
 import { Icon } from "native-base";
 import { connect } from 'react-redux'
 import ImagePicker from 'react-native-image-picker';
@@ -160,7 +160,7 @@ class HeaderProfile extends Component {
         var date1 = new Date()
         var date2 = new Date(this.props.userprofile.userprofile.DateOfBirth)
         var age = parseInt((date1 - date2) / 31557600000)
-        
+
         this.setState({
             fullname: this.props.userprofile.userprofile.FirstName,
             lastname: this.props.userprofile.userprofile.LastName,
@@ -207,9 +207,17 @@ const styles = StyleSheet.create({
         width: 100,
         height: 100,
         borderRadius: 50,
-        borderColor: '#fff',
-        borderWidth: 2,
-        backgroundColor: "#fff",
+        ...Platform.select({
+            ios: {
+                borderRadius: 50,
+                borderColor: '#fff',
+                borderWidth: 2,
+                backgroundColor: "#fff",
+            },
+            android: {
+                borderRadius: 50,
+            },
+        }),
         justifyContent: "center",
         alignItems: "center"
     },

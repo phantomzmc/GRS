@@ -19,6 +19,7 @@ class ModalHistory extends Component {
     }
     componentWillMount() {
         console.log(dataInvoice[0])
+        console.log(this.props.registerID)
         setTimeout(() => {
             this.setState({ showInvoice: true })
         }, 500)
@@ -62,7 +63,8 @@ class ModalHistory extends Component {
                             <View>
                                 {dataInvoice[0].PaymentStatus == 2 ?
                                     <QRCode
-                                        value={dataInvoice[0].RegisterID}
+                                        // value={dataInvoice[0].RegisterID}
+                                        value={this.props.registerID}
                                         size={75}
                                     />
                                     :
@@ -72,13 +74,13 @@ class ModalHistory extends Component {
                                 }
                             </View>
                             <View>
-                                {/* <View style={{ flex : 0 ,justifyContent : "flex-end"}}>
+                                <View style={{ flex : 0 ,justifyContent : "flex-end"}}>
                                     <Text style={styles.subTextHead}>ชำระเงิน</Text>
                                     {dataInvoice[0].PaymentType == 1 ?
                                         <Text style={styles.subTextHead}>บัตรเครดิต/เดรบิต</Text> :
                                         <Text style={styles.subTextHead}>โอนเงินผ่านธนาคาร</Text>
                                     }
-                                </View> */}
+                                </View>
                                 <Text style={styles.subTextHead}> Order : {dataInvoice[0].InvoiceID} </Text>
                             </View>
                         </CardItem>

@@ -273,9 +273,9 @@ class ControlDistance extends Component {
                         <RegisterDistance
                             nextState={this.goNextState.bind(this)}
                         />
-                        <View style={{ flex: 1 }}>
+                        {/* <View style={{ flex: 1 }}>
                             <Spinner visible={this.state.visible} textContent={"รอสักครู่..."} textStyle={{ color: '#FFF' }} />
-                        </View>
+                        </View> */}
                     </Container>
                 }
                 {this.props.event.event.GroupRegister !== 1 ?

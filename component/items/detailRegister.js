@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, FlatList } from 'react-native';
 import { connect } from 'react-redux'
 import QRCode from 'react-native-qrcode-svg';
 
@@ -25,7 +25,7 @@ class DetailRegister extends Component {
                 this.props.address.user.province + " " +
                 this.props.address.user.postcode,
             numberInvoice: this.props.invoice.invoice[0].InvoiceID,
-            regisID : this.props.invoice.invoice.RegisterID
+            regisID: this.props.invoice.invoice.RegisterID
         })
         if (this.props.creditcard.statusPayment == 2) {
             this.setState({ statusPayment1: true, statusPayment2: false })
@@ -44,16 +44,37 @@ class DetailRegister extends Component {
                         {this.state.statusPayment2 && <Text style={styles.typePaymentWarning}>รอดำเนินการ</Text>}
                     </View>
                     <View>
-                        {countFriend.length > 1 || this.props.creditcard.statusPayment == 1 ?
+                        {this.props.creditcard.statusPayment == 1 ?
                             <View style={styles.disQRcode}>
                                 <Text style={styles.textName3}>QR Code</Text>
                             </View>
                             :
-                            <QRCode
-                                value={this.props.invoice.registerid}
-                                size={75}
+                            <FlatList
+                                style={{ width: 80, height: 120 }}
+                                horizontal
+                                data={this.props.invoice.dataRegis}
+                                renderItem={({ item, index }) =>
+                                    <View style={{ width: 80, height: 80 }}>
+                                        <QRCode
+                                            value={item.RegisterID}
+                                            size={75}
+                                        />
+                                        <Text style={{ fontSize: 10, fontFamily: 'Kanit', textAlign: "center", paddingTop: 5 }}>{item.FullName}</Text>
+                                    </View>
+                                }
+                                keyExtractor={(item, index) => index}
                             />
+
+                            // <QRCode
+                            //     value={this.props.invoice.registerid}
+                            //     size={75}
+                            // />
+
                         }
+                        {/* {countFriend.length > 2 || this.props.creditcard.statusPayment == 1 &&
+                            
+
+                        } */}
                     </View>
                     <View>
                         <Text style={{ fontSize: 10, color: '#A9A9A9', fontFamily: 'Kanit' }}> Order : {this.state.numberInvoice} </Text>

@@ -10,8 +10,10 @@ const eventState = {
   distanceEvent: {
     distanceName: "",
     distance: "1 km",
-    price: 0.
-  }
+    price: 0,
+    statusPhotoPlus: 0
+  },
+  photoPlusService : "0"
 };
 const credit = {
   nameCredit: {
@@ -147,6 +149,10 @@ const event = (state = eventState, action) => {
       state.totalRegister = action.payload;
       break;
     }
+    case "setStatusPhotoPlus": {
+      state.photoPlusService = action.payload
+      break;
+    }
   }
   return state;
 };
@@ -259,8 +265,8 @@ const userprofile = (state = {
   imgprofile: "",
   imgbackground: "",
   userstatus: "",
-  registerStatus : {
-    RegisterStatus : 0
+  registerStatus: {
+    RegisterStatus: 0
   }
 }, action) => {
   switch (action.type) {
@@ -303,8 +309,12 @@ const invoice = (state = {}, action) => {
       state.invoice = action.payload
       break;
     }
-    case "setRegisterID" : {
+    case "setRegisterID": {
       state.registerid = action.payload
+      break;
+    }
+    case "setDataRegis" : {
+      state.dataRegis = action.payload
       break;
     }
   }

@@ -14,6 +14,8 @@ import { Form, Item, Input, Label, Tabs, Tab, TabHeading, Icon } from 'native-ba
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import req from '../../config/uri_req'
 import api_key from '../../config/api_key'
+import SegmentedControlTab from 'react-native-segmented-control-tab'
+
 
 class FormRegister extends Component {
   static propTypes = {
@@ -36,10 +38,11 @@ class FormRegister extends Component {
       bloodtype: "",
       nation: "",
       gen: "M",
-      selectedIndex: 0,
+      genText: "",
       status: "",
       showToast: false,
       status_userid: true,
+      selectedIndex: 0,
     };
   }
 
@@ -237,6 +240,18 @@ class FormRegister extends Component {
       this.setState({ gen: "F" })
     }, 100)
   }
+  handleIndexChange = (index) => {
+    this.setState({
+      ...this.state,
+      selectedIndex: index,
+    });
+    if (index === 0) {
+      this.setState({ gen: "M", genText: "ชาย" })
+    }
+    else if (index === 1) {
+      this.setState({ gen: "F", genText: "หญิง" })
+    }
+  }
 
   render() {
     let { fullname, lastname, nickname, password, confirmpassword, teamname, bib, userid, tel, email, date, bloodtype, nation, gen } = this.state;
@@ -282,11 +297,21 @@ class FormRegister extends Component {
           </Item>
         </Form>
         <View style={{ flexDirection: "row" }}>
-          <Text style={styles.headForm}>เพศ</Text>
+          <Text style={styles.headForm}>เพศ : {this.state.selectedIndex == 0 ? "ชาย" : "หญิง"}</Text>
           <Text style={styles.headdetail}> ** จำเป็น **</Text>
         </View>
         <View style={styles.conlorsegment}>
-          <Tabs
+          <SegmentedControlTab
+            values={['ชาย', 'หญิง']}
+            selectedIndex={this.state.selectedIndex}
+            onTabPress={this.handleIndexChange}
+            tabsContainerStyle={{ height: 50, backgroundColor: '#f2f2f2' }}
+            tabStyle={{ backgroundColor: '#f2f2f2', borderWidth: 0, borderColor: 'transparent' }}
+            activeTabStyle={{ backgroundColor: 'white', marginTop: 2 }}
+            tabTextStyle={{ color: '#444444', fontFamily: "Kanit" }}
+            activeTabTextStyle={{ color: '#FC561F', fontFamily: "Kanit" }}
+          />
+          {/* <Tabs
             initialPage={this.state.selectedIndex}
             tabBarUnderlineStyle={{ backgroundColor: "#FC561F", height: 2 }}
           >
@@ -306,7 +331,7 @@ class FormRegister extends Component {
                 </TouchableOpacity>
               </TabHeading>}>
             </Tab>
-          </Tabs>
+          </Tabs> */}
         </View>
         <View style={{ flexDirection: "row" }}>
           <Text style={styles.headForm}>รหัสบัตรประชาชน/หนังสือเดินทาง</Text>

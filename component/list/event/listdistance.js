@@ -138,18 +138,15 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontFamily: 'Kanit',
         fontSize: 20,
-        fontWeight: '500'
     },
     distance: {
         color: '#fff',
         fontSize: 26,
-        fontWeight: '500',
         fontFamily: 'Kanit'
     },
     price: {
         color: '#fff',
         fontSize: 20,
-        fontWeight: '500',
         fontFamily: 'Kanit'
     },
     listview: {}

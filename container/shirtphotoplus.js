@@ -48,7 +48,7 @@ class ShirtPhotoPlus extends Component {
             RunnerID: this.props.userprofile.userprofile.RunnerID,
             CourseID: datadis.id,
             JerseySize: this.state.shirt,
-            PhotoPlusService: datadis.statusPhotoPlus,
+            PhotoPlusService: this.props.event.photoPlusService,
             PromoCode: "",
             CourseFee: datadis.price,
         }
@@ -56,7 +56,7 @@ class ShirtPhotoPlus extends Component {
             RunnerID: this.props.userprofile.userprofile.RunnerID,
             CourseID: datadis.id,
             JerseySize: this.state.shirt,
-            PhotoPlusService: datadis.statusPhotoPlus,
+            PhotoPlusService: this.props.event.photoPlusService,
             PromoCode: "",
             CourseFee: datadis.price,
             firstname : this.props.userprofile.userprofile.FirstName,

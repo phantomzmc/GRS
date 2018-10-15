@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, StatusBar } from 'react-native';
-import { Container, Header, Tab, Tabs, TabHeading, Icon, Button, ScrollableTab } from 'native-base';
+import { View, StyleSheet, TouchableOpacity, StatusBar } from 'react-native';
+import { Container, Header, Tab, Tabs, TabHeading, Icon, Button, ScrollableTab, Text } from 'native-base';
 import { connect } from 'react-redux'
 import CreditPayment from '../../container/creditPayment'
 import TotalRegister from '../../component/items/totalRegister'
@@ -50,19 +50,29 @@ class ButtonChangePayment extends Component {
                     goEditProfile={() => this.props.navigation.navigate('EditProfile')}
                     goRegis={() => this.props.navigation.navigate('ControlDistance')}
                     goSingleLogin={() => this.props.navigation.navigate('SingleLogin')}
-                    goContacts={()=> this.props.navigation.navigate('Contacts')}
+                    goContacts={() => this.props.navigation.navigate('Contacts')}
                 />
-                <Tabs initialPage={this.state.pageNumber}>
-                    <Tab heading={<TabHeading><Icon name="card" /><Text style={styles.textLabel}> ชำระผ่านบัตรเครดิต/เดบิต</Text></TabHeading>}>
+                <Tabs
+                    initialPage={this.state.pageNumber}
+                >
+                    <Tab heading={
+                        <TabHeading>
+                            <Icon name="card" />
+                            <Text style={styles.textLabel}> ชำระผ่านบัตรเครดิต/เดบิต</Text>
+                        </TabHeading>}>
                         <CreditPayment
                             showDetail={this.gotoShowDetail.bind(this)}
                             totalPayment={this.gotoTotalPayment.bind(this)} />
                     </Tab>
-                    <Tab heading={<TabHeading><Icon name="list" /><Text style={styles.textLabel}> เเสดงค่าสมัครทั้งหมด</Text></TabHeading>}>
+                    <Tab heading={
+                        <TabHeading>
+                            <Icon name="list" />
+                            <Text style={styles.textLabel}> เเสดงค่าสมัครทั้งหมด</Text>
+                        </TabHeading>}>
                         <TotalRegister />
                     </Tab>
                 </Tabs>
-                <SummaryTotal 
+                <SummaryTotal
                     total={parseFloat(this.props.event.totalRegister).toFixed(2)}
                 />
             </Container>
@@ -111,6 +121,13 @@ const styles = StyleSheet.create({
         color: '#FC561F',
         backgroundColor: '#fff',
     },
+    gender: {
+        flexDirection: "row",
+        backgroundColor: "#fff",
+        flex: 1,
+        justifyContent: "center",
+        padding: 10
+    }
 
 })
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ImageBackground, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, ImageBackground, Image, StyleSheet, TouchableOpacity, Platform } from 'react-native';
 import { Icon, Container } from "native-base";
 import { connect } from 'react-redux'
 import ImagePicker from 'react-native-image-picker';
@@ -64,7 +64,7 @@ class HeaderRegister extends Component {
         }
 
         console.log(this.props.userprofile.datapic)
-        if(this.props.userprofile.userprofile == ""){
+        if (this.props.userprofile.userprofile == "") {
             let uri = req[0].uspGetUserProfile
             let apikey = api_key[0].api_key
             let data = ({
@@ -292,8 +292,8 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-start'
     },
-    cover : {
-        backgroundColor : '#e0e0e0'
+    cover: {
+        backgroundColor: '#e0e0e0'
     },
     coverImg: {
         width: '100%',
@@ -303,9 +303,17 @@ const styles = StyleSheet.create({
         width: 100,
         height: 100,
         borderRadius: 50,
-        borderColor: '#fff',
-        borderWidth: 2,
-        backgroundColor: "#fff",
+        ...Platform.select({
+            ios: {
+                borderRadius: 50,
+                borderColor: '#fff',
+                borderWidth: 2,
+                backgroundColor: "#fff",
+            },
+            android: {
+                borderRadius: 50,
+            },
+        }),
         justifyContent: "center",
         alignItems: "center"
     },

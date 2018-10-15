@@ -317,7 +317,7 @@ class TeamList extends Component {
                                     <Icon name="ios-people" style={{ padding: 10 }} />
                                     <Input
                                         placeholder="ค้นหาเลขบัตรประชาชน/หนังสือเดินทาง"
-                                        style={{ fontFamily: 'kanit', fontSize: 14, paddingHorizontal: 10 }}
+                                        style={{ fontFamily: 'Kanit', fontSize: 14, paddingHorizontal: 10 }}
                                         returnKeyType={"next"}
                                         value={this.state.searchText}
                                         onChangeText={(text) => this.setState({ searchText: text })}
@@ -326,7 +326,7 @@ class TeamList extends Component {
                                     <View>
                                         <Button small iconLeft transparent primary onPress={this.showModal}>
                                             <Icon name="ios-search" />
-                                            <Text style={{ fontFamily: 'kanit' }}>ค้นหา</Text>
+                                            <Text style={{ fontFamily: 'Kanit' }}>ค้นหา</Text>
                                         </Button>
                                     </View>
                                 </Item>
@@ -462,7 +462,6 @@ const styles = StyleSheet.create({
         borderRadius: 20,
     },
     textButton: {
-        fontWeight: '500',
         fontSize: 15,
         color: '#fff',
         fontFamily: 'Kanit',
@@ -470,22 +469,20 @@ const styles = StyleSheet.create({
     textTile: {
         padding: 10,
         fontSize: 26,
-        fontWeight: '700',
-        fontFamily: 'kanit',
+        fontFamily: 'Kanit',
         color: '#000',
     },
     textLabel: {
         color: '#FC561F',
         fontSize: 12,
-        fontFamily: 'kanit',
+        fontFamily: 'Kanit',
     },
     text: {
         fontSize: 16,
-        fontWeight: '700',
         color: '#000',
         padding: 5,
         color: "#fff",
-        fontFamily: 'kanit',
+        fontFamily: 'Kanit',
     },
     boxBackground: {
         backgroundColor: "#000",

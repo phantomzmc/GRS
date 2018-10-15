@@ -15,6 +15,7 @@ import { connect } from 'react-redux'
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import req from '../../../config/uri_req'
 import api_key from '../../../config/api_key'
+import SegmentedControlTab from 'react-native-segmented-control-tab'
 
 class FormRegister extends Component {
   static propTypes = {
@@ -37,6 +38,7 @@ class FormRegister extends Component {
       bloodtype: "",
       nation: "",
       gen: "M",
+      genText : "",
       selectedIndex: 0,
       status: "",
       showToast: false
@@ -56,13 +58,15 @@ class FormRegister extends Component {
       date: userprofile.DateOfBirth,
       nation: userprofile.Nationality,
       gen: userprofile.Gender,
+      genText : userprofile.Gender == "M" ? "ชาย" : "หญิง",
+      selectedIndex: userprofile.Gender == "M" ? 0 : 1
     })
-    if (this.state.gen == "M") {
-      this.setState({ selectedIndex: 0 })
-    }
-    else if (this.state.gen == "F") {
-      this.setState({ selectedIndex: 1 })
-    }
+    // if (this.state.gen == "M") {
+    //   this.setState({ selectedIndex: 0 })
+    // }
+    // else if (this.state.gen == "F") {
+    //   this.setState({ selectedIndex: 1 })
+    // }
   }
   sendData = (fullname, lastname, nickname, teamname, bib, userid, tel, email, date, bloodtype, nation, gen) => {
     const { password, confirmpassword } = this.state
@@ -132,7 +136,18 @@ class FormRegister extends Component {
       this.setState({ gen: "F" })
     }, 100)
   }
-
+  handleIndexChange = (index) => {
+    this.setState({
+      ...this.state,
+      selectedIndex: index,
+    });
+    if (index === 0) {
+      this.setState({ gen: "M", genText: "ชาย" })
+    }
+    else if (index === 1) {
+      this.setState({ gen: "F", genText: "หญิง" })
+    }
+  }
   render() {
     let { fullname, lastname, nickname, teamname, bib, userid, tel, email, date, bloodtype, nation, gen } = this.state;
     return (
@@ -173,9 +188,19 @@ class FormRegister extends Component {
             />
           </Item>
         </Form>
-        <Text style={styles.headForm}>เพศ</Text>
+        <Text style={styles.headForm}>เพศ : {this.state.genText}</Text>
         <View style={styles.conlorsegment}>
-          <Tabs
+          <SegmentedControlTab
+            values={['ชาย', 'หญิง']}
+            selectedIndex={this.state.selectedIndex}
+            onTabPress={this.handleIndexChange}
+            tabsContainerStyle={{ height: 50, backgroundColor: '#f2f2f2' }}
+            tabStyle={{ backgroundColor: '#f2f2f2', borderWidth: 0, borderColor: 'transparent' }}
+            activeTabStyle={{ backgroundColor: 'white', marginTop: 2 }}
+            tabTextStyle={{ color: '#444444', fontFamily: "Kanit" }}
+            activeTabTextStyle={{ color: '#FC561F', fontFamily: "Kanit" }}
+          />
+          {/* <Tabs
             initialPage={this.state.selectedIndex}
             page={this.state.selectedIndex}
             tabBarUnderlineStyle={{ backgroundColor: "#FC561F", height: 2 }}>
@@ -195,7 +220,7 @@ class FormRegister extends Component {
                 </TouchableOpacity>
               </TabHeading>}>
             </Tab>
-          </Tabs>
+          </Tabs> */}
         </View>
         <Text style={styles.headForm}>รหัสบัตรประชาชน/หนังสือเดินทาง</Text>
         <Form>
@@ -395,7 +420,7 @@ const styles = StyleSheet.create({
   },
   gender: {
     flexDirection: "row",
-    backgroundColor : "#fff",
+    backgroundColor: "#fff",
     flex: 1,
     justifyContent: "center",
     padding: 10

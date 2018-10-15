@@ -50,6 +50,7 @@ class HistoryContainer extends Component {
             });
         return this.state.dataSource
     }
+    
     checkOutput(data) {
         if (data == "") {
             this.setState({ statusData: false })
@@ -82,7 +83,7 @@ class HistoryContainer extends Component {
                     translucent={true}
                 />
                 <View style={{ flex: 1 }}>
-                    <Spinner visible={this.state.visible} textContent={"รอสักครู่..."} textStyle={{ color: '#FFF' }} />
+                    {/* <Spinner visible={this.state.visible} textContent={"รอสักครู่..."} textStyle={{ color: '#FFF' }} /> */}
                     {this.state.statusData == true ?
                         <HistoryList
                             historyData={this.state.dataSource}

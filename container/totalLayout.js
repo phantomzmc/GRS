@@ -46,7 +46,6 @@ class TotalLayout extends Component {
                 this.setState({ modalLoading: false, layout_invoice: true })
                 setTimeout(() => {
                     this.captureScreenFunction()
-                    this.loopTable()
                 }, 500)
             }
         }, 1000)
@@ -118,9 +117,13 @@ class TotalLayout extends Component {
             responseType: 'json'
         })
             .then((response) => {
-                this.setState({ isLoading: false, invoiceID: response.data[0].RegisterID });
+                this.setState({ isLoading: false, invoiceID: response.data[0].RegisterID, dataRegis: response.data });
                 console.log(response.data)
+                this.props.setDataRegis(response.data)
                 this.props.setRegisterID(response.data[0].RegisterID)
+                if (this.props.creditcard.typePayment !== 2) {
+                    this.loopTable()
+                }
             }).catch((error) => {
                 this.setState({ modalError: true })
                 // setTimeout(() => {
@@ -137,8 +140,8 @@ class TotalLayout extends Component {
         const data = await MailGunSend.onSendMail({
             'from': 'Guurun Support Team. <support@guurun.com>',
             'to': this.props.userprofile.userprofile.Email,
-            'subject': 'Guurun Support Team รหัสในการยืนยันตัวตน',
-            'text': 'สวัสดีคุณ ' + this.props.profile.profile.fullname + ' รหัสที่ใช้ในการยืนยันตัวตนขอผู้ใช้งานคือ : ' + this.props.profile.verify,
+            'subject': 'Guurun Support Team ยืนยันการสมัครรายการ ' + this.props.event.event.EventName,
+            'text': 'สวัสดีคุณ ' + this.props.profile.profile.fullname,
             'html': '<!DOCTYPE html><html><head><meta charset="UTF-8"><style>#table1 {background-color: #eeeeee;width: 100%;}#table2 {width: 100%;}td,th {text-align: left;padding: 8px;}tr {' +
                 'border: 1px solid #111;}#hr {color: #FC561F;text-align: center;}h4 {color: #FC561F;text-align: center;}#textRigth {text-align: right;}h2 {text-align: center;}line {height: 10px;}' +
                 'p {text-align: center;}</style><title>OrderInvoice</title></head><body><h2>Order รอการชำระเงิน โครงการ ' + this.props.event.event.EventName + ' </h2><p id="hr">ข้อมูลการสมัครของท่านถูกบันทึกลงในระบบเรียบร้อยแล้วกรุณารอใบยืนยันการสมัครเพื่อนำไปลงทะเบียนรับเสื้อและเบอร์วิ่งในวันเวลาที่กำหนด</p><hr id="line">' +
@@ -205,12 +208,15 @@ class TotalLayout extends Component {
                         album: 'GRS'
                     }, 'photo')
                 },
-                Alert.alert('บันทึกสำเร็จ', 'ทำการบันทึกรายการเสร็จสิ้น', [
-                    {
-                        text: 'ตกลง',
-                        onPress: () => this.gotoListEvent()
-                    }
-                ], { cancelable: false }),
+                // Alert.alert('บันทึกสำเร็จ', 'ทำการบันทึกรายการเสร็จสิ้น', [
+                //     {
+                //         text: 'ตกลง',
+                //     },
+                //     {
+                //         text: 'ไปยังรายการวิ่ง',
+                //         onPress: () => this.gotoListEvent()
+                //     }
+                // ], { cancelable: false }),
                 // error => console.error("Oops, Something Went Wrong", error)
             );
 
@@ -321,10 +327,16 @@ const mapDispatchToProps = dispatch => {
                 payload: list
             })
         },
-        setRegisterID : (registerid) => {
+        setRegisterID: (registerid) => {
             dispatch({
-                type : 'setRegisterID',
-                payload : registerid
+                type: 'setRegisterID',
+                payload: registerid
+            })
+        },
+        setDataRegis: (dataRegis) => {
+            dispatch({
+                type : 'setDataRegis',
+                payload : dataRegis
             })
         }
     }
