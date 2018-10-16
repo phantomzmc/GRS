@@ -9,11 +9,9 @@
             background-color: #eeeeee;
             width: 100%;
         }
-
         #table2 {
             width: 100%;
         }
-
         td,
         th {
             /* border: 1px solid #dddddd; */
@@ -51,11 +49,32 @@
         p {
             text-align: center;
         }
+        #qrcode {
+            text-align: center;
+            padding: 20px; 
+        }
+        
     </style>
     <title>OrderInvoice</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lrsjng.jquery-qrcode/0.14.0/jquery-qrcode.min.js"></script>
 </head>
 
 <body>
+
+    <script>
+        var regisID = "55"
+        jQuery(function () {
+            jQuery('#output').qrcode("55");
+        })
+    </script>
+    <div id="qrcode">
+        <div id="output"></div>
+    </div>
+    <img src="https://api.qrserver.com/v1/create-qr-code/?data=HelloWorld&amp;size=100x100" alt="" title="" />
+
+
     <h2>Order รอการชำระเงิน โครงการ ............. </h2>
     <p id="hr">ข้อมูลการสมัครของท่านถูกบันทึกลงในระบบเรียบร้อยแล้ว
         กรุณารอใบยืนยันการสมัครเพื่อนำไปลงทะเบียนรับเสื้อและเบอร์วิ่งในวันเวลาที่กำหนด</p>

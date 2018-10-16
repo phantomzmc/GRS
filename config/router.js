@@ -42,9 +42,9 @@ import Test from '../mockdata'
 
 
 export default StackNavigator({
-    // Test : {
-    //     screen : Test
-    // },
+    Test : {
+        screen : Test
+    },
     // TeamList: {
     //     screen: TeamList,
     //     navigationOptions: {
