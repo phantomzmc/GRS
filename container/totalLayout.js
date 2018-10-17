@@ -37,10 +37,10 @@ class TotalLayout extends Component {
         }
     }
     componentWillMount() {
+        this.addRegister()
         this.setState({ modalLoading: true })
     }
     componentDidMount() {
-        this.addRegister()
         setTimeout(() => {
             if (this.state.modalLoading == true) {
                 this.setState({ modalLoading: false, layout_invoice: true })
@@ -48,7 +48,7 @@ class TotalLayout extends Component {
                     this.captureScreenFunction()
                 }, 500)
             }
-        }, 1000)
+        }, 1250)
     }
     addRegister() {
         console.log("addregis")

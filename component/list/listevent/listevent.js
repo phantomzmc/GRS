@@ -8,7 +8,8 @@ import {
     FlatList,
     TouchableHighlight,
     ImageBackground,
-    TouchableOpacity
+    TouchableOpacity,
+    Linking
 } from 'react-native';
 import { YellowBox } from 'react-native';
 import { Card, CardItem, Container, Icon, Button, Text } from "native-base";
@@ -155,8 +156,8 @@ class ListEvent extends Component {
                                             </View>
                                             <View style={styles.containerEventDetail}>
                                                 <Text style={styles.monthText}>วันที่จัดงาน : {item.EventDate}</Text>
-                                                <View style={{ flexDirection : "row" , backgroundColor : "#FC561F" ,padding : 5 , borderRadius : 5}} onPress={this.gotoPayment.bind(this, item)}>
-                                                    <Icon name="ios-person-add" type="Ionicons" style={{ color : '#fff', paddingLeft : 5}}/>
+                                                <View style={{ flexDirection: "row", backgroundColor: "#FC561F", padding: 5, borderRadius: 5 }} onPress={this.gotoPayment.bind(this, item)}>
+                                                    <Icon name="ios-person-add" type="Ionicons" style={{ color: '#fff', paddingLeft: 5 }} />
                                                     <Text style={styles.addRegis}> สมัครรายการวิ่ง</Text>
                                                 </View>
                                                 {/* <Button iconLeft small primary onPress={this.gotoPayment.bind(this, item)}>
@@ -168,7 +169,11 @@ class ListEvent extends Component {
                                     </TouchableHighlight>
                                     <CardItem footer borderedtem>
                                         <View style={{ justifyContent: "space-between", alignContent: "center", flexDirection: "row", backgroundColor: "#fff", flex: 1 }}>
-                                            <Button iconLeft small bordered success onPress={this.gotoRegisinfo.bind(this, item)}>
+                                            <Button
+                                                iconLeft small bordered success
+                                                // onPress={this.gotoRegisinfo.bind(this, item)}
+                                                onPress={() => Linking.openURL(item.EventURL == undefined || "" ? 'http://shutterrunning2014.com/' : item.EventURL)}
+                                            >
                                                 <Icon name="ios-list" type="Ionicons" />
                                                 <Text style={styles.info}>รายละเอียดงานวิ่ง</Text>
                                             </Button>

@@ -13,10 +13,12 @@ class DetailRegister extends Component {
         date: new Date().getDate(),
         month: new Date().getMonth(),
         year: new Date().getFullYear(),
-        countFriend: this.props.friendlist.friendEvent
+        countFriend: this.props.friendlist.friendEvent,
+        qrcode: true
     }
 
     componentDidMount() {
+        this.checkDataRegis()
         console.log(this.props.invoice.registerid)
         this.setState({
             address: this.props.address.user.adress + " " +
@@ -34,8 +36,19 @@ class DetailRegister extends Component {
             this.setState({ statusPayment1: false, statusPayment2: true })
         }
     }
+    checkDataRegis() {
+        const { dataRegis } = this.props.invoice.dataRegis
+        if (dataRegis !== "") {
+            setTimeout(() => {
+                this.setState({
+                    qrcode: true
+                })
+            }, 300)
+        }
+    }
     render() {
         let { date, month, year, countFriend } = this.state
+        let { dataRegis } = this.props.invoice.dataRegis
         return (
             <View style={styles.container}>
                 <View style={styles.view1}>
