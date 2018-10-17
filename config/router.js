@@ -42,9 +42,9 @@ import Test from '../mockdata'
 
 
 export default StackNavigator({
-    Test : {
-        screen : Test
-    },
+    // Test : {
+    //     screen : Test
+    // },
     // TeamList: {
     //     screen: TeamList,
     //     navigationOptions: {
@@ -107,37 +107,19 @@ export default StackNavigator({
     ResetEncode: {
         screen: ResetEncode,
         navigationOptions: {
-            title: "ขอรหัสผ่านใหม่",
-            headerStyle: {
-                backgroundColor: "#FC561F"
-            },
-            headerTitleStyle: {
-                color: "#fff"
-            }
+            header: () => null
         }
     },
     ResetPassword: {
         screen: ResetPassword,
         navigationOptions: {
-            title: "ขอรหัสผ่านใหม่",
-            headerStyle: {
-                backgroundColor: "#FC561F"
-            },
-            headerTitleStyle: {
-                color: "#fff"
-            }
+            header: () => null
         }
     },
     SubmitEncode: {
         screen: SubmitEncode,
         navigationOptions: {
-            title: "ขอรหัสผ่านใหม่",
-            headerStyle: {
-                backgroundColor: "#FC561F"
-            },
-            headerTitleStyle: {
-                color: "#fff"
-            }
+            header: () => null
         }
     },
     ShirtPhotoPlus: {

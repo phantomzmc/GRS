@@ -37,6 +37,7 @@ class CradFriendDistance extends Component {
             firstname: "",
             lastname: "",
             imgProfile : "",
+            email : "",
             index: this.props.idkey,
         }
     }
@@ -53,6 +54,7 @@ class CradFriendDistance extends Component {
                 firstname: dis.FirstName,
                 lastname: dis.LastName,
                 imgProfile : dis.PicProfile,
+                email : dis.Email,
                 index: this.props.idkey,
 
             })
@@ -114,13 +116,14 @@ class CradFriendDistance extends Component {
         this.getDataRegisFriend(item.JerseySizeValue)
     }
     getDataRegisFriend(JerseySizeValue) {
-        let { runnerid, couseid, nameRegis, total, jersersize, dataRegis, firstname, lastname,imgProfile } = this.state
+        let { runnerid, couseid, nameRegis, total, jersersize, dataRegis, firstname, lastname,imgProfile ,email} = this.state
         let data = {
             RunnerID: runnerid,
             CourseID: couseid,
             JerseySize: JerseySizeValue,
             PhotoPlusService: "0",
             PromoCode: "",
+            Email : email,
             CourseFee: total,
         }
         let fulldata = {
@@ -133,6 +136,7 @@ class CradFriendDistance extends Component {
             PromoCode: "",
             nameRegis: nameRegis,
             CourseFee: total,
+            Email : email,
             picProfile : imgProfile
         }
         dataFriend.push(data)

@@ -25,8 +25,8 @@ const credit = {
   paymentslip: "",
   charge: {
     id: ""
-  }
-
+  },
+  transaction: ""
 };
 const user = {
   profile: {
@@ -205,7 +205,10 @@ const creditcard = (state = credit, action) => {
     case "setCharge": {
       state.charge = action.payload
       break;
-
+    }
+    case "setTransaction" : {
+      state.transaction = action.payload
+      break;
     }
     case "setTypePayment": {
       state.typePayment = action.payload

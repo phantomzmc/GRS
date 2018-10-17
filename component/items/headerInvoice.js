@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, StatusBar } from "react-native";
+import { StyleSheet, StatusBar,Platform } from "react-native";
 import { Content, Header, Left, Body, Right, Button, Icon, Title, Text, View } from 'native-base';
 import Menu, { MenuItem, MenuDivider } from 'react-native-material-menu';
 import { connect } from "react-redux";
@@ -118,7 +118,7 @@ class HeaderTeam extends Component {
     render() {
         return (
             <View>
-                <Header style={{ backgroundColor: "#FC561F" }}>
+                <Header androidStatusBarColor="#FC561F" style={styles.header}>
                     <Left>
                         <Button transparent onPress={this.onPressGoBack.bind(this)}>
                             <Icon name='arrow-back' style={{ color: "#fff" }} />
@@ -223,6 +223,18 @@ const mapDispatchToProps = dispatch => {
 }
 
 const styles = StyleSheet.create({
+    header: {
+        backgroundColor: '#FC561F',
+        ...Platform.select({
+            ios: {
+                
+            },
+            android: {
+                paddingTop: 15,
+                paddingBottom : 0
+            },
+        })
+    },
     title: {
         fontFamily: "Kanit",
         color: "#fff",

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native'
-import { Conatainer } from 'native-base'
+import { Container } from 'native-base'
 import { connect } from 'react-redux'
 import randomstringPromise from 'randomstring-promise/react-native';
 import SubmitResetPassword from '../component/form/submitResetPass'
+import HeaderTeam from '../component/items/headerTeam'
 import axios from 'axios'
 import req from '../config/uri_req';
 import api_key from '../config/api_key'
@@ -18,9 +19,10 @@ class ResetEncode extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            title: "ขอรหัสผ่านใหม่",
             password: "",
-            userid : "",
-            verifycode : "",
+            userid: "",
+            verifycode: "",
             statusVerify: 0
         }
     }
@@ -28,21 +30,21 @@ class ResetEncode extends Component {
         randomstringPromise(6)
             .then((verifycode) => {
                 this.props.resetPassword(verifycode)
-                this.setState({ verifycode : verifycode})
+                this.setState({ verifycode: verifycode })
                 console.log(this.state.verifycode)
             });
     }
     gotoLogin = () => {
         this.props.navigation.navigate("SubmitEncode")
     }
-    sendUpdateEncode(userid,email) {
+    sendUpdateEncode(userid, email) {
         let uri = req[0].uspUpdateEncodeURL
         let apikey = api_key[0].api_key
         let data = ({
             params: [
                 { name: "Username", value: userid },
                 { name: "Email", value: email },
-                { name : "EncodeURL" , value : this.props.profile.newpassword}
+                { name: "EncodeURL", value: this.props.profile.newpassword }
             ]
         })
         axios.post(uri, data, {
@@ -55,6 +57,7 @@ class ResetEncode extends Component {
             .then((response) => {
                 this.setState({ isLoading: false, status: response.data[0] });
                 console.log(this.state.status)
+                this.props.setUsername(userid)
                 this.gotoLogin()
                 // this.props.navigation.navigate('SubmitEncode')
             }).catch((error) => {
@@ -64,21 +67,35 @@ class ResetEncode extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
-                <ResetPasswordForm
-                    sendNewCode={this.sendUpdateEncode.bind(this)}
-                    goLogin={this.gotoLogin.bind(this)} 
+            <Container>
+                <HeaderTeam
+                    title={this.state.title}
+                    menu={false}
+                    statusRegis={true}
+                    goback={() => this.props.navigation.navigate("Login")}
+                    goLogin={() => this.props.navigation.navigate("Login")}
+                    goFriendlist={() => this.props.navigation.navigate('FriendList')}
+                    goHistory={() => this.props.navigation.navigate('HistoryContainer')}
+                    goEditProfile={() => this.props.navigation.navigate('EditProfile')}
+                    goRegis={() => this.props.navigation.navigate('ControlDistance')}
+                    goSingleLogin={() => this.props.navigation.navigate('SingleLogin')}
+                    goContacts={() => this.props.navigation.navigate('Contacts')}
+                />
+                <View style={styles.cardView}>
+                    <ResetPasswordForm
+                        sendNewCode={this.sendUpdateEncode.bind(this)}
+                        goLogin={this.gotoLogin.bind(this)}
                     />
-                {/* <SubmitResetPassword /> */}
-
-            </View>
+                    {/* <SubmitResetPassword /> */}
+                </View>
+            </Container>
         );
     }
 }
 const mapStateToProps = state => {
     return {
-        profile : state.profile,
-        token : state.token
+        profile: state.profile,
+        token: state.token
     }
 }
 const mapDisPatchToProps = (dispatch) => {
@@ -88,12 +105,18 @@ const mapDisPatchToProps = (dispatch) => {
                 type: "resetPassword",
                 payload: password
             });
+        },
+        setUsername : username => {
+            dispatch({
+                type : "setUsername",
+                payload : username
+            })
         }
     }
 
 }
 const styles = StyleSheet.create({
-    container: {
+    cardView: {
         padding: 20
     }
 })

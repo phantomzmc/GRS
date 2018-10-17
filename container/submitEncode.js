@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, StyleSheet, TouchableOpacity, Text, Alert } from 'react-native'
-import { Conatainer } from 'native-base'
+import { Container } from 'native-base'
 import { connect } from 'react-redux'
 import SubmitResetPassword from '../component/form/submitResetPass'
 import ResetPasswordForm from '../component/form/resetPasswordForm'
+import HeaderTeam from '../component/items/headerTeam'
 import axios from 'axios'
 import req from '../config/uri_req';
 import api_key from '../config/api_key'
@@ -17,6 +18,7 @@ class SubmitEncode extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            title: "ขอรหัสผ่านใหม่",
             password: "",
             userid: "",
             password: "",
@@ -54,6 +56,7 @@ class SubmitEncode extends Component {
                 this.gotoLogin()
             });
     }
+    
     setEncode(code) {
         console.log(code)
         this.setState({
@@ -61,6 +64,8 @@ class SubmitEncode extends Component {
             submitform: false,
             resetform: true
         })
+        // this.checkEncode(code)
+
     }
     setNewPassword(password) {
         console.log(password)
@@ -82,23 +87,38 @@ class SubmitEncode extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
-                {/* <ResetPasswordForm
+            <Container>
+                <HeaderTeam
+                    title={this.state.title}
+                    menu={false}
+                    statusRegis={true}
+                    goback={() => this.props.navigation.navigate("Login")}
+                    goLogin={() => this.props.navigation.navigate("Login")}
+                    goFriendlist={() => this.props.navigation.navigate('FriendList')}
+                    goHistory={() => this.props.navigation.navigate('HistoryContainer')}
+                    goEditProfile={() => this.props.navigation.navigate('EditProfile')}
+                    goRegis={() => this.props.navigation.navigate('ControlDistance')}
+                    goSingleLogin={() => this.props.navigation.navigate('SingleLogin')}
+                    goContacts={() => this.props.navigation.navigate('Contacts')}
+                />
+                <View style={styles.cardView}>
+                    {/* <ResetPasswordForm
                     sendNewCode={this.sendResetPassword.bind(this)}
                     goLogin={this.gotoLogin.bind(this)} /> */}
-                {
-                    this.state.submitform &&
-                    <SubmitResetPassword
-                        codesubmit={this.setEncode.bind(this)}
-                    />
-                }
-                {
-                    this.state.resetform &&
-                    <ResetPasswordForm
-                        sendNewCode={this.setNewPassword.bind(this)}
-                    />
-                }
-            </View>
+                    {
+                        this.state.submitform &&
+                        <SubmitResetPassword
+                            codesubmit={this.setEncode.bind(this)}
+                        />
+                    }
+                    {
+                        this.state.resetform &&
+                        <ResetPasswordForm
+                            sendNewCode={this.setNewPassword.bind(this)}
+                        />
+                    }
+                </View>
+            </Container>
         );
     }
 }
@@ -106,7 +126,8 @@ const mapStateToProps = state => {
     return {
         profile: state.profile,
         token: state.token,
-        userprofile: state.userprofile
+        userprofile: state.userprofile,
+        username: state.username
     }
 }
 const mapDisPatchToProps = (dispatch) => {
@@ -121,7 +142,7 @@ const mapDisPatchToProps = (dispatch) => {
 
 }
 const styles = StyleSheet.create({
-    container: {
+    cardView: {
         padding: 20
     }
 })

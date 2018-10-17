@@ -46,7 +46,8 @@ class CellEventListFriend extends Component {
             RunnerID: item.RunnerID,
             FirstName: item.FirstName,
             LastName: item.LastName,
-            PicProfile: item.PicProfile
+            PicProfile: item.PicProfile,
+            Email : item.Email
         }
         var str_newitem = dataitem
         for (i = 0; i <= data.length; i++) {
@@ -102,7 +103,8 @@ class CellEventListFriend extends Component {
             RunnerID: item.RunnerID,
             FirstName: item.FirstName,
             LastName: item.LastName,
-            PicProfile: item.PicProfile
+            PicProfile: item.PicProfile,
+            Email : item.Email
         }
         console.log(value)
         if (value == false) {

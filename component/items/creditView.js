@@ -64,6 +64,7 @@ class CreditView extends Component {
         console.log(data)
         this.checkPaymentModal(data)
         this.props.setCharge(data)
+        this.props.setTransaction(data.transaction)
     }
     openModal = () => {
         this.setState({ modalLoad: !this.state.modalLoad })
@@ -277,6 +278,12 @@ const mapDispatchtoProps = (dispatch) => {
             dispatch({
                 type: 'setCharge',
                 payload: charges
+            })
+        },
+        setTransaction: (transaction) => {
+            dispatch({
+                type: 'setTransaction',
+                payload : transaction
             })
         }
     }

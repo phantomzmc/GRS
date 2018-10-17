@@ -50,7 +50,7 @@ class DetailRegister extends Component {
                             </View>
                             :
                             <FlatList
-                                style={{ width: 80, height: 120 }}
+                                style={{ width: 80, height: 150 }}
                                 horizontal
                                 data={this.props.invoice.dataRegis}
                                 renderItem={({ item, index }) =>
@@ -60,6 +60,7 @@ class DetailRegister extends Component {
                                             size={75}
                                         />
                                         <Text style={{ fontSize: 10, fontFamily: 'Kanit', textAlign: "center", paddingTop: 5 }}>{item.FullName}</Text>
+                                        <Text style={{ fontSize: 10, fontFamily: 'Kanit', textAlign: "center", paddingTop: 5 }}>Confirm Number : xxx{item.RegisterID}</Text>
                                     </View>
                                 }
                                 keyExtractor={(item, index) => index}

@@ -47,7 +47,8 @@ class AddressLayout extends Component {
             layoutPost: false
         }
     }
-    componentWillMount = () => {
+    componentWillMount() {
+        this.getPleaceItem()
         if (this.props.choiceSend.choiceSend.choice == 0) {
             this.setState({ checked: true, checked2: false })
         }
@@ -60,7 +61,6 @@ class AddressLayout extends Component {
         })
         console.log(this.state.priceEvent)
         console.log(this.state.priceCDO)
-        this.getPleaceItem()
     }
     componentDidMount() {
         this.getCountPostPrice()
@@ -78,10 +78,12 @@ class AddressLayout extends Component {
         })
     }
     getPleaceItem() {
+        console.log("getPleaceItem")
         let uri = req[0].uspGetPlaceItemLists
         let apikey = api_key[0].api_key
         let data = ({
             params: {
+                name: "EventID",
                 value: this.props.event.event.EventID,
             }
         })
@@ -93,14 +95,14 @@ class AddressLayout extends Component {
             responseType: 'json'
         })
             .then((responseJson) => {
-                this.setState({
-                    isLoading: false,
-                    item: responseJson.data,
-                    pleace: responseJson.data[0].PlaceItemName,
-                    postPrice: responseJson.data[1].PlaceItemName
-                });
                 console.log(responseJson.data)
-                this.checkPleacSelect()
+                // this.setState({
+                //     isLoading: false,
+                //     item: responseJson.data,
+                //     // pleace: responseJson.data[0].PlaceItemName,
+                //     // postPrice: responseJson.data[1].PlaceItemName
+                // });
+                this.checkPleacSelect(responseJson.data)
             }).catch((error) => {
                 // this.props.navigation.navigate('EventList')
             });
@@ -128,27 +130,51 @@ class AddressLayout extends Component {
                 // this.props.navigation.navigate('EventList')
             });
     }
-    checkPleacSelect() {
-        if((this.state.item[0].PlaceItemSelected == 1 || this.state.item[1].PlaceItemSelected == 1) && (this.state.item[0].PlaceItemSelected == 0 || this.state.item[1].PlaceItemSelected == 0)){
+    checkPleacSelect(data) {
+        console.log(data[0])
+        // if ((data[0].PlaceItemSelected == "1" || data[1].PlaceItemSelected == "1") && (data[0].PlaceItemSelected == "0" || data[1].PlaceItemSelected == "0")) {
+        if (data.length >= 2) {
+            console.log("0")
+            setTimeout(() => {
+                this.setState({
+                    layoutPleace: true,
+                    layoutPost: true,
+                    checked: true,
+                    checked2: false,
+                })
+            }, 500)
             this.setState({
-                layoutPleace: true,
-                layoutPost : true,
-                checked : true,
-                checked2 : false
+                pleace: data[0].PlaceItemName,
+                postPrice: data[1].PlaceItemName
             })
         }
-        else if (this.state.item[0].PlaceItemSelected == 1 || this.state.item[1].PlaceItemSelected == 1) {
+        else if (data[0].PlaceItemSelected == "1" || data[1].PlaceItemSelected == "1") {
+            console.log("1")
+            setTimeout(() => {
+                this.setState({
+                    layoutPleace: true,
+                    checked: true,
+                })
+            }, 500)
             this.setState({
-                layoutPleace: true,
-                checked : true
+                pleace: data[0].PlaceItemName,
             })
         }
-        else if (this.state.item[0].PlaceItemSelected == 0 || this.state.item[1].PlaceItemSelected == 0) {
-            this.setState({ 
-                layoutPost: true,
-                checked2 : true
-             })
+        else if (data[0].PlaceItemSelected == "0" || data[1].PlaceItemSelected == "0") {
+            console.log("2")
+
+            setTimeout(() => {
+                this.setState({
+                    layoutPost: true,
+                    checked2: true,
+                })
+            }, 500)
+            this.setState({
+                postPrice: data[0].PlaceItemName
+            })
         }
+
+
     }
     nextToPayment = () => {
         // this.getChoice()
@@ -234,7 +260,7 @@ class AddressLayout extends Component {
                     goEditProfile={() => this.props.navigation.navigate('EditProfile')}
                     goRegis={() => this.props.navigation.navigate('ControlDistance')}
                     goSingleLogin={() => this.props.navigation.navigate('SingleLogin')}
-                    goContacts={()=> this.props.navigation.navigate('Contacts')}
+                    goContacts={() => this.props.navigation.navigate('Contacts')}
 
                 />
                 <ScrollView >
