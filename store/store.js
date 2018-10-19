@@ -26,7 +26,9 @@ const credit = {
   charge: {
     id: ""
   },
-  transaction: ""
+  transaction: "",
+  typePayment : 1,
+  statusPayment : 2
 };
 const user = {
   profile: {
