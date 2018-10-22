@@ -1,8 +1,10 @@
 
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, FlatList } from 'react-native';
+import { Icon, Row } from "native-base";
 import { connect } from 'react-redux'
 import QRCode from 'react-native-qrcode-svg';
+import { Container } from 'native-base';
 
 class DetailRegister extends Component {
     state = {
@@ -50,95 +52,104 @@ class DetailRegister extends Component {
         let { date, month, year, countFriend } = this.state
         let { dataRegis } = this.props.invoice.dataRegis
         return (
-            <View style={styles.container}>
-                <View style={styles.view1}>
-                    <View>
-                        {this.state.statusPayment1 && <Text style={styles.typePaymentSuccess}> จ่ายเเล้ว </Text>}
-                        {this.state.statusPayment2 && <Text style={styles.typePaymentWarning}>รอดำเนินการ</Text>}
-                    </View>
-                    <View>
-                        {this.props.creditcard.statusPayment == 1 ?
-                            <View style={styles.disQRcode}>
-                                <Text style={styles.textName3}>QR Code</Text>
-                            </View>
-                            :
-                            <FlatList
-                                style={{ width: 80, height: 150 }}
-                                horizontal
-                                data={this.props.invoice.dataRegis}
-                                renderItem={({ item, index }) =>
-                                    <View style={{ width: 80, height: 80 }}>
-                                        <QRCode
-                                            value={item.RegisterID}
-                                            size={75}
-                                        />
-                                        <Text style={{ fontSize: 10, fontFamily: 'Kanit', textAlign: "center", paddingTop: 5 }}>{item.FullName}</Text>
-                                        <Text style={{ fontSize: 10, fontFamily: 'Kanit', textAlign: "center", paddingTop: 5 }}>Confirm Number : xxx{item.RegisterID}</Text>
-                                    </View>
-                                }
-                                keyExtractor={(item, index) => index}
-                            />
+            <View style={{ flexDirection: 'row', justifyContent: 'space-around' ,alignItems : 'center'}}>
+                <Icon name="chevron-small-left" style={{ color: "#000" }} type="Entypo" />
+                <FlatList
+                    horizontal
+                    style={{ width: '100%' }}
+                    data={this.props.invoice.dataRegis}
+                    renderItem={({ item, index }) =>
+                        <View style={styles.container}>
+                            <View style={styles.view1}>
+                                <View>
+                                    {this.state.statusPayment1 && <Text style={styles.typePaymentSuccess}> จ่ายเเล้ว </Text>}
+                                    {this.state.statusPayment2 && <Text style={styles.typePaymentWarning}>รอดำเนินการ</Text>}
+                                </View>
+                                <View style={{ width: 80, height: 120 }}>
+                                    {this.props.creditcard.statusPayment == 1 ?
+                                        <View style={styles.disQRcode}>
+                                            <Text style={styles.textName3}>QR Code</Text>
+                                        </View>
+                                        :
 
-                            // <QRCode
-                            //     value={this.props.invoice.registerid}
-                            //     size={75}
-                            // />
+                                        <View style={{ width: 80, height: 80 }}>
+                                            <QRCode
+                                                value={item.RegisterID}
+                                                size={75}
+                                            />
+                                            <Text style={{ fontSize: 10, fontFamily: 'Kanit', textAlign: "center", paddingTop: 5 }}>{item.FullName}</Text>
+                                            <Text style={{ fontSize: 10, fontFamily: 'Kanit', textAlign: "center", paddingTop: 5 }}>Confirm Number : xxx{item.RegisterID}</Text>
+                                        </View>
 
-                        }
-                        {/* {countFriend.length > 2 || this.props.creditcard.statusPayment == 1 &&
+
+                                        // <QRCode
+                                        //     value={this.props.invoice.registerid}
+                                        //     size={75}
+                                        // />
+
+                                    }
+                                    {/* {countFriend.length > 2 || this.props.creditcard.statusPayment == 1 &&
                             
 
                         } */}
-                    </View>
-                    <View>
-                        <Text style={{ fontSize: 10, color: '#A9A9A9', fontFamily: 'Kanit' }}> Order : {this.state.numberInvoice} </Text>
-                        <Text style={{ fontSize: 10, color: '#A9A9A9', fontFamily: 'Kanit' }}>{date}-{month}- {year}</Text>
-                    </View>
-                </View>
-                <View style={styles.viewName}>
-                    <Text style={styles.textName1}>ชื่อ - นามสกุล</Text>
-                    <Text style={styles.textName2}>{this.props.userprofile.userprofile.FirstName} {this.props.userprofile.userprofile.LastName}</Text>
-                    <Text style={styles.textName1}>รายการวิ่ง</Text>
-                    <Text style={styles.textName2}>{this.props.event.event.EventName}</Text>
-                </View>
-                <View style={styles.viewSize}>
-                    <View style={styles.box}>
-                        <Text style={styles.boxTitle}>ไซค์เสื้อ</Text>
-                        {/* <Text style={styles.boxName}>{this.props.shirtphoto.size}</Text> */}
-                        {this.props.friendlist.fullfriendEvent[0].JerseySize = undefined ?
-                            <Text style={styles.boxName}>
-                                {this.props.friendlist.fullfriendEvent.JerseySize}
-                            </Text>
-                            :
-                            <Text style={styles.boxName}>
-                                {this.props.friendlist.fullfriendEvent[0].JerseySize}
-                            </Text>
-                        }
-                    </View>
-                    <View style={styles.box}>
-                        <Text style={styles.boxTitle}>ระยะทาง</Text>
-                        {this.props.friendlist.fullfriendEvent[0].nameRegis == undefined ?
-                            <Text style={styles.boxName}>
-                                {this.props.friendlist.fullfriendEvent.nameRegis}
-                            </Text>
-                            :
-                            <Text style={styles.boxName}>
-                                {this.props.friendlist.fullfriendEvent[0].nameRegis}
-                            </Text>
-                        }
-                    </View>
-                </View>
-                <View style={styles.viewAddress}>
-                    <View style={{ flex: 1, alignItems: 'center' }}>
-                        <Text style={styles.textName1}>Address</Text>
-                        {/* <Text style={{ fontFamily: 'Kanit' }}>{this.props.address.user.adress}</Text> */}
-                        <Text style={{ fontFamily: 'Kanit' }}>{this.state.address}</Text>
-                    </View>
-                    <View style={{ flex: 1, alignItems: 'center' }}>
-                        <Text style={styles.textName1}>วันที่</Text>
-                        <Text style={{ fontFamily: 'Kanit' }}>{this.props.event.event.EventDate}</Text>
-                    </View>
-                </View>
+                                </View>
+                                <View>
+                                    <Text style={{ fontSize: 10, color: '#A9A9A9', fontFamily: 'Kanit' }}> Order : {this.state.numberInvoice} </Text>
+                                    <Text style={{ fontSize: 10, color: '#A9A9A9', fontFamily: 'Kanit' }}>{date}-{month}- {year}</Text>
+                                </View>
+                            </View>
+                            <View style={styles.viewName}>
+                                <Text style={styles.textName1}>ชื่อ - นามสกุล</Text>
+                                <Text style={styles.textName2}>{item.FullName}</Text>
+                                <Text style={styles.textName1}>รายการวิ่ง</Text>
+                                <Text style={styles.textName2}>{this.props.event.event.EventName}</Text>
+                            </View>
+                            <View style={styles.viewSize}>
+                                <View style={styles.box}>
+                                    <Text style={styles.boxTitle}>ไซค์เสื้อ</Text>
+                                    <Text style={styles.boxName}>{item.JerseySize}</Text>
+                                    {/* {this.props.friendlist.fullfriendEvent[0].JerseySize = undefined ?
+                                    <Text style={styles.boxName}>
+                                        {this.props.friendlist.fullfriendEvent.JerseySize}
+                                    </Text>
+                                    :
+                                    <Text style={styles.boxName}>
+                                        {this.props.friendlist.fullfriendEvent[0].JerseySize}
+                                    </Text>
+                                } */}
+                                </View>
+                                <View style={styles.box}>
+                                    {/* <Text style={styles.boxTitle}>ระยะทาง</Text> */}
+                                    <Text style={styles.boxName}>
+                                        {item.CourseName}
+                                    </Text>
+                                    {/* {this.props.friendlist.fullfriendEvent[0].nameRegis == undefined ?
+                                    <Text style={styles.boxName}>
+                                        {this.props.friendlist.fullfriendEvent.nameRegis}
+                                    </Text>
+                                    :
+                                    <Text style={styles.boxName}>
+                                        {this.props.friendlist.fullfriendEvent[0].nameRegis}
+                                    </Text>
+                                } */}
+                                </View>
+                            </View>
+                            <View style={styles.viewAddress}>
+                                <View style={{ flex: 1, alignItems: 'center', width: '50%' }}>
+                                    <Text style={styles.textName1}>Address</Text>
+                                    {/* <Text style={{ fontFamily: 'Kanit' }}>{this.props.address.user.adress}</Text> */}
+                                    <Text style={{ fontFamily: 'Kanit' }}>{this.state.address}</Text>
+                                </View>
+                                <View style={{ flex: 1, alignItems: 'center' }}>
+                                    <Text style={styles.textName1}>วันที่</Text>
+                                    <Text style={{ fontFamily: 'Kanit' }}>{this.props.event.event.EventDate}</Text>
+                                </View>
+                            </View>
+                        </View>
+                    }
+                    keyExtractor={(item, index) => index}
+                />
+                <Icon name="chevron-small-right" style={{ color: "#000"}} type="Entypo" />
 
             </View>
         );
@@ -146,9 +157,10 @@ class DetailRegister extends Component {
 }
 const styles = StyleSheet.create({
     container: {
+        width: 320,
         marginTop: 30,
-        marginLeft: 30,
-        marginRight: 30,
+        marginBottom: 10,
+        marginHorizontal: 10,
         backgroundColor: '#fff',
         borderColor: '#fff',
         borderWidth: 2,

@@ -20,7 +20,8 @@ class HistoryList extends Component {
         this.state = {
             isModalVisible: false,
             name: "",
-            dataSource: []
+            dataSource: [],
+            registerID : ""
         }
     }
     componentDidMount() {
@@ -73,7 +74,7 @@ class HistoryList extends Component {
                 console.log(response.data)
                 // this.props.setRegisterID(response.data[0].RegisterID)
             }).catch((error) => {
-                this.setState({ modalError: true })
+                this.getInvoiceID(invoiceid)
                 // setTimeout(() => {
                 //     this.props.navigation.navigate('EventList')
                 // }, 3000)
@@ -86,7 +87,7 @@ class HistoryList extends Component {
         this.getDetailInvoice(item.InvoiceID)
         setTimeout(() => {
             this._toggleModal()
-        }, 500)
+        }, 1000)
     }
     _toggleModal = (data) => {
         this.setState({ isModalVisible: !this.state.isModalVisible });

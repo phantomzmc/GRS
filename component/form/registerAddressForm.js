@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { View, Text, StyleSheet, TouchableOpacity, Alert, Image } from "react-native";
 import { Form, Item, Input, Label } from 'native-base'
 import KeyboardSpacer from 'react-native-keyboard-spacer';
+import { connect} from 'react-redux'
 import ProvinceForm from './addressForm-province'
 import AmphoeForm from './addressForm-amphoe'
 import TambonForm from './addressForm-tunporn'
@@ -14,13 +15,15 @@ class FormAddressRegister extends Component {
   };
   constructor(props) {
     super(props);
+
+    const address = this.props.profile.address
     this.state = {
-      number: "",
-      tambon: "",
-      amphoe: "",
-      country: "",
-      postNumber: "",
-      province: ""
+      number : address.address,
+       tambon : address.t,
+       amphoe : address.a,
+       country : address.country,
+       postNumber : address.postNumber,
+       province : address.city
     };
   }
   checkInputValue(number, tambon, amphoe, province, country, postNumber) {
@@ -108,10 +111,10 @@ class FormAddressRegister extends Component {
         </View>
         <Form>
           <Item floatingLabel last>
-            <Label style={styles.textLabel}>Ex.123/45</Label>
+            <Label style={styles.textLabel}>{this.state.number == "" ? "Ex.123/45" : this.state.number}</Label>
             <Input
               style={{ fontFamily: "Kanit" }}
-              onChangeText={number => this.setState({ number })}
+              onChangeText={number => this.setState({ number : number })}
             />
           </Item>
         </Form>
@@ -122,10 +125,10 @@ class FormAddressRegister extends Component {
 
         <Form>
           <Item floatingLabel last>
-            <Label style={styles.textLabel}>Ex.หนองหอย</Label>
+            <Label style={styles.textLabel}>{this.state.tambon == "" ? "Ex.หนองหอย" : this.state.tambon}</Label>
             <Input
               style={{ fontFamily: "Kanit" }}
-              onChangeText={tambon => this.setState({ tambon })}
+              onChangeText={tambon => this.setState({ tambon : tambon })}
             />
           </Item>
         </Form>
@@ -138,11 +141,11 @@ class FormAddressRegister extends Component {
 
         <Form>
           <Item floatingLabel last>
-            <Label style={styles.textLabel}>Ex.เมืองเชียงใหม่</Label>
+            <Label style={styles.textLabel}>{this.state.amphoe == "" ? "Ex.เมืองเชียงใหม่" : this.state.amphoe}</Label>
             <Input
               style={{ fontFamily: "Kanit" }}
 
-              onChangeText={amphoe => this.setState({ amphoe })}
+              onChangeText={amphoe => this.setState({ amphoe : amphoe })}
             />
           </Item>
         </Form>
@@ -154,10 +157,10 @@ class FormAddressRegister extends Component {
 
         <Form>
           <Item floatingLabel last>
-            <Label style={styles.textLabel}>Ex.เชียงใหม่</Label>
+            <Label style={styles.textLabel}>{this.state.province == "" ? "Ex.เชียงใหม่" : this.state.province}</Label>
             <Input
               style={{ fontFamily: "Kanit" }}
-              onChangeText={province => this.setState({ province })}
+              onChangeText={province => this.setState({ province : province })}
             />
           </Item>
         </Form>
@@ -168,10 +171,10 @@ class FormAddressRegister extends Component {
         </View>
         <Form>
           <Item floatingLabel last>
-            <Label style={styles.textLabel}>Ex.ไทย</Label>
+            <Label style={styles.textLabel}>{this.state.country == "" ? "Ex.ไทย" : this.state.country}</Label>
             <Input
               style={{ fontFamily: "Kanit" }}
-              onChangeText={country => this.setState({ country })}
+              onChangeText={country => this.setState({ country : country })}
             />
           </Item>
         </Form>
@@ -181,11 +184,11 @@ class FormAddressRegister extends Component {
         </View>
         <Form>
           <Item floatingLabel last>
-            <Label style={styles.textLabel}>Ex.10160</Label>
+            <Label style={styles.textLabel}>{this.state.postNumber == "" ? "Ex.10160" : this.state.postNumber}</Label>
             <Input
               keyboardType="phone-pad"
               style={{ fontFamily: "Kanit" }}
-              onChangeText={postNumber => this.setState({ postNumber })}
+              onChangeText={postNumber => this.setState({ postNumber : postNumber})}
             />
           </Item>
         </Form>
@@ -298,4 +301,10 @@ const styles = StyleSheet.create({
     fontFamily: 'Kanit'
   }
 });
-export default FormAddressRegister;
+
+const mapStateToProps = state => {
+  return {
+    profile : state.profile
+  }
+}
+export default connect(mapStateToProps)(FormAddressRegister);

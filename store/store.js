@@ -33,8 +33,30 @@ const credit = {
 const user = {
   profile: {
     userid: "",
-    password: ""
+    password: "",
+    bib : "",
+    fullname : "",
+    lastname : "",
+    nickname : "",
+    confirmpassword : "",
+    email: "",
+    teamname : "",
+    tel : "",
+    journeyDate : "",
+    bloodtype : "",
+    nation : "",
+    gen : ""
+
   },
+  address : {
+    a: "",
+    address : "",
+    city : "",
+    country : "",
+    postNumber : "",
+    t : ""
+  },
+
   help: {
     firstname: "1",
     lastname: "1",

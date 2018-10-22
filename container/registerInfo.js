@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, ScrollView, StatusBar, TouchableOpacity, Image } from "react-native";
+import { View, StyleSheet, ScrollView, StatusBar, TouchableOpacity, Image,Alert } from "react-native";
 import { Text, CardItem, Card, Form, Item, Label, Input, Content, Button, Body, Icon, Container } from "native-base";
 import axios from 'axios'
 import { connect } from "react-redux";

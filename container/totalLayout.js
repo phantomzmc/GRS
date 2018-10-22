@@ -122,14 +122,11 @@ class TotalLayout extends Component {
                 this.props.setRegisterID(response.data[0].RegisterID)
                 if (this.props.creditcard.typePayment !== 2) {
                     this.loopSentEmail()
-                    this.loopTable()
+                    this.loopTable(response.data)
                 }
                 this.showLayoutInvoice()
             }).catch((error) => {
-                this.setState({ modalError: true })
-                // setTimeout(() => {
-                //     this.props.navigation.navigate('EventList')
-                // }, 3000)
+                this.getInvoiceID(invoiceid)
             });
 
     }
@@ -138,23 +135,24 @@ class TotalLayout extends Component {
     }
     loopSentEmail() {
         const { dataFriendFull } = this.state
-        for (let index = 0; index < dataFriendFull.length - 1; index++) {
-            this.sendEmailInvoiceTeam(dataFriendFull[index])
+        for (let index = 0; index < dataFriendFull.length; index++) {
+            this.sendEmailInvoiceTeam(dataFriendFull[index],index)
         }
     }
-    sendEmailInvoiceTeam(item) {
+    sendEmailInvoiceTeam(item,index) {
         // const strTable = str.toString()
+        const invoice = this.props.invoice.dataRegis
         const data = MailGunSend.onSendMail({
             'from': 'Guurun Support Team. <support@guurun.com>',
             'to': item.Email,
             // 'to': this.props.userprofile.userprofile.Email,
             'subject': 'Guurun Support Team ยืนยันการสมัครรายการ ' + this.props.event.event.EventName,
             'text': 'สวัสดีคุณ ' + item.firstname + "  " + item.lastname,
-            'html': '<!DOCTYPE html><html><head><meta charset="UTF-8"><style>#table1 {background-color: #eeeeee;width: 100%;}#table2 {width: 100%;}td,th {text-align: left;padding: 8px;}tr {' +
-                'border: 1px solid #111;}#hr {color: #FC561F;text-align: center;}h4 {color: #FC561F;text-align: center;}#textRigth {text-align: right;}h2 {text-align: center;}line {height: 10px;}' +
+            'html': '<!DOCTYPE html><html><head><meta charset="UTF-8"><style>#table1 {background-color: #eeeeee;width: 100%;}#table2 {width: 100%;}td,th {text-align: center;padding: 8px;}tr {' +
+                'border: 1px solid #111;}#hr {color: #FC561F;text-align: center;}h4 {color: #FC561F;text-align: center;}#textRigth {text-align: right;}#textLeft {text-align : left;}h2 {text-align: center;}line {height: 10px;}' +
                 'p {text-align: center;}#qrcode {text-align: center;padding: 20px;}</style><title>OrderInvoice</title>' +
-                '</head><body><div id="qrcode"><img src="https://api.qrserver.com/v1/create-qr-code/?data=' + this.props.invoice.registerid + '&amp;size=100x100" alt="" title="" /></div></div><h2> Confirmation Card งาน ' + this.props.event.event.EventName + ' </h2><p id="hr">ข้อมูลการสมัครของท่านถูกบันทึกลงในระบบเรียบร้อยแล้วกรุณารอใบยืนยันการสมัครเพื่อนำไปลงทะเบียนรับเสื้อและเบอร์วิ่งในวันเวลาที่กำหนด</p><hr id="line">' +
-                '<table id="table1"><tr><td colspan="6">ใบเสร็จหมายเลขที่ #' + this.state.output[0].InvoiceID + '</td></tr><tr><th>No.</th><th>Name-Lastname</th><th>Course</th><th>Jersey</th><th>Qty</th><th>Total</th></tr>' +
+                '</head><body><div id="qrcode"><img src="https://api.qrserver.com/v1/create-qr-code/?data=' + invoice[index].RegisterID + '&amp;size=100x100" alt="" title="" /><p>Confirm ID : xxx' + invoice[index].RegisterID + '</p></div></div><h2> Confirmation Card งาน ' + this.props.event.event.EventName + ' </h2><p id="hr">ข้อมูลการสมัครของท่านถูกบันทึกลงในระบบเรียบร้อยแล้วกรุณารอใบยืนยันการสมัครเพื่อนำไปลงทะเบียนรับเสื้อและเบอร์วิ่งในวันเวลาที่กำหนด</p><hr id="line">' +
+                '<table id="table1"><tr><td colspan="6">ใบเสร็จหมายเลขที่ #' + this.state.output[0].InvoiceID + '</td></tr><tr><th>No.</th><th>Name-Lastname</th><th>Course</th><th>Jersey</th><th>Qty</th><th id="textRigth">Total</th></tr>' +
                 '<tr><td> 1 </td><td>' + item.firstname + "  " + item.lastname + '</td><td>' + item.nameRegis + '</td><td>' + item.JerseySize + '</td><td>' + "1" + '</td><td id="textRigth">' + item.CourseFee + '</td></tr>' +
                 '<tr><td colspan="5" id="textRigth">รับเสื้อ ' + this.props.choiceSend.choiceSend.detail + '</td><td id="textRigth">' + this.props.choiceSend.choiceSend.priceCDO + '.00</td>' +
                 '</tr><tr><td colspan="5" id="textRigth">ค่าธรรมเนียมการใช้บัตรเครดิต/เดบิต</td><td id="textRigth">' + this.props.creditcard.vat + '</td></tr><tr><td colspan="5" id="textRigth">All Total</td><td id="textRigth">' + this.props.event.totalRegister + '</td></tr>' +
@@ -172,11 +170,11 @@ class TotalLayout extends Component {
             'to': this.props.userprofile.userprofile.Email,
             'subject': 'Guurun Support Team ยืนยันการสมัครรายการ ' + this.props.event.event.EventName,
             'text': 'สวัสดีคุณ ' + this.props.profile.profile.fullname,
-            'html': '<!DOCTYPE html><html><head><meta charset="UTF-8"><style>#table1 {background-color: #eeeeee;width: 100%;}#table2 {width: 100%;}td,th {text-align: left;padding: 8px;}tr {' +
-                'border: 1px solid #111;}#hr {color: #FC561F;text-align: center;}h4 {color: #FC561F;text-align: center;}#textRigth {text-align: right;}h2 {text-align: center;}line {height: 10px;}' +
-                'p {text-align: center;}#qrcode {text-align: center;padding: 20px;}</style><title>OrderInvoice</title>' +
-                '</head><body><div id="qrcode"><img src="https://api.qrserver.com/v1/create-qr-code/?data=' + this.props.invoice.registerid + '&amp;size=100x100" alt="" title="" /></div></div><h2> Confirmation Card งาน ' + this.props.event.event.EventName + ' </h2><p id="hr">ข้อมูลการสมัครของท่านถูกบันทึกลงในระบบเรียบร้อยแล้วกรุณารอใบยืนยันการสมัครเพื่อนำไปลงทะเบียนรับเสื้อและเบอร์วิ่งในวันเวลาที่กำหนด</p><hr id="line">' +
-                '<table id="table1"><tr><td colspan="6">ใบเสร็จหมายเลขที่ #' + this.state.output[0].InvoiceID + '</td></tr><tr><th>No.</th><th>Name-Lastname</th><th>Course</th><th>Jersey</th><th>Qty</th><th>Total</th></tr>' +
+            'html': '<!DOCTYPE html><html><head><meta charset="UTF-8"><style>#table1 {background-color: #eeeeee;width: 100%;}#table2 {width: 100%;}td,th {text-align: center;padding: 8px;}tr {' +
+                'border: 1px solid #111;}#hr {color: #FC561F;text-align: center;}h4 {color: #FC561F;text-align: center;}#textRigth {text-align: right;}#textLeft {text-align : left;}h2 {text-align: center;}line {height: 10px;}' +
+                'p {text-align: center;}#qrcode {padding: 20px;}#qr-confirm {justify-content: column; }</style><title>OrderInvoice</title>' +
+                '</head><body><h2> Confirmation Card งาน ' + this.props.event.event.EventName + ' </h2><p id="hr">ข้อมูลการสมัครของท่านถูกบันทึกลงในระบบเรียบร้อยแล้วกรุณารอใบยืนยันการสมัครเพื่อนำไปลงทะเบียนรับเสื้อและเบอร์วิ่งในวันเวลาที่กำหนด</p><hr id="line">' +
+                '<table id="table1"><tr><td colspan="6">ใบเสร็จหมายเลขที่ #' + this.state.output[0].InvoiceID + '</td></tr><tr><th>No.</th><th>Name-Lastname</th><th>Course</th><th>Jersey</th><th>Qty</th><th id="textRigth">Total</th></tr>' +
                 strTable +
                 '<tr><td colspan="5" id="textRigth">รับเสื้อ ' + this.props.choiceSend.choiceSend.detail + '</td><td id="textRigth">' + this.props.choiceSend.choiceSend.priceCDO + '.00</td>' +
                 '</tr><tr><td colspan="5" id="textRigth">ค่าธรรมเนียมการใช้บัตรเครดิต/เดบิต</td><td id="textRigth">' + this.props.creditcard.vat + '</td></tr><tr><td colspan="5" id="textRigth">All Total</td><td id="textRigth">' + this.props.event.totalRegister + '</td></tr>' +
@@ -186,11 +184,13 @@ class TotalLayout extends Component {
         })
         console.log(data)
     }
-    loopTable() {
+    loopTable(data) {
         const { dataFriendFull } = this.state
+        const dataInvoice = data
         console.log(dataFriendFull)
         for (i = 0; i < dataFriendFull.length; i++) {
-            strTable = '<tr><td></td><td>' + dataFriendFull[i].firstname + "  " + dataFriendFull[i].lastname + '</td><td>' + dataFriendFull[i].nameRegis + '</td><td>' + dataFriendFull[i].JerseySize + '</td><td>' + "1" + '</td><td id="textRigth">' + dataFriendFull[i].CourseFee + '</td></tr>'
+            var no = 1 + i
+            strTable = '<tr><td>' + no + '</td><td><div id="qr-confirm">' + dataFriendFull[i].firstname + "  " + dataFriendFull[i].lastname + '<div id="qrcode"><img src="https://api.qrserver.com/v1/create-qr-code/?data=' + dataInvoice[i].RegisterID + '&amp;size=100x100" alt="" title="" /><p>Confirm ID : xxx' + dataInvoice[i].RegisterID + '</p></div></td><td>' + dataFriendFull[i].nameRegis + '</td><td>' + dataFriendFull[i].JerseySize + '</td><td>' + "1" + '</td><td id="textRigth">' + dataFriendFull[i].CourseFee + '</td></tr>'
             dataFriend2.push(strTable)
             // console.log(dataFriendFull[i].lastname)
         }

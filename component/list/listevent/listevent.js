@@ -172,7 +172,7 @@ class ListEvent extends Component {
                                             <Button
                                                 iconLeft small bordered success
                                                 // onPress={this.gotoRegisinfo.bind(this, item)}
-                                                onPress={() => Linking.openURL(item.EventURL == undefined || "" ? 'http://shutterrunning2014.com/' : item.EventURL)}
+                                                onPress={() => Linking.openURL(item.EventUrl == undefined || "" ? 'http://shutterrunning2014.com/' : item.EventUrl)}
                                             >
                                                 <Icon name="ios-list" type="Ionicons" />
                                                 <Text style={styles.info}>รายละเอียดงานวิ่ง</Text>

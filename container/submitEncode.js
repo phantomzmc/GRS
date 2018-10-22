@@ -92,7 +92,7 @@ class SubmitEncode extends Component {
                     title={this.state.title}
                     menu={false}
                     statusRegis={true}
-                    goback={() => this.props.navigation.navigate("Login")}
+                    goback={() => this.props.navigation.navigate("ResetEncode")}
                     goLogin={() => this.props.navigation.navigate("Login")}
                     goFriendlist={() => this.props.navigation.navigate('FriendList')}
                     goHistory={() => this.props.navigation.navigate('HistoryContainer')}

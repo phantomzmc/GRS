@@ -10,7 +10,8 @@ import {
 } from "react-native";
 import DatePicker from 'react-native-datepicker'
 import axios from 'axios'
-import { Form, Item, Input, Label, Tabs, Tab, TabHeading, Icon } from 'native-base'
+import { Form, Item, Input, Label, Tabs, Tab, TabHeading, Icon } from 'native-base';
+import { connect } from 'react-redux'
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import req from '../../config/uri_req'
 import api_key from '../../config/api_key'
@@ -45,7 +46,24 @@ class FormRegister extends Component {
       selectedIndex: 0,
     };
   }
-
+  componentDidMount() {
+    const profile = this.props.profile.profile
+    this.setState({
+      userid: profile.userid,
+      password: profile.password,
+      fullname: profile.password,
+      lastname: profile.lastname,
+      nickname: profile.nickname,
+      confirmpassword: profile.confirmpassword,
+      email: profile.email,
+      teamname: profile.teamname,
+      tel: profile.tel,
+      journeyDate: profile.journeyDate,
+      bloodtype: profile.bloodtype,
+      nation: profile.nation,
+      bib: profile.bib
+    })
+  }
   sendData = (fullname, lastname, nickname, password, confirmpassword, teamname, bib, userid, tel, email, date, bloodtype, nation, gen) => {
     this.props.goEvent(fullname, lastname, nickname, password, confirmpassword, teamname, bib, userid, tel, email, date, bloodtype, nation, gen);
   };
@@ -275,14 +293,14 @@ class FormRegister extends Component {
             <Label style={styles.textLabel}>ชื่อ</Label>
             <Input
               style={{ fontFamily: "Kanit" }}
-              onChangeText={fullname => this.setState({ fullname })}
+              onChangeText={fullname => this.setState({ fullname: fullname })}
             />
           </Item>
           <Item floatingLabel last>
             <Label style={styles.textLabel}>นามสกุล</Label>
             <Input
               style={{ fontFamily: "Kanit" }}
-              onChangeText={lastname => this.setState({ lastname })}
+              onChangeText={lastname => this.setState({ lastname: lastname })}
             />
           </Item>
         </Form>
@@ -292,7 +310,7 @@ class FormRegister extends Component {
             <Label style={styles.textLabel}>ชื่อเล่น</Label>
             <Input
               style={{ fontFamily: "Kanit" }}
-              onChangeText={nickname => this.setState({ nickname })}
+              onChangeText={nickname => this.setState({ nickname: nickname })}
             />
           </Item>
         </Form>
@@ -343,7 +361,7 @@ class FormRegister extends Component {
               <Label style={styles.textLabel}>Ex.15099999xxxxx</Label>
               <Input
                 style={{ fontFamily: "Kanit" }}
-                onChangeText={userid => this.setState({ userid })}
+                onChangeText={userid => this.setState({ userid: userid })}
                 onEndEditing={this.checkUsernmae.bind(this)}
                 keyboardType="phone-pad" />
             </Item>
@@ -352,7 +370,7 @@ class FormRegister extends Component {
               <Label style={styles.textLabel}>Ex.15099999xxxxx</Label>
               <Input
                 style={{ fontFamily: "Kanit" }}
-                onChangeText={userid => this.setState({ userid })}
+                onChangeText={userid => this.setState({ userid: userid })}
                 onEndEditing={this.checkUsernmae.bind(this)}
                 keyboardType="phone-pad" />
 
@@ -369,7 +387,7 @@ class FormRegister extends Component {
             <Label style={styles.textLabel}>Ex. A,B,O,AB</Label>
             <Input
               style={{ fontFamily: "Kanit" }}
-              onChangeText={bloodtype => this.setState({ bloodtype })}
+              onChangeText={bloodtype => this.setState({ bloodtype: bloodtype })}
             />
           </Item>
         </Form>
@@ -382,7 +400,7 @@ class FormRegister extends Component {
             <Label style={styles.textLabel}>Ex.ไทย,อเมริกัน</Label>
             <Input
               style={{ fontFamily: "Kanit" }}
-              onChangeText={nation => this.setState({ nation })} />
+              onChangeText={nation => this.setState({ nation: nation })} />
           </Item>
         </Form>
 
@@ -397,7 +415,7 @@ class FormRegister extends Component {
               <Input
                 style={{ fontFamily: "Kanit" }}
                 secureTextEntry={true}
-                onChangeText={password => this.setState({ password })}
+                onChangeText={password => this.setState({ password: password })}
               />
             </Item>
           </Form>
@@ -408,7 +426,7 @@ class FormRegister extends Component {
               <Input
                 style={{ fontFamily: "Kanit" }}
                 secureTextEntry={true}
-                onChangeText={password => this.setState({ password })}
+                onChangeText={password => this.setState({ password: password })}
               />
             </Item>
           </Form>
@@ -425,7 +443,7 @@ class FormRegister extends Component {
               <Input
                 style={{ fontFamily: "Kanit" }}
                 secureTextEntry={true}
-                onChangeText={confirmpassword => this.setState({ confirmpassword })} />
+                onChangeText={confirmpassword => this.setState({ confirmpassword: confirmpassword })} />
             </Item>
           </Form>
           :
@@ -435,7 +453,7 @@ class FormRegister extends Component {
               <Input
                 style={{ fontFamily: "Kanit" }}
                 secureTextEntry={true}
-                onChangeText={confirmpassword => this.setState({ confirmpassword })} />
+                onChangeText={confirmpassword => this.setState({ confirmpassword: confirmpassword })} />
             </Item>
           </Form>
         }
@@ -476,7 +494,7 @@ class FormRegister extends Component {
             <Input
               style={{ fontFamily: "Kanit" }}
 
-              onChangeText={teamname => this.setState({ teamname })} />
+              onChangeText={teamname => this.setState({ teamname: teamname })} />
           </Item>
         </Form>
         <Text style={styles.headForm}>BIBName</Text>
@@ -486,7 +504,7 @@ class FormRegister extends Component {
             <Input
               style={{ fontFamily: "Kanit" }}
 
-              onChangeText={bib => this.setState({ bib })} />
+              onChangeText={bib => this.setState({ bib: bib })} />
           </Item>
         </Form>
         <View style={{ flexDirection: "row" }}>
@@ -500,7 +518,7 @@ class FormRegister extends Component {
               style={{ fontFamily: "Kanit" }}
 
               keyboardType="phone-pad"
-              onChangeText={tel => this.setState({ tel })} />
+              onChangeText={tel => this.setState({ tel: tel })} />
           </Item>
         </Form>
         <View style={{ flexDirection: "row" }}>
@@ -513,7 +531,7 @@ class FormRegister extends Component {
             <Input
               style={{ fontFamily: "Kanit" }}
               keyboardType="email-address"
-              onChangeText={email => this.setState({ email })}
+              onChangeText={email => this.setState({ email: email })}
               onEndEditing={this.checkEmail.bind(this)} />
           </Item>
         </Form>
@@ -644,4 +662,10 @@ const styles = StyleSheet.create({
   }
 
 });
-export default FormRegister;
+
+const mapStateToProps = state => {
+  return {
+    profile: state.profile
+  }
+}
+export default connect(mapStateToProps)(FormRegister);

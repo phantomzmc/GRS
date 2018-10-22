@@ -97,13 +97,13 @@ def enableSeparateBuildPerCPUArchitecture = false
 def enableProguardInReleaseBuilds = false
 
 android {
-    compileSdkVersion 23
+    compileSdkVersion 27
     buildToolsVersion '28.0.2'
 
     defaultConfig {
         applicationId "com.grs"
-        minSdkVersion 16
-        targetSdkVersion 22
+        minSdkVersion 26
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         ndk {
