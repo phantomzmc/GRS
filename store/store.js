@@ -344,6 +344,10 @@ const invoice = (state = {}, action) => {
       state.dataRegis = action.payload
       break;
     }
+    case "setConfirmNo" : {
+      state.confirmNo = action.payload
+      break;
+    }
   }
   return state;
 }

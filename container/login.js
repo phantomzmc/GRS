@@ -213,7 +213,7 @@ class Login extends Component {
                     translucent={true}
                 />
 
-                <Header androidStatusBarColor="#2c3e50" style={{ backgroundColor: 'none', marginTop: Platform.OS === 'ios' ? 0 : 15 }}>
+                <Header androidStatusBarColor="transparent" style={{ backgroundColor : 'transparent', marginTop: Platform.OS === 'ios' ? 0 : 15 }}>
                     <Left>
 
                     </Left>

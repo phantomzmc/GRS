@@ -86,7 +86,7 @@ class VerifyCode extends Component {
             <Container style={styles.container}>
                 <HeaderTeam
                     title={this.state.title}
-                    goback={this.gotoBack.bind(this)}
+                    goback={false}
                 />
                 <StatusBar
                     barStyle="light-content"

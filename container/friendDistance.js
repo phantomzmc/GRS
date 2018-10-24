@@ -87,7 +87,9 @@ class FriendDistance extends Component {
                 />
                 <ScrollView>
                     <View style={styles.container}>
-                        <FriendInEvent />
+                        <FriendInEvent 
+                            toggleList={this.props.toggleList}
+                        />
                         <View style={styles.submitContainer}>
                             {this.state.statusButton == true ?
                                 <TouchableHighlight style={styles.buttonContainer}>

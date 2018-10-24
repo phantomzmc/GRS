@@ -21,7 +21,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>7</string>
+	<string>8</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -42,7 +42,7 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>ระบบจะระบุบตำแหน่งของผู้ใช้งาน</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>ระบบเข้าสู่คลังภาพของผู้ใช้งาน</string>
 	<key>NSPhotoLibraryUsageDescription</key>

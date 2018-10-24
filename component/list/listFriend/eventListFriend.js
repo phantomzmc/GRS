@@ -6,6 +6,7 @@ import axios from 'axios'
 import CellEventListFriend from './cell-eventListFriend'
 import CellProfile from './cell-profile'
 import datafriend from './dataFriend'
+import dataSmartFriend from './dataSmartFriend'
 import req from '../../../config/uri_req'
 import api_key from '../../../config/api_key'
 import { colors } from '../../../node_modules/react-native-elements';
@@ -99,13 +100,13 @@ class EventListFriend extends Component {
                     <FlatList
                         horizontal
                         refreshControl={this._refreshControl()}
-                        data={this.props.friend}
+                        data={dataSmartFriend}
                         renderItem={({ item, index }) =>
 
                             <CellEventListFriend
                                 items={item}
                                 idkey={index}
-                                sendStatusCheck={this.props.changeCheck}
+                                sendStatusCheck={true}
                                 // getAddFriend={this.addFriendEvent.bind(this)}
                             />
                         }

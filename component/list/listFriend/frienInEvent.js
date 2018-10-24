@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import CardFriendDistance from '../../items/cardFriendDistance'
 import dataFriend from './dataFriend';
 import dataFriendFull from './dataFriend-full'
+import dataSmartFriend from './dataSmartFriend'
+import datafriendRegis from './dataFriend-regis'
 import dataPrice from '../listevent/dataPrice'
 import dataDis from '../listevent/dataDistance'
 import dataShirt from '../listShirt/dataShirt'
@@ -55,6 +57,7 @@ class FriendInEvent extends Component {
                         dataDis[index] = dis
                         dataShirt[index] = shirt
                         this.sumPrice(index)
+                        this.loopObIndex()
 
                         this.props.setFriendRegister(dataSource)
                         this.props.addFriendInEvent(dataFriend)
@@ -66,6 +69,25 @@ class FriendInEvent extends Component {
             ], { cancelable: true }
         )
     }
+    loopObIndex(){
+        const obIndex = []
+        datafriendRegis.map((item, index) => {
+            var key = {
+                key : item.key
+            }
+            obIndex.splice(index, 1,key)
+        })
+        console.log(obIndex)
+        this.setNewRegisStatus(obIndex)
+    }
+    setNewRegisStatus(dataOb) {
+        dataOb.map((item,index)=>{
+            dataSmartFriend[item.key].RegisterStatus = "0"
+            console.log(dataSmartFriend)
+        })
+        this.props.toggleList()
+    }
+
     sumPrice(index) {
         if (index == 0) {
             this.props.setTotalRegister(0)

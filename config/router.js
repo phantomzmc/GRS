@@ -7,7 +7,6 @@ import AddressLayout from '../container/addressLayout'
 import TotalPayment from '../container/totalLayout'
 import Register from '../container/userRegister'
 import TeamList from '../container/teamList'
-import TabRouter from '../config/tabrouter'
 import AddEventFriend from '../container/AddEventDetailFrind'
 import TransferPayment from '../container/tranferPayment'
 import TotalRegister from '../component/items/totalRegister'
@@ -51,7 +50,12 @@ export default StackNavigator({
     //         header: () => null
     //     }
     // },
-
+    // Login: {
+    //     screen: Login,
+    //     navigationOptions: {
+    //         header: () => null
+    //     }
+    // },
     EventList: {
         screen: EventList,
         navigationOptions: {

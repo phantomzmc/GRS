@@ -19,6 +19,7 @@ import req from '../config/uri_req'
 import api_key from '../config/api_key'
 import datafriendRegis from '../component/list/listFriend/dataFriend-regis'
 import datafriendSug from '../component/list/listFriend/dataFriendSug-regis'
+import dataSmartFriend from '../component/list/listFriend/dataSmartFriend'
 import SummaryTotal from '../component/items/summary'
 
 import SegmentedControlTab from 'react-native-segmented-control-tab'
@@ -51,7 +52,7 @@ class TeamList extends Component {
             totalRegister: 0,
             selectedIndex: 1,
             teamlayout: true,
-            singlelayout: false
+            singlelayout: false,
         }
         this.getFriend = this.getFriend.bind(this)
     }
@@ -68,11 +69,39 @@ class TeamList extends Component {
 
     addFriendEvent() {
         this.props.setFriendRegister(datafriendRegis)
+        this.loopObIndex()
         this.setState({ frienddistance: false })
         setTimeout(() => {
             this.setState({ frienddistance: true })
         }, 500)
         this.setState({ statusCheck: false })
+    }
+    loopObIndex() {
+        const obIndex = []
+        datafriendRegis.map((item, index) => {
+            var key = {
+                key: item.key
+            }
+            obIndex.splice(index, 1, key)
+        })
+        console.log(obIndex)
+        this.setNewRegisStatus(obIndex)
+    }
+    setNewRegisStatus(dataOb) {
+        dataOb.map((item, index) => {
+            var status = {
+                RegisterStatus: "-1"
+            }
+            dataSmartFriend[item.key].RegisterStatus = "-1"
+            console.log(dataSmartFriend)
+        })
+        this._toggleFriendList()
+    }
+    _toggleFriendList = () => {
+        this.setState({ friendlist: false })
+        setTimeout(() => {
+            this.setState({ friendlist: true })
+        })
     }
     showModal = () => {
         let { searchText } = this.state
@@ -117,12 +146,29 @@ class TeamList extends Component {
             .then((response) => {
                 this.setState({ isLoading: false, dataSource: response.data });
                 console.log(this.state.dataSource)
+                this.setDataSmartFriend(response.data)
             })
             .catch((error) => {
                 this.setState({ isLoading: true })
                 // this.setState({ isModalVisibleError: !this.state.isModalVisibleError })
                 // console.error(error);
             });
+    }
+    setDataSmartFriend(data) {
+        data.map((item, index) => {
+            var friend = {
+                RunnerID: item.RunnerID,
+                Email: item.Email,
+                FirstName: item.FirstName,
+                LastName: item.LastName,
+                Gender: item.Gender,
+                PicProfile: item.PicProfile,
+                RegisterStatus: item.RegisterStatus,
+                FriendStatus: item.FriendStatus
+            }
+            dataSmartFriend.splice(index, 1, friend)
+        })
+        console.log(dataSmartFriend)
     }
 
     _checkAddFriend(newitem, status) {
@@ -353,7 +399,7 @@ class TeamList extends Component {
                                                 isAddFriendEvent={() => this.addFriendEvent()}
                                                 goAddFriendList={() => this.gotoFriendList()}
                                                 changeCheck={this.state.statusCheck}
-                                                friend={this.state.dataSource}
+                                                friend={dataSmartFriend}
                                             />
                                         </ScrollView>
                                         <View style={{ paddingHorizontal: 10, paddingVertical: 20 }}>
@@ -382,6 +428,7 @@ class TeamList extends Component {
                                     <View>
                                         <FriendDistance
                                             goAddress={() => this.gotoAddress()}
+                                            toggleList={this._toggleFriendList}
                                         />
                                     </View>
                                 }

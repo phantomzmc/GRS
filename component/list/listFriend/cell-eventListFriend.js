@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, Image, Text,TouchableOpacity } from "react-native";
+import { StyleSheet, Image, Text, TouchableOpacity } from "react-native";
 import { View, Card, CardItem, Left, Right } from 'native-base';
 import CheckBox from 'react-native-checkbox-heaven';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -16,7 +16,7 @@ class CellEventListFriend extends Component {
             icon: "heart",
             iconColor: "#F44336",
             datafriend: [],
-            statusCheck: true
+            statusCheck: false
         }
         this.checkFavorite = this.checkFavorite.bind(this)
     }
@@ -26,7 +26,7 @@ class CellEventListFriend extends Component {
         console.log(this.props.items)
         console.log(this.state.item)
     }
-    onCheck(){
+    onCheck() {
 
     }
     addFriendEvent = (item, idkey) => {
@@ -47,7 +47,8 @@ class CellEventListFriend extends Component {
             FirstName: item.FirstName,
             LastName: item.LastName,
             PicProfile: item.PicProfile,
-            Email : item.Email
+            Email: item.Email,
+            key: this.props.idkey
         }
         var str_newitem = dataitem
         for (i = 0; i <= data.length; i++) {
@@ -100,11 +101,12 @@ class CellEventListFriend extends Component {
     _cellAddFriend(item, status) {
         var value = status
         dataitem = {
+            key: this.props.idkey,
             RunnerID: item.RunnerID,
             FirstName: item.FirstName,
             LastName: item.LastName,
             PicProfile: item.PicProfile,
-            Email : item.Email
+            Email: item.Email
         }
         console.log(value)
         if (value == false) {
@@ -121,7 +123,7 @@ class CellEventListFriend extends Component {
             if (this.state.checked == true) {
                 this.addFriendEvent(this.state.item, this.props.idkey)
                 console.log(this.state.item)
-                this.setState({ statusCheck: false })
+                // this.setState({ statusCheck: false })
             }
             else if (this.state.checked == false) {
                 this.removeFriendEvent(this.state.item)
@@ -177,19 +179,20 @@ class CellEventListFriend extends Component {
                                         onChange={this.handleOnChange.bind(this)}
                                         style={{ flex: 1 }}
                                     />
-                                    {/* :
-                                        <View>
-                                            <View style={{ backgroundColor: "#C0C0C0", width: 20, height: 20, borderRadius: 10 ,justifyContent : "center" ,alignItems : "center" }}>
-                                                <Icon name="check" type="FontAwesome" style={{ color: "#fff" }} />
-                                            </View>
-                                        </View> */}
-
-
-                                </View> :
-                                <View style={{ flexDirection: "row" }}>
-                                    <Icon name="check" type="FontAwesome" style={{ color: "#9ACD32" }} />
-                                    <Text style={styles.textStatusRegis}> สมัครรายการนี้แล้ว</Text>
                                 </View>
+                                :
+                                item.RegisterStatus == -1 ?
+                                    <View>
+                                        <View style={{ flexDirection: "row" }}>
+                                            <Icon name="check" type="FontAwesome" style={{ color: "#FC561F" }} />
+                                            <Text style={styles.textStatusAdd}> เพิ่มในการสมัคร</Text>
+                                        </View>
+                                    </View>
+                                    :
+                                    <View style={{ flexDirection: "row" }}>
+                                        <Icon name="check" type="FontAwesome" style={{ color: "#9ACD32" }} />
+                                        <Text style={styles.textStatusRegis}> สมัครรายการนี้แล้ว</Text>
+                                    </View>
                             }
                         </Left>
                         <Right>
@@ -243,7 +246,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         paddingHorizontal: 10,
     },
-    cardDefal : {
+    cardDefal: {
     },
     card: {
         borderColor: '#FC561F',
@@ -289,6 +292,11 @@ const styles = StyleSheet.create({
         fontFamily: 'Kanit',
         fontSize: 10,
         color: "#9ACD32"
+    },
+    textStatusAdd: {
+        fontFamily: 'Kanit',
+        fontSize: 10,
+        color: "#FC561F"
     }
 })
 

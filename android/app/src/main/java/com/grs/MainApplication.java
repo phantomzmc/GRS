@@ -3,10 +3,8 @@ package com.grs;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+
 import com.bitgo.randombytes.RandomBytesPackage;
-import com.microsoft.appcenter.reactnative.crashes.AppCenterReactNativeCrashesPackage;
-import com.microsoft.appcenter.reactnative.analytics.AppCenterReactNativeAnalyticsPackage;
-import com.microsoft.appcenter.reactnative.appcenter.AppCenterReactNativePackage;
 import com.pusherman.networkinfo.RNNetworkInfoPackage;
 import com.imagepicker.ImagePickerPackage;
 import fr.greweb.reactnativeviewshot.RNViewShotPackage;
@@ -37,18 +35,16 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
-          new MainReactPackage(),
-            new RandomBytesPackage(),
-            new AppCenterReactNativeCrashesPackage(MainApplication.this, getResources().getString(R.string.appCenterCrashes_whenToSendCrashes)),
-            new AppCenterReactNativeAnalyticsPackage(MainApplication.this, getResources().getString(R.string.appCenterAnalytics_whenToEnableAnalytics)),
-            new AppCenterReactNativePackage(MainApplication.this),
-            new RNNetworkInfoPackage(),
-            new ImagePickerPackage(),
-            new RNViewShotPackage(),
-            new ReactVideoPackage(),
-            new VectorIconsPackage(),
-            new OmisePackage(),
-            new ReactNativeIcons(),
+              new MainReactPackage(),
+              new RandomBytesPackage(),
+
+              new RNNetworkInfoPackage(),
+              new ImagePickerPackage(),
+              new RNViewShotPackage(),
+              new ReactVideoPackage(),
+              new VectorIconsPackage(),
+              new OmisePackage(),
+              new ReactNativeIcons(),
               new SvgPackage()
 //            new RNCameraPackage(),
 //            new VectorIconsPackage()

@@ -77,7 +77,6 @@ class DetailRegister extends Component {
                                                 value={item.RegisterID}
                                                 size={75}
                                             />
-                                            <Text style={{ fontSize: 10, fontFamily: 'Kanit', textAlign: "center", paddingTop: 5 }}>{item.FullName}</Text>
                                             <Text style={{ fontSize: 10, fontFamily: 'Kanit', textAlign: "center", paddingTop: 5 }}>Confirm Number : xxx{item.RegisterID}</Text>
                                         </View>
 

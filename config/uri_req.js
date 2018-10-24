@@ -34,7 +34,8 @@ export default
             uspUpdateEncodeURL : url + "Main.uspUpdateEncodeURL",
             uspGetEvent : url + "Main.uspGetEvent",
             uspGetRegisterListsOfInvoice : url + "Main.uspGetRegisterListsOfInvoice",
-            uspCheckEncodeURL : url + "Main.uspCheckEncodeURL"
+            uspCheckEncodeURL : url + "Main.uspCheckEncodeURL",
+            uspAddConfirmNo : url + "Main.uspAddConfirmNo"
         },
         {
             url_mailgun: "https://api.mailgun.net/v3/mg.guurun.com/messages",

@@ -73,13 +73,12 @@ import com.android.build.OutputFile
  */
 
 project.ext.react = [
-    entryFile: "index.js",
-    iconFontNames: [ 'MaterialIcons.ttf', 'EvilIcons.ttf','Kanit-Light.ttf' ]
+        entryFile: "index.js",
+        iconFontNames: [ 'MaterialIcons.ttf', 'EvilIcons.ttf','Kanit-Light.ttf' ]
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
-
 
 /**
  * Set this to true to create two separate APKs instead of one:
@@ -141,9 +140,6 @@ android {
 
 dependencies {
     implementation project(':react-native-randombytes')
-    implementation project(':appcenter-crashes')
-    implementation project(':appcenter-analytics')
-    implementation project(':appcenter')
     implementation project(':react-native-network-info')
     implementation project(':react-native-image-picker')
     implementation project(':react-native-view-shot')
@@ -154,7 +150,7 @@ dependencies {
     implementation project(':react-native-vector-icons')
     implementation project(':react-native-svg')
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation "com.android.support:appcompat-v7:23.0.1"
+    implementation "com.android.support:appcompat-v7:27.1.1"
     implementation "com.facebook.react:react-native:+"
     implementation project(path: ':react-native-svg')  // From node_modules
 }

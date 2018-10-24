@@ -24,30 +24,6 @@ class ModalHistory extends Component {
             this.setState({ showInvoice: true })
         }, 500)
     }
-    onSaveInvoice() {
-        this.captureScreenFunction()
-    }
-    captureScreenFunction = () => {
-        captureScreen({
-            format: "jpg",
-            quality: 0.8
-        })
-            .then(
-                uri => {
-                    CameraRollExtended.saveToCameraRoll({
-                        uri: uri,
-                        album: 'GRS'
-                    }, 'photo')
-                },
-                Alert.alert('บันทึกสำเร็จ', 'ทำการบันทึกรายการเสร็จสิ้น', [
-                    {
-                        text: 'ตกลง',
-                    }
-                ], { cancelable: false }),
-                // error => console.error("Oops, Something Went Wrong", error)
-            );
-
-    }
     render() {
         return (
             <Card>
@@ -62,11 +38,14 @@ class ModalHistory extends Component {
                             </View>
                             <View>
                                 {dataInvoice[0].PaymentStatus == 2 ?
-                                    <QRCode
-                                        // value={dataInvoice[0].RegisterID}
-                                        value={this.props.registerID}
-                                        size={75}
-                                    />
+                                    <View style={{ alignItems : "center"}}>
+                                        <QRCode
+                                            // value={dataInvoice[0].RegisterID}
+                                            value={this.props.registerID}
+                                            size={75}
+                                        />
+                                        <Text style={styles.textName3}>Confirm ID xxx{this.props.registerID}</Text>
+                                    </View>
                                     :
                                     <View style={styles.disQRcode}>
                                         <Text style={styles.textName3}>QR Code</Text>
@@ -74,7 +53,7 @@ class ModalHistory extends Component {
                                 }
                             </View>
                             <View>
-                                <View style={{ flex : 0 ,justifyContent : "flex-end"}}>
+                                <View style={{ flex: 0, justifyContent: "flex-end" }}>
                                     <Text style={styles.subTextHead}>ชำระเงิน</Text>
                                     {dataInvoice[0].PaymentType == 1 ?
                                         <Text style={styles.subTextHead}>บัตรเครดิต/เดรบิต</Text> :
@@ -211,10 +190,6 @@ class ModalHistory extends Component {
                         </CardItem>
                         <CardItem style={{ justifyContent: "center" }}>
                             <View style={{ flexDirection: "row" }}>
-                                <Button rounded success onPress={this.onSaveInvoice.bind(this)} style={{ marginHorizontal: 10 }}>
-                                    <Icon name="ios-add-circle-outline" />
-                                    <Text style={{ fontFamily: "Kanit" }}>บันทึก</Text>
-                                </Button>
                                 <Button rounded light onPress={this.props.toggleModal} style={{ marginHorizontal: 10 }}>
                                     <Icon name="ios-remove-circle-outline" />
                                     <Text style={{ fontFamily: "Kanit" }}>ปิด</Text>
@@ -326,8 +301,8 @@ const styles = StyleSheet.create({
         borderRadius: 37.5,
         borderColor: "#FFA500",
         borderWidth: 1,
-        justifyContent : "center",
-        alignItems : "center",
+        justifyContent: "center",
+        alignItems: "center",
         flex: 1
     }
 

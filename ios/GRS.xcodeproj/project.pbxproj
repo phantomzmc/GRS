@@ -466,7 +466,6 @@
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		32F10E7110D149148AEE2D22 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		379A85B1A4FD45EAB2F01762 /* AppCenter-Config.plist */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.plist.xml; name = "AppCenter-Config.plist"; path = "GRS/AppCenter-Config.plist"; sourceTree = "<group>"; };
-		449EECE408C143A6692A8A6C /* libPods-GRS-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GRS-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		46E3EACFD9984604B5521AA9 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		4788FBEEDA1883C51B58E582 /* Pods-GRS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GRS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GRS/Pods-GRS.debug.xcconfig"; sourceTree = "<group>"; };
 		4BA14BBA03FD4B309DBE6090 /* Kanit-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Kanit-Light.ttf"; path = "../assets/fonts/Kanit-Light.ttf"; sourceTree = "<group>"; };
@@ -776,7 +775,6 @@
 				118FCCA020E24C98003F1DC1 /* libRSKImageCropper.a */,
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
 				A16BA52FF2765703EF175A65 /* libPods-GRS.a */,
-				449EECE408C143A6692A8A6C /* libPods-GRS-tvOS.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1572,11 +1570,13 @@
 					"$(SRCROOT)/../node_modules/appcenter/ios/AppCenterReactNative",
 					"$(SRCROOT)/../node_modules/appcenter-analytics/ios/AppCenterReactNativeAnalytics",
 					"$(SRCROOT)/../node_modules/appcenter-crashes/ios/AppCenterReactNativeCrashes",
+					"$(SRCROOT)/../node_modules/appcenter/ios/AppCenterReactNative",
 				);
 				INFOPLIST_FILE = GRS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/GRS\"",
 					"\"$(SRCROOT)/GRS\"",
 					"\"$(SRCROOT)/GRS\"",
 					"\"$(SRCROOT)/GRS\"",
@@ -1613,6 +1613,7 @@
 					"$(SRCROOT)/../node_modules/appcenter/ios/AppCenterReactNative",
 					"$(SRCROOT)/../node_modules/appcenter-analytics/ios/AppCenterReactNativeAnalytics",
 					"$(SRCROOT)/../node_modules/appcenter-crashes/ios/AppCenterReactNativeCrashes",
+					"$(SRCROOT)/../node_modules/appcenter/ios/AppCenterReactNative",
 				);
 				"HEADER_SEARCH_PATHS[arch=*]" = (
 					"$(inherited)",
@@ -1627,6 +1628,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/GRS\"",
 					"\"$(SRCROOT)/GRS\"",
 					"\"$(SRCROOT)/GRS\"",
 					"\"$(SRCROOT)/GRS\"",

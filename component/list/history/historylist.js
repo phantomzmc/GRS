@@ -21,7 +21,7 @@ class HistoryList extends Component {
             isModalVisible: false,
             name: "",
             dataSource: [],
-            registerID : ""
+            registerID: ""
         }
     }
     componentDidMount() {
@@ -31,10 +31,10 @@ class HistoryList extends Component {
         }, 500)
 
     }
-    getDetailInvoice(InvoiceID) {
+    getDetailInvoice(invoice) {
         let data = ({
             params: [
-                { name: "InvoiceID", value: InvoiceID },
+                { name: "InvoiceID", value: invoice },
             ]
         })
         axios.post(uri, data, {
@@ -45,10 +45,11 @@ class HistoryList extends Component {
             responseType: 'json'
         })
             .then((response) => {
-                this.setState({ isLoading: false, dataSource2: response.data[0] });
+                this.setState({ dataSource2: response.data[0] });
+                console.log(response.data[0])
                 dataInvoice.splice(0, 1, response.data[0])
-                console.log(this.state.dataSource2)
                 this.getInvoiceID(response.data[0].InvoiceID)
+                this.getComfirmNo(response.data[0].InvoiceID)
             }).catch((error) => {
                 // this.setState({ isModalVisibleError: !this.state.isModalVisibleError })
                 console.error(error);
@@ -70,24 +71,43 @@ class HistoryList extends Component {
             responseType: 'json'
         })
             .then((response) => {
-                this.setState({ isLoading: false, registerID: response.data[0].RegisterID });
-                console.log(response.data)
-                // this.props.setRegisterID(response.data[0].RegisterID)
+                this.setState({ registerID: response.data[0].RegisterID });
+                console.log(response.data[0])
+                setTimeout(() => {
+                    this.setState({ isModalVisible: true })
+                }, 500)
             }).catch((error) => {
                 this.getInvoiceID(invoiceid)
-                // setTimeout(() => {
-                //     this.props.navigation.navigate('EventList')
-                // }, 3000)
+            });
+    }
+    getComfirmNo(invoiceid) {
+        let uri = req[0].uspAddConfirmNo
+        let apikey = api_key[0].api_key
+        let data = ({
+            params: [
+                { name: "InvoiceID", value: invoiceid }
+            ]
+        })
+        axios.post(uri, data, {
+            headers: {
+                "X-DreamFactory-API-Key": apikey,
+                "X-DreamFactory-Session-Token": this.props.token.token,
+            },
+            responseType: 'json'
+        })
+            .then((response) => {
+                this.setState({ registerID: response.data[0].RegisterID });
+                console.log(response.data[0])
+                
+            }).catch((error) => {
             });
 
     }
     setItems(item) {
-        console.log(item.name)
+        console.log(item.InvoiceID)
         this.setState({ invoice: item })
         this.getDetailInvoice(item.InvoiceID)
-        setTimeout(() => {
-            this._toggleModal()
-        }, 1000)
+
     }
     _toggleModal = (data) => {
         this.setState({ isModalVisible: !this.state.isModalVisible });

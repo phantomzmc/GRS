@@ -181,7 +181,7 @@ class HeaderTeam extends Component {
                                 <ScrollView>
                                     {this.props.statusRegis == false ?
                                         <View></View> :
-                                        <MenuItem onPress={this.gotoProfile} style={{ padding: 10 }}>
+                                        <MenuItem onPress={this.gotoProfile} >
                                             <Icon name='user-circle' type='FontAwesome' style={{ fontSize: 18 }} />
                                             {/* // <Image source={{ uri: this.state.uri }} style={{ width: 30, height: 30, borderRadius: 15, justifyContent: "center", alignItems: "center" }} /> */}
 
@@ -189,43 +189,43 @@ class HeaderTeam extends Component {
                                         </MenuItem>
                                     }
                                     <MenuDivider />
-                                    <MenuItem onPress={this.gotoProfile} style={{ padding: 10 }}>
+                                    <MenuItem onPress={this.gotoProfile}>
                                         <Icon name='user-circle' type='FontAwesome' style={{ fontSize: 18 }} />
                                         <Text style={styles.item_menu}>  ข้อมูลส่วนตัว</Text>
                                     </MenuItem>
-                                    <MenuItem onPress={this.gotoFriendlist} style={{ padding: 10 }}>
+                                    <MenuItem onPress={this.gotoFriendlist}>
                                         <Icon name='group' type='FontAwesome' style={{ fontSize: 18 }} />
                                         <Text style={styles.item_menu}>  Friends List</Text>
                                     </MenuItem>
                                     {this.props.statusRegis == false ?
-                                        <MenuItem style={{ padding: 10 }}>
+                                        <MenuItem >
                                             <Icon name='edit' type='FontAwesome' style={{ fontSize: 18, color: "#c0c0c0" }} />
                                             <Text style={[styles.item_menu, { color: "#c0c0c0" }]}>  ลงทะเบียน</Text>
                                         </MenuItem>
                                         :
-                                        <MenuItem onPress={this.gotoRegis} style={{ padding: 10 }}>
+                                        <MenuItem onPress={this.gotoRegis} >
                                             <Icon name='edit' type='FontAwesome' style={{ fontSize: 18 }} />
                                             <Text style={styles.item_menu}>  ลงทะเบียน</Text>
                                         </MenuItem>
                                     }
-                                    <MenuItem onPress={this.gotoHistory} style={{ padding: 10 }}>
+                                    <MenuItem onPress={this.gotoHistory} >
                                         <Icon name='history' type='FontAwesome' style={{ fontSize: 18 }} />
                                         <Text style={styles.item_menu}>  History</Text>
                                     </MenuItem>
                                     <MenuDivider />
-                                    <MenuItem onPress={this.gotoContacts} style={{ padding: 10 }}>
+                                    <MenuItem onPress={this.gotoContacts} >
                                         <Icon name='ios-call' type='Ionicons' style={{ fontSize: 18 }} />
                                         <Text style={styles.item_menu}>  ติดต่อสอบถาม</Text>
                                     </MenuItem>
                                     <MenuDivider />
-                                    <MenuItem onPress={this.gotoLogout} style={{ padding: 10 }}>
+                                    <MenuItem onPress={this.gotoLogout} >
                                         <Icon name='log-out' type='Entypo' style={{ fontSize: 18 }} />
                                         <Text style={styles.item_menu}>  ออกจากระบบ</Text>
                                     </MenuItem>
                                     <MenuDivider />
-                                    <MenuItem onPress={this.hideMenu} style={{ padding: 10 }}>
+                                    <MenuItem onPress={this.hideMenu} >
                                         <Icon name='close' type='FontAwesome' style={{ fontSize: 18, color: "#FF0000" }} />
-                                        <Text style={[styles.item_menu, { color: "#FF0000" }]}>   ปิด</Text>
+                                        <Text style={styles.item_menu_close}>   ปิด</Text>
                                     </MenuItem>
                                 </ScrollView>
 
@@ -319,6 +319,11 @@ const styles = StyleSheet.create({
         fontFamily: "Kanit",
         fontSize: 18,
     },
+    item_menu_close: {
+        fontFamily: "Kanit",
+        fontSize: 18,
+        color: "#FF0000"
+    },
     titleHead2: {
         fontFamily: "Kanit",
         color: "#fff",
@@ -332,5 +337,8 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center"
     },
+    item:  { 
+        padding : 10
+    }
 })
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderTeam)
