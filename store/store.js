@@ -28,7 +28,8 @@ const credit = {
   },
   transaction: "",
   typePayment : 1,
-  statusPayment : 2
+  statusPayment : 2,
+  regisStatus : true
 };
 const user = {
   profile: {
@@ -65,7 +66,8 @@ const user = {
   },
   verify: "",
   statuslogin: 0,
-  newpassword: ""
+  newpassword: "",
+  regisStatus : true
 };
 const friend = {
   friendRegis: [],
@@ -137,6 +139,10 @@ const profile = (state = user, action) => {
     }
     case "setStatusRegis": {
       state.statusRegis = action.payload;
+      break;
+    }
+    case "setRegisterStatus" : {
+      state.registerStatus = action.payload;
       break;
     }
   }
@@ -240,6 +246,10 @@ const creditcard = (state = credit, action) => {
     }
     case "setPaymentSlip": {
       state.paymentslip = action.payload
+      break;
+    }
+    case "setStatusRegis" : {
+      state.regisStatus = action.payload
       break;
     }
     default:

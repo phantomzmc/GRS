@@ -91,12 +91,12 @@ class EventListFriend extends Component {
                             </CardItem>
                         </Card>
                     </View>
-                    <View>
+                    {/* <View>
                         <CellProfile
                             items={this.state.dataSource}
                             sendStatusCheck={this.props.changeCheck}
                         />
-                    </View>
+                    </View> */}
                     <FlatList
                         horizontal
                         refreshControl={this._refreshControl()}

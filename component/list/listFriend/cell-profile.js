@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { connect } from "react-redux";
 import datafriend from './dataFriend'
 import datafriendRegis from './dataFriend-regis'
+import dataSmartFriend from './dataSmartFriend'
 
 class CellProfile extends Component {
     constructor(props) {
@@ -45,8 +46,11 @@ class CellProfile extends Component {
             FirstName: item.FirstName,
             LastName: item.LastName,
             PicProfile: item.PicProfile,
-            Email: item.Email
+            Email: item.Email,
+            RegisterStatus: this.state.regisStatus,
+            key: -1
         }
+        console.log(dataitem)
         var str_newitem = dataitem
         for (i = 0; i <= data.length; i++) {
             if (JSON.stringify(str_newitem) == JSON.stringify(data[i])) {
@@ -75,7 +79,8 @@ class CellProfile extends Component {
             // this.setState({ isAddStatusError: true })
         }
         else if (value == true) {
-            datafriendRegis.push(dataitem)
+            dataSmartFriend.splice(dataSmartFriend.length, 1, dataitem)
+            // datafriendRegis.push(dataitem)
 
         }
     }
@@ -83,7 +88,6 @@ class CellProfile extends Component {
         this.setState({ checked: val })
         if (this.state.checked == false) {
             this.addFriendEvent(this.state.item)
-            console.log(this.state.item)
         }
         else if (this.state.checked == true) {
             this.removeFriendEvent(this.props.idkey)
@@ -121,21 +125,28 @@ class CellProfile extends Component {
                 <Card>
                     <CardItem>
                         <Left>
-                            {regisStatus == 0 ?
-                                <View>
-                                    <CheckBox
-                                        iconSize={20}
-                                        iconName='iosCircleMix'
-                                        checked={this.state.checked}
-                                        checkedColor='#FC561F'
-                                        uncheckedColor='#C0C0C0'
-                                        onChange={this.handleOnChange.bind(this)}
-                                        style={{ flex: 1 }}
-                                    />
-                                </View> :
+                            {this.props.profile.registerStatus !== true ?
+                                this.props.userprofile.registerStatus.RegisterStatus == 0 ?
+                                    <View>
+                                        <CheckBox
+                                            iconSize={20}
+                                            iconName='iosCircleMix'
+                                            checked={this.state.checked}
+                                            checkedColor='#FC561F'
+                                            uncheckedColor='#C0C0C0'
+                                            onChange={this.handleOnChange.bind(this)}
+                                            style={{ flex: 1 }}
+                                        />
+                                    </View>
+                                    :
+                                    <View style={{ flexDirection: "row" }}>
+                                        <Icon name="check" type="FontAwesome" style={{ color: "#9ACD32" }} />
+                                        <Text style={styles.textStatusRegis}> สมัครรายการนี้แล้ว</Text>
+                                    </View>
+                                :
                                 <View style={{ flexDirection: "row" }}>
-                                    <Icon name="check" type="FontAwesome" style={{ color: "#9ACD32" }} />
-                                    <Text style={styles.textStatusRegis}> สมัครรายการนี้แล้ว</Text>
+                                    <Icon name="check" type="FontAwesome" style={{ color: "#FC561F" }} />
+                                    <Text style={styles.textStatusAdd}> เพิ่มในการสมัคร</Text>
                                 </View>
                             }
                         </Left>
@@ -177,6 +188,7 @@ class CellProfile extends Component {
 
 const mapStateToProps = state => {
     return {
+        profile: state.profile,
         userprofile: state.userprofile
     }
 }
@@ -228,6 +240,11 @@ const styles = StyleSheet.create({
         fontFamily: 'Kanit',
         fontSize: 10,
         color: "#9ACD32"
+    },
+    textStatusAdd: {
+        fontFamily: 'Kanit',
+        fontSize: 10,
+        color: "#FC561F"
     }
 })
 

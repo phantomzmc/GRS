@@ -57,8 +57,8 @@ class FriendInEvent extends Component {
                         dataDis[index] = dis
                         dataShirt[index] = shirt
                         this.sumPrice(index)
+                        this.loopDeleteUserProfile(index)
                         this.setDelRegisStatus(item.key)
-                        console.log(item)
                         this.props.setFriendRegister(dataSource)
                         this.props.addFriendInEvent(dataFriend)
                         this.props.addFullFriendInEvent(dataFriendFull)
@@ -69,21 +69,16 @@ class FriendInEvent extends Component {
             ], { cancelable: true }
         )
     }
-    // loopObIndex(i) {
-    //     const obIndex = []
-    //     datafriendRegis.map((item, index) => {
-    //         var key = {
-    //             key: item.key
-    //         }
-    //         obIndex.splice(index, 1, key)
-    //     })
-    //     console.log(obIndex)
-    //     this.setDelRegisStatus(obIndex, i)
-    // }
+
     setDelRegisStatus(key) {
         dataSmartFriend[key].RegisterStatus = "0"
         console.log(dataSmartFriend)
         this.props.toggleList()
+    }
+    loopDeleteUserProfile(index) {
+        if (dataSmartFriend[index].RunnerID === this.props.userprofile.userprofile.RunnerID) {
+            this.props.setRegisterStatus(true)
+        }
     }
 
     sumPrice(index) {
@@ -157,7 +152,8 @@ class FriendInEvent extends Component {
 }
 const mapStateToProps = state => {
     return {
-        friendlist: state.friendlist
+        friendlist: state.friendlist,
+        userprofile: state.userprofile
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -190,6 +186,12 @@ const mapDispatchToProps = (dispatch) => {
             dispatch({
                 type: 'setTotalRegister',
                 payload: dataPrice
+            })
+        },
+        setRegisterStatus: (status) => {
+            dispatch({
+                type: 'setRegisterStatus',
+                payload: status
             })
         }
     }

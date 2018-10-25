@@ -86,7 +86,7 @@ class CradFriendDistance extends Component {
     }
 
     passDistance(item) {
-        var price = item.CourseFee
+        var price = item.CoursePrice
         this.setState({
             dataDis: item,
             total: parseFloat(item.Fee),
@@ -124,7 +124,7 @@ class CradFriendDistance extends Component {
             PhotoPlusService: "0",
             PromoCode: "",
             Email : email,
-            CourseFee: total,
+            CoursePrice: total,
         }
         let fulldata = {
             RunnerID: runnerid,
@@ -135,7 +135,7 @@ class CradFriendDistance extends Component {
             PhotoPlusService: "0",
             PromoCode: "",
             nameRegis: nameRegis,
-            CourseFee: total,
+            CoursePrice: total,
             Email : email,
             picProfile : imgProfile
         }

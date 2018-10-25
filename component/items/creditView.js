@@ -81,6 +81,7 @@ class CreditView extends Component {
         else if (charges.status == "failed") {
             this.setState({ modalFaild: !this.state.modalFaild })
             setTimeout(() => {
+                this.props.payment()
                 this.setState({ modalFaild: !this.state.modalFaild })
             }, 3000);
             console.log("failed")
@@ -257,7 +258,8 @@ class CreditView extends Component {
 }
 const mapStateToProps = state => {
     return {
-        event: state.event
+        event: state.event,
+        credit : state.credit
     }
 }
 const mapDispatchtoProps = (dispatch) => {

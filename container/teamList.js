@@ -60,7 +60,9 @@ class TeamList extends Component {
         clearInterval(this._interval);
     }
     componentDidMount() {
-        this.getFriend()
+        setTimeout(() => {
+            this.getFriend()
+        }, 500)
         this._onRefresh()
         this._interval = setInterval(() => {
             this.setState({ totalRegister: this.props.event.totalRegister })
@@ -89,10 +91,12 @@ class TeamList extends Component {
     }
     setNewRegisStatus(dataOb) {
         dataOb.map((item, index) => {
-            var status = {
-                RegisterStatus: "-1"
-            }
+            // if (item.RunnerID == this.props.userprofile.userprofile.RunnerID) {
+            //     this.props.setRegisterStatus(false)
+            // }
+            // else {
             dataSmartFriend[item.key].RegisterStatus = "-1"
+            // }
             console.log(dataSmartFriend)
         })
         this._toggleFriendList()
@@ -146,13 +150,29 @@ class TeamList extends Component {
             .then((response) => {
                 this.setState({ isLoading: false, dataSource: response.data });
                 console.log(this.state.dataSource)
+                this._toggleFriendList()
                 this.setDataSmartFriend(response.data)
+                this.setProfileSmartFriend()
             })
             .catch((error) => {
                 this.setState({ isLoading: true })
                 // this.setState({ isModalVisibleError: !this.state.isModalVisibleError })
                 // console.error(error);
             });
+    }
+    setProfileSmartFriend() {
+        console.log("setProfileSmartFriend")
+        var profile = {
+            RunnerID: this.props.userprofile.userprofile.RunnerID,
+            Email: this.props.userprofile.userprofile.Email,
+            FirstName: this.props.userprofile.userprofile.FirstName,
+            LastName: this.props.userprofile.userprofile.LastName,
+            Gender: this.props.userprofile.userprofile.Gender,
+            PicProfile: this.props.userprofile.userprofile.PicProfile,
+            RegisterStatus: this.props.userprofile.registerStatus.RegisterStatus,
+            FriendStatus: "2"
+        }
+        dataSmartFriend.splice(0, 1, profile)
     }
     setDataSmartFriend(data) {
         data.map((item, index) => {
@@ -166,7 +186,7 @@ class TeamList extends Component {
                 RegisterStatus: item.RegisterStatus,
                 FriendStatus: item.FriendStatus
             }
-            dataSmartFriend.splice(index, 1, friend)
+            dataSmartFriend.splice(index + 1, 1, friend)
         })
         console.log(dataSmartFriend)
     }
@@ -174,6 +194,7 @@ class TeamList extends Component {
     _checkAddFriend(newitem, status) {
         var data = datafriendRegis
         dataitem = {
+            key: "",
             RunnerID: newitem.RunnerID,
             FirstName: newitem.FirstName,
             LastName: newitem.LastName,
@@ -181,24 +202,28 @@ class TeamList extends Component {
             PicProfile: newitem.PicProfile,
             RegisterStatus: newitem.RegisterStatus,
             FriendStatus: newitem.FriendStatus,
-            Email : newitem.Email == undefined || "" ? "" : newitem.Email
+            Email: newitem.Email == undefined || "" ? "" : newitem.Email
         }
         var str_newitem = dataitem
-
-        for (i = 0; i <= data.length; i++) {
-            if (JSON.stringify(str_newitem) == JSON.stringify(data[i])) {
-                console.log("ซ้ำ")
-                status = false
-                break;
-            }
-            else if (JSON.stringify(str_newitem) != JSON.stringify(data[i])) {
-                status = true
-            }
+        if (data == "" || undefined) {
+            this._addFriend(dataitem, true)
         }
-        setTimeout(() => {
-            this._addFriend(dataitem, status)
-        }, 1500)
-        return status
+        else if (data != "") {
+            for (i = 0; i <= data.length; i++) {
+                if (JSON.stringify(str_newitem.RunnerID) == JSON.stringify(data[i].RunnerID)) {
+                    console.log("ซ้ำ")
+                    status = false
+                    break;
+                }
+                else if (JSON.stringify(str_newitem.RunnerID) != JSON.stringify(data[i].RunnerID)) {
+                    status = true
+                }
+            }
+            setTimeout(() => {
+                this._addFriend(dataitem, status)
+            }, 1500)
+            return status
+        }
     }
     _addFriend(dataitem, status) {
         var value = status
@@ -480,7 +505,12 @@ const mapDispatchToProps = dispatch => {
                 payload: datafriend
             })
         },
-
+        setRegisterStatus: (status) => {
+            dispatch({
+                type: 'setRegisterStatus',
+                payload: status
+            })
+        }
     }
 }
 const mapStateToProps = state => {

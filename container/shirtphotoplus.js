@@ -51,7 +51,7 @@ class ShirtPhotoPlus extends Component {
             PhotoPlusService: this.props.event.photoPlusService,
             PromoCode: "",
             Email : this.props.userprofile.userprofile.Email,
-            CourseFee: datadis.price,
+            CoursePrice: datadis.price,
         }
         let dataFull = [{
             RunnerID: this.props.userprofile.userprofile.RunnerID,
@@ -59,7 +59,7 @@ class ShirtPhotoPlus extends Component {
             JerseySize: this.state.shirt,
             PhotoPlusService: this.props.event.photoPlusService,
             PromoCode: "",
-            CourseFee: datadis.price,
+            CoursePrice: datadis.price,
             firstname : this.props.userprofile.userprofile.FirstName,
             lastname : this.props.userprofile.userprofile.LastName,
             Email : this.props.userprofile.userprofile.Email,

@@ -77,7 +77,7 @@ class DetailRegister extends Component {
                                                 value={item.RegisterID}
                                                 size={75}
                                             />
-                                            <Text style={{ fontSize: 10, fontFamily: 'Kanit', textAlign: "center", paddingTop: 5 }}>Confirm Number : xxx{item.RegisterID}</Text>
+                                            <Text style={{ fontSize: 10, fontFamily: 'Kanit', textAlign: "center", paddingTop: 5 }}>Confirm Number : {item.ConfirmNo}</Text>
                                         </View>
 
 
@@ -99,14 +99,14 @@ class DetailRegister extends Component {
                             </View>
                             <View style={styles.viewName}>
                                 <Text style={styles.textName1}>ชื่อ - นามสกุล</Text>
-                                <Text style={styles.textName2}>{item.FullName}</Text>
+                                <Text style={styles.textName2}>{this.props.friendlist.fullfriendEvent[index].firstname} {this.props.friendlist.fullfriendEvent[index].lastname}</Text>
                                 <Text style={styles.textName1}>รายการวิ่ง</Text>
                                 <Text style={styles.textName2}>{this.props.event.event.EventName}</Text>
                             </View>
                             <View style={styles.viewSize}>
                                 <View style={styles.box}>
                                     <Text style={styles.boxTitle}>ไซค์เสื้อ</Text>
-                                    <Text style={styles.boxName}>{item.JerseySize}</Text>
+                                    <Text style={styles.boxName}>{this.props.friendlist.fullfriendEvent[index].JerseySize}</Text>
                                     {/* {this.props.friendlist.fullfriendEvent[0].JerseySize = undefined ?
                                     <Text style={styles.boxName}>
                                         {this.props.friendlist.fullfriendEvent.JerseySize}
@@ -120,7 +120,7 @@ class DetailRegister extends Component {
                                 <View style={styles.box}>
                                     {/* <Text style={styles.boxTitle}>ระยะทาง</Text> */}
                                     <Text style={styles.boxName}>
-                                        {item.CourseName}
+                                        {this.props.friendlist.fullfriendEvent[index].nameRegis}
                                     </Text>
                                     {/* {this.props.friendlist.fullfriendEvent[0].nameRegis == undefined ?
                                     <Text style={styles.boxName}>
@@ -228,9 +228,9 @@ const styles = StyleSheet.create({
         justifyContent: "center"
     },
     disQRcode: {
-        width: 75,
-        height: 75,
-        borderRadius: 37.5,
+        width: 80,
+        height: 80,
+        borderRadius: 40,
         borderColor: "#FFA500",
         borderWidth: 1,
         justifyContent: "center",

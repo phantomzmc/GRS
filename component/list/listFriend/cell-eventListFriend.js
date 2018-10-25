@@ -23,8 +23,8 @@ class CellEventListFriend extends Component {
     componentDidMount() {
         this.setState({ item: this.props.items, statusCheck: this.props.sendStatusCheck })
         this.checkFavorite()
-        console.log(this.props.items)
-        console.log(this.state.item)
+        // console.log(this.props.items)
+        // console.log(this.state.item)
     }
     onCheck() {
 
@@ -202,13 +202,22 @@ class CellEventListFriend extends Component {
                                     type="Foundation"
                                     style={{ fontSize: 20, color: "#F44336" }}
 
-                                /> :
-                                <Icon
-                                    name="group"
-                                    type="FontAwesome"
-                                    style={{ fontSize: 20, color: "#C0C0C0" }}
-
                                 />
+                                :
+                                item.FriendStatus == 2 ?
+                                    <Icon
+                                        name="user"
+                                        type="FontAwesome5"
+                                        style={{ fontSize: 20, color: "#FC561F" }}
+
+                                    />
+                                    :
+                                    <Icon
+                                        name="group"
+                                        type="FontAwesome"
+                                        style={{ fontSize: 20, color: "#C0C0C0" }}
+
+                                    />
                             }
                         </Right>
                     </CardItem>

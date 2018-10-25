@@ -51,7 +51,8 @@ class CreditPayment extends Component {
                     <CreditView 
                         goAddress={this.goAddressSend.bind(this)}
                         TotalPrice={this.props.event.totalPrice}
-                        ShowDetail={this.showDetailPayment.bind(this)} />
+                        ShowDetail={this.showDetailPayment.bind(this)} 
+                        payment={this.props.payment()}/>
                 </View>
             </ScrollView>
         );

@@ -56,7 +56,7 @@ class ListTotalRegis extends Component {
                             </Content>
                             <Right>
                                 <View>
-                                    <Text style={{ fontSize: 10, fontFamily: 'Kanit' }}>{item.CourseFee}.0 ฿</Text>
+                                    <Text style={{ fontSize: 10, fontFamily: 'Kanit' }}>{item.CoursePrice}.0 ฿</Text>
                                 </View>
                             </Right>>
                         </View>}

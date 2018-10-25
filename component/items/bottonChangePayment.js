@@ -31,6 +31,9 @@ class ButtonChangePayment extends Component {
     gotoBack = () => {
         this.props.navigation.navigate('ControlPayment')
     }
+    gotoPayment = () => {
+        this.props.navigation.navigate('ButtonChangePayment')
+    }
     render() {
         return (
             <Container style={styles.container}>
@@ -62,7 +65,9 @@ class ButtonChangePayment extends Component {
                         </TabHeading>}>
                         <CreditPayment
                             showDetail={this.gotoShowDetail.bind(this)}
-                            totalPayment={this.gotoTotalPayment.bind(this)} />
+                            totalPayment={this.gotoTotalPayment.bind(this)} 
+                            payment={this.gotoPayment.bind(this)}
+                        />
                     </Tab>
                     <Tab heading={
                         <TabHeading>
