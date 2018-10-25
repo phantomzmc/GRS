@@ -27,7 +27,7 @@ class FriendInEvent extends Component {
             dataSource: this.props.friendlist.friendRegis,
         });
     }
-    deleteItem(index) {
+    deleteItem = (index, item) => {
         let { dataSource, dataRegis } = this.state
         let dis = { CourseName: "", Distance: "" }
         let shirt = { JerseySizeValue: "", JerseySizeDesc: "" }
@@ -41,24 +41,24 @@ class FriendInEvent extends Component {
                     text: 'ตกลง', onPress: () => {
 
                         dataSource.splice(index, 1)
-                        if(dataFriend == ""){
+                        if (dataFriend == "") {
                             dataPrice.splice(index, 1)
                         }
-                        else if (dataFriend[index].PhotoPlusService == 0) {
-                            dataPrice.splice(index, 1)
-                        }
-                        else if (dataFriend[index].PhotoPlusService == 1) {
-                            dataPrice.splice(index, 1),
-                            dataPrice.splice([index + 1], 1)
-                        }
+                        // else if (dataFriend[index].PhotoPlusService == 0) {
+                        //     dataPrice.splice(index, 1)
+                        // }
+                        // else if (dataFriend[index].PhotoPlusService == 1) {
+                        //     dataPrice.splice(index, 1),
+                        //     dataPrice.splice([index + 1], 1)
+                        // }
 
                         dataFriend.splice(index, 1)
                         dataFriendFull.splice(index, 1)
                         dataDis[index] = dis
                         dataShirt[index] = shirt
                         this.sumPrice(index)
-                        this.loopObIndex()
-
+                        this.setDelRegisStatus(item.key)
+                        console.log(item)
                         this.props.setFriendRegister(dataSource)
                         this.props.addFriendInEvent(dataFriend)
                         this.props.addFullFriendInEvent(dataFriendFull)
@@ -69,22 +69,20 @@ class FriendInEvent extends Component {
             ], { cancelable: true }
         )
     }
-    loopObIndex(){
-        const obIndex = []
-        datafriendRegis.map((item, index) => {
-            var key = {
-                key : item.key
-            }
-            obIndex.splice(index, 1,key)
-        })
-        console.log(obIndex)
-        this.setNewRegisStatus(obIndex)
-    }
-    setNewRegisStatus(dataOb) {
-        dataOb.map((item,index)=>{
-            dataSmartFriend[item.key].RegisterStatus = "0"
-            console.log(dataSmartFriend)
-        })
+    // loopObIndex(i) {
+    //     const obIndex = []
+    //     datafriendRegis.map((item, index) => {
+    //         var key = {
+    //             key: item.key
+    //         }
+    //         obIndex.splice(index, 1, key)
+    //     })
+    //     console.log(obIndex)
+    //     this.setDelRegisStatus(obIndex, i)
+    // }
+    setDelRegisStatus(key) {
+        dataSmartFriend[key].RegisterStatus = "0"
+        console.log(dataSmartFriend)
         this.props.toggleList()
     }
 
@@ -149,7 +147,7 @@ class FriendInEvent extends Component {
                             <CardFriendDistance
                                 distance={item}
                                 idkey={index}
-                                delete={this.deleteItem.bind(this)}
+                                delete={() => this.deleteItem(index, item)}
                             />
                         </View>}
                 />

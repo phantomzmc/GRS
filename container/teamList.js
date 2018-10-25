@@ -177,7 +177,11 @@ class TeamList extends Component {
             RunnerID: newitem.RunnerID,
             FirstName: newitem.FirstName,
             LastName: newitem.LastName,
-            PicProfile: newitem.PicProfile
+            Gender: newitem.Gender,
+            PicProfile: newitem.PicProfile,
+            RegisterStatus: newitem.RegisterStatus,
+            FriendStatus: newitem.FriendStatus,
+            Email : newitem.Email == undefined || "" ? "" : newitem.Email
         }
         var str_newitem = dataitem
 
