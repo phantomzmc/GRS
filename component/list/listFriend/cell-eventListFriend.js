@@ -106,7 +106,10 @@ class CellEventListFriend extends Component {
             FirstName: item.FirstName,
             LastName: item.LastName,
             PicProfile: item.PicProfile,
-            Email: item.Email
+            Gender: item.Gender,
+            Email: item.Email,
+            RegisterStatus: item.RegisterStatus,
+            FriendStatus: item.FriendStatus,
         }
         console.log(value)
         if (value == false) {

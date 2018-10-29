@@ -45,11 +45,10 @@ class HistoryList extends Component {
             responseType: 'json'
         })
             .then((response) => {
-                this.setState({ dataSource2: response.data[0] });
+                this.setState({ dataSource: response.data[0] });
                 console.log(response.data[0])
-                dataInvoice.splice(0, 1, response.data[0])
+                // dataInvoice.splice(0, 1, response.data[0])
                 this.getInvoiceID(response.data[0].InvoiceID)
-                this.getComfirmNo(response.data[0].InvoiceID)
             }).catch((error) => {
                 // this.setState({ isModalVisibleError: !this.state.isModalVisibleError })
                 console.error(error);
@@ -63,6 +62,7 @@ class HistoryList extends Component {
                 { name: "InvoiceID", value: invoiceid }
             ]
         })
+        console.log(data)
         axios.post(uri, data, {
             headers: {
                 "X-DreamFactory-API-Key": apikey,
@@ -71,37 +71,20 @@ class HistoryList extends Component {
             responseType: 'json'
         })
             .then((response) => {
-                this.setState({ registerID: response.data[0].RegisterID });
-                console.log(response.data[0])
+                this.setState({ dataSource2: response.data });
+                console.log(response.data)
+                const data = response.data
+                for (let index = 0; index < data.length; index++) {
+                    dataInvoice.splice(index, 1, response.data[index])
+                    console.log(response.data[index])
+                }
+                console.log(dataInvoice)
                 setTimeout(() => {
                     this.setState({ isModalVisible: true })
                 }, 500)
             }).catch((error) => {
                 this.getInvoiceID(invoiceid)
             });
-    }
-    getComfirmNo(invoiceid) {
-        let uri = req[0].uspAddConfirmNo
-        let apikey = api_key[0].api_key
-        let data = ({
-            params: [
-                { name: "InvoiceID", value: invoiceid }
-            ]
-        })
-        axios.post(uri, data, {
-            headers: {
-                "X-DreamFactory-API-Key": apikey,
-                "X-DreamFactory-Session-Token": this.props.token.token,
-            },
-            responseType: 'json'
-        })
-            .then((response) => {
-                this.setState({ registerID: response.data[0].RegisterID });
-                console.log(response.data[0])
-                
-            }).catch((error) => {
-            });
-
     }
     setItems(item) {
         console.log(item.InvoiceID)
@@ -154,6 +137,7 @@ class HistoryList extends Component {
                     <View style={{ flex: 1 }}>
                         <ModalHistory
                             registerID={this.state.registerID}
+                            dataAll={this.state.dataSource}
                             dataHistory={this.state.dataSource2}
                             toggleModal={this._toggleModal}
                         />

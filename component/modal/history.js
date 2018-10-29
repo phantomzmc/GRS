@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, ScrollView, Alert } from 'react-native';
+import { View, StyleSheet, Image, ScrollView, Alert, FlatList } from 'react-native';
 import { Card, CardItem, Body, Button, Text, Icon } from "native-base";
 import CameraRollExtended from 'react-native-store-photos-album'
 import { captureScreen } from "react-native-view-shot";
@@ -18,188 +18,226 @@ class ModalHistory extends Component {
         showInvoice: false
     }
     componentWillMount() {
-        console.log(dataInvoice[0])
-        console.log(this.props.registerID)
+        console.log(this.props.dataHistory)
+        console.log(this.props.dataAll)
         setTimeout(() => {
             this.setState({ showInvoice: true })
         }, 500)
     }
     render() {
         return (
+            this.state.showInvoice &&
+
             <Card>
-                {this.state.showInvoice &&
-                    <ScrollView>
-                        <CardItem style={styles.view1}>
-                            <View>
-                                {dataInvoice[0].PaymentStatus == 2 ?
-                                    <Text style={styles.typePayment}> จ่ายเเล้ว </Text> :
-                                    <Text style={styles.typePaymentWarning}>รอตรวจสอบการชำระเงิน</Text>
-                                }
-                            </View>
-                            <View>
-                                {dataInvoice[0].PaymentStatus == 2 ?
-                                    <View style={{ alignItems : "center"}}>
-                                        <QRCode
-                                            // value={dataInvoice[0].RegisterID}
-                                            value={this.props.registerID}
-                                            size={75}
-                                        />
-                                        <Text style={styles.textName3}>Confirm ID xxx{this.props.registerID}</Text>
-                                    </View>
-                                    :
-                                    <View style={styles.disQRcode}>
-                                        <Text style={styles.textName3}>QR Code</Text>
-                                    </View>
-                                }
-                            </View>
-                            <View>
-                                <View style={{ flex: 0, justifyContent: "flex-end" }}>
-                                    <Text style={styles.subTextHead}>ชำระเงิน</Text>
-                                    {dataInvoice[0].PaymentType == 1 ?
-                                        <Text style={styles.subTextHead}>บัตรเครดิต/เดรบิต</Text> :
-                                        <Text style={styles.subTextHead}>โอนเงินผ่านธนาคาร</Text>
-                                    }
-                                </View>
-                                <Text style={styles.subTextHead}> Order : {dataInvoice[0].InvoiceID} </Text>
-                            </View>
-                        </CardItem>
-                        <CardItem style={styles.viewName}>
-                            <Body>
-                                <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
-                                    <View style={{ flex: 1 }}>
-                                        <Text style={styles.textName3}>Email</Text>
-                                        <Text style={styles.textName4}>{dataInvoice[0].Email}</Text>
-                                    </View>
-                                    <View style={{ flex: 0, alignItems: 'center' }}>
-                                        <Text style={styles.textName3}>โทรศัพท์</Text>
-                                        <Text style={styles.textName4}>{dataInvoice[0].Phone}</Text>
-                                    </View>
-                                </View>
-                                <Text style={styles.textName1}>รายการวิ่ง</Text>
-                                <Text style={styles.textName2}>{dataInvoice[0].EventName}</Text>
-                            </Body>
-                        </CardItem>
-                        <CardItem>
-                            <View style={styles.viewAddress}>
-                                <View style={{ flex: 1 }}>
-                                    <Text style={styles.textName3}>ที่อยู่</Text>
-                                    <Text style={{ fontFamily: 'Kanit', fontSize: 14, marginRight: 10 }}>{dataInvoice[0].Address} {dataInvoice[0].SubDistric} {dataInvoice[0].Distric} {dataInvoice[0].Province} {dataInvoice[0].PostCode}</Text>
-                                </View>
-                                <View style={{ flex: 0, alignItems: 'center' }}>
-                                    <Text style={styles.textName3}>วันที่</Text>
-                                    <Text style={{ fontFamily: 'Kanit', fontSize: 14 }}>{dataInvoice[0].InvoiceDatetime.substr(0, 11)}</Text>
-                                </View>
-                            </View>
-                        </CardItem>
-                        <CardItem style={{ justifyContent: "center" }}>
-                            <View style={styles.container2}>
-                                <View style={styles.detailRow}>
-                                    <View>
-                                        <View style={{ backgroundColor: 'red', width: 50, height: 50, borderRadius: 25, }}>
-                                            <Image source={require('../icon/calendar.png')}
-                                                style={{ width: 30, height: 30, justifyContent: 'center', alignSelf: 'center', marginTop: 10 }} />
-                                        </View>
-                                    </View>
-                                    <View>
-                                        <Text style={{ fontSize: 10, fontFamily: 'Kanit', textAlign: 'center', width: 150 }}>{dataInvoice[0].EventName} </Text>
-                                        {/* <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'Kanit', textAlign: 'center', width: 150 }}>({this.props.event.distanceEvent.distance} - {this.props.shirtphoto.size}) x 1 (Photo Plus)</Text> */}
-                                    </View>
-                                    <View>
-                                        <Text style={{ fontSize: 10, fontFamily: 'Kanit' }}>{parseFloat(dataInvoice[0].TotalFee).toFixed(2)} ฿</Text>
-                                    </View>
-                                </View>
-
-                                <View style={styles.detailRow}>
-                                    <View>
-                                        <View style={{ backgroundColor: '#3BB1FA', width: 50, height: 50, borderRadius: 25, }}>
-                                            <Image source={require('../icon/clothes.png')}
-                                                style={{ width: 30, height: 30, justifyContent: 'center', alignSelf: 'center', marginTop: 10 }} />
-                                        </View>
-                                    </View>
-                                    {dataInvoice[0].PlaceItemID == 1 ?
+                <ScrollView>
+                    <FlatList
+                        horizontal
+                        style={{ width: '100%' }}
+                        data={this.props.dataHistory}
+                        renderItem={({ item, index }) =>
+                            <View style={{ width: 350 }}>
+                                {/* // <View>
+                                //     <Icon name="chevron-small-left" style={{ color: "#000" }} type="Entypo" />
+                                // </View> */}
+                                <View>
+                                    <CardItem style={styles.view1}>
                                         <View>
-                                            <Text style={{ fontSize: 10, fontFamily: 'Kanit', textAlign: 'center' }}>รับเสื้อและเบอร์ที่ :  </Text>
-                                            {/* <Text style={{ fontSize: 10, fontFamily: 'Kanit', paddingHorizontal: 50 }}></Text> */}
-                                            <View style={{ marginHorizontal: 20 }}>
-                                                <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'Kanit', textAlign: 'center', width: 150 }}>{parseFloat(dataInvoice[0].PlaceItemName).toFixed(2)} ฿</Text>
+                                            {this.props.dataAll.PaymentStatus == 2 ?
+                                                <Text style={styles.typePayment}> จ่ายเเล้ว </Text> :
+                                                <Text style={styles.typePaymentWarning}>รอตรวจสอบการชำระเงิน</Text>
+                                            }
+                                        </View>
+                                        <View>
+                                            {this.props.dataAll.PaymentStatus == 2 ?
+                                                <View style={{ alignItems: "center" }}>
+                                                    <QRCode
+                                                        value={item.RegisterID}
+                                                        // value={this.props.registerID}
+                                                        size={75}
+                                                    />
+                                                    <Text style={styles.textName3}>Confirm ID xxx{item.ConfirmNo}</Text>
+                                                </View>
+                                                :
+                                                <View style={styles.disQRcode}>
+                                                    <Text style={styles.textName3}>QR Code</Text>
+                                                </View>
+                                            }
+                                        </View>
+                                        <View>
+                                            <View style={{ width: '50%', justifyContent: "flex-end" }}>
+                                                <Text style={styles.subTextHead}>ชำระเงิน</Text>
+                                                {this.props.dataAll.PaymentType == 1 ?
+                                                    <Text style={styles.subTextHead}>บัตรเครดิต/เดรบิต</Text> :
+                                                    <Text style={styles.subTextHead}>โอนเงินผ่านธนาคาร</Text>
+                                                }
+                                            </View>
+                                            <Text style={styles.subTextHead}> Order : {this.props.dataAll.InvoiceID} </Text>
+                                        </View>
+                                    </CardItem>
+
+                                    <CardItem style={styles.viewName}>
+                                        <Body>
+                                            <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
+                                                <View style={{ width: '50%' }}>
+                                                    <Text style={styles.textName3}>ชื่อ - นามสกุล</Text>
+                                                    <Text style={styles.textName4}>{item.FullName}</Text>
+
+                                                </View>
+                                                <View style={{ width: '50%', alignItems: 'center' }}>
+                                                    <Text style={styles.textName3}>Email</Text>
+                                                    <Text style={styles.textName4}>{item.Email}</Text>
+                                                </View>
+                                            </View>
+                                            <View style={{ width: '75%' }}>
+                                                <Text style={styles.textName1}>รายการวิ่ง</Text>
+                                                <Text style={styles.textName2}>{this.props.dataAll.EventName}</Text>
+                                            </View>
+                                        </Body>
+                                    </CardItem>
+                                    <CardItem>
+                                        <Body>
+                                            <View style={styles.viewSize}>
+                                                <View style={styles.box}>
+                                                    <Text style={styles.boxTitle}>ไซค์เสื้อ</Text>
+                                                    <Text style={styles.boxName}>{item.JerseySize}</Text>
+
+                                                </View>
+                                                <View style={styles.box}>
+                                                    <Text style={styles.boxName}>
+                                                        {item.CourseName}
+                                                    </Text>
+                                                </View>
+                                            </View>
+                                        </Body>
+                                    </CardItem>
+                                    <CardItem>
+                                        <View style={styles.viewAddress}>
+                                            <View style={{ width: '50%' }}>
+                                                <Text style={styles.textName3}>ที่อยู่</Text>
+                                                <Text style={{ fontFamily: 'Kanit', fontSize: 14, marginRight: 10 }}>{this.props.dataAll.Address} {this.props.dataAll.SubDistric} {this.props.dataAll.Distric} {this.props.dataAll.Province} {this.props.dataAll.PostCode}</Text>
+                                            </View>
+                                            <View style={{ width: '50%', alignItems: 'center' }}>
+                                                <Text style={styles.textName3}>วันที่</Text>
+                                                <Text style={{ fontFamily: 'Kanit', fontSize: 14 }}>{item.InvoiceDatetime.substr(0, 11)}</Text>
                                             </View>
                                         </View>
-                                        :
-                                        <View>
-                                            <Text style={{ fontSize: 10, fontFamily: 'Kanit', textAlign: 'center' }}>บริหารจัดส่ง   </Text>
-                                            {/* <Text style={{ fontSize: 10, fontFamily: 'Kanit' }}>วันที่ 27 มกราคม 2561</Text> */}
-                                            <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'Kanit', textAlign: 'center', width: 150 }}>{dataInvoice[0].Address} {dataInvoice[0].SubDistric} {dataInvoice[0].Distric} {dataInvoice[0].Province} {dataInvoice[0].PostCode}</Text>
-                                        </View>
-                                    }
-                                    <View>
-                                        <Text style={{ fontSize: 10, fontFamily: 'Kanit' }}>{parseFloat(dataInvoice[0].TotalPost).toFixed(2)} ฿</Text>
+                                    </CardItem>
+                                </View>
+                                {/* // <View>
+                                //     <Icon name="chevron-small-right" style={{ color: "#000" }} type="Entypo" />
+                                // </View> */}
+                            </View>
+                        } />
+
+                    <CardItem style={{ justifyContent: "center" }}>
+                        <View style={styles.container2}>
+                            <View style={styles.detailRow}>
+                                <View>
+                                    <View style={{ backgroundColor: 'red', width: 50, height: 50, borderRadius: 25, }}>
+                                        <Image source={require('../icon/calendar.png')}
+                                            style={{ width: 30, height: 30, justifyContent: 'center', alignSelf: 'center', marginTop: 10 }} />
                                     </View>
                                 </View>
+                                <View>
+                                    <Text style={{ fontSize: 10, fontFamily: 'Kanit', textAlign: 'center', width: 150 }}>{this.props.dataAll.EventName} </Text>
+                                    {/* <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'Kanit', textAlign: 'center', width: 150 }}>({item.Distance} - {item.JerseySize}) {item.PhotoPlusService === 1 ? "x 1 (Photo Plus)" : ""}</Text> */}
+                                </View>
+                                <View>
+                                    <Text style={{ fontSize: 10, fontFamily: 'Kanit' }}>{parseFloat(this.props.dataAll.TotalFee).toFixed(2)} ฿</Text>
+                                </View>
+                            </View>
+
+                            <View style={styles.detailRow}>
+                                <View>
+                                    <View style={{ backgroundColor: '#3BB1FA', width: 50, height: 50, borderRadius: 25, }}>
+                                        <Image source={require('../icon/clothes.png')}
+                                            style={{ width: 30, height: 30, justifyContent: 'center', alignSelf: 'center', marginTop: 10 }} />
+                                    </View>
+                                </View>
+                                {this.props.dataAll.PlaceItemID == 1 ?
+                                    <View>
+                                        <Text style={{ fontSize: 10, fontFamily: 'Kanit', textAlign: 'center' }}>รับเสื้อและเบอร์ที่ :  </Text>
+                                        {/* <Text style={{ fontSize: 10, fontFamily: 'Kanit', paddingHorizontal: 50 }}></Text> */}
+                                        <View style={{ marginHorizontal: 20 }}>
+                                            <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'Kanit', textAlign: 'center', width: 150 }}>{this.props.dataAll.PlaceItemName}</Text>
+                                        </View>
+                                    </View>
+                                    :
+                                    <View>
+                                        <Text style={{ fontSize: 10, fontFamily: 'Kanit', textAlign: 'center' }}>บริหารจัดส่ง   </Text>
+                                        {/* <Text style={{ fontSize: 10, fontFamily: 'Kanit' }}>วันที่ 27 มกราคม 2561</Text> */}
+                                        <Text style={{ fontSize: 7, color: '#8B8B8B', fontFamily: 'Kanit', textAlign: 'center', width: 150 }}>{this.props.dataAll.Address} {this.props.dataAll.SubDistric} {this.props.dataAll.Distric} {this.props.dataAll.Province} {this.props.dataAll.PostCode}</Text>
+                                    </View>
+                                }
+                                <View>
+                                    <Text style={{ fontSize: 10, fontFamily: 'Kanit' }}>{parseFloat(this.props.dataAll.TotalPost).toFixed(2)} ฿</Text>
+                                </View>
+                            </View>
+                            <View style={styles.detailRow}>
+                                <View>
+                                    <View style={{ backgroundColor: '#FD9C00', width: 50, height: 50, borderRadius: 25, }}>
+                                        <Image source={require('../icon/bank-cards.png')}
+                                            style={{ width: 30, height: 30, justifyContent: 'center', alignSelf: 'center', marginTop: 10 }} />
+                                    </View>
+                                </View>
+                                <View>
+                                    <Text style={{ fontSize: 10, fontFamily: 'Kanit' }}>ค่าธรรมเนียมการใช้บัตรเครดิต/เดบิต</Text>
+                                    {/* <Text style={{ fontSize: 7, color: '#8B8B8B' }}>(5 Km. - S) x 1 (Photo Plus)</Text> */}
+                                </View>
+                                <View>
+                                    <Text style={{ fontSize: 10, fontFamily: 'Kanit' }}>{parseFloat(this.props.dataAll.TotalCreditFee).toFixed(2)} ฿</Text>
+                                </View>
+                            </View>
+                            {this.props.dataAll.TotalDiscount == 0 ?
+                                <View></View>
+                                :
                                 <View style={styles.detailRow}>
                                     <View>
-                                        <View style={{ backgroundColor: '#FD9C00', width: 50, height: 50, borderRadius: 25, }}>
-                                            <Image source={require('../icon/bank-cards.png')}
+                                        <View style={{ backgroundColor: '#4CD964', width: 50, height: 50, borderRadius: 25, }}>
+                                            <Image source={require('../icon/price.png')}
                                                 style={{ width: 30, height: 30, justifyContent: 'center', alignSelf: 'center', marginTop: 10 }} />
                                         </View>
                                     </View>
                                     <View>
-                                        <Text style={{ fontSize: 10, fontFamily: 'Kanit' }}>ค่าธรรมเนียมการใช้บัตรเครดิต/เดบิต</Text>
+                                        <Text style={{ fontSize: 10, fontFamily: 'Kanit' }}>ส่วนลดค่าโปรโมชั่น {parseFloat(this.props.dataAll.TotalDiscount).toFixed(2)} บาท</Text>
                                         {/* <Text style={{ fontSize: 7, color: '#8B8B8B' }}>(5 Km. - S) x 1 (Photo Plus)</Text> */}
                                     </View>
                                     <View>
-                                        <Text style={{ fontSize: 10, fontFamily: 'Kanit' }}>{parseFloat(dataInvoice[0].TotalCreditFee).toFixed(2)} ฿</Text>
+                                        <Text style={{ fontSize: 10, fontFamily: 'Kanit' }}>{parseFloat(this.props.dataAll.TotalDiscount).toFixed(2)} ฿</Text>
                                     </View>
                                 </View>
-                                {dataInvoice[0].TotalDiscount == 0 ?
-                                    <View></View>
-                                    :
-                                    <View style={styles.detailRow}>
-                                        <View>
-                                            <View style={{ backgroundColor: '#4CD964', width: 50, height: 50, borderRadius: 25, }}>
-                                                <Image source={require('../icon/price.png')}
-                                                    style={{ width: 30, height: 30, justifyContent: 'center', alignSelf: 'center', marginTop: 10 }} />
-                                            </View>
-                                        </View>
-                                        <View>
-                                            <Text style={{ fontSize: 10, fontFamily: 'Kanit' }}>ส่วนลดค่าโปรโมชั่น {parseFloat(dataInvoice[0].TotalDiscount).toFixed(2)} บาท</Text>
-                                            {/* <Text style={{ fontSize: 7, color: '#8B8B8B' }}>(5 Km. - S) x 1 (Photo Plus)</Text> */}
-                                        </View>
-                                        <View>
-                                            <Text style={{ fontSize: 10, fontFamily: 'Kanit' }}>{parseFloat(dataInvoice[0].TotalDiscount).toFixed(2)} ฿</Text>
-                                        </View>
-                                    </View>
-                                }
+                            }
 
 
-                                <View style={styles.detailRow}>
-                                    <View>
-                                        <View style={{ backgroundColor: '#FDD463', width: 50, height: 50, borderRadius: 25, }}>
-                                            <Image source={require('../icon/bill.png')}
-                                                style={{ width: 30, height: 30, justifyContent: 'center', alignSelf: 'center', marginTop: 10 }} />
-                                        </View>
-                                    </View>
-                                    <View>
-                                        <Text style={{ fontSize: 10, fontFamily: 'Kanit' }}>รวมทั้งสิ้น</Text>
-                                        {/* <Text style={{ fontSize: 7, color: '#8B8B8B' }}>(5 Km. - S) x 1 (Photo Plus)</Text> */}
-                                    </View>
-                                    <View>
-                                        <Text style={{ fontSize: 10, fontFamily: 'Kanit' }}>{parseFloat(dataInvoice[0].TotalAll).toFixed(2)} ฿</Text>
+                            <View style={styles.detailRow}>
+                                <View>
+                                    <View style={{ backgroundColor: '#FDD463', width: 50, height: 50, borderRadius: 25, }}>
+                                        <Image source={require('../icon/bill.png')}
+                                            style={{ width: 30, height: 30, justifyContent: 'center', alignSelf: 'center', marginTop: 10 }} />
                                     </View>
                                 </View>
+                                <View>
+                                    <Text style={{ fontSize: 10, fontFamily: 'Kanit' }}>รวมทั้งสิ้น</Text>
+                                    {/* <Text style={{ fontSize: 7, color: '#8B8B8B' }}>(5 Km. - S) x 1 (Photo Plus)</Text> */}
+                                </View>
+                                <View>
+                                    <Text style={{ fontSize: 10, fontFamily: 'Kanit' }}>{parseFloat(this.props.dataAll.TotalAll).toFixed(2)} ฿</Text>
+                                </View>
                             </View>
-                        </CardItem>
-                        <CardItem style={{ justifyContent: "center" }}>
-                            <View style={{ flexDirection: "row" }}>
-                                <Button rounded light onPress={this.props.toggleModal} style={{ marginHorizontal: 10 }}>
-                                    <Icon name="ios-remove-circle-outline" />
-                                    <Text style={{ fontFamily: "Kanit" }}>ปิด</Text>
-                                </Button>
-                            </View>
-                        </CardItem>
-                    </ScrollView>
-                }
+                        </View>
+                    </CardItem>
+                    <CardItem style={{ justifyContent: "center" }}>
+                        <View style={{ flexDirection: "row" }}>
+                            <Button rounded light onPress={this.props.toggleModal} style={{ marginHorizontal: 10 }}>
+                                <Icon name="ios-remove-circle-outline" />
+                                <Text style={{ fontFamily: "Kanit" }}>ปิด</Text>
+                            </Button>
+                        </View>
+                    </CardItem>
+                </ScrollView>
             </Card>
         );
+
     }
 }
 
@@ -208,8 +246,8 @@ const styles = StyleSheet.create({
         borderRadius: 20,
     },
     view1: {
-        marginTop: 10,
-        padding: 10,
+        // marginTop: 10,
+        // padding: 10,
         alignItems: 'center',
         flexDirection: 'row',
         justifyContent: 'space-around',
@@ -226,10 +264,13 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
     },
     box: {
+        width: 150,
         backgroundColor: '#FC561F',
         borderRadius: 10,
         padding: 10,
         paddingHorizontal: 40,
+        alignItems: "center",
+        justifyContent: "center"
     },
     viewAddress: {
         // alignItems : "center",
@@ -270,9 +311,10 @@ const styles = StyleSheet.create({
         fontFamily: 'Kanit'
     },
     boxName: {
-        fontSize: 25,
+        fontSize: 18,
         color: '#fff',
-        fontFamily: 'Kanit'
+        fontFamily: 'Kanit',
+        justifyContent: "center"
     },
     detailRow: {
         height: 60,
@@ -291,7 +333,7 @@ const styles = StyleSheet.create({
         shadowRadius: 2,
     },
     subTextHead: {
-        fontSize: 10,
+        fontSize: 8,
         color: '#A9A9A9',
         fontFamily: 'Kanit'
     },

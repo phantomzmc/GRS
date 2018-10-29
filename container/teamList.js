@@ -72,6 +72,7 @@ class TeamList extends Component {
     addFriendEvent() {
         this.props.setFriendRegister(datafriendRegis)
         this.loopObIndex()
+        // this.changeAddRegisStatus()
         this.setState({ frienddistance: false })
         setTimeout(() => {
             this.setState({ frienddistance: true })
@@ -91,12 +92,7 @@ class TeamList extends Component {
     }
     setNewRegisStatus(dataOb) {
         dataOb.map((item, index) => {
-            // if (item.RunnerID == this.props.userprofile.userprofile.RunnerID) {
-            //     this.props.setRegisterStatus(false)
-            // }
-            // else {
             dataSmartFriend[item.key].RegisterStatus = "-1"
-            // }
             console.log(dataSmartFriend)
         })
         this._toggleFriendList()
@@ -194,7 +190,7 @@ class TeamList extends Component {
     _checkAddFriend(newitem, status) {
         var data = datafriendRegis
         dataitem = {
-            key: "",
+            // key: "",
             RunnerID: newitem.RunnerID,
             FirstName: newitem.FirstName,
             LastName: newitem.LastName,
@@ -210,20 +206,53 @@ class TeamList extends Component {
         }
         else if (data != "") {
             for (i = 0; i <= data.length; i++) {
-                if (JSON.stringify(str_newitem.RunnerID) == JSON.stringify(data[i].RunnerID)) {
+                if (JSON.stringify(str_newitem) == JSON.stringify(data[i])) {
                     console.log("ซ้ำ")
                     status = false
                     break;
                 }
-                else if (JSON.stringify(str_newitem.RunnerID) != JSON.stringify(data[i].RunnerID)) {
+                else if (JSON.stringify(str_newitem) != JSON.stringify(data[i])) {
                     status = true
                 }
             }
-            setTimeout(() => {
-                this._addFriend(dataitem, status)
-            }, 1500)
-            return status
         }
+        setTimeout(() => {
+            this._addFriend(dataitem, status)
+        }, 1500)
+        return status
+    }
+    changeRegisStatus(dataitem) {
+        console.log(dataitem)
+        for (let index = 0; index < dataSmartFriend.length; index++) {
+            if (dataitem.RunnerID == dataSmartFriend[index].RunnerID) {
+                dataSmartFriend[index].RegisterStatus = "-1"
+                console.log(dataSmartFriend[index])
+            }
+        }
+    }
+    changeAddRegisStatus() {
+        const key = []
+        for (let index = 0; index < datafriendRegis.length; index++) {
+            dataSmartFriend.map((item) => {
+                if (item.RunnerID == datafriendRegis[index].RunnerID) {
+                    key.push(item.RunnerID)
+                }
+            })
+        }
+        console.log(key)
+        this._loopChangeRegisStatus(key)
+    }
+    _loopChangeRegisStatus(key) {
+        dataSmartFriend.map((item,index) => {
+            if (item.RunnerID === key[index])
+                item.RegisterStatus = "-1"
+                console.log(item)
+        })
+        // for (i = 0; i <= key.length; i++) {
+        //     if (dataSmartFriend[i].RunnerID == key[i])
+        //         dataSmartFriend[i].RegisterStatus = "-1"
+        //         console.log(dataSmartFriend[i])
+        // }
     }
     _addFriend(dataitem, status) {
         var value = status
@@ -233,6 +262,7 @@ class TeamList extends Component {
         }
         else if (value == true) {
             datafriendRegis.push(dataitem)
+            this.changeRegisStatus(dataitem)
             this.props.setFriendRegister(datafriendRegis)
             this.setState({ frienddistance: true })
             this.setState({ frienddistance: false })

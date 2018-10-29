@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, View, StatusBar, ImageBackground, AsyncStorage } from 'react-native';
+import { StyleSheet, View, StatusBar, ImageBackground, AsyncStorage, Platform, PermissionsAndroid, Alert } from 'react-native';
 import { Container } from "native-base";
 import List from '../component/list/listevent/listevent'
 import HeaderTeam from '../component/items/headerTeam'
@@ -10,6 +10,30 @@ import { NetworkInfo } from 'react-native-network-info';
 import axios from 'axios'
 import api_key from '../config/api_key'
 import req from '../config/uri_req'
+
+export async function request_location_runtime_permission() {
+
+    try {
+        const granted = await PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+            {
+                'title': 'แอพพลิเคชั่นนี้ขออนุญาตตำแหน่งของคุณ',
+                'message': 'แอพพิลเคชั่นนี้ต้องการที่จะทราบพการระบุพิกัดของผู้ใช้งาน'
+            }
+        )
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+
+            Alert.alert("Location Permission Granted.");
+        }
+        else {
+
+            Alert.alert("Location Permission Not Granted");
+
+        }
+    } catch (err) {
+        console.warn(err)
+    }
+}
 
 class ListEvent extends Component {
     static propTypes = {
@@ -39,7 +63,8 @@ class ListEvent extends Component {
         setTimeout(() => {
         }, 500)
     }
-    componentDidMount() {
+    async componentDidMount() {
+        await request_location_runtime_permission()
         setTimeout(() => {
             this.checkLocalLogin()
         }, 2000)
@@ -96,7 +121,7 @@ class ListEvent extends Component {
     gotoLogin = () => {
         this.props.navigation.navigate("Login")
     }
-    gotoRegisInfo =() => {
+    gotoRegisInfo = () => {
         this.props.navigation.navigate("RegisterInfo")
     }
     checkUser = () => {
@@ -164,7 +189,7 @@ class ListEvent extends Component {
                     goEditProfile={() => this.props.navigation.navigate('EditProfile')}
                     goRegis={false}
                     goSingleLogin={() => this.props.navigation.navigate('SingleLogin')}
-                    goContacts={()=> this.props.navigation.navigate('Contacts')}
+                    goContacts={() => this.props.navigation.navigate('Contacts')}
                 />
                 <List
                     CheckLogin={this.checkUser.bind(this)}

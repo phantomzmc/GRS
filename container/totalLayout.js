@@ -170,7 +170,9 @@ class TotalLayout extends Component {
         if (this.props.creditcard.typePayment !== 2) {
             console.log(dataFriendFull.length)
             if (dataFriendFull.length == 1) {
-                this.loopSentEmail()
+                // this.loopSentEmail()
+                this.loopTable(data)
+
             }
             else if (dataFriendFull.length > 1) {
                 this.loopSentEmail()
@@ -197,11 +199,10 @@ class TotalLayout extends Component {
             'html': '<!DOCTYPE html><html><head><meta charset="UTF-8"><style>#table1 {background-color: #eeeeee;width: 100%;}#table2 {width: 100%;}td,th {text-align: center;padding: 8px;}tr {' +
                 'border: 1px solid #111;}#hr {color: #FC561F;text-align: center;}h4 {color: #FC561F;text-align: center;}#textRigth {text-align: right;}#textLeft {text-align : left;}h2 {text-align: center;}line {height: 10px;}' +
                 'p {text-align: center;}#qrcode {text-align: center;padding: 20px;}</style><title>OrderInvoice</title>' +
-                '</head><body><div id="qrcode"><img src="https://api.qrserver.com/v1/create-qr-code/?data=' + invoice[index].RegisterID + '&amp;size=100x100" alt="" title="" /><p>Confirm ID : ' + invoice[index].ConfirmNo + '</p></div></div><h2> Confirmation Card งาน ' + this.props.event.event.EventName + ' </h2><p id="hr">ข้อมูลของท่านถูกบันทุกลงในระบบเรียบร้อยแล้ว กรุณานำไปยืนยันการสมัครนี้ไปลงทะเบียนรับเสื้อและเบอร์ในวันเวลาที่กำหนด</p><hr id="line">' +
+                '</head><body><div id="qrcode"><img src="https://api.qrserver.com/v1/create-qr-code/?data=' + invoice[index].RegisterID + '&amp;size=100x100" alt="" title="" /><p>Confirm ID : ' + invoice[index].ConfirmNo + '</p></div></div><h2> Confirmation Card งาน ' + this.props.event.event.EventName + ' </h2><p id="hr">ข้อมูลของท่านถูกบันทุกลงในระบบเรียบร้อยแล้ว กรุณานำใบยืนยันการสมัครนี้ไปลงทะเบียนรับเสื้อและเบอร์ในวันเวลาที่กำหนด</p><hr id="line">' +
                 '<table id="table1"><tr><td colspan="6"><b>ใบเสร็จหมายเลขที่ #' + this.state.output[0].InvoiceID + '</b></td></tr><tr><th>No.</th><th>Name-Lastname</th><th>Course</th><th>Jersey</th><th>Qty</th><th id="textRigth">Total</th></tr>' +
                 '<tr><td> 1 </td><td>' + item.firstname + "  " + item.lastname + '</td><td>' + item.nameRegis + '</td><td>' + item.JerseySize + '</td><td>' + "1" + '</td><td id="textRigth">' + item.CoursePrice + '</td></tr>' +
-                '<tr><td colspan="5" id="textRigth">รับเสื้อ ' + this.props.choiceSend.choiceSend.detail + '</td><td id="textRigth">' + this.props.choiceSend.choiceSend.priceCDO + '.00</td>' +
-                '</tr><tr><td colspan="5" id="textRigth">ค่าธรรมเนียมการใช้บัตรเครดิต/เดบิต</td><td id="textRigth">' + this.props.creditcard.vat + '</td></tr><tr><td colspan="5" id="textRigth">All Total</td><td id="textRigth">' + this.props.event.totalRegister + '</td></tr>' +
+                
                 '</table><table id="table2"><tr><td colspan="6"><p id="hr">อีเมล์ฉบับนี้เป็นระบบอัตโนมัติ กรุณาอย่าตอบกลับในอีเมล์นี้ หากต้องการความช่วยเหลือเพิ่มโปรดติดต่อฝ่ายรับสมัคร</p></td></tr><tr><td colspan="6"><hr id="line">' +
                 '</td></tr><tr><td colspan="6"><h4>Shutter Running Services</h4><p>7 Market Today krungthepkreetra 7 Huamark</p><p>Bangkapi</p><p>Bangkok, Thailand 10240 Phone: (+66) 2 111 2201 </p><p>http://shutterrunning2014.com</p>' +
                 '</td></tr></table></body></html>'
@@ -219,7 +220,7 @@ class TotalLayout extends Component {
             'html': '<!DOCTYPE html><html><head><meta charset="UTF-8"><style>#table1 {background-color: #eeeeee;width: 100%;}#table2 {width: 100%;}td,th {text-align: center;padding: 8px;}tr {' +
                 'border: 1px solid #111;}#hr {color: #FC561F;text-align: center;}h4 {color: #FC561F;text-align: center;}#textRigth {text-align: right;}#textLeft {text-align : left;}h2 {text-align: center;}line {height: 10px;}' +
                 'p {text-align: center;}#qrcode {padding: 20px;}#qr-confirm {justify-content: column; }</style><title>OrderInvoice</title>' +
-                '</head><body><h2> Confirmation Card งาน ' + this.props.event.event.EventName + ' </h2><p id="hr">ข้อมูลของท่านถูกบันทุกลงในระบบเรียบร้อยแล้ว กรุณานำไปยืนยันการสมัครนี้ไปลงทะเบียนรับเสื้อและเบอร์ในวันเวลาที่กำหนด</p><hr id="line">' +
+                '</head><body><h2> Confirmation Card งาน ' + this.props.event.event.EventName + ' </h2><p id="hr">ข้อมูลของท่านถูกบันทุกลงในระบบเรียบร้อยแล้ว กรุณานำใบยืนยันการสมัครนี้ไปลงทะเบียนรับเสื้อและเบอร์ในวันเวลาที่กำหนด</p><hr id="line">' +
                 '<table id="table1"><tr><td colspan="6"><b>ใบเสร็จหมายเลขที่ #' + this.state.output[0].InvoiceID + '</b></td></tr><tr><th>No.</th><th>Name-Lastname</th><th>QR Code</th><th>Course</th><th>Jersey</th><th>Qty</th><th id="textRigth">Total</th></tr>' +
                 strTable +
                 '<tr><td colspan="6" id="textRigth">รับเสื้อ ' + this.props.choiceSend.choiceSend.detail + '</td><td id="textRigth">' + this.props.choiceSend.choiceSend.priceCDO + '.00</td>' +

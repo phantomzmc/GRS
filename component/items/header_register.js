@@ -24,6 +24,18 @@ class HeaderRegister extends Component {
         }
         this.fixBugimage = this.fixBugimage.bind(this)
     }
+    setData() {
+        var date1 = new Date()
+        var date2 = new Date(this.props.userprofile.userprofile.DateOfBirth)
+        var age = parseInt((date1 - date2) / 31557600000)
+
+        this.setState({
+            fullname: this.props.userprofile.userprofile.FirstName,
+            lastname: this.props.userprofile.userprofile.LastName,
+            gen: this.props.userprofile.userprofile.Gender,
+            age: age
+        })
+    }
     setNullImage() {
         this.setState({
             ImageSource: "",
@@ -53,6 +65,7 @@ class HeaderRegister extends Component {
         }
     }
     componentWillMount() {
+        this.setData()
         {
             this.props.userprofile.userprofile.PicProfile && this.props.userprofile.userprofile.BackgroundProfile == "" ?
                 this.setNullImage()
