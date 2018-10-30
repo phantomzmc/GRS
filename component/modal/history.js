@@ -55,7 +55,7 @@ class ModalHistory extends Component {
                                                         // value={this.props.registerID}
                                                         size={75}
                                                     />
-                                                    <Text style={styles.textName3}>Confirm ID xxx{item.ConfirmNo}</Text>
+                                                    <Text style={styles.textName3}>Confirm No : {item.ConfirmNo}</Text>
                                                 </View>
                                                 :
                                                 <View style={styles.disQRcode}>
@@ -64,11 +64,10 @@ class ModalHistory extends Component {
                                             }
                                         </View>
                                         <View>
-                                            <View style={{ width: '50%', justifyContent: "flex-end" }}>
-                                                <Text style={styles.subTextHead}>ชำระเงิน</Text>
+                                            <View style={{ justifyContent: "flex-end" }}>
                                                 {this.props.dataAll.PaymentType == 1 ?
-                                                    <Text style={styles.subTextHead}>บัตรเครดิต/เดรบิต</Text> :
-                                                    <Text style={styles.subTextHead}>โอนเงินผ่านธนาคาร</Text>
+                                                    <Text style={styles.subTextHead}>ชำระเงิน: บัตรเครดิต/เดรบิต</Text> :
+                                                    <Text style={styles.subTextHead}>ชำระเงิน: โอนเงินผ่านธนาคาร</Text>
                                                 }
                                             </View>
                                             <Text style={styles.subTextHead}> Order : {this.props.dataAll.InvoiceID} </Text>
@@ -78,12 +77,12 @@ class ModalHistory extends Component {
                                     <CardItem style={styles.viewName}>
                                         <Body>
                                             <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
-                                                <View style={{ width: '50%' }}>
+                                                <View style={{ width: '40%' }}>
                                                     <Text style={styles.textName3}>ชื่อ - นามสกุล</Text>
                                                     <Text style={styles.textName4}>{item.FullName}</Text>
 
                                                 </View>
-                                                <View style={{ width: '50%', alignItems: 'center' }}>
+                                                <View style={{ width: '60%', alignItems: 'center' }}>
                                                     <Text style={styles.textName3}>Email</Text>
                                                     <Text style={styles.textName4}>{item.Email}</Text>
                                                 </View>
@@ -103,6 +102,7 @@ class ModalHistory extends Component {
 
                                                 </View>
                                                 <View style={styles.box}>
+                                                    <Text style={styles.boxTitle}>รายการ/ระยะทาง</Text>
                                                     <Text style={styles.boxName}>
                                                         {item.CourseName}
                                                     </Text>
@@ -260,15 +260,16 @@ const styles = StyleSheet.create({
         padding: 20,
     },
     viewSize: {
+        flex: 1,
         flexDirection: 'row',
-        justifyContent: 'space-around',
+        justifyContent: 'space-around'
     },
     box: {
         width: 150,
         backgroundColor: '#FC561F',
-        borderRadius: 10,
+        borderRadius: 5,
         padding: 10,
-        paddingHorizontal: 40,
+        paddingHorizontal: 10,
         alignItems: "center",
         justifyContent: "center"
     },

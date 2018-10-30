@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.grs"
-    android:versionCode="2"
+    package="com.ibitz.grs"
+    android:versionCode="3"
     android:versionName="2.0">
 
     <uses-permission android:name="android.permission.INTERNET" />

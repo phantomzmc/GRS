@@ -237,7 +237,7 @@ class TotalLayout extends Component {
         console.log(dataInvoice)
         for (i = 0; i < dataFriendFull.length; i++) {
             var no = 1 + i
-            strTable = '<tr><td>' + no + '</td><td>' + dataFriendFull[i].firstname + "  " + dataFriendFull[i].lastname + '</td><td><div id="qr-confirm"><div id="qrcode"><img src="https://api.qrserver.com/v1/create-qr-code/?data=' + dataInvoice[i].RegisterID + '&amp;size=100x100" alt="" title="" /><p>Confirm ID : ' + dataInvoice[i].ConfirmNo + '</p></div></td><td>' + dataFriendFull[i].nameRegis + '</td><td>' + dataFriendFull[i].JerseySize + '</td><td>' + "1" + '</td><td id="textRigth">' + dataFriendFull[i].CoursePrice + '</td></tr>'
+            strTable = '<tr><td>' + no + '</td><td>' + dataFriendFull[i].firstname + "  " + dataFriendFull[i].lastname + '</td><td><div id="qr-confirm"><div id="qrcode"><img src="https://api.qrserver.com/v1/create-qr-code/?data=' + dataInvoice[i].RegisterID + '&amp;size=100x100" alt="" title="" /><p>Confirm ID : ' + dataInvoice[i].ConfirmNo + '</p></div></td><td>' + dataFriendFull[i].nameRegis + '</td><td>' + dataFriendFull[i].JerseySize + '</td><td>' + "1" + '</td><td id="textRigth">' + parseFloat(dataFriendFull[i].CoursePrice).toFixed(2) + '</td></tr>'
             dataFriend2.push(strTable)
             console.log(strTable)
         }
@@ -315,6 +315,7 @@ class TotalLayout extends Component {
                     onSave={this.captureScreenFunction.bind(this)}
                     menu={true}
                     statusRegis={true}
+                    goEvent={() => this.props.navigation.navigate("EventList")}
                     goLogin={() => this.props.navigation.navigate("Login")}
                     goFriendlist={() => this.props.navigation.navigate('FriendList')}
                     goHistory={() => this.props.navigation.navigate('HistoryContainer')}

@@ -13,7 +13,7 @@ const eventState = {
     price: 0,
     statusPhotoPlus: 0
   },
-  photoPlusService : "0"
+  photoPlusService: "0"
 };
 const credit = {
   nameCredit: {
@@ -27,35 +27,35 @@ const credit = {
     id: ""
   },
   transaction: "",
-  typePayment : 1,
-  statusPayment : 2,
-  regisStatus : true
+  typePayment: 1,
+  statusPayment: 2,
+  regisStatus: true
 };
 const user = {
   profile: {
     userid: "",
     password: "",
-    bib : "",
-    fullname : "",
-    lastname : "",
-    nickname : "",
-    confirmpassword : "",
+    bib: "",
+    fullname: "",
+    lastname: "",
+    nickname: "",
+    confirmpassword: "",
     email: "",
-    teamname : "",
-    tel : "",
-    journeyDate : "",
-    bloodtype : "",
-    nation : "",
-    gen : ""
+    teamname: "",
+    tel: "",
+    journeyDate: "",
+    bloodtype: "",
+    nation: "",
+    gen: ""
 
   },
-  address : {
+  address: {
     a: "",
-    address : "",
-    city : "",
-    country : "",
-    postNumber : "",
-    t : ""
+    address: "",
+    city: "",
+    country: "",
+    postNumber: "",
+    t: ""
   },
 
   help: {
@@ -67,7 +67,7 @@ const user = {
   verify: "",
   statuslogin: 0,
   newpassword: "",
-  regisStatus : true
+  regisStatus: true
 };
 const friend = {
   friendRegis: [],
@@ -141,7 +141,7 @@ const profile = (state = user, action) => {
       state.statusRegis = action.payload;
       break;
     }
-    case "setRegisterStatus" : {
+    case "setRegisterStatus": {
       state.registerStatus = action.payload;
       break;
     }
@@ -236,7 +236,7 @@ const creditcard = (state = credit, action) => {
       state.charge = action.payload
       break;
     }
-    case "setTransaction" : {
+    case "setTransaction": {
       state.transaction = action.payload
       break;
     }
@@ -248,7 +248,7 @@ const creditcard = (state = credit, action) => {
       state.paymentslip = action.payload
       break;
     }
-    case "setStatusRegis" : {
+    case "setStatusRegis": {
       state.regisStatus = action.payload
       break;
     }
@@ -350,11 +350,11 @@ const invoice = (state = {}, action) => {
       state.registerid = action.payload
       break;
     }
-    case "setDataRegis" : {
+    case "setDataRegis": {
       state.dataRegis = action.payload
       break;
     }
-    case "setConfirmNo" : {
+    case "setConfirmNo": {
       state.confirmNo = action.payload
       break;
     }
@@ -397,7 +397,7 @@ const friendlist = (state = friend, action) => {
   }
   return state;
 }
-const network = (state = {}, action) => {
+const network = (state = { ip: "", lat: "", long: "" }, action) => {
   switch (action.type) {
     case "setIP": {
       state.ip = action.payload

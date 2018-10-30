@@ -43,7 +43,7 @@ class ResetVerify extends Component {
         })
         console.log(data)
     }
-    sendResetVerify(userid , email) {
+    sendResetVerify(userid, email) {
         let uri = req[0].uspResetActivecode
         let api_key = apikey[0].api_key
         let data = ({
@@ -78,6 +78,7 @@ class ResetVerify extends Component {
         return (
             <View>
                 <HeaderTeam
+                    goEvent={() => this.props.navigation.navigate("EventList")}
                     title={this.state.title}
                     goback={this.gotoBack.bind(this)}
                 />

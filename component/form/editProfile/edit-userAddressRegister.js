@@ -48,6 +48,7 @@ class UserAddressRegister extends Component {
       <Container>
         <HeaderTeam
           title={this.state.title}
+          goEvent={() => this.props.navigation.navigate("EventList")}
           goback={this.gotoBack.bind(this)}
         />
         <StatusBar

@@ -154,6 +154,7 @@ class FriendList extends Component {
                 <HeaderTeam
                     title={this.state.title}
                     menu={true}
+                    goEvent={() => this.props.navigation.navigate("EventList")}
                     goback={() => this.props.navigation.navigate('EventList')}
                     goLogin={() => this.props.navigation.navigate("Login")}
                     goFriendlist={() => this.props.navigation.navigate('FriendList')}
@@ -168,7 +169,7 @@ class FriendList extends Component {
                 {/* <Header searchBar rounded androidStatusBarColor="#FC561F" style={styles.header}> */}
 
                 <Item style={{ flexDirection: "row" }}>
-                    <Icon name="ios-people" style={{ padding : 10}}/>
+                    <Icon name="ios-people" style={{ padding: 10 }} />
                     <Input
                         hasRef={ref => (this.textInputRef = ref)}
                         placeholder="ค้นหาเลขบัตรประชาชน/หนังสือเดินทาง"

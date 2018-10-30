@@ -74,6 +74,7 @@ class UserRegister extends Component {
         <HeaderTeam
           title={this.state.title}
           menu={true}
+          goEvent={() => this.props.navigation.navigate("EventList")}
           goback={() => this.props.navigation.navigate('ControlDistance')}
           goLogin={() => this.props.navigation.navigate("Login")}
           goFriendlist={() => this.props.navigation.navigate('FriendList')}

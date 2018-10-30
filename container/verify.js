@@ -85,6 +85,7 @@ class VerifyCode extends Component {
         return (
             <Container style={styles.container}>
                 <HeaderTeam
+                    goEvent={() => this.props.navigation.navigate("EventList")}
                     title={this.state.title}
                     goback={false}
                 />

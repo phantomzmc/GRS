@@ -84,6 +84,10 @@ class HeaderTeam extends Component {
         this._menu.show();
         this.checkStatusLogin()
     };
+    gotoEvent = () =>{
+        this.props.goEvent()
+        this._menu.hide();
+    }
     gotoProfile = () => {
         this.props.goEditProfile()
         this._menu.hide();
@@ -188,6 +192,11 @@ class HeaderTeam extends Component {
                                             <Text style={styles.item_menu}>  {this.state.nameUser}</Text>
                                         </MenuItem>
                                     }
+                                    <MenuDivider />
+                                    <MenuItem onPress={this.gotoEvent}>
+                                        <Icon name='list' type='FontAwesome' style={{ fontSize: 18 }} />
+                                        <Text style={styles.item_menu}>  รายการวิ่ง</Text>
+                                    </MenuItem>
                                     <MenuDivider />
                                     <MenuItem onPress={this.gotoProfile}>
                                         <Icon name='user-circle' type='FontAwesome' style={{ fontSize: 18 }} />

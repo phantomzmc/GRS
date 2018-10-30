@@ -40,6 +40,7 @@ class ButtonChangeTranfer extends Component {
                     title={this.state.title}
                     menu={true}
                     statusRegis={true}
+                    goEvent={() => this.props.navigation.navigate("EventList")}
                     goback={() => this.props.navigation.navigate("ControlPayment")}
                     goLogin={() => this.props.navigation.navigate("Login")}
                     goFriendlist={() => this.props.navigation.navigate('FriendList')}

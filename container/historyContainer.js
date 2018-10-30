@@ -50,7 +50,7 @@ class HistoryContainer extends Component {
             });
         return this.state.dataSource
     }
-    
+
     checkOutput(data) {
         if (data == "") {
             this.setState({ statusData: false })
@@ -67,6 +67,7 @@ class HistoryContainer extends Component {
                 <HeaderTeam
                     title={this.state.title}
                     menu={true}
+                    goEvent={() => this.props.navigation.navigate("EventList")}
                     goback={() => this.props.navigation.navigate('ControlDistance')}
                     goLogin={() => this.props.navigation.navigate("Login")}
                     goFriendlist={() => this.props.navigation.navigate('FriendList')}
@@ -74,7 +75,7 @@ class HistoryContainer extends Component {
                     goEditProfile={() => this.props.navigation.navigate('EditProfile')}
                     goRegis={() => this.props.navigation.navigate('ControlDistance')}
                     goSingleLogin={() => this.props.navigation.navigate('SingleLogin')}
-                    goContacts={()=> this.props.navigation.navigate('Contacts')}
+                    goContacts={() => this.props.navigation.navigate('Contacts')}
 
                 />
                 <StatusBar

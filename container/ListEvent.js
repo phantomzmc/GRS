@@ -59,7 +59,7 @@ class ListEvent extends Component {
 
     }
     componentWillMount() {
-        this.getNetwork()
+        // this.getNetwork()
         setTimeout(() => {
         }, 500)
     }
@@ -183,6 +183,7 @@ class ListEvent extends Component {
                     menu={true}
                     statusRegis={false}
                     goback={false}
+                    goEvent={() => this.props.navigation.navigate("EventList")}
                     goLogin={() => this.props.navigation.navigate("Login")}
                     goFriendlist={() => this.props.navigation.navigate('FriendList')}
                     goHistory={() => this.props.navigation.navigate('HistoryContainer')}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, ScrollView, StatusBar, TouchableOpacity, Image,Alert } from "react-native";
+import { View, StyleSheet, ScrollView, StatusBar, TouchableOpacity, Image, Alert } from "react-native";
 import { Text, CardItem, Card, Form, Item, Label, Input, Content, Button, Body, Icon, Container } from "native-base";
 import axios from 'axios'
 import { connect } from "react-redux";
@@ -59,12 +59,12 @@ class RegisterInfo extends Component {
             Alert.alert("ค้นหาไม่พบ", "ผู้ใช้งานนี้ยังไม่ได้ทำการสมัครรายการวิ่งนี้", [
                 {
                     text: "ค้นหาอีกครั้ง",
-                    onPress: () => this.setState({ search: "",islistinfo : false })
+                    onPress: () => this.setState({ search: "", islistinfo: false })
                 }
             ])
         }
-        else if(data != ""){
-            this.setState({ search: "",islistinfo : true })
+        else if (data != "") {
+            this.setState({ search: "", islistinfo: true })
         }
     }
     goEventList = () => {
@@ -76,6 +76,7 @@ class RegisterInfo extends Component {
         return (
             <Container>
                 <HeaderTeam
+                    goEvent={() => this.props.navigation.navigate("EventList")}
                     goback={this.goEventList.bind(this)}
                     title="ตรวจสอบรายชื่อ"
                 />
@@ -86,14 +87,14 @@ class RegisterInfo extends Component {
                 />
                 <KeyboardAwareScrollView>
                     <View style={styles.container}>
-                        <Card style={{ borderRadius : 10}}>
-                            <CardItem style={{ borderRadius : 10}}> 
+                        <Card style={{ borderRadius: 10 }}>
+                            <CardItem style={{ borderRadius: 10 }}>
                                 <Body style={styles.bodyTitle}>
                                     <Image source={{ uri: url + this.props.event.event.BackgroundImage }} style={styles.imgEvent} />
                                     <Text style={styles.titleEvent}>{this.state.titleEvent}</Text>
                                 </Body>
                             </CardItem>
-                            <CardItem style={{ justifyContent: "center",borderRadius : 10 }}>
+                            <CardItem style={{ justifyContent: "center", borderRadius: 10 }}>
                                 <View>
                                     <Form>
                                         <Item floatingLabel>

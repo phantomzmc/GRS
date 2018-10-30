@@ -243,10 +243,10 @@ class TeamList extends Component {
         this._loopChangeRegisStatus(key)
     }
     _loopChangeRegisStatus(key) {
-        dataSmartFriend.map((item,index) => {
+        dataSmartFriend.map((item, index) => {
             if (item.RunnerID === key[index])
                 item.RegisterStatus = "-1"
-                console.log(item)
+            console.log(item)
         })
         // for (i = 0; i <= key.length; i++) {
         //     if (dataSmartFriend[i].RunnerID == key[i])
@@ -358,6 +358,7 @@ class TeamList extends Component {
                 <HeaderTeam
                     title={this.state.titleHead}
                     menu={true}
+                    goEvent={() => this.props.navigation.navigate("EventList")}
                     goback={() => this.props.navigation.navigate('EventList')}
                     goLogin={() => this.props.navigation.navigate("Login")}
                     goFriendlist={() => this.props.navigation.navigate('FriendList')}

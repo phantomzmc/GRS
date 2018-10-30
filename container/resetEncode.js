@@ -72,6 +72,7 @@ class ResetEncode extends Component {
                     title={this.state.title}
                     menu={false}
                     statusRegis={true}
+                    goEvent={() => this.props.navigation.navigate("EventList")}
                     goback={() => this.props.navigation.navigate("Login")}
                     goLogin={() => this.props.navigation.navigate("Login")}
                     goFriendlist={() => this.props.navigation.navigate('FriendList')}
