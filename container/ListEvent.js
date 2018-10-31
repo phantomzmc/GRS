@@ -59,7 +59,7 @@ class ListEvent extends Component {
 
     }
     componentWillMount() {
-        // this.getNetwork()
+        this.getNetwork()
         setTimeout(() => {
         }, 500)
     }
